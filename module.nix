@@ -9,7 +9,7 @@
       enable = lib.mkEnableOption "jank client";
       package = lib.mkOption {
         description = "jank client package";
-        default = ./package.nix;
+        default = pkgs.callPackage ./package.nix;
         type = lib.types.package;
       };
       port = lib.mkOption {
