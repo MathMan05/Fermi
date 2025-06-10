@@ -45,7 +45,7 @@
           (lib.getExe
             config.services.jank-client.package)
         ];
-        imports = ["${config.services.jank-client.package}/jank-client.nix"];
+        imports = [(builtins.toPath "${config.services.jank-client.package}/jank-client.nix")];
       };
     };
   };
