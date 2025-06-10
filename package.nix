@@ -1,12 +1,14 @@
 {
   stdenv,
   compose2nix,
+  git,
   ...
 }:
 stdenv.mkDerivation {
   name = "jank-client";
   src = ./.;
   nativeBuildInputs = [
+    git
     compose2nix
   ];
   buildPhase = ''
@@ -14,6 +16,11 @@ stdenv.mkDerivation {
     echo "systemctl start docker-build-jank-client-jank.service" >> start-server
     echo "systemctl restart docker-jank-client-jank.service" >> start-server
     chmod a+x start-server
+    git init
+    git add -A
+    git config user.name "name"
+    git config user.email "name@url"
+    git commit -m "init"
   '';
   installPhase = ''
     mkdir $out/bin -p
