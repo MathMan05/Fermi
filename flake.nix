@@ -102,6 +102,7 @@
     nixosModules.${system}.default = {
       lib,
       config,
+      module,
       ...
     }: {
       options = {
