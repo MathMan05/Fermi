@@ -20,4 +20,9 @@ stdenv.mkDerivation {
     cp start-server $out/bin/jank-client
     cp . $out/src -r
   '';
+  meta = {
+    mainProgram = "jank-client";
+    description = "jank-client";
+    homepage = "https://git.mtgmonkey.net/jank-client-fork.git";
+  };
 }
