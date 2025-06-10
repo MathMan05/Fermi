@@ -58,7 +58,7 @@
         virtualisation.oci-containers.containers."jank-client-jank" = {
           image = "compose2nix/jank-client-jank";
           ports = [
-            "${config.services.jank-client.port}:8080/tcp"
+            "${builtins.toString config.services.jank-client.port}:8080/tcp"
           ];
           log-driver = "journald";
           extraOptions = [
