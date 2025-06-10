@@ -20,7 +20,7 @@
         mkdir $out/bin -p
         mkdir $out/src -p
         cp start-server $out/bin/jank-client
-        cp . $out/src
+        cp . $out/src -r
       '';
     };
   in {
