@@ -9,7 +9,7 @@
       enable = lib.mkEnableOption "jank client";
       package = lib.mkOption {
         description = "jank client package";
-        default = pkg;
+        default = config.services.jank-client.package;
         type = lib.types.package;
       };
       port = lib.mkOption {
