@@ -30,6 +30,7 @@
       config,
       ...
     }: {
+      imports = [(builtins.toPath "${config.services.jank-client.package}/jank-client.nix")];
       options = {
         services.jank-client = {
           enable = lib.mkEnableOption "jank client";
@@ -41,7 +42,6 @@
         };
       };
       config = lib.mkIf config.services.jank-client.enable {
-        imports = [(builtins.toPath "${config.services.jank-client.package}/jank-client.nix")];
         environment.systemPackages = [
           (lib.getExe
             config.services.jank-client.package)
