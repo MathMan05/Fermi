@@ -13,6 +13,7 @@ stdenv.mkDerivation {
     echo "#!/usr/bin/env bash" > start-server
     echo "systemctl start docker-build-jank-client-jank.service" >> start-server
     echo "systemctl restart docker-jank-client-jank.service" >> start-server
+    chmod a+x start-server
   '';
   installPhase = ''
     mkdir $out/bin -p
