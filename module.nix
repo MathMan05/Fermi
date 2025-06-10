@@ -21,8 +21,7 @@
   };
   config = lib.mkIf config.services.jank-client.enable {
     environment.systemPackages = [
-      (lib.getExe
-        config.services.jank-client.package)
+      config.services.jank-client.package
     ];
     virtualisation.docker = {
       enable = true;
