@@ -46,6 +46,10 @@
         };
       };
       config = lib.mkIf config.services.jank-client.enable {
+        environment.systemPackages = [
+          (lib.getExe pkgs.callPackage
+            config.services.jank-client.package)
+        ];
         virtualisation.docker = {
           enable = true;
           autoPrune.enable = true;
