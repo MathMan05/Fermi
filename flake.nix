@@ -5,24 +5,25 @@
   outputs = {nixpkgs, ...}: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    pkg = pkgs.stdenv.mkDerivation {
-      name = "jank-client";
-      src = ./.;
-      nativeBuildInputs = [
-        pkgs.compose2nix
-      ];
-      buildPhase = ''
-        echo "#!/usr/bin/env bash" > start-server
-        echo "systemctl start docker-build-jank-client-jank.service" >> start-server
-        echo "systemctl restart docker-jank-client-jank.service" >> start-server
-      '';
-      installPhase = ''
-        mkdir $out/bin -p
-        mkdir $out/src -p
-        cp start-server $out/bin/jank-client
-        cp . $out/src -r
-      '';
-    };
+    pkg = {pkgs, ...}:
+      pkgs.stdenv.mkDerivation {
+        name = "jank-client";
+        src = ./.;
+        nativeBuildInputs = [
+          pkgs.compose2nix
+        ];
+        buildPhase = ''
+          echo "#!/usr/bin/env bash" > start-server
+          echo "systemctl start docker-build-jank-client-jank.service" >> start-server
+          echo "systemctl restart docker-jank-client-jank.service" >> start-server
+        '';
+        installPhase = ''
+          mkdir $out/bin -p
+          mkdir $out/src -p
+          cp start-server $out/bin/jank-client
+          cp . $out/src -r
+        '';
+      };
   in {
     packages.${system}.default = pkg;
     nixosModules.${system}.default = {
@@ -48,8 +49,7 @@
       config = lib.mkIf config.services.jank-client.enable {
         environment.systemPackages = [
           (lib.getExe
-            (pkgs.callPackage
-              config.services.jank-client.package))
+            config.services.jank-client.package)
         ];
         virtualisation.docker = {
           enable = true;
