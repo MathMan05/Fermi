@@ -107,7 +107,7 @@
             TimeoutSec = 300;
           };
           script = ''
-            cd ${pkg}/src
+            cd ${pkgs.callPackage pkg {}}/src
             docker build -t compose2nix/jank-client-jank .
           '';
         };
