@@ -240,7 +240,8 @@
 		"box3description": "We always appreciate some help, whether that be in the form of bug reports, or code, or even just pointing out some typos.",
 		"trans": "Translate",
 		"transTitle": "Translate Jank Client",
-		"transDesc": "You can help translate Jank Client into your own language!"
+		"transDesc": "You can help translate Jank Client into your own language!",
+		"forgotPassword": "Forgot password?"
 	},
 	"form": {
 		"captcha": "Wait, are you a human?"

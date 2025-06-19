@@ -103,6 +103,13 @@ export async function makeLogin(trasparentBg = false, instance = "") {
 	const rec = document.createElement("div");
 	form.addHTMLArea(rec);
 	form.addHTMLArea(a);
+
+	const forgot = document.createElement("a");
+	forgot.href = "/reset";
+	forgot.textContent = I18n.htmlPages.forgotPassword();
+	const rec_forgot = document.createElement("div");
+	form.addHTMLArea(rec_forgot);
+	form.addHTMLArea(forgot);
 }
 await I18n.done;
 if (window.location.pathname.startsWith("/login")) {
