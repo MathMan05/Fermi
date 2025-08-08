@@ -1442,6 +1442,7 @@ span.instanceStatus {
 	max-height: fit-content;
 	flex-basis: auto;
 	flex-grow: 0;
+	margin-top: auto;
 }
 .scroller {
 	flex: 1;
@@ -1463,7 +1464,6 @@ span.instanceStatus {
 }
 #ghostMessages {
 	transform: translate(0px, -22px);
-	flex-grow: 1;
 }
 #pasteimage:empty {
 	height: 0;
@@ -1628,6 +1628,9 @@ span.instanceStatus {
 .titlespace {
 	padding: 3px 36px 3px 16px;
 	border-left: 2px solid transparent;
+}
+.titlespace {
+	margin-bottom: 20px;
 }
 .messagediv {
 	position: relative;
