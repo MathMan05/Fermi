@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180"><g fill="red"><path d="M134 100h-24l-5 64a12 12 0 0 0 11 13 12 12 0 0 0 13-11zm-69-4-2-1 3-9 1-11H43l-8 89a12 12 0 0 0 11 13 12 12 0 0 0 13-11zm4-46 3-32A12 12 0 0 0 61 5a12 12 0 0 0-13 11l-3 34h12zm-2 25h5l7-12H68Zm1-12h11l6-13H69Z"/><path d="m68 63 1-13H57l-1 13zm-1 12 1-12H56l-1 12Z"/><path d="M56 63H44l-1 12h12zm1-13H45l-1 13h12z"/><path d="m43 75 1-12 1-13H20A12 12 0 0 0 8 63a12 12 0 0 0 12 12Z"/><path stroke="red" stroke-linecap="round" stroke-width="24.2" d="M160 128H12"/><path d="m65 96 1-10-3 9 2 1zm63-99c-5 0-59 91-57 96 3 5 109 6 111 1 3-4-48-97-54-97zm-6 23h12v46h-12Zm6 54a7 7 0 0 1 7 7 7 7 0 0 1-7 7 7 7 0 0 1-7-7 7 7 0 0 1 7-7z"/></g></svg>
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 11V13H12.5556L12.048 17.5681L10.3864 14.5773L10.5617 13H9.51014L8.39902 11H10.7839L11.2283 7H7.22222L7.04799 8.56813L5.06569 5H5.45056L6.00612 0H8L7.44444 5H11.4506L12.0061 0H14L13.4444 5H17V7H13.2222L12.7778 11H16Z" fill="#FF0000"/>
+<path d="M4.9343 5H2V7H3.82319L4.9343 5Z" fill="#FF0000"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5 9L10 18H6V16H4V18H0L5 9ZM6 11H4V15H6V11Z" fill="#FF0000"/>
+</svg>
