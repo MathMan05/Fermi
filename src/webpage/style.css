@@ -3894,14 +3894,10 @@ fieldset input[type="radio"] {
 	#page:has(#maintoggle:checked) #mainarea {
 		left: 0;
 	}
-	#page:has(#memberlisttoggle:checked) #sideContainDiv,
-	#sideContainDiv.searchDiv {
+	#page:has(#memberlisttoggle:checked) #sideContainDiv:not(.hideSearchDiv),
+	#sideContainDiv.searchDiv:not(.hideSearchDiv) {
 		right: 0;
 		overflow: auto;
-		transition: transform 0.2s;
-	}
-	.hideSearchDiv {
-		transform: translate(100%);
 	}
 	#page:has(#maintoggle:checked) #maintoggleicon {
 		rotate: 180deg;
