@@ -142,3 +142,11 @@ package-lock.json
 pnpm-lock.yaml
 build.js
 dependency-graph.svg
+
+# Docker data directory
+data/
+.docker/.env
+
+# IDE/Editor directories
+.vscode/
+.idea/

@@ -1,0 +1,81 @@
+name: fermi-client
+
+services:
+  fermi-client:
+    container_name: fermi-client
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+      args:
+        NODE_ENV: ${NODE_ENV:-production}
+        VER: ${GIT_COMMIT:-unknown}
+    image: fermi-client:${VERSION:-latest}
+    restart: unless-stopped
+
+    # Port mapping
+    ports:
+      - "${HOST_PORT:-8080}:${CONTAINER_PORT:-8080}"
+
+    # Environment variables
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - PORT=${CONTAINER_PORT:-8080}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+
+    # Volume mounts
+    volumes:
+      # Application data persistence
+      - ${BASE_PWD:-./data}/app_data:/app/data
+      # Logs persistence
+      - ${BASE_PWD:-./data}/logs:/app/logs
+      # Configuration (if needed)
+      - ${BASE_PWD:-./data}/config:/app/config:ro
+
+    # Networks
+    networks:
+      - fermi-network
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # Health check
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:8080/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+
+# Custom network
+networks:
+  fermi-network:
+    driver: bridge
+    name: fermi_network
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.25.0.0/16
