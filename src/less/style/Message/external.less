@@ -1,0 +1,121 @@
+.filename a {
+	color: var(--filename);
+}
+.attachments {
+	margin-top: 4px;
+	gap: 4px;
+	flex-wrap: wrap;
+}
+.embed {
+	max-width: 400px;
+	padding: 12px;
+	background: var(--embed-bg);
+	font-size: 0.88em;
+	color: var(--secondary-text);
+	border-radius: 4px;
+}
+.linkembed {
+	margin-top: 4px;
+}
+.embed-color {
+	max-width: 400px;
+	margin-top: 4px;
+	border-radius: 4px;
+}
+.embed-color .embed {
+	margin-left: 4px;
+	border-radius: 0 4px 4px 0;
+}
+.embed a {
+	display: inline-block;
+	padding-bottom: 4px;
+	font-size: 1rem;
+	font-weight: bold;
+}
+.embed .provider {
+	padding-bottom: 4px;
+	color: var(--secondary-text-soft);
+}
+img.embedicon {
+	height: 16px;
+	width: 16px;
+	margin-right: 4px;
+	border-radius: 50%;
+	vertical-align: bottom;
+}
+img.embedimg {
+	max-width: 96px;
+}
+img.authorEmbedImg {
+	max-width: 20px;
+	margin-right: 4px;
+	border-radius: 1in;
+}
+img.bigembedimg {
+	margin-top: 8px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.inviteEmbed {
+	width: 400px;
+	max-width: 100%;
+	padding: 0;
+	margin: 4px 0 0 0;
+	border-radius: 4px;
+	overflow: hidden;
+}
+.inviteEmbed .banner {
+	height: 48px;
+	width: 400px;
+}
+.inviteEmbed .flexltr {
+	padding: 12px;
+	gap: 8px;
+	z-index: 2;
+	padding-top: 24px;
+}
+.inviteEmbed .unread {
+	display: none;
+}
+.inviteEmbed .pfp {
+	cursor: auto;
+}
+.inviteEmbed .invguildinfo {
+	flex: 1;
+	padding: 4px 12px;
+	background: var(--primary-bg);
+	color: var(--primary-text);
+	border-radius: 4px;
+	justify-content: center;
+}
+.subtext {
+	color: var(--primary-text-soft);
+}
+.inviteEmbed h2 {
+	margin: 0 12px;
+	font-size: 1em;
+	font-weight: normal;
+	text-align: center;
+	line-height: 1em;
+	color: var(--secondary-text-soft);
+}
+.unknownfile {
+	margin-top: 4px;
+	padding: 4px;
+	background: var(--secondary-bg);
+	border-radius: 4px;
+	position: relative;
+}
+.acceptinvbutton {
+	width: calc(100% - 24px);
+	padding: 6px;
+	margin: 12px;
+	background: var(--green);
+	font-size: 1.15rem;
+	font-weight: bold;
+	text-align: center;
+}
+.acceptinvbutton:hover,
+.acceptinvbutton:disabled {
+	background: color-mix(in hsl, var(--green) 80%, var(--black));
+}

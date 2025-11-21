@@ -1,0 +1,95 @@
+#servers {
+	flex: 0 0 auto;
+	padding: 8px;
+	background: var(--servers-bg);
+	box-sizing: border-box;
+	overflow-y: auto;
+	user-select: none;
+}
+.servericon,
+#sentdms .pfp {
+	height: 48px;
+	width: 48px;
+	margin-bottom: 8px;
+	border-radius: 50%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: border-radius 0.2s;
+}
+.servericon:hover,
+.serveropen .servericon,
+#sentdms .pfp:hover {
+	border-radius: 30%;
+}
+.home .svgicon {
+	background: var(--icon);
+}
+.home .svg-plus {
+	height: 16px;
+	width: 16px;
+}
+.home .svg-explore {
+	height: 44px;
+	width: 44px;
+}
+.lightbr {
+	margin: 8px 4px;
+}
+.blankserver,
+.home {
+	background: var(--blank-bg);
+}
+.servernoti {
+	position: relative;
+}
+.unread {
+	position: absolute;
+	transform: translate(-18px, 20px);
+	height: 8px;
+	width: 8px;
+	background: var(--primary-text);
+	border-radius: 4px;
+	transition:
+		transform 0.2s,
+		height 0.2s;
+}
+.servernoti:hover .unread.pinged {
+	transform: translate(34px, 14px);
+	height: 20px;
+}
+.servernoti:hover .unread {
+	transform: translate(-12px, 12px);
+	height: 24px;
+}
+.serveropen .unread {
+	transform: translate(-12px, 8px) !important;
+	height: 32px !important;
+	width: 8px !important;
+}
+.serveropen .unread.pinged {
+	color: transparent;
+}
+.notiunread {
+	transform: translate(-12px, 20px);
+}
+#sentdms {
+	position: relative;
+}
+.unread.pinged {
+	height: 16px;
+	width: 16px;
+	transform: translate(34px, 34px);
+	background: var(--red);
+	font-size: 0.75rem;
+	font-weight: bold;
+	line-height: 15px;
+	text-align: center;
+	/* border: 4px solid var(--servers-bg); */
+	/* border-radius: 50%; */
+	pointer-events: none;
+	z-index: 0;
+	top: 0px;
+}

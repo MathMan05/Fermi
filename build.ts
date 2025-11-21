@@ -19,8 +19,13 @@ if (urlMaybe && URL.canParse(urlMaybe)) {
 async function moveFiles(curPath: string, newPath: string, first = true) {
 	async function processFile(file: string) {
 		const Prom: Promise<unknown>[] = [];
-		if ((await fs.stat(path.join(curPath, file))).isDirectory()) {
-			await fs.mkdir(path.join(newPath, file));
+		const fullPath = path.join(curPath, file);
+		if ((await fs.stat(fullPath)).isDirectory()) {
+			const rel = path.relative(path.join(__dirname, "src", "less"), fullPath);
+			if (!rel || !rel.startsWith("..")) {
+				return;
+			}
+			await fs.mkdir(path.join(newPath, file), {recursive: true});
 			Prom.push(moveFiles(path.join(curPath, file), path.join(newPath, file), false));
 		} else {
 			if (!file.endsWith(".ts")) {
@@ -139,6 +144,32 @@ async function build() {
 	} catch {}
 	await fs.mkdir(path.join(__dirname, "dist"));
 	console.timeEnd("Cleaning dir");
+	try {
+		console.time("Compiling Less to dist");
+		const distWeb = path.join(__dirname, "dist", "webpage");
+		try {
+			await fs.mkdir(distWeb, {recursive: true});
+		} catch {}
+		try {
+			child_process.execSync(
+				`npx lessc --clean-css src/less/theme.less ${path.join(distWeb, "themes.css")}`,
+				{stdio: "inherit"},
+			);
+		} catch (e) {
+			console.error("Less compile (theme.less -> dist) failed:", e);
+		}
+		try {
+			child_process.execSync(
+				`npx lessc --clean-css src/less/style/style.less ${path.join(distWeb, "style.css")}`,
+				{stdio: "inherit"},
+			);
+		} catch (e) {
+			console.error("Less compile (style.less -> dist) failed:", e);
+		}
+		console.timeEnd("Compiling Less to dist");
+	} catch (e) {
+		console.error("Error while compiling Less to dist:", e);
+	}
 
 	console.time("Moving and compiling files");
 	await moveFiles(path.join(__dirname, "src"), path.join(__dirname, "dist"));

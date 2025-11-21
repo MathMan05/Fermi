@@ -1,0 +1,233 @@
+.channelnamediv {
+	background: var(--main-header-bg);
+}
+#channelname {
+	flex: none;
+	font-weight: bold;
+}
+#channelTopic {
+	margin: auto 0 0 8px;
+	font-size: 0.9em;
+	color: var(--primary-text-soft);
+	cursor: pointer;
+
+	button {
+		margin-right: 0.05in;
+	}
+}
+#channelTopic[hidden] {
+	display: none;
+}
+#scrollWrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 100%;
+}
+#channelw {
+	flex: 1;
+	/* max-height: fit-content; */
+	flex-basis: auto;
+	flex-grow: 1;
+	position: relative;
+}
+.scroller {
+	flex: 1;
+	padding-bottom: 22px;
+	overflow-y: auto;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 1;
+	max-height: fit-content;
+}
+#pasteimage {
+	height: 30%;
+	padding: 12px;
+	margin: 16px;
+	background: var(--typebox-bg);
+	border-radius: 4px;
+	display: flex;
+	gap: 12px;
+	overflow-y: auto;
+	flex-wrap: wrap;
+	flex-shrink: 0;
+	margin-top: 8px;
+}
+
+#pasteimage:empty {
+	height: 0;
+	padding: 0;
+	margin: 0;
+}
+.containedFile {
+	position: relative;
+	flex: 0 0 192px;
+	background: var(--blank-bg);
+	border-radius: 8px;
+	overflow: hidden;
+	height: 192px;
+}
+.messageimgdiv {
+	position: relative;
+	overflow: clip;
+	width: fit-content;
+	height: fit-content;
+}
+.messageimg {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+	user-select: none;
+	cursor: pointer;
+}
+.attachments .messageimg {
+	border-radius: 4px;
+}
+#replybox {
+	height: 32px;
+	padding: 0 10px 0 16px;
+	margin: 0 16px;
+	background: var(--secondary-bg);
+	font-size: 0.9em;
+	color: var(--secondary-text);
+	border-radius: 8px 8px 0 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: height 0.2s;
+	flex-shrink: 0;
+}
+.cancelReply {
+	height: 16px;
+	width: 16px;
+}
+.cancelReply:hover {
+	background: var(--primary-text-prominent);
+}
+#replybox.hideReplyBox {
+	height: 0;
+	overflow: hidden;
+}
+#realbox {
+	padding: 0 16px 28px 16px;
+}
+.commandFront {
+	user-select: none !important;
+	padding: 4px;
+	background: var(--secondary-bg);
+	border-radius: 4px;
+}
+#typebox {
+	position: relative;
+	margin: -10px 0px;
+	flex-grow: 1;
+	width: 1px;
+	margin-left: 0.06in;
+	white-space: pre;
+	flex-shrink: 1;
+	text-wrap: auto;
+	overflow-y: auto;
+	margin-right: 0.03in;
+	padding: 10px 0;
+}
+#typebox:not([contenteditable="false"]):empty:before,
+#typebox:not([contenteditable="false"]):has(span:only-child:empty):before {
+	content: var(--channel-text);
+	opacity: 0.5;
+	position: absolute;
+	cursor: text;
+}
+.outerTypeBox {
+	max-height: 50svh;
+	padding: 10px 10px;
+	background: var(--typebox-bg);
+	border-radius: 4px;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+
+.searchBox:empty {
+	width: 2in;
+}
+.searchBox:empty::after {
+	content: var(--hint-text);
+	color: var(--primary-text-soft);
+	position: absolute;
+	top: 4px;
+	cursor: text;
+}
+.searchBox {
+	white-space: nowrap;
+	height: 0.075in;
+	padding: 4px 10px 16px 10px;
+	background: var(--dock-bg);
+	border-radius: 4px;
+	/* overflow-y: auto; */
+	display: flex;
+	flex-direction: row;
+	width: 3in;
+	margin: 0 0.1in;
+	overflow: hidden;
+	flex-shrink: 0;
+	transition: width 0.2s;
+}
+.spaceElm {
+	margin: auto;
+}
+.outerTypeBox > span::before {
+	content: "\feff";
+}
+#typebox[contenteditable="false"] {
+	cursor: not-allowed;
+}
+#typebox[contenteditable="false"]:before {
+	content: "You can't send messages here";
+	opacity: 0.5;
+}
+#typebox.typeboxreplying {
+	border-radius: 0 0 4px 4px;
+}
+#typebox img {
+	max-width: 100%;
+}
+#typing {
+	position: absolute;
+	bottom: 7px;
+	margin-left: 24px;
+	font-size: 0.9em;
+	gap: 4px;
+}
+#typing.hidden {
+	display: none;
+}
+.loading-indicator {
+	margin-top: 2px;
+	align-items: center;
+}
+.dot {
+	animation: fade 1s infinite;
+	width: 6px;
+	height: 6px;
+	background: var(--primary-text);
+	border-radius: 50%;
+	margin-right: 3px;
+}
+.dot:nth-child(2) {
+	animation-delay: 0.33s;
+}
+.dot:nth-child(3) {
+	animation-delay: 0.66s;
+}
+.loadingMessage {
+	span {
+		opacity: 0.5;
+	}
+}
+.erroredMessage {
+	span {
+		opacity: 1;
+		color: var(--red);
+	}
+}

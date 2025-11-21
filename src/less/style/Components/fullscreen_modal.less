@@ -1,0 +1,286 @@
+.background {
+	contain-intrinsic-width: AUTO 100px;
+	position: fixed;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: color-mix(in srgb, var(--black) 75%, transparent);
+	backdrop-filter: blur(1px);
+	z-index: 102;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:not(.menu) {
+		animation-name: bg-fade;
+	}
+	animation-duration: 0.2s;
+	&.removeElm {
+		animation-name: bg-fade-out;
+		> * {
+			&.centeritem {
+				animation-name: fade-in-back-out;
+			}
+		}
+	}
+
+	> * {
+		animation-duration: 0.2s;
+		animation-name: fade-in-back-settings;
+		&.centeritem {
+			animation-name: fade-in-back;
+		}
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-out;
+	}
+}
+@keyframes bg-fade-out {
+	0% {
+		background: color-mix(in srgb, var(--black) 75%, transparent);
+		backdrop-filter: blur(1px);
+	}
+	100% {
+		background: transparent;
+		backdrop-filter: blur(0px);
+	}
+}
+@keyframes bg-fade {
+	0% {
+		background: transparent;
+		backdrop-filter: blur(0px);
+	}
+	100% {
+		background: color-mix(in srgb, var(--black) 75%, transparent);
+		backdrop-filter: blur(1px);
+	}
+}
+@keyframes fade-in-back-settings {
+	0% {
+		opacity: 0;
+		transform: scale(1.1);
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.bgRemove {
+	animation-duration: 0.2s;
+	animation-name: bg-out;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-out;
+}
+@keyframes bg-out {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: scale(1.1);
+	}
+}
+@keyframes fade-in-back-out {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		backdrop-filter: blur(0px);
+		transform: scale(0.9);
+	}
+}
+@keyframes fade-in-back {
+	0% {
+		transform: scale(1);
+		opacity: 0;
+	}
+	1% {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.imgfit {
+	max-height: 85svh;
+	max-width: 85svw;
+	display: flex;
+
+	img {
+		flex-shrink: 1;
+		height: auto;
+		max-width: inherit;
+		width: auto;
+		max-height: inherit;
+	}
+}
+.centeritem.profile {
+	width: 80%;
+	height: 80%;
+}
+.accountSwitcher {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.nonimagecenter,
+.accountSwitcher {
+	max-height: 95svh;
+	width: 500px;
+	padding: 6px;
+	margin: 0;
+	background: var(--secondary-bg);
+	border: none;
+	border-radius: 8px;
+	box-shadow:
+		0 0 24px var(--shadow),
+		0 0 1.5px var(--primary-text);
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.nonimagecenter & .flexttb,
+.nonimagecenter & .flexltr {
+	flex: 1;
+	gap: 8px;
+}
+.nonimagecenter > .flexttb,
+.nonimagecenter > .flexltr {
+	padding: 0 0 16px 0 !important;
+	background: var(--primary-bg);
+	border-radius: 8px;
+}
+.nonimagecenter .settingstitle {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+.nonimagecenter .flexspace,
+.nonimagecenter .FormSettings {
+	padding: 0;
+}
+.nonimagecenter button {
+	height: 100%;
+}
+fieldset {
+	margin-bottom: 4px;
+	border-color: var(--primary-text-soft);
+}
+fieldset input[type="radio"] {
+	margin: 6px;
+}
+.switchtable {
+	padding: 8px;
+	background: var(--primary-bg);
+	border-radius: 8px;
+	cursor: pointer;
+	align-items: center;
+	flex-shrink: 0;
+	margin-bottom: 10px;
+}
+.switchtable:hover {
+	background: var(--primary-hover);
+}
+.switchtable .pfp {
+	height: 48px;
+	width: 48px;
+	margin-right: 8px;
+}
+.serverURL {
+	font-size: 0.9em;
+	color: var(--primary-text-soft);
+}
+.accountSwitcher {
+	z-index: 102;
+}
+.accountSwitcher h1 {
+	margin-bottom: 4px;
+	text-align: center;
+}
+.accountSwitcher select {
+	width: 100%;
+	margin: 0;
+}
+.accountSwitcher:has(button) {
+	padding: 24px;
+}
+.accountSwitcher button {
+	padding: 12px;
+	text-align: center;
+}
+.invitediv {
+	padding-left: 8px;
+	border-radius: 4px;
+	background: var(--secondary-bg);
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+.copycontainer {
+	flex: none;
+	background: var(--button-bg);
+	cursor: pointer;
+	margin-left: auto;
+}
+.copycontainer:hover {
+	background: var(--button-hover);
+}
+.copybutton {
+	height: 20px;
+	width: 20px;
+	margin: 8px;
+}
+.nonimagecenter:has(.guildy) {
+	max-height: unset;
+	width: auto;
+}
+#typediv[style*="hidden"] {
+	height: 0px;
+}
+.guildy {
+	gap: 6px;
+	height: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+}
+#discovery-guild-content {
+	flex: 1;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 8px;
+	overflow-y: auto;
+}
+.discovery-guild {
+	height: 280px;
+	border-radius: 8px;
+	background: var(--secondary-bg);
+	overflow: hidden;
+	cursor: pointer;
+	position: relative;
+	.banner {
+		position: relative !important;
+	}
+}
+.discovery-guild:hover {
+	background: var(--secondary-hover);
+}
+.flex {
+	margin: 12px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.icon {
+	height: 48px;
+	width: 48px;
+	border-radius: 50%;
+}
+.discovery-guild h3 {
+	font-size: 1em;
+}
+.discovery-guild p {
+	margin: 0 12px;
+	font-size: 0.9em;
+	color: var(--secondary-text-soft);
+	word-break: break-word;
+}

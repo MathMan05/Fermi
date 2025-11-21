@@ -1,0 +1,73 @@
+#sideContainDiv {
+	padding: 16px 8px;
+	display: none;
+	flex: none;
+	width: 240px;
+	background: var(--sidebar-bg);
+	flex-direction: column;
+	justify-content: space-between;
+	z-index: 4;
+}
+#sideDiv {
+	overflow-y: auto;
+	box-sizing: border-box;
+	position: relative;
+	overflow: auto;
+	flex-grow: 1;
+}
+#page:has(#memberlisttoggle:checked) #sideContainDiv {
+	display: flex;
+}
+#sideContainDiv.searchDiv {
+	padding: 0px;
+	display: flex;
+	width: max(30vw, 400px);
+
+	.topMessage {
+		margin: 0px 10px;
+		margin-top: 2px;
+		margin-bottom: 10px;
+		cursor: pointer;
+		padding: 0.05in;
+		border-radius: 0.075in;
+		background: #00000020;
+	}
+	.topMessage:hover {
+		background: #00000050;
+	}
+}
+
+.memberList {
+	padding-bottom: 16px;
+	color: var(--primary-text-soft);
+	.flexttb {
+		padding-left: 8px;
+	}
+}
+.memberList h3 {
+	margin: 0 8px 4px 8px;
+	font-size: 0.9rem;
+}
+.memberList .liststyle:hover {
+	background: var(--sidebar-hover);
+}
+.memberList.offline .liststyle {
+	opacity: 0.5;
+}
+#memberlisttoggle {
+	display: none;
+}
+#memberlisttoggleicon {
+	display: block;
+	padding: 12px 0;
+	margin-left: 0;
+	cursor: pointer;
+	flex-grow: 0;
+}
+#memberlisttoggleicon span {
+	height: 16px;
+	width: 16px;
+}
+#page:has(#memberlisttoggle:checked) #memberlisttoggleicon span {
+	background: var(--primary-text-prominent);
+}

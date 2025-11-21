@@ -1,0 +1,65 @@
+.contextmenu {
+	position: absolute;
+	padding: 8px;
+	background: var(--secondary-bg);
+	border-radius: 4px;
+	box-shadow: 0 0 8px var(--shadow);
+	z-index: 102;
+
+	animation-duration: 0.2s;
+	animation-name: context-fade-in;
+	animation-timing-function: ease-out;
+
+	hr {
+		width: 90%;
+		height: 1px;
+	}
+}
+.removeElm {
+	pointer-events: none;
+}
+.contextmenu.removeElm {
+	animation-name: context-fade-out;
+}
+@keyframes context-fade-out {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes context-fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.contextbutton {
+	position: relative;
+	width: 180px;
+	padding: 8px;
+	background: transparent;
+	font-size: 0.9rem;
+	line-height: 1em;
+	color: var(--secondary-text);
+	border: none;
+	transition: none;
+	display: flex;
+	flex-direction: row;
+	.svgicon {
+		height: 0.2in;
+		width: 0.2in;
+		position: absolute;
+		right: 6px;
+		top: 6px;
+	}
+}
+.contextbutton:enabled:hover {
+	background: var(--secondary-hover);
+}
+.contextbutton:disabled {
+	background: var(--secondary-bg);
+}

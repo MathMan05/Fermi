@@ -1,0 +1,377 @@
+.menu {
+	background: var(--settings-bg);
+}
+.settingstitle {
+	flex: none;
+	background: var(--settings-header-bg);
+	min-height: 48px;
+	padding: 8px 16px;
+	flex-wrap: wrap;
+	border-bottom: 2px solid var(--shadow);
+	box-sizing: border-box;
+	display: flex;
+	gap: 0 6px;
+	align-items: center;
+	user-select: none;
+	/* pointer-events: none; */
+	width: 100%;
+	box-sizing: border-box;
+}
+.Buttons {
+	flex: 1;
+	width: inherit;
+}
+.settingbuttons.flexltr {
+	width: 100%;
+	border-right: 0;
+	border-radius: 0.04in;
+	.SettingsButton {
+		width: auto;
+		border-radius: 3px 3px 1px 1px;
+	}
+}
+.settingbuttons {
+	flex: none;
+	width: 192px;
+	padding: 6px;
+	background: var(--settings-panel-bg);
+	border-right: 2px solid var(--shadow);
+	border-left: 2px solid transparent;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+.roleButtonStyle {
+	color: transparent;
+	background-image: var(
+		--user-bg,
+		linear-gradient(var(--primary-text-soft), var(--primary-text-soft))
+	);
+	background-clip: text;
+}
+.SettingsButton {
+	width: 100%;
+	padding: 8px 12px;
+	background: transparent;
+	color: var(--primary-text-soft);
+	border: none;
+	transition: background 0.1s;
+	position: relative;
+}
+.infosection {
+	.activeSetting {
+		border-bottom: white solid 1px;
+	}
+}
+.activeSetting {
+	background: var(--secondary-hover);
+}
+.SettingsButton:hover {
+	background: var(--settings-panel-hover);
+	color: var(--primary-text-prominent);
+}
+.activeSetting:hover {
+	background: color-mix(in srgb, var(--secondary-bg) 40%, transparent);
+}
+.addrole {
+	height: 10px;
+	width: 10px;
+	margin-left: auto;
+	align-self: center;
+	cursor: pointer;
+}
+.centeritem {
+	.fadeHTMLArea {
+		animation-duration: 0s;
+	}
+}
+.fadeHTMLArea {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	background: var(--settings-bg);
+	animation-duration: 0.2s;
+	animation-name: fadeOldSettings;
+
+	@media screen and (max-width: 600px) {
+		animation-duration: 0s;
+	}
+	animation-timing-function: ease-in;
+	z-index: 900;
+	&:empty {
+		display: none;
+	}
+	.FormSettings {
+		> div {
+			padding-bottom: 47px;
+		}
+	}
+}
+@keyframes fadeOldSettings {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes fade-shrink {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+}
+@keyframes fade-grow-in {
+	0% {
+		opacity: 0;
+	}
+	1% {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.EmojiGuildMenu.removeElm {
+	animation-duration: 0.2s;
+	animation-name: fade-shrink;
+	animation-timing-function: ease-in;
+}
+.titlediv {
+	display: flex;
+	flex: 1;
+
+	> flexspace {
+		flex: 1;
+	}
+}
+.flexspace {
+	padding-bottom: 32px;
+	overflow-y: auto;
+	position: relative;
+}
+.flexspace:has(.flexspace) {
+	height: 100%;
+	padding-bottom: 0;
+}
+.FormSettings .flexspace {
+	padding-bottom: 0;
+}
+.FormSettings {
+	padding-bottom: 32px;
+}
+.webhookArea {
+	background: var(--secondary-bg);
+	padding: 0.2in;
+	display: flex;
+	align-items: center;
+	border-radius: 0.1in;
+	user-select: none;
+	cursor: pointer;
+	span {
+		color: var(--secondary-text-soft);
+	}
+	.svgicon {
+		width: 0.4in;
+		height: 0.4in;
+		margin-left: auto;
+	}
+}
+.stickersDiv {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.webhookpfppreview {
+	width: 0.8in;
+	height: 0.8in;
+	border-radius: 1in;
+	margin-right: 0.2in;
+}
+.stickerView {
+	max-width: 2.5in;
+	max-height: 2.5in;
+}
+.sticker {
+	max-width: 4in;
+	height: 2in;
+}
+.vsmaller {
+	.optionElement {
+		margin-top: 8px;
+	}
+}
+.traceHead {
+	cursor: pointer;
+	border-bottom: black solid 4px;
+}
+.traceDiv {
+	padding: 5px 10px;
+}
+.traceBars {
+	padding: 10px 0px;
+}
+.mutGuildBox {
+	background: var(--primary-bg);
+	padding: 6px;
+	cursor: pointer;
+	margin-top: 6px;
+
+	img {
+		width: 48px !important;
+		height: 48px !important;
+		padding: 4px !important;
+		margin: 0px !important;
+	}
+	.flexttb {
+		display: flex;
+		justify-content: space-evenly;
+		padding-left: 8px;
+	}
+	border-radius: 6px;
+}
+.dropDownTrace {
+	background: var(--primary-hover);
+	padding: 20px 10px;
+	border-radius: 10px;
+	border: black solid 4px;
+}
+.optionElement,
+.FormSettings > button {
+	margin: 16px 16px 0 16px;
+	word-break: break-word;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+.permbox {
+	display: flex;
+	flex-wrap: wrap;
+}
+.permbox > span {
+	padding: 6px;
+	margin: 4px;
+	background: var(--role-bg);
+	white-space: nowrap;
+	word-break: keep-all;
+	border-radius: 3px;
+}
+.flexltr:has(> .optionElement) {
+	margin: 16px 16px 0 16px;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+.flexltr > .optionElement {
+	margin: 0;
+}
+.optionElement:has(.optionElement) {
+	margin: 0;
+	position: relative;
+}
+.optionElement:has(.Buttons) {
+	height: 100%;
+	min-height: 0;
+	display: flex;
+}
+.optionElement input[type="text"],
+.optionElement textarea,
+.optionElement .fileinputdiv {
+	max-width: 500px;
+}
+#app-list-container div,
+#connection-container div {
+	max-width: 500px;
+	padding: 8px;
+	margin-top: 12px;
+	background: var(--secondary-bg);
+	color: var(--secondary-text);
+	border: 1.5px solid transparent;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+}
+#app-list-container div:hover {
+	border: 1.5px solid color-mix(in srgb, var(--secondary-text), transparent);
+}
+#app-list-container img {
+	height: 32px;
+	width: 32px;
+	border-radius: 4px;
+}
+#app-list-container h2 {
+	font-size: 1rem;
+}
+#connection-container .disabled {
+	color: var(--button-disabled-text);
+	cursor: not-allowed;
+}
+.inlinelabel {
+	margin-right: 4px;
+}
+.setting {
+	padding: 16px;
+	background: var(--secondary-bg);
+	color: var(--secondary-text);
+	border-radius: 4px;
+}
+.settingsname {
+	font-size: 1.15rem;
+}
+.setting p {
+	font-size: 0.9em;
+	color: var(--secondary-text-soft);
+}
+.tritoggle {
+	display: inline;
+	margin-left: 4px;
+}
+.tritoggle input {
+	margin: 0 2px;
+	accent-color: var(--grey);
+}
+.tritoggle input:first-child {
+	accent-color: var(--green);
+}
+.tritoggle input:nth-child(3) {
+	accent-color: var(--red);
+}
+.nonimagecenter > .flexltr.savediv {
+	padding: 16px !important;
+}
+.savediv {
+	position: fixed;
+	bottom: 24px;
+	right: 50%;
+	transform: translateX(50%);
+	padding: 16px !important;
+	background: var(--secondary-bg) !important;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: var(--secondary-text);
+	border-radius: 8px !important;
+	align-items: center;
+	box-shadow:
+		0 0 24px var(--shadow),
+		0 0 1px var(--primary-text);
+	box-sizing: border-box;
+	z-index: 2;
+}
+.savediv button {
+	margin-left: 12px;
+	background: var(--green);
+}
+.exitsettings {
+	position: absolute;
+	top: 11px;
+	right: 12px;
+	height: 24px;
+	width: 24px;
+	cursor: pointer;
+}
+.exitsettings:hover {
+	background: var(--primary-text-prominent);
+}

@@ -1,0 +1,436 @@
+.pfpDiv {
+	position: relative;
+}
+.pfp,
+.replypfp {
+	display: block;
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	cursor: pointer;
+	user-select: none;
+}
+.leftArrow {
+	z-index: 1;
+	width: 42px;
+	height: 42px;
+	display: block;
+	background: var(--primary-text-soft);
+	position: absolute;
+	top: calc(50% - 42px);
+	left: 4px;
+	cursor: pointer;
+}
+.rightArrow {
+	z-index: 1;
+	width: 42px;
+	height: 42px;
+	display: block;
+	background: var(--primary-text-soft);
+	position: absolute;
+	top: calc(50% - 42px);
+	right: 4px;
+	cursor: pointer;
+}
+.svg-mediaSettings {
+	width: 15px;
+	height: 30px;
+	background: var(--primary-text);
+	cursor: pointer;
+	display: block;
+	mask-size: contain !important;
+}
+.svg-mediaButton {
+	width: 30px;
+	height: 30px;
+	background: var(--primary-text);
+	cursor: pointer;
+	display: block;
+	mask-size: cover !important;
+}
+.svg-crown {
+	width: 16px;
+	height: 16px;
+	background: var(--yellow) !important;
+	mask: url(/icons/crown.svg);
+	mask-size: cover !important;
+	flex-shrink: 0;
+	cursor: pointer;
+	margin-left: -2px !important;
+}
+.svg-history {
+	width: 36px;
+	height: 36px;
+	background: var(--primary-text-soft);
+	mask: url(/icons/history.svg);
+	mask-size: cover !important;
+	flex-shrink: 0;
+	cursor: pointer;
+
+	&:hover {
+		background: var(--black);
+	}
+}
+.svg-folder {
+	mask: url(/icons/folder.svg);
+	background-color: var(--folder-color, var(--accent-color));
+	mask-size: contain !important;
+	width: 36px;
+	height: 36px;
+}
+.messageimgdiv:hover {
+	.svg-gifstar {
+		top: 4px;
+	}
+}
+.svg-gifstar {
+	mask: url(/icons/gifstar.svg);
+	mask-size: contain !important;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: -30px;
+	right: 5px;
+	transition: top 0.2s;
+	transition-timing-function: ease-in;
+	background: white;
+	cursor: pointer;
+	&.favorited {
+		background: yellow;
+	}
+}
+.svg-stream {
+	mask: url(/icons/stream.svg);
+	mask-size: contain !important;
+	background: var(--primary-text);
+}
+.svg-stopstream {
+	mask: url(/icons/stopstream.svg);
+	mask-size: contain !important;
+	background-color: var(--red);
+}
+.svg-video {
+	mask: url(/icons/video.svg);
+	mask-size: contain !important;
+	background: var(--primary-text);
+}
+.svg-novideo {
+	mask: url(/icons/novideo.svg);
+	mask-size: contain !important;
+	background: var(--red);
+}
+.svg-call {
+	mask: url(/icons/call.svg);
+	mask-size: contain !important;
+}
+.svg-hangup {
+	mask: url(/icons/hangup.svg);
+	mask-size: contain !important;
+	background: var(--red);
+}
+.svg-plainx {
+	mask: url(/icons/plainx.svg);
+	mask-size: contain !important;
+}
+.svg-sticker {
+	mask: url(/icons/sticker.svg);
+	mask-size: contain !important;
+}
+.svg-search {
+	mask: url(/icons/search.svg);
+	mask-size: contain !important;
+}
+.svg-spoiler {
+	mask: url(/icons/spoiler.svg);
+}
+.svg-pin {
+	mask: url(/icons/pin.svg);
+	mask-size: cover;
+}
+.svg-rules {
+	mask: url(/icons/rules.svg);
+	mask-size: cover;
+}
+.svg-unspoiler {
+	mask: url(/icons/unspoiler.svg);
+}
+.svg-soundMore {
+	mask: url(/icons/soundMore.svg);
+}
+.svg-play {
+	mask: url(/icons/play.svg);
+}
+.svg-pause {
+	mask: url(/icons/pause.svg);
+}
+.svg-announce {
+	mask: url(/icons/announce.svg);
+}
+.svg-emoji {
+	mask: url(/icons/emoji.svg);
+}
+.svg-gif {
+	mask: url(/icons/gif.svg);
+}
+.svg-edit {
+	mask: url(/icons/edit.svg);
+}
+.svg-reply {
+	mask: url(/icons/reply.svg);
+}
+.svg-delete {
+	mask: url(/icons/delete.svg);
+}
+.svg-category {
+	mask: url(/icons/category.svg);
+}
+.svg-intoMenu {
+	mask: url(/icons/intoMenu.svg);
+}
+.svg-leftArrow {
+	mask: url(/icons/leftArrow.svg);
+}
+.svg-channel {
+	mask: url(/icons/channel.svg);
+}
+.svg-copy {
+	mask: url(/icons/copy.svg);
+}
+.svg-explore {
+	mask: url(/icons/explore.svg);
+}
+.svg-home {
+	mask: url(/icons/home.svg);
+}
+.svg-settings {
+	mask: url(/icons/settings.svg);
+}
+.svg-voice {
+	mask: url(/icons/voice.svg);
+}
+.svg-plus {
+	mask: url(/icons/plus.svg);
+}
+.svg-upload {
+	mask: url(/icons/upload.svg);
+	width: 0.2in !important;
+	cursor: pointer;
+}
+.svg-x {
+	mask: url(/icons/x.svg);
+}
+.svg-friends {
+	mask: url(/icons/friends.svg);
+	width: 24px !important;
+	height: 24px !important;
+	margin-right: 0 !important;
+}
+.svg-frmessage {
+	mask: url(/icons/frmessage.svg);
+}
+.svg-addfriend {
+	mask: url(/icons/addfriend.svg);
+}
+
+.svg-channelnsfw {
+	mask: url(/icons/channelnsfw.svg);
+}
+.svg-announcensfw {
+	mask: url(/icons/announcensfw.svg);
+}
+.svg-voicensfw {
+	mask: url(/icons/voicensfw.svg);
+}
+
+.svgicon {
+	display: block;
+	height: 100%;
+	width: 100%;
+	background: var(--primary-text-soft);
+	mask-repeat: no-repeat;
+	aspect-ratio: 1/1;
+	flex-shrink: 0;
+}
+.svg-mic {
+	height: 22px;
+	width: 22px;
+	margin: 6px;
+	mask: url(/icons/mic.svg);
+	mask-size: contain !important;
+}
+.svg-micmute {
+	height: 22px;
+	width: 22px;
+	margin: 6px;
+	mask: url(/icons/micmute.svg);
+	background-color: var(--red);
+	mask-size: contain !important;
+}
+.mobileback {
+	visibility: hidden;
+	height: 0px;
+	width: 0px;
+}
+#searchX {
+	width: 0.16in;
+	height: 0.16in;
+	position: absolute;
+	right: 13px;
+	top: 6px;
+}
+#searchX.svg-plainx {
+	cursor: pointer;
+}
+#pinnedM {
+	width: 0.25in;
+	height: 0.25in;
+	cursor: pointer;
+}
+.unreadPin {
+	position: relative;
+}
+.unreadPin::after {
+	width: 0.1in;
+	height: 0.1in;
+	content: "";
+	background: var(--red);
+	position: absolute;
+	right: 0px;
+	bottom: -5px;
+	border-radius: 1in;
+}
+#stickerTB {
+	width: 0.2in;
+	height: 0.2in;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin-left: 6px;
+}
+#emojiTB {
+	width: 0.2in;
+	height: 0.2in;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin-left: 6px;
+}
+#gifTB {
+	width: 0.2in;
+	height: 0.2in;
+	cursor: pointer;
+	flex-shrink: 0;
+	mask-size: 0.2in 0.2in;
+}
+.selectarrow {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	height: 12px;
+	width: 12px;
+	pointer-events: none;
+}
+.hoverthing {
+	position: absolute;
+	background: var(--dock-bg);
+	padding: 0.04in;
+	border-radius: 0.05in;
+	transform: translate(-50%, 0);
+	pointer-events: none;
+
+	animation-duration: 0.1s;
+	animation-name: fade-in-hover;
+	animation-timing-function: ease-out;
+
+	border: solid 0.03in var(--dock-bg);
+	z-index: 200;
+}
+@keyframes fade-in-hover {
+	from {
+		opacity: 0;
+		transform: translate(-50%, 0) scale(0.9) translateY(-10px);
+		user-select: none;
+	}
+
+	to {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+}
+.errorHTML {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	justify-content: center;
+	align-content: center;
+	h3 {
+		margin-bottom: 15px;
+	}
+	> div {
+		background: var(--primary-bg);
+		padding: 15px;
+		border-radius: 10px;
+		height: 60%;
+		width: 60%;
+		box-shadow: 5px 5px 5px black;
+		display: flex;
+		flex-direction: column;
+
+		> div {
+			padding: 10px;
+			box-shadow: 0px 0px 5px black;
+			border-radius: 10px;
+			margin-top: auto;
+		}
+	}
+	img {
+		background: var(--primary-bg);
+		padding: 10px;
+		border-radius: 10px 10px 0 0;
+		box-shadow: 5px 5px 5px black;
+	}
+}
+.editMessage {
+	background: var(--typebox-bg);
+	padding: 0.05in;
+	border-radius: 0.04in;
+}
+#gimmefile {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #00000070;
+	top: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 99;
+	&[hidden] {
+		display: none;
+	}
+}
+.commandError {
+	position: absolute;
+	top: -36px;
+	left: 34px;
+	z-index: 1;
+	background: var(--red);
+	padding: 6px;
+	border-radius: 4px;
+	&.removeElm {
+		animation-duration: 4s;
+		animation-name: errorElm;
+		animation-fill-mode: forwards;
+		animation-timing-function: ease-in-out;
+	}
+}
+@keyframes errorElm {
+	100%,
+	0% {
+		opacity: 0;
+	}
+	5%,
+	95% {
+		opacity: 1;
+	}
+}

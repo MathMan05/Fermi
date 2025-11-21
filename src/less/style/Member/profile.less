@@ -1,0 +1,160 @@
+.profile {
+	position: absolute;
+	height: 350px;
+	width: 300px;
+	max-height: 100svh;
+	background: var(--card-bg);
+	box-shadow:
+		0 0 8px var(--shadow),
+		inset 0 132px 64px var(--accent_color);
+	border-radius: 8px;
+	overflow: hidden;
+	align-items: flex-start;
+	z-index: 3;
+	display: flex;
+	flex-direction: column;
+	&:not(.hypoprofile) {
+		animation-duration: 0.2s;
+		animation-name: fade-in;
+		animation-fill-mode: forwards;
+		animation-timing-function: cubic-bezier(0.28, 0.48, 0.24, 1.27);
+	}
+	input {
+		width: calc(100% - 20px);
+		margin: 0px 10px;
+		margin-bottom: 10px;
+		box-sizing: border-box;
+		padding: 10px;
+		background: var(--secondary-bg);
+		border: none;
+		border-radius: 5px;
+		font-size: 14px;
+	}
+}
+@keyframes fade-in {
+	0% {
+		transform: translateY(30px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+.hypoprofile {
+	position: relative;
+	min-height: 350px;
+	margin-bottom: 8px;
+}
+.profile .pfpDiv {
+	position: absolute;
+	z-index: 2;
+	top: 20px;
+}
+.profile .pfp {
+	height: 64px;
+	width: 64px;
+	margin: 8px 0 0 8px;
+	cursor: pointer;
+}
+.statusDiv {
+	position: absolute;
+	right: 2px;
+	bottom: 2px;
+	height: 7px;
+	width: 7px;
+	background: var(--black);
+	border: 2.5px solid var(--black);
+	border-radius: 50%;
+}
+.profile .statusDiv {
+	width: 14px;
+	height: 14px;
+}
+.onlinestatus {
+	background: var(--green);
+}
+.offlinestatus {
+	background: var(--primary-bg);
+}
+.banner {
+	background: yellow;
+	height: 100px;
+	width: 100%;
+	object-fit: cover;
+	position: absolute !important;
+	/* z-index: 2; */
+}
+.badge {
+	display: inline-flex;
+	padding: 2px;
+	border: solid 2px var(--black);
+	border-radius: 8px;
+	img {
+		object-fit: contain;
+		width: 18px;
+		height: 18px;
+	}
+}
+.infosection {
+	flex: 1;
+	width: calc(100% - 16px);
+	padding: 12px;
+	margin: 8px;
+	margin-top: 64px;
+	background: var(--secondary-bg);
+	color: var(--secondary-text);
+	border-radius: 8px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	padding-top: 30px;
+	z-index: 1;
+	.fadeHTMLArea {
+		background: var(--secondary-bg) !important;
+	}
+}
+.infosection h2,
+.infosection h3 {
+	word-break: break-word;
+	font-size: 20px;
+}
+.infosection hr {
+	width: 100%;
+}
+.tag {
+	margin: 4px 0;
+	font-size: 0.9em !important;
+	color: var(--secondary-text);
+}
+.pronouns {
+	font-size: 0.9em;
+	color: var(--secondary-text-soft);
+}
+.rolesbox {
+	min-height: unset;
+	margin-top: auto;
+	padding-top: 6px;
+	gap: 2px;
+	flex-wrap: wrap;
+}
+.rolediv {
+	padding: 4px 6px;
+	background: var(--role-bg);
+	color: var(--role-text);
+	font-size: 0.9em;
+	border: 1px solid var(--black);
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+ul {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.colorrolediv {
+	height: 12px;
+	width: 12px;
+	background: var(--role-color);
+	border-radius: 50%;
+}

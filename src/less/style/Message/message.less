@@ -1,0 +1,218 @@
+.messagediv,
+.titlespace {
+	padding: 3px 36px 3px 16px;
+	border-left: 2px solid transparent;
+}
+.titlespace {
+	margin-bottom: 20px;
+}
+.messagediv {
+	position: relative;
+}
+.messagediv:hover {
+	background: var(--primary-hover);
+}
+.fSpoil {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	backdrop-filter: blur(20px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: backdrop-filter 0.4s;
+	span {
+		background: var(--spoiler-bg);
+		padding: 3px 6px;
+		border-radius: 6px;
+	}
+}
+.fSpoil:hover {
+	backdrop-filter: blur(15px);
+	span {
+		background: var(--spoiler-hover);
+	}
+}
+.messageButtons,
+.controls {
+	position: absolute;
+	top: -16px;
+	right: 16px;
+	background: var(--secondary-bg);
+	box-shadow:
+		0 0 4px var(--shadow),
+		0 0 2px var(--shadow);
+	border-radius: 4px;
+	overflow: hidden;
+}
+.messageButtons button,
+.controls button {
+	padding: 8px;
+	background: transparent;
+	border-radius: 0;
+	cursor: pointer;
+	transition: none;
+}
+.messageButtons button span,
+.controls button span {
+	display: block;
+	height: 16px;
+	width: 16px;
+	background: var(--secondary-text-soft);
+}
+.messageButtons button:hover,
+.controls button:hover {
+	background: var(--secondary-hover);
+}
+.messageButtons button:hover span,
+.controls button:hover span {
+	background: var(--secondary-text);
+}
+.controls {
+	top: 6px;
+	right: 6px;
+	box-shadow: 0 0 1.5px var(--primary-text-soft);
+	z-index: 1;
+}
+.message {
+	padding-right: 28px;
+}
+.topMessage {
+	margin-top: 16px;
+}
+.zeroheight {
+	padding: 0;
+}
+.blocked {
+	display: inline-block;
+	margin-bottom: 4px;
+	color: var(--primary-text-soft);
+	cursor: pointer;
+}
+.message.blocked {
+	margin-bottom: 0;
+}
+.messagediv:has(.message.blocked):hover {
+	background: transparent;
+}
+.pfprow {
+	flex: none;
+	width: 40px;
+	margin: 2px 12px 0 0;
+}
+.pfprow .pfp {
+	height: 40px;
+	width: 40px;
+}
+.commentrow {
+	word-break: break-word;
+	gap: 4px;
+	width: 100%;
+	max-height: 1000px;
+	overflow: clip;
+	position: relative;
+}
+.commentrow::after {
+	content: "View rest";
+	position: absolute;
+	top: 960px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: var(--secondary-bg);
+	padding: 10px;
+	border-radius: 4px;
+	text-align: center;
+	cursor: pointer;
+}
+.commentrow:hover::after {
+	background: var(--secondary-hover);
+}
+.fileinputdiv > div {
+	width: 64px;
+	height: 64px;
+	object-fit: contain;
+	background: var(--secondary-bg);
+	border-radius: 16px;
+	cursor: pointer;
+	img {
+		width: 64px;
+		height: 64px;
+		object-fit: contain;
+		border-radius: 16px;
+	}
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	span {
+		text-align: center;
+	}
+}
+.username {
+	margin-top: auto;
+	font-weight: bold;
+	word-break: break-all;
+	cursor: pointer;
+	color: transparent;
+	background-clip: text, border-box;
+	position: relative;
+	background-image: var(--userbg, linear-gradient(var(--primary-text), var(--primary-text)));
+}
+.roleIcon {
+	display: inline-block;
+	padding: 1px;
+	margin-left: 3px;
+	cursor: default;
+	width: 20px;
+	height: 20px;
+	object-fit: contain;
+}
+.userwrap {
+	display: flex;
+	align-items: flex-end;
+}
+.pinText {
+	cursor: pointer;
+}
+.pinText:hover {
+	text-decoration: underline;
+}
+.username:hover:after {
+	text-decoration: underline;
+	position: absolute;
+	content: "";
+	width: 100%;
+	height: 1px;
+	background-image: inherit;
+	left: 0;
+	bottom: 1px;
+}
+.bot {
+	padding: 2px 5px;
+	margin-left: 4px;
+	vertical-align: 1px;
+	background: color-mix(in srgb, var(--accent-color) 75%, transparent) !important;
+	font-size: 0.75em !important;
+	font-weight: bold;
+	color: var(--primary-text-prominent) !important;
+	border-radius: 4px;
+	flex-grow: 0;
+	width: fit-content;
+	background-clip: border-box !important;
+}
+.membererror {
+	display: inline-block;
+	width: 14px;
+	margin-left: 4px;
+	font-size: 13px;
+	line-height: 1em;
+	text-align: center;
+	border: solid var(--red) 2px;
+	border-radius: 50%;
+}
+.jumped {
+	animation: jumped 1.3s;
+}

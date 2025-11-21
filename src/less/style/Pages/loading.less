@@ -1,0 +1,72 @@
+#loading {
+	z-index: 100;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background: var(--loading-bg, inherit) !important;
+	color: var(--loading-text);
+	text-align: center;
+	transition: transform 0.2s;
+	overflow: hidden; /* keep size if window height is too small */
+}
+#loading.doneloading {
+	transform: translate(0%, -100%);
+}
+#loadingdiv {
+	display: none;
+	flex: 0 0 100%; /* push out scroller until loaded */
+	overflow-y: auto;
+	flex-direction: column-reverse;
+	position: absolute;
+	background: var(--primary-bg);
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+}
+#switchaccounts {
+	color: var(--link);
+	text-decoration: underline;
+	cursor: pointer;
+}
+#loadingdiv.loading {
+	display: flex;
+}
+.loadingmessage {
+	position: relative;
+}
+.loadingpfp {
+	position: absolute;
+	height: 40px;
+	width: 40px;
+	margin-left: 16px;
+	background: var(--typebox-bg);
+	border-radius: 50%;
+}
+.loadingcontent {
+	height: 16px;
+	margin: 0 0 12px 68px;
+	background: var(--typebox-bg);
+	border-radius: 8px;
+}
+.folder-icon-div {
+	width: 44px;
+	height: 44px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--folder-bg);
+	border-radius: 16px;
+	margin: 2px;
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+.folder-div {
+	background: color-mix(in srgb, var(--primary-text-soft), 70% transparent);
+	padding: 3px;
+	margin: -3px;
+	border-radius: 16px;
+	margin-bottom: 6px;
+}
+.guilds-div-folder {
+	transition: height 0.2s;
+}

@@ -1,0 +1,35 @@
+.liststyle {
+	padding: 3px 8px;
+	border-radius: 4px;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin-bottom: 4px;
+	transition: background 0.2s;
+	&.viewChannel {
+		background: #00000050;
+	}
+}
+.memberListStyle {
+	span {
+		font-size: 0.9rem;
+		margin-left: 4px;
+		font-weight: 600;
+		color: transparent;
+		background-clip: text, border-box;
+		position: relative;
+		background-image: var(--userbg, linear-gradient(var(--primary-text)));
+	}
+}
+.liststyle .statusDiv {
+	right: -1px;
+	bottom: -1px;
+}
+.liststyle:hover {
+	background: var(--channel-hover);
+	color: var(--primary-text-prominent);
+}
+#channels .liststyle {
+	margin: 0 8px;
+}

@@ -1,0 +1,128 @@
+.emojiPicker {
+	position: absolute;
+	height: 440px;
+	width: 360px;
+	max-height: 100svh;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: 0 0 8px var(--shadow);
+	gap: 8px;
+	box-sizing: border-box;
+	user-select: none;
+	background: var(--secondary-bg);
+	z-index: 104;
+
+	input {
+		width: 1in;
+		position: absolute;
+		right: 8px;
+		top: 2px;
+		transition: width 0.2s;
+		background: var(--card-bg);
+	}
+}
+.emojiPicker,
+.gifmenu,
+.stickerPicker {
+	animation-duration: 0.2s;
+	animation-name: fade-in-back;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-out;
+	&.removeElm {
+		animation-name: fade-in-back-out;
+	}
+}
+.stickerSelect {
+	width: 1in;
+	height: 1in;
+	margin-right: 6px;
+	padding: 5px;
+	background: var(--secondary-bg);
+	border-radius: 6px;
+	cursor: pointer;
+	display: flex;
+	margin-bottom: 8px;
+}
+.stickerPicker {
+	position: absolute;
+	height: 440px;
+	width: 390px;
+	max-height: 100svh;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: 0 0 8px var(--shadow);
+	gap: 8px;
+	box-sizing: border-box;
+	user-select: none;
+	background: var(--secondary-bg);
+	z-index: 4;
+
+	input {
+		width: 1in;
+		position: absolute;
+		right: 8px;
+		top: 2px;
+		transition: width 0.2s;
+		background: var(--card-bg);
+	}
+	.sticker {
+		max-width: 1in;
+		max-height: 1in;
+		flex-grow: 1;
+	}
+}
+.emojiHeading {
+	height: 0.25in;
+}
+.emojiTitle {
+	font-size: 1.2rem;
+}
+.emojirow {
+	flex: none;
+	align-items: center;
+	overflow-x: auto;
+	flex-grow: 0;
+}
+.emojiSelect {
+	flex: none;
+	height: 40px;
+	width: 40px;
+	font-size: 28px;
+	line-height: 28px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.emojiSelect:hover {
+	background: var(--secondary-hover);
+}
+.emoji-server,
+.emojiBody .smallemoji {
+	height: auto;
+	width: auto;
+	max-height: 28px;
+	max-width: 28px;
+	margin: 0;
+}
+.emojiBody {
+	flex: 1;
+	padding: 6px;
+	background: var(--card-bg);
+	border-radius: 8px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+	grid-auto-rows: min-content;
+	overflow-y: auto;
+}
+.stickerBody {
+	flex: 1;
+	padding: 8px;
+	background: var(--card-bg);
+	border-radius: 8px;
+	display: flex;
+	overflow-y: auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+}

@@ -1,0 +1,667 @@
+#maintoggle,
+#maintoggleicon {
+	display: none;
+}
+
+@media screen and (max-width: 1000px) {
+	#sideContainDiv {
+		position: relative;
+		margin-left: -256px;
+	}
+	.flexspace:has(.hypoprofile) {
+		flex-direction: column;
+	}
+	.optionElement input[type="text"],
+	.optionElement textarea,
+	.optionElement .fileinputdiv {
+		width: 100%;
+	}
+	.searching {
+		#searchBox {
+			width: 2in;
+			margin-right: 36px;
+			padding: 7px 10px 13px 10px;
+			flex-shrink: 0;
+		}
+	}
+	#searchBox {
+		width: 0px;
+		padding: 0;
+	}
+	.searchBox:empty::after {
+		content: "";
+	}
+	#searchX {
+		position: absolute;
+		width: 24px;
+		height: 24px;
+		margin: 0;
+		cursor: pointer;
+		top: 5px;
+		right: 2px;
+		transition: height 0.2s;
+	}
+	.searchMeta {
+		transition: width 0.2s;
+		min-width: 32px;
+		height: 32px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.searching {
+		position: absolute;
+		width: 100%;
+		background: var(--primary-bg);
+		z-index: 1;
+		#searchBox {
+			width: 100%;
+			padding: 7px 10px 13px 10px;
+			flex-shrink: 1;
+		}
+	}
+	#homePage {
+		max-width: unset;
+		width: 94%;
+	}
+	#page {
+		display: block;
+		position: fixed;
+	}
+	#servers,
+	.channelflex,
+	#mainarea {
+		position: absolute;
+		height: 100svh;
+	}
+	.channelflex {
+		left: 64px;
+	}
+	#mainarea {
+		left: 304px;
+		width: 100svw;
+		background: var(--primary-bg);
+		transition: left 0.3s;
+	}
+	#sideContainDiv,
+	#sideContainDiv.searchDiv {
+		display: block;
+		right: -100svw;
+		margin-left: -100svw;
+		width: 100svw;
+		transition: right 0.3s;
+		box-sizing: border-box;
+	}
+	.channelnamediv {
+		padding: 0;
+	}
+	#maintoggleicon {
+		display: block;
+		padding: 12px;
+		cursor: pointer;
+	}
+	#memberlisttoggleicon {
+		padding: 6px;
+	}
+	#maintoggleicon span {
+		height: 14px;
+		width: 14px;
+		rotate: -90deg;
+	}
+	.scroller {
+		pointer-events: none;
+	}
+	#page:has(#maintoggle:checked) .scroller {
+		pointer-events: auto;
+	}
+	#page:has(#maintoggle:checked) #mainarea {
+		left: 0;
+	}
+	#page:has(#memberlisttoggle:checked) #sideContainDiv:not(.hideSearchDiv),
+	#sideContainDiv.searchDiv:not(.hideSearchDiv) {
+		right: 0;
+		overflow: auto;
+	}
+	#page:has(#maintoggle:checked) #maintoggleicon {
+		rotate: 180deg;
+	}
+	.messagediv {
+		padding: 3px 12px 3px 10px;
+	}
+	.message {
+		padding-right: 4px;
+	}
+	.topMessage {
+		margin-top: 8px;
+	}
+	.pfprow {
+		width: 32px;
+	}
+	.pfprow .pfp {
+		height: 32px;
+		width: 32px;
+	}
+	.replyflex:before {
+		left: 15px;
+		width: 24px;
+	}
+	.replyflex,
+	.reactiondiv {
+		padding-left: 44px;
+	}
+	#realbox,
+	#logindiv,
+	#pasteimg {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	#replybox {
+		margin-left: 12px;
+		margin-right: 12px;
+	}
+	.contextmenu,
+	.profile,
+	.emojiPicker,
+	.stickerPicker,
+	.gifmenu {
+		top: unset !important;
+		bottom: 0 !important;
+		right: unset !important;
+		width: 100% !important;
+		box-sizing: border-box;
+		border-radius: 16px 16px 0 0;
+		box-shadow:
+			0 0 14px var(--shadow),
+			0 0 28px var(--shadow);
+	}
+	.contextbutton {
+		width: 100%;
+		padding: 12px;
+	}
+	.profile {
+		height: 65%;
+		box-shadow:
+			0 0 14px var(--shadow),
+			0 0 28px var(--shadow),
+			inset 0 132px 64px var(--accent_color);
+	}
+	.hypoprofile {
+		border-radius: 8px;
+	}
+	#logindiv,
+	#invitebody,
+	.savediv,
+	.nonimagecenter,
+	.accountSwitcher {
+		width: 94%;
+		min-width: unset;
+	}
+	.Buttons {
+		flex-direction: column;
+	}
+	.settingstitle {
+		font-size: 1.2rem;
+	}
+	.settingbuttons {
+		height: 100%;
+		width: 100%;
+		z-index: 1;
+		position: absolute;
+	}
+	.settingsHTMLArea {
+		z-index: 2;
+		height: 100%;
+		background: var(--primary-bg);
+		transition: transform 0.2s;
+	}
+	.nonimagecenter .settingbuttons {
+		height: auto;
+	}
+	.fixedsearch {
+		top: 50% !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%);
+		min-width: 80svw;
+	}
+	.rolesheader {
+		margin: 6px 12px;
+	}
+	.mobileback {
+		width: 20px;
+		height: 20px;
+		visibility: visible;
+		cursor: pointer;
+	}
+	.mobileHidden {
+		transform: translate(100%, 0px);
+	}
+}
+.settingsHTMLArea {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+}
+.friendcontainer {
+	display: flex;
+	width: 100%;
+	padding: 0.2in;
+	overflow-y: auto;
+	height: 100%;
+	align-items: stretch;
+	box-sizing: border-box;
+
+	> div {
+		background: #00000030;
+		margin-bottom: 0.1in;
+		padding: 0.06in 0.1in;
+		border-radius: 0.1in;
+		border: solid 1px var(--black);
+	}
+}
+.fixedsearch {
+	position: absolute;
+	background: var(--primary-bg);
+	min-height: 0.2in;
+	padding: 0.05in;
+	border: solid 1px var(--black);
+	border-radius: 0.05in;
+	z-index: 104;
+	span {
+		background: #00000042;
+		width: 100%;
+		margin-top: 4px;
+		padding: 6px;
+		box-sizing: border-box;
+		border-radius: 0.05in;
+		cursor: pointer;
+	}
+}
+.suberror {
+	animation: goout 6s forwards;
+}
+.suberrora {
+	background: var(--channel-hover);
+	border-radius: 0.1in;
+	position: absolute;
+	border: solid var(--primary-text) 0.02in;
+	color: color-mix(in hsl, var(--yellow), var(--red));
+	font-weight: bold;
+	opacity: 0;
+	cursor: default;
+	/* height: .4in; */
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-evenly;
+	padding: 0.075in;
+	box-sizing: border-box;
+	pointer-events: none;
+}
+@keyframes goout {
+	0%,
+	100% {
+		opacity: 0;
+	}
+	5%,
+	90% {
+		opacity: 1;
+	}
+}
+.friendsbutton {
+	transition: background-color 0.2s;
+	padding: 0.08in;
+}
+.bigemoji {
+	width: 0.6in;
+	object-fit: contain;
+	height: 0.6in;
+}
+.bigemojiUni {
+	font-size: 47px;
+}
+.friendlyButton {
+	padding: 0.07in;
+	background: #00000045;
+	transition: background 0.2s;
+	border-radius: 1in;
+	border: solid 1px var(--black);
+	width: 24px;
+	height: 24px;
+	margin: 0 0.05in;
+}
+.friendlyButton:hover {
+	background: black;
+}
+.stickerOption {
+	border: solid 1px var(--black);
+	display: flex;
+	align-items: center;
+	padding: 0.075in;
+	margin-bottom: 0.2in;
+	border-radius: 0.1in;
+	background: var(--primary-hover);
+	position: relative;
+	margin-right: 15px;
+	cursor: pointer;
+	img {
+		height: 2in;
+	}
+}
+.emojiOption {
+	border: solid 1px var(--black);
+	display: flex;
+	align-items: center;
+	padding: 0.075in;
+	margin-bottom: 0.2in;
+	border-radius: 0.1in;
+	background: var(--primary-hover);
+	position: relative;
+	input {
+		width: 2in !important;
+		height: 0.3in;
+	}
+	.bigemoji {
+		padding-right: 0.5in;
+	}
+}
+.deleteEmoji {
+	width: 0.3in;
+	height: 0.3in;
+	position: absolute;
+	right: 0.2in;
+	cursor: pointer;
+}
+
+.gifmenu {
+	position: absolute;
+	width: 4.5in;
+	height: 5in;
+	background: var(--secondary-bg);
+	border-radius: 8px;
+}
+.gifPreviewBox {
+	position: relative;
+	width: 2in;
+	margin-bottom: 10px;
+	border-radius: 7px;
+	overflow: hidden;
+	cursor: pointer;
+
+	img {
+		width: 2in;
+		height: 1in;
+		object-fit: cover;
+	}
+	span {
+		top: 0px;
+		left: 0px;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		background: #00000099;
+		font-weight: bold;
+	}
+}
+.gifbox {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	overflow-y: auto;
+	margin: 0.1in;
+	align-items: center;
+	position: relative;
+	overflow-x: clip;
+}
+.searchGifBar {
+	background: var(--black);
+}
+.vr-message {
+	border-right: 1px solid var(--black) !important;
+}
+.gifmenu .title {
+	display: flex;
+	align-items: center;
+}
+.searchGifBar,
+.gifmenu .title {
+	height: 0.3in;
+	margin: 0.15in 0.15in 0 0.15in;
+	flex-shrink: 0;
+
+	border: none;
+	border-radius: 4px;
+	font-size: 0.2in;
+	padding: 0 0.1in;
+	span {
+		width: 16px;
+		height: 16px;
+		background: var(--primary-text);
+		cursor: pointer;
+	}
+}
+img.error {
+	position: relative;
+}
+img.error::after {
+	background: var(--secondary-bg) url("/icons/sad.svg");
+	background-size: contain;
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.dragBottomView {
+	position: relative;
+}
+.dragTopView {
+	position: relative;
+}
+.dragTopView::after {
+	content: "";
+	width: 100%;
+	height: 4px;
+	border-radius: 4px;
+	background: var(--primary-text-soft);
+	top: -1px;
+	left: 0px;
+	position: absolute;
+}
+.dragBottomView::after {
+	content: "";
+	width: 100%;
+	height: 4px;
+	border-radius: 4px;
+	background: var(--primary-text-soft);
+	bottom: -3px;
+	left: 0px;
+	position: absolute;
+}
+.dragFolderView::before {
+	content: "";
+	width: 24px;
+	height: 24px;
+	background: var(--green);
+	top: 12px;
+	left: -6px;
+	border-radius: 100%;
+	position: absolute;
+	pointer-events: none;
+}
+.blogDiv {
+	background: var(--secondary-bg);
+	padding: 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	div {
+		width: 100%;
+		h2 {
+			width: 100%;
+			border-bottom: solid var(--primary-text) 1px;
+			margin-bottom: 15px;
+			padding-bottom: 8px;
+		}
+	}
+}
+.gifBox {
+	img {
+		max-width: 196px;
+		border-radius: 4px;
+	}
+	cursor: pointer;
+	position: absolute;
+	overflow: hidden;
+}
+.emojiForm {
+	display: flex;
+	background: var(--secondary-bg);
+	padding: 6px;
+	width: fit-content;
+	border-radius: 4px;
+	align-items: center;
+	cursor: pointer;
+	:last-child {
+		margin-left: 6px;
+		max-width: 32px !important;
+		max-height: 32px !important;
+		flex-shrink: 0;
+	}
+}
+.emptyEmoji {
+	background: var(--primary-bg);
+	width: 32px;
+	height: 32px;
+	border-radius: 2in;
+}
+.stickerMArea {
+	padding-left: 48px;
+}
+.solidBackground {
+	background: var(--secondary-bg);
+	opacity: 1;
+}
+.EmojiGuildMenu {
+	position: absolute;
+	background: var(--dock-bg);
+	padding: 6px;
+	border-radius: 6px;
+	width: 350px;
+	animation-duration: 0.2s;
+	animation-name: fade-grow-in;
+	animation-timing-function: ease-out;
+	z-index: 1;
+}
+.GuildEmojiTop {
+	background: var(--primary-bg);
+	padding: 8px;
+	border-radius: 6px;
+	margin-bottom: 10px;
+	img {
+		margin-right: 10px;
+	}
+}
+
+.guildEmojiRow {
+	img {
+		margin-right: 8px;
+		margin-bottom: 0px;
+		flex-shrink: 0;
+	}
+	margin: 4px;
+}
+.guildEmojiText {
+	display: flex;
+	justify-content: center;
+}
+
+.optionElement:has(.friendGroupSelect) {
+	flex-shrink: 1;
+	overflow-y: scroll;
+}
+.friendGroupSelect {
+	> div {
+		padding: 6px;
+		display: flex;
+		align-items: center;
+		img {
+			margin-right: 12px;
+			width: 40px;
+			height: 40px;
+		}
+		input {
+			margin-left: auto;
+			height: 20px;
+			width: 20px;
+		}
+	}
+}
+.expandButtons {
+	.optionElement {
+		flex-grow: 1;
+		button {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}
+.groupDmDiv {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	img {
+		background: var(--channels-bg);
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		&:nth-child(1) {
+			width: 32px;
+			height: 32px;
+		}
+		&:nth-child(2) {
+			right: 0px;
+			bottom: 0px;
+		}
+		&:nth-child(3) {
+			left: 0px;
+			bottom: 0px;
+		}
+		&:nth-child(4) {
+			right: 0px;
+			top: 0px;
+		}
+		&:nth-child(5) {
+			left: 0px;
+			top: 0px;
+		}
+	}
+}
+
+#sentdms .groupDmDiv {
+	background: transparent;
+	width: 48px;
+	height: 48px;
+	img {
+		width: 24px;
+		height: 24px;
+		&:nth-child(1) {
+			width: 48px;
+			height: 48px;
+		}
+		margin-bottom: 0px;
+	}
+}
+.guildPreview {
+	.banner {
+		position: relative !important;
+		margin-left: 10px;
+		border-radius: 10px;
+	}
+	.icon {
+		flex-shrink: 0;
+	}
+}

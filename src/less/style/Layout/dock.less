@@ -1,0 +1,104 @@
+#VoiceBox {
+	margin: 2px 0;
+	background: var(--dock-bg);
+	div {
+		width: 100%;
+	}
+}
+#VoiceStatus {
+	padding: 8px;
+	font-weight: bold;
+	padding-bottom: 2px;
+}
+#VoiceStatus:empty {
+	padding: 0;
+}
+#VoiceButtons:empty {
+	padding: 0;
+	height: 0;
+}
+#VoiceButtons {
+	height: 46px;
+	display: flex;
+	align-items: stretch;
+	width: 100%;
+
+	div {
+		flex-grow: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--primary-bg);
+		margin: 6px;
+		border-radius: 6px;
+		cursor: pointer;
+		span {
+			height: 24px;
+			width: 24px;
+			display: block;
+		}
+		transition: background 0.1s;
+		&:hover {
+			background: color-mix(in srgb, var(--primary-bg), 20% var(--primary-text));
+		}
+	}
+}
+
+#VoiceGuild {
+	padding-left: 8px;
+	font-weight: bold;
+	padding-bottom: 4px;
+	font-size: 14px;
+	cursor: pointer;
+	width: fit-content;
+	span {
+		white-space: nowrap;
+	}
+}
+#VoiceGuild:hover {
+	text-decoration: underline;
+}
+#VoiceGuild:empty {
+	padding: 0;
+}
+
+#userdock {
+	padding: 4px 6px;
+	background: var(--dock-bg);
+	align-items: center;
+	justify-content: space-between;
+}
+#userinfo {
+	min-width: 50%;
+	padding: 0 6px;
+	gap: 6px;
+	cursor: pointer;
+}
+#userinfo:hover {
+	background: var(--dock-hover);
+}
+#userpfp {
+	margin: 6px 0;
+}
+.userflex {
+	justify-content: center;
+}
+#status {
+	font-size: 0.8em;
+}
+#user-actions > * {
+	border-radius: 50%;
+	cursor: pointer;
+	background: var(--user-info-bg);
+	color: var(--user-info-text);
+	box-sizing: border-box;
+}
+#user-actions > :hover {
+	background: var(--dock-hover);
+}
+#settings {
+	height: 22px;
+	width: 22px;
+	margin: 6px;
+	background: var(--user-info-text);
+}
