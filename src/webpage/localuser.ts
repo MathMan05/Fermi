@@ -4026,7 +4026,7 @@ class Localuser {
 			remove();
 		}
 	}
-	MDFindChannel(name: string, orginal: string, box: HTMLDivElement, typebox: MarkDown) {
+	MDFindChannel(name: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
 		const maybe: [number, Channel][] = [];
 		if (this.lookingguild && this.lookingguild.id !== "@me") {
 			for (const channel of this.lookingguild.channels) {
@@ -4039,7 +4039,7 @@ class Localuser {
 		maybe.sort((a, b) => b[0] - a[0]);
 		this.MDSearchOptions(
 			maybe.map((a) => ["# " + a[1].name, `<#${a[1].id}> `, undefined]),
-			orginal,
+			original,
 			box,
 			typebox,
 		);
@@ -4113,7 +4113,7 @@ class Localuser {
 			}
 		}
 	}
-	findEmoji(search: string, orginal: string, box: HTMLDivElement, typebox: MarkDown) {
+	findEmoji(search: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
 		const emj = Emoji.searchEmoji(search, this, 10);
 		const map = emj.map(([emoji]): [string, string, HTMLElement, () => void] => {
 			return [
@@ -4127,7 +4127,7 @@ class Localuser {
 				},
 			];
 		});
-		this.MDSearchOptions(map, orginal, box, typebox);
+		this.MDSearchOptions(map, original, box, typebox);
 	}
 	async findCommands(search: string, box: HTMLDivElement, md: MarkDown) {
 		const guild = this.lookingguild;

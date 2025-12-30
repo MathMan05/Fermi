@@ -610,7 +610,7 @@ export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 					if (urls == null) throw new Error("How the fuck was `urls` null here?");
 					const temp = new URL(str);
 					temp.port = "";
-					const newOrgin = temp.host;
+					const newOrigin = temp.host;
 					const protocol = temp.protocol;
 					const tempurls = {
 						api: new URL(urls.api),
@@ -618,16 +618,16 @@ export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 						gateway: new URL(urls.gateway),
 						wellknown: new URL(urls.wellknown),
 					};
-					tempurls.api.host = newOrgin;
+					tempurls.api.host = newOrigin;
 					tempurls.api.protocol = protocol;
 
-					tempurls.cdn.host = newOrgin;
+					tempurls.cdn.host = newOrigin;
 					tempurls.api.protocol = protocol;
 
-					tempurls.gateway.host = newOrgin;
+					tempurls.gateway.host = newOrigin;
 					tempurls.gateway.protocol = temp.protocol === "http:" ? "ws:" : "wss:";
 
-					tempurls.wellknown.host = newOrgin;
+					tempurls.wellknown.host = newOrigin;
 					tempurls.wellknown.protocol = protocol;
 
 					try {
