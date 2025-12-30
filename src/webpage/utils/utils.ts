@@ -448,8 +448,8 @@ export async function getapiurls(str: string): Promise<
 		} else {
 			const val = stringURLsMap.get(str);
 			if (val) {
-				const responce = await fetch(val.api + (val.api.endsWith("/") ? "" : "/") + "ping");
-				if (responce.ok) {
+				const response = await fetch(val.api + (val.api.endsWith("/") ? "" : "/") + "ping");
+				if (response.ok) {
 					if (val.login) {
 						return val as {
 							wellknown: string;
@@ -544,8 +544,8 @@ export async function getapiurls(str: string): Promise<
 	} catch {
 		const val = stringURLsMap.get(str);
 		if (val) {
-			const responce = await fetch(val.api + (val.api.endsWith("/") ? "" : "/") + "ping");
-			if (responce.ok) {
+			const response = await fetch(val.api + (val.api.endsWith("/") ? "" : "/") + "ping");
+			if (response.ok) {
 				if (val.login) {
 					urls = val as {
 						wellknown: string;

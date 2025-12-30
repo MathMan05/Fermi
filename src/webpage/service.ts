@@ -143,19 +143,19 @@ let fails = 0;
 async function getfile(req: Request): Promise<Response> {
 	checkCache();
 	if (!samedomain(req.url) || enabled === "false" || (enabled === "offlineOnly" && !offline)) {
-		const responce = await fetch(req.clone());
+		const response = await fetch(req.clone());
 		if (samedomain(req.url)) {
-			if (enabled === "offlineOnly" && responce.ok) {
-				putInCache(toPath(req.url), responce.clone());
+			if (enabled === "offlineOnly" && response.ok) {
+				putInCache(toPath(req.url), response.clone());
 			}
-			if (!responce.ok) {
+			if (!response.ok) {
 				fails++;
 				if (fails > 5) {
 					offline = true;
 				}
 			}
 		}
-		return responce;
+		return response;
 	}
 
 	let path = toPath(req.url);
@@ -228,12 +228,12 @@ self.addEventListener("fetch", async (e) => {
 
 	if (apiHosts?.has(host || "")) {
 		try {
-			const responce = await fetch(req.clone());
+			const response = await fetch(req.clone());
 			try {
-				event.respondWith(responce.clone());
+				event.respondWith(response.clone());
 			} catch {}
 
-			const json = await responce.json();
+			const json = await response.json();
 			if (json._trace) {
 				sendAll({
 					code: "trace",
