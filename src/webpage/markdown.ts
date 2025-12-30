@@ -719,8 +719,8 @@ class MarkDown {
 					}
 					if (URL.canParse(build) && txt[j] === ">") {
 						const url = new URL(build);
-						const allowedProticals = new Set(["https:", "http:"]);
-						if (allowedProticals.has(url.protocol)) {
+						const allowedprotocols = new Set(["https:", "http:"]);
+						if (allowedprotocols.has(url.protocol)) {
 							i = j;
 
 							if (keep) {

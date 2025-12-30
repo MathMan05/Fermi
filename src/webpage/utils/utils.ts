@@ -611,7 +611,7 @@ export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 					const temp = new URL(str);
 					temp.port = "";
 					const newOrgin = temp.host;
-					const protical = temp.protocol;
+					const protocol = temp.protocol;
 					const tempurls = {
 						api: new URL(urls.api),
 						cdn: new URL(urls.cdn),
@@ -619,16 +619,16 @@ export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 						wellknown: new URL(urls.wellknown),
 					};
 					tempurls.api.host = newOrgin;
-					tempurls.api.protocol = protical;
+					tempurls.api.protocol = protocol;
 
 					tempurls.cdn.host = newOrgin;
-					tempurls.api.protocol = protical;
+					tempurls.api.protocol = protocol;
 
 					tempurls.gateway.host = newOrgin;
 					tempurls.gateway.protocol = temp.protocol === "http:" ? "ws:" : "wss:";
 
 					tempurls.wellknown.host = newOrgin;
-					tempurls.wellknown.protocol = protical;
+					tempurls.wellknown.protocol = protocol;
 
 					try {
 						if (
