@@ -130,7 +130,7 @@ const app = http.createServer(async (req, res) => {
 	sendFile(filePath);
 });
 
-export type instace = {
+export type instance = {
 	name: string;
 	description?: string;
 	descriptionLong?: string;
@@ -157,7 +157,7 @@ export type instace = {
 };
 const instances = JSON.parse(
 	readFileSync(process.env.JANK_INSTANCES_PATH || __dirname + "/webpage/instances.json").toString(),
-) as instace[];
+) as instance[];
 
 const instanceNames = new Map<string, Instance>();
 

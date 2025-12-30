@@ -1142,10 +1142,10 @@ class Options implements OptionsElement<void> {
 		onchange?: InstancePicker["onchange"],
 		{button, instance}: {button?: HTMLButtonElement; instance?: string} = {},
 	) {
-		const instacePicker = new InstancePicker(this, onchange, button, instance);
-		this.options.push(instacePicker);
-		this.generate(instacePicker);
-		return instacePicker;
+		const instancePicker = new InstancePicker(this, onchange, button, instance);
+		this.options.push(instancePicker);
+		this.generate(instancePicker);
+		return instancePicker;
 	}
 	returnFromSub() {
 		this.subOptions = undefined;

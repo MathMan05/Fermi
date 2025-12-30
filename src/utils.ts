@@ -1,4 +1,4 @@
-import {instace} from "./index.js";
+import {instance} from "./index.js";
 
 interface ApiUrls {
 	api: string;
@@ -9,7 +9,7 @@ interface ApiUrls {
 
 export async function getApiUrls(
 	url: string,
-	instances: instace[],
+	instances: instance[],
 	check = true,
 ): Promise<ApiUrls | null> {
 	if (!url.endsWith("/")) {
