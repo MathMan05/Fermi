@@ -3,7 +3,7 @@ import {
 	getInstances,
 	getStringURLMapPair,
 	instancefetch,
-	instanceinfo,
+	InstanceInfo,
 	removeAni,
 } from "./utils/utils.js";
 import {Emoji} from "./emoji.js";
@@ -890,13 +890,13 @@ class Dialog {
 		removeAni(background);
 	}
 }
-class InstancePicker implements OptionsElement<instanceinfo | null> {
-	value: instanceinfo | null = null;
+class InstancePicker implements OptionsElement<InstanceInfo | null> {
+	value: InstanceInfo | null = null;
 	owner: Options | Form;
 	verify = document.createElement("p");
-	onchange = (_: instanceinfo) => {};
+	onchange = (_: InstanceInfo) => {};
 	instance?: string;
-	watchForChange(func: (arg1: instanceinfo) => void) {
+	watchForChange(func: (arg1: InstanceInfo) => void) {
 		this.onchange = func;
 	}
 	constructor(

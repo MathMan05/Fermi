@@ -3,6 +3,8 @@ import {MarkDown} from "../markdown.js";
 import {Dialog} from "../settings.js";
 import {fix} from "./cssMagic.js";
 import {messageFrom, messageTo} from "./serviceType.js";
+import {isLoopback, trimTrailingSlashes} from "./netUtils";
+
 fix();
 const apiDoms = new Set<string>();
 let instances:
@@ -95,13 +97,7 @@ export function setDefaults() {
 }
 setDefaults();
 export class Specialuser {
-	serverurls: {
-		api: string;
-		cdn: string;
-		gateway: string;
-		wellknown: string;
-		login: string;
-	};
+	serverurls: InstanceUrls;
 	email: string;
 	token: string;
 	loggedin;
@@ -117,7 +113,6 @@ export class Specialuser {
 		this.serverurls.cdn = new URL(json.serverurls.cdn).toString().replace(/\/$/, "");
 		this.serverurls.gateway = new URL(json.serverurls.gateway).toString().replace(/\/$/, "");
 		this.serverurls.wellknown = new URL(json.serverurls.wellknown).toString().replace(/\/$/, "");
-		this.serverurls.login = new URL(json.serverurls.login).toString().replace(/\/$/, "");
 		this.email = json.email;
 		this.token = json.token;
 		this.loggedin = json.loggedin;
@@ -416,33 +411,119 @@ const stringURLsMap = new Map<
 		login?: string;
 	}
 >();
+
+export interface InstanceUrls {
+	admin?: string;
+	api: string;
+	cdn: string;
+	gateway: string;
+	wellknown: string;
+}
+
+export interface InstanceInfo extends InstanceUrls {
+	value: string;
+}
+
+export async function getapiurls(str: string): Promise<InstanceUrls | null> {
+	str = str.trim();
+	if (!str) return null;
+
+	console.info("Attempting to fetch .well-known's for", str);
+
+	// Override first:
+	let urls: InstanceUrls | null = await getInstanceInfo(str);
+	if (urls) return urls;
+
+	// Otherwise, fall back to looking it up...
+	try {
+		urls = await getApiUrlsV2(str);
+		if (!urls) throw new Error("meow");
+		return urls;
+	} catch {
+		return await getApiUrlsV1(str);
+	}
+}
+
+//region Instance list
+export async function getInstanceInfo(str: string): Promise<InstanceInfo | null> {
+	// wait for it to be loaded...? Where is this even comming from?
+	if (stringURLMap.size == 0) {
+		await new Promise<void>((res, _) => {
+			let intervalId = setInterval(() => {
+				if (stringURLMap.size !== 0) {
+					clearInterval(intervalId);
+					res();
+				}
+			}, 10);
+		});
+	}
+
+	console.info("Checking if we already know", str, "in our instance lists:", {
+		stringURLMap,
+		stringURLsMap,
+	});
+
+	if (stringURLMap.has(str)) {
+		console.error("OOH WE GOT STRING->URL MAP ENTRY FOR", str, "!!!!", stringURLMap.get(str));
+		return (await getapiurls(stringURLMap.get(str)!)) as InstanceInfo;
+	}
+
+	if (stringURLsMap.has(str)) {
+		console.error(
+			"WE GOT URL->INSTANCE MAP ENTRY FOR ",
+			str,
+			"!!!!!!!!!!11",
+			stringURLsMap.get(str),
+		);
+		return stringURLsMap.get(str) as InstanceInfo;
+	}
+
+	return null;
+}
+//endregion
+
+//region Well-Known v2
+export async function getApiUrlsV2(str: string): Promise<InstanceUrls | null> {
+	if (!URL.canParse(str)) {
+		console.log("getApiUrlsV2:", str, "is not a parseable url");
+		return null;
+	}
+	try {
+		const info = await fetch(str + "/.well-known/spacebar/client").then((r) => r.json());
+		return {
+			admin: info.admin?.baseUrl,
+			api: info.api.baseUrl + "/api/v" + info.api.apiVersions.default,
+			gateway: info.gateway.baseUrl,
+			cdn: info.cdn.baseUrl,
+			wellknown: str,
+		};
+	} catch (e) {
+		console.log("No .well-known v2 for", str, (e as Error).message);
+		return null;
+	}
+}
+//endregion
+
+//region Well-Known v1
 /**
- * this fucntion checks if a string is an instance, it'll either return the API urls or false
+ * this function checks if a string is an instance, it'll either return the API urls or null
  */
-export async function getapiurls(str: string): Promise<
-	| {
-			api: string;
-			cdn: string;
-			gateway: string;
-			wellknown: string;
-			login: string;
-	  }
-	| false
-> {
+export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 	function appendApi(str: string) {
 		return str.includes("api") ? str : str.endsWith("/") ? str + "api" : str + "/api";
 	}
 	if (!URL.canParse(str)) {
-		const val = stringURLMap.get(str);
 		if (stringURLMap.size === 0) {
 			await new Promise<void>((res) => {
-				setInterval(() => {
+				let intervalID = setInterval(() => {
 					if (stringURLMap.size !== 0) {
+						clearInterval(intervalID);
 						res();
 					}
 				}, 100);
 			});
 		}
+		const val = stringURLMap.get(str);
 		if (val) {
 			str = val;
 		} else {
@@ -451,22 +532,10 @@ export async function getapiurls(str: string): Promise<
 				const response = await fetch(val.api + (val.api.endsWith("/") ? "" : "/") + "ping");
 				if (response.ok) {
 					if (val.login) {
-						return val as {
-							wellknown: string;
-							api: string;
-							cdn: string;
-							gateway: string;
-							login: string;
-						};
+						return val as InstanceUrls;
 					} else {
 						val.login = val.api;
-						return val as {
-							wellknown: string;
-							api: string;
-							cdn: string;
-							gateway: string;
-							login: string;
-						};
+						return val as InstanceUrls;
 					}
 				}
 			} else if (!str.match(/^https?:\/\//gm)) {
@@ -480,54 +549,25 @@ export async function getapiurls(str: string): Promise<
 	let api: string;
 	try {
 		const info = await fetch(`${str}.well-known/spacebar`).then((x) => x.json());
-		if (info.api.endsWith("/")) {
-			const temp = info.api.split("/");
-			temp.pop();
-			info.api = temp.join("/");
-		}
-		api = info.api;
+		api = trimTrailingSlashes(info.api);
 	} catch {
 		api = str;
 	}
 	if (!URL.canParse(api)) {
-		return false;
+		return null;
 	}
 	const url = new URL(api);
-	function isloopback(str: string) {
-		return str.includes("localhost") || str.includes("127.0.0.1");
-	}
-	let urls:
-		| undefined
-		| {
-				api: string;
-				cdn: string;
-				gateway: string;
-				wellknown: string;
-				login: string;
-		  };
+	let urls: undefined | InstanceUrls;
 	function fixApi() {
 		if (!urls) return;
-		if (urls.api.endsWith("/")) {
-			const split = urls.api.split("/");
-			split.pop();
-			urls.api = split.join("/");
-		}
-		if (urls.cdn.endsWith("/")) {
-			const split = urls.cdn.split("/");
-			split.pop();
-			urls.cdn = split.join("/");
-		}
-		if (urls.gateway.endsWith("/")) {
-			const split = urls.gateway.split("/");
-			split.pop();
-			urls.gateway = split.join("/");
-		}
-		if (urls.login.endsWith("/")) {
-			const split = urls.login.split("/");
-			split.pop();
-			urls.login = split.join("/");
-		}
+		urls = {
+			wellknown: trimTrailingSlashes(urls.wellknown),
+			api: trimTrailingSlashes(urls.api),
+			cdn: trimTrailingSlashes(urls.cdn),
+			gateway: trimTrailingSlashes(urls.gateway),
+		};
 	}
+
 	try {
 		const info = await fetch(
 			`${api}${url.pathname.includes("api") ? "" : "api"}/policies/instance/domains`,
@@ -538,49 +578,27 @@ export async function getapiurls(str: string): Promise<
 			gateway: info.gateway,
 			cdn: info.cdn,
 			wellknown: str,
-			login: apiurl.origin + appendApi(apiurl.pathname),
 		};
 		fixApi();
 	} catch {
 		const val = stringURLsMap.get(str);
 		if (val) {
-			const response = await fetch(val.api + (val.api.endsWith("/") ? "" : "/") + "ping");
+			const response = await fetch(trimTrailingSlashes(val.api) + "/ping");
 			if (response.ok) {
 				if (val.login) {
-					urls = val as {
-						wellknown: string;
-						api: string;
-						cdn: string;
-						gateway: string;
-						login: string;
-					};
+					urls = val as InstanceUrls;
 					fixApi();
 				} else {
 					val.login = val.api;
-					urls = val as {
-						wellknown: string;
-						api: string;
-						cdn: string;
-						gateway: string;
-						login: string;
-					};
+					urls = val as InstanceUrls;
 					fixApi();
 				}
 			}
 		}
 	}
 	if (urls) {
-		if (isloopback(urls.api) !== isloopback(str)) {
-			return new Promise<
-				| {
-						api: string;
-						cdn: string;
-						gateway: string;
-						wellknown: string;
-						login: string;
-				  }
-				| false
-			>((res) => {
+		if (isLoopback(urls.api) !== isLoopback(str)) {
+			return new Promise<InstanceUrls | null>((res) => {
 				const menu = new Dialog("");
 				const options = menu.float.options;
 				options.addMDText(new MarkDown(I18n.incorrectURLS(), undefined));
@@ -589,6 +607,7 @@ export async function getapiurls(str: string): Promise<
 				opt.addButtonInput("", I18n.yes(), async () => {
 					if (clicked) return;
 					clicked = true;
+					if (urls == null) throw new Error("How the fuck was `urls` null here?");
 					const temp = new URL(str);
 					temp.port = "";
 					const newOrgin = temp.host;
@@ -598,7 +617,6 @@ export async function getapiurls(str: string): Promise<
 						cdn: new URL(urls.cdn),
 						gateway: new URL(urls.gateway),
 						wellknown: new URL(urls.wellknown),
-						login: new URL(urls.login),
 					};
 					tempurls.api.host = newOrgin;
 					tempurls.api.protocol = protical;
@@ -612,9 +630,6 @@ export async function getapiurls(str: string): Promise<
 					tempurls.wellknown.host = newOrgin;
 					tempurls.wellknown.protocol = protical;
 
-					tempurls.login.host = newOrgin;
-					tempurls.login.protocol = protical;
-
 					try {
 						if (
 							!(
@@ -623,12 +638,12 @@ export async function getapiurls(str: string): Promise<
 								)
 							).ok
 						) {
-							res(false);
+							res(null);
 							menu.hide();
 							return;
 						}
 					} catch {
-						res(false);
+						res(null);
 						menu.hide();
 						return;
 					}
@@ -637,23 +652,23 @@ export async function getapiurls(str: string): Promise<
 						cdn: tempurls.cdn.toString(),
 						gateway: tempurls.gateway.toString(),
 						wellknown: tempurls.wellknown.toString(),
-						login: tempurls.login.toString(),
 					});
 					menu.hide();
 				});
 				const no = opt.addButtonInput("", I18n.no(), async () => {
 					if (clicked) return;
 					clicked = true;
+					if (urls == null) throw new Error("How the fuck was `urls` null here?");
 					try {
 						//TODO make this a promise race for when the server just never responds
 						//TODO maybe try to strip ports as another way to fix it
 						if (!(await fetch(urls.api + "ping")).ok) {
-							res(false);
+							res(null);
 							menu.hide();
 							return;
 						}
 					} catch {
-						res(false);
+						res(null);
 						return;
 					}
 					res(urls);
@@ -673,15 +688,17 @@ export async function getapiurls(str: string): Promise<
 		//*/
 		try {
 			if (!(await fetch(urls.api + "/ping")).ok) {
-				return false;
+				return null;
 			}
 		} catch {
-			return false;
+			return null;
 		}
 		return urls;
 	}
-	return false;
+	return null;
 }
+//endregion
+
 async function isAnimated(src: string) {
 	try {
 		src = new URL(src).pathname;
@@ -780,14 +797,7 @@ export function createImg(
 		},
 	});
 }
-export interface instanceinfo {
-	wellknown: string;
-	api: string;
-	cdn: string;
-	gateway: string;
-	login: string;
-	value: string;
-}
+
 /**
  *
  * This function takes in a string and checks if the string is a valid instance
@@ -807,7 +817,7 @@ const checkInstance = Object.assign(
 			loginButton.disabled = true;
 			verify!.textContent = I18n.login.checking();
 			const instanceValue = instance;
-			const instanceinfo = (await getapiurls(instanceValue)) as instanceinfo;
+			const instanceinfo = (await getapiurls(instanceValue)) as InstanceInfo;
 			if (instanceinfo) {
 				instanceinfo.value = instanceValue;
 				localStorage.setItem("instanceinfo", JSON.stringify(instanceinfo));
@@ -834,14 +844,7 @@ const checkInstance = Object.assign(
 		}
 	},
 	{} as {
-		alt?: (e: {
-			wellknown: string;
-			api: string;
-			cdn: string;
-			gateway: string;
-			login: string;
-			value: string;
-		}) => void;
+		alt?: (e: InstanceInfo) => void;
 	},
 );
 {

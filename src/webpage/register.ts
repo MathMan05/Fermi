@@ -3,6 +3,7 @@ import {adduser, Specialuser} from "./utils/utils.js";
 import {makeLogin} from "./login.js";
 import {MarkDown} from "./markdown.js";
 import {Dialog, FormError} from "./settings.js";
+import {trimTrailingSlashes} from "./utils/netUtils";
 export async function makeRegister(
 	trasparentBg = false,
 	instance = "",
@@ -13,8 +14,7 @@ export async function makeRegister(
 	opt.addTitle(I18n.htmlPages.createAccount());
 	const picker = opt.addInstancePicker(
 		(info) => {
-			const api = info.login + (info.login.endsWith("/") ? "" : "/");
-			form.fetchURL = api + "auth/register";
+			form.fetchURL = trimTrailingSlashes(info.api) + "/auth/register";
 			tosLogic(md);
 		},
 		{instance},
