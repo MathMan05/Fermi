@@ -543,12 +543,10 @@ export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 			}
 		}
 	}
-	if (str.at(-1) !== "/") {
-		str += "/";
-	}
+	str = trimTrailingSlashes(str);
 	let api: string;
 	try {
-		const info = await fetch(`${str}.well-known/spacebar`).then((x) => x.json());
+		const info = await fetch(`${str}/.well-known/spacebar`).then((x) => x.json());
 		api = trimTrailingSlashes(info.api);
 	} catch {
 		api = str;
@@ -607,7 +605,7 @@ export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 				opt.addButtonInput("", I18n.yes(), async () => {
 					if (clicked) return;
 					clicked = true;
-					if (urls == null) throw new Error("How the fuck was `urls` null here?");
+					if (urls == null) throw new Error("Unexpected undefined, exiting");
 					const temp = new URL(str);
 					temp.port = "";
 					const newOrigin = temp.host;
@@ -658,7 +656,7 @@ export async function getApiUrlsV1(str: string): Promise<InstanceUrls | null> {
 				const no = opt.addButtonInput("", I18n.no(), async () => {
 					if (clicked) return;
 					clicked = true;
-					if (urls == null) throw new Error("How the fuck was `urls` null here?");
+					if (urls == null) throw new Error("URLs is undefined");
 					try {
 						//TODO make this a promise race for when the server just never responds
 						//TODO maybe try to strip ports as another way to fix it
@@ -837,7 +835,6 @@ const checkInstance = Object.assign(
 				return;
 			}
 		} catch {
-			console.log("catch");
 			verify!.textContent = I18n.login.invalid();
 			loginButton.disabled = true;
 			return;
