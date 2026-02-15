@@ -1388,15 +1388,10 @@ class Localuser {
 			} else {
 				category = document.createElement("div");
 				category.classList.add("memberList");
-				let title = document.createElement("h3");
 				if (role === "offline") {
-					title.textContent = I18n.user.offline();
 					category.classList.add("offline");
-				} else if (role === "online") {
-					title.textContent = I18n.user.online();
-				} else {
-					title.textContent = role.name;
 				}
+				const title = document.createElement("h3");
 				category.append(title);
 				const membershtml = document.createElement("div");
 				membershtml.classList.add("flexttb");
@@ -1412,6 +1407,15 @@ class Localuser {
 					memberListMap: memberMap,
 				});
 			}
+			const title = category.getElementsByTagName("h3")[0];
+			if (role === "offline") {
+				title.textContent = I18n.user.offline();
+			} else if (role === "online") {
+				title.textContent = I18n.user.online();
+			} else {
+				title.textContent = role.name;
+			}
+			title.textContent += ` — ${list.length}`;
 			lastDiv = category;
 			const membershtml = category.getElementsByTagName("div")[0];
 			const cur = new Set(
