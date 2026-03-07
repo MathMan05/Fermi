@@ -4507,7 +4507,7 @@ fieldset input[type="radio"] {
 .suberrora {
 	background: var(--channel-hover);
 	border-radius: 0.1in;
-	position: absolute;
+	position: relative;
 	border: solid var(--primary-text) 0.02in;
 	color: color-mix(in hsl, var(--yellow), var(--red));
 	font-weight: bold;
@@ -4522,6 +4522,7 @@ fieldset input[type="radio"] {
 	box-sizing: border-box;
 	pointer-events: none;
 	z-index: 10000000;
+    width: fit-content;
 }
 @keyframes goout {
 	0%,
