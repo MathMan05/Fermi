@@ -796,6 +796,7 @@ textarea {
 	height: 32px;
 	width: 32px;
 	border-radius: 50%;
+	object-fit: cover;
 	cursor: pointer;
 	user-select: none;
 }
@@ -2045,8 +2046,10 @@ span.instanceStatus {
 	flex-shrink: 0;
 	margin-bottom: 4px;
 	transition: background 0.2s;
-	&.viewChannel {
-		background: #00000050;
+	&.viewChannel, &.viewChannel:hover {
+		background: var(--channel-selected);
+		color: var(--primary-text-prominent);
+		font-weight: bold;
 	}
 }
 .memberListStyle {
@@ -2069,7 +2072,8 @@ span.instanceStatus {
 	color: var(--primary-text-prominent);
 }
 #channels .liststyle {
-	margin: 0 8px;
+	margin-left: 8px;
+	margin-right: 8px;
 }
 
 /* Dock */
@@ -2687,6 +2691,7 @@ input[type="search"]:read-only {
 .timestamp {
 	flex: none;
 	margin-left: 6px;
+	margin-bottom: 1px;
 	font-size: 0.75em;
 	color: var(--primary-text-soft);
 }
@@ -4337,6 +4342,10 @@ fieldset input[type="radio"] {
 	.reactiondiv {
 		padding-left: 44px;
 	}
+	.sticker {
+		height: auto;
+		max-width: 100%;
+	}
 	#realbox,
 	#logindiv,
 	#pasteimg {
@@ -4627,7 +4636,7 @@ fieldset input[type="radio"] {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: #00000099;
+		background: color-mix(in srgb, var(--card-bg) 60%, transparent);
 		font-weight: bold;
 	}
 }
@@ -4643,7 +4652,7 @@ fieldset input[type="radio"] {
 	overflow-x: clip;
 }
 .searchGifBar {
-	background: var(--black);
+	background: var(--card-bg);
 }
 .vr-message {
 	border-right: 1px solid var(--black) !important;
