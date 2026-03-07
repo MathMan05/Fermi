@@ -506,6 +506,7 @@ class Group extends Channel {
 		});
 		form.addTextInput(I18n.channel["name:"](), "name", {
 			initText: this.name === this.defaultName() ? "" : this.name,
+            maxLength: this.localuser.instanceLimits.channel?.maxName ?? 9999,
 		});
 		form.addImageInput(I18n.channel.icon(), "icon", {
 			initImg: this.icon ? this.iconUrl() : undefined,
