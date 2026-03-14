@@ -137,14 +137,17 @@ class TextInput implements OptionsElement<string> {
 	value: string;
 	input!: WeakRef<HTMLInputElement>;
 	password: boolean;
+    html_div!: HTMLDivElement;
+    maxLength: number;
 	constructor(
 		label: string,
 		onSubmit: (str: string) => void,
 		owner: Options,
-		{initText = "", password = false} = {},
+		{initText = "", password = false, maxLength=9999} = {},
 	) {
 		this.label = label;
 		this.value = initText;
+        this.maxLength = maxLength;
 		this.owner = owner;
 		this.onSubmit = onSubmit;
 		this.password = password;
@@ -156,10 +159,12 @@ class TextInput implements OptionsElement<string> {
 		div.append(span);
 		const input = document.createElement("input");
 		input.value = this.value;
+        input.maxLength = this.maxLength;
 		input.type = this.password ? "password" : "text";
 		input.oninput = this.onChange.bind(this);
 		this.input = new WeakRef(input);
 		div.append(input);
+        this.html_div = div;
 		return div;
 	}
 	onChange() {
@@ -169,6 +174,10 @@ class TextInput implements OptionsElement<string> {
 			const value = input.value as string;
 			this.onchange(value);
 			this.value = value;
+            if (value.length == this.maxLength) {; 
+                let limit = " (" + this.maxLength.toString() + ")";
+                this.makeError(I18n.localuser.inputLengthLimit() + limit);
+            }
 		}
 	}
 	onchange: (str: string) => void = (_) => {};
@@ -177,6 +186,21 @@ class TextInput implements OptionsElement<string> {
 	}
 	submit() {
 		this.onSubmit(this.value);
+	}
+    makeError(message: string) {
+		let element = this.html_div.getElementsByClassName("suberror")[0] as HTMLElement;
+		if (!element) {
+			const div = document.createElement("div");
+			div.classList.add("suberror", "suberrora");
+			this.html_div.append(div);
+			element = div;
+		} else {
+			element.classList.remove("suberror");
+			setTimeout((_) => {
+				element.classList.add("suberror");
+			}, 100);
+		}
+		element.textContent = message;
 	}
 }
 class DateInput extends TextInput {
@@ -528,14 +552,17 @@ class MDInput implements OptionsElement<string> {
 	readonly onSubmit: (str: string) => void;
 	value: string;
 	input!: WeakRef<HTMLTextAreaElement>;
+    html_div!: HTMLDivElement;
+    maxLength: number;
 	constructor(
 		label: string,
 		onSubmit: (str: string) => void,
 		owner: Options,
-		{initText = ""} = {},
+		{initText = "", maxLength=9999} = {},
 	) {
 		this.label = label;
 		this.value = initText;
+        this.maxLength = maxLength;
 		this.owner = owner;
 		this.onSubmit = onSubmit;
 	}
@@ -547,9 +574,11 @@ class MDInput implements OptionsElement<string> {
 		div.append(document.createElement("br"));
 		const input = document.createElement("textarea");
 		input.value = this.value;
+        input.maxLength = this.maxLength;
 		input.oninput = this.onChange.bind(this);
 		this.input = new WeakRef(input);
 		div.append(input);
+        this.html_div = div;
 		return div;
 	}
 	onChange() {
@@ -559,6 +588,10 @@ class MDInput implements OptionsElement<string> {
 			const value = input.value as string;
 			this.onchange(value);
 			this.value = value;
+            if (value.length == this.maxLength) {; 
+                let limit = " (" + this.maxLength.toString() + ")";
+                this.makeError(I18n.localuser.inputLengthLimit() + limit);
+            }
 		}
 	}
 	onchange: (str: string) => void = (_) => {};
@@ -567,6 +600,21 @@ class MDInput implements OptionsElement<string> {
 	}
 	submit() {
 		this.onSubmit(this.value);
+	}
+    makeError(message: string) {
+		let element = this.html_div.getElementsByClassName("suberror")[0] as HTMLElement;
+		if (!element) {
+			const div = document.createElement("div");
+			div.classList.add("suberror", "suberrora");
+			this.html_div.append(div);
+			element = div;
+		} else {
+			element.classList.remove("suberror");
+			setTimeout((_) => {
+				element.classList.add("suberror");
+			}, 100);
+		}
+		element.textContent = message;
 	}
 }
 class EmojiInput implements OptionsElement<Emoji | undefined | null> {
@@ -1197,11 +1245,12 @@ class Options implements OptionsElement<void> {
 	addTextInput(
 		label: string,
 		onSubmit: (str: string) => void,
-		{initText = "", password = false} = {},
+		{initText = "", password = false, maxLength=9999} = {},
 	) {
 		const textInput = new TextInput(label, onSubmit, this, {
 			initText,
 			password,
+            maxLength,
 		});
 		this.options.push(textInput);
 		this.generate(textInput);
@@ -1213,8 +1262,8 @@ class Options implements OptionsElement<void> {
 		this.generate(colorInput);
 		return colorInput;
 	}
-	addMDInput(label: string, onSubmit: (str: string) => void, {initText = ""} = {}) {
-		const mdInput = new MDInput(label, onSubmit, this, {initText});
+	addMDInput(label: string, onSubmit: (str: string) => void, {initText = "", maxLength=9999} = {}) {
+		const mdInput = new MDInput(label, onSubmit, this, {initText, maxLength});
 		this.options.push(mdInput);
 		this.generate(mdInput);
 		return mdInput;
@@ -1807,11 +1856,12 @@ class Form implements OptionsElement<object> {
 	addTextInput(
 		label: string,
 		formName: string,
-		{initText = "", required = false, password = false} = {},
+		{initText = "", required = false, password = false, maxLength=9999} = {},
 	) {
 		const textInput = this.options.addTextInput(label, (_) => {}, {
 			initText,
 			password,
+            maxLength,
 		});
 		this.names.set(formName, textInput);
 		if (required) {
@@ -1830,8 +1880,8 @@ class Form implements OptionsElement<object> {
 		return colorInput;
 	}
 
-	addMDInput(label: string, formName: string, {initText = "", required = false} = {}) {
-		const mdInput = this.options.addMDInput(label, (_) => {}, {initText});
+	addMDInput(label: string, formName: string, {initText = "", required = false, maxLength=9999} = {}) {
+		const mdInput = this.options.addMDInput(label, (_) => {}, {initText, maxLength});
 		this.names.set(formName, mdInput);
 		if (required) {
 			this.required.add(mdInput);
