@@ -497,6 +497,7 @@
 		"areYouSureDelete": "Are you sure you want to delete your account? If so enter the phrase $1",
 		"badCode": "Invalid code",
 		"badPassword": "Incorrect password",
+        "inputLengthLimit": "Length limit reached",
 		"botAvatar": "Bot avatar:",
 		"botInviteCreate": "Bot invite creator",
 		"botUsername": "Bot username:",

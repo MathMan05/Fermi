@@ -646,6 +646,7 @@ class User extends SnowFlake {
 		);
 		form.addTextInput(I18n.member["nick:"](), "nickname", {
 			initText: this.nickname || "",
+            maxLength: this.localuser.instanceLimits.user?.maxUsername ?? 9999,
 		});
 		dio.show();
 	}
