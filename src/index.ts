@@ -8,6 +8,7 @@ import {readFileSync} from "fs";
 import process from "node:process";
 
 const devmode = (process.env.NODE_ENV || "development") === "development";
+const skipinstances = (process.env.SKIP_INSTANCE_UPDATE || false) === '1';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 type dirtype = Map<string, dirtype | string>;
@@ -190,7 +191,12 @@ async function updateInstances(): Promise<void> {
 	}
 }
 
-updateInstances();
+/* If skipinstances is false, we update the json file for instances
+   otherwise we skip uploading instances in favor of what is already
+   set in `dist/webpage/instances.json` */
+if (skipinstances === false) {
+    updateInstances();
+}
 /*
 app.set("trust proxy", (ip: unknown) => {
 	if (typeof ip !== "string") return false;
