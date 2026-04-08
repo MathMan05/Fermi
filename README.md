@@ -1,5 +1,5 @@
 # Fermi
-Fermi is a [Spacebar](https://spacebar.chat) Client written in TS, HTML, and CSS.
+Fermi is a [Harmony](https://redir.fermi.chat/server) Client written in TS, HTML, and CSS.
 
 ![](src/webpage/home/SS1.webp)
 
