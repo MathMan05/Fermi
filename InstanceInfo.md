@@ -21,7 +21,7 @@ Inside of `webpage` you'll see a file called `instances.json` in that file you'l
         "discord"?:<Discord @>,
         "github"?:<Github profile URL>,
         "email"?:<Email address>,
-        "spacebar":?:<Spacebar username>,
+        "harmony":?:<Spacebar username>,
         "matrix"?:<Matrix account>,
         "mastodon"?:<Mastodon account>
     }

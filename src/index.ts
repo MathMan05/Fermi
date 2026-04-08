@@ -148,7 +148,7 @@ export type instance = {
 		discord?: string;
 		github?: string;
 		email?: string;
-		spacebar?: string;
+		harmony?: string;
 		matrix?: string;
 		mastodon?: string;
 	};
