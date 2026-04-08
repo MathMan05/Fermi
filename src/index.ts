@@ -1,7 +1,6 @@
 import http from "http";
 import fs from "node:fs/promises";
 import path from "node:path";
-import {observe} from "./stats.js";
 import {getApiUrls} from "./utils.js";
 import {fileURLToPath} from "node:url";
 import {readFileSync} from "fs";
@@ -164,33 +163,6 @@ for (const instance of instances) {
 	instanceNames.set(instance.name, instance);
 }
 
-async function updateInstances(): Promise<void> {
-	try {
-		const response = await fetch(
-			"https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/instances/instances.json",
-		);
-		const json = (await response.json()) as Instance[];
-		for (const instance of json) {
-			if (instanceNames.has(instance.name)) {
-				const existingInstance = instanceNames.get(instance.name);
-				if (existingInstance) {
-					for (const key of Object.keys(instance)) {
-						if (!(key in existingInstance)) {
-							existingInstance[key] = instance[key];
-						}
-					}
-				}
-			} else {
-				instances.push(instance as any);
-			}
-		}
-		observe(instances);
-	} catch (error) {
-		console.error("Error updating instances:", error);
-	}
-}
-
-updateInstances();
 /*
 app.set("trust proxy", (ip: unknown) => {
 	if (typeof ip !== "string") return false;
