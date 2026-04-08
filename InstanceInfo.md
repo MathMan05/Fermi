@@ -32,7 +32,6 @@ Anything with a `?` in-front of its `:` are optional, though you must either inc
 Some of these values may not be used right now, though they will likely be used in the future, so feel free to fill out what you like, though the more you fill out the more information we can give the users about your instance in the future.
 `language` should be [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1_codes).
 `country` should be [ISO 8166-2 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-You can also add yourself to [this](https://github.com/spacebarchat/spacebarchat/tree/master/instances) list, and you should, though there are **some disadvantages** to only being in that list such as not being on the Fermi Discovery list which shows Guilds more higher up on the Fermi client, etc.
 
 # Questions
 ## Do I have to do this to let Fermi Client connect to my server?
