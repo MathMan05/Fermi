@@ -3,7 +3,8 @@
 		"name": "Spacebar",
 		"description": "The official Spacebar instance.",
 		"image": "https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/branding/png/Spacebar__Icon-Discord.png",
-		"url": "https://spacebar.chat"
+		"url": "https://spacebar.chat",
+		"display":false
 	},
 	{
 		"name": "Fastbar",
