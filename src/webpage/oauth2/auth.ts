@@ -47,6 +47,7 @@ type botjsonfetch = {
 if (window.location.pathname.startsWith("/oauth2")) {
 	const users = getBulkUsers();
 	const params = new URLSearchParams(window.location.search);
+	//TODO replace me
 	const well = params.get("instance") || "https://spacebar.chat";
 	const permstr = params.get("permissions");
 	const joinable: Specialuser[] = [];
