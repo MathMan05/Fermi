@@ -200,7 +200,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Client version: $1\n\n[Join the official Fermi guild]($2/invite/USgYJo?instance=https%3A%2F%2Fspacebar.chat)\n\n[Help translate Fermi](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc) \n\n[Help create Fermi](https://github.com/MathMan05/Fermi)\n\n[Help maintain the server Fermi relies on](https://redir.fermi.chat/server)\n\n[Read the blog](https://blog.fermi.chat/)\n\nCalculated rights: $3",
+	"clientDesc": "Client version: $1\n\n[Join the official Fermi guild](https://redir.fermi.chat/invite)\n\n[Help translate Fermi](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc) \n\n[Help create Fermi](https://github.com/MathMan05/Fermi)\n\n[Help maintain the server Fermi relies on](https://redir.fermi.chat/server)\n\n[Read the blog](https://blog.fermi.chat/)\n\nCalculated rights: $3",
 	"commands": {
 		"errorNotValid": "$1 is not a valid choice for $2",
 		"required": "$1 is a required part of this command"

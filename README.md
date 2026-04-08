@@ -22,7 +22,7 @@ You can view the current roadmap on https://github.com/users/MathMan05/projects/
 AI code due to not being GPLv3 compatable is not allowed in this repo. I thought this didn't need to be said, but it does.
 And to be clear, *any* use of AI is not allowed in Fermi.
 ## Link
-The official Spacebar server for Fermi: https://fermi.chat/invite/USgYJo?instance=https%3A%2F%2Fspacebar.chat
+The official Spacebar server for Fermi: https://redir.fermi.chat/invite
 
 The current hosted instance of Fermi: https://fermi.chat/
 
