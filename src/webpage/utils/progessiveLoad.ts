@@ -315,12 +315,3 @@ export async function ProgessiveDecodeJSON<X>(
 	await prog.ready;
 	return identifyType(prog) as Promise<Progressive<X>>;
 }
-/*
-const test = [1, 2, 3, 4, 5, 6];
-const blob = new Blob([JSON.stringify(test)]);
-ProgessiveDecodeJSON<typeof test>("https://api.github.com/repos/spacebarchat/server/git/refs")
-	.then(async (obj) => {
-		console.log(await obj.getWhole()); //returns the ping object
-	})
-	.then(console.warn);
-//*/
