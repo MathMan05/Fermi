@@ -371,8 +371,12 @@ class Directory {
 
 export {Directory};
 
-const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
-const iOS = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const mobile =
+	/iPhone|iPad|iPod|Android/i.test(navigator.userAgent) ||
+	(window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+const iOS =
+	/iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+	(navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 export {mobile, iOS};
 
 const datalist = document.getElementById("instances");
@@ -451,7 +455,7 @@ export async function getapiurls(str: string): Promise<InstanceUrls | null> {
 //region Instance list
 export async function getInstanceInfo(str: string): Promise<InstanceInfo | null> {
 	// wait for it to be loaded...? Where is this even comming from?
-	if (stringURLMap.size == 0) {
+	if (stringURLMap.size === 0) {
 		await new Promise<void>((res, _) => {
 			let intervalId = setInterval(() => {
 				if (stringURLMap.size !== 0) {
