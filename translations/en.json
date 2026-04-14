@@ -872,7 +872,7 @@
 	"unableToPin": "Unable to pin message",
 	"sbWarns":{
 		"regi":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. Continue?",
-		"in":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. If you're the instance owner, please look into switching your instance over to the fork called Harmony."
+		"in":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. This message should only show once."
 	},
 	"unpinMessage": "Unpin message",
 	"updateAv": "Updates available",
