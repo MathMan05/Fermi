@@ -67,7 +67,7 @@ async function webhookMenu(
 
 	const makeHook = (hook: webhookType) => {
 		//TODO remove once the server fixes this bug
-		hook.url ||= `${guild.info.api}/webhooks/${guild.id}/${hook.token}`;
+		hook.url ||= `${guild.info.api}/webhooks/${hook.id}/${hook.token}`;
 
 		const div = document.createElement("div");
 		div.classList.add("flexltr", "webhookArea");
