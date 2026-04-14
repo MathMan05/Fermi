@@ -200,7 +200,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Client version: $1\n\n[Join the official Fermi guild]($2/invite/USgYJo?instance=https%3A%2F%2Fspacebar.chat)\n\n[Help translate Fermi](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc) \n\n[Help create Fermi](https://github.com/MathMan05/Fermi)\n\n[Help maintain the server Fermi relies on](https://github.com/spacebarchat/server)\n\n[Read the blog](https://blog.fermi.chat/)\n\nCalculated rights: $3",
+	"clientDesc": "Client version: $1\n\n[Join the official Fermi guild](https://redir.fermi.chat/invite)\n\n[Help translate Fermi](https://redir.fermi.chat/translate) \n\n[Help create Fermi](https://github.com/MathMan05/Fermi)\n\n[Help maintain the server Fermi relies on](https://redir.fermi.chat/server)\n\n[Read the blog](https://blog.fermi.chat/)\n\nCalculated rights: $3",
 	"commands": {
 		"errorNotValid": "$1 is not a valid choice for $2",
 		"required": "$1 is a required part of this command"
@@ -219,7 +219,7 @@
 		"cacheDesc": "map files will still load either way, this'll just make sure they're in cache when a new update rolls out.",
 		"captureTrace": "This setting tells Fermi to capture _trace properties from the server, enabling this may cause progressive JSON decoding to not work (might require a reload)",
 		"clearWellKnowns": "Re-fetch .well-known records:",
-		"description": "These are for developers of Spacebar/Fermi, if you don't know what you're doing, please don't mess with these settings.",
+		"description": "These are for developers of Harmony/Fermi, if you don't know what you're doing, please don't mess with these settings.",
 		"gatewayComp": "Disable Gateway compression:",
 		"reportSystem":"Enable experimental reporting system:",
 		"logGateway": "Log received gateway events (log level info):",
@@ -392,10 +392,10 @@
 		"addBot": "Add to guild",
 		"alreadyHave": "Already have an account?",
 		"box1Items": "Direct Messaging|Reactions support|Invites|Account switching|User settings|Developer portal|Bot invites|Translation support",
-		"box1title": "Fermi is a Spacebar-compatible client seeking to be as good as it can be with many features including:",
+		"box1title": "Fermi is a Harmony-compatible client seeking to be as good as it can be with many features including:",
 		"box3description": "We always appreciate some help, whether that be in the form of bug reports, or code, or even just pointing out some typos.",
 		"box3title": "Contribute to Fermi",
-		"compatableInstances": "Spacebar-compatible instances:",
+		"compatableInstances": "Harmony-compatible instances:",
 		"createAccount": "Create account",
 		"dobField": "Date of birth:",
 		"emailField": "Email:",
@@ -478,7 +478,7 @@
 	},
 	"jankInfo": "Client information",
 	"leaveGuild": "Leave guild",
-	"leaving": "You're leaving Spacebar",
+	"leaving": "You're leaving Harmony",
 	"loaded": "Loaded",
 	"localuser": {
 		"2faCode:": "Code:",
@@ -512,7 +512,7 @@
 		"connections": "Connections",
 		"createApp": "Create application",
 		"customSound": "Custom sound",
-		"customStatusWarn": "Spacebar does not support custom status being displayed at this time so while it'll accept the status, it will not do anything with it",
+		"customStatusWarn": "Harmony does not support custom status being displayed at this time so while it'll accept the status, it will not do anything with it",
 		"deleteAccount": "Account deletion",
 		"deleteAccountButton": "Delete account",
 		"description": "Description:",
@@ -868,8 +868,12 @@
 		"traces": "$1 ($2ms) $3"
 	},
 	"typing": "$2 {{PLURAL:$1|is|are}} typing",
-	"unableToConnect": "Unable to connect to the Spacebar server. Please try logging out and back in.",
+	"unableToConnect": "Unable to connect to the Harmony server. Please try logging out and back in.",
 	"unableToPin": "Unable to pin message",
+	"sbWarns":{
+		"regi":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. Continue?",
+		"in":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. If you're the instance owner, please look into switching your instance over to the fork called Harmony."
+	},
 	"unpinMessage": "Unpin message",
 	"updateAv": "Updates available",
 	"uploadBanner": "Upload banner:",

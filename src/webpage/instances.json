@@ -3,26 +3,7 @@
 		"name": "Spacebar",
 		"description": "The official Spacebar instance.",
 		"image": "https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/branding/png/Spacebar__Icon-Discord.png",
-		"url": "https://spacebar.chat"
-	},
-	{
-		"name": "Fastbar",
-		"description": "The best Spacebar instance with 95% uptime, running under on a NVME drive running with bleeding edge stuff <3",
-		"image": "https://spacebar.greysilly7.xyz/logo.png",
-		"url": "https://greysilly7.xyz",
-		"language": "en",
-		"country": "US",
-		"display": true,
-		"urls": {
-			"wellknown": "https://greysilly7.xyz",
-			"api": "https://api-spacebar.greysilly7.xyz/api",
-			"cdn": "https://cdn-spacebar.greysilly7.xyz",
-			"gateway": "wss://gateway-spacebar.greysilly7.xyz"
-		},
-		"contactInfo": {
-			"discord": "greysilly7",
-			"github": "https://github.com/greysilly7",
-			"email": "greysilly7@gmail.com"
-		}
+		"url": "https://spacebar.chat",
+		"display":false
 	}
 ]

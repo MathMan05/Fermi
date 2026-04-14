@@ -1003,9 +1003,6 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 		}
 
 		for (const instance of json) {
-			if (instance.display === false) {
-				continue;
-			}
 			const option = document.createElement("option");
 			option.disabled = !instance.online;
 			option.value = instance.name;
@@ -1023,6 +1020,9 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 				option.label = instance.description;
 			} else {
 				option.label = instance.name;
+			}
+			if (instance.display === false) {
+				continue;
 			}
 			datalist.append(option);
 		}

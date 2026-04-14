@@ -13,7 +13,7 @@ The translations are stored in `/src/webpage/translations` in this format below.
 ```
 
 ## I want to help translate this
-Please go to [https://translatewiki.net/wiki/Translating:Fermi](https://translatewiki.net/wiki/Translating:Fermi) to help translate this project.
+Please go to [https://redir.fermi.chat/translate](https://redir.fermi.chat/translate) to help translate this project.
 ## What is the format?
 It's the same format found [here](https://github.com/wikimedia/jquery.i18n#message-file-format), though we are not using jquery, and you might notice some of the strings use markdown, but most do not.
 

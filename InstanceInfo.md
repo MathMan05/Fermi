@@ -21,7 +21,7 @@ Inside of `webpage` you'll see a file called `instances.json` in that file you'l
         "discord"?:<Discord @>,
         "github"?:<Github profile URL>,
         "email"?:<Email address>,
-        "spacebar":?:<Spacebar username>,
+        "harmony":?:<Harmony username>,
         "matrix"?:<Matrix account>,
         "mastodon"?:<Mastodon account>
     }
@@ -32,14 +32,13 @@ Anything with a `?` in-front of its `:` are optional, though you must either inc
 Some of these values may not be used right now, though they will likely be used in the future, so feel free to fill out what you like, though the more you fill out the more information we can give the users about your instance in the future.
 `language` should be [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1_codes).
 `country` should be [ISO 8166-2 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-You can also add yourself to [this](https://github.com/spacebarchat/spacebarchat/tree/master/instances) list, and you should, though there are **some disadvantages** to only being in that list such as not being on the Fermi Discovery list which shows Guilds more higher up on the Fermi client, etc.
 
 # Questions
 ## Do I have to do this to let Fermi Client connect to my server?
 No, you may choose to not do this, this just makes it easier for people using Fermi Client to find and use your instance as it's in the dropdown menu for instances, though the user may enter any instance they please.
-## If my instance isn't Spacebar is that allowed to be entered?
-If it's Spacebar compatible then yes, it may be entered. Though if there are **too many incompatibilities** however, it may not be included, or may need a warning of sorts.
-## I'm hosting my own instance of Spacebar and would like to change the default instance on my instance of Fermi Client to my own instance.
+## If my instance isn't Harmony is that allowed to be entered?
+If it's Harmony compatible then yes, it may be entered. Though if there are **too many incompatibilities** however, it may not be included, or may need a warning of sorts.
+## I'm hosting my own instance of Harmony and would like to change the default instance on my instance of Fermi Client to my own instance.
 Just change the first entry in the list to your own, and it should connect without issue.
-## Why would I put my instance in this list over the official Spacebar list?
+## Why would I put my instance in this list over the official Harmony list?
 While putting your instance in the other list will get it to show up on Fermi client, this list does have more settings, and will show up earlier in the results, though either list will work to get in the dropdown menu.
