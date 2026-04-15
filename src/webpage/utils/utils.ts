@@ -7,6 +7,7 @@ import {isLoopback, trimTrailingSlashes} from "./netUtils";
 import {getLocalSettings, ServiceWorkerMode, setLocalSettings} from "./storage/localSettings";
 import {getPreferences} from "./storage/userPreferences";
 import {getDeveloperSettings} from "./storage/devSettings";
+import {Versions} from "../versions.js";
 
 fix();
 const apiDoms = new Set<string>();
@@ -858,6 +859,7 @@ const checkInstance = Object.assign(
 					console.log(verify!.textContent);
 					verify!.textContent = "";
 				}, 3000);
+				Versions.makeVersion(instanceinfo.api, "regi");
 				return instanceinfo;
 			} else {
 				verify!.textContent = I18n.login.invalid();
