@@ -1005,7 +1005,7 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 
 		for (const instance of json) {
 			const option = document.createElement("option");
-			option.disabled = !instance.online;
+			option.disabled = instance.online === false;
 			option.value = instance.name;
 			if (instance.url) {
 				stringURLMap.set(option.value, instance.url);
