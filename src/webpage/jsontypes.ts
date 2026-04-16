@@ -990,6 +990,12 @@ type wsjson =
 	  }
 	| {
 			op: 0;
+			d: ConnectionJson;
+			s: number;
+			t: "USER_CONNECTIONS_UPDATE";
+	  }
+	| {
+			op: 0;
 			t: "THREAD_MEMBERS_UPDATE";
 			d: {
 				guild_id: string;
@@ -1380,6 +1386,19 @@ type opRTC12 = {
 		];
 	};
 };
+export interface ConnectionJson {
+	id: string;
+	friend_sync: boolean;
+	name: string;
+	revoked: boolean;
+	show_activity: number;
+	type: string; //While it is kinda an enum, we must act like it's just a generic "type"
+	verified: boolean;
+	visibility: number;
+	integrations: []; //idk
+	metadata_visibility: number;
+	two_way_link: boolean;
+}
 
 export {
 	readyjson,

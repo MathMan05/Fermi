@@ -13,6 +13,7 @@ import {
 	memberlistupdatejson,
 	messageCreateJson,
 	messagejson,
+	ConnectionJson,
 	presencejson,
 	readStateEntry,
 	readyjson,
@@ -709,6 +710,7 @@ class Localuser {
 			this.handleTrace(e.trace);
 		});
 	}
+	conectionChange = () => {};
 	async handleEvent(temp: wsjson) {
 		if (temp.d._trace) this.handleTrace(temp.d._trace);
 		if (getDeveloperSettings().gatewayLogging) console.debug(temp);
@@ -758,6 +760,10 @@ class Localuser {
 						this.messageCreate(temp);
 					}
 					break;
+				case "USER_CONNECTIONS_UPDATE": {
+					this.conectionChange();
+					break;
+				}
 				case "MESSAGE_DELETE": {
 					temp.d.guild_id ??= "@me";
 					const channel = this.channelids.get(temp.d.channel_id);
@@ -2989,40 +2995,152 @@ class Localuser {
 		{
 			const connections = settings.addButton(I18n.localuser.connections());
 			const connectionContainer = document.createElement("div");
-			connectionContainer.id = "connection-container";
+			const actConDivCont = document.createElement("div");
 
-			fetch(this.info.api + "/connections", {
-				headers: this.headers,
-			})
-				.then((r) => r.json() as Promise<{[key: string]: {enabled: boolean}}>)
-				.then((json) => {
-					Object.keys(json)
-						.sort((key) => (json[key].enabled ? -1 : 1))
-						.forEach((key) => {
-							const connection = json[key];
-
-							const container = document.createElement("div");
-							container.textContent = key.charAt(0).toUpperCase() + key.slice(1);
-
-							if (connection.enabled) {
-								container.addEventListener("click", async () => {
-									const connectionRes = await fetch(
-										this.info.api + "/connections/" + key + "/authorize",
-										{
-											headers: this.headers,
-										},
-									);
-									const connectionJSON = await connectionRes.json();
-									window.open(connectionJSON.url, "_blank", "noopener noreferrer");
-								});
-							} else {
-								container.classList.add("disabled");
-							}
-
-							connectionContainer.appendChild(container);
-						});
+			connectionContainer.classList.add("connection-container");
+			this.conectionChange = () => {
+				if (document.contains(settings.html)) {
+					remake();
+				} else {
+					this.conectionChange = () => {};
+				}
+			};
+			const remake = () => {
+				connectionContainer.innerHTML = "";
+				actConDivCont.innerHTML = "";
+				const cons = fetch(this.info.api + "/users/@me/connections", {
+					headers: this.headers,
 				});
+
+				fetch(this.info.api + "/connections", {
+					headers: this.headers,
+				})
+					.then((r) => r.json() as Promise<{[key: string]: {enabled: boolean; icon_url?: string}}>)
+					.then(async (json) => {
+						const actCons = (await (await cons).json()) as ConnectionJson[];
+						const actConMap = new Map<string, ConnectionJson>(
+							actCons.map((_) => [_.type, _] as const),
+						);
+						const serverConnections = Object.keys(json).sort((key) => (json[key].enabled ? -1 : 1));
+
+						serverConnections
+							.filter((_) => !actConMap.has(_))
+							.forEach((key) => {
+								const connection = json[key];
+
+								const container = document.createElement("div");
+								if (connection.icon_url) {
+									const span = document.createElement("span");
+									span.classList.add("conImg", "svgicon");
+									span.style.setProperty("mask", `url("${connection.icon_url}")`);
+									//span.alt = key;
+									container.append(span);
+								} else {
+									container.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+								}
+
+								if (connection.enabled) {
+									container.addEventListener("click", async () => {
+										const connectionRes = await fetch(
+											this.info.api + "/connections/" + key + "/authorize",
+											{
+												headers: this.headers,
+											},
+										);
+										const connectionJSON = await connectionRes.json();
+										window.open(connectionJSON.url, "_blank", "noopener noreferrer");
+									});
+								} else {
+									container.classList.add("disabled");
+								}
+
+								connectionContainer.appendChild(container);
+							});
+						serverConnections
+							.filter((_) => actConMap.has(_))
+							.forEach((_) => {
+								const con = actConMap.get(_);
+								if (!con) return;
+								const connectionObj = json[_];
+
+								const actConDiv = document.createElement("div");
+								actConDiv.classList.add("flexttb", "actConnectionDiv");
+								const topRow = document.createElement("div");
+								actConDiv.append(topRow);
+								topRow.classList.add("flexltr");
+								if (connectionObj.icon_url) {
+									const span = document.createElement("span");
+									span.classList.add("conImg", "svgicon");
+									span.style.setProperty("mask", `url("${connectionObj.icon_url}")`);
+									//span.alt = key;
+									topRow.append(span);
+								}
+
+								const nameDiv = document.createElement("div");
+								nameDiv.classList.add("flexttb");
+
+								const name = document.createElement("span");
+								name.textContent = con.name;
+
+								const serviceName = document.createElement("span");
+								serviceName.textContent = _;
+
+								nameDiv.append(name, serviceName);
+
+								topRow.append(nameDiv);
+
+								const input = document.createElement("input");
+								input.type = "checkbox";
+								input.checked = !!con.visibility;
+								input.onchange = () => {
+									fetch(this.info.api + "/users/@me/connections/" + con.type + "/" + con.id, {
+										method: "PATCH",
+										body: JSON.stringify({
+											visibility: input.checked,
+										}),
+										headers: this.headers,
+									});
+								};
+
+								const dispRow = document.createElement("div");
+								dispRow.classList.add("flexltr");
+								actConDiv.append(dispRow);
+
+								const dispText = document.createElement("span");
+								dispText.textContent = "Display on profile";
+								dispRow.append(dispText, input);
+
+								const remove = document.createElement("button");
+								remove.textContent = "Delete Connection";
+								actConDiv.append(remove);
+								remove.onclick = () => {
+									const d = new Dialog("Are you sure?");
+									d.options.addText("If you remove this connection, you can't undo it");
+									const row = d.options.addOptions("", {ltr: true});
+									row.addButtonInput("", I18n.yes(), async () => {
+										await fetch(
+											this.info.api + "/users/@me/connections/" + con.type + "/" + con.id,
+											{
+												method: "DELETE",
+												headers: this.headers,
+											},
+										);
+										d.hide();
+									});
+									row.addButtonInput("", I18n.no(), () => {
+										d.hide();
+									});
+									d.show();
+								};
+
+								actConDivCont.append(actConDiv);
+							});
+					});
+			};
+			remake();
 			connections.addHTMLArea(connectionContainer);
+			connections.addHR();
+			connections.addHTMLArea(actConDivCont);
 		}
 		{
 			const devPortal = settings.addButton(I18n.localuser.devPortal());

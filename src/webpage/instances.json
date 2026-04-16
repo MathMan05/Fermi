@@ -1,16 +1,23 @@
 [
 	{
-		"name": "Spacebar",
-		"description": "The official Spacebar instance.",
+		"name": "Harmony",
+		"description": "A staging instance for Harmony",
 		"image": "https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/branding/png/Spacebar__Icon-Discord.png",
-		"url": "https://spacebar.chat",
-		"display":false
+		"url": "https://api.harmony.melodychat.org/",
+		"display":true
 	},
 	{
 		"name": "Harmony Staging",
 		"description": "A staging instance for Harmony",
 		"image": "https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/branding/png/Spacebar__Icon-Discord.png",
 		"url": "https://stg-api.harmony.melodychat.org/",
-		"display":true
+		"display":false
+	},
+	{
+		"name": "Spacebar",
+		"description": "The official Spacebar instance.",
+		"image": "https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/branding/png/Spacebar__Icon-Discord.png",
+		"url": "https://spacebar.chat",
+		"display":false
 	}
 ]

@@ -221,6 +221,24 @@ body {
 	display: flex;
 	flex-direction: column;
 }
+.actConnectionDiv {
+	background: #0000005c;
+	padding: 6px;
+	border-radius: 4px;
+	> * {
+		padding: 2px;
+		span {
+			margin-right: 10px;
+		}
+		input {
+			margin-left: auto;
+			width: 20px;
+			height: 20px;
+		}
+		display: flex;
+		align-items: center;
+	}
+}
 .mediaDisp {
 	> * {
 		height: 150px;
@@ -4110,8 +4128,13 @@ fieldset input[type="radio"] {
 .optionElement .fileinputdiv {
 	max-width: 500px;
 }
+.connection-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
 #app-list-container div,
-#connection-container div {
+.connection-container div {
 	max-width: 500px;
 	padding: 8px;
 	margin-top: 12px;
@@ -4123,6 +4146,7 @@ fieldset input[type="radio"] {
 	align-items: center;
 	gap: 8px;
 	cursor: pointer;
+	margin-left: 6px;
 }
 #app-list-container div:hover {
 	border: 1.5px solid color-mix(in srgb, var(--secondary-text), transparent);
@@ -4135,7 +4159,16 @@ fieldset input[type="radio"] {
 #app-list-container h2 {
 	font-size: 1rem;
 }
-#connection-container .disabled {
+.conImg {
+	width: 36px;
+	height: 36px;
+	background: var(--primary-text);
+}
+
+.disabled .conImg {
+	opacity: 0.3;
+}
+.connection-container .disabled {
 	color: var(--button-disabled-text);
 	cursor: not-allowed;
 }
