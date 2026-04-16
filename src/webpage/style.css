@@ -3267,7 +3267,7 @@ img.bigembedimg {
 	min-height: 350px;
 	margin-bottom: 8px;
 }
-.profile .pfpDiv {
+.profile > .pfpDiv {
 	position: absolute;
 	z-index: 2;
 	top: 20px;
