@@ -202,7 +202,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Cliëntversie: $1 \n\n[Sluit u aan bij het officiële Fermi-gilde]($2/invite/USgYJo?instance=https%3A%2F%2Fspacebar.chat)\n\n[Help Fermi te vertalen](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc) \n\n[Help Fermi te maken](https://github.com/MathMan05/Fermi)\n\n[Help de server waar Fermi op bouwt te onderhouden](https://github.com/spacebarchat/server)\n\n[Lees het blog](https://blog.fermi.chat/)\n\nBerekende rechten: $3",
+	"clientDesc": "Cliëntversie: $1 \n\n[Sluit u aan bij het officiële Fermi-gilde](https://redir.fermi.chat/invite)\n\n[Help Fermi te vertalen](https://redir.fermi.chat/translate) \n\n[Help Fermi te maken](https://github.com/MathMan05/Fermi)\n\n[Help de server waar Fermi op bouwt te onderhouden](https://redir.fermi.chat/server)\n\n[Lees het blog](https://blog.fermi.chat/)\n\nBerekende rechten: $3",
 	"commands": {
 		"errorNotValid": "$1 is geen geldige keuze voor $2",
 		"required": "$1 is een vereist onderdeel van deze opdracht"
@@ -221,7 +221,7 @@
 		"cacheDesc": "kaartbestanden worden hoe dan ook geladen; dit zorgt er alleen voor dat ze in de cache staan wanneer er een nieuwe update wordt uitgebracht.",
 		"captureTrace": "Deze instelling geeft Fermi de opdracht om _trace-eigenschappen van de server vast te leggen. Het inschakelen hiervan kan ertoe leiden dat progressieve JSON-decodering niet werkt; mogelijk is een herladen nodig.",
 		"clearWellKnowns": ".well-known-records opnieuw ophalen:",
-		"description": "Deze instellingen zijn bedoeld voor ontwikkelaars van Spacebar/Fermi. Als u niet weet wat u doet, kunt u deze instellingen beter niet wijzigen.",
+		"description": "Deze instellingen zijn bedoeld voor ontwikkelaars van Harmony/Fermi. Als u niet weet wat u doet, kunt u deze instellingen beter niet wijzigen.",
 		"gatewayComp": "Gateway-compressie uitschakelen:",
 		"reportSystem": "Experimentele rapportagesysteem inschakelen:",
 		"logGateway": "Ontvangen gatewaygebeurtenissen loggen (logniveau info):",
@@ -394,10 +394,10 @@
 		"addBot": "Toevoegen aan gilde",
 		"alreadyHave": "Heeft u al een account?",
 		"box1Items": "Directe berichten|Ondersteuning voor reacties|Uitnodigingen|Van account wisselen|Gebruikersinstellingen|Ontwikkelaarsportaal|Robot-uitnodigingen|Ondersteuning voor vertaling",
-		"box1title": "Fermi is een Spacebar-compatibele cliënt die ernaar streeft om zo goed mogelijk te zijn met veel functies, waaronder:",
+		"box1title": "Fermi is een Harmony-compatibele client die ernaar streeft om zo goed mogelijk te zijn met veel functies, waaronder:",
 		"box3description": "We stellen hulp altijd op prijs, of het nu gaat om het melden van bugs, het bijdragen van code of het verbeteren van typefouten.",
 		"box3title": "Aan Fermi bijdragen",
-		"compatableInstances": "Spacebar-compatibele servers:",
+		"compatableInstances": "Harmony-compatibele servers:",
 		"createAccount": "Account aanmaken",
 		"dobField": "Geboortedatum:",
 		"emailField": "E-mail:",
@@ -480,7 +480,7 @@
 	},
 	"jankInfo": "Cliëntinformatie",
 	"leaveGuild": "Gilde verlaten",
-	"leaving": "U verlaat Spacebar",
+	"leaving": "U verlaat Harmony",
 	"loaded": "Geladen",
 	"localuser": {
 		"2faCode:": "Code:",
@@ -514,7 +514,7 @@
 		"connections": "Verbindingen",
 		"createApp": "Toepassing aanmaken",
 		"customSound": "Aangepast geluid",
-		"customStatusWarn": "Spacebar ondersteunt nog geen aangepaste statusweergave. Hoewel de status wordt geaccepteerd, wordt er verder niets mee gedaan.",
+		"customStatusWarn": "Harmony ondersteunt nog geen aangepaste statusweergave. Hoewel de status wordt geaccepteerd, wordt er verder niets mee gedaan.",
 		"deleteAccount": "Account verwijderen",
 		"deleteAccountButton": "Account verwijderen",
 		"description": "Beschrijving:",
@@ -870,8 +870,12 @@
 		"traces": "$1 ($2ms) $3"
 	},
 	"typing": "$2 {{PLURAL:$1|is|zijn}} aan het typen",
-	"unableToConnect": "Kan geen verbinding maken met de Spacebar-server. Probeer u af en weer aan te melden.",
+	"unableToConnect": "Kan geen verbinding maken met de Harmony-server. Probeer u af en weer aan te melden.",
 	"unableToPin": "Bericht kan niet worden vastgezet",
+	"sbWarns": {
+		"regi": "Spacebar-instanties worden officieel niet meer ondersteund door Fermi, hoewel het waarschijnlijk nog wel werkt. Harmony wordt echter aanbevolen. Doorgaan?",
+		"in": "Spacebar-instanties worden officieel niet meer ondersteund door Fermi. Hoewel het waarschijnlijk nog wel werkt, wordt Harmony aanbevolen. Dit bericht zou slechts één keer moeten verschijnen."
+	},
 	"unpinMessage": "Bericht losmaken",
 	"updateAv": "Updates beschikbaar",
 	"uploadBanner": "Banner uploaden:",
