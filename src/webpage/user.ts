@@ -1546,6 +1546,7 @@ class User extends SnowFlake {
 		})();
 		const pfp = this.buildstatuspfp(guild);
 		pfp.onclick = (e) => {
+			if (this.id.includes("clone")) return;
 			this.fullProfile(guild);
 			div.remove();
 			e.stopImmediatePropagation();
