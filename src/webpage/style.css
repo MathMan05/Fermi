@@ -4164,6 +4164,12 @@ fieldset input[type="radio"] {
 	height: 36px;
 	background: var(--primary-text);
 }
+.conProfImg {
+	margin-right: 4px;
+}
+.conProfDiv {
+	margin: 6px;
+}
 
 .disabled .conImg {
 	opacity: 0.3;

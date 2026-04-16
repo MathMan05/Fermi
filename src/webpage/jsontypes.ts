@@ -440,6 +440,7 @@ export type highMemberJSON = mainuserjson & {
 	}[];
 	//Only reason this is optional is due to the fact that this is really new and I want to make sure the type checker checks this for me :3
 	mutual_friends?: userjson[];
+	connected_accounts: ConnectionJson[];
 };
 type emojijson = {
 	name: string;
@@ -1388,6 +1389,7 @@ type opRTC12 = {
 };
 export interface ConnectionJson {
 	id: string;
+	external_id: string;
 	friend_sync: boolean;
 	name: string;
 	revoked: boolean;
@@ -1398,6 +1400,9 @@ export interface ConnectionJson {
 	integrations: []; //idk
 	metadata_visibility: number;
 	two_way_link: boolean;
+	metadata?: {
+		created_at: "2020-09-10T23:37:05.000+00:00";
+	};
 }
 
 export {

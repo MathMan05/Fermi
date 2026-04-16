@@ -4,7 +4,14 @@ import {Contextmenu} from "./contextmenu.js";
 import {Localuser} from "./localuser.js";
 import {Guild} from "./guild.js";
 import {SnowFlake} from "./snowflake.js";
-import {highMemberJSON, presencejson, relationJson, userjson, webhookInfo} from "./jsontypes.js";
+import {
+	ConnectionJson,
+	highMemberJSON,
+	presencejson,
+	relationJson,
+	userjson,
+	webhookInfo,
+} from "./jsontypes.js";
 import {Role} from "./role.js";
 import {Search} from "./search.js";
 import {I18n} from "./i18n.js";
@@ -1147,6 +1154,13 @@ class User extends SnowFlake {
 			this.nameChange();
 		}
 	}
+	static getLink(con: ConnectionJson): string | void {
+		switch (con.type) {
+			case "steam": {
+				return `https://steamcommunity.com/profiles/${con.external_id}`;
+			}
+		}
+	}
 	async fullProfile(guild: Guild | null | Member = null) {
 		console.log(guild);
 		const membres = (async () => {
@@ -1264,11 +1278,12 @@ class User extends SnowFlake {
 		const rule = document.createElement("hr");
 		userbody.appendChild(rule);
 		const float = new Float("");
+		const infoDiv = document.createElement("div");
+		infoDiv.classList.add("flexttb");
 		const buttons = float.options.addButtons("", {top: true, titles: false});
 		{
 			const info = buttons.add(I18n.profile.userInfo());
-			const infoDiv = document.createElement("div");
-			infoDiv.classList.add("flexttb");
+
 			infoDiv.append(I18n.profile.bio(), document.createElement("hr"));
 			const biohtml = this.bio.makeHTML();
 			infoDiv.appendChild(biohtml);
@@ -1400,6 +1415,44 @@ class User extends SnowFlake {
 						}),
 				);
 				friends.addHTMLArea(div);
+			}
+			if (high.connected_accounts.length) {
+				const cons = await this.localuser.getConnections();
+
+				for (const con of high.connected_accounts) {
+					const conic = cons[con.type];
+					if (!conic) continue;
+					const conDiv = document.createElement("div");
+					conDiv.classList.add("flexltr", "conProfDiv");
+					const url = User.getLink(con);
+					if (url) {
+						MarkDown.safeLink(conDiv, url);
+						conDiv.style.cursor = "pointer";
+					}
+
+					if (conic.icon_url) {
+						const span = document.createElement("span");
+						span.classList.add("conImg", "svgicon", "conProfImg");
+						span.style.setProperty("mask", `url("${conic.icon_url}")`);
+						//span.alt = key;
+						conDiv.append(span);
+					} else {
+						conDiv.textContent = con.type.charAt(0).toUpperCase() + con.type.slice(1);
+					}
+
+					const nameDateBox = document.createElement("div");
+					nameDateBox.classList.add("flexttb");
+					const username = document.createElement("span");
+					username.textContent = con.name;
+					nameDateBox.append(username);
+					if (con.metadata && con.metadata.created_at) {
+						const len = document.createElement("span");
+						len.textContent = `Member since: ${new Date(con.metadata.created_at).toDateString()}`;
+						nameDateBox.append(len);
+					}
+					conDiv.append(nameDateBox);
+					infoDiv.append(conDiv);
+				}
 			}
 		})();
 		return background;
