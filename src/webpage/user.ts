@@ -1447,7 +1447,9 @@ class User extends SnowFlake {
 					nameDateBox.append(username);
 					if (con.metadata && con.metadata.created_at) {
 						const len = document.createElement("span");
-						len.textContent = `Member since: ${new Date(con.metadata.created_at).toDateString()}`;
+						len.textContent = I18n.connections.since(
+							new Date(con.metadata.created_at).toDateString(),
+						);
 						nameDateBox.append(len);
 					}
 					conDiv.append(nameDateBox);

@@ -874,6 +874,13 @@
 		"regi":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. Continue?",
 		"in":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. This message should only show once."
 	},
+	"connections":{
+		"since":"Member since: $1",
+		"display":"Display on profile: ",
+		"delete":"Delete Connection",
+		"sure":"Are you sure?",
+		"sureDesc":"If you remove this connection, you can't undo it"
+	},
 	"unpinMessage": "Unpin message",
 	"updateAv": "Updates available",
 	"uploadBanner": "Upload banner:",

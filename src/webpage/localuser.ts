@@ -3108,15 +3108,15 @@ class Localuser {
 							actConDiv.append(dispRow);
 
 							const dispText = document.createElement("span");
-							dispText.textContent = "Display on profile";
+							dispText.textContent = I18n.connections.display();
 							dispRow.append(dispText, input);
 
 							const remove = document.createElement("button");
-							remove.textContent = "Delete Connection";
+							remove.textContent = I18n.connections.delete();
 							actConDiv.append(remove);
 							remove.onclick = () => {
-								const d = new Dialog("Are you sure?");
-								d.options.addText("If you remove this connection, you can't undo it");
+								const d = new Dialog(I18n.connections.sure());
+								d.options.addText(I18n.connections.sureDesc());
 								const row = d.options.addOptions("", {ltr: true});
 								row.addButtonInput("", I18n.yes(), async () => {
 									await fetch(this.info.api + "/users/@me/connections/" + con.type + "/" + con.id, {
