@@ -2,14 +2,14 @@
 	{
 		"name": "Harmony",
 		"description": "A staging instance for Harmony",
-		"image": "https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/branding/png/Spacebar__Icon-Discord.png",
+		"image": "https://melodychat.org/favicon.svg",
 		"url": "https://api.harmony.melodychat.org/",
 		"display":true
 	},
 	{
 		"name": "Harmony Staging",
 		"description": "A staging instance for Harmony",
-		"image": "https://raw.githubusercontent.com/spacebarchat/spacebarchat/master/branding/png/Spacebar__Icon-Discord.png",
+		"image": "https://melodychat.org/favicon.svg",
 		"url": "https://stg-api.harmony.melodychat.org/",
 		"display":false
 	},
