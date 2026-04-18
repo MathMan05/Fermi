@@ -199,7 +199,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Leagan cliant: $1\n\n[Bí páirteach i ngiúld oifigiúil Fermi]($2/invite/USgYJo?instance=https%3A%2F%2Fspacebar.chat)\n\n[Cabhraigh le Fermi a aistriú](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc)\n\n[Cabhraigh le Fermi a chruthú](https://github.com/MathMan05/Fermi)\n\n[Cabhraigh leis an bhfreastalaí a bhfuil Fermi ag brath air a chothabháil](https://github.com/spacebarchat/server)\n\n[Léigh an blag](https://blog.fermi.chat/)\n\nCearta ríofa: $3",
+	"clientDesc": "Leagan cliant: $1\n\n[Bí páirteach i ngiúld oifigiúil Fermi](https://redir.fermi.chat/invite)\n\n[Cabhraigh le Fermi a aistriú](https://redir.fermi.chat/translate)\n\n[Cabhraigh le Fermi a chruthú](https://github.com/MathMan05/Fermi)\n\n[Cabhraigh leis an bhfreastalaí a bhfuil Fermi ag brath air a chothabháil](https://redir.fermi.chat/server)\n\n[Léigh an blag](https://blog.fermi.chat/)\n\nCearta ríofa: $3",
 	"commands": {
 		"errorNotValid": "Ní rogha bhailí é $1 le haghaidh $2",
 		"required": "Is cuid riachtanach den ordú seo é $1"
@@ -218,7 +218,7 @@
 		"cacheDesc": "Lódálfaidh comhaid léarscáile fós ar aon nós, cinnteoidh sé seo go mbeidh siad sa taisce nuair a chuirtear nuashonrú nua amach.",
 		"captureTrace": "Insíonn an socrú seo do Fermi airíonna _trace a ghabháil ón bhfreastalaí, agus má chuireann tú seo ar siúl d’fhéadfadh sé nach n-oibreoidh díchódú forásach JSON (d’fhéadfadh athlódáil a bheith ag teastáil).",
 		"clearWellKnowns": "Ath-aisghabh taifid .well-known:",
-		"description": "Tá siad seo do fhorbróirí Spacebar/Fermi, mura bhfuil a fhios agat cad atá á dhéanamh agat, ná cuir isteach ar na socruithe seo le do thoil.",
+		"description": "Tá siad seo do fhorbróirí Harmony/Fermi, mura bhfuil a fhios agat cad atá á dhéanamh agat, ná cuir isteach ar na socruithe seo le do thoil.",
 		"gatewayComp": "Díchumasaigh comhbhrú Geata:",
 		"reportSystem": "Cumasaigh córas tuairiscithe turgnamhach:",
 		"logGateway": "Logáil imeachtaí geata a fuarthas (eolas ar leibhéal logála):",
@@ -391,10 +391,10 @@
 		"addBot": "Cuir leis an gild",
 		"alreadyHave": "An bhfuil cuntas agat cheana féin?",
 		"box1Items": "Teachtaireachtaí Díreacha|Tacaíocht imoibrithe|Cuirí|Athrú cuntais|Socruithe úsáideora|Tairseach forbróra|Cuirí bota|Tacaíocht aistriúcháin",
-		"box1title": "Is cliant atá comhoiriúnach leis an Spacebar é Fermi atá ag iarraidh a bheith chomh maith agus is féidir le go leor gnéithe lena n-áirítear:",
+		"box1title": "Is cliant atá comhoiriúnach le Harmony é Fermi atá ag iarraidh a bheith chomh maith agus is féidir le go leor gnéithe lena n-áirítear:",
 		"box3description": "Cuirimid fáilte i gcónaí roimh chabhair, bíodh sé sin i bhfoirm tuairiscí fabht, nó cód, nó fiú trí roinnt clóscríobh a thabhairt ar aird.",
 		"box3title": "Cuir le Fermi",
-		"compatableInstances": "Cásanna atá comhoiriúnach leis an spásbharra:",
+		"compatableInstances": "Cásanna atá comhoiriúnach le Harmony:",
 		"createAccount": "Cruthaigh cuntas",
 		"dobField": "Dáta breithe:",
 		"emailField": "Ríomhphost:",
@@ -477,7 +477,7 @@
 	},
 	"jankInfo": "Faisnéis chliaint",
 	"leaveGuild": "Fág an gild",
-	"leaving": "Tá tú ag fágáil an Spásbharra",
+	"leaving": "Tá tú ag fágáil Harmony",
 	"loaded": "Luchtaithe",
 	"localuser": {
 		"2faCode:": "Cód:",
@@ -511,7 +511,7 @@
 		"connections": "Naisc",
 		"createApp": "Cruthaigh feidhmchlár",
 		"customSound": "Fuaim saincheaptha",
-		"customStatusWarn": "Ní thacaíonn an spásbharra le taispeáint stádais saincheaptha faoi láthair, mar sin cé go nglacfaidh sé leis an stádas, ní dhéanfaidh sé aon rud leis.",
+		"customStatusWarn": "Ní thacaíonn Harmony le taispeáint stádais saincheaptha faoi láthair, mar sin cé go nglacfaidh sé leis an stádas, ní dhéanfaidh sé aon rud leis.",
 		"deleteAccount": "Scriosadh cuntais",
 		"deleteAccountButton": "Scrios cuntas",
 		"description": "Cur síos:",
@@ -867,8 +867,12 @@
 		"traces": "$1 ($2ms) $3"
 	},
 	"typing": "Tá $2 {{PLURAL:$1|}} ag clóscríobh",
-	"unableToConnect": "Ní féidir ceangal leis an bhfreastalaí Spásbharra. Déan iarracht logáil amach agus isteach arís.",
+	"unableToConnect": "Ní féidir ceangal leis an bhfreastalaí Harmony. Déan iarracht logáil amach agus isteach arís.",
 	"unableToPin": "Ní féidir an teachtaireacht a phionáil",
+	"sbWarns": {
+		"regi": "Ní thacaíonn Fermi go hoifigiúil le cásanna spásbharra a thuilleadh, cé go n-oibreoidh sé fós is dócha, moltar Harmony. Lean ar aghaidh?",
+		"in": "Ní thacaíonn Fermi go hoifigiúil le cásanna spásbharra a thuilleadh, cé go n-oibreoidh sé fós is dócha, moltar Harmony. Níor cheart go dtaispeánfaí an teachtaireacht seo ach uair amháin."
+	},
 	"unpinMessage": "Díphionáil teachtaireacht",
 	"updateAv": "Nuashonruithe ar fáil",
 	"uploadBanner": "Uaslódáil meirge:",

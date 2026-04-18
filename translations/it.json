@@ -190,7 +190,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Versione client: $1 \n\n[Unisciti alla gilda ufficiale di Fermi]($2/invite/USgYJo?instance=https%3A% 2F%2Fspacebar.chat)\n\n[Aiutaci a tradurre Fermi](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc) \n\n[Aiuta a creare Fermi](https://github.com/MathMan05/Fermi)\n\n[Aiuta a gestire il server su cui si basa Fermi](https://github.com/spacebarchat/server)\n\n[Leggi il blog](https://blog.fermi.chat/)\n\nDiritti calcolati: $3",
+	"clientDesc": "Versione client: $1 \n\n[Unisciti alla gilda ufficiale di Fermi](https://redir.fermi.chat/invite)\n\n[Aiuta a tradurre Fermi](https://redir.fermi.chat/translate) \n\n[Aiuta a creare Fermi](https://github.com/MathMan05/Fermi)\n\n[Aiuta a mantenere il server su cui si basa Fermi](https://redir.fermi.chat/server)\n\n[Leggi il blog](https://blog.fermi.chat/)\n\nDiritti calcolati: $3",
 	"commands": {
 		"errorNotValid": "$1 non è una scelta valida per $2",
 		"required": "$1 è una parte obbligatoria di questo comando"
@@ -204,7 +204,7 @@
 	"delete": "Cancella",
 	"deleteConfirm": "Sei sicuro di voler cancellare questo?",
 	"devSettings": {
-		"description": "Queste impostazioni sono riservate agli sviluppatori di Spacebar/Fermi, se non sapete cosa state facendo, vi preghiamo di non modificarle.",
+		"description": "Queste impostazioni sono riservate agli sviluppatori di Harmony/Fermi, se non sapete cosa state facendo, vi preghiamo di non modificarle.",
 		"reportSystem": "Attiva sistema di segnalazione sperimentale:",
 		"name": "Impostazioni sviluppatore"
 	},
@@ -362,10 +362,10 @@
 	"htmlPages": {
 		"addBot": "Aggiungi alla gilda",
 		"alreadyHave": "Hai già un'utenza?",
-		"box1title": "Fermi è un client compatibile con Spacebar che punta a essere il migliore possibile, con numerose funzionalità, tra cui:",
+		"box1title": "Fermi è un client compatibile con Harmony che punta a essere il migliore possibile grazie a numerose funzionalità, tra cui:",
 		"box3description": "Apprezziamo sempre un po' di aiuto, che si tratti di segnalazioni di bug, di codice o anche solo di segnalazioni di errori di battitura.",
 		"box3title": "Contribuisci a Fermi",
-		"compatableInstances": "Istanze compatibili con Spacebar:",
+		"compatableInstances": "Istanze compatibili con Harmony:",
 		"createAccount": "Registrati",
 		"dobField": "Data di nascita:",
 		"emailField": "Email:",
@@ -438,7 +438,7 @@
 	},
 	"jankInfo": "Informazioni sul client",
 	"leaveGuild": "Lascia il guild",
-	"leaving": "Stai lasciando Spacebar",
+	"leaving": "Stai lasciando Harmony",
 	"loaded": "Caricato",
 	"localuser": {
 		"2faCode:": "Codice:",
