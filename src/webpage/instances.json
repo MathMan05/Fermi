@@ -2,14 +2,14 @@
 	{
 		"name": "Harmony",
 		"description": "The official Harmony community!",
-		"image": "https://melodychat.org/favicon.svg",
+		"image": "https://codeberg.org/MelodyChat/landing-page/raw/commit/9d69a5de98123a95cba77556ccaf83ad71162d63/src/assets/harmony.webp",
 		"url": "https://api.harmony.melodychat.org/",
 		"display":true
 	},
 	{
 		"name": "Harmony Staging",
 		"description": "A staging instance for Harmony",
-		"image": "https://melodychat.org/favicon.svg",
+		"image": "https://codeberg.org/MelodyChat/landing-page/raw/commit/9d69a5de98123a95cba77556ccaf83ad71162d63/src/assets/harmony.webp",
 		"url": "https://stg-api.harmony.melodychat.org/",
 		"display":false
 	},
