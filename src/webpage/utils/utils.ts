@@ -472,19 +472,19 @@ export async function getInstanceInfo(str: string): Promise<InstanceInfo | null>
 		stringURLsMap,
 	});
 
-	if (stringURLMap.has(str)) {
+	if (stringURLMap.has(str.toLowerCase())) {
 		console.error("OOH WE GOT STRING->URL MAP ENTRY FOR", str, "!!!!", stringURLMap.get(str));
-		return (await getapiurls(stringURLMap.get(str)!)) as InstanceInfo;
+		return (await getapiurls(stringURLMap.get(str.toLowerCase())!)) as InstanceInfo;
 	}
 
-	if (stringURLsMap.has(str)) {
+	if (stringURLsMap.has(str.toLowerCase())) {
 		console.error(
 			"WE GOT URL->INSTANCE MAP ENTRY FOR ",
 			str,
 			"!!!!!!!!!!11",
-			stringURLsMap.get(str),
+			stringURLsMap.get(str.toLowerCase()),
 		);
-		return stringURLsMap.get(str) as InstanceInfo;
+		return stringURLsMap.get(str.toLowerCase()) as InstanceInfo;
 	}
 
 	return null;

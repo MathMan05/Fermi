@@ -1007,12 +1007,12 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 			option.disabled = instance.online === false;
 			option.value = instance.name;
 			if (instance.url) {
-				stringURLMap.set(option.value, instance.url);
+				stringURLMap.set(option.value.toLowerCase(), instance.url);
 				if (instance.urls) {
 					stringURLsMap.set(instance.url, instance.urls);
 				}
 			} else if (instance.urls) {
-				stringURLsMap.set(option.value, instance.urls);
+				stringURLsMap.set(option.value.toLowerCase(), instance.urls);
 			} else {
 				option.disabled = true;
 			}
