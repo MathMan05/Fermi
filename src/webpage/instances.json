@@ -1,7 +1,7 @@
 [
 	{
 		"name": "Harmony",
-		"description": "A staging instance for Harmony",
+		"description": "The official Harmony community!",
 		"image": "https://melodychat.org/favicon.svg",
 		"url": "https://api.harmony.melodychat.org/",
 		"display":true
