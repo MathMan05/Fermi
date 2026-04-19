@@ -27,7 +27,7 @@
 		"resolvePackageJsonImports": true,
 		"skipLibCheck": true,
 		"outDir": "./dist",
-		"types": ["node"]
+		"types": ["node","audioworklet"]
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["node_modules"]
