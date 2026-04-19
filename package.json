@@ -1,7 +1,7 @@
 {
-	"name": "jankclient",
-	"version": "0.2.0",
-	"description": "A Spacebar Client written in TS, HTML and CSS. to run, clone the repo and do either `npm start` or `bun start` both bun and node are supported, and both should function as expected. To access Fermi Client after init simply go to http://localhost:8080/login and login with your username and password.",
+	"name": "fermi",
+	"version": "0.0.1",
+	"description": "A Harmony Client written in TS, HTML and CSS.",
 	"main": ".dist/index.js",
 	"type": "module",
 	"scripts": {
