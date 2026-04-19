@@ -10,7 +10,6 @@ import {Emoji} from "./emoji.js";
 import {I18n} from "./i18n.js";
 import {Localuser} from "./localuser.js";
 import {MarkDown} from "./markdown.js";
-import {Versions} from "./versions.js";
 
 interface OptionsElement<x> {
 	//
