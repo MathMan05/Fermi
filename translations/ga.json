@@ -873,6 +873,13 @@
 		"regi": "Ní thacaíonn Fermi go hoifigiúil le cásanna spásbharra a thuilleadh, cé go n-oibreoidh sé fós is dócha, moltar Harmony. Lean ar aghaidh?",
 		"in": "Ní thacaíonn Fermi go hoifigiúil le cásanna spásbharra a thuilleadh, cé go n-oibreoidh sé fós is dócha, moltar Harmony. Níor cheart go dtaispeánfaí an teachtaireacht seo ach uair amháin."
 	},
+	"connections": {
+		"since": "Ball ó: $1",
+		"display": "Taispeáin ar phróifíl:",
+		"delete": "Scrios an Ceangal",
+		"sure": "An bhfuil tú cinnte?",
+		"sureDesc": "Mura mbaintear an nasc seo, ní féidir leat é a chealú"
+	},
 	"unpinMessage": "Díphionáil teachtaireacht",
 	"updateAv": "Nuashonruithe ar fáil",
 	"uploadBanner": "Uaslódáil meirge:",

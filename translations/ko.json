@@ -259,7 +259,7 @@
 		"tokenDisplay": "토큰: $1",
 		"updateSettings": "설정 업데이트",
 		"updatesYay": "업데이트가 있습니다!",
-		"userSettings": "사용자 설정"
+		"userSettings": "사용자 공개 프로필"
 	},
 	"login": {
 		"checking": "인스턴스 확인 중",
