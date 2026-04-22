@@ -650,6 +650,12 @@
 		"name": "Nome:"
 	},
 	"todayAt": "Oggi alle $1",
+	"connections": {
+		"since": "Membro dal: $1",
+		"delete": "Cancella connessione",
+		"sure": "Sei sicuro?",
+		"sureDesc": "Se rimuovi questa connessione, non puoi annullare."
+	},
 	"updateAv": "Aggiornamenti disponibili",
 	"uploadFilesText": "Carica i tuoi file qui!",
 	"user": {

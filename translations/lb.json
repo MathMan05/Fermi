@@ -372,6 +372,10 @@
 		"traces": "$1 ($2:&nbsp;ms) $3"
 	},
 	"typing": "$2 {{PLURAL:$1|ass|sinn}} am schreiwen",
+	"connections": {
+		"since": "Member zanter: $1",
+		"sure": "Sidd Dir sécher?"
+	},
 	"uploadFilesText": "Lued Är Fichieren hei erop!",
 	"useTemplate": "$1 als Schabloun benotzen",
 	"useTemplateButton": "Schabloun benotzen",

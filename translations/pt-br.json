@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Bartomelow",
 			"Eduardoaddad",
 			"Erol",
 			"Illyria",
@@ -562,7 +563,7 @@
 		"trustedDesc": "Esses domínios não vão te perguntar por permissão ao clicá-los como outros links, só permita links que você confia.",
 		"updateSettings": "Configurações de atualização",
 		"updatesYay": "Atualizações foram encontradas!",
-		"userSettings": "Configurações do Usuário"
+		"userSettings": "Seu perfil público"
 	},
 	"login": {
 		"allGood": "Tudo certo",
