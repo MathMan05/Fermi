@@ -225,6 +225,8 @@ body {
 	background: #0000005c;
 	padding: 6px;
 	border-radius: 4px;
+	margin-bottom: 12px;
+
 	> * {
 		padding: 2px;
 		span {
