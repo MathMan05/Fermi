@@ -4,6 +4,7 @@
 			"Bisang",
 			"McDutchie",
 			"Suleiman the Magnificent Television",
+			"Tensama0415",
 			"YeBoy371",
 			"Ykhwong"
 		]
@@ -50,11 +51,16 @@
 	"channel": {
 		"announcement": "알림",
 		"copyId": "채널 ID 복사",
+		"copyIdCat": "분류 ID 복사",
 		"createCatagory": "분류 만들기",
 		"createChannel": "채널 만들기",
+		"creating": "채널 만드는 중",
 		"delete": "채널 삭제",
+		"deleteCat": "채널 삭제 중",
+		"icon": "아이콘:",
 		"makeInvite": "초대하기",
 		"markRead": "읽은 것으로 표시",
+		"mute": "채널 알림 미표시",
 		"name": "채널",
 		"name:": "채널 이름:",
 		"nsfw:": "후방주의/성인용 콘텐츠 경고:",
@@ -64,25 +70,36 @@
 		"selectType": "채널 유형 선택",
 		"settings": "설정",
 		"settingsFor": "$1 설정",
+		"slowmode": "저속 모드:",
 		"text": "텍스트",
+		"timedOutUntil": "다음 시간까지 타임아웃: $1",
 		"topic:": "주제:",
+		"unmute": "채널 알림 표시",
 		"voice": "음성",
 		"deleteThread": "스레드 삭제",
+		"hideThreads": "활동이 없으면 숨김",
 		"forum": "포럼"
 	},
 	"threads": {
-		"name": "스레드 이름:"
+		"leave": "스레드 나가기",
+		"join": "스레드 입장하기",
+		"name": "스레드 이름:",
+		"editTags": "태그 편집"
 	},
 	"forum": {
+		"creorsear": "게시글을 작성 또는 검색",
 		"next": "다음",
 		"back": "뒤로",
 		"newPost": "새 글 작성하기",
+		"post": "게시",
 		"sortOptions": {
 			"sortby": {
 				"title": "정렬 기준"
 			},
 			"sortOrder": {
-				"title": "정렬 순서"
+				"title": "정렬 순서",
+				"recent": "최신 순",
+				"old": "과거 순"
 			}
 		},
 		"allTags": "모든 태그",
@@ -100,6 +117,10 @@
 	"copymessageid": "메시지 ID 복사",
 	"delete": "삭제",
 	"deleteConfirm": "이것을 삭제하시겠습니까?",
+	"deviceManage": {
+		"logout": "로그아웃"
+	},
+	"edit": "편집",
 	"emoji": {
 		"confirmDel": "이 이모티콘을 삭제하시겠습니까?",
 		"image:": "이미지:",
@@ -417,6 +438,11 @@
 	"switchAccounts": "계정 전환 ⇌",
 	"todayAt": "오늘 $1",
 	"typing": "$2님이 타이핑 중{{PLURAL:$1|입니다}}",
+	"connections": {
+		"since": "가입일: $1",
+		"delete": "연결 삭제",
+		"sure": "확실합니까?"
+	},
 	"updateAv": "업데이트가 있습니다",
 	"uploadFilesText": "여기에 파일을 올리세요!",
 	"user": {
