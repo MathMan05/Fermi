@@ -5,6 +5,7 @@ import {Guild} from "./guild.js";
 import {I18n} from "./i18n.js";
 import {Dialog} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
+import {setTextWithWrappedEmoji} from "./utils/utils.js";
 const linkMenu = new Contextmenu<string, void>("copyLink", true);
 linkMenu.addButton(
 	() => I18n.copyRegLink(),
@@ -629,6 +630,7 @@ class MarkDown {
 					mention.classList.add("mentionMD");
 					mention.contentEditable = "false";
 					mention.textContent = everyone ? "@everyone" : "@here";
+						setTextWithWrappedEmoji(mention, mention.textContent || "");
 					appendcurrent();
 					span.appendChild(mention);
 					mention.setAttribute("real", everyone ? `@everyone` : "@here");
@@ -670,17 +672,21 @@ class MarkDown {
 										const role = this.channel.guild.roleids.get(id);
 										if (role) {
 											mention.textContent = `@${role.name}`;
+											setTextWithWrappedEmoji(mention, mention.textContent || "");
 											mention.style.color = `var(--role-${role.id})`;
 										} else {
 											mention.textContent = I18n.guild.unknownRole();
+											setTextWithWrappedEmoji(mention, mention.textContent || "");
 										}
 									}
 								} else {
 									(async () => {
 										mention.textContent = I18n.userping.resolving();
+										setTextWithWrappedEmoji(mention, mention.textContent || "");
 										const user = await this.localuser?.getUser(id);
 										if (user) {
 											mention.textContent = `@${user.name}`;
+											setTextWithWrappedEmoji(mention, mention.textContent || "");
 											let guild: null | Guild = null;
 											if (this.channel) {
 												guild = this.channel.guild;
@@ -692,11 +698,13 @@ class MarkDown {
 												guild.resolveMember(user).then((member) => {
 													if (member) {
 														mention.textContent = `@${member.name}`;
+														setTextWithWrappedEmoji(mention, mention.textContent || "");
 													}
 												});
 											}
 										} else {
 											mention.textContent = I18n.userping.unknown();
+											setTextWithWrappedEmoji(mention, mention.textContent || "");
 										}
 									})();
 								}
@@ -705,6 +713,7 @@ class MarkDown {
 								const channel = this.localuser.channelids.get(id);
 								if (channel) {
 									mention.textContent = `#${channel.name}`;
+									setTextWithWrappedEmoji(mention, mention.textContent || "");
 									if (!keep && !stdsize) {
 										mention.onclick = (_) => {
 											if (!this.localuser) return;
@@ -713,6 +722,7 @@ class MarkDown {
 									}
 								} else {
 									mention.textContent = "#unknown";
+									setTextWithWrappedEmoji(mention, mention.textContent || "");
 								}
 								break;
 						}
