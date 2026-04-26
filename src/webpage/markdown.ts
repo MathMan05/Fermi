@@ -630,7 +630,7 @@ class MarkDown {
 					mention.classList.add("mentionMD");
 					mention.contentEditable = "false";
 					mention.textContent = everyone ? "@everyone" : "@here";
-						setTextWithWrappedEmoji(mention, mention.textContent || "");
+					
 					appendcurrent();
 					span.appendChild(mention);
 					mention.setAttribute("real", everyone ? `@everyone` : "@here");
