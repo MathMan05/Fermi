@@ -673,7 +673,7 @@ class MarkDown {
 										if (role) {
 											mention.textContent = `@${role.name}`;
 											setTextWithWrappedEmoji(mention, mention.textContent || "");
-											mention.style.color = `var(--role-${role.id})`;
+											mention.style.setProperty("--userbg", `var(--role-${role.id})`);
 										} else {
 											mention.textContent = I18n.guild.unknownRole();
 											setTextWithWrappedEmoji(mention, mention.textContent || "");
