@@ -876,6 +876,13 @@
 		"regi": "Spacebar-instanties worden officieel niet meer ondersteund door Fermi, hoewel het waarschijnlijk nog wel werkt. Harmony wordt echter aanbevolen. Doorgaan?",
 		"in": "Spacebar-instanties worden officieel niet meer ondersteund door Fermi. Hoewel het waarschijnlijk nog wel werkt, wordt Harmony aanbevolen. Dit bericht zou slechts één keer moeten verschijnen."
 	},
+	"connections": {
+		"since": "Lid sinds: $1",
+		"display": "Weergeven op profiel:",
+		"delete": "Verbinding verwijderen",
+		"sure": "Weet u het zeker?",
+		"sureDesc": "Als u deze verbinding verbreekt, kunt u dat niet meer ongedaan maken."
+	},
 	"unpinMessage": "Bericht losmaken",
 	"updateAv": "Updates beschikbaar",
 	"uploadBanner": "Banner uploaden:",
