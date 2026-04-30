@@ -6,6 +6,7 @@ import {highMemberJSON, memberjson, presencejson} from "./jsontypes.js";
 import {I18n} from "./i18n.js";
 import {Dialog, Options, Settings} from "./settings.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {setTextWithWrappedEmoji} from "./utils/utils.js";
 
 class Member extends SnowFlake {
 	static already = {};
@@ -34,6 +35,7 @@ class Member extends SnowFlake {
 	elms = new Set<WeakRef<HTMLElement>>();
 	subName(elm: HTMLElement) {
 		this.elms.add(new WeakRef(elm));
+		setTextWithWrappedEmoji(elm, this.name);
 	}
 	nameChange() {
 		for (const ref of this.elms) {
@@ -42,7 +44,7 @@ class Member extends SnowFlake {
 				this.elms.delete(ref);
 				continue;
 			}
-			elm.textContent = this.name;
+			setTextWithWrappedEmoji(elm, this.name);
 		}
 	}
 	commuicationDisabledLeft() {

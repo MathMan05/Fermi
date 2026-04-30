@@ -31,6 +31,36 @@ let instances:
 	  }[]
 	| null = null;
 await setTheme();
+// Matches keycaps, flags, standard, skin-toned, and ZWJ emoji sequences.
+const emojiGraphemeRegex = /^(?:[0-9#*]\uFE0F?\u20E3|\p{Regional_Indicator}{2}|\p{Extended_Pictographic}(?:\uFE0F|\uFE0E)?[\u{1F3FB}-\u{1F3FF}]?(?:\u200D\p{Extended_Pictographic}(?:\uFE0F|\uFE0E)?[\u{1F3FB}-\u{1F3FF}]?)*?)$/u;
+export function setTextWithWrappedEmoji(target: HTMLElement, name: string) {
+	target.textContent = "";
+	// Fallback for browsers without grapheme segmentation support.
+	if (!("Segmenter" in Intl)) {
+		target.textContent = name;
+		return;
+	}
+	const segmenter = new Intl.Segmenter("und", {granularity: "grapheme"});
+	// Buffer plain text between emoji to keep fewer DOM nodes.
+	let textBuffer = "";
+	const flushTextBuffer = () => {
+		if (!textBuffer) return;
+		target.append(textBuffer);
+		textBuffer = "";
+	};
+	for (const {segment} of segmenter.segment(name)) {
+		if (emojiGraphemeRegex.test(segment)) {
+			flushTextBuffer();
+			const emoji = document.createElement("span");
+			emoji.classList.add("emoji");
+			emoji.textContent = segment;
+			target.append(emoji);
+		} else {
+			textBuffer += segment;
+		}
+	}
+	flushTextBuffer();
+}
 export async function setTheme(theme?: string) {
 	const prefs = await getPreferences();
 	document.body.className = (theme || prefs.theme) + "-theme";

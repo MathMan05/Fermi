@@ -2646,6 +2646,9 @@ span.instanceStatus {
 	object-fit: contain;
 	align-self: center;
 }
+span.emoji {
+	color: initial;
+}
 .userwrap {
 	display: flex;
 	align-items: baseline;

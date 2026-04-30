@@ -17,7 +17,7 @@ import {Search} from "./search.js";
 import {I18n} from "./i18n.js";
 import {Hover} from "./hover.js";
 import {Dialog, Float, Options} from "./settings.js";
-import {createImg, removeAni, safeImg} from "./utils/utils.js";
+import {createImg, removeAni, safeImg, setTextWithWrappedEmoji} from "./utils/utils.js";
 import {Direct} from "./direct.js";
 import {Permissions} from "./permissions.js";
 import {Channel} from "./channel.js";
@@ -682,6 +682,7 @@ class User extends SnowFlake {
 	elms = new Set<WeakRef<HTMLElement>>();
 	subName(elm: HTMLElement) {
 		this.elms.add(new WeakRef(elm));
+		setTextWithWrappedEmoji(elm, this.name);
 	}
 	nameChange() {
 		this.getMembersSync().forEach((memb) => {
@@ -694,7 +695,7 @@ class User extends SnowFlake {
 				this.elms.delete(ref);
 				continue;
 			}
-			elm.textContent = this.name;
+			setTextWithWrappedEmoji(elm, this.name);
 		}
 	}
 
