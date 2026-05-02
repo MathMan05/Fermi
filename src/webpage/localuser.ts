@@ -100,6 +100,7 @@ class Localuser {
 	readonly userMap: Map<string, User> = new Map();
 	voiceFactory?: VoiceFactory;
 	play?: Play;
+    instanceLimits: any;
 	instancePing = {
 		name: "Unknown",
 	};
@@ -259,6 +260,18 @@ class Localuser {
 		if (this.perminfo.user.disableColors === undefined) this.perminfo.user.disableColors = true;
 		this.updateTranslations();
 	}
+    
+    async loadInstanceLimits(instanceUrl: string) {
+        const res = await fetch(`${instanceUrl}/policies/instance/limits/`, {
+                method: "GET",
+            })
+                .then((response) => response.json())
+                .then((json) => {
+                    return json;
+                });
+        this.instanceLimits = res;
+    }
+
 	favorites!: Favorites;
 	readysup = false;
 	get voiceAllowed() {
@@ -1646,6 +1659,7 @@ class Localuser {
 			await guild.loadChannel(location[5], true, location[6]);
 			this.channelfocus = this.channelids.get(location[5]);
 		}
+        await this.loadInstanceLimits(this.info.api);
 	}
 	loaduser(): void {
 		(document.getElementById("username") as HTMLSpanElement).textContent = this.user.username;
@@ -2494,11 +2508,12 @@ class Localuser {
 			});
 			const bioBox = settingsLeft.addMDInput(I18n.bio(), (_) => {}, {
 				initText: this.user.bio.rawString,
+                maxLength: this.instanceLimits.user?.maxBio ?? 9999
 			});
 			bioBox.watchForChange((_) => {
-				newbio = _;
-				hypouser.bio = new MarkDown(_, this);
-				regen();
+                newbio = _;
+                hypouser.bio = new MarkDown(_, this);
+                regen();
 			});
 
 			if (this.user.accent_color) {
@@ -2886,7 +2901,9 @@ class Localuser {
 					if (this.mfa_enabled) {
 						form.addTextInput(I18n.localuser["2faCode:"](), "code");
 					}
-					form.addTextInput(I18n.localuser.newUsername(), "username");
+					form.addTextInput(I18n.localuser.newUsername(), "username", {
+                        maxLength: this.instanceLimits.user?.maxUsername ?? 9999
+                    });
 				});
 				security.addButtonInput("", I18n.localuser.changePassword(), () => {
 					const form = security.addSubForm(
@@ -3887,6 +3904,7 @@ class Localuser {
 		);
 		form.addTextInput(I18n.localuser.botUsername(), "username", {
 			initText: bot.username,
+            maxLength: this.instanceLimits.user?.maxUsername ?? 9999,
 		});
 		form.addImageInput(I18n.localuser.botAvatar(), "avatar", {
 			initImg: bot.getpfpsrc(),
