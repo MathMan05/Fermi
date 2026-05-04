@@ -9,7 +9,7 @@
 			"Ykhwong"
 		]
 	},
-	"2faCode": "2FA 코드:",
+	"2faCode": "2단계 인증 코드:",
 	"404": {
 		"404": "오류:404 - 페이지를 찾을 수 없음",
 		"app": "앱으로",
@@ -43,11 +43,27 @@
 		"name": "접근성"
 	},
 	"badge": {
-		"certified_moderator": "중재자"
+		"certified_moderator": "중재자",
+		"guild_booster_lvl1": "부스트된 길드",
+		"guild_booster_lvl2": "부스트된 길드",
+		"guild_booster_lvl3": "부스트된 길드",
+		"guild_booster_lvl4": "부스트된 길드",
+		"guild_booster_lvl5": "부스트된 길드",
+		"guild_booster_lvl6": "부스트된 길드",
+		"guild_booster_lvl7": "부스트된 길드",
+		"guild_booster_lvl8": "부스트된 길드",
+		"guild_booster_lvl9": "잠시동안 부스트된 길드"
 	},
 	"blankMessage": "빈 메시지",
+	"blog": {
+		"blog": "블로그",
+		"blogUpdates": "블로그 업데이트:",
+		"fermi": "페르미 블로그",
+		"gotoPost": "게시글로 이동"
+	},
 	"bot": "봇",
 	"botSettings": "봇 설정",
+	"cancel": "취소",
 	"channel": {
 		"announcement": "알림",
 		"copyId": "채널 ID 복사",
@@ -270,7 +286,7 @@
 		"oldPassword:": "이전 비밀번호:",
 		"password:": "비밀번호",
 		"privacyPolcyURL": "개인정보처리방침 링크:",
-		"secret": "비밀",
+		"secret": "비밀번호",
 		"publicAvaliable": "봇을 공개적으로 초대할 수 있게 할까요?",
 		"resetToken": "토큰 초기화",
 		"setUp2fa": "2FA 구성",
