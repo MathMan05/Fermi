@@ -532,7 +532,7 @@ class Localuser {
 			if (DecompressionStream) {
 				(async () => {
 					let build = "";
-					for await (const data of ds.readable.tee()[0].pipeThrough(new TextDecoderStream())) {
+					for await (const data of ds.readable.pipeThrough(new TextDecoderStream())) {
 						build += data;
 						try {
 							const temp = JSON.parse(build);
