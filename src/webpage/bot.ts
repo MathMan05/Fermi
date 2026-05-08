@@ -123,6 +123,7 @@ class Bot {
 			});
 			const bioBox = settingsLeft.addMDInput(I18n.bio(), (_) => {}, {
 				initText: bot.bio.rawString,
+				maxLength: this.localuser.instanceLimits.user?.maxBio ?? 9999
 			});
 			bioBox.watchForChange((_) => {
 				newbio = _;
