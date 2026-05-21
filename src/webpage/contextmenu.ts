@@ -235,15 +235,17 @@ type contextCluster<X, Y> = [Contextmenu<X, Y>, X, Y];
 class LayeredEvent extends CustomEvent<unknown> {
 	menus: contextCluster<unknown, unknown>[];
 	primary?: contextCluster<unknown, unknown>;
-	constructor(mouse: MouseEvent, menus: LayeredEvent["menus"]) {
+	side: "top" | "bottom";
+	constructor(mouse: MouseEvent, menus: LayeredEvent["menus"], side: "top" | "bottom") {
 		super("layered", {bubbles: true});
+		this.side = side;
 		this.menus = menus;
 		queueMicrotask(() => {
 			console.log(this);
 			const pop = this.primary || menus.pop();
 			if (!pop) return;
 			const [menu, addinfo, other] = pop;
-			menu.makemenu(mouse.clientX, mouse.clientY, addinfo, other, undefined, menus);
+			menu.makemenu(mouse.clientX, mouse.clientY, addinfo, other, undefined, menus, this.side);
 		});
 	}
 }
@@ -340,7 +342,11 @@ class Contextmenu<x, y> {
 		other: y,
 		keep: boolean | HTMLElement = false,
 		layered: LayeredEvent["menus"] = [],
+		side: "top" | "bottom" = "top",
 	) {
+		if (side === "bottom") {
+			y = y - window.innerHeight;
+		}
 		const div = document.createElement("div");
 		div.classList.add("contextmenu", "flexttb");
 		const processed = new WeakSet<menuPart<unknown, unknown>>();
@@ -386,6 +392,7 @@ class Contextmenu<x, y> {
 		touchDrag: (x: number, y: number) => unknown = () => {},
 		touchEnd: (x: number, y: number) => unknown = () => {},
 		click: "right" | "left" = "right",
+		side: "top" | "bottom" = "top",
 	) {
 		const func = (event: MouseEvent) => {
 			const selectedText = window.getSelection();
@@ -406,7 +413,7 @@ class Contextmenu<x, y> {
 			}
 			event.stopImmediatePropagation();
 			event.preventDefault();
-			const layered = new LayeredEvent(event, []);
+			const layered = new LayeredEvent(event, [], side);
 			obj.dispatchEvent(layered);
 		};
 		obj.addEventListener("layered", (layered) => {

@@ -183,6 +183,9 @@ body {
 	min-height: 0;
 	display: flex;
 }
+.pollRes {
+	padding-left: 50px;
+}
 .amsCont {
 	display: flex;
 	flex-direction: row;
@@ -256,6 +259,39 @@ body {
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
+}
+.pollBody {
+	background: #00000059;
+	padding: 10px;
+	border-radius: 4px;
+	margin-top: 2px;
+	margin-left: 52px;
+	h3 {
+		margin-bottom: 10px;
+	}
+}
+.answerArea {
+	--bg: #0000004a;
+	background: var(--bg);
+	margin-top: 3px;
+	padding: 12px;
+	cursor: pointer;
+	position: relative;
+
+	input {
+		margin-left: auto;
+		cursor: pointer;
+	}
+}
+.pollAnsM {
+	.svg-delete {
+		width: 20px;
+		cursor: pointer;
+		margin-left: 6px;
+	}
+	.flexltr {
+		align-items: center;
+	}
 }
 .reses {
 	span {
@@ -2733,6 +2769,9 @@ span.instanceStatus {
 	position: relative;
 	background-image: var(--userbg, linear-gradient(var(--primary-text), var(--primary-text)));
 }
+.pollText {
+	margin: 0px 4px;
+}
 .roleIcon {
 	display: inline-block;
 	padding: 1px;
@@ -3055,6 +3094,17 @@ span .quote:last-of-type .quoteline {
 
 	> p {
 		line-height: 20px;
+	}
+}
+.countpollspan {
+	position: absolute;
+	right: 40px;
+}
+.pollresembed {
+	margin-left: 50px;
+	margin-top: 6px;
+	button {
+		margin-left: auto;
 	}
 }
 .linkembed {

@@ -423,7 +423,11 @@ if (window.location.pathname.startsWith("/channels")) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 	};
-	(document.getElementById("upload") as HTMLElement).onclick = () => {
+	const umenu = new Contextmenu<void, void>("upload");
+	umenu.addButton(I18n.makePoll(), () => {
+		thisUser.makePoll();
+	});
+	umenu.addButton(I18n.upload(), () => {
 		const input = document.createElement("input");
 		input.type = "file";
 		input.click();
@@ -441,7 +445,16 @@ if (window.location.pathname.startsWith("/channels")) {
 				}
 			}
 		};
-	};
+	});
+	umenu.bindContextmenu(
+		document.getElementById("upload")!,
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		"left",
+		"bottom",
+	);
 	const emojiTB = document.getElementById("emojiTB") as HTMLElement;
 	emojiTB.onmousedown = (e) => e.stopImmediatePropagation();
 	emojiTB.onclick = (e) => {
