@@ -424,9 +424,15 @@ if (window.location.pathname.startsWith("/channels")) {
 		e.stopImmediatePropagation();
 	};
 	const umenu = new Contextmenu<void, void>("upload");
-	umenu.addButton(I18n.makePoll(), () => {
-		thisUser.makePoll();
-	});
+	umenu.addButton(
+		I18n.makePoll(),
+		() => {
+			thisUser.makePoll();
+		},
+		{
+			visible: () => !!thisUser.channelfocus?.hasPermission("SEND_POLLS"),
+		},
+	);
 	umenu.addButton(I18n.upload(), () => {
 		const input = document.createElement("input");
 		input.type = "file";
