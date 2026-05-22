@@ -1135,78 +1135,79 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 		const span = document.createElement("span");
 		span.textContent = this.instanceInfo.name;
 		div.append(span);
-		div.onclick = () => {
-			const d = new Dialog("");
-			const instnaces = getInstances() ?? [];
-			for (const i of instnaces) {
-				if (!i.display) continue;
-				const instance = document.createElement("div");
-				instance.classList.add("flexttb", "instDiv");
-				const div = document.createElement("div");
-				instance.append(div);
+		if (!new URLSearchParams(window.location.search).get("instance"))
+			div.onclick = () => {
+				const d = new Dialog("");
+				const instnaces = getInstances() ?? [];
+				for (const i of instnaces) {
+					if (!i.display) continue;
+					const instance = document.createElement("div");
+					instance.classList.add("flexttb", "instDiv");
+					const div = document.createElement("div");
+					instance.append(div);
 
-				div.classList.add("flexltr");
-				if (i.image) {
-					const img = document.createElement("img");
-					img.src = i.image;
-					div.append(img);
-				}
-				const span = document.createElement("span");
-				span.textContent = i.name;
-				div.append(span);
-
-				if (i.description) {
-					const p = document.createElement("p");
-					p.textContent = i.description;
-					instance.append(p);
-				}
-				instance.onclick = async () => {
-					d.hide();
-					this.instanceInfo = {
-						name: i.name,
-						des: i.description,
-						img: i.image,
-					};
-					this.genArea();
-					const urls = await checkInstance(i.name, this.verify, this.button);
-					if (urls) {
-						this.onchange(urls);
+					div.classList.add("flexltr");
+					if (i.image) {
+						const img = document.createElement("img");
+						img.src = i.image;
+						div.append(img);
 					}
-				};
-				d.options.addHTMLArea(instance);
-			}
-			d.options.addButtonInput("", I18n.register.other(), () => {
-				const opt = d.options.addSubOptions(I18n.register.other());
-				let id = 0;
-				opt.addTextInput(I18n.register.instURL(), () => {}).onchange = async (_) => {
-					const thisid = ++id;
-					await new Promise((res) => setTimeout(res, 1000));
-					console.log(id, thisid);
-					if (thisid !== id) return;
-					try {
-						const i = await checkInstance(_, this.verify, this.button);
-						if (i) {
-							this.onchange(i);
-							const ping = (await (await fetch(i.api + "/ping")).json()).instance;
-							this.instanceInfo = {
-								name: ping.name,
-								des: ping.description ?? undefined,
-								img: ping.image ?? undefined,
-							};
-							this.genArea();
-						} else {
-							this.instanceInfo = {
-								name: _,
-							};
-							this.genArea();
+					const span = document.createElement("span");
+					span.textContent = i.name;
+					div.append(span);
+
+					if (i.description) {
+						const p = document.createElement("p");
+						p.textContent = i.description;
+						instance.append(p);
+					}
+					instance.onclick = async () => {
+						d.hide();
+						this.instanceInfo = {
+							name: i.name,
+							des: i.description,
+							img: i.image,
+						};
+						this.genArea();
+						const urls = await checkInstance(i.name, this.verify, this.button);
+						if (urls) {
+							this.onchange(urls);
 						}
-					} catch {
-						//
-					}
-				};
-			});
-			d.show().parentElement!.style.zIndex = "203";
-		};
+					};
+					d.options.addHTMLArea(instance);
+				}
+				d.options.addButtonInput("", I18n.register.other(), () => {
+					const opt = d.options.addSubOptions(I18n.register.other());
+					let id = 0;
+					opt.addTextInput(I18n.register.instURL(), () => {}).onchange = async (_) => {
+						const thisid = ++id;
+						await new Promise((res) => setTimeout(res, 1000));
+						console.log(id, thisid);
+						if (thisid !== id) return;
+						try {
+							const i = await checkInstance(_, this.verify, this.button);
+							if (i) {
+								this.onchange(i);
+								const ping = (await (await fetch(i.api + "/ping")).json()).instance;
+								this.instanceInfo = {
+									name: ping.name,
+									des: ping.description ?? undefined,
+									img: ping.image ?? undefined,
+								};
+								this.genArea();
+							} else {
+								this.instanceInfo = {
+									name: _,
+								};
+								this.genArea();
+							}
+						} catch {
+							//
+						}
+					};
+				});
+				d.show().parentElement!.style.zIndex = "203";
+			};
 	}
 	static picker?: InstancePicker;
 	static genDataList() {
