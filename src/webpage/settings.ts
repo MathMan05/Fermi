@@ -1173,10 +1173,10 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 				};
 				d.options.addHTMLArea(instance);
 			}
-			d.options.addButtonInput("", "Other instance", () => {
-				const opt = d.options.addSubOptions("Other instance");
+			d.options.addButtonInput("", I18n.register.other(), () => {
+				const opt = d.options.addSubOptions(I18n.register.other());
 				let id = 0;
-				opt.addTextInput("URL:", () => {}).onchange = async (_) => {
+				opt.addTextInput(I18n.register.instURL(), () => {}).onchange = async (_) => {
 					const thisid = ++id;
 					await new Promise((res) => setTimeout(res, 1000));
 					console.log(id, thisid);

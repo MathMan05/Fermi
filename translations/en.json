@@ -790,7 +790,9 @@
 		"passwordError:": "Password: $1",
 		"register": "Register",
 		"tos": "You must agree to the TOS",
-		"usernameError": "Username: $1"
+		"usernameError": "Username: $1",
+		"other":"Other instance",
+		"instURL":"URL:"
 	},
 	"remove": "Remove",
 	"renderJoinAvatars": "Display avatars for new members: ",
