@@ -1111,10 +1111,12 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 
 		return div;
 	}
-	instanceInfo = {
+	instanceInfo: {
+		name: string;
+		img?: string;
+		des?: string;
+	} = {
 		name: "loading",
-		img: undefined as string | undefined,
-		des: undefined as string | undefined,
 	};
 	button?: HTMLButtonElement;
 	input = document.createElement("div");
@@ -1192,6 +1194,11 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 								img: ping.image ?? undefined,
 							};
 							this.genArea();
+						} else {
+							this.instanceInfo = {
+								name: _,
+							};
+							this.genArea();
 						}
 					} catch {
 						//
@@ -1253,12 +1260,17 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 							img: i.image,
 						};
 						this.picker.genArea();
-					} else {
+					} else if (e) {
 						const ping = (await (await fetch(e?.api + "/ping")).json()).instance;
 						this.picker.instanceInfo = {
 							name: ping.name,
 							des: ping.description ?? undefined,
 							img: ping.image ?? undefined,
+						};
+						this.picker.genArea();
+					} else {
+						this.picker.instanceInfo = {
+							name,
 						};
 						this.picker.genArea();
 					}
