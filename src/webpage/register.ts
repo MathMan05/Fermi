@@ -63,8 +63,8 @@ export async function makeRegister(
 	picker.giveButton(button);
 	button?.classList.add("createAccount");
 
-	const email = form.addTextInput(I18n.htmlPages.emailField(), "email");
 	const user = form.addTextInput(I18n.htmlPages.userField(), "username");
+	const email = form.addTextInput(I18n.htmlPages.emailField(), "email", {name: "username"});
 	const p1 = form.addTextInput(I18n.htmlPages.pwField(), "password", {password: true});
 	const p2 = form.addTextInput(I18n.htmlPages.pw2Field(), "password2", {password: true});
 
