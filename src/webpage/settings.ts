@@ -1137,7 +1137,7 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 			const d = new Dialog("");
 			const instnaces = getInstances() ?? [];
 			for (const i of instnaces) {
-				//if (!i.display) continue;
+				if (!i.display) continue;
 				const instance = document.createElement("div");
 				instance.classList.add("flexttb", "instDiv");
 				const div = document.createElement("div");
