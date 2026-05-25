@@ -142,6 +142,7 @@
 		},
 		"admins": "Administrateure fannen",
 		"all": "All",
+		"idSel": "ID:",
 		"community": "Communautéit",
 		"createNewTemplate": "Nei Schabloun uleeën",
 		"default": "Standard ($1)",
@@ -316,7 +317,9 @@
 		"DOBError": "Gebuertsdatum: $1",
 		"emailError": "E-Mail-Adress: $1",
 		"passwordError:": "Passwuert: $1",
-		"usernameError": "Benotzernumm: $1"
+		"usernameError": "Benotzernumm: $1",
+		"other": "Aner Instanz",
+		"instURL": "URL:"
 	},
 	"remove": "Ewechhuelen",
 	"reply": "Äntweren",
@@ -342,7 +345,9 @@
 		"next": "Nächst",
 		"old": "Al",
 		"page": "Säit $1",
-		"search": "Sichen"
+		"search": "Sichen",
+		"before": "Virdrun:",
+		"after": "Duerno:"
 	},
 	"settings": {
 		"img": "Bild eroplueden",

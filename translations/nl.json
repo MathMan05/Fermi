@@ -322,6 +322,8 @@
 		"banner:": "Banner:",
 		"bans": "Bannen",
 		"boostMessage?": "Stuur een bericht wanneer iemand uw gilde versterkt!",
+		"banId": "Blokkeren op basis van ID",
+		"idSel": "ID:",
 		"community": "Gemeenschap",
 		"confirmDelete": "Weet u zeker dat u $1 wilt verwijderen?",
 		"confirmLeave": "Weet u zeker dat u weg wilt?",
@@ -435,7 +437,7 @@
 		"failed": "Interactie mislukt",
 		"nonsence": "De server heeft een component van het type $1 verzonden dat niet bestaat",
 		"notImpl": "Fermi ondersteunt componenttype $1 nog niet",
-		"onlyYou": "Alleen jij kunt dit bericht zien",
+		"onlyYou": "Alleen u kunt dit bericht zien",
 		"replyline": "Interactie gestart",
 		"started": "Interactie verwerken...",
 		"worked": "Interactie geslaagd"
@@ -775,7 +777,8 @@
 		"mut": "Onderlinge gilden",
 		"mutFriends": "Wederzijdse vrienden",
 		"permInfo": "Machtigingen",
-		"userInfo": "Gebruikersinfo"
+		"userInfo": "Gebruikersinfo",
+		"notes": "Gebruikersopmerkingen"
 	},
 	"profileColor": "Profielkleur",
 	"pronouns": "Voornaamwoorden:",
@@ -789,7 +792,9 @@
 		"passwordError:": "Wachtwoord: $1",
 		"register": "Inschrijven",
 		"tos": "U moet instemmen met de voorwaarden",
-		"usernameError": "Gebruikersnaam: $1"
+		"usernameError": "Gebruikersnaam: $1",
+		"other": "Andere instantie",
+		"instURL": "Url:"
 	},
 	"remove": "Verwijderen",
 	"renderJoinAvatars": "Profielafbeeldingen weergeven voor nieuwe leden:",

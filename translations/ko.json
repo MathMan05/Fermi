@@ -14,17 +14,22 @@
 	"404": {
 		"404": "오류:404 - 페이지를 찾을 수 없음",
 		"app": "앱으로",
-		"blog": "Fermi 블로그",
+		"blog": "페르미 블로그",
 		"home": "홈페이지",
 		"login": "로그인"
 	},
 	"onboarding": {
+		"name": "온보딩",
+		"disable": "온보딩 비활성화",
 		"addChannel": "채널 추가",
 		"channel": "채널:",
 		"desc": "설명:",
+		"deleteChannel": "온보딩에서 채널 삭제",
+		"enable": "온보딩 활성화",
 		"title": "$1에 오신 것을 환영합니다!"
 	},
 	"DMs": {
+		"add": "이 메시지에 누군가를 추가",
 		"close": "DM 닫기",
 		"copyId": "DM ID 복사",
 		"markRead": "읽은 것으로 표시",
@@ -33,7 +38,15 @@
 	"ok": "확인",
 	"UrlGen": "봇 초대 생성기",
 	"Voice": {
+		"userVol": "사용자 음량:",
 		"status": {
+			"badWS": "WS로부터 나쁜 응답",
+			"conectionFailed": "연결 실패",
+			"done": "연결됨",
+			"left": "음성 채팅 떠남",
+			"notconnected": "연결 안됨",
+			"sendingStreams": "오디오 스트림 전송 중",
+			"startingRTC": "RTC 연결 시작",
 			"waitingMainWS": "주요 WS를 기다리는 중",
 			"waitingURL": "음성 URL을 기다리는 중",
 			"wsAuth": "WS의 승인을 기다리는 중",
@@ -41,10 +54,32 @@
 		}
 	},
 	"accessibility": {
-		"name": "접근성"
+		"gifSettings": {
+			"always": "항상",
+			"hover": "커서를 올릴 시",
+			"never": "안 함"
+		},
+		"name": "접근성",
+		"playGif": "GIF 재생:",
+		"playIcon": "애니메이션 아이콘 재생:",
+		"roleColors": "역할 색상 비활성화:",
+		"gradientColors": "그라데이션 색상 비활성화:",
+		"decorations": "아바타 장식 활성화:"
+	},
+	"accountNotStart": "계정을 시작할 수 없습니다",
+	"add": "추가",
+	"applications": {
+		"delete": "애플리케이션 삭제",
+		"sure": "$1를 삭제하시겠습니까?"
 	},
 	"badge": {
+		"active_developer": "활동 개발자",
+		"application_guild_subscription": "프리미엄 보유",
+		"automod": "AutoMod 사용",
+		"bug_hunter_level_1": "버그 사냥꾼 레벨 1",
+		"bug_hunter_level_2": "버그 사냥꾼 레벨 2",
 		"certified_moderator": "중재자",
+		"early_supporter": "초기 후원자",
 		"guild_booster_lvl1": "부스트된 길드",
 		"guild_booster_lvl2": "부스트된 길드",
 		"guild_booster_lvl3": "부스트된 길드",
@@ -54,19 +89,35 @@
 		"guild_booster_lvl7": "부스트된 길드",
 		"guild_booster_lvl8": "부스트된 길드",
 		"guild_booster_lvl9": "잠시동안 부스트된 길드",
-		"hypesquad": "Vibesquad [자리 표시자]"
+		"hypesquad": "Vibesquad [자리 표시자]",
+		"hypesquad_house_1": "대담함",
+		"hypesquad_house_2": "우수함",
+		"hypesquad_house_3": "균형",
+		"legacy_username": "기존 사용자이 이름 있음",
+		"partner": "인스턴스 파트너",
+		"premium": "프리미엄",
+		"quest_completed": "퀘스트를 완료함",
+		"staff": "인스턴스 직원",
+		"verified_developer": "인증된 개발자"
 	},
+	"bio": "자기 소개:",
 	"blankMessage": "빈 메시지",
 	"blog": {
 		"blog": "블로그",
 		"blogUpdates": "블로그 업데이트:",
+		"desc": "페르미에 대한 최신 소식을 받아보시려면 블로그를 읽거나 구독하세요!",
 		"fermi": "페르미 블로그",
-		"gotoPost": "게시글로 이동"
+		"gotoPost": "게시글로 이동",
+		"wantUpdates": "페르미 프로젝트 진행 상황에 대한 주간 블로그 업데이트를 받아보시겠습니까?"
 	},
 	"bot": "봇",
+	"botGuilds": "봇이 속한 길드:",
 	"botSettings": "봇 설정",
 	"cancel": "취소",
 	"channel": {
+		"SlowmodeCool": "저속 모드 쿨다운: $1",
+		"TimeOutCool": "다음 시간까지 타임아웃: $1",
+		"allowIcons": "사용자 지정 채널 아이콘 허용",
 		"announcement": "알림",
 		"copyId": "채널 ID 복사",
 		"copyIdCat": "분류 ID 복사",
@@ -112,13 +163,25 @@
 		"post": "게시",
 		"sortOptions": {
 			"sortby": {
-				"title": "정렬 기준"
+				"title": "정렬 기준",
+				"recent": "최근 활동함",
+				"posted": "게시일"
 			},
 			"sortOrder": {
 				"title": "정렬 순서",
 				"recent": "최신 순",
 				"old": "과거 순"
-			}
+			},
+			"tagMatch": {
+				"title": "태그 일치 여부",
+				"some": "일부 태그 일치",
+				"all": "모든 태그 일치"
+			},
+			"name": "정렬 옵션"
+		},
+		"errors": {
+			"tagsReq": "태그는 필수입니다.",
+			"requireText": "메시지는 비워둘 수 없습니다"
 		},
 		"allTags": "모든 태그",
 		"settings": {
@@ -131,41 +194,94 @@
 	},
 	"channelLink": "# $1",
 	"confirmGuildLeave": "$1 장소를 떠나시겠습니까",
+	"copyLink": "메시지 링크 복사",
 	"copyRegLink": "링크 복사",
 	"copymessageid": "메시지 ID 복사",
+	"copyrawtext": "원본 텍스트 복사",
+	"createAccount": "계정 만들기",
 	"delete": "삭제",
 	"deleteConfirm": "이것을 삭제하시겠습니까?",
-	"deviceManage": {
-		"logout": "로그아웃"
+	"devSettings": {
+		"badUser": "과도한 정보를 전송하는 불량 사용자 객체에 대한 로깅을 활성화:",
+		"cache": "서비스 워커 캐싱 맵 파일 활성화:",
+		"captureTrace": "이 설정은 페르미에게 서버에서 _trace 속성을 캡처하도록 지시합니다. 이 기능을 활성화하면 점진적 JSON 디코딩이 작동하지 않을 수 있습니다(새로 고침이 필요할 수 있음).",
+		"description": "이 설정은 Harmony/페르미 개발자를 위한 것입니다. 사용법을 잘 모르시는 분은 이 설정을 건드리지 마세요.",
+		"gatewayComp": "게이트웨이 압축을 비활성화:",
+		"reportSystem": "실험 보고 시스템을 활성화:",
+		"logGateway": "수신된 게이트웨이 이벤트 로그(로그 레벨 정보):",
+		"name": "개발자 설정"
 	},
+	"deviceManage": {
+		"city": "도시: $1",
+		"continent": "대륙: $1",
+		"country": "국가: $1",
+		"latitude": "위도: $1",
+		"logout": "로그아웃",
+		"longitude": "경도: $1",
+		"manageDev": "기기 관리",
+		"postal": "우편번호: $1",
+		"region": "지역: $1",
+		"title": "세션 관리"
+	},
+	"discovery": "발견",
+	"dms": "개인 메시지",
 	"edit": "편집",
 	"emoji": {
 		"confirmDel": "이 이모티콘을 삭제하시겠습니까?",
+		"found": {
+			"not": "이 이모티콘은 당신의 길드에서 제공하는 것이 아닙니다. 이 이모티콘을 사용하려면 해당 이모티콘을 제공하는 길드에 가입하세요.",
+			"other": "이 이모티콘은 다른 길드에서 온 것입니다.",
+			"private": "이 이모티콘에 해당하는 길드를 찾을 수 없습니다.",
+			"this": "이 이모티콘은 이 길드에서 가져온 것입니다."
+		},
+		"from": "이 이모티콘은 다음에서 가져온 것입니다:",
 		"image:": "이미지:",
+		"join": "길드 가입",
 		"name:": "이름:",
+		"privateGuild": "이 길드는 비공개 길드입니다",
 		"title": "이모티콘",
 		"upload": "이모티콘 업로드"
 	},
+	"emojiSelect": "이모티콘:",
+	"errorReconnect": "서버에 연결할 수 없습니다. **$1**초 후에 다시 시도합니다...",
+	"favoriteGifs": "즐겨찾는 GIF",
 	"folder": {
+		"color": "폴더 색상:",
+		"create": "새 폴더 만들기",
+		"edit": "폴더 편집",
 		"name": "폴더 이름:"
+	},
+	"form": {
+		"captcha": "잠시만요, 사람이신가요?"
 	},
 	"friends": {
 		"addfriend": "친구 추가",
 		"addfriendpromt": "사용자 이름으로 친구 추가:",
+		"requestsent": "요청이 전송되었습니다!",
 		"all": "모두",
 		"all:": "모든 친구:",
 		"blocked": "차단됨",
 		"blockedusers": "차단된 사용자:",
+		"bu": "차단된 사용자",
 		"friendlist": "친구 목록",
 		"friends": "친구",
 		"notfound": "사용자를 찾을 수 없습니다",
 		"online": "온라인",
 		"online:": "온라인 친구:",
-		"pending": "보류 중",
+		"pending": "대기 중",
 		"pending:": "대기 중인 친구 요청:",
 		"removeFriend": "친구 제거"
 	},
+	"goThere": "네, 이동합니다",
+	"goThereTrust": "네, 이제부터 이 도메인을 신뢰합니다",
+	"goingToURL": "이 링크를 클릭하면 $1(으)로 이동합니다. 정말로 이동합니까?",
+	"group": {
+		"createdm": "개인 메세지를 만드세요!",
+		"edit": "그룹 채팅 편집",
+		"select": "친구 선택"
+	},
 	"guild": {
+		"DISCOVERABLE": "발견",
 		"INVITES_DISABLED": "초대 전용",
 		"adminMenu": {
 			"changePerms": "찾기 위해 권한 변경",
@@ -174,30 +290,66 @@
 			"owner": "소유자 찾기",
 			"permission": "권한:"
 		},
+		"report": "길드 신고",
 		"admins": "관리자 찾기",
 		"all": "모두",
-		"banner:": "배너:",
+		"banReason": "차단 이유: $1",
+		"bannedBy": "차단한 사용자:",
+		"banner:": "차단:",
+		"bans": "차단",
+		"boostMessage?": "누군가 당신의 길드를 부스트해 줄 때 메시지를 보냅니다!",
+		"banId": "ID로 차단",
+		"idSel": "ID:",
+		"community": "커뮤니티",
+		"confirmDelete": "$1 항목을 삭제하시겠습니까?",
 		"confirmLeave": "떠나시겠습니까?",
+		"copyId": "길드 ID 복사",
+		"create": "길드를 처음부터 만들기",
 		"createFromTemplate": "틀에서 길드 만들기",
 		"createNewTemplate": "새 틀 만들기",
+		"creating": "길드 만드는 중",
 		"default": "기본값 ($1)",
+		"defaultNoti": "길드의 기본 알림 설정을 지정하세요!",
+		"delete": "길드 삭제",
 		"description:": "설명:",
+		"disoveryTitle": "길드 발견 ($1개 {{PLURAL:$1|항목}})",
+		"editingTemplate": "$1 편집 중",
+		"emptytext": "이상하네요, 이 길드에는 채널이 없네요!?",
+		"emptytitle": "이상한 점",
+		"guilds": "길드",
+		"helpTips?": "길드에 도움이 될 만한 팁을 보내주세요!",
+		"howJoin": "길드에 가입하려면 어떻게 해야 하나요?",
 		"icon:": "아이콘:",
+		"invites": "초대",
+		"joinConfirm": "$1에 가입합니까?",
+		"leave": "길드 탈퇴",
 		"loadingDiscovery": "불러오는 중...",
 		"makeInvite": "초대하기",
 		"markRead": "읽은 것으로 표시",
 		"memberCount": "$1명의 {{PLURAL:$1|회원}}",
+		"mute": "길드 음소거",
 		"name:": "이름:",
+		"nameNoMatch": "이름이 일치하지 않습니다",
+		"noDelete": "괜찮습니다",
+		"noLeave": "괜찮습니다",
 		"none": "없음",
 		"notifications": "알림",
 		"overview": "개요",
 		"region:": "지역:",
 		"roles": "역할",
+		"ruleId": "규칙 채널:",
+		"selectnoti": "알림 유형을 선택:",
+		"sendrandomwelcome?": "누군가 이 길드에 가입할 때 무작위 메시지를 보냅니다:",
 		"serverName": "길드 이름:",
 		"settings": "설정",
 		"settingsFor": "$1 설정",
+		"splash": "발견 환영:",
+		"stickWelcomeReact?": "길드에 새로운 멤버가 가입했을 때, 길드원들이 스티커로 반응을 보이도록 설정합니다!",
 		"systemSelect:": "시스템 메시지 채널:",
 		"tempCreatedBy": "틀 만든이:",
+		"tempUseCount": "이 틀은 $1회{{PLURAL:$1|}} 사용되었습니다",
+		"template": "길드를 구축하기 위한 틀 링크/코드:",
+		"templateDesc": "틀 설명:",
 		"templateName": "틀 이름:",
 		"templateURL": "틀 링크: $1",
 		"templates": "틀",
@@ -210,24 +362,43 @@
 	"htmlPages": {
 		"addBot": "길드에 추가",
 		"alreadyHave": "계정이 이미 있습니까?",
+		"box3title": "페르미에 기여하세요",
+		"compatableInstances": "Harmony 호환 인스턴스:",
 		"createAccount": "계정 만들기",
 		"dobField": "출생일:",
 		"emailField": "이메일:",
 		"idpermissions": "이를 통해 봇은 다음 작업을 수행할 수 있습니다.",
 		"instanceField": "인스턴스:",
 		"loaddesc": "오래 걸리지 않습니다",
+		"loadingText": "페르미가 로딩되는 중입니다",
 		"loginButton": "로그인",
 		"noAccount": "계정이 없나요?",
+		"pw2Field": "비밀번호를 다시 입력하세요:",
 		"pwField": "비밀번호:",
 		"switchaccounts": "계정 전환",
 		"trans": "번역",
-		"userField": "사용자 이름:"
+		"transDesc": "페르미 프로그래밍 언어를 여러분의 언어로 번역하는 데 도움을 주세요!",
+		"transTitle": "페르미를 번역",
+		"userField": "사용자 이름:",
+		"welcomeJank": "페르미에 오신 것을 환영합니다"
+	},
+	"instInfo": "인스턴스 정보",
+	"instanceInfo": {
+		"contact": "이메일 인스턴스 관리자",
+		"frontPage": "[첫 페이지]($1)",
+		"name": "인스턴스 정보",
+		"publicUrl": "[공개 링크]($1)",
+		"tosPage": "[이용약관 페이지]($1)"
 	},
 	"instanceStats": {
+		"members": "회원: $1",
 		"messages": "메시지: $1",
 		"name": "인스턴스 통계: $1",
 		"servers": "길드: $1",
 		"users": "등록된 사용자: $1"
+	},
+	"interactions": {
+		"failed": "상호 작용 실패"
 	},
 	"invite": {
 		"accept": "수락",
@@ -342,6 +513,7 @@
 		"notFound": "미디어를 찾을 수 없습니다"
 	},
 	"member": {
+		"ban": "$2에서 $1을(를) 차단",
 		"nick:": "별명:",
 		"reason:": "이유:"
 	},
@@ -363,7 +535,7 @@
 		"cancel": "취소",
 		"submit": "제출",
 		"blockUser": "사용자 차단",
-		"timeout": "멤버를 타임아웃",
+		"timeout": "회원 타임아웃",
 		"summary": "보고서 요약:"
 	},
 	"nevermind": "괜찮습니다",
@@ -379,9 +551,10 @@
 			"MANAGE_THREADS": "역할 회원이 스레드를 삭제 및 보관하고 모든 개인 스레드를 볼 수 있도록 허용합니다.",
 			"MANAGE_CHANNELS": "역할 회원이 채널을 관리하고 편집할 수 있도록 허용합니다.",
 			"MANAGE_ROLES": "역할 회원이 역할을 편집하고 관리할 수 있도록 허용합니다.",
+			"MANAGE_WEBHOOKS": "역할 구성원이 웹훅을 편집/삭제할 수 있도록 허용합니다.",
 			"MANAGE_EVENTS": "역할 회원이 이벤트를 편집하고 관리할 수 있도록 허용합니다.",
 			"KICK_MEMBERS": "역할 회원이 길드에서 회원을 내보낼 수 있도록 허용합니다.",
-			"BAN_MEMBERS": "역할 회원이 길드에서 회원을 금지할 수 있도록 허용합니다.",
+			"BAN_MEMBERS": "역할 회원이 길드에서 회원을 차단할 수 있도록 허용합니다.",
 			"MOVE_MEMBERS": "역할 회원이 음성 채널 간에 회원을 이동할 수 있도록 허용합니다.",
 			"MUTE_MEMBERS": "역할 회원이 다른 회원을 조용히 하게 할 수 있도록 허용합니다.",
 			"DEAFEN_MEMBERS": "역할 회원이 다른 회원의 소리를 듣지 못하게 할 수 있도록 허용합니다. (회원의 소리를 듣지 못하게 하면 자동으로 음소거됩니다.)",
@@ -409,100 +582,229 @@
 			"ADD_REACTIONS": "반응 추가",
 			"ADMINISTRATOR": "관리자",
 			"ATTACH_FILES": "파일 첨부",
+			"BAN_MEMBERS": "회원 차단",
+			"BYPASS_SLOWMODE": "저속 모드 우회",
 			"CHANGE_NICKNAME": "별명 바꾸기",
 			"CONNECT": "연결",
 			"CREATE_EVENTS": "이벤트 만들기",
+			"CREATE_GUILD_EXPRESSIONS": "표현 만들기",
 			"CREATE_INSTANT_INVITE": "초대장 만들기",
 			"CREATE_PRIVATE_THREADS": "비공개 스레드 만들기",
 			"CREATE_PUBLIC_THREADS": "공개 스레드 만들기",
+			"DEAFEN_MEMBERS": "회원 음성 차단",
 			"EMBED_LINKS": "링크 삽입",
+			"KICK_MEMBERS": "회원 추방",
 			"MANAGE_CHANNELS": "채널 관리",
 			"MANAGE_EVENTS": "이벤트 관리",
+			"MANAGE_GUILD": "길드 관리",
+			"MANAGE_GUILD_EXPRESSIONS": "표현 관리",
 			"MANAGE_MESSAGES": "메시지 관리",
 			"MANAGE_NICKNAMES": "별명 관리",
 			"MANAGE_ROLES": "역할 관리",
 			"MANAGE_THREADS": "스레드 관리",
 			"MANAGE_WEBHOOKS": "웹훅 관리",
+			"MENTION_EVERYONE": "@everyone, @here 및 모든 역할을 언급 가능",
+			"MODERATE_MEMBERS": "회원 타임아웃",
+			"MOVE_MEMBERS": "회원 이동",
 			"MUTE_MEMBERS": "회원 알림을 받지 않음",
+			"PIN_MESSAGES": "메시지 고정",
+			"PRIORITY_SPEAKER": "우선 발언권",
 			"READ_MESSAGE_HISTORY": "메시지 역사 읽기",
+			"REQUEST_TO_SPEAK": "발언 요청",
 			"SEND_MESSAGES": "메시지 보내기",
+			"SEND_MESSAGES_IN_THREADS": "스레드에 메시지 보내기",
+			"SEND_POLLS": "설문 조사 만들기",
+			"SEND_TTS_MESSAGES": "텍스트 음성 변환 메시지 보내기",
 			"SEND_VOICE_MESSAGES": "음성 메시지 보내기",
+			"SPEAK": "말하기",
 			"STREAM": "비디오",
+			"USE_APPLICATION_COMMANDS": "애플리케이션 명령어 사용",
+			"USE_EMBEDDED_ACTIVITIES": "활동 사용",
 			"USE_EXTERNAL_APPS": "외부 앱 사용",
 			"USE_EXTERNAL_EMOJIS": "외부 이모티콘 사용",
 			"USE_EXTERNAL_SOUNDS": "외부 사운드 사용",
 			"USE_EXTERNAL_STICKERS": "외부 스티커 사용",
 			"USE_SOUNDBOARD": "사운드보드 사용",
+			"USE_VAD": "음성 활동 감지 사용",
 			"VIEW_AUDIT_LOG": "감사 로그 보기",
-			"VIEW_CHANNEL": "채널 보기"
+			"VIEW_CHANNEL": "채널 보기",
+			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "크리에이터 수익 창출 분석 보기",
+			"VIEW_GUILD_INSIGHTS": "길드 분석 정보 보기"
 		}
 	},
+	"pinMessage": "메시지 고정",
 	"profile": {
-		"userInfo": "사용자 정보"
+		"bio": "내 정보:",
+		"joined": "계정 생성일: $1",
+		"joinedMember": "가입일 $1: $2",
+		"mut": "상호 길드",
+		"mutFriends": "상호 친구",
+		"permInfo": "권한",
+		"userInfo": "사용자 정보",
+		"notes": "사용자 메모"
 	},
+	"profileColor": "프로필 색상",
+	"pronouns": "대명사:",
 	"readableName": "한국어",
+	"recentEmoji": "최근 이모티콘",
 	"register": {
 		"DOBError": "출생일: $1",
+		"agreeTOS": "[서비스 약관]($1)에 동의합니다:",
 		"emailError": "이메일: $1",
+		"noTOS": "이 인스턴스에는 서비스 약관이 없지만, 그래도 약관에 동의합니다:",
 		"passwordError:": "비밀번호: $1",
+		"register": "등록",
 		"tos": "TOS에 동의해야 합니다",
-		"usernameError": "사용자 이름: $1"
+		"usernameError": "사용자 이름: $1",
+		"other": "다른 인스턴스",
+		"instURL": "URL:"
 	},
+	"remove": "제거",
+	"renderJoinAvatars": "신규 회원을 위한 표시 아바타:",
 	"reply": "답변",
+	"replyingTo": "$1님에게 답변 중",
 	"retrying": "다시 시도하는 중...",
 	"role": {
 		"color": "첫 번째 색",
 		"colors": {
-			"name": "컬러 스킴:"
+			"name": "컬러 스킴:",
+			"one": "단색",
+			"two": "두 개 색상",
+			"three": "세 개 색상",
+			"secondColor": "두 번째 색상:",
+			"thirdColor": "세 번째 색상:"
 		},
 		"confirmDelete": "'$1' 항목을 삭제하시겠습니까?",
+		"copyId": "역할 ID 복사",
 		"delete": "역할 삭제",
+		"deleting": "역할 삭제 중...",
 		"displaySettings": "표시 설정",
+		"mentionable": "누구나 이 역할에 핑을 보낼 수 있도록 허용:",
 		"name": "역할 이름:",
+		"perms": "권한",
 		"remove": "역할 제거",
-		"roleFileIcon": "역할 아이콘:"
+		"roleEmoji": "역할 이모티콘:",
+		"roleFileIcon": "역할 아이콘:",
+		"roles": "역할"
 	},
+	"search": {
+		"back": "뒤로",
+		"new": "새",
+		"next": "다음",
+		"old": "오래됨",
+		"page": "페이지 $1",
+		"search": "검색",
+		"settings": "검색 설정",
+		"before": "이전:",
+		"after": "이후:",
+		"includensfw": "NSFW 포함:",
+		"authors": "작성자:",
+		"mentions": "언급:",
+		"channels": "채널:"
+	},
+	"searchGifs": "$1 검색",
 	"settings": {
 		"clear": "지우기",
 		"img": "이미지 업로드",
 		"save": "변경사항 저장",
+		"unsaved": "주의하세요, 저장되지 않은 변경 사항이 있습니다",
 		"updates": {
 			"serviceWorkerMode": {
+				"disabled": "꺼짐",
+				"enabled": "켜짐",
 				"offlineOnly": "오프라인 전용",
-				"title": "서비스 워커 설정"
+				"title": "서비스 워커 설정",
+				"unregistered": "꺼짐 (미디어 캐시 포함)"
 			}
 		}
 	},
+	"showBlockedMessages": "이 사용자를 차단했습니다. $1개 차단된 {{PLURAL:$1|메시지}}를 보려면 클릭하세요.",
+	"spoiler": "스포일러",
 	"sticker": {
+		"confirmDel": "이 스티커를 삭제하겠습니까?",
+		"del": "스티커 삭제",
+		"desc": "설명",
+		"image": "이미지:",
 		"name": "이름:",
+		"tags": "관련 이모티콘:",
+		"title": "스티커",
 		"upload": "스티커 업로드"
 	},
 	"submit": "제출",
 	"switchAccounts": "계정 전환 ⇌",
 	"todayAt": "오늘 $1",
+	"trace": {
+		"totalTime": "$2 : $1ms",
+		"traces": "$1 ($2ms) $3"
+	},
 	"typing": "$2님이 타이핑 중{{PLURAL:$1|입니다}}",
+	"unableToPin": "메시지를 고정할 수 없습니다",
+	"sbWarns": {
+		"regi": "페르미에서는 더 이상 스페이스바를 사용한 입력이 공식적으로 지원되지 않습니다. 작동은 될 가능성이 높지만, Harmony 사용을 권장합니다. 계속하시겠습니까?",
+		"in": "페르미에서는 스페이스바를 이용한 자동 입력이 더 이상 공식적으로 지원되지 않습니다. 작동은 될 수 있지만, Harmony 사용을 권장합니다. 이 메시지는 한 번만 표시되어야 합니다."
+	},
 	"connections": {
 		"since": "가입일: $1",
 		"delete": "연결 삭제",
 		"sure": "확실합니까?"
 	},
+	"unpinMessage": "메시지 고정 해제",
 	"updateAv": "업데이트가 있습니다",
+	"uploadBanner": "배너 업로드:",
 	"uploadFilesText": "여기에 파일을 올리세요!",
+	"uploadPfp": "아바타 업로드:",
+	"useTemplate": "$1을(를) 틀로써 사용",
+	"useTemplateButton": "틀 사용",
+	"usedFermi": "페르미를 통해 보내짐",
 	"user": {
+		"report": "사용자 보고",
+		"deleted": "삭제된 사용자",
+		"reportApp": "보고 애플리케이션",
 		"addRole": "역할 추가",
+		"ban": "회원 차단",
 		"block": "사용자 차단",
 		"copyId": "사용자 ID 복사",
+		"dnd": "방해 금지",
+		"editNick": "별명 수정",
 		"editServerProfile": "길드 프로필 편집",
 		"friendReq": "친구 요청",
+		"idle": "비활성",
+		"instanceBan": "인스턴스 차단",
+		"invisible": "보이지 않음",
+		"kick": "회원 추방",
 		"message": "사용자에게 메시지 보내기",
+		"nick": {
+			"foe": "적의 별명 설정",
+			"friend": "친구의 별명 설정",
+			"stalker": "요청자의 닉네임 설정",
+			"stalking": "요청된 닉네임 설정"
+		},
 		"offline": "오프라인",
 		"online": "온라인",
+		"remove": "사용자 제거",
 		"removeRole": "역할 제거",
+		"sendMessage": "메시지 @$1",
+		"timeout": "회원 타임아웃",
+		"unTimeout": "회원의 타임아웃 제거",
+		"unban": "$1 차단 해제",
 		"unblock": "사용자 차단 해제",
 		"viewProfile": "프로필 보기"
 	},
+	"userping": {
+		"resolving": "사용자 해결 중",
+		"unknown": "@unknown-user"
+	},
+	"vc": {
+		"joinForStream": "음성 채널에 참여해 시청",
+		"joiningStream": "스트리밍에 참여 중...",
+		"joinstream": "스트리밍 시청하기",
+		"leavestream": "스트리밍 나가기",
+		"stopstream": "스트리밍 중단"
+	},
 	"webauth": {
-		"keyname": "키 이름:"
+		"addKey": "키 추가",
+		"keyname": "키 이름:",
+		"manage": "보안 키 관리"
 	},
 	"webhook": "웹훅",
 	"webhooks": {
@@ -510,16 +812,22 @@
 		"areYouSureDelete": "$1 항목을 삭제하시겠습니까?",
 		"avatar": "아바타",
 		"base": "웹훅",
-		"channel": "Webhook을 채널로 출력:",
+		"channel": "웹훅을 채널로 출력:",
 		"copyURL": "웹훅 링크 복사",
 		"createdAt": "만든 날짜: $1",
 		"createdBy": "만든이:",
-		"name": "Webhook 이름:",
+		"deleteWebhook": "웹훅 삭제",
+		"name": "웹훅 이름:",
 		"newWebHook": "새 웹훅",
 		"token": "웹혹 토큰: `$1`",
-		"type2": "채널 팔로워"
+		"type": "유형: $1",
+		"type1": "들어오는",
+		"type2": "채널 팔로워",
+		"type3": "애플리케이션",
+		"url": "웹훅 링크: `$1`"
 	},
 	"widget": "길드 위젯",
+	"widgetEnabled": "위젯 활성화됨",
 	"yes": "예",
 	"yesterdayAt": "어제 $1"
 }

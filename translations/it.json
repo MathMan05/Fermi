@@ -297,6 +297,7 @@
 		"banner:": "Banner:",
 		"bans": "Ban",
 		"boostMessage?": "Invia un messaggio quando qualcuno potenzia la tua gilda!",
+		"idSel": "ID:",
 		"community": "Comunità",
 		"confirmDelete": "Sei sicuro di voler cancellare $1?",
 		"confirmLeave": "Sei sicuro di voler abbandonare?",
@@ -603,7 +604,8 @@
 		}
 	},
 	"profile": {
-		"userInfo": "Informazioni utente"
+		"userInfo": "Informazioni utente",
+		"notes": "Note utente"
 	},
 	"profileColor": "Colore del profilo",
 	"pronouns": "Pronomi:",
@@ -611,7 +613,8 @@
 	"register": {
 		"DOBError": "Data di nascita: $1",
 		"register": "Registrati",
-		"usernameError": "Nome utente: $1"
+		"usernameError": "Nome utente: $1",
+		"instURL": "URL:"
 	},
 	"remove": "Rimuovi",
 	"reply": "Rispondi",

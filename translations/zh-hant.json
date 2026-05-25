@@ -320,6 +320,8 @@
 		"banner:": "橫幅：",
 		"bans": "禁止",
 		"boostMessage?": "當有人促進您的公會時發送訊息！",
+		"banId": "透過 ID 禁止",
+		"idSel": "ID:",
 		"community": "社群",
 		"confirmDelete": "您確定要刪除$1嗎？",
 		"confirmLeave": "您確定您要離開嗎？",
@@ -773,7 +775,8 @@
 		"mut": "共同公會",
 		"mutFriends": "共同好友",
 		"permInfo": "權限",
-		"userInfo": "使用者資訊"
+		"userInfo": "使用者資訊",
+		"notes": "使用者備註"
 	},
 	"profileColor": "個人檔案色彩",
 	"pronouns": "稱謂：",

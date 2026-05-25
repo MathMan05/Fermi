@@ -10,6 +10,7 @@
 			"Pawsdt",
 			"Peterxy12",
 			"Plana",
+			"TFX202X",
 			"Wilf233"
 		]
 	},
@@ -208,7 +209,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "客户端版本：$1 \n\n[加入 Fermi 官方公会]（$2/invite\n/USgYJo?instance=https%3A%2F%2Fspacebar.chat）\n\n[帮助翻译 Fermi]（https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc）\n\n[帮助开发 Fermi]（https://github.com/MathMan05/Fermi）\n\n[帮助维护 Fermi 所依赖的服务器]（https://github.com/spacebarchat/server）\n\n[阅读博客]（https://blog.fermi.chat/）\n\n计算权限：$3",
+	"clientDesc": "客户端版本：$1 \n\n[加入官方Fermi公会](https://redir.fermi.chat/invite)\n\n[帮助翻译Fermi](https://redir.fermi.chat/translate) \n\n[帮助创建Fermi](https://github.com/MathMan05/Fermi)\n\n[帮助维护Fermi所依赖的服务器](https://redir.fermi.chat/server)\n\n[阅读博客](https://blog.fermi.chat/)\n\n计算权限：$3",
 	"commands": {
 		"errorNotValid": "$1不是$2的有效选择",
 		"required": "$1是此命令的必要组成部分"
@@ -227,7 +228,7 @@
 		"cacheDesc": "无论哪种方式，map 文件仍然会加载，这是确保在新的更新推出时它们已在缓存中。",
 		"captureTrace": "此设置会指示 Fermi 从服务器捕获 _trace 属性，启用此设置可能会导致渐进式 JSON 解码无法运作（可能需要重新加载）。",
 		"clearWellKnowns": "重新获取<code>.well-known</code>记录：",
-		"description": "这些设置是给 Spacebar/Fermi 的开发者用的，如果你不知道自己在做什么，请不要更改这些设置。",
+		"description": "这些设置是给Harmony/Fermi的开发者用的，如果你不知道自己在做什么，请不要随意更改这些设置。",
 		"gatewayComp": "禁用网关压缩：",
 		"reportSystem": "启用实验性报告系统：",
 		"logGateway": "记录接收到的网关事件（日志级别信息）：",
@@ -328,6 +329,8 @@
 		"banner:": "横幅：",
 		"bans": "禁止",
 		"boostMessage?": "当有人提升您的公会时发送讯息！",
+		"banId": "根据ID封禁",
+		"idSel": "ID：",
 		"community": "社群",
 		"confirmDelete": "您确定要删除$1吗？",
 		"confirmLeave": "您确定您要离开吗？",
@@ -401,7 +404,7 @@
 		"alreadyHave": "已经拥有账号？",
 		"box3description": "我们始终感谢大家的帮助，无论是提交错误报告、代码，还是指出拼写错误。",
 		"box3title": "为 Fermi 做出贡献",
-		"compatableInstances": "Spacebar 相容实例：",
+		"compatableInstances": "兼容Harmony的实例：",
 		"createAccount": "创建账号",
 		"dobField": "出生日期：",
 		"emailField": "电子邮件：",
@@ -483,7 +486,7 @@
 	},
 	"jankInfo": "客户端信息",
 	"leaveGuild": "离开公会",
-	"leaving": "您正在离开 Spacebar",
+	"leaving": "你即将离开Harmony",
 	"loaded": "已加载",
 	"localuser": {
 		"2faCode:": "代码：",
@@ -517,7 +520,7 @@
 		"connections": "连接",
 		"createApp": "创建应用程序",
 		"customSound": "自定义音效",
-		"customStatusWarn": "Spacebar 目前不支持显示自定义状态，因此它虽然会接受状态但不会对其做出任何行为",
+		"customStatusWarn": "Harmony目前不支持显示自定义状态，因此虽然它会接受该状态，但不会对其进行任何处理。",
 		"deleteAccount": "删除账号",
 		"deleteAccountButton": "删除账号",
 		"description": "描述：",
@@ -781,7 +784,8 @@
 		"mut": "互助公会",
 		"mutFriends": "共同好友",
 		"permInfo": "权限",
-		"userInfo": "用户信息"
+		"userInfo": "用户信息",
+		"notes": "用户笔记"
 	},
 	"profileColor": "个人档案色",
 	"pronouns": "称谓：",
@@ -795,7 +799,9 @@
 		"passwordError:": "密码：$1",
 		"register": "注册",
 		"tos": "您必须同意服务条款",
-		"usernameError": "用户名：$1"
+		"usernameError": "用户名：$1",
+		"other": "其他实例",
+		"instURL": "URL："
 	},
 	"remove": "移除",
 	"renderJoinAvatars": "显示新成员的头像：",
@@ -833,7 +839,14 @@
 		"nofind": "似乎没有符合您搜索条件的讯息，请尝试扩大搜索条件，以找出您想要的内容",
 		"old": "旧",
 		"page": "第 $1 页",
-		"search": "搜索"
+		"search": "搜索",
+		"settings": "搜索设置",
+		"before": "前：",
+		"after": "后：",
+		"includensfw": "包含NSFW内容：",
+		"authors": "作者：",
+		"mentions": "提及：",
+		"channels": "频道："
 	},
 	"searchGifs": "搜索$1",
 	"settings": {
@@ -873,8 +886,19 @@
 		"traces": "$1（$2 毫秒）$3"
 	},
 	"typing": "$2{{PLURAL:$1|正在}}输入",
-	"unableToConnect": "无法连接到 Spacebar 服务器。请尝试登出并重新登录。",
+	"unableToConnect": "无法连接到Harmony服务器。请尝试注销并重新登录。",
 	"unableToPin": "无法固定消息",
+	"sbWarns": {
+		"regi": "Fermi已不再正式支持Spacebar实例，虽然它可能仍然可以工作，但建议使用Harmony。是否继续？",
+		"in": "Fermi已不再正式支持Spacebar实例，虽然它可能仍然可以工作，但建议使用Harmony。此消息只会显示一次。"
+	},
+	"connections": {
+		"since": "会员注册时间： $1",
+		"display": "个人资料页面显示：",
+		"delete": "删除连接",
+		"sure": "您确定吗？",
+		"sureDesc": "如果断开此连接，则无法撤销。"
+	},
 	"unpinMessage": "取消置顶消息",
 	"updateAv": "可用更新",
 	"uploadBanner": "上传横幅：",
@@ -915,7 +939,8 @@
 		"timeout": "超时的成员",
 		"unTimeout": "移除成员超时",
 		"unban": "解封$1",
-		"unblock": "解封用户"
+		"unblock": "解封用户",
+		"viewProfile": "查看个人资料"
 	},
 	"userping": {
 		"resolving": "正在解析用户",
