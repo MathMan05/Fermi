@@ -319,6 +319,8 @@
 		"banner:": "Meirge:",
 		"bans": "Toirmisc",
 		"boostMessage?": "Seol teachtaireacht nuair a chuireann duine borradh faoi do ghrúpa!",
+		"banId": "Toirmeasc de réir aitheantais",
+		"idSel": "Aitheantas:",
 		"community": "Pobal",
 		"confirmDelete": "An bhfuil tú cinnte gur mian leat $1 a scriosadh?",
 		"confirmLeave": "An bhfuil tú cinnte gur mian leat imeacht?",
@@ -772,7 +774,8 @@
 		"mut": "Gildeanna frithpháirteacha",
 		"mutFriends": "Cairde frithpháirteacha",
 		"permInfo": "Ceadanna",
-		"userInfo": "Eolas úsáideora"
+		"userInfo": "Eolas úsáideora",
+		"notes": "Nótaí úsáideora"
 	},
 	"profileColor": "Dath próifíle",
 	"pronouns": "Forainmneacha:",
@@ -786,7 +789,9 @@
 		"passwordError:": "Pasfhocal: $1",
 		"register": "Cláraigh",
 		"tos": "Ní mór duit aontú leis na Téarmaí Seirbhíse",
-		"usernameError": "Ainm úsáideora: $1"
+		"usernameError": "Ainm úsáideora: $1",
+		"other": "Sampla eile",
+		"instURL": "URL:"
 	},
 	"remove": "Bain",
 	"renderJoinAvatars": "Taispeáin abhatár do bhaill nua:",
@@ -824,7 +829,14 @@
 		"nofind": "Is cosúil nach bhfuil aon teachtaireachtaí ann a mheaitseálann do chuardach, b'fhéidir go bhfuil tú ag iarraidh do chuardach a leathnú chun iarracht a dhéanamh an rud atá uait a aimsiú.",
 		"old": "Sean",
 		"page": "Leathanach $1",
-		"search": "Cuardaigh"
+		"search": "Cuardaigh",
+		"settings": "Socruithe Cuardaigh",
+		"before": "Roimhe seo:",
+		"after": "Tar éis:",
+		"includensfw": "Cuir NSFW san áireamh:",
+		"authors": "Údair:",
+		"mentions": "Luaitear:",
+		"channels": "Cainéil:"
 	},
 	"searchGifs": "Cuardaigh i $1",
 	"settings": {
