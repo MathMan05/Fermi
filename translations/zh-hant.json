@@ -42,6 +42,7 @@
 	"dismiss": "去除",
 	"UrlGen": "機器人邀請生成器",
 	"Voice": {
+		"userVol": "使用者數量：",
 		"status": {
 			"badWS": "WebSocket回應錯誤",
 			"conectionFailed": "連接失敗",
@@ -201,7 +202,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "客戶端版本：$1 \n\n[加入 Fermi 官方公會]（$2/invite\n/USgYJo?instance=https%3A%2F%2Fspacebar.chat）\n\n[協助翻譯 Fermi]（https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc）\n\n[協助開發 Fermi]（https://github.com/MathMan05/Fermi）\n\n[協助維護 Fermi 所依賴的伺服器]（https://github.com/spacebarchat/server）\n\n[閱讀部落格]（https://blog.fermi.chat/）\n\n計算權限：$3",
+	"clientDesc": "客戶端版本：$1 \n\n[加入 Fermi 官方公會]（https://redir.fermi.chat/invite）\n\n[協助翻譯 Fermi]（https://redir.fermi.chat/translate）\n\n[協助開發 Fermi]（https://github.com/MathMan05/Fermi）\n\n[協助維護 Fermi 所依賴的伺服器]（https://redir.fermi.chat/server）\n\n[閱讀部落格]（https://blog.fermi.chat/）\n\n估計權限：$3",
 	"commands": {
 		"errorNotValid": "$1不是$2的有效選擇",
 		"required": "$1是此指令的必需部分"
@@ -220,7 +221,7 @@
 		"cacheDesc": "映射檔案在任何情況都會載入，這樣是為了確保在新版本發佈時能已快取。",
 		"captureTrace": "此設定會指示 Fermi 從伺服器擷取 _trace 屬性，啟用此可能會導致漸進式 JSON 解碼無法運作（可能需要重新載入）。",
 		"clearWellKnowns": "重新取得 .well-known 紀錄：",
-		"description": "這些是給 Spacebar/Fermi 的開發人員使用，若您不清楚用途，請不要變動這些設定。",
+		"description": "這些是給 Harmony/Fermi 的開發人員使用，若您不清楚用途，請不要變動這些設定。",
 		"gatewayComp": "停用閘道器壓縮：",
 		"reportSystem": "啟用實驗性回報系統：",
 		"logGateway": "記錄接收到的閘道器事件（日誌等級資訊）：",
@@ -277,6 +278,7 @@
 	"friends": {
 		"addfriend": "新增好友",
 		"addfriendpromt": "透過使用者名稱新增好友：",
+		"requestsent": "請求已發送！",
 		"all": "全部",
 		"all:": "全部好友：",
 		"blocked": "已封鎖",
@@ -395,7 +397,7 @@
 		"alreadyHave": "已經有帳號了嗎？",
 		"box3description": "我們一向感謝任何協助，無論是錯誤報告、程式碼，或是指出一些拼字錯誤。",
 		"box3title": "為 Fermi 做出貢獻",
-		"compatableInstances": "Spacebar 相容實例：",
+		"compatableInstances": "Harmony 相容實例：",
 		"createAccount": "建立帳號",
 		"dobField": "出生日期：",
 		"emailField": "電子郵件：",
@@ -477,7 +479,7 @@
 	},
 	"jankInfo": "客戶端資訊",
 	"leaveGuild": "離開公會",
-	"leaving": "您正在離開 Spacebar",
+	"leaving": "您正在離開 Harmony",
 	"loaded": "已載入",
 	"localuser": {
 		"2faCode:": "代碼：",
@@ -511,7 +513,7 @@
 		"connections": "連接",
 		"createApp": "建立應用程式",
 		"customSound": "自訂音效",
-		"customStatusWarn": "Spacebar 目前不支援顯示自訂狀態，因此雖然會接受狀態但不會對此做出任何行為",
+		"customStatusWarn": "Harmony 目前不支援顯示自訂狀態，因此雖然會接受狀態但不會對此做出任何行為",
 		"deleteAccount": "帳號刪除",
 		"deleteAccountButton": "刪除帳號",
 		"description": "描述：",
@@ -559,7 +561,7 @@
 		"trustedDesc": "當您點擊導向這些網域的連結時，系統將『不會』像其他連結那樣要求您授權開啟。請僅將此權限授予您信任的網域，例如：'https://fermi.chat'",
 		"updateSettings": "更新設定",
 		"updatesYay": "已找到更新！",
-		"userSettings": "使用者設定"
+		"userSettings": "您的公開個人資料"
 	},
 	"login": {
 		"allGood": "一切都好",
@@ -790,7 +792,9 @@
 		"passwordError:": "密碼：$1",
 		"register": "註冊",
 		"tos": "您必須同意服務條款",
-		"usernameError": "使用者名稱：$1"
+		"usernameError": "使用者名稱：$1",
+		"other": "其他實例",
+		"instURL": "URL："
 	},
 	"remove": "移除",
 	"renderJoinAvatars": "顯示新成員的頭像：",
@@ -828,7 +832,14 @@
 		"nofind": "似乎沒有符合您搜尋條件的訊息，請嘗試擴大搜尋條件，以找出您想要的內容",
 		"old": "舊",
 		"page": "第 $1 頁",
-		"search": "搜尋"
+		"search": "搜尋",
+		"settings": "搜尋設定",
+		"before": "早於：",
+		"after": "晚於：",
+		"includensfw": "包含 NSFW 內容：",
+		"authors": "作者：",
+		"mentions": "提及：",
+		"channels": "頻道："
 	},
 	"searchGifs": "搜尋$1",
 	"settings": {
@@ -868,8 +879,19 @@
 		"traces": "$1（$2 毫秒）$3"
 	},
 	"typing": "$2{{PLURAL:$1|正在}}輸入",
-	"unableToConnect": "無法連接到 Spacebar 伺服器。請嘗試登出並重新登入。",
+	"unableToConnect": "無法連接到 Harmony 伺服器。請嘗試登出並重新登入。",
 	"unableToPin": "無法置頂訊息",
+	"sbWarns": {
+		"regi": "Fermi 已不再正式支援 Spacebar 實例，雖然這仍可以運作，但建議您改用 Harmony。您是否要繼續？",
+		"in": "Fermi 已不再正式支援 Spacebar 實例，雖然這仍可以運作，但建議您改用 Harmony。此訊息只會顯示一次。"
+	},
+	"connections": {
+		"since": "會員加入時間：$1",
+		"display": "顯示在個人資料：",
+		"delete": "刪除連接",
+		"sure": "您確定嗎？",
+		"sureDesc": "如果您移除此連接，則無法還原。"
+	},
 	"unpinMessage": "取消置頂訊息",
 	"updateAv": "有更新可用",
 	"uploadBanner": "上傳橫幅：",
@@ -910,7 +932,8 @@
 		"timeout": "逾時成員",
 		"unTimeout": "移除成員上的逾時",
 		"unban": "解禁$1",
-		"unblock": "解除封鎖使用者"
+		"unblock": "解除封鎖使用者",
+		"viewProfile": "查看個人檔案"
 	},
 	"userping": {
 		"resolving": "解析使用者",

@@ -15,7 +15,7 @@
 		"home": "Startpagina",
 		"listtitle": "Misschien wilde u naar een van deze plekken gaan",
 		"login": "Aanmelden",
-		"report": "Als u deze pagina binnen de cliënt hebt gevonden, meld dit dan:",
+		"report": "Als u deze pagina binnen de client aantreft, meld dit dan:",
 		"reset": "Wachtwoord opnieuw instellen",
 		"title": "Bent u verdwaald?",
 		"whatelse": "Wat denkt u dat er nog meer moet gebeuren?",
@@ -32,15 +32,15 @@
 		"title": "Welkom bij $1!"
 	},
 	"DMs": {
-		"add": "Iemand aan directe bericht toevoegen",
+		"add": "Iemand aan dit directe bericht toevoegen",
 		"close": "Directe bericht sluiten",
 		"copyId": "Directe bericht-ID kopiëren",
 		"markRead": "Markeren als gelezen",
 		"name": "Directe berichten"
 	},
-	"ok": "Ok",
+	"ok": "OK",
 	"dismiss": "Sluiten",
-	"UrlGen": "Bot-uitnodigingsgenerator",
+	"UrlGen": "Robotuitnodigingsgenerator",
 	"Voice": {
 		"userVol": "Gebruikersvolume:",
 		"status": {
@@ -53,8 +53,8 @@
 			"notconnected": "Niet verbonden",
 			"sendingStreams": "Audiostreams verzenden",
 			"startingRTC": "RTC-verbinding wordt gemaakt",
-			"waitingMainWS": "Wachten het hoofd-WS",
-			"waitingURL": "Wachten op spraak-URL",
+			"waitingMainWS": "Wachten op hoofd-WS",
+			"waitingURL": "Wachten op spraak-url",
 			"wsAuth": "wachten op autorisatie van WS",
 			"wsOpen": "Wachten tot WS opengaat"
 		}
@@ -86,7 +86,7 @@
 		"bug_hunter_level_1": "Foutenjager niveau 1",
 		"bug_hunter_level_2": "Foutenjager niveau 2",
 		"certified_moderator": "Moderator",
-		"early_supporter": "Eerste ondersteuner",
+		"early_supporter": "Vroege supporter",
 		"guild_booster_lvl1": "Versterkt gilde",
 		"guild_booster_lvl2": "Versterkt gilde",
 		"guild_booster_lvl3": "Versterkt gilde",
@@ -101,10 +101,10 @@
 		"hypesquad_house_2": "Uitmuntendheid",
 		"hypesquad_house_3": "Evenwicht",
 		"legacy_username": "heeft oude gebruikersnaam",
-		"partner": "Instantiepartner",
+		"partner": "Serverpartner",
 		"premium": "Premium",
 		"quest_completed": "heeft een missie voltooid",
-		"staff": "Serverpersoneel",
+		"staff": "Servermedewerker",
 		"verified_developer": "Geverifieerde ontwikkelaar"
 	},
 	"bio": "Bio:",
@@ -114,7 +114,7 @@
 		"blogUpdates": "Actualiteiten:",
 		"desc": "Lees de blog of abonneer u erop voor nieuwtjes over Fermi!",
 		"fermi": "Blog van Fermi",
-		"gotoPost": "Naar het artikel",
+		"gotoPost": "Naar het bericht",
 		"wantUpdates": "Wilt u wekelijks actualiteiten ontvangen over de ontwikkeling van Fermi?"
 	},
 	"bot": "ROBOT",
@@ -140,9 +140,9 @@
 		"name": "Kanaal",
 		"name:": "Kanaalnaam:",
 		"nsfw:": "Waarschuwing: inhoud niet geschikt voor minderjarigen:",
-		"permissions": "Machtigingen",
-		"selectCatName": "Naam van de categorie",
-		"selectName": "Naam van het kanaal",
+		"permissions": "Rechten",
+		"selectCatName": "Categorienaam",
+		"selectName": "Kanaalnaam",
 		"selectType": "Selecteer kanaaltype",
 		"settings": "Instellingen",
 		"settingsFor": "Instellingen voor $1",
@@ -219,7 +219,7 @@
 		"badUser": "Logging voor slechte gebruikersobjecten inschakelen die te veel gegevens verzenden:",
 		"cache": "Cachefunctie voor kaartbestanden van de Service Worker inschakelen:",
 		"cacheDesc": "kaartbestanden worden hoe dan ook geladen; dit zorgt er alleen voor dat ze in de cache staan wanneer er een nieuwe update wordt uitgebracht.",
-		"captureTrace": "Deze instelling geeft Fermi de opdracht om _trace-eigenschappen van de server vast te leggen. Het inschakelen hiervan kan ertoe leiden dat progressieve JSON-decodering niet werkt; mogelijk is een herladen nodig.",
+		"captureTrace": "Deze instelling geeft Fermi de opdracht om _trace-eigenschappen van de server vast te leggen. Het inschakelen hiervan kan ertoe leiden dat progressieve JSON-decodering niet werkt; mogelijk is opnieuw laden nodig.",
 		"clearWellKnowns": ".well-known-records opnieuw ophalen:",
 		"description": "Deze instellingen zijn bedoeld voor ontwikkelaars van Harmony/Fermi. Als u niet weet wat u doet, kunt u deze instellingen beter niet wijzigen.",
 		"gatewayComp": "Gateway-compressie uitschakelen:",
@@ -244,7 +244,7 @@
 		"region": "Regio: $1",
 		"title": "Sessies beheren"
 	},
-	"discovery": "Ontdekking",
+	"discovery": "Ontdekken",
 	"dms": "Directe berichten",
 	"edit": "Bewerken",
 	"emoji": {
@@ -284,7 +284,7 @@
 		"blocked": "Geblokkeerd",
 		"blockedusers": "Geblokkeerde gebruikers:",
 		"bu": "Geblokkeerde gebruiker",
-		"discnotfound": "Discriminator niet gevonden",
+		"discnotfound": "Onderscheid niet gevonden",
 		"friendlist": "Vriendenlijst",
 		"friends": "Vrienden",
 		"notfound": "Gebruiker niet gevonden",
@@ -298,35 +298,35 @@
 	"goThereTrust": "Ja, en vertrouw dit domein vanaf nu",
 	"goingToURL": "Deze hyperlink brengt u naar $1. Weet u zeker dat u daarheen wilt gaan?",
 	"group": {
-		"createdm": "Maak directe bericht!",
+		"createdm": "DM maken!",
 		"edit": "Groepschat bewerken",
 		"select": "Vrienden kiezen"
 	},
 	"guild": {
 		"COMMUNITY": "Lidmaatschap aanvragen",
 		"disableInvites": "Uitnodigingen uitschakelen:",
-		"DISCOVERABLE": "Ontdekking",
+		"DISCOVERABLE": "Ontdekken",
 		"INVITES_DISABLED": "Alleen op uitnodiging",
 		"adminMenu": {
-			"changePerms": "Machtigingen wijzigen om te zoeken",
+			"changePerms": "Recenten wijzigen om te zoeken",
 			"finding": "Beheerders zoeken",
 			"ownName": "Eigenaar",
-			"owner": "Zoek de eigenaar op",
-			"permission": "Machtigingen:"
+			"owner": "Eigenaar opzoeken",
+			"permission": "Rechten:"
 		},
 		"report": "Gilde rapporteren",
 		"admins": "Beheerders zoeken",
 		"all": "Alle",
 		"banReason": "Reden voor ban: $1",
 		"bannedBy": "Verbannen door:",
-		"banner:": "Banner:",
-		"bans": "Bannen",
-		"boostMessage?": "Stuur een bericht wanneer iemand uw gilde versterkt!",
+		"banner:": "Verbanner:",
+		"bans": "Verbanningen",
+		"boostMessage?": "Een bericht verzenden wanneer iemand uw gilde versterkt!",
 		"banId": "Blokkeren op basis van ID",
 		"idSel": "ID:",
 		"community": "Gemeenschap",
 		"confirmDelete": "Weet u zeker dat u $1 wilt verwijderen?",
-		"confirmLeave": "Weet u zeker dat u weg wilt?",
+		"confirmLeave": "Weet u zeker dat u het gilde wilt verlaten?",
 		"copyId": "Gilde-ID kopiëren",
 		"create": "Volledig nieuw gilde maken",
 		"createFromTemplate": "Gilde maken op basis van sjabloon",
@@ -336,8 +336,8 @@
 		"defaultNoti": "Stel de standaardmeldingsinstellingen van uw gilde in!",
 		"delete": "Gilde verwijderen",
 		"description:": "Beschrijving:",
-		"disoveryTitle": "Gilden ontdekken ($1 vermelding{{PLURAL:$1||en}})",
-		"editingTemplate": "Bewerken van $1",
+		"disoveryTitle": "Gilden verkennen ($1 {{PLURAL:$1|vermelding|vermeldingen}})",
+		"editingTemplate": "$1 bewerken",
 		"emptytext": "Wat vreemd, dit gilde heeft geen kanalen!?",
 		"emptytitle": "Vreemde plek",
 		"guilds": "Gilden",
@@ -393,7 +393,7 @@
 		"warnOffiline": "Server is offline, kan geen verbinding maken"
 	},
 	"htmlPages": {
-		"addBot": "Toevoegen aan gilde",
+		"addBot": "Aan gilde toevoegen",
 		"alreadyHave": "Heeft u al een account?",
 		"box3description": "We stellen hulp altijd op prijs, of het nu gaat om het melden van bugs, het bijdragen van code of het verbeteren van typefouten.",
 		"box3title": "Aan Fermi bijdragen",
@@ -416,13 +416,13 @@
 		"userField": "Gebruikersnaam:",
 		"welcomeJank": "Welkom bij Fermi"
 	},
-	"incorrectURLS": "## Deze instantie heeft waarschijnlijk de verkeerde koppelingen verzonden.\n### Als u de eigenaar van de instantie bent, raadpleeg dan [hier](https://docs.spacebar.chat/setup/server/) onder *Verbinding maken vanaf externe machines* om het probleem op te lossen.\n Wilt u dat Fermi automatisch probeert deze fout te herstellen, zodat u verbinding kunt maken met de instantie?",
+	"incorrectURLS": "## Deze server heeft waarschijnlijk de verkeerde koppelingen verzonden.\n### Als u de eigenaar van de server bent, raadpleeg dan [hier](https://docs.spacebar.chat/setup/server/) onder *Verbinding maken vanaf externe machines* om het probleem op te lossen.\n Wilt u dat Fermi automatisch probeert deze fout te herstellen, zodat u verbinding kunt maken met de server?",
 	"instInfo": "Serverinformatie",
 	"instanceInfo": {
-		"contact": "Instantiebeheerders mailen",
+		"contact": "Serverbeheerders mailen",
 		"frontPage": "[Voorpagina]($1)",
-		"name": "Instantie-gegevens",
-		"publicUrl": "[Openbare koppeing]($1)",
+		"name": "Servergegevens",
+		"publicUrl": "[Openbare koppeling]($1)",
 		"tosPage": "[Gebruiksvoorwaardenpagina]($1)"
 	},
 	"instanceStats": {
@@ -477,7 +477,7 @@
 		"noLimit": "Geen limiet",
 		"title": "Mensen uitnodigen"
 	},
-	"jankInfo": "Cliëntinformatie",
+	"jankInfo": "Clientgegevens",
 	"leaveGuild": "Gilde verlaten",
 	"leaving": "U verlaat Harmony",
 	"loaded": "Geladen",
@@ -519,13 +519,13 @@
 		"description": "Beschrijving:",
 		"devPortal": "Ontwikkelaarsportaal",
 		"disableConnection": "Deze verbinding is bij de server uitgeschakeld",
-		"editingBot": "Bewerken van de robot $1",
+		"editingBot": "Robot $1 bewerken",
 		"install": "Installeren",
 		"installDesc": "Na installeren kunt u Fermi in een eigen venster openen en als aparte app gebruiken! U kunt Fermi ook gewoon in de webbrowser blijven gebruiken en dan werkt het precies hetzelfde.",
 		"installJank": "Fermi installeren",
 		"language": "Taal:",
 		"manageBot": "Robot beheren",
-		"manageInstance": "Instantie beheren",
+		"manageInstance": "Server beheren",
 		"mustTypePhrase": "Om uw account te verwijderen moet u de zin typen",
 		"newDiscriminator": "Nieuwe discriminator:",
 		"newEmail:": "Nieuw e-mailadres",
@@ -536,18 +536,18 @@
 		"notisound": "Meldingsgeluid:",
 		"oldPassword:": "Oud wachtwoord:",
 		"password:": "Wachtwoord",
-		"privacyPolcyURL": "Link privacybeleid:",
-		"appID": "Toepassing ID: $1",
+		"privacyPolcyURL": "Koppeling naar privacybeleid:",
+		"appID": "Toepassings-ID: $1",
 		"showSecret": "Clientgeheim weergeven",
 		"clientSecret": "Cliëntgeheim: $1",
-		"secret": "Geheim .",
-		"publicAvaliable": "De robot publiekelijk uitnodigbaar maken?",
+		"secret": "Geheim",
+		"publicAvaliable": "De robot openbaar uitnodigbaar maken?",
 		"refreshPage": "Vernieuw de pagina om toe te passen",
 		"requireCode": "Codetoekenning vereisen om de robot uit te nodigen?",
 		"resetToken": "Token opnieuw instellen",
 		"saveToken": "Token lokaal opslaan",
 		"setUp2fa": "Tweetrapsauthenticatie instellen",
-		"setUp2faInstruction": "Kopieer dit geheim naar uw TOTP-app (Time-based One-Time Password) om uw 2FA aanmeldcode te genereren.",
+		"setUp2faInstruction": "Kopieer dit geheim naar uw TOTP-app (Time-based One-Time Password) om uw aanmeldcode voor tweetrapsauthenticatie te genereren.",
 		"settings": "Instellingen",
 		"sillyDeleteConfirmPhrase": "Shrek is liefde, Shrek is leven",
 		"soundTooLarge": "Het geluid dat u probeerde te uploaden was te groot. Probeer het nog eens.",
@@ -564,16 +564,16 @@
 		"userSettings": "Uw publieke profiel"
 	},
 	"login": {
-		"allGood": "Alles goed",
+		"allGood": "Alles is in orde",
 		"checking": "Server wordt gecontroleerd",
 		"enterPAgain": "Voer het nieuwe wachtwoord nogmaals in:",
-		"invalid": "Onjuiste instantie, probeer het nog eens",
+		"invalid": "Onjuiste server, probeer het nog eens",
 		"login": "Aanmelden",
 		"newPassword": "Nieuw wachtwoord:",
-		"pasteInfo": "Plak hier de herstel-link:",
+		"pasteInfo": "Plak hier de herstelkoppeling:",
 		"recover": "Wachtwoord vergeten?",
 		"recovery": "Wachtwoord vergeten",
-		"waiting": "Wacht totdat de instantie gecontroleerd is"
+		"waiting": "Wacht totdat de server gecontroleerd is"
 	},
 	"logout": {
 		"error": {
@@ -588,10 +588,10 @@
 		"AreYouSureStop": "Weet u zeker dat u deze server wilt stoppen?",
 		"TokenFormats": {
 			"JSON": "In JSON-indeling",
-			"URLs": "Links om uit te nodigen",
+			"URLs": "Koppelingen om uit te nodigen",
 			"plain": "Eenvoudig"
 		},
-		"clientURL": "Cliënt-link:",
+		"clientURL": "Clientkoppeling:",
 		"copy": "Kopiëren",
 		"count": "Aantal:",
 		"create": "Aanmaken",
@@ -599,7 +599,7 @@
 		"format": "Formaat:",
 		"genericType": "Generiek",
 		"length": "Lengte:",
-		"regType": "link-type registratie-token",
+		"regType": "Koppelingstype voot registratie-token",
 		"stop": "Server stoppen"
 	},
 	"media": {
@@ -655,7 +655,7 @@
 	"nevermind": "Laat maar",
 	"no": "Nee",
 	"noEmojiFont": "Emoji van het systeem gebruiken",
-	"noMessages": "Er zijn nog geen berichten, wees de eerste die iets zegt!",
+	"noMessages": "Er zijn nog geen berichten. Zeg als eerste iets!",
 	"noPins": "Hier is voor u nog niets te zien",
 	"noStickers": "Dat is jammer, er zijn geen stickers die u kunt gebruiken!",
 	"notiClump": "U heeft $1 meldingen van $2 gekregen",
@@ -663,7 +663,7 @@
 	"otherAt": "$1 om $2",
 	"permissions": {
 		"descriptions": {
-			"ADMINISTRATOR": "Geeft alle onderstaande machtigingen aan rolleden en omzeilt alle overschrijvingen van machtigingen. Alleen U en leden/bots die u volledig vertrouwt, zouden deze UITGEBREIDE machtiging mogen hebben!",
+			"ADMINISTRATOR": "Geeft alle onderstaande rechten aan rolleden en omzeilt alle overschrijvingen van rechten. Alleen U en leden/bots die u volledig vertrouwt, zouden deze UITGEBREIDE rechten mogen hebben!",
 			"MANAGE_GUILD": "Maakt het beheren en bewerken van het gilde mogelijk.",
 			"VIEW_AUDIT_LOG": "Hiermee kunnen rol-leden het inspectielogboek bekijken",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "Laat rolleden inzichten over rolabonnementen bekijken.",
@@ -697,7 +697,7 @@
 			"SEND_TTS_MESSAGES": "Hiermee kunnen rol-leden tekst-naar-spraakberichten in tekstkanalen sturen",
 			"USE_EXTERNAL_EMOJIS": "Hiermee kunnen rol-leden externe emoji’s in tekstkanalen gebruiken.",
 			"USE_EXTERNAL_STICKERS": "Hiermee kunnen rolleden externe stickers gebruiken in tekstkanalen.",
-			"EMBED_LINKS": "Sta toe dat koppelingen die door rolleden worden verzonden, automatisch worden ingesloten in tekstkanalen.",
+			"EMBED_LINKS": "Toestaan dat koppelingen die door rolleden worden verzonden, automatisch worden ingesloten in tekstkanalen.",
 			"ATTACH_FILES": "Hiermee kunnen rolleden bestanden bijvoegen in tekstkanalen.",
 			"SEND_VOICE_MESSAGES": "Maakt het mogelijk om spraakberichten te verzenden in tekstkanalen.",
 			"CREATE_INSTANT_INVITE": "Hiermee kunnen rolleden uitnodigingen voor het gilde aanmaken.",
@@ -774,9 +774,9 @@
 		"bio": "Over mij:",
 		"joined": "Account aangemaakt: $1",
 		"joinedMember": "Toegetreden tot $1: $2",
-		"mut": "Onderlinge gilden",
+		"mut": "Gedeelde gilden",
 		"mutFriends": "Wederzijdse vrienden",
-		"permInfo": "Machtigingen",
+		"permInfo": "Rechten",
 		"userInfo": "Gebruikersinfo",
 		"notes": "Gebruikersopmerkingen"
 	},
@@ -791,9 +791,9 @@
 		"noTOS": "Voor deze server zijn er geen servicevoorwaarden, accepteer ze toch maar:",
 		"passwordError:": "Wachtwoord: $1",
 		"register": "Inschrijven",
-		"tos": "U moet instemmen met de voorwaarden",
+		"tos": "U moet instemmen met de gebruiksvoorwaarden",
 		"usernameError": "Gebruikersnaam: $1",
-		"other": "Andere instantie",
+		"other": "Andere server",
 		"instURL": "Url:"
 	},
 	"remove": "Verwijderen",
@@ -882,8 +882,8 @@
 	"unableToConnect": "Kan geen verbinding maken met de Harmony-server. Probeer u af en weer aan te melden.",
 	"unableToPin": "Bericht kan niet worden vastgezet",
 	"sbWarns": {
-		"regi": "Spacebar-instanties worden officieel niet meer ondersteund door Fermi, hoewel het waarschijnlijk nog wel werkt. Harmony wordt echter aanbevolen. Doorgaan?",
-		"in": "Spacebar-instanties worden officieel niet meer ondersteund door Fermi. Hoewel het waarschijnlijk nog wel werkt, wordt Harmony aanbevolen. Dit bericht zou slechts één keer moeten verschijnen."
+		"regi": "Spacebar-server worden officieel niet meer ondersteund door Fermi, hoewel het waarschijnlijk nog wel werkt. Harmony wordt echter aanbevolen. Doorgaan?",
+		"in": "Spacebar-server worden officieel niet meer ondersteund door Fermi. Hoewel het waarschijnlijk nog wel werkt, wordt Harmony aanbevolen. Dit bericht zou slechts één keer moeten verschijnen."
 	},
 	"connections": {
 		"since": "Lid sinds: $1",
@@ -907,7 +907,7 @@
 		"addRole": "Rollen toevoegen",
 		"ban": "Lid verbannen",
 		"block": "Gebruiker blokkeren",
-		"confirmInstBan": "Weet u zeker dat u de server $1 wilt verbannen?",
+		"confirmInstBan": "Weet u zeker dat u $1 van de server wilt verbannen?",
 		"copyId": "Gebruikers-ID kopiëren",
 		"dnd": "Niet storen",
 		"editNick": "Bijnaam bewerken",
@@ -944,7 +944,7 @@
 		"joiningStream": "Verbinden met uitzending…",
 		"joinstream": "Uitzending bekijken",
 		"leavestream": "Uitzending verlaten",
-		"stopstream": "Uitzending stoppen"
+		"stopstream": "Stream beëindigen"
 	},
 	"webauth": {
 		"addKey": "Sleutel toevoegen",
@@ -973,7 +973,7 @@
 		"type3": "Toepassing",
 		"url": "Webhook-koppeling: `$1`"
 	},
-	"welcomeMessages": "Welkom $1! Leuk dat je er bent!\nHoi $1, leuk je te ontmoeten!\nDag $1, schuif ook gezellig aan!\nKom erbij $1, heb je pizza bij je?",
+	"welcomeMessages": "Welkom $1! Leuk dat u er bent!\nHoi $1, leuk u te ontmoeten!\nDag $1, schuif ook gezellig aan!\nKom erbij $1, hebt u pizza bij u?",
 	"widget": "Gilde-widget",
 	"widgetEnabled": "Widget ingeschakeld",
 	"yes": "Ja",
