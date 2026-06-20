@@ -722,6 +722,11 @@ class Localuser {
 	}
 	conectionChange = () => {};
 	async handleEvent(temp: wsjson) {
+		try {
+			window.checker?.checkEvent(temp);
+		} catch (e) {
+			console.error(e);
+		}
 		if (temp.d._trace) this.handleTrace(temp.d._trace);
 		if (getDeveloperSettings().gatewayLogging) console.debug(temp);
 		if (temp.s) this.lastSequence = temp.s;

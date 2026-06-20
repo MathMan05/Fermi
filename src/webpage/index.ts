@@ -18,12 +18,24 @@ import "./oauth2/auth.js";
 import "./audio/page.js";
 import "./404.js";
 import {Channel} from "./channel.js";
+import type * as C from "./typeChecker/chekerIndex.js";
 
 if (window.location.pathname === "/app") {
 	window.location.pathname = "/channels/@me";
 }
 export interface CustomHTMLDivElement extends HTMLDivElement {
 	markdown: MarkDown;
+}
+declare global {
+	interface Window {
+		checker?: typeof C.Check;
+	}
+}
+if (localStorage.getItem("checkTypes")) {
+	const i = (await import(
+		"/typeChecker/chekerIndex.js" as "./typeChecker/chekerIndex.js"
+	)) as typeof C;
+	window.checker = i.Check;
 }
 if (window.location.pathname.startsWith("/channels")) {
 	let templateID = new URLSearchParams(window.location.search).get("templateID");
