@@ -456,6 +456,8 @@ class Embed {
 			if (this.json.video) {
 				img.onclick = async () => {
 					if (this.json.video) {
+						const url = new URL(this.json.video.url);
+						if (url.host !== "youtube.com") return;
 						img.remove();
 						const iframe = document.createElement("iframe");
 						iframe.src = this.json.video.url + "?autoplay=1";
