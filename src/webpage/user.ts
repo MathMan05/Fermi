@@ -1173,6 +1173,33 @@ class User extends SnowFlake {
 			}
 		}
 	}
+	note?: string;
+	async saveNotes(note: string) {
+		this.note = note;
+		await fetch(`${this.info.api}/users/@me/notes/${this.id}`, {
+			method: "PUT",
+			headers: this.headers,
+			body: JSON.stringify({note}),
+		});
+	}
+	async getNotes() {
+		try {
+			if (this.note === undefined) {
+				this.note =
+					(
+						await (
+							await fetch(`${this.info.api}/users/@me/notes/${this.id}`, {
+								method: "GET",
+								headers: this.headers,
+							})
+						).json()
+					).note || "";
+			}
+		} catch {
+			this.note = "";
+		}
+		return this.note as string;
+	}
 	async fullProfile(guild: Guild | null | Member = null) {
 		console.log(guild);
 		const membres = (async () => {
@@ -1380,6 +1407,14 @@ class User extends SnowFlake {
 		document.body.append(background);
 		background.append(div);
 		console.log(background);
+		const notes = buttons.add(I18n.profile.notes());
+		const textArea = document.createElement("textarea");
+		textArea.classList.add("userNote");
+		notes.addHTMLArea(textArea);
+		this.getNotes().then((_) => (textArea.textContent = _));
+		textArea.onblur = () => {
+			this.saveNotes(textArea.value);
+		};
 		(async () => {
 			const high = await this.highInfo();
 			const mut = buttons.add(I18n.profile.mut());

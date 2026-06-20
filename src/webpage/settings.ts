@@ -138,11 +138,12 @@ class TextInput implements OptionsElement<string> {
 	input!: WeakRef<HTMLInputElement>;
 	password: boolean;
 	spaceReplace: string;
+	name: string;
 	constructor(
 		label: string,
 		onSubmit: (str: string) => void,
 		owner: Options,
-		{initText = "", password = false, spaceReplace = " "} = {},
+		{initText = "", password = false, spaceReplace = " ", name = ""} = {},
 	) {
 		this.label = label;
 		this.value = initText;
@@ -150,6 +151,7 @@ class TextInput implements OptionsElement<string> {
 		this.onSubmit = onSubmit;
 		this.password = password;
 		this.spaceReplace = spaceReplace;
+		this.name = name;
 	}
 	generateHTML(): HTMLDivElement {
 		const div = document.createElement("div");
@@ -157,6 +159,7 @@ class TextInput implements OptionsElement<string> {
 		span.textContent = this.label;
 		div.append(span);
 		const input = document.createElement("input");
+		if (this.name) input.name = this.name;
 		input.value = this.value;
 		input.type = this.password ? "password" : "text";
 		input.oninput = this.onChange.bind(this);
@@ -1087,11 +1090,9 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 		div.append(verify);
 
 		const input = this.input;
-		input.readOnly = !!new URLSearchParams(window.location.search).get("instance");
-		console.log("read only", input.readOnly, window.location.search);
-		input.type = "search";
-		input.setAttribute("list", "instances");
 		div.append(input);
+
+		/*
 		let cur = 0;
 		input.onkeyup = async () => {
 			const thiscur = ++cur;
@@ -1102,26 +1103,114 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 				this.onchange(urls);
 			}
 		};
+		*/
 
 		InstancePicker.picker = this;
 		InstancePicker.genDataList();
+		this.genArea();
 
 		return div;
 	}
+	instanceInfo: {
+		name: string;
+		img?: string;
+		des?: string;
+	} = {
+		name: "loading",
+	};
 	button?: HTMLButtonElement;
-	input = document.createElement("input");
+	input = document.createElement("div");
 	giveButton(button: HTMLButtonElement | undefined) {
 		this.button = button;
 	}
+	genArea() {
+		const div = this.input;
+		div.textContent = "";
+		div.classList.add("flexltr", "instDiv");
+		if (this.instanceInfo.img) {
+			const img = document.createElement("img");
+			img.src = this.instanceInfo.img;
+			div.append(img);
+		}
+		const span = document.createElement("span");
+		span.textContent = this.instanceInfo.name;
+		div.append(span);
+		if (!new URLSearchParams(window.location.search).get("instance"))
+			div.onclick = () => {
+				const d = new Dialog("");
+				const instnaces = getInstances() ?? [];
+				for (const i of instnaces) {
+					if (!i.display) continue;
+					const instance = document.createElement("div");
+					instance.classList.add("flexttb", "instDiv");
+					const div = document.createElement("div");
+					instance.append(div);
+
+					div.classList.add("flexltr");
+					if (i.image) {
+						const img = document.createElement("img");
+						img.src = i.image;
+						div.append(img);
+					}
+					const span = document.createElement("span");
+					span.textContent = i.name;
+					div.append(span);
+
+					if (i.description) {
+						const p = document.createElement("p");
+						p.textContent = i.description;
+						instance.append(p);
+					}
+					instance.onclick = async () => {
+						d.hide();
+						this.instanceInfo = {
+							name: i.name,
+							des: i.description,
+							img: i.image,
+						};
+						this.genArea();
+						const urls = await checkInstance(i.name, this.verify, this.button);
+						if (urls) {
+							this.onchange(urls);
+						}
+					};
+					d.options.addHTMLArea(instance);
+				}
+				d.options.addButtonInput("", I18n.register.other(), () => {
+					const opt = d.options.addSubOptions(I18n.register.other());
+					let id = 0;
+					opt.addTextInput(I18n.register.instURL(), () => {}).onchange = async (_) => {
+						const thisid = ++id;
+						await new Promise((res) => setTimeout(res, 1000));
+						console.log(id, thisid);
+						if (thisid !== id) return;
+						try {
+							const i = await checkInstance(_, this.verify, this.button);
+							if (i) {
+								this.onchange(i);
+								const ping = (await (await fetch(i.api + "/ping")).json()).instance;
+								this.instanceInfo = {
+									name: ping.name,
+									des: ping.description ?? undefined,
+									img: ping.image ?? undefined,
+								};
+								this.genArea();
+							} else {
+								this.instanceInfo = {
+									name: _,
+								};
+								this.genArea();
+							}
+						} catch {
+							//
+						}
+					};
+				});
+				d.show().parentElement!.style.zIndex = "203";
+			};
+	}
 	static picker?: InstancePicker;
 	static genDataList() {
-		let datalist = document.getElementById("instances");
-		if (!datalist) {
-			datalist = document.createElement("datalist");
-			datalist.setAttribute("id", "instances");
-			document.body.append(datalist);
-		}
-
 		const json = getInstances();
 
 		const [stringURLMap, stringURLsMap] = getStringURLMapPair();
@@ -1148,44 +1237,60 @@ class InstancePicker implements OptionsElement<InstanceInfo | null> {
 				name = json[0].name;
 			}
 			if (this.picker) {
+				const i = json.find((_) => _.name.toLowerCase() === name.toLowerCase());
+				if (i) {
+					this.picker.instanceInfo = {
+						name: i.name,
+						des: i.description,
+						img: i.image,
+					};
+					this.picker.genArea();
+				}
 				checkInstance(
 					name,
 					this.picker.verify,
 					this.picker.button || document.createElement("button"),
-				).then((e) => {
-					if (e) this.picker?.onchange(e);
+				).then(async (e) => {
+					if (!this.picker) return;
+					if (e) this.picker.onchange(e);
+					const i = json.find((_) => _.name.toLowerCase() === name.toLowerCase());
+					if (i) {
+						this.picker.instanceInfo = {
+							name: i.name,
+							des: i.description,
+							img: i.image,
+						};
+						this.picker.genArea();
+					} else if (e) {
+						const ping = (await (await fetch(e?.api + "/ping")).json()).instance;
+						this.picker.instanceInfo = {
+							name: ping.name,
+							des: ping.description ?? undefined,
+							img: ping.image ?? undefined,
+						};
+						this.picker.genArea();
+					} else {
+						this.picker.instanceInfo = {
+							name,
+						};
+						this.picker.genArea();
+					}
 				});
-				this.picker.input.value = name;
 			}
 		}
 
-		if (datalist.childElementCount !== 0) {
-			return;
-		}
-
 		for (const instance of json) {
-			const option = document.createElement("option");
-			option.disabled = instance.online === false;
-			option.value = instance.name;
 			if (instance.url) {
-				stringURLMap.set(option.value.toLowerCase(), instance.url);
+				stringURLMap.set(instance.name.toLowerCase(), instance.url);
 				if (instance.urls) {
 					stringURLsMap.set(instance.url, instance.urls);
 				}
 			} else if (instance.urls) {
-				stringURLsMap.set(option.value.toLowerCase(), instance.urls);
-			} else {
-				option.disabled = true;
-			}
-			if (instance.description) {
-				option.label = instance.description;
-			} else {
-				option.label = instance.name;
+				stringURLsMap.set(instance.name.toLowerCase(), instance.urls);
 			}
 			if (instance.display === false) {
 				continue;
 			}
-			datalist.append(option);
 		}
 	}
 	submit() {}
@@ -1375,12 +1480,13 @@ class Options implements OptionsElement<void> {
 	addTextInput(
 		label: string,
 		onSubmit: (str: string) => void,
-		{initText = "", password = false, spaceReplace = " "} = {},
+		{initText = "", password = false, spaceReplace = " ", name = ""} = {},
 	) {
 		const textInput = new TextInput(label, onSubmit, this, {
 			initText,
 			password,
 			spaceReplace,
+			name,
 		});
 		this.options.push(textInput);
 		this.generate(textInput);
@@ -1987,12 +2093,13 @@ class Form implements OptionsElement<object> {
 	addTextInput(
 		label: string,
 		formName: string,
-		{initText = "", required = false, password = false, spaceReplace = " "} = {},
+		{initText = "", required = false, password = false, spaceReplace = " ", name = ""} = {},
 	) {
 		const textInput = this.options.addTextInput(label, (_) => {}, {
 			initText,
 			password,
 			spaceReplace,
+			name,
 		});
 		this.names.set(formName, textInput);
 		if (required) {

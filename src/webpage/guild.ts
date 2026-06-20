@@ -1074,6 +1074,26 @@ class Guild extends SnowFlake {
 
 		if (this.member.hasPermission("BAN_MEMBERS")) {
 			const banMenu = settings.addButton(I18n.guild.bans());
+			banMenu.addButtonInput("", I18n.guild.banId(), () => {
+				const opt = banMenu.addSubOptions(I18n.guild.banId(), {noSubmit: true});
+				const reason = opt.addTextInput(I18n.member["reason:"](), () => {});
+				opt.addTextInput(I18n.guild.idSel(), async (id) => {
+					const headers = structuredClone(this.headers);
+					(headers as any)["x-audit-log-reason"] = reason.value;
+					const ret = await fetch(`${this.info.api}/guilds/${this.id}/bans/${id}`, {
+						method: "PUT",
+						headers,
+					});
+					if (!ret.ok) {
+						new Dialog((await ret.json()).message).show();
+						return;
+					}
+					banMenu.returnFromSub();
+				});
+				opt.addButtonInput("", I18n.submit(), () => {
+					opt.submit();
+				});
+			});
 			const makeBanMenu = () => {
 				const banDiv = document.createElement("div");
 				const bansp = ProgessiveDecodeJSON<banObj[]>(

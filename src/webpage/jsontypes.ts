@@ -971,6 +971,15 @@ type messageCreateJson = {
 	s: number;
 	t: "MESSAGE_CREATE";
 };
+type userNote = {
+	op: 0;
+	t: "USER_NOTE_UPDATE";
+	d: {
+		note: string;
+		id: string;
+	};
+	s: number;
+};
 export type pollUpdateJson = {
 	op: 0;
 	d: {
@@ -1075,6 +1084,7 @@ type wsjson =
 				heartbeat_interval: number;
 			};
 	  }
+	| userNote
 	| {
 			op: 0;
 			t: "MESSAGE_REACTION_ADD";

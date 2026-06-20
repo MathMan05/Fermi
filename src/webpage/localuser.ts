@@ -775,6 +775,11 @@ class Localuser {
 						this.messageCreate(temp);
 					}
 					break;
+				case "USER_NOTE_UPDATE": {
+					const u = this.userMap.get(temp.d.id);
+					if (u) u.note = temp.d.note;
+					break;
+				}
 				case "USER_CONNECTIONS_UPDATE": {
 					this.conectionChange();
 					break;
