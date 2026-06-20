@@ -14,6 +14,8 @@ import {
 	interactionEvents,
 	memberjson,
 	messagejson,
+	polljson,
+	pollUpdateJson,
 	userjson,
 } from "./jsontypes.js";
 import {Emoji} from "./emoji.js";
@@ -68,6 +70,7 @@ class Message extends SnowFlake {
 	}[] = [];
 	pinned!: boolean;
 	flags: number = 0;
+	poll?: polljson;
 	getTimeStamp() {
 		return new Date(this.timestamp).getTime();
 	}
@@ -249,6 +252,22 @@ class Message extends SnowFlake {
 				},
 				icon: {
 					css: "svg-delete",
+				},
+				color: "red",
+			},
+		);
+		Message.contextmenu.addButton(
+			() => I18n.message.endPoll(),
+			function (this: Message) {
+				this.confirmDeletePoll();
+			},
+			{
+				visible: function () {
+					return (
+						this.author.id === this.localuser.user.id &&
+						!!this.poll &&
+						!this.poll.results?.is_finalized
+					);
 				},
 				color: "red",
 			},
@@ -642,6 +661,22 @@ class Message extends SnowFlake {
 		}
 		console.log("deleted done");
 	}
+	pollUpdate(update: pollUpdateJson) {
+		if (!this.poll) return;
+		if (!this.poll.results) this.poll.results = {is_finalized: false, answer_counts: []};
+		let ans = this.poll.results.answer_counts.find((_) => _.id === update.d.answer_id);
+		if (!ans) {
+			ans = {id: update.d.answer_id, count: 0, me_voted: false};
+			this.poll.results.answer_counts.push(ans);
+		}
+		if (update.t === "MESSAGE_POLL_VOTE_ADD") {
+			ans.count++;
+			if (update.d.user_id === this.localuser.user.id) ans.me_voted = true;
+		} else {
+			ans.count--;
+			if (update.d.user_id === this.localuser.user.id) ans.me_voted = false;
+		}
+	}
 	reactdiv!: WeakRef<HTMLDivElement>;
 	blockedPropigate() {
 		const previd = this.channel.idToPrev.get(this.id);
@@ -792,7 +827,8 @@ class Message extends SnowFlake {
 				}
 			}
 		}
-		if (this.message_reference && this.type !== 6 && this.type !== 18) {
+
+		if (this.message_reference && this.type !== 6 && this.type !== 18 && this.type !== 46) {
 			const replyline = document.createElement("div");
 
 			const minipfp = document.createElement("img");
@@ -1137,6 +1173,76 @@ class Message extends SnowFlake {
 			time.classList.add("timestamp");
 			text.append(time);
 			div.classList.add("topMessage");
+		} else if (this.type === 46) {
+			build.classList.remove("flexltr");
+			build.classList.add("flexttb");
+			const t = I18n.message.pollRes("$$$$", "||||");
+			const content = document.createElement("div");
+			content.classList.add("flexltr", "pollRes");
+			const username = document.createElement("span");
+			this.author.bind(username, this.guild);
+			username.classList.add("username");
+			const [before, after] = t.split("$$$$");
+			username.textContent = this.author.name;
+			const [b1, a1] = before.split("||||") as [string, undefined | string];
+			const [b2, a2] = after.split("||||") as [string, undefined | string];
+			const b1s = document.createElement("span");
+			b1s.textContent = b1;
+			content.append(b1s);
+			const poll = document.createElement("span");
+			poll.classList.add("pollText", "username");
+			poll.onclick = () => {
+				this.channel.focus(this.message_reference?.message_id!, true);
+			};
+			this.channel.getmessage(this.message_reference?.message_id!).then((_) => {
+				if (!_) return;
+				poll.textContent = _!.poll!.question!.text;
+			});
+
+			if (a1) {
+				content.append(poll);
+				const a1s = document.createElement("span");
+				a1s.textContent = a1;
+				content.append(a1s);
+			}
+			content.append(username);
+			const b2s = document.createElement("span");
+			b2s.textContent = b2;
+			content.append(b2s);
+			if (a2) {
+				content.append(poll);
+				const a2s = document.createElement("span");
+				a2s.textContent = a2;
+				content.append(a2s);
+			}
+			build.append(content);
+
+			const resBody = document.createElement("div");
+			resBody.classList.add("embed", "flexltr", "pollresembed");
+			const res = document.createElement("div");
+			res.classList.add("flexttb");
+			const m = new Map((this.embeds[0].json.fields ?? []).map((f) => [f.name, f.value] as const));
+			if (m.has("victor_answer_text")) {
+				const ans = document.createElement("span");
+				ans.textContent = m.get("victor_answer_text") + "";
+				const winning = document.createElement("span");
+				const per = Number(m.get("victor_answer_votes")) / Number(m.get("total_votes"));
+				winning.textContent = I18n.poll.winningAnswer(Math.round(per * 100) + "");
+				res.append(ans, winning);
+			} else {
+				res.textContent = I18n.poll.tie();
+			}
+			const view = document.createElement("button");
+			view.textContent = I18n.poll.view();
+			view.onclick = () => {
+				this.channel.focus(this.message_reference?.message_id!, true);
+			};
+			resBody.append(res, view);
+
+			build.append(resBody);
+
+			this.bindButtonEvent();
+			return div;
 		}
 		build.appendChild(text);
 		const stickerArea = document.createElement("div");
@@ -1145,6 +1251,118 @@ class Message extends SnowFlake {
 			stickerArea.append(sticker.getHTML());
 		}
 		div.append(stickerArea);
+
+		if (this.poll) {
+			const pollbody = document.createElement("div");
+			pollbody.classList.add("flexttb", "pollBody");
+			let voted = false;
+			const genPoll = () => {
+				if (!this.poll) return;
+				pollbody.textContent = "";
+				const d = new Date(this.poll.expiry);
+				const expired = +d < Date.now() || this.poll.results?.is_finalized || false;
+				const nupdate = () => {
+					fetch(`${this.info.api}/channels/${this.channel.id}/polls/${this.id}/answers/@me`, {
+						method: "PUT",
+						headers: this.headers,
+						body: JSON.stringify({
+							answer_ids: [...r.values()]
+								.filter((_) => _.me_voted)
+								.map(({id}) => id)
+								.filter((_) => _),
+						}),
+					});
+					voted = !!r.values.length;
+				};
+				if (!this.poll.results) this.poll.results = {is_finalized: false, answer_counts: []};
+				const r = new Map((this.poll.results?.answer_counts ?? []).map((_) => [_.id, _] as const));
+				const question = document.createElement("h3");
+				question.textContent = this.poll.question.text;
+				pollbody.append(question);
+				let ccount = [...r.values()].reduce((e, l) => e + +l.me_voted, 0);
+				if (this.poll.allow_multiselect) voted = !!ccount;
+				for (const a of this.poll.answers) {
+					const aarea = document.createElement("div");
+					aarea.classList.add("flexltr", "answerArea");
+					const span = document.createElement("span");
+					span.textContent = a.poll_media.text;
+					const check = document.createElement("input");
+					check.type = "checkbox";
+					check.disabled = expired;
+					check.checked = !!r.get(a.answer_id ?? -1)?.me_voted;
+
+					aarea.append(span, check);
+					if (!expired)
+						check.onclick = (e) => {
+							e.stopImmediatePropagation();
+							if (ccount && check.checked && !this.poll?.allow_multiselect) {
+								check.checked = false;
+								return;
+							} else ccount += check.checked ? 1 : -1;
+							if (this.poll?.allow_multiselect && ccount) voted = true;
+							let g = r.get(a.answer_id ?? -1);
+							if (!g) {
+								g = {count: 0, id: a.answer_id ?? -1, me_voted: false};
+								this.poll?.results?.answer_counts.push(g);
+								r.set(a.answer_id ?? -1, g);
+							}
+							g.me_voted = check.checked;
+							if (this.poll?.allow_multiselect) nupdate();
+						};
+					if (voted || expired) {
+						const total = [...r.values()].reduce((e, l) => e + l.count, 0);
+						const count = document.createElement("span");
+						count.classList.add("countpollspan");
+						let c = r.get(a.answer_id ?? -1)?.count ?? 0;
+						if (isNaN(c)) c = 0;
+						let per = Math.round((c / total) * 100);
+						if (isNaN(per)) per = 0;
+						count.textContent = I18n.poll.count("" + c, per + "");
+						aarea.append(count);
+						if (per)
+							aarea.style.background = `linear-gradient(to right, var(--green) ${per}%, var(--bg) ${100 - per}%)`;
+					}
+					aarea.onclick = () => check.click();
+					pollbody.append(aarea);
+				}
+
+				if (!this.poll.allow_multiselect) {
+					const submit = document.createElement("button");
+					submit.textContent = I18n.submit();
+					pollbody.append(submit);
+					if (expired) {
+						submit.disabled = true;
+					} else {
+						submit.onclick = () => {
+							nupdate();
+						};
+					}
+				}
+
+				if (expired) {
+				} else {
+					const expiresAt = document.createElement("span");
+					const updatePollTime = async () => {
+						if (document.contains(expiresAt))
+							expiresAt.textContent = I18n.poll.expires(MarkDown.relTime(d, updatePollTime));
+					};
+					expiresAt.textContent = I18n.poll.expires(MarkDown.relTime(d));
+					queueMicrotask(() => MarkDown.relTime(d, updatePollTime));
+					pollbody.append(expiresAt);
+				}
+			};
+			genPoll();
+			this.localuser.subToPollUpdate(this.id, () => {
+				if (document.contains(div)) {
+					genPoll();
+				} else {
+					this.localuser.subToPollUpdate(this.id, null);
+				}
+			});
+
+			div.append(pollbody);
+		}
+
 		if (!dupe) {
 			if (this.components && this.components.components.length) {
 				const cdiv = this.components.getHTML();
@@ -1304,7 +1522,7 @@ class Message extends SnowFlake {
 						});
 					};
 				}
-				if (this.author === this.localuser.user) {
+				if (this.author === this.localuser.user && this.type !== 46) {
 					const container = document.createElement("button");
 					const edit = document.createElement("span");
 					edit.classList.add("svg-edit", "svgicon");
@@ -1346,6 +1564,22 @@ class Message extends SnowFlake {
 		const options = diaolog.options.addOptions("", {ltr: true});
 		options.addButtonInput("", I18n.yes(), () => {
 			this.delete();
+			diaolog.hide();
+		});
+		options.addButtonInput("", I18n.no(), () => {
+			diaolog.hide();
+		});
+		diaolog.show();
+	}
+	confirmDeletePoll() {
+		const diaolog = new Dialog("");
+		diaolog.options.addTitle(I18n.deleteConfirmPoll());
+		const options = diaolog.options.addOptions("", {ltr: true});
+		options.addButtonInput("", I18n.yes(), () => {
+			fetch(`${this.info.api}/channels/${this.channel.id}/polls/${this.id}/expire`, {
+				headers: this.headers,
+				method: "POST",
+			});
 			diaolog.hide();
 		});
 		options.addButtonInput("", I18n.no(), () => {

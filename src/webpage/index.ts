@@ -18,12 +18,24 @@ import "./oauth2/auth.js";
 import "./audio/page.js";
 import "./404.js";
 import {Channel} from "./channel.js";
+import type * as C from "./typeChecker/chekerIndex.js";
 
 if (window.location.pathname === "/app") {
 	window.location.pathname = "/channels/@me";
 }
 export interface CustomHTMLDivElement extends HTMLDivElement {
 	markdown: MarkDown;
+}
+declare global {
+	interface Window {
+		checker?: typeof C.Check;
+	}
+}
+if (localStorage.getItem("checkTypes")) {
+	const i = (await import(
+		"/typeChecker/chekerIndex.js" as "./typeChecker/chekerIndex.js"
+	)) as typeof C;
+	window.checker = i.Check;
 }
 if (window.location.pathname.startsWith("/channels")) {
 	let templateID = new URLSearchParams(window.location.search).get("templateID");
@@ -423,7 +435,18 @@ if (window.location.pathname.startsWith("/channels")) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 	};
-	(document.getElementById("upload") as HTMLElement).onclick = () => {
+	const umenu = new Contextmenu<void, void>("upload");
+	umenu.addButton(
+		I18n.makePoll(),
+		() => {
+			thisUser.makePoll();
+		},
+		{
+			//TODO re-enable this once polls is merged
+			visible: () => false, //!!thisUser.channelfocus?.hasPermission("SEND_POLLS"),
+		},
+	);
+	umenu.addButton(I18n.upload(), () => {
 		const input = document.createElement("input");
 		input.type = "file";
 		input.click();
@@ -441,7 +464,16 @@ if (window.location.pathname.startsWith("/channels")) {
 				}
 			}
 		};
-	};
+	});
+	umenu.bindContextmenu(
+		document.getElementById("upload")!,
+		undefined,
+		undefined,
+		undefined,
+		undefined,
+		"left",
+		"bottom",
+	);
 	const emojiTB = document.getElementById("emojiTB") as HTMLElement;
 	emojiTB.onmousedown = (e) => e.stopImmediatePropagation();
 	emojiTB.onclick = (e) => {

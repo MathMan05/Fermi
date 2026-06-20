@@ -968,7 +968,10 @@ class MarkDown {
 		return span;
 	}
 	static relTime(date: Date, nextUpdate?: () => void): string {
-		const time = Date.now() - +date;
+		const r = Date.now() - +date;
+		if (isNaN(r)) return "NaN";
+		const up = r < 0;
+		const time = Math.abs(r);
 
 		let seconds = Math.round(time / 1000);
 		const round = time % 1000;
@@ -983,25 +986,32 @@ class MarkDown {
 
 		const formatter = new Intl.RelativeTimeFormat(I18n.lang, {style: "short"});
 		if (years) {
-			if (nextUpdate)
-				setTimeout(
-					nextUpdate,
-					round + (seconds + (minutes + (hours + days * 24) * 60) * 60) * 1000,
-				);
-			return formatter.format(-years, "year");
+			if (nextUpdate) {
+				const ti = round + (seconds + (minutes + (hours + days * 24) * 60) * 60) * 1000;
+				setTimeout(nextUpdate, up ? 1000 * 60 * 60 * 24 * 365 - ti : ti);
+			}
+			return formatter.format(up ? years : -years, "year");
 		} else if (days) {
-			if (nextUpdate)
-				setTimeout(nextUpdate, round + (seconds + (minutes + hours * 60) * 60) * 1000);
-			return formatter.format(-days, "days");
+			if (nextUpdate) {
+				const ti = round + (seconds + (minutes + hours * 60) * 60) * 1000;
+				setTimeout(nextUpdate, up ? 1000 * 60 * 60 * 24 - ti : ti);
+			}
+			return formatter.format(up ? days : -days, "days");
 		} else if (hours) {
-			if (nextUpdate) setTimeout(nextUpdate, round + (seconds + minutes * 60) * 1000);
-			return formatter.format(-hours, "hours");
+			if (nextUpdate) {
+				const ti = round + (seconds + minutes * 60) * 1000;
+				setTimeout(nextUpdate, up ? 1000 * 60 * 60 - ti : ti);
+			}
+			return formatter.format(up ? hours : -hours, "hours");
 		} else if (minutes) {
-			if (nextUpdate) setTimeout(nextUpdate, round + seconds * 1000);
-			return formatter.format(-minutes, "minutes");
+			if (nextUpdate) {
+				const ti = round + seconds * 1000;
+				setTimeout(nextUpdate, up ? 1000 * 60 - ti : ti);
+			}
+			return formatter.format(up ? minutes : -minutes, "minutes");
 		} else {
-			if (nextUpdate) setTimeout(nextUpdate, round);
-			return formatter.format(-seconds, "seconds");
+			if (nextUpdate) setTimeout(nextUpdate, up ? 1000 - round : round);
+			return formatter.format(up ? seconds : -seconds, "seconds");
 		}
 	}
 	static unspoil(e: any): void {

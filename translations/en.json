@@ -213,6 +213,7 @@
 	"createAccount": "Create Account",
 	"delete": "Delete",
 	"deleteConfirm": "Are you sure you want to delete this?",
+	"deleteConfirmPoll":"Are you sure you want to end the poll early?",
 	"devSettings": {
 		"badUser": "Enable logging of bad user objects that send too much information:",
 		"cache": "Enable Service Worker Caching map files:",
@@ -223,7 +224,7 @@
 		"gatewayComp": "Disable Gateway compression:",
 		"reportSystem":"Enable experimental reporting system:",
 		"logGateway": "Log received gateway events (log level info):",
-		"name": "Developer Settings",
+		"name": "Developer settings",
 		"traces": "Expose traces:"
 	},
 	"deviceManage": {
@@ -555,7 +556,7 @@
 		"themesAndSounds": "Themes & Sounds",
 		"tokenDisplay": "Token: $1",
 		"trace": "Traces",
-		"trusted": "Trusted Domains",
+		"trusted": "Trusted domains",
 		"trustedDesc": "When you click on links sending you to these domain, you will ***not*** be prompted for permission to open like other links, only give this to domains you trust, such as 'https://fermi.chat'",
 		"updateSettings": "Update settings",
 		"updatesYay": "Updates found!",
@@ -623,6 +624,7 @@
 		"andMore": "$1, and more!",
 		"attached": "sent an attachment",
 		"delete": "Delete message",
+		"endPoll":"End poll",
 		"report":"Report message",
 		"deleted": "Deleted message",
 		"edit": "Edit message",
@@ -637,7 +639,8 @@
 		"reactions": "View reactions",
 		"reactionsTitle": "Reactions",
 		"retry": "Resend errored message",
-		"viewrest": "View rest"
+		"viewrest": "View rest",
+		"pollRes":"$1's poll $2 has closed."
 	},
 	"report":{
 		"back":"Back",
@@ -822,6 +825,29 @@
 		"roleEmoji": "Role emoji:",
 		"roleFileIcon": "Role icon:",
 		"roles": "Roles"
+	},
+	"upload":"Upload files",
+	"makePoll":"Make poll",
+	"poll":{
+		"question":"Question:",
+		"answers":"Answers:",
+		"newAnswer":"New Answer",
+		"duration":"Duration:",
+		"durCount":{
+			"1":"1 hour",
+			"4":"4 hours",
+			"8":"8 hours",
+			"24":"24 hours",
+			"72":"3 days",
+			"168":"7 days",
+			"336":"14 days"
+		},
+		"mult":"Allow multiple answers:",
+		"expires":"Expires: $1",
+		"tie":"It was a tie!",
+		"winningAnswer":"Winning answer: $1%",
+		"view":"View poll",
+		"count":"$1 {{PLURAL:$1|vote|votes}} $2%"
 	},
 	"search": {
 		"back": "Back",

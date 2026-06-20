@@ -19,6 +19,7 @@ import {
 	readyjson,
 	startTypingjson,
 	wsjson,
+	pollUpdateJson,
 } from "./jsontypes.js";
 import {Member} from "./member.js";
 import {Dialog, Form, FormError, Options, Settings} from "./settings.js";
@@ -721,6 +722,11 @@ class Localuser {
 	}
 	conectionChange = () => {};
 	async handleEvent(temp: wsjson) {
+		try {
+			window.checker?.checkEvent(temp);
+		} catch (e) {
+			console.error(e);
+		}
 		if (temp.d._trace) this.handleTrace(temp.d._trace);
 		if (getDeveloperSettings().gatewayLogging) console.debug(temp);
 		if (temp.s) this.lastSequence = temp.s;
@@ -776,6 +782,14 @@ class Localuser {
 				}
 				case "USER_CONNECTIONS_UPDATE": {
 					this.conectionChange();
+					break;
+				}
+				case "MESSAGE_POLL_VOTE_ADD":
+				case "MESSAGE_POLL_VOTE_REMOVE": {
+					const m = this.messages.get(temp.d.message_id);
+					m?.pollUpdate(temp);
+					const f = this.pollUpdateSubMap.get(temp.d.message_id);
+					f?.(temp);
 					break;
 				}
 				case "MESSAGE_DELETE": {
@@ -4532,7 +4546,77 @@ class Localuser {
 		const searchBox = document.getElementById("searchBox") as HTMLDivElement;
 		searchBox.style.setProperty("--hint-text", JSON.stringify(I18n.search.search()));
 	}
+	makePoll() {
+		const d = new Dialog(I18n.makePoll());
+		const opt = d.options;
+		const q = opt.addTextInput(I18n.poll.question(), () => {});
+		opt.addText(I18n.poll.answers());
+		const ansField = document.createElement("div");
+		ansField.classList.add("flexttb", "pollAnsM");
+		const answers = ["", ""] as string[];
+		const genAnswerField = () => {
+			ansField.textContent = "";
+			for (let i = 0; i < answers.length; i++) {
+				const si = i;
+				const div = document.createElement("div");
+				div.classList.add("flexltr");
+				const input = document.createElement("input");
+				input.type = "text";
+				input.value = answers[i];
+				input.onchange = () => {
+					answers[si] = input.value;
+				};
+
+				const del = document.createElement("span");
+				del.classList.add("svg-delete", "svgicon");
+				div.append(input, del);
+				del.onclick = () => {
+					answers.splice(si, 1);
+					genAnswerField();
+				};
+				ansField.append(div);
+			}
+		};
+		genAnswerField();
+		opt.addHTMLArea(ansField);
+		opt.addButtonInput("", I18n.poll.newAnswer(), () => {
+			answers.push("");
+			genAnswerField();
+		});
+		const hours = [1, 4, 8, 24, 72, 168, 336] as const;
+		const h = opt.addSelect(
+			I18n.poll.duration(),
+			() => {},
+			//@ts-ignore-error this is fine :P
+			hours.map((_) => I18n.poll.durCount[_ + ""]()),
+			{
+				defaultIndex: 3,
+			},
+		);
+		const c = opt.addCheckboxInput(I18n.poll.mult(), () => {});
+		opt.addButtonInput("", I18n.submit(), () => {
+			const chan = this.channelfocus;
+			if (!chan) return;
+			chan.sendMessage("", {
+				poll: {
+					question: {
+						text: q.value,
+					},
+					answers: answers.map((_) => ({poll_media: {text: _}})),
+					duration: hours[h.index] as number,
+					allow_multiselect: c.value,
+				},
+			});
+			d.hide();
+		});
+		d.show();
+	}
 	curSearch?: Symbol;
+	pollUpdateSubMap = new Map<string, (u: pollUpdateJson) => void>();
+	subToPollUpdate(m: string, func: ((u: pollUpdateJson) => void) | null) {
+		if (func) this.pollUpdateSubMap.set(m, func);
+		else this.pollUpdateSubMap.delete(m);
+	}
 	mSearch(query: string) {
 		const searchy = Symbol("search");
 		this.curSearch = searchy;

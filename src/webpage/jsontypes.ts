@@ -448,6 +448,37 @@ type emojijson = {
 	animated?: boolean;
 	emoji?: string;
 };
+interface pollMedia {
+	text: string;
+	emoji?: emojijson;
+}
+export interface creatPollJSON {
+	question: pollMedia;
+	answers: {
+		id?: number;
+		poll_media: pollMedia;
+	}[];
+	duration: number;
+	allow_multiselect?: boolean;
+}
+export interface polljson {
+	question: pollMedia;
+	answers: {
+		answer_id?: number;
+		poll_media: pollMedia;
+	}[];
+	expiry: string;
+	allow_multiselect?: boolean;
+	layout_type: 1;
+	results?: {
+		is_finalized: boolean;
+		answer_counts: {
+			id: number;
+			count: number;
+			me_voted: boolean;
+		}[];
+	};
+}
 type emojipjson = emojijson & {
 	available: boolean;
 	guild_id: string;
@@ -835,6 +866,7 @@ type messagejson = {
 	sticker_items: stickerJson[];
 	message_reference?: string;
 	referenced_message?: messagejson;
+	poll?: polljson;
 };
 
 export interface threadMetadata {
@@ -1039,6 +1071,7 @@ type wsjson =
 	  }
 	| messageCreateJson
 	| readyjson
+	| pollUpdateJson
 	| {
 			op: 11;
 			s: undefined;

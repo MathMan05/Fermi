@@ -9,6 +9,7 @@ import {InfiniteScroller} from "./infiniteScroller.js";
 import {SnowFlake} from "./snowflake.js";
 import {
 	channeljson,
+	creatPollJSON,
 	embedjson,
 	filejson,
 	memberjson,
@@ -3619,12 +3620,14 @@ class Channel extends SnowFlake {
 			embeds = [],
 			sticker_ids = [],
 			nonce = undefined,
+			poll = undefined,
 		}: {
-			attachments: Blob[];
-			embeds: embedjson[];
-			replyingto: Message | null;
-			sticker_ids: string[];
+			attachments?: Blob[];
+			embeds?: embedjson[];
+			replyingto?: Message | null;
+			sticker_ids?: string[];
 			nonce?: string;
+			poll?: creatPollJSON;
 		},
 		onRes = (_e: "Ok" | "NotOk") => {},
 	) {
@@ -3634,7 +3637,8 @@ class Channel extends SnowFlake {
 			content.trim() === "" &&
 			attachments.length === 0 &&
 			embeds.length == 0 &&
-			sticker_ids.length === 0
+			sticker_ids.length === 0 &&
+			!poll
 		) {
 			return;
 		}
@@ -3717,6 +3721,7 @@ class Channel extends SnowFlake {
 				message_reference: undefined,
 				sticker_ids,
 				embeds,
+				poll,
 			};
 			if (replyjson) {
 				body.message_reference = replyjson;
@@ -3758,6 +3763,7 @@ class Channel extends SnowFlake {
 				message_reference: undefined,
 				sticker_ids,
 				embeds,
+				poll,
 			};
 			if (replyjson) {
 				body.message_reference = replyjson;
@@ -3974,4 +3980,3 @@ class Channel extends SnowFlake {
 }
 Channel.setupcontextmenu();
 export {Channel};
-

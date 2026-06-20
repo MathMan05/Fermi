@@ -1096,8 +1096,8 @@ a=rtcp-mux\r`;
 				const settings = e.track.getConstraints();
 
 				console.log("gotVideo?", media, settings);
-				settings.height = 300;
-				settings.width = 300;
+				//settings.height = 300;
+				//settings.width = 300;
 				e.track.applyConstraints(settings);
 				//e.track
 
