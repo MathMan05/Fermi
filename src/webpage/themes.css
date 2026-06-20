@@ -108,14 +108,13 @@
 
 	--button-bg: #babdd2;
 	--button-hover: #9c9fbf;
-	--spoiler-bg: #34333a;
+	--spoiler-bg: #c7c6e5;
 	--link: #283c8b;
 
 	--black: #434392;
 	--red: #ca304d;
 	--secondary-text-soft: #211f2e;
 	--blank-bg: #494985;
-	--spoiler-text: #e4e6ed;
 }
 
 .Dark-Accent-theme {
@@ -174,8 +173,8 @@ body {
 	--message-jump-bg: color-mix(in srgb, var(--accent-color) 20%, transparent);
 	--code-bg: var(--secondary-bg);
 	--code-text: var(--secondary-text);
-	--spoiler-text: var(--primary-text);
 	--spoiler-hover: color-mix(in srgb, var(--spoiler-bg), var(--primary-text-soft) 10%);
+	--spoiler-unspoiled: color-mix(in srgb, var(--primary-text-soft) 15%, var(--primary-bg));
 	--quote-line: color-mix(in srgb, var(--primary-text-soft), transparent);
 	--reply-line: color-mix(in srgb, var(--primary-text-soft) 20%, transparent);
 	--reply-text: var(--primary-text-soft);
