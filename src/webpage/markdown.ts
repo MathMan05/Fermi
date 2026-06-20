@@ -1005,8 +1005,8 @@ class MarkDown {
 		}
 	}
 	static unspoil(e: any): void {
-		e.target.classList.remove("spoiler");
-		e.target.classList.add("unspoiled");
+		e.currentTarget.classList.remove("spoiler");
+		e.currentTarget.classList.add("unspoiled");
 	}
 	onUpdate: (upto: string, pre: boolean) => unknown = () => {};
 	box = new WeakRef(document.createElement("div"));

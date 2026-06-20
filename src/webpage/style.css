@@ -2857,19 +2857,28 @@ input[type="search"]:read-only {
 	background: var(--spoiler-bg);
 	color: var(--spoiler-bg);
 	cursor: pointer;
-	a {
+	samp, a {
+		background: transparent;
+		color: inherit;
+	}
+	pre, .quote {
+		background: var(--spoiler-bg);
 		color: var(--spoiler-bg);
 	}
 }
 .spoiler:hover {
 	background: var(--spoiler-hover);
 	color: var(--spoiler-hover);
+	pre, .quote {
+		background: var(--spoiler-hover);
+		color: var(--spoiler-hover);
+	}
 }
 .unspoiled {
-	color: var(--spoiler-text);
-}
-a.unspoiled {
-	color: var(--link) !important;
+	background: var(--spoiler-unspoiled);
+	.quote {
+		background: var(--spoiler-unspoiled);
+	}
 }
 .quote {
 	display: inline-block;
