@@ -2827,11 +2827,7 @@ class Channel extends SnowFlake {
 						build += ", ";
 					}
 					i++;
-					if (thing.nick) {
-						build += thing.nick;
-					} else {
-						build += thing.user.username;
-					}
+					build += thing.name;
 					showing = true;
 				}
 			} else {
