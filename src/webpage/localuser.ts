@@ -4059,6 +4059,11 @@ class Localuser {
 			}[];
 			gifs: [fullgif];
 		};
+
+		await fetch(
+			this.info.api + "/gifs/trending-gifs?" + new URLSearchParams([["locale", I18n.lang]]),
+			{headers: this.headers},
+		);
 		const gifbox = document.createElement("div");
 		gifbox.classList.add("gifbox");
 		const search = document.createElement("input");

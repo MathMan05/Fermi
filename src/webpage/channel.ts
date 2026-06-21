@@ -2783,15 +2783,18 @@ class Channel extends SnowFlake {
 		if (getMessages) await this.buildmessages(aroundMessage);
 		//loading.classList.remove("loading");
 	}
-	typingmap: Map<Member, number> = new Map();
+	typingmap: Map<Member | User, number> = new Map();
 	async typingStart(typing: startTypingjson): Promise<void> {
-		const memb = await Member.new(typing.d.member!, this.guild);
+		const memb = typing.d.member
+			? await Member.new(typing.d.member, this.guild)
+			: await this.localuser.getUser(typing.d.user_id);
 		if (!memb) return;
 		this.typingmap.set(memb, Date.now());
-		memb.user.statusChange();
+		const user = memb instanceof User ? memb : memb.user;
+		user.statusChange();
 		setTimeout(() => {
 			this.rendertyping();
-			memb.user.statusChange();
+			user.statusChange();
 		}, 10000);
 		if (memb.id === this.localuser.user.id) {
 			console.log("you is typing");

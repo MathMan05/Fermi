@@ -404,7 +404,7 @@ class Member extends SnowFlake {
 	get info() {
 		return this.owner.info;
 	}
-	static async new(memberjson: memberjson, owner: Guild): Promise<Member | undefined> {
+	static async new(memberjson: memberjson, owner: Guild): Promise<Member> {
 		let user: User;
 		if (owner.localuser.userMap.has(memberjson.id)) {
 			if (memberjson.user) {
@@ -418,18 +418,19 @@ class Member extends SnowFlake {
 		}
 		if (user.members.has(owner)) {
 			let memb = user.members.get(owner);
-			if (memb === undefined) {
+			if (memb instanceof Promise) {
+				const member = await memb; //I should do something else, though for now this is "good enough";
+				if (member) {
+					member.update(memberjson);
+					return member;
+				}
+			}
+			if (memb === undefined || memb instanceof Promise) {
 				memb = new Member(memberjson, owner);
 				user.members.set(owner, memb);
 				owner.members.add(memb);
 				user.localuser.memberListUpdate();
 				return memb;
-			} else if (memb instanceof Promise) {
-				const member = await memb; //I should do something else, though for now this is "good enough";
-				if (member) {
-					member.update(memberjson);
-				}
-				return member;
 			} else {
 				if (memberjson.presence) {
 					memb.getPresence(memberjson.presence);
