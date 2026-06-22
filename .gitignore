@@ -140,3 +140,6 @@ src/webpage/translations/langs.js
 
 build.js
 dependency-graph.svg
+
+# IntelliJ IDE project files
+.idea/
