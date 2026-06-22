@@ -223,6 +223,7 @@
 	"createAccount": "创建账号",
 	"delete": "删除",
 	"deleteConfirm": "您确定要删除此内容吗？",
+	"deleteConfirmPoll": "您确定要提前结束投票吗？",
 	"devSettings": {
 		"badUser": "启用对发送过多信息的恶意用户对象的日志记录：",
 		"cache": "启用 Service Worker 缓存映射文件",
@@ -633,6 +634,7 @@
 		"andMore": "$1，还有更多！",
 		"attached": "已发送附件",
 		"delete": "删除消息",
+		"endPoll": "结束投票",
 		"report": "举报消息",
 		"deleted": "已删除消息",
 		"edit": "编辑消息",
@@ -647,7 +649,8 @@
 		"reactions": "查看反应",
 		"reactionsTitle": "回应",
 		"retry": "重新发送错误消息",
-		"viewrest": "查看剩余内容"
+		"viewrest": "查看剩余内容",
+		"pollRes": "$1的投票$2已结束。"
 	},
 	"report": {
 		"back": "返回",
@@ -832,6 +835,29 @@
 		"roleEmoji": "角色表情符号：",
 		"roleFileIcon": "角色图标：",
 		"roles": "角色"
+	},
+	"upload": "上传文件",
+	"makePoll": "发起投票",
+	"poll": {
+		"question": "问题：",
+		"answers": "回答：",
+		"newAnswer": "新回答",
+		"duration": "期限：",
+		"durCount": {
+			"1": "1小时",
+			"4": "4小时",
+			"8": "8小时",
+			"24": "24小时",
+			"72": "3天",
+			"168": "7天",
+			"336": "14天"
+		},
+		"mult": "允许多选：",
+		"expires": "终止于：$1",
+		"tie": "平局！",
+		"winningAnswer": "胜出的回答：$1%",
+		"view": "查看投票",
+		"count": "$1票{{PLURAL:$1|投给}}$2%"
 	},
 	"search": {
 		"back": "上一页",
