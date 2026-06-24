@@ -1557,7 +1557,7 @@ class Options implements OptionsElement<void> {
 		onSubmit: (opt: Options) => void,
 		{ltr = false, noSubmit = false, intText = ""} = {},
 	) {
-		const button = new SubButtonInput(textContent, onSubmit, this, {ltr, noSubmit});
+		const button = new SubButtonInput(textContent, onSubmit, this, {ltr, noSubmit, intText});
 		this.options.push(button);
 		this.generate(button);
 		return button;
@@ -2018,7 +2018,7 @@ class Form implements OptionsElement<object> {
 		onSubmit: (opt: Options) => void,
 		{ltr = false, noSubmit = false, intText = ""} = {},
 	) {
-		return this.options.addSubButtonInput(textContent, onSubmit, {ltr, noSubmit});
+		return this.options.addSubButtonInput(textContent, onSubmit, {ltr, noSubmit, intText});
 	}
 	addHTMLArea(html: (() => HTMLElement) | HTMLElement, onSubmit = () => {}) {
 		return this.options.addHTMLArea(html, onSubmit);
