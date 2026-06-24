@@ -755,6 +755,23 @@ select {
 	cursor: pointer;
 	transition: background 0.1s ease-in-out;
 }
+.subButton {
+	min-width: 350px;
+	padding: 10px;
+	position: relative;
+	&::after {
+		content: "";
+		mask: url(./icons/intoMenu.svg);
+		mask-size: contain !important;
+		width: 24px;
+		height: 24px;
+		background: var(--primary-text-soft);
+		display: block;
+		position: absolute;
+		right: 4px;
+		top: 8px;
+	}
+}
 input::file-selector-button {
 	margin-right: 6px;
 }
@@ -2896,11 +2913,13 @@ input[type="search"]:read-only {
 	background: var(--spoiler-bg);
 	color: var(--spoiler-bg);
 	cursor: pointer;
-	samp, a {
+	samp,
+	a {
 		background: transparent;
 		color: inherit;
 	}
-	pre, .quote {
+	pre,
+	.quote {
 		background: var(--spoiler-bg);
 		color: var(--spoiler-bg);
 	}
@@ -2908,7 +2927,8 @@ input[type="search"]:read-only {
 .spoiler:hover {
 	background: var(--spoiler-hover);
 	color: var(--spoiler-hover);
-	pre, .quote {
+	pre,
+	.quote {
 		background: var(--spoiler-hover);
 		color: var(--spoiler-hover);
 	}

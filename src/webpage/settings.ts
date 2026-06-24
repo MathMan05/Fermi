@@ -354,6 +354,42 @@ class CheckboxInput implements OptionsElement<boolean> {
 	}
 }
 
+class SubButtonInput implements OptionsElement<void> {
+	readonly owner: Options;
+	readonly onClick: (opt: Options) => void;
+	textContent: string;
+	value!: void;
+	opts?: {noSubmit?: boolean; ltr?: boolean};
+
+	constructor(
+		textContent: string,
+		onClick: (opt: Options) => void,
+		owner: Options,
+		{} = {},
+		opts?: SubButtonInput["opts"],
+	) {
+		this.owner = owner;
+		this.onClick = onClick;
+		this.textContent = textContent;
+		this.opts = opts;
+	}
+	buttonHtml?: HTMLButtonElement;
+	generateHTML(): HTMLDivElement {
+		const div = document.createElement("div");
+		const button = document.createElement("button");
+		button.classList.add("subButton");
+		button.textContent = this.textContent;
+		button.onclick = () => {
+			this.onClick(this.owner.addSubOptions(this.textContent, this.opts));
+		};
+		this.buttonHtml = button;
+		div.append(button);
+		return div;
+	}
+	watchForChange() {}
+	submit() {}
+}
+
 class ButtonInput implements OptionsElement<void> {
 	readonly label: string;
 	readonly owner: Options;
@@ -1512,6 +1548,16 @@ class Options implements OptionsElement<void> {
 	}
 	addButtonInput(label: string, textContent: string, onSubmit: () => void) {
 		const button = new ButtonInput(label, textContent, onSubmit, this);
+		this.options.push(button);
+		this.generate(button);
+		return button;
+	}
+	addSubButtonInput(
+		textContent: string,
+		onSubmit: (opt: Options) => void,
+		{ltr = false, noSubmit = false} = {},
+	) {
+		const button = new SubButtonInput(textContent, onSubmit, this, {ltr, noSubmit});
 		this.options.push(button);
 		this.generate(button);
 		return button;
