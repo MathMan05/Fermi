@@ -383,6 +383,7 @@ export class Favorites {
 		await this.save(saveImportance.low);
 	}
 	async addReactEmoji(nameOrID: string) {
+		if (nameOrID === "undefined" || nameOrID === undefined) return;
 		const obj = (this.emojiReactionFrecency[nameOrID] ??= {
 			totalUses: 0,
 			recentUses: [],
