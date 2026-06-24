@@ -215,6 +215,7 @@
 	"createAccount": "Account aanmaken",
 	"delete": "Verwijderen",
 	"deleteConfirm": "Weet u zeker dat u dit wilt verwijderen?",
+	"deleteConfirmPoll": "Weet u zeker dat u de peiling vervroegd wilt sluiten?",
 	"devSettings": {
 		"badUser": "Logging voor slechte gebruikersobjecten inschakelen die te veel gegevens verzenden:",
 		"cache": "Cachefunctie voor kaartbestanden van de Service Worker inschakelen:",
@@ -625,6 +626,7 @@
 		"andMore": "$1 en meer!",
 		"attached": "bijlage verzonden",
 		"delete": "Bericht verwijderen",
+		"endPoll": "Peiling sluiten",
 		"report": "Bericht melden",
 		"deleted": "Verwijderd bericht",
 		"edit": "Bericht bewerken",
@@ -639,7 +641,8 @@
 		"reactions": "Reacties bekijken",
 		"reactionsTitle": "Reacties",
 		"retry": "Bericht met fout opnieuw verzenden",
-		"viewrest": "De rest bekijken"
+		"viewrest": "De rest bekijken",
+		"pollRes": "De peiling van $1, $2, is gesloten."
 	},
 	"report": {
 		"back": "Terug",
@@ -824,6 +827,29 @@
 		"roleEmoji": "Rol-emoji:",
 		"roleFileIcon": "Rolpictogram:",
 		"roles": "Rollen"
+	},
+	"upload": "Bestanden uploaden",
+	"makePoll": "Peiling maken",
+	"poll": {
+		"question": "Vraag:",
+		"answers": "Antwoorden:",
+		"newAnswer": "Nieuw antwoord",
+		"duration": "Duur:",
+		"durCount": {
+			"1": "1 uur",
+			"4": "4 uur",
+			"8": "8 uur",
+			"24": "24 uur",
+			"72": "3 dagen",
+			"168": "7 dagen",
+			"336": "14 dagen"
+		},
+		"mult": "Meerdere antwoorden toestaan:",
+		"expires": "Vervalt: $1",
+		"tie": "Het was gelijkspel!",
+		"winningAnswer": "Winnend antwoord: $1%",
+		"view": "Peiling bekijken",
+		"count": "$1 {{PLURAL:$1|stem|stemmen}} $2%"
 	},
 	"search": {
 		"back": "Terug",
