@@ -2,7 +2,7 @@ import {Guild} from "./guild.js";
 import {Channel} from "./channel.js";
 import {Direct, Group} from "./direct.js";
 import {User} from "./user.js";
-import {createImg, getapiurls, getBulkUsers, installPGet, SW} from "./utils/utils.js";
+import {createImg, getapiurls, getBulkUsers, getInstances, installPGet, SW} from "./utils/utils.js";
 import {getBulkInfo, setTheme, Specialuser} from "./utils/utils.js";
 import {
 	channeljson,
@@ -49,6 +49,7 @@ import {getLocalSettings, ServiceWorkerModeValues} from "./utils/storage/localSe
 import {PromiseLock} from "./utils/promiseLock.js";
 import {CDNParams} from "./utils/cdnParams.js";
 import {SnowFlake} from "./snowflake.js";
+import {trimTrailingSlashes} from "./utils/netUtils.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
@@ -1450,6 +1451,18 @@ class Localuser {
 		});
 		elms.set("online", online);
 		this.generateListHTML(elms, channel);
+	}
+	instanceString(): string {
+		const insts = getInstances();
+		if (insts) {
+			for (const inst of insts) {
+				if (trimTrailingSlashes(inst.url ?? "") === trimTrailingSlashes(this.info.wellknown)) {
+					return inst.name;
+				}
+			}
+		}
+		console.log("failed with", insts, this.info.wellknown);
+		return this.info.wellknown;
 	}
 	roleListMap = new WeakMap<
 		HTMLDivElement,
@@ -3485,7 +3498,7 @@ class Localuser {
 							} else if (format.index === 2) {
 								if (urlOptionsJSON.type === "Fermi") {
 									const options = new URLSearchParams();
-									options.set("instance", this.info.wellknown);
+									options.set("instance", this.instanceString());
 									pre.textContent = json.tokens
 										.map((token) => {
 											options.set("token", token);

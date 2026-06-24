@@ -64,7 +64,7 @@ export async function makeInviteMenu(inviteMenu: Options, guild: Guild, url: str
 						"/invite/" +
 						invite.code +
 						"?" +
-						new URLSearchParams([["instance", guild.info.wellknown]]),
+						new URLSearchParams([["instance", guild.localuser.instanceString()]]),
 					undefined,
 				),
 			);
@@ -1282,7 +1282,7 @@ class Guild extends SnowFlake {
 								headers: this.headers,
 							},
 						);
-						const search = new URLSearchParams([["instance", this.info.wellknown]]);
+						const search = new URLSearchParams([["instance", this.localuser.instanceString()]]);
 						form.addMDText(
 							new MarkDown(
 								I18n.guild.templateURL(
@@ -1431,7 +1431,7 @@ class Guild extends SnowFlake {
 				.then((_) => _.json())
 				.then((json) => {
 					const params = new URLSearchParams("");
-					params.set("instance", this.info.wellknown);
+					params.set("instance", this.localuser.instanceString());
 					const encoded = params.toString();
 					text.textContent = `${location.origin}/invite/${json.code}?${encoded}`;
 				});

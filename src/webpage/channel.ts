@@ -371,7 +371,7 @@ class Channel extends SnowFlake {
 				.then((_) => _.json())
 				.then((json) => {
 					const params = new URLSearchParams("");
-					params.set("instance", this.info.wellknown);
+					params.set("instance", this.localuser.instanceString());
 					const encoded = params.toString();
 					text.textContent = `${location.origin}/invite/${json.code}?${encoded}`;
 				});
