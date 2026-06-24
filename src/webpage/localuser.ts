@@ -3442,7 +3442,7 @@ class Localuser {
 						const urlOption = tokens.addOptions("");
 						const urlOptionsJSON = {
 							url: window.location.origin,
-							type: "Jank",
+							type: "Fermi",
 						};
 						function makeURLMenu() {
 							urlOption
@@ -3456,13 +3456,13 @@ class Localuser {
 								.addSelect(
 									I18n.manageInstance.regType(),
 									() => {},
-									["Jank", I18n.manageInstance.genericType()],
+									["Fermi", I18n.manageInstance.genericType()],
 									{
-										defaultIndex: ["Jank", "generic"].indexOf(urlOptionsJSON.type),
+										defaultIndex: ["Fermi", "generic"].indexOf(urlOptionsJSON.type),
 									},
 								)
 								.watchForChange((i) => {
-									urlOptionsJSON.type = ["Jank", "generic"][i];
+									urlOptionsJSON.type = ["Fermi", "generic"][i];
 								});
 						}
 						makeURLMenu();
@@ -3483,7 +3483,7 @@ class Localuser {
 							} else if (format.index === 1) {
 								pre.textContent = json.tokens.join("\n");
 							} else if (format.index === 2) {
-								if (urlOptionsJSON.type === "Jank") {
+								if (urlOptionsJSON.type === "Fermi") {
 									const options = new URLSearchParams();
 									options.set("instance", this.info.wellknown);
 									pre.textContent = json.tokens
