@@ -3870,10 +3870,15 @@ class Localuser {
 			initText: json.privacy_policy_url,
 		});
 		form.addText(I18n.localuser.appID(appId));
-		form.addButtonInput("", I18n.localuser.showSecret(), () => {
-			const opt = form.addSubOptions(I18n.localuser.secret());
-			opt.addText(I18n.localuser.clientSecret(json.verify_key));
-		});
+		form.addSubButtonInput(
+			I18n.localuser.showSecret(),
+			(opt) => {
+				opt.addText(I18n.localuser.clientSecret(json.verify_key));
+			},
+			{
+				intText: I18n.localuser.secret(),
+			},
+		);
 		form.addTextInput(I18n.localuser.TOSURL(), "terms_of_service_url", {
 			initText: json.terms_of_service_url,
 		});
