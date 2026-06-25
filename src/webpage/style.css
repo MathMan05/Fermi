@@ -1579,6 +1579,7 @@ textarea {
 	padding: 0.05in;
 	border-radius: 0.04in;
 	white-space: preserve-breaks;
+	outline: none;
 }
 #gimmefile {
 	position: absolute;
