@@ -5,12 +5,14 @@
 			"Asteralee",
 			"Bananax47",
 			"Codeurluce",
+			"Crowwhailord",
 			"Derugon",
 			"EmDashUser002",
 			"Gomoko",
 			"Goombiis",
 			"Lenchanteur",
 			"Mahabarata",
+			"Majda GHARRABOU",
 			"McDutchie",
 			"Momo50WM",
 			"Od1n",
@@ -641,6 +643,7 @@
 		"andMore": "$1 et plus !",
 		"attached": "à envoyé une pièce jointe",
 		"delete": "Supprimer le message",
+		"endPoll": "Finir le sondage",
 		"report": "Signaler le message",
 		"deleted": "Message supprimé",
 		"edit": "Modifier le message",
@@ -837,6 +840,18 @@
 		"roleEmoji": "Emoji de rôle :",
 		"roleFileIcon": "Icône de rôle :",
 		"roles": "Rôles"
+	},
+	"poll": {
+		"question": "Question",
+		"newAnswer": "Nouvelle réponse",
+		"durCount": {
+			"1": "1 heure",
+			"24": "24 heures",
+			"168": "7 jours"
+		},
+		"mult": "Autoriser plusieurs réponses :",
+		"winningAnswer": "Réponse gagnante $1%",
+		"count": "$1 {{PLURAL:$1| vote|votes}} $2 %"
 	},
 	"search": {
 		"back": "Retour",

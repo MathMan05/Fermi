@@ -241,6 +241,9 @@
 		"usernameError": "उपयोगकर्ता नाम: $1"
 	},
 	"reply": "उत्तर दें",
+	"poll": {
+		"question": "प्रश्न:"
+	},
 	"settings": {
 		"clear": "खाली करें"
 	},

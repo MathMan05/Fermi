@@ -218,6 +218,7 @@
 	"createAccount": "계정 만들기",
 	"delete": "삭제",
 	"deleteConfirm": "이것을 삭제하시겠습니까?",
+	"deleteConfirmPoll": "정말로 이 설문 조사를 일찍 끝내겠습니까?",
 	"devSettings": {
 		"badUser": "과도한 정보를 전송하는 불량 사용자 객체에 대한 로깅을 활성화:",
 		"cache": "서비스 워커 캐싱 맵 파일 활성화:",
@@ -399,7 +400,9 @@
 		"addBot": "길드에 추가",
 		"alreadyHave": "계정이 이미 있습니까?",
 		"box3description": "버그 보고서, 코드 제공, 심지어 오타 지적까지, 어떤 형태의 도움이라도 언제나 감사히 받겠습니다.",
+		"box4description": "Fermi의 핵심 기능인 Harmony 백엔드 유지 관리에 참여해 주세요! 버그 보고, 기능 요청, 문서 작성 등 어떤 도움이라도 환영합니다!",
 		"box3title": "페르미에 기여하세요",
+		"box4title": "Harmony에 기여하세요",
 		"compatableInstances": "Harmony 호환 인스턴스:",
 		"createAccount": "계정 만들기",
 		"dobField": "출생일:",
@@ -628,6 +631,7 @@
 		"andMore": "$1, 그리고 더!",
 		"attached": "첨부를 보냈습니다",
 		"delete": "메시지 삭제",
+		"endPoll": "설문 조사 끝내기",
 		"report": "메시지 신고",
 		"deleted": "삭제된 메시지",
 		"edit": "메시지 편집",
@@ -642,7 +646,8 @@
 		"reactions": "반응 보기",
 		"reactionsTitle": "반응",
 		"retry": "오류가 발생한 메시지 재전송",
-		"viewrest": "나머지 보기"
+		"viewrest": "나머지 보기",
+		"pollRes": "$1님의 설문 조사 $2이(가) 종료되었습니다."
 	},
 	"report": {
 		"back": "뒤로",
@@ -828,7 +833,13 @@
 		"roleFileIcon": "역할 아이콘:",
 		"roles": "역할"
 	},
+	"upload": "파일 업로드",
+	"makePoll": "설문 조사 만들기",
 	"poll": {
+		"question": "질문:",
+		"answers": "답변:",
+		"newAnswer": "새로운 답변",
+		"duration": "기간:",
 		"durCount": {
 			"1": "1시간",
 			"4": "4시간",
@@ -837,7 +848,13 @@
 			"72": "3일",
 			"168": "7일",
 			"336": "14일"
-		}
+		},
+		"mult": "복수 답변을 허용:",
+		"expires": "만료일: $1",
+		"tie": "동점입니다!",
+		"winningAnswer": "최다 득표 답변: $1%",
+		"view": "설문 조사 보기",
+		"count": "$1{{PLURAL:$1|표}} $2%"
 	},
 	"search": {
 		"back": "뒤로",

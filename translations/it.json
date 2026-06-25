@@ -562,6 +562,7 @@
 		"andMore": "$1 e altro!",
 		"attached": "ha inviato un allegato",
 		"delete": "Cancella messaggio",
+		"endPoll": "Fine del sondaggio",
 		"report": "Segnala messaggio",
 		"deleted": "Messaggio cancellato",
 		"edit": "Modifica messaggio",
@@ -629,6 +630,26 @@
 		"displaySettings": "Impostazioni di visualizzazione",
 		"perms": "Autorizzazioni",
 		"roles": "Ruoli"
+	},
+	"upload": "Carica file",
+	"poll": {
+		"question": "Domanda:",
+		"answers": "Risposte:",
+		"newAnswer": "Nuova risposta",
+		"duration": "Durata:",
+		"durCount": {
+			"1": "1 ora",
+			"4": "4 ore",
+			"8": "8 ore",
+			"24": "24 ore",
+			"72": "3 giorni",
+			"168": "7 giorni",
+			"336": "14 giorni"
+		},
+		"mult": "Consenti risposte multiple:",
+		"expires": "Scade: $1",
+		"winningAnswer": "Risposta vincente: $1%",
+		"count": "$1 {{PLURAL:$1|voto|voti}} $2%"
 	},
 	"search": {
 		"back": "Indietro",
