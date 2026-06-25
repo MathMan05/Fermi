@@ -339,6 +339,22 @@
 		"perms": "Berechtegungen",
 		"roles": "Rollen"
 	},
+	"upload": "Fichieren eroplueden",
+	"poll": {
+		"question": "Fro:",
+		"answers": "Äntwerten:",
+		"newAnswer": "Nei Äntwert",
+		"duration": "Dauer:",
+		"durCount": {
+			"1": "1 Stonn",
+			"4": "4 Stonnen",
+			"8": "8 Stonnen",
+			"24": "24 Stonnen",
+			"72": "3 Deeg",
+			"168": "7 Deeg",
+			"336": "14 Deeg"
+		}
+	},
 	"search": {
 		"back": "Zeréck",
 		"new": "Nei",

@@ -468,6 +468,13 @@
 		"roleFileIcon": "Rol Simgesi:",
 		"roles": "Roller"
 	},
+	"poll": {
+		"question": "Soru:",
+		"durCount": {
+			"24": "24 saat"
+		},
+		"winningAnswer": "Kazanan cevap: %$1"
+	},
 	"searchGifs": "Tenor'da Arayın",
 	"settings": {
 		"clear": "Temizle",
