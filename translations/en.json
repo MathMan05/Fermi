@@ -109,7 +109,7 @@
 	"blankMessage": "Blank message",
 	"blog": {
 		"blog": "Blog",
-		"blogUpdates": "Blog updates:",
+		"blogUpdates": "Get blog updates when you open the app:",
 		"desc": "Read or subscribe to the blog for updates on Fermi!",
 		"fermi": "Fermi Blog",
 		"gotoPost": "Go to post",
