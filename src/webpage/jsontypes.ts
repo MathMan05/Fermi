@@ -863,7 +863,7 @@ type messagejson = {
 	pinned: boolean;
 	type: number;
 	webhook?: webhookInfo;
-	sticker_items: stickerJson[];
+	sticker_items?: stickerJson[];
 	message_reference?: string;
 	referenced_message?: messagejson;
 	poll?: polljson;
