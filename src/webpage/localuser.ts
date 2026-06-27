@@ -639,8 +639,8 @@ class Localuser {
 			(document.getElementById("loading") as HTMLElement).classList.remove("doneloading");
 			(document.getElementById("loading") as HTMLElement).classList.add("loading");
 			this.fetchingmembers.clear();
-			this.noncemap.clear();
-			this.noncebuild.clear();
+			this.memberNonceMap.clear();
+			this.memberNonceBuild.clear();
 			const loaddesc = document.getElementById("load-desc") as HTMLElement;
 			if (
 				(event.code > 1000 && event.code < 1016) ||
@@ -2340,7 +2340,7 @@ class Localuser {
 		return img;
 	}
 	private last = "-1";
-	generateFavicon() {
+	private generateFavicon() {
 		const make = () => {
 			const favicon = document.getElementById("favicon") as HTMLLinkElement;
 
@@ -5049,10 +5049,10 @@ class Localuser {
 		});
 		return await promise;
 	}
-	fetchingmembers: Map<string, boolean> = new Map();
-	noncemap: Map<string, (r: [memberjson[], string[]]) => void> = new Map();
-	noncebuild: Map<string, [memberjson[], string[], number[]]> = new Map();
-	searchMap = new Map<
+	private readonly fetchingmembers = new Map<string, boolean>();
+	private readonly memberNonceMap = new Map<string, (r: [memberjson[], string[]]) => void>();
+	private readonly memberNonceBuild = new Map<string, [memberjson[], string[], number[]]>();
+	private readonly searchMap = new Map<
 		string,
 		(arg: {
 			chunk_index: number;
@@ -5085,7 +5085,7 @@ class Localuser {
 			}
 		}
 		chunk.members ??= [];
-		const arr = this.noncebuild.get(chunk.nonce);
+		const arr = this.memberNonceBuild.get(chunk.nonce);
 		if (!arr) return;
 		arr[0] = arr[0].concat(chunk.members);
 		if (chunk.not_found) {
@@ -5093,11 +5093,11 @@ class Localuser {
 		}
 		arr[2].push(chunk.chunk_index);
 		if (arr[2].length === chunk.chunk_count) {
-			this.noncebuild.delete(chunk.nonce);
-			const func = this.noncemap.get(chunk.nonce);
+			this.memberNonceBuild.delete(chunk.nonce);
+			const func = this.memberNonceMap.get(chunk.nonce);
 			if (!func) return;
 			func([arr[0], arr[1]]);
-			this.noncemap.delete(chunk.nonce);
+			this.memberNonceMap.delete(chunk.nonce);
 		}
 	}
 	async getmembers() {
@@ -5124,8 +5124,8 @@ class Localuser {
 				}
 				const promise: Promise<[memberjson[], string[]]> = new Promise((res) => {
 					const nonce = "" + Math.floor(Math.random() * 100000000000);
-					this.noncemap.set(nonce, res);
-					this.noncebuild.set(nonce, [[], [], []]);
+					this.memberNonceMap.set(nonce, res);
+					this.memberNonceBuild.set(nonce, [[], [], []]);
 					if (!this.ws) return;
 					this.ws.send(
 						JSON.stringify({
@@ -5222,8 +5222,8 @@ class Localuser {
 		return url;
 	}
 
-	refreshTimeOut?: NodeJS.Timeout;
-	urlsToRefresh: [string, (arg: string) => void][] = [];
+	private refreshTimeOut?: NodeJS.Timeout;
+	private urlsToRefresh: [string, (arg: string) => void][] = [];
 	refreshURL(url: string): Promise<string> {
 		if (!this.refreshTimeOut) {
 			this.refreshTimeOut = setTimeout(async () => {
