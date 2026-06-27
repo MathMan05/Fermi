@@ -75,7 +75,7 @@ class Localuser {
 	initialized!: boolean;
 	info!: Specialuser["serverurls"];
 	headers!: {"Content-type": string; Authorization: string};
-	guilds = new Map<string, Guild>();
+	readonly guilds = new Map<string, Guild>();
 	user!: User;
 	idToPrev = new Map<string, string | undefined>();
 	idToNext = new Map<string, string | undefined>();
@@ -370,7 +370,7 @@ class Localuser {
 		this.guildFolders = ready.d.user_settings.guild_folders;
 		document.body.style.setProperty("--view-rest", I18n.message.viewrest());
 		this.initialized = true;
-		this.guilds = new Map();
+		this.guilds.clear();
 		this.user = new User(ready.d.user, this);
 		this.user.setstatus(sessionStorage.getItem("status") || "online");
 		this.resume_gateway_url = ready.d.resume_gateway_url;
@@ -467,7 +467,7 @@ class Localuser {
 	unload(): void {
 		this.initialized = false;
 		this.outoffocus();
-		this.guilds = new Map();
+		this.guilds.clear();
 		if (this.ws) {
 			this.ws.close(4040);
 		}
