@@ -58,7 +58,7 @@ class Sticker extends SnowFlake {
 			}
 		}
 		const weakGuild = new WeakMap<Sticker, Guild>();
-		for (const guild of localuser.guilds) {
+		for (const guild of localuser.guildids.values()) {
 			if (guild.id !== "@me" && guild.stickers.length !== 0) {
 				for (const sticker of guild.stickers) {
 					if (similar(sticker)) {
@@ -73,7 +73,7 @@ class Sticker extends SnowFlake {
 		});
 	}
 	static getFromId(id: string, localuser: Localuser) {
-		for (const guild of localuser.guilds) {
+		for (const guild of localuser.guildids.values()) {
 			const stick = guild.stickers.find((_) => _.id === id);
 			if (stick) {
 				return stick;
@@ -83,7 +83,9 @@ class Sticker extends SnowFlake {
 	}
 	static emojiMap = new WeakMap<Localuser, Map<string, Sticker | void>>();
 	static async lookupEmoji(id: string, localuser: Localuser): Promise<Sticker | void> {
-		const guild = localuser.guilds.find((guild) => guild.emojis.find((emoji) => emoji.id === id));
+		const guild = localuser.guildids
+			.values()
+			.find((guild) => guild.emojis.find((emoji) => emoji.id === id));
 		if (guild) {
 			const sticker = guild.stickers.find((_) => _.id === id);
 			if (sticker) return sticker;
@@ -128,7 +130,7 @@ class Sticker extends SnowFlake {
 		topBar.classList.add("flexltr", "emojiHeading");
 		const guilds = [
 			localuser.focusGuild,
-			...localuser.guilds.filter((guild) => guild !== localuser.focusGuild),
+			...localuser.guildids.values().filter((guild) => guild !== localuser.focusGuild),
 		]
 			.filter((guild) => guild !== undefined)
 			.filter((guild) => guild.id != "@me" && guild.stickers.length > 0);

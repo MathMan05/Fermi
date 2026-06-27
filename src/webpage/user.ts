@@ -683,7 +683,7 @@ class User extends SnowFlake {
 		dio.show();
 	}
 	getMembersSync() {
-		return this.localuser.guilds
+		return [...this.localuser.guildids.values()]
 			.map((guild) => {
 				const m = this.members.get(guild);
 				return m instanceof Member ? m : undefined;

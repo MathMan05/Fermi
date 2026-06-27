@@ -53,7 +53,9 @@ class Emoji {
 	}
 	static emojiMap = new WeakMap<Localuser, Map<string, emojiSource | void>>();
 	static async lookupEmoji(id: string, localuser: Localuser): Promise<emojiSource | void> {
-		const guild = localuser.guilds.find((guild) => guild.emojis.find((emoji) => emoji.id === id));
+		const guild = localuser.guildids
+			.values()
+			.find((guild) => guild.emojis.find((emoji) => emoji.id === id));
 		if (guild) {
 			return {
 				type: "GUILD",
@@ -261,7 +263,7 @@ class Emoji {
 				return new Emoji(emj, localuser);
 			}
 		}
-		for (const guild of localuser.guilds) {
+		for (const guild of localuser.guildids.values()) {
 			if (!guild.emojis) continue;
 			const emj = guild.emojis.find((_) => _.id === idOrString);
 			if (emj) {
@@ -361,7 +363,10 @@ class Emoji {
 
 		let isFirst = true;
 		if (localuser) {
-			[localuser.focusGuild, ...localuser.guilds.filter((guild) => guild !== localuser.focusGuild)]
+			[
+				localuser.focusGuild,
+				...localuser.guildids.values().filter((guild) => guild !== localuser.focusGuild),
+			]
 				.filter((_) => _ !== undefined)
 				.filter((guild) => guild.id != "@me" && guild.emojis.length > 0)
 				.forEach((guild) => {
@@ -512,7 +517,7 @@ class Emoji {
 		}
 		const weakGuild = new WeakMap<emojijson, Guild>();
 		if (localuser) {
-			for (const guild of localuser.guilds) {
+			for (const guild of localuser.guildids.values()) {
 				if (guild.id !== "@me" && guild.emojis.length !== 0) {
 					for (const emoji of guild.emojis) {
 						if (similar(emoji)) {

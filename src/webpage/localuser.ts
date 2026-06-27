@@ -75,7 +75,6 @@ class Localuser {
 	initialized!: boolean;
 	info!: Specialuser["serverurls"];
 	headers!: {"Content-type": string; Authorization: string};
-	guilds!: Guild[];
 	guildids = new Map<string, Guild>();
 	user!: User;
 	idToPrev = new Map<string, string | undefined>();
@@ -371,7 +370,6 @@ class Localuser {
 		this.guildFolders = ready.d.user_settings.guild_folders;
 		document.body.style.setProperty("--view-rest", I18n.message.viewrest());
 		this.initialized = true;
-		this.guilds = [];
 		this.guildids = new Map();
 		this.user = new User(ready.d.user, this);
 		this.user.setstatus(sessionStorage.getItem("status") || "online");
@@ -419,12 +417,10 @@ class Localuser {
 		};
 		for (const thing of ready.d.guilds) {
 			const temp = new Guild(thing, this, members[thing.id]);
-			this.guilds.push(temp);
 			this.guildids.set(temp.id, temp);
 		}
 		{
 			const temp = new Direct(ready.d.private_channels, this);
-			this.guilds.push(temp);
 			this.guildids.set(temp.id, temp);
 		}
 		if (ready.d.user_guild_settings) {
@@ -471,7 +467,6 @@ class Localuser {
 	unload(): void {
 		this.initialized = false;
 		this.outoffocus();
-		this.guilds = [];
 		this.guildids = new Map();
 		if (this.ws) {
 			this.ws.close(4040);
@@ -877,7 +872,6 @@ class Localuser {
 					const guildy = this.guildids.get(temp.d.id);
 					if (guildy) {
 						this.guildids.delete(temp.d.id);
-						this.guilds.splice(this.guilds.indexOf(guildy), 1);
 						guildy.html.remove();
 						if (guildy === this.focusGuild) {
 							this.guildids.get("@me")?.loadGuild();
@@ -896,7 +890,6 @@ class Localuser {
 				case "GUILD_CREATE":
 					(async () => {
 						const guildy = new Guild(temp.d, this, this.user);
-						this.guilds.push(guildy);
 						this.guildids.set(guildy.id, guildy);
 						const divy = this.makeGuildIcon(guildy);
 						guildy.HTMLicon = divy;
@@ -1326,10 +1319,9 @@ class Localuser {
 		if (this.voiceFactory) {
 			this.voiceFactory.onJoin = (voice) => {
 				voice.onSatusChange = (status) => {
-					let channel: Channel | undefined = undefined;
-					for (const guild of this.guilds) {
-						channel ||= guild.channels.find((_) => _.voice === voice);
-					}
+					let channel: Channel | undefined = this.channelids
+						.values()
+						.find((_) => _.voice === voice);
 					if (channel) this.changeVCStatus(status, channel);
 					else console.error("Uh, no channel found?");
 				};
@@ -2115,8 +2107,8 @@ class Localuser {
 		const br = document.createElement("hr");
 		br.classList.add("lightbr");
 		serverlist.appendChild(br);
-		const guilds = new Set(this.guilds);
-		const dirrect = this.guilds.find((_) => _ instanceof Direct) as Direct;
+		const guilds = new Set(this.guildids.values());
+		const dirrect = this.guildids.get("@me") as Direct;
 
 		guilds.delete(dirrect);
 		const folders = this.guildFolders
@@ -2328,7 +2320,7 @@ class Localuser {
 		}
 	}
 	unreads(): void {
-		for (const thing of this.guilds) {
+		for (const thing of this.guildids.values()) {
 			if (thing.id === "@me") {
 				thing.unreads();
 				continue;
@@ -2390,7 +2382,7 @@ class Localuser {
 	}
 	totalMentions() {
 		let sum = 0;
-		for (const guild of this.guilds) {
+		for (const guild of this.guildids.values()) {
 			sum += guild.mentions;
 		}
 		for (const channel of (this.guildids.get("@me") as Direct).channels) {
