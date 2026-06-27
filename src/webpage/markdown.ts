@@ -702,7 +702,7 @@ class MarkDown {
 								}
 								break;
 							case "#":
-								const channel = this.localuser.channelids.get(id);
+								const channel = this.localuser.channels.get(id);
 								if (channel) {
 									mention.textContent = `#${channel.name}`;
 									if (!keep && !stdsize) {

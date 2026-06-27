@@ -32,7 +32,7 @@ class Direct extends Guild {
 		for (const thing of json) {
 			const temp = new Group(thing, this);
 			this.channels.push(temp);
-			this.localuser.channelids.set(temp.id, temp);
+			this.localuser.channels.set(temp.id, temp);
 		}
 		this.headchannels = this.channels;
 		this.discovery = new Discovery(this);
@@ -40,13 +40,13 @@ class Direct extends Guild {
 	createChannelpac(json: any) {
 		const thischannel = new Group(json, this);
 		this.channels.push(thischannel);
-		this.localuser.channelids.set(thischannel.id, thischannel);
+		this.localuser.channels.set(thischannel.id, thischannel);
 		this.sortchannels();
 		this.printServers();
 		return thischannel;
 	}
 	delChannel(json: channeljson) {
-		const channel = this.localuser.channelids.get(json.id) as Group;
+		const channel = this.localuser.channels.get(json.id) as Group;
 		super.delChannel(json);
 		if (channel) {
 			channel.del();

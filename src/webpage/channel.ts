@@ -679,7 +679,7 @@ class Channel extends SnowFlake {
 		if (json === -1) {
 			return;
 		}
-		this.localuser.channelids.set(this.id, this);
+		this.localuser.channels.set(this.id, this);
 		this.flags = json.flags || 0;
 		this.memberCount = json.member_count;
 		this.defaultAutoArchiveDuration = json.default_auto_archive_duration;
@@ -905,7 +905,7 @@ class Channel extends SnowFlake {
 	resolveparent(_guild: Guild = this.owner) {
 		const parentid = this.parent_id;
 		if (!parentid) return false;
-		this.parent = this.localuser.channelids.get(parentid);
+		this.parent = this.localuser.channels.get(parentid);
 		this.parent ??= undefined;
 		if (this.parent !== undefined) {
 			this.parent.children.push(this);
@@ -2167,13 +2167,13 @@ class Channel extends SnowFlake {
 			has_more: boolean;
 		};
 		for (const threadjson of res.threads) {
-			if (this.localuser.channelids.has(threadjson.id)) continue;
+			if (this.localuser.channels.has(threadjson.id)) continue;
 			const thread = new Channel(threadjson, this.guild);
-			this.localuser.channelids.set(threadjson.id, thread);
+			this.localuser.channels.set(threadjson.id, thread);
 			thread.resolveparent();
 		}
 		for (const message of res.messages) {
-			const thread = this.localuser.channelids.get(message.channel_id);
+			const thread = this.localuser.channels.get(message.channel_id);
 			if (!thread) continue;
 			const m = this.localuser.messages.get(message.id);
 			if (!m) this.localuser.messages.set(message.id, new Message(message, thread));
@@ -3226,7 +3226,7 @@ class Channel extends SnowFlake {
 
 		const span = this.nameSpan.deref();
 		if (span) span.textContent = this.name;
-		const parent = this.localuser.channelids.get(json.parent_id);
+		const parent = this.localuser.channels.get(json.parent_id);
 		if (parent) {
 			this.parent = parent;
 			this.parent_id = parent.id;

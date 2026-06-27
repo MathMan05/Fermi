@@ -91,7 +91,7 @@ class Localuser {
 	private ws?: WebSocket;
 	private connectionSucceed = 0;
 	private errorBackoff = 0;
-	channelids: Map<string, Channel> = new Map();
+	readonly channels: Map<string, Channel> = new Map();
 	readonly userMap: Map<string, User> = new Map();
 	voiceFactory?: VoiceFactory;
 	play?: Play;
@@ -363,7 +363,7 @@ class Localuser {
 	async gottenReady(ready: readyjson): Promise<void> {
 		await I18n.done;
 		this.errorBackoff = 0;
-		this.channelids.clear();
+		this.channels.clear();
 		this.inrelation.clear();
 		this.userMap.clear();
 		this.queryBlog();
@@ -432,7 +432,7 @@ class Localuser {
 		}
 		if (ready.d.read_state) {
 			for (const thing of ready.d.read_state.entries) {
-				const channel = this.channelids.get(thing.channel_id);
+				const channel = this.channels.get(thing.channel_id);
 				if (!channel) {
 					this.unknownRead.set(thing.channel_id, thing);
 					continue;
@@ -460,7 +460,7 @@ class Localuser {
 		this.focusChannel = undefined;
 	}
 	giveMessage(m: messagejson) {
-		const c = this.channelids.get(m.channel_id);
+		const c = this.channels.get(m.channel_id);
 		if (!c) return;
 		new Message(m, c);
 	}
@@ -752,7 +752,7 @@ class Localuser {
 		if (temp.op == 0) {
 			switch (temp.t) {
 				case "THREAD_MEMBERS_UPDATE": {
-					const channel = this.channelids.get(temp.d.id);
+					const channel = this.channels.get(temp.d.id);
 					if (!channel) return;
 					if (temp.d.added_members) {
 						for (const memb of temp.d.added_members) {
@@ -809,7 +809,7 @@ class Localuser {
 				}
 				case "MESSAGE_DELETE": {
 					temp.d.guild_id ??= "@me";
-					const channel = this.channelids.get(temp.d.channel_id);
+					const channel = this.channels.get(temp.d.channel_id);
 					if (!channel) break;
 					const message = channel.messages.get(temp.d.id);
 					if (!message) break;
@@ -821,7 +821,7 @@ class Localuser {
 					break;
 				case "MESSAGE_UPDATE": {
 					temp.d.guild_id ??= "@me";
-					const channel = this.channelids.get(temp.d.channel_id);
+					const channel = this.channels.get(temp.d.channel_id);
 					if (!channel) break;
 					const message = channel.messages.get(temp.d.id);
 					if (!message) break;
@@ -843,7 +843,7 @@ class Localuser {
 					break;
 				case "CHANNEL_PINS_UPDATE":
 					temp.d.guild_id ??= "@me";
-					const channel = this.channelids.get(temp.d.channel_id);
+					const channel = this.channels.get(temp.d.channel_id);
 					if (!channel) break;
 					delete channel.pinnedMessages;
 					channel.lastpin = new Date() + "";
@@ -906,7 +906,7 @@ class Localuser {
 						temp.d.guild_id ??= "@me";
 						const guild = this.guilds.get(temp.d.guild_id);
 						if (!guild) break;
-						const channel = this.channelids.get(temp.d.channel_id);
+						const channel = this.channels.get(temp.d.channel_id);
 						if (!channel) break;
 						const message = channel.messages.get(temp.d.message_id);
 						if (!message) break;
@@ -922,7 +922,7 @@ class Localuser {
 				case "MESSAGE_REACTION_REMOVE":
 					{
 						temp.d.guild_id ??= "@me";
-						const channel = this.channelids.get(temp.d.channel_id);
+						const channel = this.channels.get(temp.d.channel_id);
 						if (!channel) break;
 
 						const message = channel.messages.get(temp.d.message_id);
@@ -934,7 +934,7 @@ class Localuser {
 				case "MESSAGE_REACTION_REMOVE_ALL":
 					{
 						temp.d.guild_id ??= "@me";
-						const channel = this.channelids.get(temp.d.channel_id);
+						const channel = this.channels.get(temp.d.channel_id);
 						if (!channel) break;
 						const message = channel.messages.get(temp.d.message_id);
 						if (!message) break;
@@ -944,7 +944,7 @@ class Localuser {
 				case "MESSAGE_REACTION_REMOVE_EMOJI":
 					{
 						temp.d.guild_id ??= "@me";
-						const channel = this.channelids.get(temp.d.channel_id);
+						const channel = this.channels.get(temp.d.channel_id);
 						if (!channel) break;
 						const message = channel.messages.get(temp.d.message_id);
 						if (!message) break;
@@ -1104,7 +1104,7 @@ class Localuser {
 					break;
 				}
 				case "MESSAGE_ACK": {
-					const channel = this.channelids.get(temp.d.channel_id);
+					const channel = this.channels.get(temp.d.channel_id);
 					if (!channel) break;
 					channel.lastreadmessageid = temp.d.message_id;
 					channel.mentions = 0;
@@ -1319,9 +1319,7 @@ class Localuser {
 		if (this.voiceFactory) {
 			this.voiceFactory.onJoin = (voice) => {
 				voice.onSatusChange = (status) => {
-					let channel: Channel | undefined = this.channelids
-						.values()
-						.find((_) => _.voice === voice);
+					let channel: Channel | undefined = this.channels.values().find((_) => _.voice === voice);
 					if (channel) this.changeVCStatus(status, channel);
 					else console.error("Uh, no channel found?");
 				};
@@ -1340,7 +1338,7 @@ class Localuser {
 		}
 	}
 	createChannel(json: channeljson): undefined | Channel {
-		const c = this.channelids.get(json.id);
+		const c = this.channels.get(json.id);
 		if (c) {
 			c.updateChannel(json);
 			return c;
@@ -1674,7 +1672,7 @@ class Localuser {
 	gotoid: string | undefined;
 	gotoRes = () => {};
 	async goToChannel(channelid: string, addstate = true, messageid: undefined | string = undefined) {
-		const channel = this.channelids.get(channelid);
+		const channel = this.channels.get(channelid);
 		if (channel) {
 			const guild = channel.guild;
 			guild.loadGuild();
@@ -1706,7 +1704,7 @@ class Localuser {
 				return;
 			}
 			await guild.loadChannel(location[5], true, location[6]);
-			this.focusChannel = this.channelids.get(location[5]);
+			this.focusChannel = this.channels.get(location[5]);
 		}
 	}
 	loaduser(): void {
@@ -2313,7 +2311,7 @@ class Localuser {
 	}
 	messageCreate(messagep: messageCreateJson): void {
 		messagep.d.guild_id ??= "@me";
-		const channel = this.channelids.get(messagep.d.channel_id);
+		const channel = this.channels.get(messagep.d.channel_id);
 		if (channel) {
 			channel.messageCreate(messagep);
 			this.unreads();
@@ -2391,7 +2389,7 @@ class Localuser {
 		return sum;
 	}
 	async typingStart(typing: startTypingjson): Promise<void> {
-		const channel = this.channelids.get(typing.d.channel_id);
+		const channel = this.channels.get(typing.d.channel_id);
 		if (!channel) return;
 		channel.typingStart(typing);
 	}
@@ -4690,7 +4688,7 @@ class Localuser {
 					//FIXME total_results shall be ignored as it's known to be bad, spacebar bug.
 					const messages = json.messages
 						.map(([m]) => {
-							const c = this.channelids.get(m.channel_id);
+							const c = this.channels.get(m.channel_id);
 							if (!c) return;
 							if (c.messages.get(m.id)) {
 								return c.messages.get(m.id);

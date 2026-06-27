@@ -1544,7 +1544,7 @@ class Guild extends SnowFlake {
 		for (const thing of json.channels) {
 			const temp = new Channel(thing, this);
 			this.channels.push(temp);
-			this.localuser.channelids.set(temp.id, temp);
+			this.localuser.channels.set(temp.id, temp);
 		}
 
 		this.headchannels = [];
@@ -1555,12 +1555,12 @@ class Guild extends SnowFlake {
 			}
 		}
 		for (const thread of json.threads) {
-			if (this.localuser.channelids.has(thread.id)) continue;
+			if (this.localuser.channels.has(thread.id)) continue;
 			const temp = new Channel(thread, this);
-			this.localuser.channelids.set(temp.id, temp);
+			this.localuser.channels.set(temp.id, temp);
 			temp.resolveparent(this);
 		}
-		this.prevchannel = this.localuser.channelids.get(this.perminfo.prevchannel);
+		this.prevchannel = this.localuser.channels.get(this.perminfo.prevchannel);
 		this.stickers = json.stickers.map((_) => new Sticker(_, this)) || [];
 	}
 	get perminfo() {
@@ -1574,7 +1574,7 @@ class Guild extends SnowFlake {
 		this.mute_config = this.mute_config;
 		this.message_notifications = settings.message_notifications;
 		for (const override of settings.channel_overrides) {
-			const channel = this.localuser.channelids.get(override.channel_id);
+			const channel = this.localuser.channels.get(override.channel_id);
 			if (!channel) continue;
 			channel.handleUserOverrides(override);
 		}
@@ -1864,7 +1864,7 @@ class Guild extends SnowFlake {
 		}
 	}
 	async goToThread(threadId: string) {
-		if (!this.localuser.channelids.has(threadId)) {
+		if (!this.localuser.channels.has(threadId)) {
 			const channelJson = await (
 				await fetch(this.info.api + "/channels/" + threadId, {
 					headers: this.headers,
@@ -1872,9 +1872,9 @@ class Guild extends SnowFlake {
 			).json();
 			if (channelJson.code == 200) {
 				const channel = new Channel(channelJson as channeljson, this);
-				this.localuser.channelids.set(channel.id, channel);
+				this.localuser.channels.set(channel.id, channel);
 				channel.resolveparent(this);
-				const par = this.localuser.channelids.get(channel.parent_id as string);
+				const par = this.localuser.channels.get(channel.parent_id as string);
 				par?.createguildHTML();
 			} else {
 				this.loadChannel();
@@ -1940,7 +1940,7 @@ class Guild extends SnowFlake {
 	}
 	async loadChannel(ID?: string | undefined | null, addstate = true, message?: string) {
 		if (ID) {
-			const channel = this.localuser.channelids.get(ID);
+			const channel = this.localuser.channels.get(ID);
 			if (channel) {
 				await channel.getHTML(addstate, undefined, message);
 				return;
@@ -2017,7 +2017,7 @@ class Guild extends SnowFlake {
 		this.localuser.loadGuild(this.id);
 	}
 	updateChannel(json: channeljson) {
-		const channel = this.localuser.channelids.get(json.id);
+		const channel = this.localuser.channels.get(json.id);
 		if (channel) {
 			const parent = channel.parent;
 			channel.updateChannel(json);
@@ -2040,7 +2040,7 @@ class Guild extends SnowFlake {
 	}
 	createChannelpac(json: channeljson) {
 		const thischannel = new Channel(json, this);
-		this.localuser.channelids.set(json.id, thischannel);
+		this.localuser.channels.set(json.id, thischannel);
 		this.channels.push(thischannel);
 		thischannel.resolveparent(this);
 		if (!thischannel.parent) {
@@ -2085,8 +2085,8 @@ class Guild extends SnowFlake {
 		channelselect.show();
 	}
 	delChannel(json: channeljson) {
-		const channel = this.localuser.channelids.get(json.id);
-		this.localuser.channelids.delete(json.id);
+		const channel = this.localuser.channels.get(json.id);
+		this.localuser.channels.delete(json.id);
 		if (!channel) return;
 		this.channels.splice(this.channels.indexOf(channel), 1);
 		const indexy = this.headchannels.indexOf(channel);
