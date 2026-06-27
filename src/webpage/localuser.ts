@@ -371,6 +371,7 @@ class Localuser {
 		document.body.style.setProperty("--view-rest", I18n.message.viewrest());
 		this.initialized = true;
 		this.guilds.clear();
+		this.channels.clear();
 		this.user = new User(ready.d.user, this);
 		this.user.setstatus(sessionStorage.getItem("status") || "online");
 		this.resume_gateway_url = ready.d.resume_gateway_url;
@@ -468,6 +469,7 @@ class Localuser {
 		this.initialized = false;
 		this.outoffocus();
 		this.guilds.clear();
+		this.channels.clear();
 		if (this.ws) {
 			this.ws.close(4040);
 		}
