@@ -1339,7 +1339,7 @@ class Localuser {
 			}
 		}
 	}
-	async createChannel(json: channeljson): undefined | Channel {
+	async createChannel(json: channeljson): Promise<undefined | Channel> {
 		const c = this.channels.get(json.id);
 		if (c) {
 			c.updateChannel(json);
