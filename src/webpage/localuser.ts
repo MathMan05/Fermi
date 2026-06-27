@@ -2339,7 +2339,7 @@ class Localuser {
 		img.src = "/logo.webp";
 		return img;
 	}
-	last = "-1";
+	private last = "-1";
 	generateFavicon() {
 		const make = () => {
 			const favicon = document.getElementById("favicon") as HTMLLinkElement;
