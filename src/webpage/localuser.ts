@@ -2331,9 +2331,9 @@ class Localuser {
 			thing.unreads(html);
 		}
 	}
-	static favC = document.createElement("canvas");
-	static favCTX = this.favC.getContext("2d") as CanvasRenderingContext2D;
-	static favImg = this.getFaviconImg();
+	private static favC = document.createElement("canvas");
+	private static favCTX = this.favC.getContext("2d") as CanvasRenderingContext2D;
+	private static favImg = this.getFaviconImg();
 	static getFaviconImg() {
 		const img = document.createElement("img");
 		img.src = "/logo.webp";
