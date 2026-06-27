@@ -11,10 +11,10 @@ class Member extends SnowFlake {
 	static already = {};
 	owner: Guild;
 	user: User;
-	roles: Role[] = [];
+	roles = new Set<Role>();
 	nick!: string;
-	avatar: void | string = undefined;
-	banner: void | string = undefined;
+	avatar?: string;
+	banner?: string;
 	communication_disabled_until?: Date;
 	private constructor(memberjson: memberjson, owner: Guild) {
 		super(memberjson.id);
@@ -99,7 +99,7 @@ class Member extends SnowFlake {
 				banner: this.banner as string | undefined,
 				//TODO presence
 				nick: this.nick,
-				roles: this.roles.map((_) => _.id),
+				roles: [...this.roles.keys()].map((_) => _.id),
 				joined_at: this.joined_at,
 				premium_since: this.premium_since,
 				deaf: this.deaf,
@@ -358,20 +358,20 @@ class Member extends SnowFlake {
 					memberjson.roles = (memberjson.roles as any[]).map((_) => _.id);
 					console.error("Member role is incorrectly sent as role object instead of role ID");
 				}
-				this.roles = [];
+				this.roles.clear();
 				for (const strrole of memberjson.roles) {
 					const role = this.guild.roleids.get(strrole);
 					if (!role) {
 						console.warn(strrole + " is not in ", this.guild.roleids);
 						continue;
 					}
-					this.roles.push(role);
+					this.roles.add(role);
 				}
 
 				if (!this.user.bot) {
 					const everyone = this.guild.roleids.get(this.guild.id);
-					if (everyone && this.roles.indexOf(everyone) === -1) {
-						this.roles.push(everyone);
+					if (everyone && !this.roles.has(everyone)) {
+						this.roles.add(everyone);
 					}
 				}
 				continue;
@@ -384,13 +384,10 @@ class Member extends SnowFlake {
 		}
 
 		const everyone = this.guild.roleids.get(this.guild.id);
-		if (everyone && this.roles.indexOf(everyone) === -1) {
-			this.roles.push(everyone);
+		if (everyone && this.roles.has(everyone)) {
+			this.roles.add(everyone);
 		}
 
-		this.roles.sort((a, b) => {
-			return this.guild.roles.indexOf(a) - this.guild.roles.indexOf(b);
-		});
 		if (changeNick) {
 			this.nameChange();
 		}
@@ -668,7 +665,7 @@ class Member extends SnowFlake {
 		menu.show();
 	}
 	addRole(role: Role) {
-		const roles = this.roles.map((_) => _.id);
+		const roles = [...this.roles].map((_) => _.id);
 		roles.push(role.id);
 		fetch(this.info.api + "/guilds/" + this.guild.id + "/members/" + this.id, {
 			method: "PATCH",
@@ -677,7 +674,7 @@ class Member extends SnowFlake {
 		});
 	}
 	removeRole(role: Role) {
-		let roles = this.roles.map((_) => _.id);
+		let roles = [...this.roles].map((_) => _.id);
 		roles = roles.filter((_) => _ !== role.id);
 		fetch(this.info.api + "/guilds/" + this.guild.id + "/members/" + this.id, {
 			method: "PATCH",
@@ -693,6 +690,9 @@ class Member extends SnowFlake {
 			headers,
 		});
 	}
+	get inOrderRoles() {
+		return this.guild.roles.filter((_) => this.roles.has(_));
+	}
 	hasPermission(name: string, adminOver = true): boolean {
 		if (this.isAdmin() && adminOver) {
 			return true;
@@ -703,7 +703,7 @@ class Member extends SnowFlake {
 				return false;
 			}
 		}
-		for (const thing of this.roles) {
+		for (const thing of this.inOrderRoles) {
 			if (thing.permissions.getPermission(name)) {
 				return true;
 			}

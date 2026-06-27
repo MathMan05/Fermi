@@ -533,7 +533,7 @@ class User extends SnowFlake {
 					e.stopPropagation();
 					const roles: [Role, string[]][] = [];
 					for (const role of member.guild.roles) {
-						if (!role.canManage() || member.roles.indexOf(role) !== -1) {
+						if (!role.canManage() || member.roles.has(role)) {
 							continue;
 						}
 						roles.push([role, [role.name]]);
@@ -559,7 +559,7 @@ class User extends SnowFlake {
 				if (member) {
 					e.stopPropagation();
 					const roles: [Role, string[]][] = [];
-					for (const role of member.roles) {
+					for (const role of member.inOrderRoles) {
 						if (!role.canManage()) {
 							continue;
 						}
@@ -1365,7 +1365,7 @@ class User extends SnowFlake {
 					}
 
 					roles.classList.add("flexltr", "rolesbox");
-					for (const role of member.roles) {
+					for (const role of member.inOrderRoles) {
 						if (role.id === member.guild.id) continue;
 						const roleDiv = document.createElement("div");
 						roleDiv.classList.add("rolediv");
@@ -1706,7 +1706,7 @@ class User extends SnowFlake {
 				}
 				const roles = document.createElement("div");
 				roles.classList.add("flexltr", "rolesbox");
-				for (const role of member.roles) {
+				for (const role of member.inOrderRoles) {
 					if (role.id === member.guild.id) continue;
 					const roleDiv = document.createElement("div");
 					roleDiv.classList.add("rolediv");
