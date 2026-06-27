@@ -633,7 +633,7 @@ class Group extends Channel {
 	get hasunreads() {
 		return this.mentions !== 0;
 	}
-	all: WeakRef<HTMLElement> = new WeakRef(document.createElement("div"));
+	all = new WeakRef<HTMLElement>(document.createElement("div"));
 	noti?: WeakRef<HTMLElement>;
 	del() {
 		const all = this.all.deref();
