@@ -71,15 +71,21 @@ class Localuser {
 		return this.headers.Authorization;
 	}
 	userinfo!: Specialuser;
-	serverurls!: Specialuser["serverurls"];
 	initialized!: boolean;
-	info!: Specialuser["serverurls"];
+	get info() {
+		return this.userinfo.serverurls;
+	}
+	set info(e) {
+		this.userinfo.serverurls = e;
+	}
 	headers!: {"Content-type": string; Authorization: string};
-	readonly guilds = new Map<string, Guild>();
 	user!: User;
+	readonly guilds = new Map<string, Guild>();
+	readonly channels: Map<string, Channel> = new Map();
+	readonly userMap: Map<string, User> = new Map();
+	messages = new Map<string, Message>();
 	idToPrev = new Map<string, string | undefined>();
 	idToNext = new Map<string, string | undefined>();
-	messages = new Map<string, Message>();
 	get status() {
 		return this.user.status;
 	}
@@ -91,8 +97,6 @@ class Localuser {
 	private ws?: WebSocket;
 	private connectionSucceed = 0;
 	private errorBackoff = 0;
-	readonly channels: Map<string, Channel> = new Map();
-	readonly userMap: Map<string, User> = new Map();
 	voiceFactory?: VoiceFactory;
 	play?: Play;
 	instancePing = {
@@ -268,9 +272,7 @@ class Localuser {
 		this.perminfo.guilds ??= {};
 		this.perminfo.user ??= {};
 		this.perminfo.user.decorations ??= true;
-		this.serverurls = this.userinfo.serverurls;
 		this.initialized = false;
-		this.info = this.serverurls;
 		SW.postMessage({
 			code: "canRefresh",
 			host: new URL(this.info.cdn).host,
@@ -489,7 +491,7 @@ class Localuser {
 		}
 		const doComp = DecompressionStream && !getDeveloperSettings().gatewayCompression;
 		const ws = new WebSocket(
-			(resume ? this.resume_gateway_url : this.serverurls.gateway.toString()) +
+			(resume ? this.resume_gateway_url : this.info.gateway.toString()) +
 				"?encoding=json&v=9" +
 				(doComp ? "&compress=zlib-stream" : ""),
 		);
@@ -662,7 +664,6 @@ class Localuser {
 						const newurls = await getapiurls(this.info.wellknown);
 						if (newurls) {
 							this.info = newurls;
-							this.serverurls = newurls;
 							this.userinfo.json.serverurls = this.info;
 							break;
 						}
@@ -672,7 +673,6 @@ class Localuser {
 						const newurls = await getapiurls(new URL(this.info.wellknown).origin);
 						if (newurls) {
 							this.info = newurls;
-							this.serverurls = newurls;
 							this.userinfo.json.serverurls = this.info;
 							break;
 						}
@@ -684,7 +684,6 @@ class Localuser {
 						const newurls = await getapiurls(url);
 						if (newurls) {
 							this.info = newurls;
-							this.serverurls = newurls;
 							this.userinfo.json.serverurls = this.info;
 						}
 						break;
