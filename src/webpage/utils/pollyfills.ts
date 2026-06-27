@@ -48,6 +48,18 @@ function defineItter(itter: typeof Iterator) {
 			i++;
 		}
 	};
+	itter.prototype.find ??= function find<U>(
+		callbackfn: (element: U, index: number) => boolean,
+	): U | undefined {
+		let i = 0;
+		for (const thing of this) {
+			if (callbackfn(thing, i)) {
+				return thing;
+			}
+			i++;
+		}
+		return undefined;
+	};
 }
 if ("Iterator" in globalThis) {
 	defineItter(globalThis.Iterator);
