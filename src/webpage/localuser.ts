@@ -138,7 +138,7 @@ class Localuser {
 		onswap?.(thisUser);
 	}
 	static userMenu = this.generateUserMenu();
-	private userResMap = new Map<string, Promise<User>>();
+	private readonly userResMap = new Map<string, Promise<User>>();
 	async getUser(id: string) {
 		let user = this.userMap.get(id);
 		if (user) return user;
@@ -365,15 +365,15 @@ class Localuser {
 	async gottenReady(ready: readyjson): Promise<void> {
 		await I18n.done;
 		this.errorBackoff = 0;
-		this.channels.clear();
-		this.inrelation.clear();
-		this.userMap.clear();
 		this.queryBlog();
 		this.guildFolders = ready.d.user_settings.guild_folders;
 		document.body.style.setProperty("--view-rest", I18n.message.viewrest());
 		this.initialized = true;
 		this.guilds.clear();
 		this.channels.clear();
+		this.userResMap.clear();
+		this.inrelation.clear();
+		this.userMap.clear();
 		this.user = new User(ready.d.user, this);
 		this.user.setstatus(sessionStorage.getItem("status") || "online");
 		this.resume_gateway_url = ready.d.resume_gateway_url;
@@ -472,6 +472,7 @@ class Localuser {
 		this.outoffocus();
 		this.guilds.clear();
 		this.channels.clear();
+		this.userResMap.clear();
 		if (this.ws) {
 			this.ws.close(4040);
 		}
