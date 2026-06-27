@@ -41,11 +41,11 @@ import {CDNParams} from "./utils/cdnParams.js";
 class Channel extends SnowFlake {
 	editing!: Message | null;
 	type!: number;
-	owner!: Guild;
-	headers!: Localuser["headers"];
+	owner: Guild;
+	headers: Localuser["headers"];
 	name!: string;
 	parent_id?: string;
-	parent: Channel | undefined;
+	parent?: Channel;
 	children!: Channel[];
 	guild_id!: string;
 	permission_overwrites!: Map<string, Permissions>;

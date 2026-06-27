@@ -26,7 +26,6 @@ class Direct extends Guild {
 		// @ts-ignore it's a hack, but it's a hack that works
 		this.properties = {};
 		this.roles = [];
-		this.roleids = new Map();
 		this.prevchannel = undefined;
 		this.properties.name = I18n.DMs.name();
 		for (const thing of json) {

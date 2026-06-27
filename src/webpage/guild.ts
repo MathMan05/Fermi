@@ -173,13 +173,13 @@ export async function makeInviteMenu(inviteMenu: Options, guild: Guild, url: str
 	inviteMenu.addHTMLArea(invDiv);
 }
 class Guild extends SnowFlake {
-	owner!: Localuser;
-	headers!: Localuser["headers"];
+	owner: Localuser;
+	headers: Localuser["headers"];
 	channels!: Channel[];
 	properties!: guildjson["properties"];
 	member_count!: number;
 	roles!: Role[];
-	roleids!: Map<string, Role>;
+	readonly roleids = new Map<string, Role>();
 	prevchannel: Channel | undefined;
 	banner!: string;
 	message_notifications!: number;
@@ -192,7 +192,7 @@ class Guild extends SnowFlake {
 	large!: boolean;
 	stickers!: Sticker[];
 	members = new Set<Member>();
-	static contextmenu = new Contextmenu<Guild, undefined>("guild menu");
+	static readonly contextmenu = new Contextmenu<Guild, void>("guild menu");
 	static setupcontextmenu() {
 		Guild.contextmenu.addButton(
 			() => I18n.guild.makeInvite(),
@@ -1487,7 +1487,7 @@ class Guild extends SnowFlake {
 				this.HTMLicon = divy;
 			}
 		}
-		this.roleids = new Map();
+		this.roleids.clear();
 		this.banner = json.banner;
 	}
 	constructor(json: guildjson | -1, owner: Localuser, member: memberjson | User | null) {
@@ -1511,7 +1511,6 @@ class Guild extends SnowFlake {
 			this.properties = json.properties;
 		}
 		this.roles = [];
-		this.roleids = new Map();
 		this.banner = json.properties.banner;
 		this.welcomeScreen = json.properties.welcome_screen;
 		if (json.roles) {
