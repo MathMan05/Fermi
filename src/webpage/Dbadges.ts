@@ -243,5 +243,5 @@ const badgeArr = [
 			icon: "7d9ae358c8c5e118768335dbe68b4fb8",
 		},
 	],
-];
+] as const;
 export {badgeArr};

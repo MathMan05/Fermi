@@ -65,12 +65,7 @@ class Localuser {
 	badges = new Map<
 		string,
 		{id: string; description: string; icon: string; link?: string; translate?: boolean}
-	>(
-		badgeArr as [
-			string,
-			{id: string; description: string; icon: string; link?: string; translate?: boolean},
-		][],
-	);
+	>(badgeArr);
 	lastSequence: number | null = null;
 	get token() {
 		return this.headers.Authorization;
