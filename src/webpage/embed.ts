@@ -384,7 +384,7 @@ class Embed {
 			div.append(h2);
 			const button = document.createElement("button");
 			button.textContent = I18n.invite.accept();
-			if (this.localuser.info.api.startsWith(info.api) && this.localuser.guildids.has(guild.id)) {
+			if (this.localuser.info.api.startsWith(info.api) && this.localuser.guilds.has(guild.id)) {
 				button.textContent = I18n.invite.alreadyJoined();
 				button.disabled = true;
 			}

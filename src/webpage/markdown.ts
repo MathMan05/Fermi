@@ -1226,7 +1226,7 @@ class MarkDown {
 			if (localuser) {
 				const [_, _2, ...path] = Url.pathname.split("/");
 
-				const guild = localuser.guildids.get(path[0]);
+				const guild = localuser.guilds.get(path[0]);
 				const channel = guild?.getChannel(path[1]);
 				if (channel) {
 					const message = isNaN(+path[2]) ? undefined : path[2];

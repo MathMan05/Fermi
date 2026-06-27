@@ -75,7 +75,7 @@ class Localuser {
 	initialized!: boolean;
 	info!: Specialuser["serverurls"];
 	headers!: {"Content-type": string; Authorization: string};
-	guildids = new Map<string, Guild>();
+	guilds = new Map<string, Guild>();
 	user!: User;
 	idToPrev = new Map<string, string | undefined>();
 	idToNext = new Map<string, string | undefined>();
@@ -370,7 +370,7 @@ class Localuser {
 		this.guildFolders = ready.d.user_settings.guild_folders;
 		document.body.style.setProperty("--view-rest", I18n.message.viewrest());
 		this.initialized = true;
-		this.guildids = new Map();
+		this.guilds = new Map();
 		this.user = new User(ready.d.user, this);
 		this.user.setstatus(sessionStorage.getItem("status") || "online");
 		this.resume_gateway_url = ready.d.resume_gateway_url;
@@ -417,17 +417,17 @@ class Localuser {
 		};
 		for (const thing of ready.d.guilds) {
 			const temp = new Guild(thing, this, members[thing.id]);
-			this.guildids.set(temp.id, temp);
+			this.guilds.set(temp.id, temp);
 		}
 		{
 			const temp = new Direct(ready.d.private_channels, this);
-			this.guildids.set(temp.id, temp);
+			this.guilds.set(temp.id, temp);
 		}
 		if (ready.d.user_guild_settings) {
 			console.log(ready.d.user_guild_settings.entries);
 
 			for (const thing of ready.d.user_guild_settings.entries) {
-				(this.guildids.get(thing.guild_id) as Guild).notisetting(thing);
+				(this.guilds.get(thing.guild_id) as Guild).notisetting(thing);
 			}
 		}
 		if (ready.d.read_state) {
@@ -467,7 +467,7 @@ class Localuser {
 	unload(): void {
 		this.initialized = false;
 		this.outoffocus();
-		this.guildids = new Map();
+		this.guilds = new Map();
 		if (this.ws) {
 			this.ws.close(4040);
 		}
@@ -869,19 +869,19 @@ class Localuser {
 					}
 					break;
 				case "GUILD_DELETE": {
-					const guildy = this.guildids.get(temp.d.id);
+					const guildy = this.guilds.get(temp.d.id);
 					if (guildy) {
-						this.guildids.delete(temp.d.id);
+						this.guilds.delete(temp.d.id);
 						guildy.html.remove();
 						if (guildy === this.focusGuild) {
-							this.guildids.get("@me")?.loadGuild();
-							this.guildids.get("@me")?.loadChannel();
+							this.guilds.get("@me")?.loadGuild();
+							this.guilds.get("@me")?.loadChannel();
 						}
 					}
 					break;
 				}
 				case "GUILD_UPDATE": {
-					const guildy = this.guildids.get(temp.d.id);
+					const guildy = this.guilds.get(temp.d.id);
 					if (guildy) {
 						guildy.update(temp.d);
 					}
@@ -890,7 +890,7 @@ class Localuser {
 				case "GUILD_CREATE":
 					(async () => {
 						const guildy = new Guild(temp.d, this, this.user);
-						this.guildids.set(guildy.id, guildy);
+						this.guilds.set(guildy.id, guildy);
 						const divy = this.makeGuildIcon(guildy);
 						guildy.HTMLicon = divy;
 						(document.getElementById("servers") as HTMLDivElement).insertBefore(
@@ -904,7 +904,7 @@ class Localuser {
 				case "MESSAGE_REACTION_ADD":
 					{
 						temp.d.guild_id ??= "@me";
-						const guild = this.guildids.get(temp.d.guild_id);
+						const guild = this.guilds.get(temp.d.guild_id);
 						if (!guild) break;
 						const channel = this.channelids.get(temp.d.channel_id);
 						if (!channel) break;
@@ -999,25 +999,25 @@ class Localuser {
 					}
 					break;
 				case "GUILD_ROLE_CREATE": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.newRole(temp.d.role);
 					break;
 				}
 				case "GUILD_ROLE_UPDATE": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.updateRole(temp.d.role);
 					break;
 				}
 				case "GUILD_ROLE_DELETE": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.deleteRole(temp.d.role_id);
 					break;
 				}
 				case "GUILD_MEMBER_UPDATE": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.memberupdate(temp.d);
 					break;
@@ -1028,7 +1028,7 @@ class Localuser {
 						const user = temp.d.user ? new User(temp.d.user, this) : await this.getUser(temp.d.id);
 						user.handleRelationship(temp.d);
 						this.relationshipsUpdate();
-						const me = this.guildids.get("@me");
+						const me = this.guilds.get("@me");
 						if (!me) return;
 						me.unreads();
 						const arr = this.relChangeUpdateMap.get(user.id);
@@ -1061,13 +1061,13 @@ class Localuser {
 					break;
 				}
 				case "GUILD_MEMBER_ADD": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					Member.new(temp.d, guild);
 					break;
 				}
 				case "GUILD_MEMBER_REMOVE": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					const user = new User(temp.d.user, this);
 					const member = user.members.get(guild);
@@ -1076,28 +1076,28 @@ class Localuser {
 					break;
 				}
 				case "GUILD_EMOJIS_UPDATE": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.emojis = temp.d.emojis;
 					guild.onEmojiUpdate(guild.emojis);
 					break;
 				}
 				case "GUILD_STICKERS_UPDATE": {
-					const guild = this.guildids.get(temp.d.guild_id);
+					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.stickers = temp.d.stickers.map((_) => new Sticker(_, guild));
 					guild.onStickerUpdate(guild.stickers);
 					break;
 				}
 				case "CHANNEL_RECIPIENT_REMOVE": {
-					const guild = this.guildids.get("@me") as Direct;
+					const guild = this.guilds.get("@me") as Direct;
 					const channel = guild.channels.find(({id}) => id == temp.d.channel_id) as Group;
 					if (!channel) break;
 					channel.removeRec(new User(temp.d.user, this));
 					break;
 				}
 				case "CHANNEL_RECIPIENT_ADD": {
-					const guild = this.guildids.get("@me") as Direct;
+					const guild = this.guilds.get("@me") as Direct;
 					const channel = guild.channels.find(({id}) => id == temp.d.channel_id) as Group;
 					if (!channel) break;
 					channel.addRec(new User(temp.d.user, this));
@@ -1331,7 +1331,7 @@ class Localuser {
 
 	heartbeat_interval: number = 0;
 	updateChannel(json: channeljson): void {
-		const guild = this.guildids.get(json.guild_id || "@me");
+		const guild = this.guilds.get(json.guild_id || "@me");
 		if (guild) {
 			guild.updateChannel(json);
 			if (json.guild_id === this.focusGuild?.id) {
@@ -1346,7 +1346,7 @@ class Localuser {
 			return c;
 		}
 		json.guild_id ??= "@me";
-		const guild = this.guildids.get(json.guild_id);
+		const guild = this.guilds.get(json.guild_id);
 		if (!guild) return;
 		if (guild.channels.find((_) => _.id === json.id)) return;
 		const channel = guild.createChannelpac(json);
@@ -1663,7 +1663,7 @@ class Localuser {
 		const [guildid, channelid, messageid] = state;
 		if (!channelid) {
 			if (guildid === "@me") {
-				const dir = this.guildids.get("@me") as Direct;
+				const dir = this.guilds.get("@me") as Direct;
 				dir.loadChannel(null, false);
 			}
 			return;
@@ -1687,7 +1687,7 @@ class Localuser {
 	delChannel(json: channeljson): void {
 		let guild_id = json.guild_id;
 		guild_id ??= "@me";
-		const guild = this.guildids.get(guild_id);
+		const guild = this.guilds.get(guild_id);
 		if (guild) {
 			guild.delChannel(json);
 		}
@@ -1724,9 +1724,9 @@ class Localuser {
 
 	loadGuild(id: string, forceReload = false): Guild | undefined {
 		this.searching = false;
-		let guild = this.guildids.get(id);
+		let guild = this.guilds.get(id);
 		if (!guild) {
-			guild = this.guildids.get("@me");
+			guild = this.guilds.get("@me");
 		}
 		console.log(forceReload);
 		if (!forceReload && this.focusGuild === guild) {
@@ -2084,7 +2084,7 @@ class Localuser {
 		div.classList.add("home", "servericon");
 
 		home.classList.add("svgicon", "svg-home");
-		(this.guildids.get("@me") as Guild).html = outdiv;
+		(this.guilds.get("@me") as Guild).html = outdiv;
 		const unread = document.createElement("div");
 		unread.classList.add("unread");
 		outdiv.append(unread);
@@ -2094,7 +2094,7 @@ class Localuser {
 		outdiv.classList.add("servernoti");
 		serverlist.append(outdiv);
 		home.onclick = () => {
-			const guild = this.guildids.get("@me");
+			const guild = this.guilds.get("@me");
 			if (!guild) return;
 			guild.loadGuild();
 			guild.loadChannel();
@@ -2107,8 +2107,8 @@ class Localuser {
 		const br = document.createElement("hr");
 		br.classList.add("lightbr");
 		serverlist.appendChild(br);
-		const guilds = new Set(this.guildids.values());
-		const dirrect = this.guildids.get("@me") as Direct;
+		const guilds = new Set(this.guilds.values());
+		const dirrect = this.guilds.get("@me") as Direct;
 
 		guilds.delete(dirrect);
 		const folders = this.guildFolders
@@ -2116,7 +2116,7 @@ class Localuser {
 				return {
 					guilds: folder.guild_ids
 						.map((id) => {
-							const guild = this.guildids.get(id);
+							const guild = this.guilds.get(id);
 							if (!guild) {
 								console.error(`guild ${id} does not exist`);
 								return;
@@ -2309,7 +2309,7 @@ class Localuser {
 		).json();
 	}
 	async guildDiscovery() {
-		this.guildids.get("@me")?.loadChannel("discover");
+		this.guilds.get("@me")?.loadChannel("discover");
 	}
 	messageCreate(messagep: messageCreateJson): void {
 		messagep.d.guild_id ??= "@me";
@@ -2320,7 +2320,7 @@ class Localuser {
 		}
 	}
 	unreads(): void {
-		for (const thing of this.guildids.values()) {
+		for (const thing of this.guilds.values()) {
 			if (thing.id === "@me") {
 				thing.unreads();
 				continue;
@@ -2382,10 +2382,10 @@ class Localuser {
 	}
 	totalMentions() {
 		let sum = 0;
-		for (const guild of this.guildids.values()) {
+		for (const guild of this.guilds.values()) {
 			sum += guild.mentions;
 		}
-		for (const channel of (this.guildids.get("@me") as Direct).channels) {
+		for (const channel of (this.guilds.get("@me") as Direct).channels) {
 			sum += channel.mentions;
 		}
 		return sum;
@@ -4993,7 +4993,7 @@ class Localuser {
 	getMemberMap = new Map<string, Promise<Member | undefined>>();
 	async getMember(id: string, guildid: string): Promise<Member | undefined> {
 		const user = this.userMap.get(id);
-		const guild = this.guildids.get(guildid) as Guild;
+		const guild = this.guilds.get(guildid) as Guild;
 		if (user) {
 			const memb = user.members.get(guild);
 			if (memb) return memb;
@@ -5017,7 +5017,7 @@ class Localuser {
 		if (guildid === "@me") {
 			return undefined;
 		}
-		const guild = this.guildids.get(guildid);
+		const guild = this.guilds.get(guildid);
 		//TODO well, maybe think this over, I set the member count and whatnot, maybe for "large enough" guilds I return a member that's filled out blankly unless its needed to be fully resolved, added stuff to identify to make it work
 		const borked = false;
 		if (!guild || (borked && guild.member_count > 250)) {

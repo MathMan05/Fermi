@@ -249,7 +249,7 @@ class User extends SnowFlake {
 
 	static contextmenu = new Contextmenu<User, Member | undefined>("User Menu");
 	async opendm(message?: string) {
-		for (const dm of (this.localuser.guildids.get("@me") as Direct).channels) {
+		for (const dm of (this.localuser.guilds.get("@me") as Direct).channels) {
 			if ((dm.type === 1 || dm.type === undefined) && dm.users[0].id === this.id) {
 				await this.localuser.goToChannel(dm.id);
 				if (message) {
@@ -275,7 +275,7 @@ class User extends SnowFlake {
 				return this.localuser.goToChannel(json.id);
 			});
 		if (message) {
-			for (const dm of (this.localuser.guildids.get("@me") as Direct).channels) {
+			for (const dm of (this.localuser.guilds.get("@me") as Direct).channels) {
 				if ((dm.type === 1 || dm.type === undefined) && dm.users[0].id === this.id) {
 					dm.sendMessage(message, {
 						attachments: [],
@@ -683,7 +683,7 @@ class User extends SnowFlake {
 		dio.show();
 	}
 	getMembersSync() {
-		return [...this.localuser.guildids.values()]
+		return [...this.localuser.guilds.values()]
 			.map((guild) => {
 				const m = this.members.get(guild);
 				return m instanceof Member ? m : undefined;
@@ -806,7 +806,7 @@ class User extends SnowFlake {
 		return div;
 	}
 	createWidget(guild?: Guild) {
-		guild = this.localuser.guildids.get("@me") as Guild;
+		guild = this.localuser.guilds.get("@me") as Guild;
 		const div = document.createElement("div");
 		div.classList.add("flexltr", "createdWebhook");
 		//TODO make sure this is something I can actually do here
@@ -1422,7 +1422,7 @@ class User extends SnowFlake {
 
 			mutDiv.append(
 				...high.mutual_guilds
-					.map((_) => [this.localuser.guildids.get(_.id), _.nick] as const)
+					.map((_) => [this.localuser.guilds.get(_.id), _.nick] as const)
 					.map(([guild, nick]) => {
 						if (!guild) return;
 						const icon = guild.generateGuildIcon(false);
