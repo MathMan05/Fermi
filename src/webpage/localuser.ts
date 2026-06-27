@@ -76,11 +76,11 @@ class Localuser {
 	info!: Specialuser["serverurls"];
 	headers!: {"Content-type": string; Authorization: string};
 	guilds!: Guild[];
-	guildids: Map<string, Guild> = new Map();
+	guildids = new Map<string, Guild>();
 	user!: User;
-	idToPrev: Map<string, string | undefined> = new Map();
-	idToNext: Map<string, string | undefined> = new Map();
-	messages: Map<string, Message> = new Map();
+	idToPrev = new Map<string, string | undefined>();
+	idToNext = new Map<string, string | undefined>();
+	messages = new Map<string, Message>();
 	get status() {
 		return this.user.status;
 	}
