@@ -1513,7 +1513,7 @@ class User extends SnowFlake {
 		guild: Guild | null | Member = null,
 		zIndex = -1,
 	): Promise<HTMLDivElement> {
-		const membres = (async () => {
+		const members = (async () => {
 			if (!guild) return;
 			let member: Member | undefined;
 			if (guild instanceof Guild) {
@@ -1537,7 +1537,7 @@ class User extends SnowFlake {
 		}
 		const banner = this.getBanner(guild);
 		div.append(banner);
-		membres.then((member) => {
+		members.then((member) => {
 			if (!member) return;
 			if (member.accent_color && member.accent_color !== 0) {
 				div.style.setProperty(
@@ -1662,7 +1662,7 @@ class User extends SnowFlake {
 		pronounshtml.classList.add("pronouns");
 		userbody.appendChild(pronounshtml);
 
-		membres.then((member) => {
+		members.then((member) => {
 			if (!member) return;
 			if (member.pronouns && member.pronouns !== "") {
 				pronounshtml.textContent = member.pronouns;
@@ -1674,7 +1674,7 @@ class User extends SnowFlake {
 		const biohtml = this.bio.makeHTML();
 		userbody.appendChild(biohtml);
 
-		membres.then((member) => {
+		members.then((member) => {
 			if (!member) return;
 			if (member.bio && member.bio !== "") {
 				//TODO make markdown take Guild
@@ -1694,7 +1694,7 @@ class User extends SnowFlake {
 		};
 
 		if (guild) {
-			membres.then((member) => {
+			members.then((member) => {
 				if (!member) return;
 				send.placeholder = I18n.user.sendMessage(member.name);
 				usernamehtml.textContent = member.name;
