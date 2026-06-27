@@ -427,7 +427,7 @@ class Message extends SnowFlake {
 				continue;
 			} else if (thing === "sticker_items") {
 				this.stickers = (messagejson.sticker_items || []).map((_) => {
-					const guild = this.localuser.guildids.get(_.guild_id as string);
+					const guild = this.localuser.guilds.get(_.guild_id as string);
 					return new Sticker(_, guild || this.localuser);
 				});
 			} else if (thing === "components" && messagejson.components) {

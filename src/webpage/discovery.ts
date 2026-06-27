@@ -171,7 +171,7 @@ export class Discovery {
 				content.appendChild(desc);
 
 				content.addEventListener("click", async () => {
-					let guildObj = this.localuser.guildids.get(guild.id);
+					let guildObj = this.localuser.guilds.get(guild.id);
 					if (guildObj) {
 						guildObj.loadGuild();
 						guildObj.loadChannel();
@@ -270,9 +270,9 @@ export class Discovery {
 			method: "PUT",
 			headers: this.headers,
 		});
-		let guildObj = this.localuser.guildids.get(guild.id);
+		let guildObj = this.localuser.guilds.get(guild.id);
 		while (!guildObj) {
-			guildObj = this.localuser.guildids.get(guild.id);
+			guildObj = this.localuser.guilds.get(guild.id);
 			await new Promise((res) => setTimeout(res, 100));
 		}
 		guildObj.loadGuild();
