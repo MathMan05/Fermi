@@ -1038,7 +1038,7 @@ class User extends SnowFlake {
 
 	async block() {
 		await this.changeRelationship(2);
-		const channel = this.localuser.channelfocus;
+		const channel = this.localuser.focusChannel;
 		if (channel) {
 			for (const message of channel.messages) {
 				message[1].generateMessage();
@@ -1048,7 +1048,7 @@ class User extends SnowFlake {
 
 	async unblock() {
 		await this.changeRelationship(0);
-		const channel = this.localuser.channelfocus;
+		const channel = this.localuser.focusChannel;
 		if (channel) {
 			for (const message of channel.messages) {
 				message[1].generateMessage();
@@ -1451,7 +1451,7 @@ class User extends SnowFlake {
 					...high.mutual_friends
 						.map((_) => new User(_, this.localuser))
 						.map((user) => {
-							const html = user.createWidget(this.localuser.lookingguild);
+							const html = user.createWidget(this.localuser.focusGuild);
 							html.onclick = (e) => {
 								e.stopImmediatePropagation();
 								e.preventDefault();

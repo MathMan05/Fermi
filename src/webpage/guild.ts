@@ -347,8 +347,8 @@ class Guild extends SnowFlake {
 		return this.channels.find((_) => _.id === id);
 	}
 	recalcPrivate() {
-		if (this !== this.localuser.lookingguild) return;
-		this.localuser.channelfocus?.slowmode();
+		if (this !== this.localuser.focusGuild) return;
+		this.localuser.focusChannel?.slowmode();
 	}
 	async findAdmin() {
 		const menu = new Dialog(I18n.guild.admins());
@@ -525,58 +525,7 @@ class Guild extends SnowFlake {
 		loadResults();
 	}
 	async searchMembers(limit: number, query: string): Promise<Member[]> {
-		if (this.id !== "@me") {
-			return new Promise<Member[]>((res) => {
-				const nonce = Math.floor(Math.random() * 10 ** 8) + "";
-				this.localuser.ws!.send(
-					JSON.stringify({
-						op: 8,
-						d: {
-							guild_id: [this.id],
-							query,
-							limit,
-							presences: true,
-							nonce,
-						},
-					}),
-				);
-				this.localuser.searchMap.set(
-					nonce,
-					async (e: {
-						chunk_index: number;
-						chunk_count: number;
-						nonce: string;
-						not_found?: string[];
-						members?: memberjson[];
-						presences: presencejson[];
-					}) => {
-						console.log(e);
-						if (e.members && e.members[0]) {
-							if (e.members[0].user) {
-								res(
-									(await Promise.all(e.members.map(async (_) => await Member.new(_, this)))).filter(
-										(_) => _ !== undefined,
-									),
-								);
-							} else {
-								const prom1: Promise<User>[] = [];
-								for (const thing of e.members) {
-									prom1.push(this.localuser.getUser(thing.id));
-								}
-								await Promise.all(prom1);
-								res(
-									(await Promise.all(e.members.map(async (_) => await Member.new(_, this)))).filter(
-										(_) => _ !== undefined,
-									),
-								);
-							}
-						}
-						return [];
-					},
-				);
-			});
-		}
-		return [];
+		return this.localuser.searchMembers(limit, query, this);
 	}
 	async showWelcome() {
 		this.welcomeScreen = await (
@@ -1783,7 +1732,6 @@ class Guild extends SnowFlake {
 		noti.classList.add("unread");
 		divy.append(noti);
 		if (guild instanceof Guild && autoLink) {
-			guild.localuser.guildhtml.set(guild.id, divy);
 			guild.html = divy;
 		}
 		let icon: string | null;
@@ -2019,17 +1967,17 @@ class Guild extends SnowFlake {
 		this.noChannel(addstate);
 	}
 	removePrevChannel() {
-		if (this.localuser.channelfocus) {
-			this.localuser.channelfocus.infinite.delete();
+		if (this.localuser.focusChannel) {
+			this.localuser.focusChannel.infinite.delete();
 		}
-		if (this !== this.localuser.lookingguild) {
+		if (this !== this.localuser.focusGuild) {
 			this.loadGuild();
 		}
-		if (this.localuser.channelfocus && this.localuser.channelfocus.myhtml) {
-			this.localuser.channelfocus.myhtml.classList.remove("viewChannel");
+		if (this.localuser.focusChannel && this.localuser.focusChannel.myhtml) {
+			this.localuser.focusChannel.myhtml.classList.remove("viewChannel");
 		}
 		this.prevchannel = undefined;
-		this.localuser.channelfocus = undefined;
+		this.localuser.focusChannel = undefined;
 		const replybox = document.getElementById("replybox") as HTMLElement;
 		const typebox = document.getElementById("typebox") as HTMLElement;
 		replybox.classList.add("hideReplyBox");

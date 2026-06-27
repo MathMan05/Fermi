@@ -136,7 +136,7 @@ class Emoji {
 					}
 					const guild = localuser.guildids.get(lookup.guild?.id as string);
 					if (guild) {
-						if (localuser.lookingguild === guild) {
+						if (localuser.focusGuild === guild) {
 							desc.textContent = I18n.emoji.found.this();
 						} else {
 							desc.textContent = I18n.emoji.found.other();
@@ -361,10 +361,7 @@ class Emoji {
 
 		let isFirst = true;
 		if (localuser) {
-			[
-				localuser.lookingguild,
-				...localuser.guilds.filter((guild) => guild !== localuser.lookingguild),
-			]
+			[localuser.focusGuild, ...localuser.guilds.filter((guild) => guild !== localuser.focusGuild)]
 				.filter((_) => _ !== undefined)
 				.filter((guild) => guild.id != "@me" && guild.emojis.length > 0)
 				.forEach((guild) => {

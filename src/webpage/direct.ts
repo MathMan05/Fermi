@@ -149,7 +149,7 @@ class Direct extends Guild {
 
 		messages.append(container);
 		const checkVoid = () => {
-			if (this.localuser.channelfocus !== undefined || this.localuser.lookingguild !== this) {
+			if (this.localuser.focusChannel !== undefined || this.localuser.focusGuild !== this) {
 				this.localuser.relationshipsUpdate = () => {};
 			}
 		};
@@ -518,13 +518,13 @@ class Group extends Channel {
 	addRec(user: User) {
 		this.users.push(user);
 		this.users = [...new Set(this.users)];
-		if (this.localuser.channelfocus === this) {
+		if (this.localuser.focusChannel === this) {
 			this.localuser.memberListQue();
 		}
 	}
 	removeRec(user: User) {
 		this.users = this.users.filter((u) => u !== user);
-		if (this.localuser.channelfocus === this) {
+		if (this.localuser.focusChannel === this) {
 			this.localuser.memberListQue();
 		}
 	}

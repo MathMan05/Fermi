@@ -80,7 +80,6 @@ class Localuser {
 	initialized!: boolean;
 	info!: Specialuser["serverurls"];
 	headers!: {"Content-type": string; Authorization: string};
-	ready!: readyjson;
 	guilds!: Guild[];
 	guildids: Map<string, Guild> = new Map();
 	user!: User;
@@ -93,12 +92,11 @@ class Localuser {
 	set status(status: string) {
 		this.user.setstatus(status);
 	}
-	channelfocus: Channel | undefined;
-	lookingguild: Guild | undefined;
-	guildhtml: Map<string, HTMLDivElement> = new Map();
-	ws: WebSocket | undefined;
-	connectionSucceed = 0;
-	errorBackoff = 0;
+	focusChannel?: Channel;
+	focusGuild?: Guild;
+	private ws?: WebSocket;
+	private connectionSucceed = 0;
+	private errorBackoff = 0;
 	channelids: Map<string, Channel> = new Map();
 	readonly userMap: Map<string, User> = new Map();
 	voiceFactory?: VoiceFactory;
@@ -142,7 +140,7 @@ class Localuser {
 		onswap?.(thisUser);
 	}
 	static userMenu = this.generateUserMenu();
-	userResMap = new Map<string, Promise<User>>();
+	private userResMap = new Map<string, Promise<User>>();
 	async getUser(id: string) {
 		let user = this.userMap.get(id);
 		if (user) return user;
@@ -222,17 +220,56 @@ class Localuser {
 		);
 		return menu;
 	}
+	async searchMembers(limit: number, query: string, guild: Guild): Promise<Member[]> {
+		if (guild.id !== "@me") {
+			return new Promise<Member[]>((res) => {
+				const nonce = Math.floor(Math.random() * 10 ** 8) + "";
+				this.ws!.send(
+					JSON.stringify({
+						op: 8,
+						d: {
+							guild_id: [guild.id],
+							query,
+							limit,
+							presences: true,
+							nonce,
+						},
+					}),
+				);
+				this.searchMap.set(nonce, async (e) => {
+					console.log(e);
+					if (e.members && e.members[0]) {
+						if (e.members[0].user) {
+							res(
+								(await Promise.all(e.members.map(async (_) => await Member.new(_, guild)))).filter(
+									(_) => _ !== undefined,
+								),
+							);
+						} else {
+							const prom1: Promise<User>[] = [];
+							for (const thing of e.members) {
+								prom1.push(this.getUser(thing.id));
+							}
+							await Promise.all(prom1);
+							res(
+								(await Promise.all(e.members.map(async (_) => await Member.new(_, guild)))).filter(
+									(_) => _ !== undefined,
+								),
+							);
+						}
+					}
+					return [];
+				});
+			});
+		}
+		return [];
+	}
 	onswap?: (l: Localuser) => void;
-	constructor(userinfo: Specialuser | -1) {
+	constructor(userinfo: Specialuser) {
 		Play.playURL("/audio/sounds.jasf").then((_) => {
 			this.play = _;
 		});
 
-		//TODO get rid of this garbage
-		if (userinfo === -1) {
-			this.rights = new Rights("");
-			return;
-		}
 		this.userinfo = userinfo;
 		this.perminfo.guilds ??= {};
 		this.perminfo.user ??= {};
@@ -280,17 +317,6 @@ class Localuser {
 		} else {
 			mic.classList.add("svg-mic");
 		}
-	}
-	channelByID(id: string): Channel | void {
-		let channel: Channel | void = undefined;
-		this.guilds.forEach((_) => {
-			_.channels.forEach((_) => {
-				if (_.id === id) {
-					channel = _;
-				}
-			});
-		});
-		return channel;
 	}
 	trace: {trace: trace; time: Date}[] = [];
 	handleTrace(str: string[]) {
@@ -350,7 +376,6 @@ class Localuser {
 		this.guildFolders = ready.d.user_settings.guild_folders;
 		document.body.style.setProperty("--view-rest", I18n.message.viewrest());
 		this.initialized = true;
-		this.ready = ready;
 		this.guilds = [];
 		this.guildids = new Map();
 		this.user = new User(ready.d.user, this);
@@ -382,10 +407,9 @@ class Localuser {
 			this.userinfo.updateLocal();
 		}
 
-		this.status = this.ready.d.user_settings.status;
-		this.channelfocus = undefined;
-		this.lookingguild = undefined;
-		this.guildhtml = new Map();
+		this.status = ready.d.user_settings.status;
+		this.focusChannel = undefined;
+		this.focusGuild = undefined;
 		const members: {[key: string]: memberjson} = {};
 		if (ready.d.merged_members) {
 			for (const thing of ready.d.merged_members) {
@@ -438,11 +462,11 @@ class Localuser {
 		servers.innerHTML = "";
 		const channels = document.getElementById("channels") as HTMLDivElement;
 		channels.innerHTML = "";
-		if (this.channelfocus) {
-			this.channelfocus.infinite.delete();
+		if (this.focusChannel) {
+			this.focusChannel.infinite.delete();
 		}
-		this.lookingguild = undefined;
-		this.channelfocus = undefined;
+		this.focusGuild = undefined;
+		this.focusChannel = undefined;
 	}
 	giveMessage(m: messagejson) {
 		const c = this.channelids.get(m.channel_id);
@@ -860,7 +884,7 @@ class Localuser {
 						this.guildids.delete(temp.d.id);
 						this.guilds.splice(this.guilds.indexOf(guildy), 1);
 						guildy.html.remove();
-						if (guildy === this.lookingguild) {
+						if (guildy === this.focusGuild) {
 							this.guildids.get("@me")?.loadGuild();
 							this.guildids.get("@me")?.loadChannel();
 						}
@@ -1092,7 +1116,7 @@ class Localuser {
 					break;
 				}
 				case "MESSAGE_ACK": {
-					const channel = this.channelByID(temp.d.channel_id);
+					const channel = this.channelids.get(temp.d.channel_id);
 					if (!channel) break;
 					channel.lastreadmessageid = temp.d.message_id;
 					channel.mentions = 0;
@@ -1323,7 +1347,7 @@ class Localuser {
 		const guild = this.guildids.get(json.guild_id || "@me");
 		if (guild) {
 			guild.updateChannel(json);
-			if (json.guild_id === this.lookingguild?.id) {
+			if (json.guild_id === this.focusGuild?.id) {
 				this.loadGuild(json.guild_id);
 			}
 		}
@@ -1339,7 +1363,7 @@ class Localuser {
 		if (!guild) return;
 		if (guild.channels.find((_) => _.id === json.id)) return;
 		const channel = guild.createChannelpac(json);
-		if (json.guild_id === this.lookingguild?.id) {
+		if (json.guild_id === this.focusGuild?.id) {
 			this.loadGuild(json.guild_id, true);
 		}
 		if (channel.id === this.gotoid) {
@@ -1365,10 +1389,10 @@ class Localuser {
 	}
 	async memberListUpdate(list: memberlistupdatejson | void) {
 		if (this.searching) return;
-		const guild = this.lookingguild;
+		const guild = this.focusGuild;
 		if (!guild) return;
 
-		const channel = this.channelfocus;
+		const channel = this.focusChannel;
 		if (!channel) return;
 		if (channel.voice && this.voiceAllowed) {
 			const div = document.getElementById("sideDiv") as HTMLDivElement;
@@ -1628,18 +1652,18 @@ class Localuser {
 		return Emoji.emojiPicker(x, y, guildEmojis ? this : undefined);
 	}
 	async getSidePannel() {
-		if (this.ws && this.channelfocus) {
-			console.log(this.channelfocus.guild.id);
+		if (this.ws && this.focusChannel) {
+			console.log(this.focusChannel.guild.id);
 			this.memberListQue();
-			if (this.channelfocus.guild.id === "@me") {
+			if (this.focusChannel.guild.id === "@me") {
 				return;
 			}
-			if (!this.channelfocus.visible) return;
+			if (!this.focusChannel.visible) return;
 			this.ws.send(
 				JSON.stringify({
 					d: {
-						channels: {[this.channelfocus.id]: [[0, 99]]},
-						guild_id: this.channelfocus.guild.id,
+						channels: {[this.focusChannel.id]: [[0, 99]]},
+						guild_id: this.focusChannel.guild.id,
 					},
 					op: 14,
 				}),
@@ -1681,7 +1705,7 @@ class Localuser {
 			guild.delChannel(json);
 		}
 
-		if (json.guild_id === this.lookingguild?.id) {
+		if (json.guild_id === this.focusGuild?.id) {
 			this.loadGuild(json.guild_id, true);
 		}
 	}
@@ -1695,7 +1719,7 @@ class Localuser {
 				return;
 			}
 			await guild.loadChannel(location[5], true, location[6]);
-			this.channelfocus = this.channelids.get(location[5]);
+			this.focusChannel = this.channelids.get(location[5]);
 		}
 	}
 	loaduser(): void {
@@ -1704,8 +1728,8 @@ class Localuser {
 		(document.getElementById("status") as HTMLSpanElement).textContent = this.status;
 	}
 	isAdmin(): boolean {
-		if (this.lookingguild) {
-			return this.lookingguild.isAdmin();
+		if (this.focusGuild) {
+			return this.focusGuild.isAdmin();
 		} else {
 			return false;
 		}
@@ -1718,22 +1742,22 @@ class Localuser {
 			guild = this.guildids.get("@me");
 		}
 		console.log(forceReload);
-		if (!forceReload && this.lookingguild === guild) {
+		if (!forceReload && this.focusGuild === guild) {
 			return guild;
 		}
-		if (this.channelfocus && this.lookingguild !== guild) {
-			this.channelfocus.infinite.delete();
-			this.channelfocus = undefined;
+		if (this.focusChannel && this.focusGuild !== guild) {
+			this.focusChannel.infinite.delete();
+			this.focusChannel = undefined;
 		}
-		if (this.lookingguild) {
-			this.lookingguild.html.classList.remove("serveropen");
+		if (this.focusGuild) {
+			this.focusGuild.html.classList.remove("serveropen");
 		}
 
 		if (!guild) return;
 		if (guild.html) {
 			guild.html.classList.add("serveropen");
 		}
-		this.lookingguild = guild;
+		this.focusGuild = guild;
 		(document.getElementById("serverName") as HTMLElement).textContent = guild.properties.name;
 		const banner = document.getElementById("servertd");
 		console.log(guild.banner, banner);
@@ -2314,7 +2338,7 @@ class Localuser {
 				thing.unreads();
 				continue;
 			}
-			const html = this.guildhtml.get(thing.id);
+			const html = thing.html;
 			thing.unreads(html);
 		}
 	}
@@ -4027,8 +4051,8 @@ class Localuser {
 		};
 	}
 	async pinnedClick(rect: DOMRect) {
-		if (!this.channelfocus) return;
-		await this.channelfocus.pinnedClick(rect);
+		if (!this.focusChannel) return;
+		await this.focusChannel.pinnedClick(rect);
 	}
 	async makeStickerBox(rect: DOMRect) {
 		const sticker = await Sticker.stickerPicker(
@@ -4038,14 +4062,14 @@ class Localuser {
 		);
 		this.favorites.addStickerFreq(sticker.id);
 		console.log(sticker);
-		if (this.channelfocus) {
-			this.channelfocus.sendMessage("", {
+		if (this.focusChannel) {
+			this.focusChannel.sendMessage("", {
 				embeds: [],
 				attachments: [],
 				sticker_ids: [sticker.id],
-				replyingto: this.channelfocus.replyingto,
+				replyingto: this.focusChannel.replyingto,
 			});
-			this.channelfocus.replyingto = null;
+			this.focusChannel.replyingto = null;
 		}
 	}
 
@@ -4124,15 +4148,15 @@ class Localuser {
 				gifs.append(div);
 
 				div.onclick = () => {
-					if (this.channelfocus) {
-						this.channelfocus.sendMessage(gif.src, {
+					if (this.focusChannel) {
+						this.focusChannel.sendMessage(gif.src, {
 							embeds: [],
 							attachments: [],
 							sticker_ids: [],
-							replyingto: this.channelfocus.replyingto,
+							replyingto: this.focusChannel.replyingto,
 						});
 						menu.remove();
-						this.channelfocus.replyingto = null;
+						this.focusChannel.replyingto = null;
 					}
 				};
 			}
@@ -4403,8 +4427,8 @@ class Localuser {
 	}
 	MDFindChannel(name: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
 		const maybe: [number, Channel][] = [];
-		if (this.lookingguild && this.lookingguild.id !== "@me") {
-			for (const channel of this.lookingguild.channels.filter((_) => _.visible)) {
+		if (this.focusGuild && this.focusGuild.id !== "@me") {
+			for (const channel of this.focusGuild.channels.filter((_) => _.visible)) {
 				const confidence = channel.similar(name);
 				if (confidence > 0) {
 					maybe.push([confidence, channel]);
@@ -4421,9 +4445,9 @@ class Localuser {
 	}
 	MDFineMentionGen(name: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
 		let members: [Member | Role | User | "@everyone" | "@here", number][] = [];
-		if (this.lookingguild && name !== "everyone" && name !== "here") {
-			if (this.lookingguild.id === "@me") {
-				const dirrect = this.channelfocus as Group;
+		if (this.focusGuild && name !== "everyone" && name !== "here") {
+			if (this.focusGuild.id === "@me") {
+				const dirrect = this.focusChannel as Group;
 
 				for (const user of dirrect.users) {
 					const rank = user.compare(name);
@@ -4432,13 +4456,13 @@ class Localuser {
 					}
 				}
 			} else {
-				for (const member of this.lookingguild.members) {
+				for (const member of this.focusGuild.members) {
 					const rank = member.compare(name);
 					if (rank > 0) {
 						members.push([member, rank]);
 					}
 				}
-				for (const role of this.lookingguild.roles.filter((_) => _.id !== this.lookingguild?.id)) {
+				for (const role of this.focusGuild.roles.filter((_) => _.id !== this.focusGuild?.id)) {
 					const rank = role.compare(name);
 					if (rank > 0) {
 						members.push([role, rank]);
@@ -4477,11 +4501,11 @@ class Localuser {
 		);
 	}
 	MDFindMention(name: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
-		if (this.ws && this.lookingguild) {
+		if (this.ws && this.focusGuild) {
 			this.MDFineMentionGen(name, original, box, typebox);
-			if (this.lookingguild.member_count <= this.lookingguild.members.size) return;
-			if (this.lookingguild.id !== "@me") {
-				this.lookingguild.searchMembers(8, name).then(async () => {
+			if (this.focusGuild.member_count <= this.focusGuild.members.size) return;
+			if (this.focusGuild.id !== "@me") {
+				this.focusGuild.searchMembers(8, name).then(async () => {
 					if (!typebox.rawString.startsWith(original)) return;
 					this.MDFineMentionGen(name, original, box, typebox);
 				});
@@ -4505,7 +4529,7 @@ class Localuser {
 		this.MDSearchOptions(map, original, box, typebox);
 	}
 	async findCommands(search: string, box: HTMLDivElement, md: MarkDown) {
-		const guild = this.lookingguild;
+		const guild = this.focusGuild;
 		if (!guild) return;
 		const commands = await guild.getCommands();
 		const sorted = commands
@@ -4521,7 +4545,7 @@ class Localuser {
 					"",
 					undefined,
 					() => {
-						this.channelfocus?.startCommand(elm);
+						this.focusChannel?.startCommand(elm);
 						return true;
 					},
 				] as const;
@@ -4620,7 +4644,7 @@ class Localuser {
 		);
 		const c = opt.addCheckboxInput(I18n.poll.mult(), () => {});
 		opt.addButtonInput("", I18n.submit(), () => {
-			const chan = this.channelfocus;
+			const chan = this.focusChannel;
 			if (!chan) return;
 			chan.sendMessage("", {
 				poll: {
@@ -4659,10 +4683,10 @@ class Localuser {
 		let channels = [] as Channel[];
 		const genPage = (page: number) => {
 			p.set("offset", page * 50 + "");
-			const guildSearch = this.lookingguild?.id !== "@me";
+			const guildSearch = this.focusGuild?.id !== "@me";
 			fetch(
 				this.info.api +
-					`${guildSearch ? `/guilds/${this.lookingguild?.id}` : `/channels/${this.channelfocus?.id}`}/messages/search/?` +
+					`${guildSearch ? `/guilds/${this.focusGuild?.id}` : `/channels/${this.focusChannel?.id}`}/messages/search/?` +
 					p.toString() +
 					(authorIds.length ? authorIds.map((_) => `&author_id=${_}`).join("") : "") +
 					(mentionIds.length ? mentionIds.map((_) => `&mentions=${_}`).join("") : "") +
@@ -4729,12 +4753,12 @@ class Localuser {
 							else p.set("include_nsfw", "false");
 						};
 						const userSearch = async (name: string, ids: string[]) => {
-							const g = this.lookingguild;
+							const g = this.focusGuild;
 							if (!g) return [];
 							g.searchMembers(8, name);
 							const members = [] as [User | Member, number][];
 							if (g.id === "@me") {
-								const dirrect = this.channelfocus as Group;
+								const dirrect = this.focusChannel as Group;
 
 								for (const user of dirrect.users) {
 									const rank = user.compare(name);
@@ -4763,7 +4787,7 @@ class Localuser {
 						opt.addAsyncMultiSelect(I18n.search.authors(), () => {}, userSearch, {
 							defaultValues: authorIds
 								.map((id) => {
-									const g = this.lookingguild;
+									const g = this.focusGuild;
 									if (!g || g.id === "@me") {
 										return this.userMap.get(id);
 									} else {
@@ -4779,7 +4803,7 @@ class Localuser {
 						opt.addAsyncMultiSelect(I18n.search.mentions(), () => {}, userSearch, {
 							defaultValues: mentionIds
 								.map((id) => {
-									const g = this.lookingguild;
+									const g = this.focusGuild;
 									if (!g || g.id === "@me") {
 										return this.userMap.get(id);
 									} else {
@@ -4791,12 +4815,12 @@ class Localuser {
 						}).onchange = (values: string[]) => {
 							mentionIds = values;
 						};
-						if (this.lookingguild?.id !== "@me")
+						if (this.focusGuild?.id !== "@me")
 							opt.addAsyncMultiSelect(
 								I18n.search.channels(),
 								() => {},
 								(name, ids) => {
-									const g = this.lookingguild;
+									const g = this.focusGuild;
 									if (!g) return [];
 									const c = g.channels.filter((_) => _.visible);
 
@@ -4823,7 +4847,7 @@ class Localuser {
 									defaultValues: channels.map((_) => ({name: _.name, value: _.id})),
 								},
 							).onchange = (values: string[]) => {
-								const g = this.lookingguild;
+								const g = this.focusGuild;
 								if (!g) return;
 								channels = values.map((id) => g.getChannel(id)).filter((_) => _ !== undefined);
 							};
@@ -4932,10 +4956,10 @@ class Localuser {
 		}
 		if (event.key === "Escape") {
 			if (event.ctrlKey) {
-				this.lookingguild?.markAsRead();
+				this.focusGuild?.markAsRead();
 			} else {
-				this.channelfocus?.readbottom();
-				this.channelfocus?.goToBottom();
+				this.focusChannel?.readbottom();
+				this.focusChannel?.goToBottom();
 			}
 			return true;
 		}

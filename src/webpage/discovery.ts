@@ -50,8 +50,8 @@ export class Discovery {
 		if (this.owner instanceof Direct) {
 			this.owner.freindDiv?.classList.remove("viewChannel");
 		}
-		if (this.localuser.channelfocus) {
-			this.localuser.channelfocus.collectBox();
+		if (this.localuser.focusChannel) {
+			this.localuser.focusChannel.collectBox();
 		}
 		history.pushState(["@me", "discover"], "", "/channels/@me/discover");
 		this.localuser.pageTitle(I18n.discovery());
@@ -60,12 +60,12 @@ export class Discovery {
 		channelTopic.removeAttribute("hidden");
 		channelTopic.textContent = "";
 		channelTopic.onclick = () => {};
-		if (this.localuser.lookingguild) {
-			this.localuser.lookingguild.html.classList.remove("serveropen");
+		if (this.localuser.focusGuild) {
+			this.localuser.focusGuild.html.classList.remove("serveropen");
 		}
 
-		this.localuser.lookingguild = undefined;
-		this.localuser.channelfocus = undefined;
+		this.localuser.focusGuild = undefined;
+		this.localuser.focusChannel = undefined;
 
 		const loading = document.getElementById("loadingdiv") as HTMLDivElement;
 		loading.classList.remove("loading");

@@ -48,16 +48,18 @@ if (window.location.pathname.startsWith("/channels")) {
 	userInfoElement.addEventListener("click", (event) => {
 		event.stopImmediatePropagation();
 		const rect = userInfoElement.getBoundingClientRect();
+		if (!thisUser) return;
 		Localuser.userMenu.makemenu(rect.x, rect.top - 10 - window.innerHeight, thisUser);
 	});
 
 	const switchAccountsElement = document.getElementById("switchaccounts") as HTMLDivElement;
 	switchAccountsElement.addEventListener("click", async (event) => {
 		event.stopImmediatePropagation();
+		if (!thisUser) return;
 		Localuser.showAccountSwitcher(thisUser);
 	});
 
-	let thisUser: Localuser;
+	let thisUser: Localuser | null = null;
 	function regSwap(l: Localuser) {
 		l.onswap = (l) => {
 			thisUser = l;
@@ -98,9 +100,9 @@ if (window.location.pathname.startsWith("/channels")) {
 
 		regSwap(thisUser);
 		thisUser.initwebsocket().then(async () => {
-			thisUser.loaduser();
+			thisUser?.loaduser();
 			console.warn("huh");
-			await thisUser.init();
+			await thisUser?.init();
 			console.warn("huh2");
 			const loading = document.getElementById("loading") as HTMLDivElement;
 			loading.classList.add("doneloading");
@@ -108,27 +110,27 @@ if (window.location.pathname.startsWith("/channels")) {
 			loaddesc.textContent = I18n.loaded();
 			console.log("done loading");
 			if (templateID) {
-				thisUser.passTemplateID(templateID);
+				thisUser?.passTemplateID(templateID);
 			}
 		});
 	} catch (e) {
 		debugger;
 		console.error(e);
 		loaddesc.textContent = I18n.accountNotStart();
-		thisUser = new Localuser(-1);
+		thisUser = null;
 	}
 	//TODO move this to the channel/guild class, this is a weird spot
 	const menu = new Contextmenu<void, void>("create rightclick");
 	menu.addButton(
 		I18n.channel.createChannel(),
 		() => {
-			if (thisUser.lookingguild) {
-				thisUser.lookingguild.createchannels();
+			if (thisUser?.focusGuild) {
+				thisUser?.focusGuild.createchannels();
 			}
 		},
 		{
 			visible: function () {
-				return thisUser.lookingguild?.member.hasPermission("MANAGE_CHANNELS") || false;
+				return thisUser?.focusGuild?.member.hasPermission("MANAGE_CHANNELS") || false;
 			},
 		},
 	);
@@ -136,13 +138,13 @@ if (window.location.pathname.startsWith("/channels")) {
 	menu.addButton(
 		I18n.channel.createCatagory(),
 		() => {
-			if (thisUser.lookingguild) {
-				thisUser.lookingguild.createcategory();
+			if (thisUser?.focusGuild) {
+				thisUser?.focusGuild.createcategory();
 			}
 		},
 		{
 			visible: function () {
-				return thisUser.lookingguild?.member.hasPermission("MANAGE_CHANNELS") || false;
+				return thisUser?.focusGuild?.member.hasPermission("MANAGE_CHANNELS") || false;
 			},
 		},
 	);
@@ -165,7 +167,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	let replyingTo: Message | null = null;
 	window.addEventListener("popstate", (e) => {
 		if (e.state instanceof Object) {
-			thisUser.goToState(e.state);
+			thisUser?.goToState(e.state);
 		}
 		//console.log(e.state,"state:3")
 	});
@@ -176,7 +178,7 @@ if (window.location.pathname.startsWith("/channels")) {
 		nonceMap.set(id, nonce);
 		return nonce;
 	}
-	const markdown = new MarkDown("", thisUser);
+	const markdown = new MarkDown("", thisUser ?? undefined);
 	async function sendMessage(channel: Channel, content: string) {
 		if (!channel.canMessageRightNow()) return;
 		if (channel.curCommand) {
@@ -185,13 +187,13 @@ if (window.location.pathname.startsWith("/channels")) {
 		}
 		markdown.onUpdate("", false);
 
-		replyingTo = thisUser.channelfocus ? thisUser.channelfocus.replyingto : null;
+		replyingTo = thisUser?.focusChannel ? thisUser.focusChannel.replyingto : null;
 		if (replyingTo?.div) {
 			replyingTo.div.classList.remove("replying");
 		}
-		if (thisUser.channelfocus) {
-			thisUser.channelfocus.replyingto = null;
-			thisUser.channelfocus.makereplybox();
+		if (thisUser?.focusChannel) {
+			thisUser.focusChannel.replyingto = null;
+			thisUser.focusChannel.makereplybox();
 		}
 		const attachments = images.filter((_) => document.contains(imagesHtml.get(_) || null));
 		while (images.length) {
@@ -238,7 +240,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	const mobileSend = document.getElementById("mobileSend");
 	if (mobileSend) {
 		mobileSend.onclick = () => {
-			const channel = thisUser.channelfocus;
+			const channel = thisUser?.focusChannel;
 			if (!channel) return;
 			const content = MarkDown.gatherBoxText(typebox);
 			sendMessage(channel, content);
@@ -246,23 +248,23 @@ if (window.location.pathname.startsWith("/channels")) {
 	}
 	async function handleEnter(event: KeyboardEvent): Promise<void> {
 		if (event.isComposing) return;
-		if (event.key === "Escape" && (images.length || thisUser.channelfocus?.replyingto)) {
+		if (event.key === "Escape" && (images.length || thisUser?.focusChannel?.replyingto)) {
 			while (images.length) {
 				const elm = imagesHtml.get(images.pop() as Blob) as HTMLElement;
 				if (pasteImageElement.contains(elm)) pasteImageElement.removeChild(elm);
 			}
-			if (thisUser.channelfocus) {
-				thisUser.channelfocus?.replyingto?.div?.classList.remove("replying");
-				thisUser.channelfocus.replyingto = null;
-				thisUser.channelfocus.makereplybox();
+			if (thisUser?.focusChannel) {
+				thisUser.focusChannel?.replyingto?.div?.classList.remove("replying");
+				thisUser.focusChannel.replyingto = null;
+				thisUser.focusChannel.makereplybox();
 			}
 			return;
 		}
-		if (thisUser.handleKeyUp(event)) {
+		if (thisUser?.handleKeyUp(event)) {
 			return;
 		}
 
-		const channel = thisUser.channelfocus;
+		const channel = thisUser?.focusChannel;
 		if (!channel) return;
 		const content = MarkDown.gatherBoxText(typebox);
 		if (content === "" && event.key === "ArrowUp") {
@@ -283,7 +285,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	typebox.addEventListener("keyup", handleEnter);
 	typebox.addEventListener("keydown", (event) => {
 		if (event.isComposing) return;
-		thisUser.keydown(event);
+		thisUser?.keydown(event);
 		if (event.key === "Enter" && !event.shiftKey && window.innerWidth > 600) {
 			event.preventDefault();
 			event.stopImmediatePropagation();
@@ -292,13 +294,13 @@ if (window.location.pathname.startsWith("/channels")) {
 	markdown.giveBox(typebox);
 	{
 		const searchBox = document.getElementById("searchBox") as CustomHTMLDivElement;
-		const markdown = new MarkDown("", thisUser);
+		const markdown = new MarkDown("", thisUser ?? undefined);
 		searchBox.markdown = markdown;
 		const searchX = document.getElementById("searchX") as HTMLElement;
 		searchBox.addEventListener("keydown", (event) => {
 			if (event.key === "Enter") {
 				event.preventDefault();
-				thisUser.mSearch(markdown.rawString);
+				thisUser?.mSearch(markdown.rawString);
 			}
 		});
 		searchBox.addEventListener("keyup", () => {
@@ -324,7 +326,7 @@ if (window.location.pathname.startsWith("/channels")) {
 				searchX.classList.add("svg-search");
 				searchBox.parentElement!.classList.remove("searching");
 				searchX.classList.remove("svg-plainx");
-				thisUser.mSearch("");
+				thisUser?.mSearch("");
 			} else {
 				searchBox.parentElement!.classList.add("searching");
 			}
@@ -341,7 +343,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	let imagesHtml = new WeakMap<Blob, HTMLElement>();
 
 	document.addEventListener("paste", async (e: ClipboardEvent) => {
-		if (!thisUser.channelfocus) return;
+		if (!thisUser?.focusChannel) return;
 		if (!e.clipboardData) return;
 
 		for (const file of Array.from(e.clipboardData.files)) {
@@ -357,7 +359,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	await setTheme();
 
 	function userSettings(): void {
-		thisUser.showusersettings();
+		thisUser?.showusersettings();
 	}
 
 	(document.getElementById("settings") as HTMLImageElement).onclick = userSettings;
@@ -410,7 +412,7 @@ if (window.location.pathname.startsWith("/channels")) {
 		const data = e.dataTransfer;
 		const bg = document.getElementById("gimmefile") as HTMLDivElement;
 		bg.hidden = true;
-		if (!thisUser.channelfocus) {
+		if (!thisUser?.focusChannel) {
 			e.preventDefault();
 			return;
 		}
@@ -431,7 +433,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	});
 	const pinnedM = document.getElementById("pinnedM") as HTMLElement;
 	pinnedM.onclick = (e) => {
-		thisUser.pinnedClick(pinnedM.getBoundingClientRect());
+		thisUser?.pinnedClick(pinnedM.getBoundingClientRect());
 		e.preventDefault();
 		e.stopImmediatePropagation();
 	};
@@ -439,7 +441,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	umenu.addButton(
 		I18n.makePoll(),
 		() => {
-			thisUser.makePoll();
+			thisUser?.makePoll();
 		},
 		{
 			//TODO re-enable this once polls is merged
@@ -452,7 +454,7 @@ if (window.location.pathname.startsWith("/channels")) {
 		input.click();
 		input.multiple = true;
 		console.log("clicked");
-		if (!thisUser.channelfocus) return;
+		if (!thisUser?.focusChannel) return;
 		input.onchange = () => {
 			if (input.files) {
 				for (const file of Array.from(input.files)) {
@@ -479,7 +481,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	emojiTB.onclick = (e) => {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		thisUser.TBEmojiMenu(emojiTB.getBoundingClientRect());
+		thisUser?.TBEmojiMenu(emojiTB.getBoundingClientRect());
 	};
 
 	const gifTB = document.getElementById("gifTB") as HTMLElement;
@@ -487,7 +489,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	gifTB.onclick = (e) => {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		thisUser.makeGifBox(gifTB.getBoundingClientRect());
+		thisUser?.makeGifBox(gifTB.getBoundingClientRect());
 	};
 
 	const stickerTB = document.getElementById("stickerTB") as HTMLElement;
@@ -495,7 +497,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	stickerTB.onclick = (e) => {
 		e.preventDefault();
 		e.stopImmediatePropagation();
-		thisUser.makeStickerBox(stickerTB.getBoundingClientRect());
+		thisUser?.makeStickerBox(stickerTB.getBoundingClientRect());
 	};
 	const updateIcon = document.getElementById("updateIcon");
 	if (updateIcon) {
