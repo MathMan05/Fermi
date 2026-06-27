@@ -20,7 +20,6 @@ import {
 	GuildOverrides,
 	commandJson,
 	applicationJson,
-	presencejson,
 	welcomeScreen,
 } from "./jsontypes.js";
 import {User} from "./user.js";
