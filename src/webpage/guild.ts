@@ -190,7 +190,7 @@ class Guild extends SnowFlake {
 	html!: HTMLElement;
 	emojis: emojipjson[] = [];
 	large!: boolean;
-	stickers!: Sticker[];
+	stickers = new Map<string, Sticker>();
 	members = new Set<Member>();
 	static readonly contextmenu = new Contextmenu<Guild, void>("guild menu");
 	static setupcontextmenu() {
@@ -951,7 +951,7 @@ class Guild extends SnowFlake {
 			containdiv.classList.add("stickersDiv");
 			const genDiv = () => {
 				containdiv.innerHTML = "";
-				for (const sticker of this.stickers) {
+				for (const [_, sticker] of this.stickers) {
 					const div = document.createElement("div");
 					div.classList.add("flexttb", "stickerOption");
 
@@ -1298,7 +1298,7 @@ class Guild extends SnowFlake {
 		}
 		settings.show();
 	}
-	onStickerUpdate = (_stickers: Sticker[]) => {};
+	onStickerUpdate = (_stickers: Map<string, Sticker>) => {};
 	addCommunity(settings: Settings, textChannels: Channel[]) {
 		const com = settings.addButton(I18n.guild.community()).addForm("", () => {}, {
 			fetchURL: this.info.api + "/guilds/" + this.id,
@@ -1560,7 +1560,7 @@ class Guild extends SnowFlake {
 			temp.resolveparent(this);
 		}
 		this.prevchannel = this.localuser.channels.get(this.perminfo.prevchannel);
-		this.stickers = json.stickers.map((_) => new Sticker(_, this)) || [];
+		this.stickers = new Map(json.stickers.map((_) => [_.id, new Sticker(_, this)] as const) || []);
 	}
 	get perminfo() {
 		return this.localuser.perminfo.guilds[this.id];
