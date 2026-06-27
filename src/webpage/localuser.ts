@@ -452,7 +452,7 @@ class Localuser {
 	}
 	inrelation = new Set<User>();
 	outoffocus(): void {
-		const servers = document.getElementById("servers") as HTMLDivElement;
+		const servers = document.getElementById("guildRail") as HTMLDivElement;
 		servers.innerHTML = "";
 		const channels = document.getElementById("channels") as HTMLDivElement;
 		channels.innerHTML = "";
@@ -895,7 +895,7 @@ class Localuser {
 						this.guilds.set(guildy.id, guildy);
 						const divy = this.makeGuildIcon(guildy);
 						guildy.HTMLicon = divy;
-						(document.getElementById("servers") as HTMLDivElement).insertBefore(
+						(document.getElementById("guildRail") as HTMLDivElement).insertBefore(
 							divy,
 							document.getElementById("bottomseparator"),
 						);
@@ -1950,7 +1950,7 @@ class Localuser {
 			this.guildOrder = this.guildOrder.filter((folder) => {
 				if (folder instanceof Guild) return true;
 				if (folder.guilds.length === 0) {
-					const servers = document.getElementById("servers");
+					const servers = document.getElementById("guildRail");
 					if (servers)
 						Array.from(servers.children).forEach((_) => {
 							const html = _ as HTMLElement;
@@ -2079,7 +2079,7 @@ class Localuser {
 		  }
 	)[] = [];
 	buildservers(): void {
-		const serverlist = document.getElementById("servers") as HTMLDivElement; //
+		const serverlist = document.getElementById("guildRail") as HTMLDivElement; //
 		const outdiv = document.createElement("div");
 		const home: any = document.createElement("span");
 		const div = document.createElement("div");

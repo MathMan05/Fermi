@@ -1660,7 +1660,7 @@ textarea {
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--primary-text-soft);
 }
-#servers::-webkit-scrollbar,
+#guildRail::-webkit-scrollbar,
 #channels::-webkit-scrollbar,
 #sideContainDiv::-webkit-scrollbar {
 	display: none;
@@ -1670,7 +1670,7 @@ textarea {
 	margin: 0px;
 	padding: 0px;
 }
-#servers,
+#guildRail,
 #channels,
 #sideDiv {
 	scrollbar-width: none;
@@ -1954,7 +1954,7 @@ span.instanceStatus {
 	transition: height 0.2s;
 }
 /* Server List */
-#servers {
+#guildRail {
 	flex: 0 0 auto;
 	padding: 8px;
 	background: var(--servers-bg);
@@ -4520,7 +4520,7 @@ fieldset input[type="radio"] {
 		display: block;
 		position: fixed;
 	}
-	#servers,
+	#guildRail,
 	.channelflex,
 	#mainarea {
 		position: absolute;
