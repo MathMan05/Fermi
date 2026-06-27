@@ -1339,7 +1339,7 @@ class Localuser {
 			}
 		}
 	}
-	createChannel(json: channeljson): undefined | Channel {
+	async createChannel(json: channeljson): undefined | Channel {
 		const c = this.channels.get(json.id);
 		if (c) {
 			c.updateChannel(json);
@@ -1355,11 +1355,12 @@ class Localuser {
 		}
 		if (channel.id === this.gotoid) {
 			guild.loadGuild();
-			guild.loadChannel(channel.id).then(() => {
-				this.gotoRes();
-				this.gotoRes = () => {};
-				this.gotoid = undefined;
-			});
+			if (channel?.type !== 4) {
+				await guild.loadChannel(channel.id);
+			}
+			this.gotoRes();
+			this.gotoRes = () => {};
+			this.gotoid = undefined;
 		}
 		return channel; // Add this line to return the 'channel' variable
 	}
@@ -1675,6 +1676,7 @@ class Localuser {
 	gotoRes = () => {};
 	async goToChannel(channelid: string, addstate = true, messageid: undefined | string = undefined) {
 		const channel = this.channels.get(channelid);
+		if (channel?.type === 4) return;
 		if (channel) {
 			const guild = channel.guild;
 			guild.loadGuild();
