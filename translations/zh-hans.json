@@ -119,7 +119,7 @@
 	"blankMessage": "空白消息",
 	"blog": {
 		"blog": "博客",
-		"blogUpdates": "博客更新：",
+		"blogUpdates": "打开应用时获取博客更新：",
 		"desc": "阅读或订阅博客，获取 Fermi 的最新动态！",
 		"fermi": "Fermi 博客",
 		"gotoPost": "前往帖子",
