@@ -891,8 +891,12 @@ class Localuser {
 				}
 				case "GUILD_CREATE":
 					(async () => {
-						const guildy = new Guild(temp.d, this, this.user);
+						const m = temp.d.members.find(({id}) => id === this.user.id);
+						const guildy = new Guild(temp.d, this, m ?? this.user);
 						this.guilds.set(guildy.id, guildy);
+						for (const m of temp.d.members) {
+							Member.newUnsafe(m, guildy);
+						}
 						const divy = this.makeGuildIcon(guildy);
 						guildy.HTMLicon = divy;
 						(document.getElementById("guildRail") as HTMLDivElement).insertBefore(

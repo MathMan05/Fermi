@@ -401,6 +401,44 @@ class Member extends SnowFlake {
 	get info() {
 		return this.owner.info;
 	}
+	static newUnsafe(memberjson: memberjson, owner: Guild): Member {
+		let user: User;
+		if (owner.localuser.userMap.has(memberjson.id)) {
+			if (memberjson.user) {
+				new User(memberjson.user, owner.localuser);
+			}
+			user = owner.localuser.userMap.get(memberjson.id) as User;
+		} else if (memberjson.user) {
+			user = new User(memberjson.user, owner.localuser);
+		} else {
+			throw new Error("missing user object of this member");
+		}
+		if (user.members.has(owner)) {
+			let memb = user.members.get(owner);
+			if (memb instanceof Promise) {
+				console.error("uh oh, that was a bad call!");
+				//Welp, this is ignored in sync unsafe
+			} else if (memb === undefined || memb instanceof Promise) {
+				memb = new Member(memberjson, owner);
+				user.members.set(owner, memb);
+				owner.members.add(memb);
+				user.localuser.memberListUpdate();
+				return memb;
+			} else {
+				if (memberjson.presence) {
+					memb.getPresence(memberjson.presence);
+				}
+				memb.update(memberjson);
+				return memb;
+			}
+		}
+
+		const memb = new Member(memberjson, owner);
+		user.members.set(owner, memb);
+		owner.members.add(memb);
+		memb.localuser.memberListUpdate();
+		return memb;
+	}
 	static async new(memberjson: memberjson, owner: Guild): Promise<Member> {
 		let user: User;
 		if (owner.localuser.userMap.has(memberjson.id)) {

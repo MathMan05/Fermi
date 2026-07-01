@@ -1533,11 +1533,7 @@ class Guild extends SnowFlake {
 				}
 			});
 		} else {
-			Member.new(member, this).then((_) => {
-				if (_) {
-					this.member = _;
-				}
-			});
+			this.member = Member.newUnsafe(member, this);
 		}
 
 		for (const thing of json.channels) {

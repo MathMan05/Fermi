@@ -1012,6 +1012,14 @@ type wsjson =
 	| roleCreate
 	| {
 			op: 0;
+			t: "GUILD_CREATE";
+			d: guildjson & {
+				members: memberjson[];
+			};
+			s: number;
+	  }
+	| {
+			op: 0;
 			d: any;
 			s: number;
 			t:
@@ -1021,7 +1029,6 @@ type wsjson =
 				| "CHANNEL_CREATE"
 				| "CHANNEL_DELETE"
 				| "GUILD_DELETE"
-				| "GUILD_CREATE"
 				| "MESSAGE_REACTION_REMOVE_ALL"
 				| "MESSAGE_REACTION_REMOVE_EMOJI"
 				| "THREAD_CREATE";
