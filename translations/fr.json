@@ -842,7 +842,7 @@
 		"roles": "Rôles"
 	},
 	"poll": {
-		"question": "Question",
+		"question": "Question :",
 		"newAnswer": "Nouvelle réponse",
 		"durCount": {
 			"1": "1 heure",
@@ -850,7 +850,7 @@
 			"168": "7 jours"
 		},
 		"mult": "Autoriser plusieurs réponses :",
-		"winningAnswer": "Réponse gagnante $1%",
+		"winningAnswer": "Réponse gagnante : $1%",
 		"count": "$1 {{PLURAL:$1| vote|votes}} $2 %"
 	},
 	"search": {
