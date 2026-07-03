@@ -5110,7 +5110,7 @@ img.error::after {
 	position: relative;
 	width: 32px;
 	height: 32px;
-	img {
+	.pfpDiv {
 		background: var(--channels-bg);
 		position: absolute;
 		width: 16px;
