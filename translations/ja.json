@@ -111,7 +111,7 @@
 	"blankMessage": "空白のメッセージ",
 	"blog": {
 		"blog": "ブログ",
-		"blogUpdates": "ブログの更新:",
+		"blogUpdates": "アプリを開ける時にブログの更新を受け取る:",
 		"desc": "Fermiの最新情報についてはブログを読むか、登録してください！",
 		"fermi": "Fermi ブログ",
 		"gotoPost": "投稿へ移動",
