@@ -62,7 +62,7 @@ class ImagesDisplay {
 				if (e.key === "ArrowLeft") {
 					e.preventDefault();
 					e.stopImmediatePropagation();
-					right.click();
+					left.click();
 				}
 			});
 		}
