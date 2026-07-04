@@ -37,6 +37,18 @@ if (localStorage.getItem("checkTypes")) {
 	)) as typeof C;
 	window.checker = i.Check;
 }
+if (window.location.pathname.startsWith("/donate")) {
+	await I18n.done;
+	I18n.translatePage();
+	const desc = document.getElementById("hostDesc")!;
+	desc.innerHTML = "";
+	desc.append(
+		...I18n.donate.host
+			.desc("$NotAlisa")
+			.split("\n")
+			.flatMap((_, i) => (i ? [document.createElement("br"), _] : _)),
+	);
+}
 if (window.location.pathname.startsWith("/channels")) {
 	let templateID = new URLSearchParams(window.location.search).get("templateID");
 	await I18n.done;

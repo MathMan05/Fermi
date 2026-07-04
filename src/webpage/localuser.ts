@@ -3863,6 +3863,11 @@ class Localuser {
 					});
 				});
 		}
+		{
+			const donate = settings.addButton(I18n.donate.donate());
+			donate.addMDText(new MarkDown(I18n.donate.mdText(window.location.origin + "/donate")));
+			donate.addText(I18n.donate.desc());
+		}
 		settings.show();
 	}
 	readonly botTokens: Map<string, string> = new Map();

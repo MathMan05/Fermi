@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Fermi: A Harmony Client</title>
+		<meta content="Fermi" property="og:title" />
+		<meta content="Join a community of people and start chatting!" property="og:description" />
+		<meta content="Join a community of people and start chatting!" name="description" />
+		<meta content="/logo.webp" property="og:image" />
+		<meta content="#4b458c" name="theme-color" />
+		<link href="/style.css" rel="stylesheet" />
+		<link href="/themes.css" rel="stylesheet" id="lightcss" />
+		<style>
+			body.no-theme {
+				background: #16191b;
+			}
+			@media (prefers-color-scheme: light) {
+				body.no-theme {
+					background: #9397bd;
+				}
+			}
+		</style>
+	</head>
+
+	<body class="no-theme" style="overflow-y: scroll">
+		<header id="titleDiv">
+			<div class="flexltr center">
+				<img src="/logo.svg" width="40" alt="Fermi icon" />
+				<h2 id="pageTitle">Fermi</h2>
+			</div>
+			<a href="/invite/oPhe5g?instance=harmony" class="TitleButtons"> Harmony Guild </a>
+			<a href="https://github.com/MathMan05/Fermi" class="TitleButtons"> Github </a>
+			<a href="/donate" i18n="donate.donate" class="TitleButtons"> Donate </a>
+		</header>
+		<div id="homePage">
+			<h1 class="pagehead" i18n="donate.title">Ways to Donate</h1>
+			<div class="pagebox">
+				<p i18n="donate.desc">
+					By donating to Fermi you help the continuation of these projects going into the future!
+				</p>
+			</div>
+
+			<div class="pagebox">
+				<h2 i18n="donate.lead.title">Support the Lead Dev</h2>
+				<p i18n="donate.lead.desc">
+					Support the lead dev of Harmony and Fermi. They made Fermi from scratch and are the lead
+					maintainer of Harmony.
+				</p>
+				<br />
+				<a href="https://liberapay.com/Mathium05/" class="TitleButtons"> Librepay </a>
+			</div>
+
+			<div class="pagebox">
+				<h2 i18n="donate.host.title">Support the Host</h2>
+				<p id="hostDesc">
+					Support the Host of the main Harmony instance! She helps to guide the project into the
+					future with leadership, and reviews much of the code that goes into the Harmony
+					codebase.<br />CashApp: $NotAlisa
+				</p>
+				<br />
+			</div>
+		</div>
+	</body>
+	<script src="/index.js" type="module"></script>
+</html>

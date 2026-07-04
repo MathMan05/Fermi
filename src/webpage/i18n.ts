@@ -46,6 +46,7 @@ class I18n {
 			const t = elm.getAttribute("i18n") as string;
 			try {
 				elm.textContent = this.getTranslation(t);
+				console.log(elm, t, this.getTranslation(t));
 			} catch {
 				console.error("Couldn't get " + t + "'s translation");
 			}

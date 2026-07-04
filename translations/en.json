@@ -385,6 +385,20 @@
 		"yesDelete": "Yes, I'm sure",
 		"yesLeave": "Yes, I'm sure"
 	},
+	"donate":{
+		"title":"Ways to Donate",
+		"donate":"Donate",
+		"desc":"By donating to Fermi you help the continuation of these projects going into the future!",
+		"mdText":"[Donate Today to Fermi]($1)",
+		"lead":{
+			"title":"Support the Lead Dev",
+			"desc":"Support the lead dev of Harmony and Fermi. They made Fermi from scratch and are the lead maintainer of Harmony."
+		},
+		"host":{
+			"title":"Support the Host",
+			"desc":"Support the Host of the main Harmony instance! She helps to guide the project into the future with leadership, and reviews much of the code that goes into the Harmony codebase.\nCashApp: $1"
+		}
+	},
 	"hideBlockedMessages": "You have this user blocked, click to hide these messages.",
 	"home": {
 		"icon": "$1's instance icon",
