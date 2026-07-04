@@ -431,7 +431,7 @@
 		"userField": "Username:",
 		"welcomeJank": "Welcome to Fermi"
 	},
-	"incorrectURLS": "## This instance has likely sent the incorrect links.\n### If you're the instance owner please see [here](https://docs.spacebar.chat/setup/server/) under *Connecting from remote machines* to correct the issue.\n Would you like Fermi to automatically try to fix this error to let you connect to the instance?",
+	"incorrectURLS": "## This instance has likely sent the incorrect links.\n### If you're the instance owner please see [here](https://docs.melodychat.org/setup/server/) under *Connecting from remote machines* to correct the issue.\n Would you like Fermi to automatically try to fix this error to let you connect to the instance?",
 	"instInfo": "Instance information",
 	"instanceInfo": {
 		"contact": "Email instance admins",
