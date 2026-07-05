@@ -61,7 +61,17 @@ class Message extends SnowFlake {
 			return this.weakdiv?.deref();
 			}
 			*/
-	div: HTMLDivElement | undefined;
+	private weakDiv?: WeakRef<HTMLDivElement>;
+	get div(): HTMLDivElement | undefined {
+		return this.weakDiv?.deref();
+	}
+	set div(div: HTMLDivElement | undefined) {
+		if (div === undefined) {
+			this.weakDiv = undefined;
+			return;
+		}
+		this.weakDiv = new WeakRef(div);
+	}
 	member: Member | undefined;
 	reactions: {
 		count: number;
