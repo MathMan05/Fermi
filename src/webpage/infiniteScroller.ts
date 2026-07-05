@@ -39,6 +39,7 @@ function fragAppend(div: HTMLElement, pre = false) {
 		new Promise<void>((res) => {
 			count++;
 			frag[pre ? "prepend" : "append"](elm);
+			elm.classList.add("noFlex");
 			if (!qued) {
 				let lcount = count;
 				function wait(t = 0) {

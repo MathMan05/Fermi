@@ -115,21 +115,23 @@ class MediaGallery extends compObj {
 		const div = document.createElement("div");
 		div.classList.add("flexttb", "mediaDisp");
 		const items = this.items.map((elm) => {
-			return elm.media.getHTML();
+			const img = elm.media.getHTML(undefined, undefined, undefined, 150);
+			img.classList.add("mediaDispImg");
+			return img;
 		});
 		const row = document.createElement("div");
-		row.classList.add("flexltr");
+		row.classList.add("flexltr", "imgRow");
 		row.append(...items.slice(0, 2));
 		div.append(row);
 		if (items.length > 2) {
 			const row = document.createElement("div");
-			row.classList.add("flexltr");
+			row.classList.add("flexltr", "imgRow");
 			row.append(...items.slice(2, 5));
 			div.append(row);
 		}
 		if (items.length > 5) {
 			const row = document.createElement("div");
-			row.classList.add("flexltr");
+			row.classList.add("flexltr", "imgRow");
 			row.append(...items.slice(5, 10));
 			div.append(row);
 		}

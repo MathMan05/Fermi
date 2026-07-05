@@ -236,7 +236,7 @@ class ReportNode {
 		}
 		this.owner.node = this;
 		const div = document.createElement("div");
-		div.classList.add("flexttb");
+		div.classList.add("flexttb", "reportElm");
 		this.div = div;
 		const title = document.createElement("h2");
 		title.textContent = this.header;

@@ -27,7 +27,7 @@ class File {
 		this.content_type = fileJSON.content_type;
 		this.size = fileJSON.size;
 	}
-	getHTML(temp: boolean = false, fullScreen = false, OSpoiler = false): HTMLElement {
+	getHTML(temp: boolean = false, fullScreen = false, OSpoiler = false, max = 96 * 3): HTMLElement {
 		function makeSpoilerHTML(): HTMLElement {
 			const spoil = document.createElement("div");
 			spoil.classList.add("fSpoil");
@@ -44,11 +44,12 @@ class File {
 
 		if (this.width && this.height) {
 			let scale = 1;
-			const max = 96 * 3;
 			scale = Math.max(scale, this.width / max);
 			scale = Math.max(scale, this.height / max);
 			this.width /= scale;
 			this.height /= scale;
+			this.width ^= 0;
+			this.height ^= 0;
 		}
 		if (this.height === null) {
 			this.height = 96 * 3;
@@ -57,6 +58,10 @@ class File {
 		if (this.content_type.startsWith("image/")) {
 			const div = document.createElement("div");
 			const img = createImg(src, undefined, div);
+			if (this.width && this.height) {
+				img.width = this.width;
+				img.height = this.height;
+			}
 			if (!fullScreen) {
 				img.classList.add("messageimg");
 				div.classList.add("messageimgdiv");
@@ -85,11 +90,11 @@ class File {
 				});
 			div.append(img);
 			if (this.width && !fullScreen) {
-				div.style.width = this.width + "px";
-				div.style.height = this.height + "px";
+				img.style.width = div.style.width = this.width + "px";
+				img.style.height = div.style.height = this.height + "px";
 			} else if (!fullScreen) {
-				div.style.maxWidth = 96 * 3 + "px";
-				div.style.maxHeight = 96 * 3 + "px";
+				img.style.maxWidth = div.style.maxWidth = 96 * 3 + "px";
+				img.style.maxHeight = div.style.maxHeight = 96 * 3 + "px";
 			}
 			img.isAnimated().then((animated) => {
 				if (!animated || !this.owner || fullScreen) return;

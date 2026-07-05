@@ -343,20 +343,16 @@ body {
 		align-items: center;
 	}
 }
-.mediaDisp {
-	> * {
-		height: 150px;
-		margin-bottom: 4px;
-		> * {
-			height: 150px !important;
-			margin-right: 4px;
-			border-radius: 6px;
-			img {
-				height: 150px;
-				object-fit: cover;
-			}
-		}
-	}
+.imgRow {
+	height: 150px !important;
+	margin-right: 4px;
+	border-radius: 6px;
+	max-height: 150px;
+	min-height: 150px;
+}
+.mediaDispImg {
+	height: 150px !important;
+	object-fit: cover;
 }
 .messageComps {
 	> .flexltr {
@@ -2442,9 +2438,9 @@ span.instanceStatus {
 	flex-direction: column;
 	flex-shrink: 1;
 	max-height: fit-content;
-	> * {
-		flex: 0;
-	}
+}
+.noFlex {
+	flex: 0;
 }
 #pasteimage {
 	height: 30%;
@@ -4080,11 +4076,11 @@ fieldset input[type="radio"] {
 	height: 70%;
 	overflow-y: auto;
 	> div {
-		> * {
-			margin-bottom: 4px;
-		}
 		min-height: 100%;
 	}
+}
+.reportElm {
+	margin-bottom: 4px;
 }
 .removeElm {
 	> .reportMenu {
