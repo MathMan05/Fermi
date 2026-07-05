@@ -9,7 +9,6 @@ export class Versions {
 	private static warned = false;
 	private showWarn(text: string) {
 		//TODO enable this once the version endpoint is up and running
-		return;
 		if (Versions.warned) return;
 		Versions.warned = true;
 		const d = new Dialog("");
@@ -31,6 +30,7 @@ export class Versions {
 		}
 	}
 	static async makeVersion(api: string, place: "regi" | "start"): Promise<Versions> {
+		if (!api.includes("spacebar.chat")) return new Versions();
 		const p = await fetch(api + "/harmony/version");
 		if (!p.ok) {
 			const v = new Versions();
