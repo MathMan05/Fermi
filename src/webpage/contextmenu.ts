@@ -393,6 +393,7 @@ class Contextmenu<x, y> {
 		touchEnd: (x: number, y: number) => unknown = () => {},
 		click: "right" | "left" = "right",
 		side: "top" | "bottom" = "top",
+		dontlayer = false,
 	) {
 		const func = (event: MouseEvent) => {
 			const selectedText = window.getSelection();
@@ -417,7 +418,7 @@ class Contextmenu<x, y> {
 			obj.dispatchEvent(layered);
 		};
 		obj.addEventListener("layered", (layered) => {
-			if (this.layered) {
+			if (this.layered && !dontlayer) {
 				layered.menus.push([this as Contextmenu<unknown, unknown>, addinfo, other]);
 			} else if (!layered.primary) {
 				layered.primary = [this as Contextmenu<unknown, unknown>, addinfo, other];

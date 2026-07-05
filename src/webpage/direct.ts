@@ -590,8 +590,18 @@ class Group extends Channel {
 	}
 	createguildHTML() {
 		const div = document.createElement("div");
-		Group.groupcontextmenu.bindContextmenu(div, this, undefined);
-		if (this.type === 1 && this.users[0]) {
+		const isSingle = this.type === 1 && this.users[0];
+		Group.groupcontextmenu.bindContextmenu(
+			div,
+			this,
+			undefined,
+			undefined,
+			undefined,
+			undefined,
+			undefined,
+			!isSingle,
+		);
+		if (isSingle) {
 			User.contextmenu.bindContextmenu(div, this.users[0], undefined);
 		}
 		this.html = new WeakRef(div);
