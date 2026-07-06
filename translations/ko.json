@@ -42,7 +42,7 @@
 		"name": "직신"
 	},
 	"ok": "확인",
-	"dismiss": "닫기",
+	"dismiss": "숨기기",
 	"UrlGen": "봇 초대 생성기",
 	"Voice": {
 		"userVol": "사용자 음량:",
@@ -66,7 +66,7 @@
 		"gifSettings": {
 			"always": "항상",
 			"hover": "커서를 올릴 시",
-			"never": "안 함"
+			"never": "없음"
 		},
 		"name": "접근성",
 		"playGif": "GIF 재생:",
@@ -88,7 +88,7 @@
 		"bot_commands": "명령어를 지원",
 		"bug_hunter_level_1": "버그 사냥꾼 레벨 1",
 		"bug_hunter_level_2": "버그 사냥꾼 레벨 2",
-		"certified_moderator": "중재자",
+		"certified_moderator": "관리자",
 		"early_supporter": "초기 후원자",
 		"guild_booster_lvl1": "부스트된 길드",
 		"guild_booster_lvl2": "부스트된 길드",
@@ -135,7 +135,7 @@
 		"createChannel": "채널 만들기",
 		"creating": "채널 만드는 중",
 		"delete": "채널 삭제",
-		"deleteCat": "채널 삭제 중",
+		"deleteCat": "분류 삭제",
 		"icon": "아이콘:",
 		"makeInvite": "초대하기",
 		"markRead": "읽은 것으로 표시",
@@ -171,7 +171,7 @@
 		"next": "다음",
 		"back": "뒤로",
 		"newPost": "새 글 작성하기",
-		"post": "게시",
+		"post": "게시물",
 		"sortOptions": {
 			"sortby": {
 				"title": "정렬 기준",
@@ -390,6 +390,20 @@
 		"yesDelete": "네, 확실합니다",
 		"yesLeave": "네, 확실합니다"
 	},
+	"donate": {
+		"title": "기부 방법",
+		"donate": "기부",
+		"desc": "Fermi에 기부하시면 이러한 프로젝트들이 미래에도 지속될 수 있도록 도와주시는 것입니다!",
+		"mdText": "[오늘 Fermi에 기부하세요]($1)",
+		"lead": {
+			"title": "리드 개발자를 지원하세요",
+			"desc": "Harmony와 페르미의 리드 개발자를 지원해주세요. 페르미를 처음부터 개발했고 Harmony의 주요 유지보수 담당자입니다."
+		},
+		"host": {
+			"title": "호스트를 지원하세요",
+			"desc": "Harmony 메인 인스턴스의 호스트를 지원해주세요! 그녀는 리더십을 발휘하여 프로젝트의 미래를 이끌고, Harmony 코드베이스에 포함되는 많은 코드들을 검토합니다.\nCashApp: $1"
+		}
+	},
 	"hideBlockedMessages": "이 사용자를 차단하였습니다. 이 메시지를 숨기려면 클릭하세요",
 	"home": {
 		"icon": "$1의 인스턴스 아이콘",
@@ -422,7 +436,7 @@
 		"userField": "사용자 이름:",
 		"welcomeJank": "페르미에 오신 것을 환영합니다"
 	},
-	"incorrectURLS": "## 이 인스턴스에서 잘못된 링크가 전송되었을 가능성이 있습니다.\n### 인스턴스 소유자이신 경우, 문제를 해결하려면 [여기](https://docs.spacebar.chat/setup/server/)의 *원격 머신에서 연결하기* 부분을 참조하세요.\n 페르미가 자동으로 이 오류를 수정하여 인스턴스에 연결할 수 있도록 시도하시겠습니까?",
+	"incorrectURLS": "## 이 인스턴스에서 잘못된 링크가 전송되었을 가능성이 있습니다.\n### 인스턴스 소유자이신 경우, 문제를 해결하려면 [여기](https://docs.melodychat.org/setup/server/)의 *원격 머신에서 연결하기* 부분을 참조하세요.\n 페르미가 자동으로 이 오류를 수정하여 인스턴스에 연결할 수 있도록 시도하시겠습니까?",
 	"instInfo": "인스턴스 정보",
 	"instanceInfo": {
 		"contact": "이메일 인스턴스 관리자",

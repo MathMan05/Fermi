@@ -111,7 +111,7 @@
 	"blankMessage": "Leeg bericht",
 	"blog": {
 		"blog": "Blog",
-		"blogUpdates": "Actualiteiten:",
+		"blogUpdates": "Blognieuwtjes zien zodra u de app opent:",
 		"desc": "Lees de blog of abonneer u erop voor nieuwtjes over Fermi!",
 		"fermi": "Blog van Fermi",
 		"gotoPost": "Naar het bericht",
@@ -386,6 +386,20 @@
 		"viewTemplate": "Sjabloon bekijken",
 		"yesDelete": "Ja, ik weet het zeker",
 		"yesLeave": "Ja, ik weet het zeker"
+	},
+	"donate": {
+		"title": "Manieren om te doneren",
+		"donate": "Doneren",
+		"desc": "Door aan Fermi te doneren helpt u mee aan het voortzetten van deze projecten in de toekomst!",
+		"mdText": "[Doneer vandaag nog aan Fermi]($1)",
+		"lead": {
+			"title": "Steun de hoofdontwikkelaar",
+			"desc": "Steun de hoofdontwikkelaar van Harmony en Fermi. Die heeft Fermi helemaal zelf ontwikkeld en is de belangrijkste beheerder van Harmony."
+		},
+		"host": {
+			"title": "Steun de gastvrouw",
+			"desc": "Steun de gastvrouw van de belangrijkste Harmony-instantie! Zij helpt het project met haar leiderschap naar de toekomst te leiden en beoordeelt een groot deel van de code die in de Harmony-codebasis wordt gebruikt. CashApp: $1"
+		}
 	},
 	"hideBlockedMessages": "U heeft deze gebruiker geblokkeerd. Klik om deze berichten te verbergen.",
 	"home": {

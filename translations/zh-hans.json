@@ -395,6 +395,20 @@
 		"yesDelete": "是的，我确定",
 		"yesLeave": "是的，我确定"
 	},
+	"donate": {
+		"title": "捐款方式",
+		"donate": "捐款",
+		"desc": "向 Fermi 捐款，您将帮助这些项目在未来持续改进！",
+		"mdText": "[立即向 Fermi 捐款]($1)",
+		"lead": {
+			"title": "支持首席开发者",
+			"desc": "支持 Harmony 和 Fermi 的首席开发者。他们从零开发了 Fermi，并且是 Harmony 的主要维护者。"
+		},
+		"host": {
+			"title": "支持托管方",
+			"desc": "支持 Harmony 主实例的托管方！她以卓越的领导力引领项目走向未来，并审核 Harmony 代码库中的大量代码。\nCashApp：$1"
+		}
+	},
 	"hideBlockedMessages": "您已封禁此用户，点击即可隐藏这些消息。",
 	"home": {
 		"icon": "$1的实例图标",
@@ -427,7 +441,7 @@
 		"userField": "用户名：",
 		"welcomeJank": "欢迎来到 Fermi"
 	},
-	"incorrectURLS": "## 此实例可能发送了错误的链接。 \n### 如果您是实例所有者，请参阅[此处]（https://docs.spacebar.chat/setup/server/）下的“从远程电脑连线”来修复此问题。 \n 您想要 Fermi 自动尝试修复此错误，以让您连接到实例吗？",
+	"incorrectURLS": "## 此实例可能发送了错误的链接。 \n### 如果您是实例所有者，请参阅[此处]（https://docs.melodychat.org/setup/server/）下的“从远程电脑连线”来修复此问题。 \n 您想要 Fermi 自动尝试修复此错误，以让您连接到实例吗？",
 	"instInfo": "实例信息",
 	"instanceInfo": {
 		"contact": "电子邮件联系实例管理员",
