@@ -468,7 +468,7 @@ class Voice {
 	async cleanServerSDP(sdp: string): Promise<string> {
 		const out = await this.getCamInfo();
 		if (out.rtx_ssrc) {
-			this.vidusers.set(out.rtx_ssrc, this.userid);
+			//this.vidusers.set(out.rtx_ssrc, this.userid);
 			console.log(out);
 		} else {
 			const i = [...this.vidusers].findIndex((_) => _[1] === this.userid);
@@ -576,7 +576,7 @@ a=rtcp-fb:${port1} goog-remb\r
 a=rtcp-fb:${port1} transport-cc\r
 a=setup:passive\r
 a=mid:${bundles[i]}${videoUsers[vi] && videoUsers[vi][1] ? `\r\na=msid:${videoUsers[vi][1]}-${videoUsers[vi][0]} v${videoUsers[vi][1]}-${videoUsers[vi][0]}\r` : "\r"}
-a=${videoUsers[vi] && videoUsers[vi][1] ? "sendonly" : mode}\r
+a=${this.settings.live ? "sendonly" : videoUsers[vi] && videoUsers[vi][1] ? "sendonly" : mode}\r
 a=ice-ufrag:${ICE_UFRAG}\r
 a=ice-pwd:${ICE_PWD}\r
 a=fingerprint:${FINGERPRINT}\r
@@ -1159,7 +1159,7 @@ a=rtcp-mux\r`;
 		} else {
 			for (let i = 0; i < count; i++) {
 				pc.addTransceiver("video", {
-					direction: "inactive",
+					direction: "recvonly",
 					streams: [],
 					sendEncodings: [{active: true, maxBitrate: this.settings.bitrate}],
 				});
