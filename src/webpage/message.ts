@@ -69,6 +69,7 @@ class Message extends SnowFlake {
 	pinned: boolean = false;
 	flags: number = 0;
 	poll?: polljson;
+	nonce: string = "";
 	getTimeStamp() {
 		return new Date(this.timestamp).getTime();
 	}
@@ -344,7 +345,7 @@ class Message extends SnowFlake {
 		dio.options.addHTMLArea(div);
 		dio.show();
 	}
-	nonce: string = "";
+
 	setEdit() {
 		const prev = this.channel.editing;
 		this.channel.editing = this;
