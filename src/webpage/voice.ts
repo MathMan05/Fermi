@@ -523,7 +523,7 @@ a=group:BUNDLE ${bundles.join(" ")}\r`;
 				"recvonly" ||
 				"sendonly" ||
 				"sendrecv";
-			const mode = {
+			let mode = {
 				inactive: "inactive",
 				recvonly: "sendonly",
 				sendonly: "recvonly",
@@ -556,12 +556,18 @@ a=rtcp-mux\r`;
 				for (const thing of set) {
 					if (thing.includes("H264/90000") && !port1) {
 						port1 = thing.split(" ")[0];
-					} else if (thing.includes("rtx/90000") && !port2) {
+					} else if (thing.includes("rtx/90000") && !port2 && port1) {
 						port2 = thing.split(" ")[0];
 					}
 				}
 
-				build += `
+				const user = videoUsers[vi];
+				if (this.settings.stream) {
+					if (vi === -1) mode = "recvonly";
+				} else if (user && user[1]) {
+					mode = "sendonly";
+				}
+				const frame = `
 m=video ${parsed1.port} UDP/TLS/RTP/SAVPF ${port1} ${port2}\r
 ${cline}\r
 a=rtpmap:${port1} H264/90000\r
@@ -575,20 +581,22 @@ a=rtcp-fb:${port1} nack pli\r
 a=rtcp-fb:${port1} goog-remb\r
 a=rtcp-fb:${port1} transport-cc\r
 a=setup:passive\r
-a=mid:${bundles[i]}${videoUsers[vi] && videoUsers[vi][1] ? `\r\na=msid:${videoUsers[vi][1]}-${videoUsers[vi][0]} v${videoUsers[vi][1]}-${videoUsers[vi][0]}\r` : "\r"}
-a=${this.settings.live ? "sendonly" : videoUsers[vi] && videoUsers[vi][1] ? "sendonly" : mode}\r
+a=mid:${bundles[i]}${user && user[1] ? `\r\na=msid:${user[1]}-${user[0]} v${user[1]}-${user[0]}\r` : "\r"}
+a=${mode}\r
 a=ice-ufrag:${ICE_UFRAG}\r
 a=ice-pwd:${ICE_PWD}\r
 a=fingerprint:${FINGERPRINT}\r
-a=candidate:${candidate}${videoUsers[vi] && videoUsers[vi][1] ? `\r\na=ssrc:${videoUsers[vi][0]} cname:${videoUsers[vi][1]}-${videoUsers[vi][0]}\r` : "\r"}
+a=candidate:${candidate}${user && user[1] ? `\r\na=ssrc:${user[0]} cname:${user[1]}-${user[0]}\r` : "\r"}
 a=rtcp-mux\r`;
+
+				build += frame;
 				vi++;
-				console.log(mode, "fine me :3");
+				if (user) console.log(mode, "fine me :3", user && [...user], vi, videoUsers, frame);
 			}
 			i++;
 		}
 		build += "\n";
-		console.log(ld.sdp, "fime :3", build, this.pc?.remoteDescription?.sdp);
+		if (videoUsers.length) console.log(ld.sdp, "fime :3", build, this.pc?.remoteDescription?.sdp);
 		return build;
 	}
 	counter?: string;
