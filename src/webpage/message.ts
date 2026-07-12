@@ -71,7 +71,7 @@ class Message extends SnowFlake {
 		}
 		this.weakDiv = new WeakRef(div);
 	}
-	member: Member | undefined;
+	member?: Member;
 	reactions: {
 		count: number;
 		emoji: emojijson;
