@@ -50,6 +50,7 @@ import {PromiseLock} from "./utils/promiseLock.js";
 import {CDNParams} from "./utils/cdnParams.js";
 import {SnowFlake} from "./snowflake.js";
 import {trimTrailingSlashes} from "./utils/netUtils.js";
+import {Versions} from "./versions.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
@@ -294,6 +295,7 @@ class Localuser {
 
 		if (this.perminfo.user.disableColors === undefined) this.perminfo.user.disableColors = true;
 		this.updateTranslations();
+		Versions.makeVersion(this.info.api, "start");
 	}
 	favorites!: Favorites;
 	readysup = false;
