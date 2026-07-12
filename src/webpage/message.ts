@@ -1660,7 +1660,7 @@ class Message extends SnowFlake {
 	}
 	reactionAdd(data: {name: string; id?: string}, member: Member | {id: string}) {
 		for (const thing of this.reactions) {
-			if (thing.emoji.name === data.name || thing.emoji.id === data.id) {
+			if (thing.emoji.name === data.name || (thing.emoji.id === data.id && data.id)) {
 				thing.count++;
 				if (member.id === this.localuser.user.id) {
 					thing.me = true;
