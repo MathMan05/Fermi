@@ -70,6 +70,10 @@ class Message extends SnowFlake {
 	flags: number = 0;
 	poll?: polljson;
 	nonce: string = "";
+	components?: Components;
+	edited_timestamp: string | null = null;
+	thread?: Channel;
+
 	getTimeStamp() {
 		return new Date(this.timestamp).getTime();
 	}
@@ -394,9 +398,7 @@ class Message extends SnowFlake {
 			},
 		);
 	}
-	components?: Components;
-	edited_timestamp: string | null = null;
-	thread?: Channel;
+
 	giveData(messagejson: messagejson) {
 		const func = this.channel.infinite.snapBottom();
 		for (const thing of Object.keys(messagejson)) {
