@@ -5,7 +5,6 @@ import {MarkDown, saveCaretPosition} from "./markdown.js";
 import {Embed} from "./embed.js";
 import {Channel} from "./channel.js";
 import {Localuser} from "./localuser.js";
-import {Role} from "./role.js";
 import {File} from "./file.js";
 import {SnowFlake} from "./snowflake.js";
 import {
@@ -36,7 +35,7 @@ class Message extends SnowFlake {
 	embeds: Embed[] = [];
 	author!: User;
 	mentions: userjson[] = [];
-	mention_roles!: Role[];
+	mention_roles = new Set<string>();
 	attachments: File[] = []; //probably should be its own class tbh, should be Attachments[]
 	message_reference?: {
 		guild_id: string;
@@ -466,12 +465,9 @@ class Message extends SnowFlake {
 			this.author = new User(messagejson.author, this.localuser, false);
 		}
 		if (messagejson.mentions) this.mentions = messagejson.mentions;
-
-		this.mention_roles = (messagejson.mention_roles || [])
-			.map((role: string | {id: string}) => {
-				return this.guild.roleids.get(role instanceof Object ? role.id : role);
-			})
-			.filter((_) => _ !== undefined);
+		this.mention_roles.clear();
+		if (messagejson.mention_roles)
+			messagejson.mention_roles.forEach((id) => this.mention_roles.add(id));
 
 		if (!this.member && this.guild.id !== "@me") {
 			this.author.resolvemember(this.guild).then((_) => {
@@ -584,7 +580,7 @@ class Message extends SnowFlake {
 			if (!!this.mentions.find(({id}) => id == userd.id)) {
 				return true;
 			} else {
-				return !new Set(this.mention_roles).isDisjointFrom(new Set(userd.roles)); //if the message mentions a role the user has
+				return !this.mention_roles.isDisjointFrom(userd.roleIds); //if the message mentions a role the user has
 			}
 		} else {
 			return false;
