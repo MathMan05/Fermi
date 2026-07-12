@@ -16,5 +16,5 @@ jobs:
         node-version: 22
     - name: npm i
       run: npm i
-    - name: npx run tsc
-      run: npx run tsc --noEmit
+    - name: npm run tsc
+      run: npm run tsc --noEmit

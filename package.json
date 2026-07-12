@@ -7,7 +7,8 @@
 	"scripts": {
 		"bunBuild": "bun build.ts",
 		"build": "node buildnode.js && node build.js",
-		"start": "node dist/index.js"
+		"start": "node dist/index.js",
+		"tsc": "tsc --noEmit"
 	},
 	"author": "MathMan05",
 	"license": "GPL-3.0",
