@@ -834,8 +834,8 @@ type messagejson = {
 	edited_timestamp: string | null;
 	tts: boolean;
 	mention_everyone: boolean;
-	mentions: []; //need examples to fix
-	mention_roles?: []; //need examples to fix
+	mentions: userjson[]; //need examples to fix
+	mention_roles?: string[]; //need examples to fix
 	attachments: filejson[];
 	embeds: embedjson[];
 	components?: component[] | null; //TODO remove this once spacebar fixes the null bug

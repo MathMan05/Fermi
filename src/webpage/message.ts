@@ -34,7 +34,7 @@ class Message extends SnowFlake {
 	headers: Localuser["headers"];
 	embeds: Embed[] = [];
 	author!: User;
-	mentions: userjson[] = [];
+	mentions = new Set<string>();
 	mention_roles = new Set<string>();
 	attachments: File[] = []; //probably should be its own class tbh, should be Attachments[]
 	message_reference?: {
@@ -46,20 +46,8 @@ class Message extends SnowFlake {
 	private timestamp!: number | string;
 	content!: MarkDown;
 	static del: Promise<void>;
-	static resolve: Function;
-	/*
-		weakdiv:WeakRef<HTMLDivElement>;
-			set div(e:HTMLDivElement){
-			if(!e){
-			this.weakdiv=null;
-			return;
-			}
-			this.weakdiv=new WeakRef(e);
-			}
-			get div(){
-			return this.weakdiv?.deref();
-			}
-			*/
+	static resolve: () => void;
+
 	private weakDiv?: WeakRef<HTMLDivElement>;
 	get div(): HTMLDivElement | undefined {
 		return this.weakDiv?.deref();
@@ -71,13 +59,14 @@ class Message extends SnowFlake {
 		}
 		this.weakDiv = new WeakRef(div);
 	}
+
 	member?: Member;
 	reactions: {
 		count: number;
 		emoji: emojijson;
 		me: boolean;
 	}[] = [];
-	pinned!: boolean;
+	pinned: boolean = false;
 	flags: number = 0;
 	poll?: polljson;
 	getTimeStamp() {
@@ -423,7 +412,7 @@ class Message extends SnowFlake {
 				continue;
 			} else if (thing === "member") {
 				Member.new(messagejson.member as memberjson, this.guild).then((_) => {
-					this.member = _ as Member;
+					this.member = _;
 				});
 				continue;
 			} else if (thing === "embeds") {
@@ -464,7 +453,12 @@ class Message extends SnowFlake {
 		if (messagejson.author.id) {
 			this.author = new User(messagejson.author, this.localuser, false);
 		}
-		if (messagejson.mentions) this.mentions = messagejson.mentions;
+		this.mentions.clear();
+		if (messagejson.mentions)
+			messagejson.mentions.forEach((_) => {
+				new User(_, this.localuser);
+				this.mentions.add(_.id);
+			});
 		this.mention_roles.clear();
 		if (messagejson.mention_roles)
 			messagejson.mention_roles.forEach((id) => this.mention_roles.add(id));
@@ -575,9 +569,9 @@ class Message extends SnowFlake {
 	mentionsuser(userd: User | Member) {
 		if (this.mention_everyone) return true;
 		if (userd instanceof User) {
-			return !!this.mentions.find(({id}) => id == userd.id);
+			return !!this.mentions.has(userd.id);
 		} else if (userd instanceof Member) {
-			if (!!this.mentions.find(({id}) => id == userd.id)) {
+			if (!!this.mentions.has(userd.id)) {
 				return true;
 			} else {
 				return !this.mention_roles.isDisjointFrom(userd.roleIds); //if the message mentions a role the user has
