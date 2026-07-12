@@ -7,7 +7,7 @@ on:
 jobs:
   tsc:
     name: tsc
-    runs-on: ubuntu-latest
+    runs-on: codeberg-tiny
     steps:
     - uses: actions/checkout@v1
     - name: install node v22
