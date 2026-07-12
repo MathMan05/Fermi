@@ -1677,12 +1677,12 @@ class Message extends SnowFlake {
 		});
 		this.updateReactions();
 	}
-	reactionRemove(data: {name: string}, id: string) {
+	reactionRemove(data: {name: string; id?: string}, id: string) {
 		console.log("test");
 		for (const i in this.reactions) {
 			const thing = this.reactions[i];
 			console.log(thing, data);
-			if (thing.emoji.name === data.name) {
+			if (thing.emoji.name === data.name || (thing.emoji.id === data.id && data.id)) {
 				thing.count--;
 				if (thing.count === 0) {
 					this.reactions.splice(Number(i), 1);
