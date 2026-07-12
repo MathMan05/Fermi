@@ -2356,14 +2356,14 @@ class Form implements OptionsElement<object> {
 						body: JSON.stringify(build),
 						headers: this.headers,
 					})
-						.then((_) => {
-							return _.text();
+						.then(async (_) => {
+							return [await _.text(), _.status] as const;
 						})
-						.then((_) => {
-							if (_ === "") return {};
-							return JSON.parse(_);
+						.then(([_, status]) => {
+							if (_ === "") return [null, status];
+							return [JSON.parse(_), status] as const;
 						})
-						.then(async (json) => {
+						.then(async ([json, status]) => {
 							if (await handleCaptcha(json, build, this.captcha)) {
 								return await doFetch();
 							}
@@ -2380,6 +2380,12 @@ class Form implements OptionsElement<object> {
 								if (this.errors(json)) {
 									return;
 								}
+							} else if (status === 500) {
+								this.error(
+									[...this.names].at(-1)?.[0] ?? "",
+									json.message ?? "internal server error",
+								);
+								return;
 							}
 							if (
 								Math.floor(json.code / 100) === 4 &&
