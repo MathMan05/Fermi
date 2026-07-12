@@ -5011,11 +5011,12 @@ class Localuser {
 		}
 	}
 	static get fonts() {
+		const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
 		return [
-			["NotoColorEmoji-Regular.ttf", "Noto Color Emoji"],
-			["OpenMoji-color-glyf_colr_0.woff2", "OpenMoji"],
-			["Twemoji-16.0.1.ttf", "Twemoji"],
-			["BlobmojiCompat.ttf", "Blobmoji"],
+			[`NotoColorEmoji-Regular.${isFirefox ? "woff2" : "ttf"}`, "Noto Color Emoji"],
+			[`OpenMoji-color-glyf_colr_0.woff2`, "OpenMoji"],
+			[`Twemoji-16.0.1.${isFirefox ? "woff2" : "ttf"}`, "Twemoji"],
+			[`BlobmojiCompat.${isFirefox ? "woff2" : "ttf"}`, "Blobmoji"],
 		] as const;
 	}
 	getMemberMap = new Map<string, Promise<Member | undefined>>();
