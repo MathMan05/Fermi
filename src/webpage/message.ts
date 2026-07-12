@@ -451,7 +451,7 @@ class Message extends SnowFlake {
 				}
 				this.thread = thread;
 				continue;
-			}
+			} else if (thing === "mention_roles") continue;
 			(this as any)[thing] = (messagejson as any)[thing];
 		}
 		this.stickers ||= [];
