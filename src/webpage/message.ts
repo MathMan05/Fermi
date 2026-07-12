@@ -425,7 +425,7 @@ class Message extends SnowFlake {
 					this.embeds[thing] = new Embed(messagejson.embeds[thing], this);
 				}
 				continue;
-			} else if (thing === "author") {
+			} else if (thing === "author" || thing === "mentions") {
 				continue;
 			} else if (thing === "sticker_items") {
 				this.stickers = (messagejson.sticker_items || []).map((_) => {
