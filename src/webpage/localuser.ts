@@ -2459,7 +2459,20 @@ class Localuser {
 		});
 	}
 	async getPosts() {
-		return (await (await fetch("https://blog.fermi.chat/feed_json_created.json")).json()) as {
+		const text = await (await fetch("https://blog.fermi.chat/feed_rss_created.xml")).text();
+		const xml = new DOMParser().parseFromString(text, "text/xml");
+		console.log(xml, text);
+		const posts = Array.from(xml.getElementsByTagName("channel")[0].getElementsByTagName("item"));
+		return {
+			items: posts.map((post) => {
+				return {
+					url: post.getElementsByTagName("link")[0].textContent,
+					title: post.getElementsByTagName("title")[0].textContent,
+					content_html: post.getElementsByTagName("description")[0].textContent,
+					image: post.getElementsByTagName("image")[0]?.textContent ?? null,
+				};
+			}),
+		} satisfies {
 			items: {
 				url: string;
 				title: string;
