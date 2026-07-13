@@ -1885,7 +1885,7 @@ class Guild extends SnowFlake {
 		const build = document.createElement("div");
 
 		for (const thing of this.headchannels) {
-			build.appendChild(thing.createguildHTML(this.member.isAdmin()));
+			build.appendChild(thing.createguildHTML(!this.member || this.member.isAdmin()));
 		}
 		return build;
 	}
