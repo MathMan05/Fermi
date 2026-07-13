@@ -13,7 +13,7 @@ export class DeveloperSettings {
 }
 
 export function getDeveloperSettings(): DeveloperSettings {
-	return new DeveloperSettings(JSON.parse(localStorage.getItem("developerSettings") || "{}"));
+	return new DeveloperSettings(JSON.parse(localStorage.getItem("developerSettings") ?? "{}"));
 }
 
 export function setDeveloperSettings(settings: DeveloperSettings): void {
