@@ -699,6 +699,11 @@ class Message extends SnowFlake {
 	get ephemeral() {
 		return !!(this.flags & (1 << 6));
 	}
+	getWelcomeText() {
+		const messages = I18n.welcomeMessages("|||").split("\n");
+		const message = messages[Number(BigInt(this.id) % BigInt(messages.length))];
+		return message.split("|||") as [string, string];
+	}
 	generateMessage(
 		premessage?: Message | undefined,
 		ignoredblock = false,
@@ -867,7 +872,17 @@ class Message extends SnowFlake {
 					reply.append(b);
 				}
 				const author = message.author;
-				reply.appendChild(message.content.makeHTML({stdsize: true}));
+				if (message.type === 7) {
+					const [first, second] = message.getWelcomeText();
+					const a = message.author;
+					reply.textContent = first + a.name + second;
+					this.localuser.getMember(a.id, this.guild.id).then((_) => {
+						if (!_) return;
+						reply.textContent = first + _.name + second;
+					});
+				} else {
+					reply.appendChild(message.content.makeHTML({stdsize: true}));
+				}
 				minipfp.src = author.getpfpsrc();
 
 				author.bind(minipfp, this.guild);
@@ -1055,9 +1070,7 @@ class Message extends SnowFlake {
 			}
 			//
 		} else if (this.type === 7) {
-			const messages = I18n.welcomeMessages("|||").split("\n");
-			const message = messages[Number(BigInt(this.id) % BigInt(messages.length))];
-			const [first, second] = message.split("|||");
+			const [first, second] = this.getWelcomeText();
 			const welcome = document.createElement("div");
 			text.appendChild(welcome);
 
