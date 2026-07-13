@@ -1726,7 +1726,7 @@ class Localuser {
 	}
 	isAdmin(): boolean {
 		if (this.focusGuild) {
-			return this.focusGuild.isAdmin();
+			return this.focusGuild.member.isAdmin();
 		} else {
 			return false;
 		}

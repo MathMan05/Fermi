@@ -600,8 +600,8 @@ class Channel extends SnowFlake {
 	sortPerms() {
 		console.log(this.permission_overwritesar + "");
 		this.permission_overwritesar.sort((a, b) => {
-			if (!this.guild.hasRole(a[0])) return -1;
-			if (!this.guild.hasRole(b[0])) return 1;
+			if (!this.guild.member.hasRole(a[0])) return -1;
+			if (!this.guild.member.hasRole(b[0])) return 1;
 			return (
 				this.guild.roles.findIndex((r) => r.id === a[0]) -
 				this.guild.roles.findIndex((r) => r.id === b[0])
@@ -752,7 +752,7 @@ class Channel extends SnowFlake {
 		this.guild.perminfo.channels[this.id] = e;
 	}
 	isAdmin() {
-		return this.guild.isAdmin();
+		return this.guild.member.isAdmin();
 	}
 	get guild() {
 		return this.owner;

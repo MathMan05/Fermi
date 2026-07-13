@@ -194,6 +194,7 @@ class Guild extends SnowFlake {
 	large!: boolean;
 	stickers = new Map<string, Sticker>();
 	members = new Map<string, Member>();
+	welcomeScreen?: welcomeScreen;
 	static readonly contextmenu = new Contextmenu<Guild, void>("guild menu");
 	static setupcontextmenu() {
 		Guild.contextmenu.addButton(
@@ -553,7 +554,6 @@ class Guild extends SnowFlake {
 
 		dio.show();
 	}
-	welcomeScreen?: welcomeScreen;
 	generateSettings() {
 		const settings = new Settings(I18n.guild.settingsFor(this.properties.name));
 		const textChannels = this.channels.filter((e) => {
@@ -1608,7 +1608,7 @@ class Guild extends SnowFlake {
 		});
 		full.show();
 	}
-	async leave() {
+	private async leave() {
 		return fetch(this.info.api + "/users/@me/guilds/" + this.id, {
 			method: "DELETE",
 			headers: this.headers,
@@ -1806,7 +1806,7 @@ class Guild extends SnowFlake {
 		});
 		full.show();
 	}
-	async delete() {
+	private async delete() {
 		return fetch(this.info.api + "/guilds/" + this.id + "/delete", {
 			method: "POST",
 			headers: this.headers,
@@ -1885,12 +1885,9 @@ class Guild extends SnowFlake {
 		const build = document.createElement("div");
 
 		for (const thing of this.headchannels) {
-			build.appendChild(thing.createguildHTML(this.isAdmin()));
+			build.appendChild(thing.createguildHTML(this.member.isAdmin()));
 		}
 		return build;
-	}
-	isAdmin() {
-		return this.member.isAdmin();
 	}
 	async markAsRead() {
 		const build: {
@@ -1918,13 +1915,6 @@ class Guild extends SnowFlake {
 			headers: this.headers,
 			body: JSON.stringify(build),
 		});
-	}
-	hasRole(r: Role | string) {
-		console.log("this should run");
-		if (r instanceof Role) {
-			r = r.id;
-		}
-		return this.member.hasRole(r);
 	}
 	async loadChannel(ID?: string | undefined | null, addstate = true, message?: string) {
 		if (ID) {
