@@ -8,6 +8,7 @@ import {OptionsElement, Buttons, Dialog, ColorInput} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
 import {Channel} from "./channel.js";
 import {I18n} from "./i18n.js";
+import {setTextWithWrappedEmoji} from "./utils/utils.js";
 
 class Role extends SnowFlake {
 	permissions: Permissions;
@@ -647,7 +648,7 @@ class RoleList extends Buttons {
 			this.buttonMap.set(thing[0], button);
 			button.classList.add("SettingsButton");
 			const span = document.createElement("span");
-			span.textContent = thing[0];
+			setTextWithWrappedEmoji(span, thing[0]);
 			button.append(span);
 			span.classList.add("roleButtonStyle");
 			const role = this.guild.roleids.get(thing[1]) || this.guild.localuser.userMap.get(thing[1]);
