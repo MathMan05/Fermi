@@ -1644,8 +1644,8 @@ class Guild extends SnowFlake {
 			}
 
 			console.log(position);
-			if (thing.move_id && thing.move_id !== thing.parent_id) {
-				thing.parent_id = thing.move_id;
+			if (thing.move_id && thing.move_id !== thing.parentId) {
+				thing.parentId = thing.move_id;
 				thisthing.parent_id = thing.parent?.id;
 				thing.move_id = undefined;
 			}
@@ -1862,7 +1862,7 @@ class Guild extends SnowFlake {
 				const channel = new Channel(channelJson as channeljson, this);
 				this.localuser.channels.set(channel.id, channel);
 				channel.resolveparent(this);
-				const par = this.localuser.channels.get(channel.parent_id as string);
+				const par = this.localuser.channels.get(channel.parentId as string);
 				par?.createguildHTML();
 			} else {
 				this.loadChannel();
