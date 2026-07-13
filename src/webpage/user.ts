@@ -59,7 +59,7 @@ class User extends SnowFlake {
 	premium_type!: number;
 	theme_colors: [number, number] | null = null;
 	badge_ids!: string[];
-	members: WeakMap<Guild, Member | undefined | Promise<Member | undefined>> = new WeakMap();
+	members = new WeakMap<Guild, Member | undefined | Promise<Member | undefined>>();
 	status!: string;
 	avatar_decoration_data?: {
 		asset: string;

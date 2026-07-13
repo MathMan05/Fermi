@@ -1424,7 +1424,7 @@ class Localuser {
 		}
 		elms.set("online", []);
 		elms.set("offline", []);
-		let members = new Set<User | Member>(guild.members);
+		let members = new Set<User | Member>(guild.members.values());
 		if (channel instanceof Group) {
 			members = new Set(channel.users);
 			members.add(this.user);
@@ -4471,7 +4471,7 @@ class Localuser {
 					}
 				}
 			} else {
-				for (const member of this.focusGuild.members) {
+				for (const [_, member] of this.focusGuild.members) {
 					const rank = member.compare(name);
 					if (rank > 0) {
 						members.push([member, rank]);
@@ -4782,7 +4782,7 @@ class Localuser {
 									}
 								}
 							} else {
-								for (const member of g.members) {
+								for (const [_, member] of g.members) {
 									const rank = member.compare(name);
 									if (rank > 0) {
 										members.push([member, rank]);
@@ -4806,7 +4806,7 @@ class Localuser {
 									if (!g || g.id === "@me") {
 										return this.userMap.get(id);
 									} else {
-										return [...g.members].find(({id: d}) => d === id);
+										return [...g.members.values()].find(({id: d}) => d === id);
 									}
 								})
 								.filter((_) => _ !== undefined)
@@ -4822,7 +4822,7 @@ class Localuser {
 									if (!g || g.id === "@me") {
 										return this.userMap.get(id);
 									} else {
-										return [...g.members].find(({id: d}) => d === id);
+										return [...g.members.values()].find(({id: d}) => d === id);
 									}
 								})
 								.filter((_) => _ !== undefined)

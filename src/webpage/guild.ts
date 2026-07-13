@@ -181,8 +181,8 @@ class Guild extends SnowFlake {
 	roles!: Role[];
 	readonly roleids = new Map<string, Role>();
 	prevchannel: Channel | undefined;
-	banner!: string;
-	message_notifications!: number;
+	banner?: string;
+	message_notifications: number = 0;
 	headchannels!: Channel[];
 	position!: number;
 	parent_id!: string;
@@ -191,7 +191,7 @@ class Guild extends SnowFlake {
 	emojis: emojipjson[] = [];
 	large!: boolean;
 	stickers = new Map<string, Sticker>();
-	members = new Set<Member>();
+	members = new Map<string, Member>();
 	static readonly contextmenu = new Contextmenu<Guild, void>("guild menu");
 	static setupcontextmenu() {
 		Guild.contextmenu.addButton(
@@ -1449,13 +1449,7 @@ class Guild extends SnowFlake {
 		this.roleUpdate(role, 0);
 	}
 	memberupdate(json: memberjson) {
-		let member: undefined | Member = undefined;
-		for (const thing of this.members) {
-			if (thing.id === json.id) {
-				member = thing;
-				break;
-			}
-		}
+		let member = this.members.get(json.id);
 
 		if (!member) return;
 		member.update(json);

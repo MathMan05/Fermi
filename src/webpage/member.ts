@@ -55,7 +55,7 @@ class Member extends SnowFlake {
 	}
 	remove() {
 		this.user.members.delete(this.guild);
-		this.guild.members.delete(this);
+		this.guild.members.delete(this.id);
 	}
 	getpfpsrc(): string {
 		if (this.hypotheticalpfp && this.avatar) {
@@ -410,7 +410,7 @@ class Member extends SnowFlake {
 			} else if (memb === undefined || memb instanceof Promise) {
 				memb = new Member(memberjson, owner);
 				user.members.set(owner, memb);
-				owner.members.add(memb);
+				owner.members.set(memb.id, memb);
 				user.localuser.memberListUpdate();
 				return memb;
 			} else {
@@ -424,7 +424,7 @@ class Member extends SnowFlake {
 
 		const memb = new Member(memberjson, owner);
 		user.members.set(owner, memb);
-		owner.members.add(memb);
+		owner.members.set(memb.id, memb);
 		memb.localuser.memberListUpdate();
 		return memb;
 	}
@@ -452,7 +452,7 @@ class Member extends SnowFlake {
 			if (memb === undefined || memb instanceof Promise) {
 				memb = new Member(memberjson, owner);
 				user.members.set(owner, memb);
-				owner.members.add(memb);
+				owner.members.set(memb.id, memb);
 				user.localuser.memberListUpdate();
 				return memb;
 			} else {
@@ -465,7 +465,7 @@ class Member extends SnowFlake {
 		} else {
 			const memb = new Member(memberjson, owner);
 			user.members.set(owner, memb);
-			owner.members.add(memb);
+			owner.members.set(memb.id, memb);
 			memb.localuser.memberListUpdate();
 			return memb;
 		}
@@ -512,7 +512,7 @@ class Member extends SnowFlake {
 			user.members.set(guild, promise);
 			const member = await promise;
 			if (member) {
-				guild.members.add(member);
+				guild.members.set(member.id, member);
 			}
 			user.members.set(guild, member);
 			return member;
