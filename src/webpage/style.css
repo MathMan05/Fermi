@@ -455,6 +455,9 @@ body {
 		padding: 0.075in 0.05in;
 		border-radius: 0.03in;
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+
 		> span,
 		img {
 			margin-right: 0.05in;
@@ -948,6 +951,10 @@ textarea {
 	aspect-ratio: 1;
 	width: 32px;
 	height: 32px;
+}
+.pfpSearch {
+	display: inline-block;
+	margin-right: 10px;
 }
 .pfp,
 .replypfp {

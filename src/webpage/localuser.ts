@@ -4501,14 +4501,24 @@ class Localuser {
 		}
 		members.sort((a, b) => b[1] - a[1]);
 		this.MDSearchOptions(
-			members.map((a) => [
-				typeof a[0] === "string" ? a[0] : "@" + a[0].name,
-				a[0] instanceof Role
-					? `<@&${a[0].id}> `
-					: typeof a[0] === "string"
-						? a[0] + " "
-						: `<@${a[0].id}> `,
-				undefined,
+			members.map(([member]) => [
+				typeof member === "string" ? member : "@" + member.name,
+				member instanceof Role
+					? `<@&${member.id}> `
+					: typeof member === "string"
+						? member + " "
+						: `<@${member.id}> `,
+				(() => {
+					const img =
+						member instanceof Member
+							? member.user.buildpfp(member)
+							: member instanceof User
+								? member.buildpfp()
+								: undefined;
+					if (!img) return img;
+					img.classList.add("pfpSearch");
+					return img;
+				})(),
 			]),
 			original,
 			box,
