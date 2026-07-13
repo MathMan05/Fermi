@@ -48,8 +48,8 @@ class Channel extends SnowFlake {
 	parent?: Channel;
 	children!: Channel[];
 	guild_id!: string;
-	permission_overwrites!: Map<string, Permissions>;
-	permission_overwritesar: [string, Permissions][] = [];
+	permissionOverwriteMap!: Map<string, Permissions>;
+	permissionOverwriteOrder: string[] = [];
 	topic!: string;
 	nsfw!: boolean;
 	position: number = 0;
@@ -59,7 +59,7 @@ class Channel extends SnowFlake {
 	}
 	async getOverwrites(): Promise<[User | Role, Permissions][]> {
 		return await Promise.all(
-			this.permission_overwritesar.map(async ([id, p]) => {
+			[...this.permissionOverwriteMap].map(async ([id, p]) => {
 				const role = this.guild.roleids.get(id);
 				if (role) return [role, p] as const;
 				return [await this.localuser.getUser(id), p] as const;
@@ -598,8 +598,8 @@ class Channel extends SnowFlake {
 		settings.show();
 	}
 	sortPerms() {
-		console.log(this.permission_overwritesar + "");
-		this.permission_overwritesar.sort((a, b) => {
+		console.log(this.permissionOverwriteOrder + "");
+		this.permissionOverwriteOrder.sort((a, b) => {
 			if (!this.guild.member.hasRole(a[0])) return -1;
 			if (!this.guild.member.hasRole(b[0])) return 1;
 			return (
@@ -607,7 +607,7 @@ class Channel extends SnowFlake {
 				this.guild.roles.findIndex((r) => r.id === b[0])
 			);
 		});
-		console.log(this.permission_overwritesar + "");
+		console.log(this.permissionOverwriteOrder + "");
 	}
 	setUpInfiniteScroller() {
 		this.infinite = new InfiniteScroller(
@@ -713,12 +713,12 @@ class Channel extends SnowFlake {
 		this.children = [];
 		this.icon = json.icon;
 		this.guild_id = json.guild_id;
-		this.permission_overwrites = new Map();
-		this.permission_overwrites = new Map();
-		this.permission_overwritesar = (json.permission_overwrites ?? []).map((r) => {
+		this.permissionOverwriteMap = new Map();
+		this.permissionOverwriteMap = new Map();
+		this.permissionOverwriteOrder = (json.permission_overwrites ?? []).map((r) => {
 			const p = new Permissions(r.allow, r.deny);
-			this.permission_overwrites.set(r.id, p);
-			return [r.id, p];
+			this.permissionOverwriteMap.set(r.id, p);
+			return r.id;
 		});
 
 		this.topic = json.topic;
@@ -862,7 +862,7 @@ class Channel extends SnowFlake {
 		}
 		//if (this.id === "1499557059291885982") debugger;
 
-		const premission = this.permission_overwrites.get(member.id);
+		const premission = this.permissionOverwriteMap.get(member.id);
 		if (premission) {
 			const perm = premission.getPermission(name);
 			if (perm) {
@@ -871,7 +871,7 @@ class Channel extends SnowFlake {
 		}
 
 		for (const role of member.roles) {
-			const premission = this.permission_overwrites.get(role.id);
+			const premission = this.permissionOverwriteMap.get(role.id);
 			if (premission) {
 				const perm = premission.getPermission(name);
 				if (perm) {
@@ -887,7 +887,7 @@ class Channel extends SnowFlake {
 		return false;
 	}
 	get canMessage(): boolean {
-		if (this.permission_overwritesar.length === 0 && this.hasPermission("MANAGE_CHANNELS")) {
+		if (this.permissionOverwriteOrder.length === 0 && this.hasPermission("MANAGE_CHANNELS")) {
 			const role = this.guild.roles.find((_) => _.name === "@everyone");
 			if (role) {
 				this.addRoleToPerms(role);
@@ -3236,15 +3236,15 @@ class Channel extends SnowFlake {
 		}
 
 		this.guild_id = json.guild_id;
-		const oldover = this.permission_overwrites;
-		this.permission_overwrites = new Map();
-		this.permission_overwritesar = (json.permission_overwrites ?? []).map((r) => {
+		const oldover = this.permissionOverwriteMap;
+		this.permissionOverwriteMap = new Map();
+		this.permissionOverwriteOrder = (json.permission_overwrites ?? []).map((r) => {
 			const p = new Permissions(r.allow, r.deny);
-			this.permission_overwrites.set(r.id, p);
-			return [r.id, p];
+			this.permissionOverwriteMap.set(r.id, p);
+			return r.id;
 		});
-		const nchange = [...new Set<string>().union(oldover).difference(this.permission_overwrites)];
-		const pchange = [...new Set<string>().union(this.permission_overwrites).difference(oldover)];
+		const nchange = [...new Set<string>().union(oldover).difference(this.permissionOverwriteMap)];
+		const pchange = [...new Set<string>().union(this.permissionOverwriteMap).difference(oldover)];
 		for (const thing of nchange) {
 			const role = this.guild.roleids.get(thing);
 			if (role) {
@@ -3258,7 +3258,7 @@ class Channel extends SnowFlake {
 		}
 		for (const thing of pchange) {
 			const role = this.guild.roleids.get(thing);
-			const perms = this.permission_overwrites.get(thing);
+			const perms = this.permissionOverwriteMap.get(thing);
 			if (role && perms) {
 				this.croleUpdate(role, perms, true);
 			} else if (perms) {
@@ -3943,11 +3943,11 @@ class Channel extends SnowFlake {
 			}),
 		});
 		const perm = new Permissions("0", "0");
-		this.permission_overwrites.set(role.id, perm);
-		this.permission_overwritesar.push([role.id, perm]);
+		this.permissionOverwriteMap.set(role.id, perm);
+		this.permissionOverwriteOrder.push(role.id);
 	}
 	async updateRolePermissions(id: string, perms: Permissions) {
-		const permission = this.permission_overwrites.get(id);
+		const permission = this.permissionOverwriteMap.get(id);
 		if (permission) {
 			permission.allow = perms.allow;
 			permission.deny = perms.deny;
