@@ -60,6 +60,12 @@ const wsCodesRetry = new Set([4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009]);
 interface CustomHTMLDivElement extends HTMLDivElement {
 	markdown: MarkDown;
 }
+interface MDSearchOption {
+	name: string;
+	replace: string;
+	icon?: HTMLElement;
+	otherLogic?: () => boolean;
+}
 
 MarkDown.emoji = Emoji;
 class Localuser {
@@ -4333,10 +4339,7 @@ class Localuser {
 		html: WeakMap<Blob, HTMLElement>,
 	) => [Blob[], WeakMap<Blob, HTMLElement>];
 	MDSearchOptions(
-		options: (
-			| [string, string, void | HTMLElement]
-			| [string, string, void | HTMLElement, () => void | boolean]
-		)[],
+		options: MDSearchOption[],
 		original: string,
 		div: HTMLDivElement = document.getElementById("searchOptions") as HTMLDivElement,
 		typebox?: MarkDown,
@@ -4345,15 +4348,16 @@ class Localuser {
 		div.innerHTML = "";
 		let i = 0;
 		const htmloptions: HTMLSpanElement[] = [];
-		for (const [name, replace, elm, func] of options) {
+
+		for (const {name, replace, icon, otherLogic} of options) {
 			if (i == 8) {
 				break;
 			}
 			i++;
 			const span = document.createElement("span");
 			htmloptions.push(span);
-			if (elm) {
-				span.append(elm);
+			if (icon) {
+				span.append(icon);
 			}
 
 			span.append(name);
@@ -4379,7 +4383,7 @@ class Localuser {
 					}
 					e.preventDefault();
 				}
-				if (!func?.() && typebox) {
+				if (!otherLogic?.() && typebox) {
 					this.MDReplace(replace, original, typebox);
 				}
 				div.innerHTML = "";
@@ -4452,7 +4456,9 @@ class Localuser {
 		}
 		maybe.sort((a, b) => b[0] - a[0]);
 		this.MDSearchOptions(
-			maybe.map((a) => ["# " + a[1].name, `<#${a[1].id}> `, undefined]),
+			maybe.map((a) => {
+				return {name: "# " + a[1].name, replace: `<#${a[1].id}> `};
+			}),
 			original,
 			box,
 			typebox,
@@ -4502,25 +4508,25 @@ class Localuser {
 		}
 		members.sort((a, b) => b[1] - a[1]);
 		this.MDSearchOptions(
-			members.map(([member]) => [
-				typeof member === "string" ? member : "@" + member.name,
-				member instanceof Role
-					? `<@&${member.id}> `
-					: typeof member === "string"
-						? member + " "
-						: `<@${member.id}> `,
-				(() => {
-					const img =
-						member instanceof Member
-							? member.user.buildpfp(member)
-							: member instanceof User
-								? member.buildpfp()
-								: undefined;
-					if (!img) return img;
-					img.classList.add("pfpSearch");
-					return img;
-				})(),
-			]),
+			members.map(([member]) => {
+				const icon =
+					member instanceof Member
+						? member.user.buildpfp(member)
+						: member instanceof User
+							? member.buildpfp()
+							: undefined;
+				icon?.classList.add("pfpSearch");
+				return {
+					name: typeof member === "string" ? member : "@" + member.name,
+					replace:
+						member instanceof Role
+							? `<@&${member.id}> `
+							: typeof member === "string"
+								? member + " "
+								: `<@${member.id}> `,
+					icon: icon,
+				};
+			}),
 			original,
 			box,
 			typebox,
@@ -4540,17 +4546,18 @@ class Localuser {
 	}
 	findEmoji(search: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
 		const emj = Emoji.searchEmoji(search, this, 10);
-		const map = emj.map(([emoji]): [string, string, HTMLElement, () => void] => {
-			return [
-				emoji.name,
-				emoji.id
+		const map = emj.map(([emoji]): MDSearchOption => {
+			return {
+				name: emoji.name,
+				replace: emoji.id
 					? `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`
 					: (emoji.emoji as string),
-				emoji.getHTML(),
-				() => {
+				icon: emoji.getHTML(),
+				otherLogic: () => {
 					this.favorites.addEmoji(emoji.id || (emoji.emoji as string));
+					return false;
 				},
-			];
+			};
 		});
 		this.MDSearchOptions(map, original, box, typebox);
 	}
@@ -4566,15 +4573,14 @@ class Localuser {
 
 		this.MDSearchOptions(
 			sorted.map(([elm]) => {
-				return [
-					`/${elm.localizedName}`,
-					"",
-					undefined,
-					() => {
+				return {
+					name: `/${elm.localizedName}`,
+					replace: "",
+					otherLogic: () => {
 						this.focusChannel?.startCommand(elm);
 						return true;
 					},
-				] as const;
+				};
 			}),
 			"",
 			box,

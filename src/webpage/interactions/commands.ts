@@ -173,11 +173,10 @@ export class Command extends SnowFlake {
 			.map((_) => _[0]);
 		this.localuser.MDSearchOptions(
 			opts.map((opt) => {
-				return [
-					opt.localizedName,
-					"",
-					void 0,
-					() => {
+				return {
+					name: opt.localizedName,
+					replace: "",
+					otherLogic: () => {
 						const html = opt.toHTML("", channel);
 						textNode.after(html);
 						textNode.remove();
@@ -186,7 +185,7 @@ export class Command extends SnowFlake {
 						focusInput(html);
 						return true;
 					},
-				];
+				};
 			}),
 			"",
 			document.getElementById("searchOptions") as HTMLDivElement,
@@ -469,16 +468,15 @@ class StringOption extends Option {
 
 		this.owner.localuser.MDSearchOptions(
 			options.map((elm) => {
-				return [
-					`${elm.name_localizations?.[I18n.lang] || elm.name}`,
-					"",
-					undefined,
-					() => {
+				return {
+					name: `${elm.name_localizations?.[I18n.lang] || elm.name}`,
+					replace: "",
+					otherLogic: () => {
 						input.value = elm.name_localizations?.[I18n.lang] || elm.name;
 						this.owner.stateChange(this, channel, input.value);
 						return true;
 					},
-				] as const;
+				};
 			}),
 			"",
 		);
