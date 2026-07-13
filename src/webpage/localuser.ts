@@ -911,7 +911,7 @@ class Localuser {
 							divy,
 							document.getElementById("bottomseparator"),
 						);
-						guildy.message_notifications = guildy.properties.default_message_notifications;
+						guildy.messageNotifications = guildy.properties.default_message_notifications;
 						guildy.showWelcome();
 					})();
 					break;
