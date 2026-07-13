@@ -34,7 +34,7 @@ async function migrateOldDeveloperSettings(): Promise<void> {
 
 	const oldGatewayCompression = localStorage.getItem("gateWayComp");
 	if (oldGatewayCompression !== null) {
-		devSettings.gatewayCompression = oldGatewayCompression === "true";
+		devSettings.gatewayCompression = oldGatewayCompression !== "false";
 		localStorage.removeItem("gateWayComp");
 		mod = true;
 	}
