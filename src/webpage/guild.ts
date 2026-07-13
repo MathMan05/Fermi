@@ -186,7 +186,9 @@ class Guild extends SnowFlake {
 	headchannels!: Channel[];
 	position!: number;
 	parent_id!: string;
-	member!: Member;
+	get member() {
+		return this.members.get(this.localuser.user.id)!;
+	}
 	html!: HTMLElement;
 	emojis: emojipjson[] = [];
 	large!: boolean;
@@ -1518,16 +1520,13 @@ class Guild extends SnowFlake {
 		this.message_notifications = 0;
 		this.sortRoles();
 		if (member instanceof User) {
-			console.warn(member);
 			Member.resolveMember(member, this).then((_) => {
-				if (_) {
-					this.member = _;
-				} else {
+				if (!_) {
 					console.error("Member was unable to resolve");
 				}
 			});
 		} else {
-			this.member = Member.newUnsafe(member, this);
+			Member.new(member, this);
 		}
 
 		for (const thing of json.channels) {
