@@ -21,7 +21,7 @@ class Direct extends Guild {
 	discovery: Discovery;
 	constructor(json: dirrectjson[], owner: Localuser) {
 		super(-1, owner, null);
-		this.message_notifications = 0;
+		this.messageNotifications = 0;
 		this.channels = [];
 		// @ts-ignore it's a hack, but it's a hack that works
 		this.properties = {};

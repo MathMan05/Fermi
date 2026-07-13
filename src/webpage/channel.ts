@@ -2868,7 +2868,7 @@ class Channel extends SnowFlake {
 	lastmessage: Message | undefined;
 	setnotifcation() {
 		const optionsArr = ["all", "onlyMentions", "none", "default"] as const;
-		const defualt = I18n.guild[optionsArr[this.guild.message_notifications]]();
+		const defualt = I18n.guild[optionsArr[this.guild.messageNotifications]]();
 		const options = optionsArr.map((e) => I18n.guild[e](defualt));
 		const notiselect = new Dialog("");
 		const form = notiselect.options.addForm(
@@ -3284,7 +3284,7 @@ class Channel extends SnowFlake {
 	get trueNotiValue() {
 		const val = this.notification;
 		if (val === "default") {
-			switch (Number(this.guild.message_notifications)) {
+			switch (Number(this.guild.messageNotifications)) {
 				case 0:
 					return "all";
 				case 1:
@@ -3303,7 +3303,7 @@ class Channel extends SnowFlake {
 		if (Number(notinumber) === 3) {
 			notinumber = null;
 		}
-		notinumber ??= this.guild.message_notifications;
+		notinumber ??= this.guild.messageNotifications;
 		console.warn("info:", notinumber);
 		switch (Number(notinumber)) {
 			case 0:
