@@ -182,7 +182,7 @@ class Guild extends SnowFlake {
 	readonly roleids = new Map<string, Role>();
 	prevchannel: Channel | undefined;
 	banner?: string;
-	message_notifications: number = 0;
+	messageNotifications: number = 0;
 	headchannels!: Channel[];
 	position!: number;
 	parent_id!: string;
@@ -1517,7 +1517,7 @@ class Guild extends SnowFlake {
 			}
 		}
 
-		this.message_notifications = 0;
+		this.messageNotifications = 0;
 		this.sortRoles();
 		if (member instanceof User) {
 			Member.resolveMember(member, this).then((_) => {
@@ -1560,7 +1560,7 @@ class Guild extends SnowFlake {
 	mute_config!: mute_config | null;
 	notisetting(settings: GuildOverrides) {
 		this.mute_config = this.mute_config;
-		this.message_notifications = settings.message_notifications;
+		this.messageNotifications = settings.message_notifications;
 		for (const override of settings.channel_overrides) {
 			const channel = this.localuser.channels.get(override.channel_id);
 			if (!channel) continue;
@@ -1574,7 +1574,7 @@ class Guild extends SnowFlake {
 			"",
 			(_, sent: any) => {
 				notiselect.hide();
-				this.message_notifications = sent.message_notifications;
+				this.messageNotifications = sent.message_notifications;
 			},
 			{
 				fetchURL: `${this.info.api}/users/@me/guilds/${this.id}/settings/`,
@@ -1588,7 +1588,7 @@ class Guild extends SnowFlake {
 			options,
 			{
 				radio: true,
-				defaultIndex: this.message_notifications,
+				defaultIndex: this.messageNotifications,
 			},
 			[0, 1, 2],
 		);
