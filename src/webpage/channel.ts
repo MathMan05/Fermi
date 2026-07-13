@@ -44,10 +44,9 @@ class Channel extends SnowFlake {
 	owner: Guild;
 	headers: Localuser["headers"];
 	name!: string;
-	parent_id?: string;
+	parentId?: string;
 	parent?: Channel;
 	children!: Channel[];
-	guild_id!: string;
 	permissionOverwriteMap!: Map<string, Permissions>;
 	permissionOverwriteOrder: string[] = [];
 	topic!: string;
@@ -707,12 +706,11 @@ class Channel extends SnowFlake {
 
 		this.name = json.name;
 		if (json.parent_id) {
-			this.parent_id = json.parent_id;
+			this.parentId = json.parent_id;
 		}
 		this.parent = undefined;
 		this.children = [];
 		this.icon = json.icon;
-		this.guild_id = json.guild_id;
 		this.permissionOverwriteMap = new Map();
 		this.permissionOverwriteMap = new Map();
 		this.permissionOverwriteOrder = (json.permission_overwrites ?? []).map((r) => {
@@ -903,7 +901,7 @@ class Channel extends SnowFlake {
 		});
 	}
 	resolveparent(_guild: Guild = this.owner) {
-		const parentid = this.parent_id;
+		const parentid = this.parentId;
 		if (!parentid) return false;
 		this.parent = this.localuser.channels.get(parentid);
 		this.parent ??= undefined;
@@ -928,8 +926,8 @@ class Channel extends SnowFlake {
 			if (thing.position != position) {
 				thisthing.position = thing.position = position;
 			}
-			if (thing.move_id && thing.move_id !== thing.parent_id) {
-				thing.parent_id = thing.move_id;
+			if (thing.move_id && thing.move_id !== thing.parentId) {
+				thing.parentId = thing.move_id;
 				thisthing.parent_id = thing.parent?.id;
 				thing.move_id = undefined;
 				//console.log(this.guild.channelids[thisthing.parent_id.id]);
@@ -1339,7 +1337,7 @@ class Channel extends SnowFlake {
 						console.log("overwrite :3", thisy);
 					}
 				}
-				that.move_id = thisy.parent_id;
+				that.move_id = thisy.parentId;
 				if (that.parent) {
 					that.parent.children.splice(that.parent.children.indexOf(that), 1);
 				} else {
@@ -2664,9 +2662,9 @@ class Channel extends SnowFlake {
 		}
 		if (addstate) {
 			history.pushState(
-				[this.guild_id, this.id, aroundMessage],
+				[this.guild.id, this.id, aroundMessage],
 				"",
-				"/channels/" + this.guild_id + "/" + this.id + (aroundMessage ? `/${aroundMessage}` : ""),
+				"/channels/" + this.guild.id + "/" + this.id + (aroundMessage ? `/${aroundMessage}` : ""),
 			);
 		}
 		this.localuser.pageTitle("#" + this.name);
@@ -3229,13 +3227,12 @@ class Channel extends SnowFlake {
 		const parent = this.localuser.channels.get(json.parent_id);
 		if (parent) {
 			this.parent = parent;
-			this.parent_id = parent.id;
+			this.parentId = parent.id;
 		} else {
 			this.parent = undefined;
-			this.parent_id = undefined;
+			this.parentId = undefined;
 		}
 
-		this.guild_id = json.guild_id;
 		const oldover = this.permissionOverwriteMap;
 		this.permissionOverwriteMap = new Map();
 		this.permissionOverwriteOrder = (json.permission_overwrites ?? []).map((r) => {

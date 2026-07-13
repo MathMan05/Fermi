@@ -555,10 +555,9 @@ class Group extends Channel {
 		userSet.add(this.localuser.user);
 
 		this.name ??= this.localuser.user.username;
-		this.parent_id!;
+		this.parentId!;
 		this.parent!;
 		this.children = [];
-		this.guild_id = "@me";
 		this.permissionOverwriteMap = new Map();
 		if (json.last_message_id) {
 			this.setLastMessageId(json.last_message_id);
