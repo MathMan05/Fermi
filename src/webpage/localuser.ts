@@ -4472,6 +4472,7 @@ class Localuser {
 				}
 			} else {
 				for (const [_, member] of this.focusGuild.members) {
+					if (!this.focusChannel?.hasPermission("VIEW_CHANNEL", member)) continue;
 					const rank = member.compare(name);
 					if (rank > 0) {
 						members.push([member, rank]);
