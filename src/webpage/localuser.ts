@@ -1419,7 +1419,7 @@ class Localuser {
 					if ("member" in member) {
 						if (this.userMap.get(member.member.id)?.members.has(guild)) return;
 						if (this.focusGuild?.id && this.focusGuild?.id !== "@me")
-							await this.getMember(member.member.id, this.focusGuild.id);
+							await this.getMember(member.member.user!.id, this.focusGuild.id);
 					} else {
 						counts.set(member.group.id, member.group.count);
 					}
