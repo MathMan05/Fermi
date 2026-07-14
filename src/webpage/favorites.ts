@@ -49,10 +49,10 @@ export class Favorites {
 	private favorite_stickers: string[] = [];
 	private sticker_frecency: favandfreq["sticker_frecency"]["stickers"] = {};
 	private favorite_emojis: string[] = [];
-	needsSave: saveImportance = 0;
-	lastSave = 0;
-	lastDecay = 0;
-	old!: favandfreqimp;
+	private needsSave: saveImportance = 0;
+	private lastSave = 0;
+	private lastDecay = 0;
+	private old!: favandfreqimp;
 	// ----- end of stuff that needs to store ----
 	get info() {
 		return this.owner.info;
