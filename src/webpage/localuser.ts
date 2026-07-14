@@ -1414,14 +1414,17 @@ class Localuser {
 				return;
 			}
 			const counts = new Map<string, number>();
-			for (const thing of list.d.ops[0].items) {
-				if ("member" in thing) {
-					if (this.userMap.get(thing.member.id)?.members.has(guild)) continue;
-					await Member.new(thing.member, guild);
-				} else {
-					counts.set(thing.group.id, thing.group.count);
-				}
-			}
+			await Promise.all(
+				list.d.ops[0].items.map(async (member) => {
+					if ("member" in member) {
+						if (this.userMap.get(member.member.id)?.members.has(guild)) return;
+						if (this.focusGuild?.id && this.focusGuild?.id !== "@me")
+							await this.getMember(member.member.id, this.focusGuild.id);
+					} else {
+						counts.set(member.group.id, member.group.count);
+					}
+				}),
+			);
 		}
 
 		const elms: Map<Role | "offline" | "online", (Member | User)[]> = new Map([]);
