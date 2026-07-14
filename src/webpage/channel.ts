@@ -3871,6 +3871,7 @@ class Channel extends SnowFlake {
 
 		if (messagez.author === this.localuser.user) {
 			this.lastSentMessage = messagez;
+			this.lastreadmessageid = messagez.id;
 			this.slowmode();
 			this.mentions = 0;
 			this.unreads();
