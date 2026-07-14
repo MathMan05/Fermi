@@ -47,7 +47,7 @@ class Channel extends SnowFlake {
 	parentId?: string;
 	parent?: Channel;
 	children!: Channel[];
-	readonly permissionOverwriteMap!: Map<string, Permissions>;
+	readonly permissionOverwriteMap = new Map<string, Permissions>();
 	permissionOverwriteOrder: string[] = [];
 	topic!: string;
 	nsfw!: boolean;
@@ -90,9 +90,9 @@ class Channel extends SnowFlake {
 	static contextmenu = new Contextmenu<Channel, undefined>("channel menu");
 	replyingto!: Message | null;
 	infinite!: InfiniteScroller;
-	idToPrev: Map<string, string | undefined>;
-	idToNext: Map<string, string | undefined>;
-	messages: Map<string, Message>;
+	readonly idToPrev: Map<string, string | undefined>;
+	readonly idToNext: Map<string, string | undefined>;
+	readonly messages: Map<string, Message>;
 	voice?: Voice;
 	bitrate: number = 128000;
 	threadData?: threadMetadata;

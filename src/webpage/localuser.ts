@@ -69,7 +69,7 @@ interface MDSearchOption {
 
 MarkDown.emoji = Emoji;
 class Localuser {
-	badges = new Map<
+	readonly badges = new Map<
 		string,
 		{id: string; description: string; icon: string; link?: string; translate?: boolean}
 	>(badgeArr);
@@ -90,9 +90,9 @@ class Localuser {
 	readonly guilds = new Map<string, Guild>();
 	readonly channels: Map<string, Channel> = new Map();
 	readonly userMap: Map<string, User> = new Map();
-	messages = new Map<string, Message>();
-	idToPrev = new Map<string, string | undefined>();
-	idToNext = new Map<string, string | undefined>();
+	readonly messages = new Map<string, Message>();
+	readonly idToPrev = new Map<string, string | undefined>();
+	readonly idToNext = new Map<string, string | undefined>();
 	get status() {
 		return this.user.status;
 	}
