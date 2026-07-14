@@ -3854,7 +3854,9 @@ class Localuser {
 		}
 		{
 			const instanceInfo = settings.addButton(I18n.instanceInfo.name());
-			fetch(this.info.api + "/policies/instance")
+			fetch(this.info.api + "/policies/instance", {
+				headers: this.headers,
+			})
 				.then((_) => _.json())
 				.then((body) => {
 					const json = body as {
