@@ -19,19 +19,24 @@ class Embed {
 	}
 	getType(json: embedjson) {
 		const users = Object.values(getBulkUsers().users) as Specialuser[];
-		const instances = getInstances()
-			?.map((_) => _.url)
-			.filter((_) => undefined !== _)
-			.concat(users.map((_) => _.serverurls.wellknown));
+		let instances: {
+			url?: string;
+			name?: string;
+		}[] = (getInstances() || []).filter((_) => undefined !== _.url);
+		instances = instances.concat(users.map((_) => ({url: _.serverurls.wellknown as string})));
 		if (instances && json.type === "link" && json.url && URL.canParse(json.url)) {
 			const Url = new URL(json.url);
-			for (const instance of instances) {
-				if (instance && URL.canParse(instance)) {
-					const IUrl = new URL(instance);
+			for (const {url: iurl, name} of instances) {
+				if (iurl && URL.canParse(iurl)) {
+					const IUrl = new URL(iurl);
 					const params = new URLSearchParams(Url.search);
 					let host: string;
-					if (params.has("instance")) {
-						const url = params.get("instance") as string;
+					let url = params.get("instance") || "";
+					if (url === name) {
+						url = iurl;
+					}
+
+					if (url) {
 						if (URL.canParse(url)) {
 							host = new URL(url).host;
 						} else {
@@ -43,7 +48,7 @@ class Embed {
 					if (IUrl.host === host) {
 						const code = Url.pathname.split("/")[Url.pathname.split("/").length - 1];
 						json.invite = {
-							url: instance,
+							url: iurl,
 							code,
 						};
 						return "invite";
