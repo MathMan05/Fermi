@@ -192,8 +192,8 @@ class Guild extends SnowFlake {
 	html!: HTMLElement;
 	emojis: emojipjson[] = [];
 	large!: boolean;
-	stickers = new Map<string, Sticker>();
-	members = new Map<string, Member>();
+	readonly stickers = new Map<string, Sticker>();
+	readonly members = new Map<string, Member>();
 	welcomeScreen?: welcomeScreen;
 	static readonly contextmenu = new Contextmenu<Guild, void>("guild menu");
 	static setupcontextmenu() {

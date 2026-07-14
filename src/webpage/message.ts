@@ -34,8 +34,8 @@ class Message extends SnowFlake {
 	headers: Localuser["headers"];
 	embeds: Embed[] = [];
 	author!: User;
-	mentions = new Set<string>();
-	mention_roles = new Set<string>();
+	readonly mentions = new Set<string>();
+	readonly mention_roles = new Set<string>();
 	mention_everyone!: boolean;
 	attachments: File[] = []; //probably should be its own class tbh, should be Attachments[]
 	message_reference?: {

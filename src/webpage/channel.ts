@@ -47,7 +47,7 @@ class Channel extends SnowFlake {
 	parentId?: string;
 	parent?: Channel;
 	children!: Channel[];
-	permissionOverwriteMap!: Map<string, Permissions>;
+	readonly permissionOverwriteMap!: Map<string, Permissions>;
 	permissionOverwriteOrder: string[] = [];
 	topic!: string;
 	nsfw!: boolean;
@@ -3234,7 +3234,7 @@ class Channel extends SnowFlake {
 		}
 
 		const oldover = this.permissionOverwriteMap;
-		this.permissionOverwriteMap = new Map();
+		this.permissionOverwriteMap.clear();
 		this.permissionOverwriteOrder = (json.permission_overwrites ?? []).map((r) => {
 			const p = new Permissions(r.allow, r.deny);
 			this.permissionOverwriteMap.set(r.id, p);

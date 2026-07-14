@@ -1099,9 +1099,11 @@ class Localuser {
 				case "GUILD_STICKERS_UPDATE": {
 					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
-					guild.stickers = new Map(
-						temp.d.stickers.map((_) => [_.id, new Sticker(_, guild)] as const),
+					guild.stickers.clear();
+					temp.d.stickers.forEach((sticker) =>
+						guild.stickers.set(sticker.id, new Sticker(sticker, guild)),
 					);
+
 					guild.onStickerUpdate(guild.stickers);
 					break;
 				}

@@ -558,7 +558,7 @@ class Group extends Channel {
 		this.parentId!;
 		this.parent!;
 		this.children = [];
-		this.permissionOverwriteMap = new Map();
+		this.permissionOverwriteMap.clear();
 		if (json.last_message_id) {
 			this.setLastMessageId(json.last_message_id);
 		} else {
