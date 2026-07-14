@@ -3240,8 +3240,8 @@ class Channel extends SnowFlake {
 			this.permissionOverwriteMap.set(r.id, p);
 			return r.id;
 		});
-		const nchange = [...new Set<string>().union(oldover).difference(this.permissionOverwriteMap)];
-		const pchange = [...new Set<string>().union(this.permissionOverwriteMap).difference(oldover)];
+		const nchange = new Set<string>(oldover.keys()).difference(this.permissionOverwriteMap);
+		const pchange = new Set<string>(this.permissionOverwriteMap.keys()).difference(oldover);
 		for (const thing of nchange) {
 			const role = this.guild.roleids.get(thing);
 			if (role) {
@@ -3265,7 +3265,6 @@ class Channel extends SnowFlake {
 				});
 			}
 		}
-		console.log(pchange, nchange);
 		this.topic = json.topic;
 		this.nsfw = json.nsfw;
 		this.fireEvents();
