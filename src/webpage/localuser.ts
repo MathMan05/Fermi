@@ -369,7 +369,7 @@ class Localuser {
 		}
 	}
 	guildFolders: guildFolder[] = [];
-	unknownRead = new Map<string, readStateEntry>();
+	readonly unknownRead = new Map<string, readStateEntry>();
 	async gottenReady(ready: readyjson): Promise<void> {
 		await I18n.done;
 		this.errorBackoff = 0;
@@ -458,7 +458,7 @@ class Localuser {
 
 		this.pingEndpoint();
 	}
-	inrelation = new Set<User>();
+	readonly inrelation = new Set<User>();
 	outoffocus(): void {
 		const servers = document.getElementById("guildRail") as HTMLDivElement;
 		servers.innerHTML = "";
@@ -721,7 +721,7 @@ class Localuser {
 		await promise;
 		console.warn("huh");
 	}
-	interNonceMap = new Map<string, Message>();
+	readonly interNonceMap = new Map<string, Message>();
 	registerInterNonce(nonce: string, thing: Message) {
 		this.interNonceMap.set(nonce, thing);
 	}
@@ -737,7 +737,7 @@ class Localuser {
 			this.handleTrace(e.trace);
 		});
 	}
-	relChangeUpdateMap = new Map<string, (() => void)[]>();
+	readonly relChangeUpdateMap = new Map<string, (() => void)[]>();
 	async relationChange(id: string): Promise<void> {
 		const arr = this.relChangeUpdateMap.get(id) || [];
 		const {promise, resolve} = Promise.withResolvers<void>();
@@ -1492,7 +1492,7 @@ class Localuser {
 		console.log("failed with", insts, this.info.wellknown);
 		return this.info.wellknown;
 	}
-	roleListMap = new WeakMap<
+	readonly roleListMap = new WeakMap<
 		HTMLDivElement,
 		{
 			role: Role | "offline" | "online";
@@ -1799,7 +1799,7 @@ class Localuser {
 		channels.appendChild(html);
 		return guild;
 	}
-	dragMap = new WeakMap<
+	readonly dragMap = new WeakMap<
 		HTMLElement,
 		| Guild
 		| {
@@ -2834,7 +2834,7 @@ class Localuser {
 								}
 							},
 							{
-								fetchURL: this.info.api + "/users/@me/mfa/totp/enable/",
+								fetchURL: this.info.api + "/users/@me/mfa/totp/enable",
 								headers: this.headers,
 							},
 						);
@@ -3851,7 +3851,7 @@ class Localuser {
 		}
 		{
 			const instanceInfo = settings.addButton(I18n.instanceInfo.name());
-			fetch(this.info.api + "/policies/instance/")
+			fetch(this.info.api + "/policies/instance")
 				.then((_) => _.json())
 				.then((body) => {
 					const json = body as {
@@ -5038,7 +5038,7 @@ class Localuser {
 			[`BlobmojiCompat.${isFirefox ? "woff2" : "ttf"}`, "Blobmoji"],
 		] as const;
 	}
-	getMemberMap = new Map<string, Promise<Member | undefined>>();
+	readonly getMemberMap = new Map<string, Promise<Member | undefined>>();
 	async getMember(id: string, guildid: string): Promise<Member | undefined> {
 		const user = this.userMap.get(id);
 		const guild = this.guilds.get(guildid) as Guild;
