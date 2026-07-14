@@ -1247,6 +1247,8 @@ class MarkDown {
 				return;
 			}
 			elm.onmouseup = (_) => {
+				const trusted = ["http", "https"];
+				if (!trusted.includes(Url.protocol)) return;
 				let parent: HTMLElement | null = elm;
 				while (parent) {
 					if (parent.classList.contains("unspoiled")) break;
