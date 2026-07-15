@@ -24,6 +24,15 @@ class Permissions {
 		const bit = 1n << BigInt(b);
 		return (big & ~bit) | (BigInt(state) << BigInt(b)); //thanks to geotale for this code :3
 	}
+	static toMask(perms: string[]): bigint {
+		return perms.reduce<bigint>((p, c) => {
+			const bit = this.permisions.indexOf(c as any);
+			if (bit !== -1) {
+				return p | (1n << BigInt(bit));
+			}
+			return p;
+		}, 0n);
+	}
 	//private static info: { name: string; readableName: string; description: string }[];
 	static *info(): Generator<{name: string; readableName: string; description: string}> {
 		for (const thing of this.permisions) {
@@ -87,6 +96,22 @@ class Permissions {
 		"PIN_MESSAGES",
 		"BYPASS_SLOWMODE",
 	] as const;
+	static noOverwrite = [
+		"KICK_MEMBERS",
+		"BAN_MEMBERS",
+		"ADMINISTRATOR",
+		"MANAGE_GUILD",
+		"VIEW_AUDIT_LOG",
+		"VIEW_GUILD_INSIGHTS",
+		"CHANGE_NICKNAME",
+		"MANAGE_NICKNAMES",
+		"MANAGE_GUILD_EXPRESSIONS",
+		"MODERATE_MEMBERS",
+		"VIEW_CREATOR_MONETIZATION_ANALYTICS",
+		"CREATE_GUILD_EXPRESSIONS",
+		"CREATE_EVENTS",
+	] satisfies ArrayElement<typeof Permissions.permisions>[];
+	static noOverwriteMask = this.toMask(this.noOverwrite);
 	getPermission(name: string): number {
 		if (undefined === Permissions.permisions.indexOf(name as any)) {
 			console.error(name + " is not found in map", Permissions.permisions);
@@ -131,4 +156,7 @@ class Permissions {
 		}
 	}
 }
+
+type ArrayElement<ArrayType extends readonly unknown[]> =
+	ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
 export {Permissions};

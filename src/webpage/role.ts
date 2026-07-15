@@ -255,6 +255,7 @@ class RoleList extends Buttons {
 			this.makeguildmenus(options);
 		}
 		for (const thing of Permissions.info()) {
+			if (channel && Permissions.noOverwrite.includes(thing.name as any)) continue;
 			options.options.push(new PermissionToggle(thing, this.permission, options));
 		}
 		if (!channel) {

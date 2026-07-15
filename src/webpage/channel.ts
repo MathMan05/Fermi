@@ -868,15 +868,21 @@ class Channel extends SnowFlake {
 			}
 		}
 
+		let deny = false;
+
 		for (const role of member.roles) {
 			const premission = this.permissionOverwriteMap.get(role.id);
 			if (premission) {
 				const perm = premission.getPermission(name);
-				if (perm) {
-					return perm === 1;
+				if (perm === 1) {
+					return true;
+				} else {
+					deny = true;
 				}
 			}
 		}
+		if (deny) return false;
+
 		for (const role of member.roles) {
 			if (role.permissions.getPermission(name)) {
 				return true;
@@ -3955,8 +3961,8 @@ class Channel extends SnowFlake {
 			method: "PUT",
 			headers: this.headers,
 			body: JSON.stringify({
-				allow: perms.allow.toString(),
-				deny: perms.deny.toString(),
+				allow: (perms.allow & ~Permissions.noOverwriteMask).toString(),
+				deny: (perms.deny & ~Permissions.noOverwriteMask).toString(),
 				id,
 				type: this.localuser.userMap.get(id) ? 1 : 0,
 			}),
