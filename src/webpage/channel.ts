@@ -48,7 +48,6 @@ class Channel extends SnowFlake {
 	parent?: Channel;
 	children!: Channel[];
 	readonly permissionOverwriteMap = new Map<string, Permissions>();
-	permissionOverwriteOrder: string[] = [];
 	topic!: string;
 	nsfw!: boolean;
 	position: number = 0;
@@ -64,6 +63,15 @@ class Channel extends SnowFlake {
 				return [await this.localuser.getUser(id), p] as const;
 			}),
 		);
+	}
+	async getOverwritesOrder() {
+		const overwrites = await this.getOverwrites();
+		const users = overwrites.filter(([_]) => _ instanceof User);
+		const roles = overwrites.filter(([_]) => _ instanceof Role) as [Role, Permissions][];
+		const order = new Map<Role, number>();
+		roles.forEach(([_]) => order.set(_, this.guild.roles.indexOf(_)));
+		roles.sort(([a], [b]) => order.get(a)! - order.get(b)!);
+		return [...users, ...roles];
 	}
 	set lastreadmessageid(id: string | undefined) {
 		const cur = this.lastreadmessageidint;
@@ -419,7 +427,6 @@ class Channel extends SnowFlake {
 		inviteOptions.show();
 	}
 	generateSettings() {
-		this.sortPerms();
 		const settings = new Settings(I18n.channel.settingsFor(this.name));
 		{
 			const gensettings = settings.addButton(I18n.channel.settings());
@@ -581,7 +588,7 @@ class Channel extends SnowFlake {
 			const s1 = settings.addButton(I18n.channel.permissions(), {optName: ""});
 
 			(async () => {
-				const list = await this.getOverwrites();
+				const list = await this.getOverwritesOrder();
 
 				s1.options.push(
 					new RoleList(list, this.guild, this.updateRolePermissions.bind(this), this),
@@ -596,18 +603,7 @@ class Channel extends SnowFlake {
 
 		settings.show();
 	}
-	sortPerms() {
-		console.log(this.permissionOverwriteOrder + "");
-		this.permissionOverwriteOrder.sort((a, b) => {
-			if (!this.guild.member.hasRole(a[0])) return -1;
-			if (!this.guild.member.hasRole(b[0])) return 1;
-			return (
-				this.guild.roles.findIndex((r) => r.id === a[0]) -
-				this.guild.roles.findIndex((r) => r.id === b[0])
-			);
-		});
-		console.log(this.permissionOverwriteOrder + "");
-	}
+
 	setUpInfiniteScroller() {
 		this.infinite = new InfiniteScroller(
 			async (id: string, offset: number): Promise<string | undefined> => {
@@ -711,9 +707,8 @@ class Channel extends SnowFlake {
 		this.parent = undefined;
 		this.children = [];
 		this.icon = json.icon;
-		this.permissionOverwriteMap = new Map();
-		this.permissionOverwriteMap = new Map();
-		this.permissionOverwriteOrder = (json.permission_overwrites ?? []).map((r) => {
+		this.permissionOverwriteMap.clear();
+		(json.permission_overwrites ?? []).forEach((r) => {
 			const p = new Permissions(r.allow, r.deny);
 			this.permissionOverwriteMap.set(r.id, p);
 			return r.id;
@@ -891,7 +886,7 @@ class Channel extends SnowFlake {
 		return false;
 	}
 	get canMessage(): boolean {
-		if (this.permissionOverwriteOrder.length === 0 && this.hasPermission("MANAGE_CHANNELS")) {
+		if (this.permissionOverwriteMap.size === 0 && this.hasPermission("MANAGE_CHANNELS")) {
 			const role = this.guild.roles.find((_) => _.name === "@everyone");
 			if (role) {
 				this.addRoleToPerms(role);
@@ -3241,10 +3236,9 @@ class Channel extends SnowFlake {
 
 		const oldover = this.permissionOverwriteMap;
 		this.permissionOverwriteMap.clear();
-		this.permissionOverwriteOrder = (json.permission_overwrites ?? []).map((r) => {
+		(json.permission_overwrites ?? []).forEach((r) => {
 			const p = new Permissions(r.allow, r.deny);
 			this.permissionOverwriteMap.set(r.id, p);
-			return r.id;
 		});
 		const nchange = new Set<string>(oldover.keys()).difference(this.permissionOverwriteMap);
 		const pchange = new Set<string>(this.permissionOverwriteMap.keys()).difference(oldover);
@@ -3947,7 +3941,6 @@ class Channel extends SnowFlake {
 		});
 		const perm = new Permissions("0", "0");
 		this.permissionOverwriteMap.set(role.id, perm);
-		this.permissionOverwriteOrder.push(role.id);
 	}
 	async updateRolePermissions(id: string, perms: Permissions) {
 		const permission = this.permissionOverwriteMap.get(id);
