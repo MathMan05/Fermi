@@ -886,6 +886,7 @@ class Channel extends SnowFlake {
 		return false;
 	}
 	get canMessage(): boolean {
+		//TODO get rid of this
 		if (this.permissionOverwriteMap.size === 0 && this.hasPermission("MANAGE_CHANNELS")) {
 			const role = this.guild.roles.find((_) => _.name === "@everyone");
 			if (role) {
