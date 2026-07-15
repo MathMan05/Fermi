@@ -871,7 +871,7 @@ class Channel extends SnowFlake {
 				const perm = premission.getPermission(name);
 				if (perm === 1) {
 					return true;
-				} else {
+				} else if (perm === -1) {
 					deny = true;
 				}
 			}
