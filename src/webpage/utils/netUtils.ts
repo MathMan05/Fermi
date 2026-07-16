@@ -15,7 +15,7 @@ export function safeGoBackLink(uri: string | null): string {
 			target.origin === window.location.origin &&
 			(target.protocol === "http:" || target.protocol === "https:")
 		) {
-			return target.pathname + target.search + target.hash;
+			return target.toString();
 		}
 	}
 
