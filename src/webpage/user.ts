@@ -1272,7 +1272,7 @@ class User extends SnowFlake {
 				const hover = new Hover(hovertxt);
 				hover.addEvent(badge);
 				if (badgejson.link && badge instanceof HTMLAnchorElement) {
-					badge.href = badgejson.link;
+					MarkDown.safeLink(badge, badgejson.link);
 				}
 				badgediv.append(badge);
 			}
