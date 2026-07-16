@@ -3,7 +3,7 @@ import {adduser, Specialuser} from "./utils/utils.js";
 import {makeLogin} from "./login.js";
 import {MarkDown} from "./markdown.js";
 import {Dialog, FormError} from "./settings.js";
-import {trimTrailingSlashes} from "./utils/netUtils";
+import {safeGoBackLink, trimTrailingSlashes} from "./utils/netUtils";
 export async function makeRegister(
 	trasparentBg = false,
 	instance = "",
@@ -38,15 +38,7 @@ export async function makeRegister(
 					return;
 				}
 				const redir = new URLSearchParams(window.location.search).get("goback");
-				if (
-					redir &&
-					(!URL.canParse(redir) || new URL(redir).host === window.location.host) &&
-					!invite
-				) {
-					window.location.href = redir;
-				} else {
-					window.location.href = "/channels/@me";
-				}
+				window.location.href = invite ? "/channels/@me" : safeGoBackLink(redir);
 			}
 		},
 		{
