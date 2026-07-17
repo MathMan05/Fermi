@@ -223,7 +223,7 @@ class RoleList extends Buttons {
 	permission: Permissions;
 	readonly guild: Guild;
 	readonly channel: false | Channel;
-	declare buttons: [string, string][];
+	declare buttons: {name: string; inner: string}[];
 	readonly options: Options;
 	onchange: (id: string, perms: Permissions) => void;
 	curid?: string;
@@ -264,7 +264,7 @@ class RoleList extends Buttons {
 			});
 		}
 		for (const i of permissions) {
-			this.buttons.push([i[0].name, i[0].id]);
+			this.buttons.push({name: i[0].name, inner: i[0].id});
 		}
 		this.options = options;
 		guild.roleUpdate = this.groleUpdate.bind(this);
@@ -516,7 +516,7 @@ class RoleList extends Buttons {
 			return b.position - a.position;
 		});
 		for (const i of this.permissions) {
-			this.buttons.push([i[0].name, i[0].id]);
+			this.buttons.push({name: i[0].name, inner: i[0].id});
 		}
 		if (!this.buttonList) return;
 		const elms = Array.from(this.buttonList.children);
@@ -641,16 +641,16 @@ class RoleList extends Buttons {
 		roleRow.append(add);
 
 		buttonTable.append(roleRow);
-		for (const thing of this.buttons) {
+		for (const {name, inner} of this.buttons) {
 			const button = document.createElement("button");
 
-			this.buttonMap.set(thing[0], button);
+			this.buttonMap.set(name, button);
 			button.classList.add("SettingsButton");
 			const span = document.createElement("span");
-			span.textContent = thing[0];
+			span.textContent = name;
 			button.append(span);
 			span.classList.add("roleButtonStyle");
-			const role = this.guild.roleids.get(thing[1]) || this.guild.localuser.userMap.get(thing[1]);
+			const role = this.guild.roleids.get(inner) || this.guild.localuser.userMap.get(inner);
 			if (role) {
 				if (role instanceof Role) {
 					if (role.getColor()) button.style.setProperty("--user-bg", `var(--role-${role.id})`);
@@ -675,7 +675,7 @@ class RoleList extends Buttons {
 			}
 			button.onclick = (_) => {
 				html.classList.remove("mobileHidden");
-				this.generateHTMLArea(thing[1], html);
+				this.generateHTMLArea(inner, html);
 				if (this.warndiv) {
 					this.warndiv.remove();
 				}

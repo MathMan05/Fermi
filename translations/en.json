@@ -64,6 +64,8 @@
 			"never": "Never"
 		},
 		"name": "Accessibility",
+		"visuals":"Visuals",
+		"animations":"Animations",
 		"playGif": "Play GIFs:",
 		"playIcon": "Play animated icons:",
 		"roleColors": "Disable role colors:",
@@ -497,8 +499,12 @@
 	"leaving": "You're leaving Harmony",
 	"loaded": "Loaded",
 	"localuser": {
+		"security":"Security",
+		"advanced":"Advanced settings",
+		"danger":"Danger zone",
 		"2faCode:": "Code:",
 		"2faCodeGive": "Your TOTP secret is: $1. This will generate a 6 digits 2FA token with a 30 second expiration period.",
+		"2fa":"2FA settings",
 		"2faDisable": "Disable 2FA",
 		"2faEnable": "Enable 2FA",
 		"CheckUpdate": "Check for updates",
@@ -538,7 +544,7 @@
 		"install": "Install",
 		"installDesc": "Installing Fermi will allow you to open it in its own window and act like its own app! You can also just continue to use Fermi in the web browser like you have been and it'll work the same.",
 		"installJank": "Install Fermi",
-		"language": "Language:",
+		"language": "Language",
 		"manageBot": "Manage bot",
 		"manageInstance": "Manage instance",
 		"mustTypePhrase": "To delete your account you must type the phrase",
@@ -576,7 +582,8 @@
 		"trustedDesc": "When you click on links sending you to these domain, you will ***not*** be prompted for permission to open like other links, only give this to domains you trust, such as 'https://fermi.chat'",
 		"updateSettings": "Update settings",
 		"updatesYay": "Updates found!",
-		"userSettings": "Your public profile"
+		"userSettings": "Your public profile",
+		"general":"General"
 	},
 	"login": {
 		"allGood": "All good",
@@ -727,7 +734,7 @@
 			"USE_SOUNDBOARD": "Allows role members to use a soundboard in voice channels.",
 			"USE_EXTERNAL_SOUNDS": "Allows role members to use soundboard sounds from other guilds in voice channels.",
 			"PRIORITY_SPEAKER": "Allows role members to be priority speaker in voice channels.",
-			"REQUEST_TO_SPEAK": "Allows role members to request to speak in stage channels.",			
+			"REQUEST_TO_SPEAK": "Allows role members to request to speak in stage channels.",
 			"USE_EMBEDDED_ACTIVITIES": "Allows role members to use embedded activities.",
 			"USE_APPLICATION_COMMANDS": "Allows role members to use application commands.",
 			"USE_EXTERNAL_APPS": "Allows role members to have application responses to show publicly in channel (When disabled, users will still be allowed to use their apps but responses will be visible only to themselves. This only applies to apps not also installed to the guild)."
@@ -814,7 +821,7 @@
 		"instURL":"URL:"
 	},
 	"remove": "Remove",
-	"renderJoinAvatars": "Display avatars for new members: ",
+	"renderJoinAvatars": " Display avatars in member welcome messages: ",
 	"reply": "Reply",
 	"replyingTo": "Replying to $1",
 	"retrying": "Retrying...",

@@ -754,6 +754,14 @@ select {
 	cursor: pointer;
 	transition: background 0.1s ease-in-out;
 }
+.langButton {
+	background: #0000004d;
+	padding: 10px;
+	margin-bottom: 8px;
+	&.selected {
+		background: #000000ad;
+	}
+}
 .subButton {
 	min-width: 350px;
 	padding: 10px;
@@ -4121,13 +4129,14 @@ fieldset input[type="radio"] {
 }
 .settingbuttons {
 	flex: none;
-	width: 192px;
+	width: 210px;
 	padding: 6px;
 	background: var(--settings-panel-bg);
 	border-right: 2px solid var(--shadow);
 	border-left: 2px solid transparent;
 	box-sizing: border-box;
 	overflow-y: auto;
+	overflow-x: clip;
 }
 .roleButtonStyle {
 	color: transparent;
@@ -4145,6 +4154,7 @@ fieldset input[type="radio"] {
 	border: none;
 	transition: background 0.1s;
 	position: relative;
+	padding-right: 0px;
 }
 .infosection {
 	.activeSetting {
@@ -4153,6 +4163,18 @@ fieldset input[type="radio"] {
 }
 .activeSetting {
 	background: var(--secondary-hover);
+}
+.settingsIndent {
+	margin-left: 5px;
+	width: calc(100% - 10px);
+}
+.settingRed {
+	color: var(--red);
+}
+.headSetting {
+	padding: 5px;
+	display: block;
+	font-weight: bold;
 }
 .SettingsButton:hover {
 	background: var(--settings-panel-hover);
