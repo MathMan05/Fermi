@@ -80,11 +80,25 @@ class MarkDown {
 			}
 			const span = document.createElement("span");
 			span.classList.add("md-emoji", "bigemojiUni");
-
-			const matched = str.match(/^((<a?:[A-Za-z\d_]*:\d*>|([^\da-zA-Z <>])) *){1,3}$/u);
-			if (matched) {
+			const seg = new Intl.Segmenter("en-US", {granularity: "grapheme"});
+			const matchReg = !!str.match(/^(((<a?:[A-Za-z\d_]*:\d*>|([^\da-zA-Z <>]+)) *))$/gu);
+			const matched = matchReg
+				? Array.from(str.matchAll(/((<a?:[A-Za-z\d_]*:\d*>|([^\da-zA-Z <>]+)) *)/gu) || []).flatMap(
+						(match) => {
+							if (match[0].match(/^<a?:[A-Za-z\d_]*:\d*>$/u)) {
+								return match[0];
+							} else if (match[0].match(/[^\da-zA-Z <>]+$/gu)) {
+								return seg.segment(match[0]);
+							} else if (match[0].match(/^\s*$/)) {
+								console.log(match);
+								return [];
+							} else return [..."aaaa"];
+						},
+					)
+				: [..."aaaa"];
+			if (matched.length <= 3) {
 				const map = [...str.matchAll(/<a?:[A-Za-z\d_]*:\d*>|[^\da-zA-Z <>]+/gu).map(([_]) => _)];
-				const seg = new Intl.Segmenter("en-US", {granularity: "grapheme"});
+
 				const invalid = map.find((str) => {
 					if (str.length > 10) return false;
 					if (Array.from(seg.segment(str)).length !== 1) return true;
