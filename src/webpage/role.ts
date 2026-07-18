@@ -203,7 +203,7 @@ class PermissionToggle implements OptionsElement<number> {
 		div.append(no);
 		if (state === 0) {
 			cur = no;
-			on.classList.add("selected");
+			no.classList.add("selected");
 		}
 		no.onclick = (_) => {
 			this.permissions.setPermission(this.rolejson.name, 0);
@@ -217,7 +217,7 @@ class PermissionToggle implements OptionsElement<number> {
 			off.classList.add("triOpt");
 			if (state === -1) {
 				cur = off;
-				on.classList.add("selected");
+				off.classList.add("selected");
 			}
 			off.onclick = (_) => {
 				this.permissions.setPermission(this.rolejson.name, -1);
