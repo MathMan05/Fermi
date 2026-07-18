@@ -222,11 +222,7 @@ class Channel extends SnowFlake {
 			},
 			{
 				visible: function () {
-					return (
-						this.hasPermission("MANAGE_CHANNELS") ||
-						this.owner_id === this.localuser.user.id ||
-						true
-					);
+					return this.hasPermission("MANAGE_CHANNELS") || this.owner_id === this.localuser.user.id;
 				},
 				icon: {
 					css: "svg-settings",
