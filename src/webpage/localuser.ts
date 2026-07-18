@@ -2038,7 +2038,7 @@ class Localuser {
 				folder.name = name.value;
 				folder.color = +("0x" + (color.value || "#0").split("#")[1]);
 				icon.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
-				if (!folder.color) icon.style.removeProperty("--folder-color");
+				if (!folder.color && folder.color !== 0) icon.style.removeProperty("--folder-color");
 				await this.saveGuildOrder();
 				dio.hide();
 			});
@@ -2048,7 +2048,7 @@ class Localuser {
 		menu.bindContextmenu(iconDiv);
 		if (folder.color !== null && folder.color !== undefined) {
 			icon.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
-			if (!folder.color) icon.style.removeProperty("--folder-color");
+			if (!folder.color && folder.color !== 0) icon.style.removeProperty("--folder-color");
 		}
 		iconDiv.append(icon);
 		const divy = document.createElement("div");
