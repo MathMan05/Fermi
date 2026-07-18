@@ -2764,7 +2764,7 @@ span.instanceStatus {
 .message.blocked {
 	margin-bottom: 0;
 }
-.messagediv:has(.message.blocked):hover {
+.blockedDiv:hover {
 	background: transparent;
 }
 .pfprow {
@@ -3349,21 +3349,24 @@ img.bigembedimg {
 	opacity: 0.5;
 }
 #memberlisttoggle {
-	display: none;
+	/* display: none; */
+	&::before {
+		content: "";
+		width: 24px;
+		height: 24px;
+		display: block;
+	}
 }
-#memberlisttoggleicon {
-	display: block;
-	padding: 12px 0;
-	margin-left: 0;
+#memberlisttoggle {
 	cursor: pointer;
-	flex-grow: 0;
+	&::before {
+		background: var(--primary-text-soft);
+	}
 }
-#memberlisttoggleicon span {
-	height: 16px;
-	width: 16px;
-}
-#page:has(#memberlisttoggle:checked) #memberlisttoggleicon span {
-	background: var(--primary-text-prominent);
+#memberlisttoggle:checked {
+	&::before {
+		background: var(--primary-text-prominent);
+	}
 }
 
 /* Context Menu */
@@ -4416,6 +4419,10 @@ fieldset input[type="radio"] {
 	color: var(--secondary-text);
 	border-radius: 4px;
 }
+.roleSettings {
+	display: flex;
+	align-items: center;
+}
 .settingsname {
 	font-size: 1.15rem;
 }
@@ -4424,18 +4431,51 @@ fieldset input[type="radio"] {
 	color: var(--secondary-text-soft);
 }
 .tritoggle {
-	display: inline;
-	margin-left: 4px;
+	display: flex;
+	margin-left: auto;
+	position: relative;
+	padding: 0px;
+	cursor: pointer;
+	&::after {
+		content: "";
+		background: var(--secondary-bg);
+		transition: left 0.2s;
+		border-radius: 4px;
+		width: 18px;
+		height: 18px;
+		display: block;
+		top: 3px;
+		left: 2px;
+		position: absolute;
+	}
+	:first-child {
+		border-radius: 5px 0px 0px 5px;
+	}
+	:last-child {
+		border-radius: 0px 5px 5px 0px;
+	}
+	&:has(:first-child.selected)::after {
+		left: 3px;
+	}
+	&:has(:nth-child(2).selected)::after {
+		left: 27px;
+	}
+	&:has(:nth-child(3).selected)::after {
+		left: 51px;
+	}
 }
-.tritoggle input {
-	margin: 0 2px;
-	accent-color: var(--grey);
+.tritoggle > .triOpt {
+	margin: 0 0px;
+	background: var(--grey);
+	width: 24px;
+	height: 24px;
+	display: inline-block;
 }
-.tritoggle input:first-child {
-	accent-color: var(--green);
+.tritoggle > .triOpt:first-child {
+	background: var(--green);
 }
-.tritoggle input:nth-child(3) {
-	accent-color: var(--red);
+.tritoggle > .triOpt:nth-child(3) {
+	background: var(--red);
 }
 .nonimagecenter > .flexltr.savediv {
 	padding: 16px !important;

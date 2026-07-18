@@ -831,6 +831,7 @@ class Message extends SnowFlake {
 						}
 						func();
 					};
+					div.classList.add("blockedDiv");
 					div.appendChild(build);
 					return div;
 				}
@@ -1394,7 +1395,7 @@ class Message extends SnowFlake {
 			const reactions = document.createElement("div");
 			reactions.classList.add("flexltr", "reactiondiv");
 			this.reactdiv = new WeakRef(reactions);
-			this.updateReactions();
+			this.updateReactions(false);
 			div.append(reactions);
 		}
 		if (this.ephemeral) {
@@ -1604,10 +1605,10 @@ class Message extends SnowFlake {
 		});
 		diaolog.show();
 	}
-	updateReactions() {
+	updateReactions(needsSnap = true) {
 		const reactdiv = this.reactdiv.deref();
 		if (!reactdiv) return;
-		const func = this.channel.infinite.snapBottom();
+		const func = needsSnap && this.channel.infinite.snapBottom();
 		reactdiv.innerHTML = "";
 		for (const thing of this.reactions) {
 			const reaction = document.createElement("div");
@@ -1667,7 +1668,7 @@ class Message extends SnowFlake {
 				this.reactionToggle(new Emoji(thing.emoji, this.guild));
 			};
 		}
-		func();
+		if (func) func();
 	}
 	reactionAdd(data: {name: string; id?: string}, member: Member | {id: string}) {
 		for (const thing of this.reactions) {

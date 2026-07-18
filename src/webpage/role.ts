@@ -159,58 +159,70 @@ class PermissionToggle implements OptionsElement<number> {
 	watchForChange() {}
 	generateHTML(): HTMLElement {
 		const div = document.createElement("div");
-		div.classList.add("setting");
+		const descDiv = document.createElement("div");
+		div.classList.add("setting", "flexltr", "roleSettings");
 		const name = document.createElement("span");
 		name.textContent = this.rolejson.readableName;
 		name.classList.add("settingsname");
-		div.append(name);
+		descDiv.append(name);
 
-		div.append(this.generateCheckbox());
+		div.append(descDiv, this.generateCheckbox());
 		const p = document.createElement("p");
 		p.textContent = this.rolejson.description;
-		div.appendChild(p);
+		descDiv.appendChild(p);
+
 		return div;
 	}
 	generateCheckbox(): HTMLElement {
-		const rand = Math.random() + "";
 		const div = document.createElement("div");
 		div.classList.add("tritoggle");
 		const state = this.permissions.getPermission(this.rolejson.name);
+		let cur = document.createElement("span");
+		function switchCur(newCur: HTMLSpanElement) {
+			cur.classList.remove("selected");
+			cur = newCur;
+			cur.classList.add("selected");
+		}
 
-		const on = document.createElement("input");
-		on.type = "radio";
-		on.name = this.rolejson.name + rand;
+		const on = document.createElement("span");
 		div.append(on);
+		on.classList.add("triOpt");
 		if (state === 1) {
-			on.checked = true;
+			cur = on;
+			on.classList.add("selected");
 		}
 		on.onclick = (_) => {
 			this.permissions.setPermission(this.rolejson.name, 1);
 			this.owner.changed();
+			switchCur(on);
 		};
 
-		const no = document.createElement("input");
-		no.type = "radio";
-		no.name = this.rolejson.name + rand;
+		const no = document.createElement("span");
+		no.classList.add("triOpt");
+
 		div.append(no);
 		if (state === 0) {
-			no.checked = true;
+			cur = no;
+			on.classList.add("selected");
 		}
 		no.onclick = (_) => {
 			this.permissions.setPermission(this.rolejson.name, 0);
 			this.owner.changed();
+			switchCur(no);
 		};
 		if (this.permissions.hasDeny) {
-			const off = document.createElement("input");
-			off.type = "radio";
-			off.name = this.rolejson.name + rand;
+			const off = document.createElement("span");
+
 			div.append(off);
+			off.classList.add("triOpt");
 			if (state === -1) {
-				off.checked = true;
+				cur = off;
+				on.classList.add("selected");
 			}
 			off.onclick = (_) => {
 				this.permissions.setPermission(this.rolejson.name, -1);
 				this.owner.changed();
+				switchCur(off);
 			};
 		}
 		return div;
