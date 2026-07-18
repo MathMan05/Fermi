@@ -3353,6 +3353,11 @@ img.bigembedimg {
 	opacity: 0.5;
 }
 #memberlisttoggle {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+}
+#memberlisttoggle.svgicon {
 	/* display: none; */
 	&::before {
 		content: "";
@@ -3361,13 +3366,13 @@ img.bigembedimg {
 		display: block;
 	}
 }
-#memberlisttoggle {
-	cursor: pointer;
+#memberlisttoggle.svgicon {
+	-moz-appearance: initial;
 	&::before {
 		background: var(--primary-text-soft);
 	}
 }
-#memberlisttoggle:checked {
+#memberlisttoggle.svgicon:checked {
 	&::before {
 		background: var(--primary-text-prominent);
 	}

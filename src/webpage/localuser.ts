@@ -457,6 +457,13 @@ class Localuser {
 		}
 
 		this.pingEndpoint();
+		const prefs = await getPreferences();
+		const ml = document.getElementById("memberlisttoggle")!;
+		if (prefs.checkMemberList) {
+			ml.classList = "";
+		} else {
+			ml.classList = "svgicon svg-friends";
+		}
 	}
 	readonly inrelation = new Set<User>();
 	outoffocus(): void {
@@ -3119,6 +3126,22 @@ class Localuser {
 					{initState: cur},
 				);
 			}
+			visuals.addCheckboxInput(
+				I18n.checkBoxMemberList(),
+				(c) => {
+					prefs.checkMemberList = c;
+					const ml = document.getElementById("memberlisttoggle")!;
+					if (c) {
+						ml.classList = "";
+					} else {
+						ml.classList = "svgicon svg-friends";
+					}
+					setPreferences(prefs);
+				},
+				{
+					initState: !!prefs.checkMemberList,
+				},
+			);
 		}
 		{
 			const animations = settings.addButton(I18n.accessibility.animations(), {contained: true});

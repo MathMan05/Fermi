@@ -822,6 +822,7 @@
 	},
 	"remove": "Remove",
 	"renderJoinAvatars": " Display avatars in member welcome messages: ",
+	"checkBoxMemberList":"Use a checkbox for the member list: ",
 	"reply": "Reply",
 	"replyingTo": "Replying to $1",
 	"retrying": "Retrying...",
