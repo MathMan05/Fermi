@@ -4081,6 +4081,7 @@ fieldset input[type="radio"] {
 	border-right: 0;
 	border-radius: 0.04in;
 	.SettingsButton {
+		padding-right: 12px;
 		width: auto;
 		border-radius: 3px 3px 1px 1px;
 	}
