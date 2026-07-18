@@ -231,7 +231,7 @@ class PermissionToggle implements OptionsElement<number> {
 }
 
 class RoleList extends Buttons {
-	permissions: [Role | User, Permissions][];
+	permissions: [Role | User | {id: string}, Permissions][];
 	permission: Permissions;
 	readonly guild: Guild;
 	readonly channel: false | Channel;
@@ -246,7 +246,7 @@ class RoleList extends Buttons {
 		return this.guild.headers;
 	}
 	constructor(
-		permissions: [Role | User, Permissions][],
+		permissions: [Role | User | {id: string}, Permissions][],
 		guild: Guild,
 		onchange: (id: string, perms: Permissions) => void,
 		channel: false | Channel,
@@ -276,7 +276,10 @@ class RoleList extends Buttons {
 			});
 		}
 		for (const i of permissions) {
-			this.buttons.push({name: i[0].name, inner: i[0].id});
+			this.buttons.push({
+				name: "name" in i[0] ? i[0].name : I18n.userping.unknown(),
+				inner: i[0].id,
+			});
 		}
 		this.options = options;
 		guild.roleUpdate = this.groleUpdate.bind(this);
@@ -474,13 +477,13 @@ class RoleList extends Buttons {
 		return menu;
 	}
 
-	deleteRole(role: Role | User) {
-		const dio = new Dialog(I18n.role.confirmDelete(role.name));
+	deleteRole(role: Role | User | {id: string}) {
+		const dio = new Dialog(I18n.role.confirmDelete("name" in role ? role.name : role.id));
 		const opt = dio.options.addOptions("", {ltr: true});
 		opt.addButtonInput("", I18n.yes(), async () => {
 			opt.removeAll();
 			opt.addText(I18n.role.deleting());
-			await fetch(role.info.api + "/guilds/" + this.guild.id + "/roles/" + role.id, {
+			await fetch(this.info.api + "/guilds/" + this.guild.id + "/roles/" + role.id, {
 				method: "DELETE",
 				headers: this.guild.headers,
 			});
@@ -523,12 +526,15 @@ class RoleList extends Buttons {
 	redoButtons() {
 		this.buttons = [];
 		this.permissions.sort(([a], [b]) => {
-			if (b instanceof User) return 1;
-			if (a instanceof User) return -1;
+			if (b instanceof User || !(b instanceof Channel)) return 1;
+			if (a instanceof User || !(a instanceof Channel)) return -1;
 			return b.position - a.position;
 		});
 		for (const i of this.permissions) {
-			this.buttons.push({name: i[0].name, inner: i[0].id});
+			this.buttons.push({
+				name: "name" in i[0] ? i[0].name : I18n.userping.unknown(),
+				inner: i[0].id,
+			});
 		}
 		if (!this.buttonList) return;
 		const elms = Array.from(this.buttonList.children);
@@ -712,7 +718,7 @@ class RoleList extends Buttons {
 			this.permission.allow = perm.allow;
 			const role = this.permissions.find((e) => e[0].id === str);
 			if (role) {
-				this.options.name = role[0].name;
+				this.options.name = "name" in role[0] ? role[0].name : I18n.userping.unknown();
 				this.options.haschanged = false;
 			}
 		}
