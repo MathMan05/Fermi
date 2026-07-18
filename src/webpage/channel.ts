@@ -1547,6 +1547,7 @@ class Channel extends SnowFlake {
 			const buttons = options.addOptions("", {ltr: true});
 			buttons.addButtonInput("", "Yes", () => {
 				this.perminfo.nsfwOk = true;
+				this.localuser.focusChannel = undefined;
 				this.getHTML();
 			});
 			buttons.addButtonInput("", "No", () => {
