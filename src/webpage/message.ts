@@ -1009,7 +1009,7 @@ class Message extends SnowFlake {
 				area.addEventListener("keyup", (event) => {
 					if (this.localuser.keyup(event)) return;
 					if (event.key === "Enter" && !event.shiftKey) {
-						this.edit(md.rawString);
+						this.edit(MarkDown.gatherBoxText(area));
 						this.channel.editing = null;
 						this.generateMessage();
 					}
