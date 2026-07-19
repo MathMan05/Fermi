@@ -265,6 +265,7 @@
 		"upload": "Upload emojis"
 	},
 	"emojiSelect": "Emoji:",
+	"gifProvidor":"Gif Provider:",
 	"errorReconnect": "Unable to connect to the server, retrying in **$1** seconds...",
 	"favoriteGifs": "Favorited GIFs",
 	"folder": {

@@ -371,6 +371,7 @@ class Localuser {
 	guildFolders: guildFolder[] = [];
 	readonly unknownRead = new Map<string, readStateEntry>();
 	async gottenReady(ready: readyjson): Promise<void> {
+		this.getGifProvidors();
 		await I18n.done;
 		this.errorBackoff = 0;
 		this.queryBlog();
@@ -2504,6 +2505,31 @@ class Localuser {
 			headers: this.headers,
 		}).then((r) => r.json() as Promise<{[key: string]: {enabled: boolean; icon_url?: string}}>);
 	}
+	gifProvideors: {name: string; api_name: string}[] = [];
+	selectedGifProfidor?: {name: string; api_name: string};
+	async getGifProvidors() {
+		const res = (await (
+			await fetch(this.info.api + "/gifs", {
+				headers: this.headers,
+			})
+		).json()) as {name: string; api_name: string}[];
+		if (res[0] && !("name" in res[0])) {
+			if (res.length === 3) {
+				this.gifProvideors = [
+					{name: "Giphy", api_name: "giphy"},
+					{name: "Klipy", api_name: "klipy"},
+				];
+			}
+		} else {
+			this.gifProvideors = res.filter((_) => _.name !== "tenor");
+		}
+		this.figureDefaultProvidor();
+	}
+	async figureDefaultProvidor() {
+		const prefs = await getPreferences();
+		this.selectedGifProfidor =
+			this.gifProvideors.find((_) => _.api_name == prefs.gifProvidor) || this.gifProvideors[0];
+	}
 	async showusersettings() {
 		const prefs = await getPreferences();
 		const localSettings = getLocalSettings();
@@ -3032,6 +3058,23 @@ class Localuser {
 					{
 						defaultIndex: index,
 					},
+				);
+			}
+			{
+				const ind = this.gifProvideors.findIndex((_) => this.selectedGifProfidor === _);
+				console.log(prefs.gifProvidor);
+				tas.addSelect(
+					I18n.gifProvidor(),
+					async (i) => {
+						prefs.gifProvidor = this.gifProvideors[i].api_name;
+						console.log(prefs.gifProvidor);
+
+						await setPreferences(prefs);
+						Localuser.loadFont();
+						this.figureDefaultProvidor();
+					},
+					this.gifProvideors.map((_) => _.name),
+					{defaultIndex: ind === -1 ? 0 : ind},
 				);
 			}
 		}
@@ -4195,7 +4238,12 @@ class Localuser {
 		Contextmenu.declareMenu(menu);
 		const trending = (await (
 			await fetch(
-				this.info.api + "/gifs/trending?" + new URLSearchParams([["locale", I18n.lang]]),
+				this.info.api +
+					"/gifs/trending?" +
+					new URLSearchParams([
+						["locale", I18n.lang],
+						["provider", this.selectedGifProfidor?.api_name!],
+					]),
 				{headers: this.headers},
 			)
 		).json()) as {
@@ -4207,7 +4255,12 @@ class Localuser {
 		};
 
 		await fetch(
-			this.info.api + "/gifs/trending-gifs?" + new URLSearchParams([["locale", I18n.lang]]),
+			this.info.api +
+				"/gifs/trending-gifs?" +
+				new URLSearchParams([
+					["locale", I18n.lang],
+					["provider", this.selectedGifProfidor?.api_name!],
+				]),
 			{headers: this.headers},
 		);
 		const gifbox = document.createElement("div");
@@ -4283,6 +4336,7 @@ class Localuser {
 							["locale", I18n.lang],
 							["q", sValue],
 							["limit", "500"],
+							["provider", this.selectedGifProfidor?.api_name!],
 						]),
 					{headers: this.headers},
 				)
@@ -4307,7 +4361,7 @@ class Localuser {
 		};
 		search.classList.add("searchGifBar");
 		//TODO fix this once we swap over
-		search.placeholder = I18n.searchGifs("Tenor");
+		search.placeholder = I18n.searchGifs(this.selectedGifProfidor?.name!);
 		const favs = this.favorites.favoriteGifs();
 		if (favs.length) {
 			favs.forEach(async (_) => (_.src = await this.refreshIfNeeded(_.src)));
