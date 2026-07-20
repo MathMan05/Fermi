@@ -50,9 +50,9 @@ function* lex(code: string, config: clikeConf) {
 	const r = regex(config);
 	const keywords = new Set(config.keywords);
 	if (config.firstLineShabang) {
-		const m = code.match(/^#!.*\n?/gm);
+		const m = code.match(/^#!.*\n?/m);
 		if (m) {
-			code = code.replace(/^#!.*\n?/gm, "");
+			code = code.replace(/^#!.*\n?/m, "");
 			yield {
 				type: hcolors.comment,
 				content: m[0],
