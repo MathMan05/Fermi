@@ -5,6 +5,7 @@ import {Guild} from "./guild.js";
 import {I18n} from "./i18n.js";
 import {Dialog} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
+import {highlight} from "./highlighter/index.js";
 const linkMenu = new Contextmenu<string, void>("copyLink", true);
 linkMenu.addButton(
 	() => I18n.copyRegLink(),
@@ -324,6 +325,7 @@ class MarkDown {
 				let find = 0;
 				let j = i + count;
 				let init = true;
+				let lang = "";
 				for (; txt[j] !== undefined && (txt[j] !== "\n" || count === 3) && find !== count; j++) {
 					if (txt[j] === "`") {
 						find++;
@@ -336,6 +338,7 @@ class MarkDown {
 							if (txt[j] === " " || txt[j] === "\n") {
 								init = false;
 							}
+							lang += txt[j];
 							if (keep) {
 								build += txt[j];
 							}
@@ -367,6 +370,7 @@ class MarkDown {
 						}
 						pre.textContent = build;
 						span.appendChild(pre);
+						if (count === 3) highlight(pre, lang, keep ? 3 + lang.length : 0, keep ? 3 : 0);
 					}
 					i--;
 					continue;

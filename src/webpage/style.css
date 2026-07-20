@@ -3366,6 +3366,25 @@ img.bigembedimg {
 		display: block;
 	}
 }
+::highlight(highkeyword) {
+	color: yellow;
+}
+::highlight(highnumber) {
+	color: orange;
+}
+::highlight(highstring) {
+	color: red;
+}
+::highlight(highsymbol) {
+	color: white;
+	font-weight: bold;
+}
+::highlight(highcomment) {
+	color: green;
+}
+::highlight(highidentifier) {
+	color: white;
+}
 #memberlisttoggle.svgicon {
 	-moz-appearance: initial;
 	&::before {

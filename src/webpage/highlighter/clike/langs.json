@@ -1,0 +1,20 @@
+[
+{
+	"names":["js","ts","javascript"],
+	"keywords": ["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do","else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "let", "await", "true", "false", "null", "undefined"],
+	"firstLineShabang": true,
+	"hashComments": false,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true,
+	"JSLikeTemplateStrings": true
+},
+{
+	"names":["h","c"],
+	"keywords":["auto", "break", "case", "char", "continue", "do", "default", "const", "double", "else", "enum", "extern", "for", "if", "goto", "float", "int", "long", "register", "return", "signed", "static", "sizeof", "short", "struct", "switch", "typedef", "union", "void", "while", "volatile", "unsigned"],
+	"firstLineShabang": false,
+	"hashComments": true,
+	"doubleSlashComments": true,
+	"multilineSlashComments": false,
+	"JSLikeTemplateStrings": false
+}
+]
