@@ -4667,14 +4667,16 @@ class Localuser {
 			typebox,
 		);
 	}
+	private MDGenID = 0;
 	MDFindMention(name: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
 		if (this.ws && this.focusGuild) {
+			const id = ++this.MDGenID;
 			this.MDFineMentionGen(name, original, box, typebox);
 			if (this.focusGuild.member_count <= this.focusGuild.members.size) return;
 			if (this.focusGuild.id !== "@me") {
 				this.focusGuild.searchMembers(8, name).then(async () => {
 					if (!typebox.rawString.startsWith(original)) return;
-					this.MDFineMentionGen(name, original, box, typebox);
+					if (this.MDGenID === id) this.MDFineMentionGen(name, original, box, typebox);
 				});
 			}
 		}
