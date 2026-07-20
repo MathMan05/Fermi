@@ -190,7 +190,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Versione client: $1 \n\n[Unisciti alla gilda ufficiale di Fermi](https://redir.fermi.chat/invite)\n\n[Aiuta a tradurre Fermi](https://redir.fermi.chat/translate) \n\n[Aiuta a creare Fermi](https://github.com/MathMan05/Fermi)\n\n[Aiuta a mantenere il server su cui si basa Fermi](https://redir.fermi.chat/server)\n\n[Leggi il blog](https://blog.fermi.chat/)\n\nDiritti calcolati: $3",
+	"clientDesc": "Versione client: $1 \n\n[Unisciti alla gilda ufficiale di Fermi](https://redir.fermi.chat/invite)\n\n[Aiuta a tradurre Fermi](https://redir.fermi.chat/translate) \n\n[Aiuta a creare Fermi](https://codeberg.org/MelodyChat/Fermi)\n\n[Aiuta a mantenere il server su cui si basa Fermi](https://redir.fermi.chat/server)\n\n[Leggi il blog](https://blog.fermi.chat/)\n\nDiritti calcolati: $3",
 	"commands": {
 		"errorNotValid": "$1 non è una scelta valida per $2",
 		"required": "$1 è una parte obbligatoria di questo comando"
@@ -464,7 +464,7 @@
 		"deleteAccountButton": "Cancella utenza",
 		"install": "Installa",
 		"installJank": "Scarica Fermi",
-		"language": "Lingua:",
+		"language": "Lingua",
 		"manageBot": "Gestisci bot",
 		"manageInstance": "Gestisci istanza",
 		"mustTypePhrase": "Per cancellare la tua utenza devi digitare la frase",
