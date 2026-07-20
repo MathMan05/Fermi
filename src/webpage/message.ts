@@ -401,6 +401,7 @@ class Message extends SnowFlake {
 	}
 
 	giveData(messagejson: messagejson) {
+		delete this.editContent;
 		const func = this.channel.infinite.snapBottom();
 		for (const thing of Object.keys(messagejson)) {
 			if (thing === "attachments") {
@@ -596,10 +597,12 @@ class Message extends SnowFlake {
 	getUnixTime(): number {
 		return new Date(this.timestamp).getTime();
 	}
+	private editContent?: string;
 	async edit(content: string) {
 		if (content === this.content.textContent) {
 			return;
 		}
+		this.editContent = content;
 		return await fetch(this.info.api + "/channels/" + this.channel.id + "/messages/" + this.id, {
 			method: "PATCH",
 			headers: this.headers,
@@ -1004,7 +1007,9 @@ class Message extends SnowFlake {
 				} catch {
 					area.contentEditable = "true";
 				}
-				const md = new MarkDown(this.content.rawString, this.owner, {keep: true});
+				const md = new MarkDown(this.editContent || this.content.rawString, this.owner, {
+					keep: true,
+				});
 				area.append(md.makeHTML());
 				area.addEventListener("keyup", (event) => {
 					if (this.localuser.keyup(event)) return;
