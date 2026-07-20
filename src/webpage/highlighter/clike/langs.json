@@ -14,7 +14,7 @@
 	"firstLineShabang": false,
 	"hashComments": true,
 	"doubleSlashComments": true,
-	"multilineSlashComments": false,
+	"multilineSlashComments": true,
 	"JSLikeTemplateStrings": false
 },
 {
@@ -24,6 +24,15 @@
 	"hashComments": false,
 	"doubleSlashComments": false,
 	"multilineSlashComments": false,
+	"JSLikeTemplateStrings": false
+},
+{
+	"names":["go"],
+	"keywords":["break","default"," func","interface","select","case","defer","go"," map","struct","chan","else","goto","package","switch","const","fallthrough  if"," range","type","continue",  "for","import","return","var"],
+	"firstLineShabang": false,
+	"hashComments": false,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true,
 	"JSLikeTemplateStrings": false
 }
 ]
