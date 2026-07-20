@@ -2,7 +2,7 @@
 {
 	"names":["js","ts","javascript"],
 	"keywords": ["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do","else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "let", "await", "true", "false", "null", "undefined"],
-	"firstLineShabang": true,
+	"firstLineShebang": true,
 	"hashComments": false,
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,
@@ -20,7 +20,7 @@
 {
 	"names":["json"],
 	"keywords":["true","false","null"],
-	"firstLineShabang": false,
+	"firstLineShebang": false,
 	"hashComments": false,
 	"doubleSlashComments": false,
 	"multilineSlashComments": false,
@@ -29,7 +29,7 @@
 {
 	"names":["go"],
 	"keywords":["break","default","func","interface","select","case","defer","go","map","struct","chan","else","goto","package","switch","const","fallthrough","if","range","type","continue",  "for","import","return","var"],
-	"firstLineShabang": false,
+	"firstLineShebang": false,
 	"hashComments": false,
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,

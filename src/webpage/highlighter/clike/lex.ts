@@ -3,7 +3,7 @@ import {hcolors} from "../colors.js";
 interface clikeConf {
 	names: string[];
 	keywords: string[];
-	firstLineShabang: boolean;
+	firstLineShebang: boolean;
 	hashComments: boolean;
 	doubleSlashComments: boolean;
 	multilineSlashComments: boolean;
@@ -49,7 +49,7 @@ export async function canLex(lang: string) {
 function* lex(code: string, config: clikeConf) {
 	const r = regex(config);
 	const keywords = new Set(config.keywords);
-	if (config.firstLineShabang) {
+	if (config.firstLineShebang) {
 		const m = code.match(/^#!.*\n?/m);
 		if (m) {
 			code = code.replace(/^#!.*\n?/m, "");
