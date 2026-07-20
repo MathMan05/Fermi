@@ -24,6 +24,8 @@ import {Channel} from "./channel.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings";
 import {ReportMenu} from "./reporting/report.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {ImagesDisplay} from "./disimg.js";
+import {File} from "./file.js";
 export const userVolMenu = new Contextmenu<Localuser, string>("user vol stacked", true);
 userVolMenu.addSlider(
 	() => I18n.Voice.userVol(),
@@ -1230,6 +1232,22 @@ class User extends SnowFlake {
 			div.style.setProperty("--accent_color", "transparent");
 		}
 		const banner = this.getBanner(guild);
+		banner.onclick = async () => {
+			const m = await membres;
+			const disp = new ImagesDisplay([
+				new File(
+					{
+						id: "fakeID",
+						filename: "avatar.webp",
+						content_type: "image/webp",
+						url: m?.getBannerUrl() ?? this.getBannerUrl()!,
+						size: 1,
+					},
+					null,
+				),
+			]);
+			disp.show();
+		};
 		div.append(banner);
 		membres.then((member) => {
 			if (!member) return;
@@ -1280,6 +1298,21 @@ class User extends SnowFlake {
 
 		const pfp = this.buildstatuspfp(guild);
 		div.appendChild(pfp);
+		pfp.onclick = () => {
+			const disp = new ImagesDisplay([
+				new File(
+					{
+						id: "fakeID",
+						filename: "avatar.webp",
+						content_type: "image/webp",
+						url: this.getpfpsrc(guild instanceof Member ? guild.guild : (guild ?? undefined)),
+						size: 1,
+					},
+					null,
+				),
+			]);
+			disp.show();
+		};
 		const userbody = document.createElement("div");
 		userbody.classList.add("flexttb", "infosection");
 		div.appendChild(userbody);
