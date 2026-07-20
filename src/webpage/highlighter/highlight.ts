@@ -20,6 +20,15 @@ function ifCSSAllows() {
 
 	const highidentifier = new Highlight();
 	CSS.highlights.set("highidentifier", highidentifier);
+
+	const highFunc = new Highlight();
+	CSS.highlights.set("highFunc", highFunc);
+
+	const highClass = new Highlight();
+	CSS.highlights.set("highClass", highClass);
+
+	const highProp = new Highlight();
+	CSS.highlights.set("highProp", highProp);
 	const f = new FinalizationRegistry<string>((id) => {
 		eliMap.delete(id);
 	});
@@ -75,6 +84,20 @@ function ifCSSAllows() {
 				highsymbol.add(r);
 				addToRangeMap(r, elm, highsymbol);
 				break;
+			case hcolors.function:
+				highFunc.add(r);
+				addToRangeMap(r, elm, highFunc);
+				break;
+			case hcolors.class:
+				highClass.add(r);
+				addToRangeMap(r, elm, highClass);
+				break;
+			case hcolors.property:
+				highProp.add(r);
+				addToRangeMap(r, elm, highProp);
+				break;
+			default:
+				color satisfies never;
 		}
 	}
 	return function highlightFromLex(

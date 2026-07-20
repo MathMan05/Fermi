@@ -59,7 +59,60 @@ function* lex(code: string, config: clikeConf) {
 			};
 		}
 	}
-	for (const [lex] of code.matchAll(r)) {
+	const matches = Array.from(code.matchAll(r));
+	let i = -1;
+	function identifyTypeOfWord(word: string) {
+		if (keywords.has(word)) {
+			return hcolors.keyword;
+		} else {
+			const next = nextNonBlank();
+			if (next) {
+				if (next.startsWith("(")) {
+					return hcolors.function;
+				}
+			}
+
+			const prev = prevNonBlank();
+			if (prev) {
+				console.log(prev);
+				if (prev.endsWith(".")) {
+					return hcolors.property;
+				}
+			}
+			if (word.match(/^[A-Z]/)) return hcolors.class;
+			return hcolors.identifier;
+		}
+	}
+	function isBlank(lex: string) {
+		if (lex.match(/^\s*$/)) {
+			return true;
+		} else if (lex.startsWith("//") && config.doubleSlashComments) {
+			return true;
+		} else if (lex.startsWith("/*") && config.multilineSlashComments) {
+			return true;
+		} else if (lex.startsWith("#") && config.hashComments) {
+			return true;
+		}
+		return false;
+	}
+	function prevNonBlank() {
+		for (let j = i - 1; j >= 0; j--) {
+			const lex = matches[j][0];
+			if (isBlank(lex)) continue;
+			return lex;
+		}
+		return null;
+	}
+	function nextNonBlank() {
+		for (let j = i + 1; j < matches.length; j++) {
+			const lex = matches[j][0];
+			if (isBlank(lex)) continue;
+			return lex;
+		}
+		return null;
+	}
+	for (const [lex] of matches) {
+		i++;
 		if (lex.startsWith("//") && config.doubleSlashComments) {
 			yield {
 				type: hcolors.comment,
@@ -92,7 +145,7 @@ function* lex(code: string, config: clikeConf) {
 			};
 		} else if (lex.match(/^[a-zA-Z]/)) {
 			yield {
-				type: keywords.has(lex) ? hcolors.keyword : hcolors.identifier,
+				type: identifyTypeOfWord(lex),
 				content: lex,
 			};
 		} else {

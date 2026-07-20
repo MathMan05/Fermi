@@ -5,4 +5,7 @@ export const enum hcolors {
 	symbol,
 	comment,
 	identifier,
+	function,
+	class,
+	property,
 }

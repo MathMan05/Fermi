@@ -3385,6 +3385,15 @@ img.bigembedimg {
 ::highlight(highidentifier) {
 	color: white;
 }
+::highlight(highClass) {
+	color: #6741ff;
+}
+::highlight(highProp) {
+	color: #33dcff;
+}
+::highlight(highFunc) {
+	color: #d564ff;
+}
 #memberlisttoggle.svgicon {
 	-moz-appearance: initial;
 	&::before {
