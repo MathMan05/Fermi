@@ -16,5 +16,14 @@
 	"doubleSlashComments": true,
 	"multilineSlashComments": false,
 	"JSLikeTemplateStrings": false
+},
+{
+	"names":["json"],
+	"keywords":["true","false","undefined"],
+	"firstLineShabang": false,
+	"hashComments": false,
+	"doubleSlashComments": false,
+	"multilineSlashComments": false,
+	"JSLikeTemplateStrings": false
 }
 ]
