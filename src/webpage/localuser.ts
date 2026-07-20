@@ -1454,7 +1454,6 @@ class Localuser {
 			}
 			if (!channel.hasPermission("VIEW_CHANNEL", member)) {
 				members.delete(member);
-				console.log(member, "can't see");
 				return;
 			}
 		});
