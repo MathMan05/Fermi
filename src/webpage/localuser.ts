@@ -4179,6 +4179,17 @@ class Localuser {
 			Bot.InviteMaker(appId, form, this.info);
 		});
 	}
+	updateSend() {
+		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
+		if (
+			(typebox.markdown.rawString && typebox.markdown.rawString !== "\n") ||
+			document.getElementById("pasteimage")?.children.length
+		) {
+			typebox.parentElement!.classList.remove("noConent");
+		} else {
+			typebox.parentElement!.classList.add("noConent");
+		}
+	}
 	//TODO make this an option
 	readonly autofillregex = Object.freeze(/(^|\s|\n)[@#:]([a-zA-Z0-9]*)$/i);
 	mdBox() {
@@ -4187,11 +4198,7 @@ class Localuser {
 		typeMd.owner = this;
 		typeMd.onUpdate = (str, pre) => {
 			this.search(document.getElementById("searchOptions") as HTMLDivElement, typeMd, str, pre);
-			if (str && str !== "\n") {
-				typebox.parentElement!.classList.remove("noConent");
-			} else {
-				typebox.parentElement!.classList.add("noConent");
-			}
+			this.updateSend();
 		};
 	}
 	async pinnedClick(rect: DOMRect) {
