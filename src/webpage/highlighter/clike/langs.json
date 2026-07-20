@@ -19,7 +19,7 @@
 },
 {
 	"names":["json"],
-	"keywords":["true","false","undefined"],
+	"keywords":["true","false","null"],
 	"firstLineShabang": false,
 	"hashComments": false,
 	"doubleSlashComments": false,
