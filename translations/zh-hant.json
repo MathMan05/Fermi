@@ -66,6 +66,8 @@
 			"never": "永不使用"
 		},
 		"name": "無障礙",
+		"visuals": "視覺化",
+		"animations": "動態",
 		"playGif": "播放GIF動圖：",
 		"playIcon": "播放動態圖示：",
 		"roleColors": "停用角色顏色：",
@@ -111,7 +113,7 @@
 	"blankMessage": "空白訊息",
 	"blog": {
 		"blog": "部落格",
-		"blogUpdates": "部落格更新：",
+		"blogUpdates": "當您開啟應用程式時取得部落格更新：",
 		"desc": "閱讀或訂閱部落格來獲得 Fermi 的最新資訊！",
 		"fermi": "Fermi 部落格",
 		"gotoPost": "前往文章",
@@ -202,7 +204,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "客戶端版本：$1 \n\n[加入 Fermi 官方公會]（https://redir.fermi.chat/invite）\n\n[協助翻譯 Fermi]（https://redir.fermi.chat/translate）\n\n[協助開發 Fermi]（https://github.com/MathMan05/Fermi）\n\n[協助維護 Fermi 所依賴的伺服器]（https://redir.fermi.chat/server）\n\n[閱讀部落格]（https://blog.fermi.chat/）\n\n估計權限：$3",
+	"clientDesc": "客戶端版本：$1 \n\n[加入 Fermi 官方公會]（https://redir.fermi.chat/invite）\n\n[協助翻譯 Fermi]（https://redir.fermi.chat/translate）\n\n[協助建立 Fermi]（https://codeberg.org/MelodyChat/Fermi）\n\n[協助維護 Fermi 所依賴的伺服器]（https://redir.fermi.chat/server）\n\n[閱讀部落格]（https://blog.fermi.chat/）\n\n估計權限：$3",
 	"commands": {
 		"errorNotValid": "$1不是$2的有效選擇",
 		"required": "$1是此指令的必需部分"
@@ -215,6 +217,7 @@
 	"createAccount": "建立帳號",
 	"delete": "刪除",
 	"deleteConfirm": "您確定要刪除這個嗎？",
+	"deleteConfirmPoll": "您確定要提前結束此投票嗎？",
 	"devSettings": {
 		"badUser": "啟用記錄發送過多資訊的惡意使用者對象：",
 		"cache": "啟用 Service Worker 快取映射檔：",
@@ -264,6 +267,7 @@
 		"upload": "上傳表情符號"
 	},
 	"emojiSelect": "表情符號：",
+	"gifProvidor": "Gif 提供者：",
 	"errorReconnect": "無法連接到伺服器，將在 **$1** 秒後重試…",
 	"favoriteGifs": "收藏的 Gif 圖檔",
 	"folder": {
@@ -386,6 +390,20 @@
 		"yesDelete": "是的，我確定",
 		"yesLeave": "是的，我確定"
 	},
+	"donate": {
+		"title": "捐款方式",
+		"donate": "捐款",
+		"desc": "藉由捐款給 Fermi，您將幫助這些專案持續發展下去！",
+		"mdText": "[今天就捐款給 Fermi]（$1）",
+		"lead": {
+			"title": "支援首席開發者",
+			"desc": "支援 Harmony 與 Fermi 的首席開發者。他們從零開始打造出 Fermi，並且是 Harmony 主要維護者。"
+		},
+		"host": {
+			"title": "支援託管一方",
+			"desc": "支援 Harmony 主執行個體的託管方！她以卓越的領導力引領專案走向未來，並審查 Harmony 程式碼庫裡的大量程式碼。\nCashApp：$1"
+		}
+	},
 	"hideBlockedMessages": "您已封鎖該名使用者，點擊即可隱藏這些訊息。",
 	"home": {
 		"icon": "$1的實例圖示",
@@ -396,7 +414,9 @@
 		"addBot": "新增到公會",
 		"alreadyHave": "已經有帳號了嗎？",
 		"box3description": "我們一向感謝任何協助，無論是錯誤報告、程式碼，或是指出一些拼字錯誤。",
+		"box4description": "請協助維護 Harmony，這是 Fermi 運作時所依賴的後端！您可以報告錯誤、提出功能請求，或是幫助編寫文件，任何幫助我們都不勝感激！",
 		"box3title": "為 Fermi 做出貢獻",
+		"box4title": "為 Harmony 做出貢獻",
 		"compatableInstances": "Harmony 相容實例：",
 		"createAccount": "建立帳號",
 		"dobField": "出生日期：",
@@ -416,7 +436,7 @@
 		"userField": "使用者名稱：",
 		"welcomeJank": "歡迎來到 Fermi"
 	},
-	"incorrectURLS": "## 此實例可能發送了錯誤的連結。 \n### 如果您是實例擁有者，請參閱[此處]（https://docs.spacebar.chat/setup/server/）下的「從遠端電腦連線」來修正此問題。 \n 您想要 Fermi 自動嘗試修復此錯誤，以讓您連接到實例嗎？",
+	"incorrectURLS": "## 此實例可能發送了錯誤的連結。 \n### 如果您是實例擁有者，請參閱[此處]（https://docs.melodychat.org/setup/server/）下的「從遠端電腦連線」來修正此問題。 \n 您想要 Fermi 自動嘗試修復此錯誤，以讓您連接到實例嗎？",
 	"instInfo": "實例資訊",
 	"instanceInfo": {
 		"contact": "電子郵件實例管理員",
@@ -482,8 +502,12 @@
 	"leaving": "您正在離開 Harmony",
 	"loaded": "已載入",
 	"localuser": {
+		"security": "資安",
+		"advanced": "進階設定",
+		"danger": "危險區域",
 		"2faCode:": "代碼：",
 		"2faCodeGive": "您的一次性驗證碼是：$1（6 位數字），這將產生一個6位數的雙因素驗證代碼、其有效期為30秒。",
+		"2fa": "雙因素驗證設定",
 		"2faDisable": "停用雙因素驗證",
 		"2faEnable": "啟用雙因素驗證",
 		"CheckUpdate": "檢查更新",
@@ -523,7 +547,7 @@
 		"install": "安裝",
 		"installDesc": "安裝 Fermi 後，您可以在其獨立的視窗中開啟，就像 Fermi 自己的應用程式一樣！您也可以像以前那樣在網頁瀏覽器中使用 Fermi，功能是相同的。",
 		"installJank": "安裝 Fermi",
-		"language": "語言：",
+		"language": "語言",
 		"manageBot": "管理機器人",
 		"manageInstance": "管理實例",
 		"mustTypePhrase": "要刪除您的帳號，您必須輸入片語",
@@ -561,7 +585,8 @@
 		"trustedDesc": "當您點擊導向這些網域的連結時，系統將『不會』像其他連結那樣要求您授權開啟。請僅將此權限授予您信任的網域，例如：'https://fermi.chat'",
 		"updateSettings": "更新設定",
 		"updatesYay": "已找到更新！",
-		"userSettings": "您的公開個人資料"
+		"userSettings": "您的公開個人資料",
+		"general": "一般"
 	},
 	"login": {
 		"allGood": "一切都好",
@@ -625,6 +650,7 @@
 		"andMore": "$1，還有更多！",
 		"attached": "已發送附件",
 		"delete": "删除訊息",
+		"endPoll": "結束投票",
 		"report": "回報訊息",
 		"deleted": "已删除的訊息",
 		"edit": "編輯訊息",
@@ -639,7 +665,8 @@
 		"reactions": "查看反應",
 		"reactionsTitle": "反應",
 		"retry": "重新發送錯誤訊息",
-		"viewrest": "查看剩餘內容"
+		"viewrest": "查看剩餘內容",
+		"pollRes": "$1的投票「$2」已結束。"
 	},
 	"report": {
 		"back": "返回",
@@ -797,7 +824,8 @@
 		"instURL": "URL："
 	},
 	"remove": "移除",
-	"renderJoinAvatars": "顯示新成員的頭像：",
+	"renderJoinAvatars": "在成員歡迎訊息裡顯示頭像：",
+	"checkBoxMemberList": "在成員清單使用勾選框：",
 	"reply": "回覆",
 	"replyingTo": "正在回覆給$1",
 	"retrying": "正在重試…",
@@ -824,6 +852,29 @@
 		"roleEmoji": "角色表情符號：",
 		"roleFileIcon": "角色圖示：",
 		"roles": "角色"
+	},
+	"upload": "上傳檔案",
+	"makePoll": "發起投票",
+	"poll": {
+		"question": "詢問：",
+		"answers": "回答：",
+		"newAnswer": "新的回答",
+		"duration": "期限：",
+		"durCount": {
+			"1": "1 小時",
+			"4": "4 小時",
+			"8": "8 小時",
+			"24": "24 小時",
+			"72": "3 天",
+			"168": "7 天",
+			"336": "14 天"
+		},
+		"mult": "允許多個回答：",
+		"expires": "期限：$1",
+		"tie": "平局！",
+		"winningAnswer": "勝出回答：$1%",
+		"view": "檢視投票",
+		"count": "$1 票{{PLURAL:$1|投給}}$2"
 	},
 	"search": {
 		"back": "上一頁",

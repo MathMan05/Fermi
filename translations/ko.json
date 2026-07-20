@@ -69,6 +69,8 @@
 			"never": "없음"
 		},
 		"name": "접근성",
+		"visuals": "시각",
+		"animations": "애니메이션",
 		"playGif": "GIF 재생:",
 		"playIcon": "애니메이션 아이콘 재생:",
 		"roleColors": "역할 색상 비활성화:",
@@ -205,7 +207,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "클라이언트 버전: $1 \n\n[공식 Fermi 길드에 가입하세요](https://redir.fermi.chat/invite)\n\n[Fermi 번역에 참여하세요](https://redir.fermi.chat/translate) \n\n[Fermi 개발에 참여하세요](https://github.com/MathMan05/Fermi)\n\n[Fermi 서버 유지 관리에 참여하세요](https://redir.fermi.chat/server)\n\n[블로그를 읽어보세요](https://blog.fermi.chat/)\n\n계산된 권한: $3",
+	"clientDesc": "클라이언트 버전: $1 \n\n[공식 Fermi 길드에 가입하세요](https://redir.fermi.chat/invite)\n\n[Fermi 번역에 참여하세요](https://redir.fermi.chat/translate) \n\n[Fermi 개발에 참여하세요](https://codeberg.org/MelodyChat/Fermi)\n\n[Fermi 서버 유지 관리에 참여하세요](https://redir.fermi.chat/server)\n\n[블로그를 읽어보세요](https://blog.fermi.chat/)\n\n계산된 권한: $3",
 	"commands": {
 		"errorNotValid": "$1은(는) $2에 대한 유효한 선택지가 아닙니다",
 		"required": "$1은(는) 이 명령의 필수 요소입니다"
@@ -268,6 +270,7 @@
 		"upload": "이모티콘 업로드"
 	},
 	"emojiSelect": "이모티콘:",
+	"gifProvidor": "GIF 제공자:",
 	"errorReconnect": "서버에 연결할 수 없습니다. **$1**초 후에 다시 시도합니다...",
 	"favoriteGifs": "즐겨찾는 GIF",
 	"folder": {
@@ -502,8 +505,12 @@
 	"leaving": "Harmony를 떠나는 중입니다",
 	"loaded": "불러옴",
 	"localuser": {
+		"security": "보안",
+		"advanced": "고급 설정",
+		"danger": "위험 구역",
 		"2faCode:": "코드:",
 		"2faCodeGive": "TOTP 비밀 키는 $1 입니다. 이 키를 누르면 30초 동안 유효한 6자리 2단계 인증 토큰이 생성됩니다.",
+		"2fa": "2단계 인증 설정",
 		"2faDisable": "2FA 비활성화",
 		"2faEnable": "2FA 활성화",
 		"CheckUpdate": "업데이트 확인",
@@ -543,7 +550,7 @@
 		"install": "설치",
 		"installDesc": "페르미를 설치하면 별도의 창에서 실행하여 독립형 앱처럼 사용할 수 있습니다! 기존처럼 웹 브라우저에서 페르미를 계속 사용하셔도 동일하게 작동합니다.",
 		"installJank": "페르미 설치",
-		"language": "언어:",
+		"language": "언어",
 		"manageBot": "봇 관리",
 		"manageInstance": "인스턴스 관리",
 		"mustTypePhrase": "계정을 삭제하려면 다음 문구를 입력해야 합니다",
@@ -581,7 +588,8 @@
 		"trustedDesc": "이러한 도메인으로 연결되는 링크를 클릭할 경우, 다른 링크처럼 열기 권한을 요청하는 메시지가 표시되지 ***않습니다***. 'https://fermi.chat'과 같이 신뢰하는 도메인에만 권한을 부여해 주세요",
 		"updateSettings": "설정 업데이트",
 		"updatesYay": "업데이트가 있습니다!",
-		"userSettings": "사용자 공개 프로필"
+		"userSettings": "사용자 공개 프로필",
+		"general": "일반"
 	},
 	"login": {
 		"allGood": "문제 없습니다",
@@ -819,7 +827,8 @@
 		"instURL": "URL:"
 	},
 	"remove": "제거",
-	"renderJoinAvatars": "신규 멤버를 위한 표시 아바타:",
+	"renderJoinAvatars": " 멤버 환영 메시지에 아바타를 표시:",
+	"checkBoxMemberList": "멤버 목록에 체크박스를 사용:",
 	"reply": "답변",
 	"replyingTo": "$1님에게 답변 중",
 	"retrying": "다시 시도하는 중...",

@@ -64,6 +64,8 @@
 			"never": "Nikdy"
 		},
 		"name": "Prístupnosť",
+		"visuals": "Vizuálne prvky",
+		"animations": "Animácie",
 		"playGif": "Prehrávať GIFy:",
 		"playIcon": "Prehrávať animované ikony:",
 		"roleColors": "Vypnúť farby rolí:",
@@ -200,7 +202,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Verzia klienta: $1\n\n[Pripojte sa k oficiálnemu serveru Fermi](https://redir.fermi.chat/invite)\n\n[Pomôžte prekladať Fermi](https://redir.fermi.chat/translate) \n\n[Pomôžte vytvárať Fermi](https://github.com/MathMan05/Fermi)\n\n[Pomôžte udržiavať server, na ktorý sa Fermi spolieha](https://redir.fermi.chat/server)\n\n[Prečítajte si blog](https://blog.fermi.chat/)\n\nVypočítané práva: $3",
+	"clientDesc": "Verzia klienta: $1 \n\n[Pridajte sa k oficiálnemu cechu Fermi](https://redir.fermi.chat/invite)\n\n[Pomôžte s prekladom Fermi](https://redir.fermi.chat/translate) \n\n[Pomôžte s vytvorením Fermi](https://codeberg.org/MelodyChat/Fermi)\n\n[Pomôžte s údržbou servera, na ktorom sa Fermi spolieha](https://redir.fermi.chat/server)\n\n[Prečítajte si blog](https://blog.fermi.chat/)\n\nVypočítané práva: $3",
 	"commands": {
 		"errorNotValid": "$1 nie je platná voľba pre $2",
 		"required": "$1 je povinná súčasť tohto príkazu"
@@ -263,6 +265,7 @@
 		"upload": "Nahrať emoji"
 	},
 	"emojiSelect": "Emoji:",
+	"gifProvidor": "Poskytovateľ Gif:",
 	"errorReconnect": "Nepodarilo sa pripojiť k serveru, ďalší pokus o **$1** s...",
 	"favoriteGifs": "Obľúbené GIFy",
 	"folder": {
@@ -431,7 +434,7 @@
 		"userField": "Používateľské meno:",
 		"welcomeJank": "Vitajte vo Fermi"
 	},
-	"incorrectURLS": "## Táto inštancia pravdepodobne odoslala nesprávne odkazy.\n### Ak ste vlastníkom inštancie, pozrite si [tu](https://docs.spacebar.chat/setup/server/) sekciu *Connecting from remote machines*, kde chybu opravíte.\n Chcete, aby sa Fermi pokúsilo túto chybu automaticky opraviť a pripojiť vás k inštancii?",
+	"incorrectURLS": "## Táto inštancia pravdepodobne odoslala nesprávne odkazy.\n### Ak ste vlastníkom inštancie, pozrite si [tu](https://docs.melodychat.org/setup/server/) v časti *Pripájanie zo vzdialených počítačov*, kde nájdete informácie o oprave problému.\n Chcete, aby sa Fermi automaticky pokúsil opraviť túto chybu a umožnil vám pripojiť sa k inštancii?",
 	"instInfo": "Informácie o inštancii",
 	"instanceInfo": {
 		"contact": "Napísať e-mail správcom inštancie",
@@ -497,8 +500,12 @@
 	"leaving": "Opúšťate Harmony",
 	"loaded": "Načítané",
 	"localuser": {
+		"security": "Bezpečnosť",
+		"advanced": "Rozšírené nastavenia",
+		"danger": "Nebezpečná zóna",
 		"2faCode:": "Kód:",
 		"2faCodeGive": "Váš TOTP kľúč je: $1. Vygeneruje 6-miestny kód 2FA s platnosťou 30 sekúnd.",
+		"2fa": "Nastavenia 2FA",
 		"2faDisable": "Vypnúť 2FA",
 		"2faEnable": "Zapnúť 2FA",
 		"CheckUpdate": "Skontrolovať aktualizácie",
@@ -538,7 +545,7 @@
 		"install": "Nainštalovať",
 		"installDesc": "Inštaláciou Fermi ho budete môcť otvárať vo vlastnom okne a fungovať ako samostatná aplikácia! Môžete tiež naďalej používať Fermi v internetovom prehliadači ako doteraz — bude fungovať rovnako.",
 		"installJank": "Nainštalovať Fermi",
-		"language": "Jazyk:",
+		"language": "Jazyk",
 		"manageBot": "Spravovať bota",
 		"manageInstance": "Spravovať inštanciu",
 		"mustTypePhrase": "Na odstránenie účtu musíte zadať frázu",
@@ -576,7 +583,8 @@
 		"trustedDesc": "Keď kliknete na odkazy vedúce na tieto domény, ***nebudete*** vyzvaní na povolenie otvorenia ako pri iných odkazoch — pridávajte sem iba domény, ktorým dôverujete, napríklad 'https://fermi.chat'",
 		"updateSettings": "Aktualizovať nastavenia",
 		"updatesYay": "Nájdené aktualizácie!",
-		"userSettings": "Váš verejný profil"
+		"userSettings": "Váš verejný profil",
+		"general": "Všeobecné"
 	},
 	"login": {
 		"allGood": "Všetko v poriadku",
@@ -814,7 +822,8 @@
 		"instURL": "URL:"
 	},
 	"remove": "Odstrániť",
-	"renderJoinAvatars": "Zobrazovať avatary nových členov:",
+	"renderJoinAvatars": "Zobraziť avatary v uvítacích správach členov:",
+	"checkBoxMemberList": "Použite zaškrtávacie políčko pre zoznam členov:",
 	"reply": "Odpovedať",
 	"replyingTo": "Odpovedá sa $1",
 	"retrying": "Skúša sa znova...",
