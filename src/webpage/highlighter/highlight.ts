@@ -24,7 +24,7 @@ function ifCSSAllows() {
 		eliMap.delete(id);
 	});
 	const eliMap = new Map<string, [Highlight, Range][]>();
-	function addToWeakRange(r: Range, elm: HTMLElement, h: Highlight) {
+	function addToRangeMap(r: Range, elm: HTMLElement, h: Highlight) {
 		let prop = elm.getAttribute("UUID");
 		if (!prop) {
 			prop = Math.random() + "";
@@ -53,27 +53,27 @@ function ifCSSAllows() {
 		switch (color) {
 			case hcolors.keyword:
 				highkeyword.add(r);
-				addToWeakRange(r, elm, highkeyword);
+				addToRangeMap(r, elm, highkeyword);
 				break;
 			case hcolors.number:
 				highnumber.add(r);
-				addToWeakRange(r, elm, highnumber);
+				addToRangeMap(r, elm, highnumber);
 				break;
 			case hcolors.comment:
 				highcomment.add(r);
-				addToWeakRange(r, elm, highcomment);
+				addToRangeMap(r, elm, highcomment);
 				break;
 			case hcolors.identifier:
 				highidentifier.add(r);
-				addToWeakRange(r, elm, highidentifier);
+				addToRangeMap(r, elm, highidentifier);
 				break;
 			case hcolors.string:
 				highstring.add(r);
-				addToWeakRange(r, elm, highstring);
+				addToRangeMap(r, elm, highstring);
 				break;
 			case hcolors.symbol:
 				highsymbol.add(r);
-				addToWeakRange(r, elm, highsymbol);
+				addToRangeMap(r, elm, highsymbol);
 				break;
 		}
 	}
