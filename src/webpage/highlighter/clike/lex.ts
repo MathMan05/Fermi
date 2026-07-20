@@ -74,7 +74,6 @@ function* lex(code: string, config: clikeConf) {
 
 			const prev = prevNonBlank();
 			if (prev) {
-				console.log(prev);
 				if (prev.endsWith(".")) {
 					return hcolors.property;
 				}
