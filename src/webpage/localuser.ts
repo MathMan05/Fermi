@@ -640,6 +640,7 @@ class Localuser {
 
 		ws.addEventListener("close", async (event) => {
 			this.ws = undefined;
+			this.voiceFactory?.close();
 			console.log("WebSocket closed with code " + event.code);
 			if (
 				(event.code > 1000 && event.code < 1016 && this.errorBackoff === 0) ||

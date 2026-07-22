@@ -280,6 +280,11 @@ class VoiceFactory {
 		obj.token = update.d.token;
 		obj.gotUrl();
 	}
+	close() {
+		Array.from(this.voiceChannels).forEach((_) => {
+			_[1].leave();
+		});
+	}
 }
 export type voiceStatusStr =
 	| "done"
