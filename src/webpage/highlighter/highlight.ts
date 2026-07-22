@@ -34,10 +34,10 @@ function ifCSSAllows() {
 	});
 	const eliMap = new Map<string, [Highlight, Range][]>();
 	function addToRangeMap(r: Range, elm: HTMLElement, h: Highlight) {
-		let prop = elm.getAttribute("UUID");
+		let prop = elm.dataset.id;
 		if (!prop) {
 			prop = Math.random() + "";
-			elm.setAttribute("UUID", prop);
+			elm.dataset.id = prop;
 			f.register(elm, prop);
 		}
 		let r2: [Highlight, Range][] | undefined = eliMap.get(prop);
@@ -48,7 +48,7 @@ function ifCSSAllows() {
 		r2.push([h, r]);
 	}
 	function clearHighlights(elm: HTMLElement) {
-		let prop = elm.getAttribute("UUID");
+		let prop = elm.dataset.id;
 		if (!prop) return;
 		const m = eliMap.get(prop);
 		if (!m) return;
