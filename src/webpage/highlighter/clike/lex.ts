@@ -3,14 +3,30 @@ import {hcolors} from "../colors.js";
 interface clikeConf {
 	names: string[];
 	keywords: string[];
-	firstLineShebang: boolean;
-	hashComments: boolean;
-	doubleSlashComments: boolean;
-	multilineSlashComments: boolean;
-	JSLikeTemplateStrings: boolean;
+	firstLineShebang?: boolean;
+	hashComments?: boolean;
+	doubleSlashComments?: boolean;
+	multilineSlashComments?: boolean;
+	JSLikeTemplateStrings?: boolean;
+	multiLine?: string;
 }
 function regex(config: clikeConf): RegExp {
 	const conds = [] as string[];
+	if (config.multiLine && "escape" in RegExp) {
+		const chars = config.multiLine;
+		const charArr = [...chars];
+		const matchOpts = [`\\\\(?:.|\s|\\n)`, `(?:[^${charArr[0]}]|\\n)`] as string[];
+		for (let i = 0; i < chars.length - 1; i++) {
+			matchOpts.push(
+				RegExp.escape(config.multiLine.slice(0, i + 1)) + `(?:(?=\\\\)|\\n|[^${charArr[i + 1]}]|$)`,
+			);
+		}
+		conds.push(
+			`(${RegExp.escape(config.multiLine)}(?:${matchOpts.join("|")})*(?:${RegExp.escape(config.multiLine)})?)`,
+		);
+	}
+	conds.push(`\'(\\\\(.|\\n)|[^"\\n\\\\])*\'?`);
+	conds.push(`"(\\\\(.|\\n)|[^"\\n\\\\])*"?`);
 	if (config.hashComments) {
 		conds.push("#.*");
 	}
@@ -27,10 +43,10 @@ function regex(config: clikeConf): RegExp {
 		conds.push("`(\\\\.|[^`])*`?");
 	}
 	conds.push("(.|\n)");
+
 	return new RegExp(
-		'"(\\\\(.|\\n)|[^"\\n\\\\])*"?|\'(\\\\(.|\\n)|[^"\\n\\\\])*\'?|\\s+|[a-zA-Z][a-zA-Z0-9]*|[0-9][a-zA-Z0-9]*\\.?[a-zA-Z0-9]*|' +
-			conds.join("|"),
-		"gm",
+		"\\s+|[a-z_A-Z][a-z_A-Z0-9]*|[0-9][a-z_A-Z0-9]*\\.?[a-zA-Z_0-9]*|" + conds.join("|"),
+		"g",
 	);
 }
 let j: undefined | clikeConf[] = undefined;
@@ -48,6 +64,7 @@ export async function canLex(lang: string) {
 }
 function* lex(code: string, config: clikeConf) {
 	const r = regex(config);
+	console.log(r);
 	const keywords = new Set(config.keywords);
 	if (config.firstLineShebang) {
 		const m = code.match(/^#!.*\n?/m);
@@ -60,6 +77,7 @@ function* lex(code: string, config: clikeConf) {
 		}
 	}
 	const matches = Array.from(code.matchAll(r));
+	console.log(matches);
 	let i = -1;
 	function identifyTypeOfWord(word: string) {
 		if (keywords.has(word)) {

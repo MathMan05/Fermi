@@ -1,6 +1,5 @@
 import {canLex} from "./clike/lex.js";
 import {highlightFromLex} from "./highlight.js";
-import {lex as pylex} from "./python/lex.js";
 import {lex as xmlex} from "./xml/lex.js";
 export async function highlight(
 	elm: HTMLElement,
@@ -17,15 +16,7 @@ export async function highlight(
 	if (skipEnd) {
 		content = content.slice(0, content.length - skipEnd);
 	}
-	if (lang === "py" || lang === "python") {
-		highlightFromLex(elm, pylex(content), skipStart);
-	} else if (
-		lang === "xml" ||
-		lang === "html" ||
-		lang === "htmlx" ||
-		lang === "qml" ||
-		lang === "gmx"
-	) {
+	if (lang === "xml" || lang === "html" || lang === "htmlx" || lang === "qml" || lang === "gmx") {
 		highlightFromLex(elm, xmlex(content), skipStart);
 	} else {
 		const clike = await canLex(lang);

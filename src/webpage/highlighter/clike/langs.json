@@ -3,7 +3,6 @@
 	"names":["js","ts","javascript"],
 	"keywords": ["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do","else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "let", "await", "true", "false", "null", "undefined"],
 	"firstLineShebang": true,
-	"hashComments": false,
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,
 	"JSLikeTemplateStrings": true
@@ -11,37 +10,32 @@
 {
 	"names":["h","c"],
 	"keywords":["auto", "break", "case", "char", "continue", "do", "default", "const", "double", "else", "enum", "extern", "for", "if", "goto", "float", "int", "long", "register", "return", "signed", "static", "sizeof", "short", "struct", "switch", "typedef", "union", "void", "while", "volatile", "unsigned"],
-	"firstLineShebang": false,
 	"hashComments": true,
 	"doubleSlashComments": true,
-	"multilineSlashComments": true,
-	"JSLikeTemplateStrings": false
+	"multilineSlashComments": true
 },
 {
 	"names":["json"],
-	"keywords":["true","false","null"],
-	"firstLineShebang": false,
-	"hashComments": false,
-	"doubleSlashComments": false,
-	"multilineSlashComments": false,
-	"JSLikeTemplateStrings": false
+	"keywords":["true","false","null"]
 },
 {
 	"names":["go"],
 	"keywords":["break","default","func","interface","select","case","defer","go","map","struct","chan","else","goto","package","switch","const","fallthrough","if","range","type","continue",  "for","import","return","var"],
-	"firstLineShebang": false,
-	"hashComments": false,
 	"doubleSlashComments": true,
-	"multilineSlashComments": true,
-	"JSLikeTemplateStrings": false
+	"multilineSlashComments": true
 },
 {
     "names": ["cs", "csharp"],
 	"keywords": ["abstract", "add", "alias", "allows", "and", "args", "as", "ascending", "async", "await", "base", "bool", "break", "by", "byte", "case", "catch", "char", "checked", "class", "closed", "const", "continue", "decimal", "default", "delegate", "descending", "do", "double", "dynamic", "else", "enum", "equals", "event", "explicit", "extension", "extern", "field", "file", "finally", "fixed", "float", "for", "foreach", "from", "get", "global", "goto", "group", "if", "implicit", "in", "init", "interface", "internal", "into", "is", "join", "let", "lock", "long", "managed", "nameof", "namespace", "new", "nint", "not", "notnull", "nuint", "null", "object", "on", "operator", "or", "orderby", "out", "override", "params", "partial", "private", "protected", "public", "readonly", "record", "ref", "remove", "required", "return", "safe", "sbyte", "scoped", "sealed", "select", "set", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "try", "typeof", "uint", "ulong", "unchecked", "unmanaged", "unsafe", "ushort", "using", "value", "var", "virtual", "void", "volatile", "when", "where", "while", "with", "yield", "true", "false"],
-	"firstLineShebang": true,
-	"hashComments": false,
+	"firstLineShebang":true,
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,
-	"JSLikeTemplateStrings": false
-}
+	"multiLine":"\"\"\""
+},
+{
+	"names": ["py", "python"],
+	"keywords": ["False", "None", "True", "and", "as", "assert", "async", "await", "break", "class", "continue", "def", "del", "elif", "else", "except", "finally", "for", "from", "global", "if", "import", "in", "is", "lambda", "nonlocal", "not", "or", "pass", "raise", "return", "try", "while", "with", "yield"],
+	"hashComments": true,
+	"multiLine":"\"\"\""
+	}
 ]
