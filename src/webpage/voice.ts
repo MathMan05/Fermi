@@ -225,8 +225,10 @@ class VoiceFactory {
 				console.warn(e);
 				if (e === "done" && stream && !video) {
 					console.error("starting to stream");
-					voice.startVideo(stream);
-					video = true;
+					setTimeout(() => {
+						voice.startVideo(stream);
+						video = true;
+					}, 500);
 				}
 			};
 
@@ -941,10 +943,7 @@ a=rtcp-mux\r`;
 		return (this.off = new Promise<RTCSessionDescriptionInit>(async (res) => {
 			if (!this.pc) throw new Error("stupid");
 			console.error("stupid!");
-			const offer = await this.pc.createOffer({
-				offerToReceiveAudio: true,
-				offerToReceiveVideo: true,
-			});
+			const offer = await this.pc.createOffer();
 			res(offer);
 		}));
 	}
@@ -1124,7 +1123,7 @@ a=rtcp-mux\r`;
 			this.recivers.add(e.receiver);
 			console.log(this.recivers);
 		};
-		if (!this.settings.stream) {
+		if (!this.settings.stream || true) {
 			const outStream = this.makeMicOuts();
 			/*
 
@@ -1147,7 +1146,7 @@ a=rtcp-mux\r`;
 				{active: true, maxBitrate: 2500000, scaleResolutionDownBy: 1, maxFramerate: 20},
 			],
 		});
-		const count = this.settings.stream ? 1 : 10;
+		const count = 10;
 		for (let i = 0; i < count; i++) {
 			pc.addTransceiver("audio", {
 				direction: "inactive",
@@ -1389,6 +1388,15 @@ a=rtcp-mux\r`;
 			}
 			this.session_id = update.session_id;
 			await this.startWS(update.session_id, update.guild_id);
+		}
+		if (!vals.live) {
+			const v = this.voiceMap.get(update.user_id);
+			if (v) {
+				this.liveMap.delete(update.user_id);
+				this.voiceMap.delete(update.user_id);
+				this.onLeaveStream(update.user_id);
+				v.leave();
+			}
 		}
 	}
 	session_id?: string;

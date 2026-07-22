@@ -1916,8 +1916,8 @@ class Channel extends SnowFlake {
 		};
 		this.voice.onconnect = () => {
 			if (!this.voice) return;
-			for (const [_, user] of this.voice.users) {
-				this.decorateLive(user);
+			for (const [id] of this.liveMap) {
+				this.decorateLive(id);
 			}
 		};
 		this.voice.onLeaveStream = (id) => {
@@ -1933,8 +1933,8 @@ class Channel extends SnowFlake {
 				this.purgeVid(id);
 			}
 			if (!this.voice) return;
-			for (const [_, user] of this.voice.users) {
-				this.decorateLive(user);
+			for (const [id] of this.liveMap) {
+				this.decorateLive(id);
 			}
 		};
 	}
