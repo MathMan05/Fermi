@@ -64,7 +64,6 @@ export async function canLex(lang: string) {
 }
 function* lex(code: string, config: clikeConf) {
 	const r = regex(config);
-	console.log(r);
 	const keywords = new Set(config.keywords);
 	if (config.firstLineShebang) {
 		const m = code.match(/^#!.*\n?/m);
