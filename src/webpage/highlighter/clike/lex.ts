@@ -76,7 +76,6 @@ function* lex(code: string, config: clikeConf) {
 		}
 	}
 	const matches = Array.from(code.matchAll(r));
-	console.log(matches);
 	let i = -1;
 	function identifyTypeOfWord(word: string) {
 		if (keywords.has(word)) {
