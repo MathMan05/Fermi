@@ -15,7 +15,7 @@ function regex(config: clikeConf): RegExp {
 	if (config.multiLine && "escape" in RegExp) {
 		const chars = config.multiLine;
 		const charArr = [...chars];
-		const matchOpts = [`\\\\(?:.|\s|\\n)`, `(?:[^${charArr[0]}]|\\n)`] as string[];
+		const matchOpts = [`\\\\(?:.|\\s|\\n)`, `(?:[^${charArr[0]}]|\\n)`] as string[];
 		for (let i = 0; i < chars.length - 1; i++) {
 			matchOpts.push(
 				RegExp.escape(config.multiLine.slice(0, i + 1)) + `(?:(?=\\\\)|\\n|[^${charArr[i + 1]}]|$)`,
