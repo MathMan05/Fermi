@@ -74,6 +74,8 @@
 			"never": "永不"
 		},
 		"name": "无障碍",
+		"visuals": "视觉效果",
+		"animations": "动画",
 		"playGif": "播放动图：",
 		"playIcon": "播放动态图标：",
 		"roleColors": "禁用角色颜色：",
@@ -210,7 +212,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "客户端版本：$1 \n\n[加入官方Fermi公会](https://redir.fermi.chat/invite)\n\n[帮助翻译Fermi](https://redir.fermi.chat/translate) \n\n[帮助创建Fermi](https://github.com/MathMan05/Fermi)\n\n[帮助维护Fermi所依赖的服务器](https://redir.fermi.chat/server)\n\n[阅读博客](https://blog.fermi.chat/)\n\n计算权限：$3",
+	"clientDesc": "客户端版本：$1 \n\n[加入官方Fermi公会](https://redir.fermi.chat/invite)\n\n[帮助翻译Fermi](https://redir.fermi.chat/translate) \n\n[帮助创建Fermi](https://codeberg.org/MelodyChat/Fermi)\n\n[帮助维护Fermi所依赖的服务器](https://redir.fermi.chat/server)\n\n[阅读博客](https://blog.fermi.chat/)\n\n计算权限：$3",
 	"commands": {
 		"errorNotValid": "$1不是$2的有效选择",
 		"required": "$1是此命令的必要组成部分"
@@ -273,6 +275,7 @@
 		"upload": "上传emoji"
 	},
 	"emojiSelect": "表情符号：",
+	"gifProvidor": "Gif 提供者：",
 	"errorReconnect": "无法连接到服务器，将在 **$1** 秒后重试…",
 	"favoriteGifs": "收藏的GIF",
 	"folder": {
@@ -507,8 +510,12 @@
 	"leaving": "你即将离开Harmony",
 	"loaded": "已加载",
 	"localuser": {
+		"security": "安全",
+		"advanced": "高级设置",
+		"danger": "危险区域",
 		"2faCode:": "代码：",
 		"2faCodeGive": "您的TOTP（基于时间的一次性密码）秘钥为：$1。这将生成一个6位的双因素验证令牌，有效期为30秒。",
+		"2fa": "双重认证设置",
 		"2faDisable": "禁用双因素验证",
 		"2faEnable": "启用双因素验证",
 		"CheckUpdate": "检查更新",
@@ -548,7 +555,7 @@
 		"install": "安装",
 		"installDesc": "安装 Fermi 后，您可以在其单独的窗口中开启，就像 Fermi 自己的应用程序一样！您也可以像以前那样在网页浏览器中使用 Fermi，功能是相同的。",
 		"installJank": "安装 Fermi",
-		"language": "语言：",
+		"language": "语言",
 		"manageBot": "管理机器人",
 		"manageInstance": "管理实例",
 		"mustTypePhrase": "要删除您的账号，您必须输入短语",
@@ -586,7 +593,8 @@
 		"trustedDesc": "当您点击链接跳转到这些域名时，系统***不会***像其他链接那样提示您授予打开权限，请仅对您信任的域名授予权限，例如<code>https://fermi.chat</code>。",
 		"updateSettings": "更新设置",
 		"updatesYay": "找到了更新！",
-		"userSettings": "您的公开个人资料"
+		"userSettings": "您的公开个人资料",
+		"general": "常规"
 	},
 	"login": {
 		"allGood": "一切顺利",
@@ -824,7 +832,8 @@
 		"instURL": "URL："
 	},
 	"remove": "移除",
-	"renderJoinAvatars": "显示新成员的头像：",
+	"renderJoinAvatars": "在成员欢迎消息中显示头像：",
+	"checkBoxMemberList": "在成员列表使用复选框：",
 	"reply": "重播",
 	"replyingTo": "正在回复给$1",
 	"retrying": "正在重试…",

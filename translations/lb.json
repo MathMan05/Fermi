@@ -289,7 +289,8 @@
 		"reactionsTitle": "Reaktiounen"
 	},
 	"report": {
-		"cancel": "Ofbriechen"
+		"cancel": "Ofbriechen",
+		"blockUser": "Benotzer spären"
 	},
 	"no": "Nee",
 	"permissions": {
