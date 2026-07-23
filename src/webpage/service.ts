@@ -267,7 +267,7 @@ self.addEventListener("fetch", async (e) => {
 						const old = url;
 						const p = Date.now();
 						req = await Promise.race<Request>([
-							new Promise(async (res) => res(new Request(await refreshUrl(url, port), req))),
+							new Promise(async (res) => res(new Request(await refreshUrl(url, port!), req))),
 							new Promise((res) => setTimeout(() => res(req), 5000)),
 						]);
 						console.log(p - Date.now(), old === url);
