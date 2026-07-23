@@ -906,6 +906,7 @@ class User extends SnowFlake {
 	userupdate(json: userjson): void {
 		const up = json.username !== this.username;
 		if (json.avatar !== this.avatar) {
+			if (json.avatar) json.avatar = json.avatar.match(/[^\/]*$/gm)![0];
 			Array.from(document.getElementsByClassName("userid:" + this.id)).forEach((element) => {
 				const img = element as safeImg;
 				if ("setSrcs" in element) {
