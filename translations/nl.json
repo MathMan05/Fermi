@@ -66,6 +66,8 @@
 			"never": "Nooit"
 		},
 		"name": "Toegankelijkheid",
+		"visuals": "Beelden",
+		"animations": "Animaties",
 		"playGif": "GIFs afspelen:",
 		"playIcon": "Geanimeerde pictogrammen afspelen:",
 		"roleColors": "Rolkleuren uitschakelen:",
@@ -202,7 +204,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Cliëntversie: $1 \n\n[Sluit u aan bij het officiële Fermi-gilde](https://redir.fermi.chat/invite)\n\n[Help Fermi te vertalen](https://redir.fermi.chat/translate) \n\n[Help Fermi te maken](https://github.com/MathMan05/Fermi)\n\n[Help de server waar Fermi op bouwt te onderhouden](https://redir.fermi.chat/server)\n\n[Lees het blog](https://blog.fermi.chat/)\n\nBerekende rechten: $3",
+	"clientDesc": "Cliëntversie: $1 \n\n[Sluit u aan bij het officiële Fermi-gilde](https://redir.fermi.chat/invite)\n\n[Help Fermi te vertalen](https://redir.fermi.chat/translate) \n\n[Help Fermi te maken](https://codeberg.org/MelodyChat/Fermi)\n\n[Help de server waar Fermi op bouwt te onderhouden](https://redir.fermi.chat/server)\n\n[Lees het blog](https://blog.fermi.chat/)\n\nBerekende rechten: $3",
 	"commands": {
 		"errorNotValid": "$1 is geen geldige keuze voor $2",
 		"required": "$1 is een vereist onderdeel van deze opdracht"
@@ -265,6 +267,7 @@
 		"upload": "Emoji's uploaden"
 	},
 	"emojiSelect": "Emoji:",
+	"gifProvidor": "GIF-aanbieder:",
 	"errorReconnect": "Kan geen verbinding maken met de server. Het wordt over **$1** seconden opnieuw geprobeerd…",
 	"favoriteGifs": "Favoriete GIF's",
 	"folder": {
@@ -433,7 +436,7 @@
 		"userField": "Gebruikersnaam:",
 		"welcomeJank": "Welkom bij Fermi"
 	},
-	"incorrectURLS": "## Deze server heeft waarschijnlijk de verkeerde koppelingen verzonden.\n### Als u de eigenaar van de server bent, raadpleeg dan [hier](https://docs.spacebar.chat/setup/server/) onder *Verbinding maken vanaf externe machines* om het probleem op te lossen.\n Wilt u dat Fermi automatisch probeert deze fout te herstellen, zodat u verbinding kunt maken met de server?",
+	"incorrectURLS": "## Deze server heeft waarschijnlijk de verkeerde koppelingen verzonden.\n### Als u de eigenaar van de server bent, raadpleeg dan [hier](https://docs.melodychat.org/setup/server/) onder *Verbinding maken vanaf externe machines* om het probleem op te lossen.\n Wilt u dat Fermi automatisch probeert deze fout te herstellen, zodat u verbinding kunt maken met de server?",
 	"instInfo": "Serverinformatie",
 	"instanceInfo": {
 		"contact": "Serverbeheerders mailen",
@@ -499,8 +502,12 @@
 	"leaving": "U verlaat Harmony",
 	"loaded": "Geladen",
 	"localuser": {
+		"security": "Beveiliging",
+		"advanced": "Gevorderde instellingen",
+		"danger": "Gevarenzone",
 		"2faCode:": "Code:",
 		"2faCodeGive": "Uw TOTP-geheim is: $1. Hiermee wordt een 2FA-token van 6 cijfers gegenereerd met een geldigheidsduur van 30 seconden.",
+		"2fa": "2FA-instellingen",
 		"2faDisable": "Tweetrapsauthenticatie uitschakelen",
 		"2faEnable": "Tweetrapsauthenticatie inschakelen",
 		"CheckUpdate": "Controleren op updates",
@@ -540,7 +547,7 @@
 		"install": "Installeren",
 		"installDesc": "Na installeren kunt u Fermi in een eigen venster openen en als aparte app gebruiken! U kunt Fermi ook gewoon in de webbrowser blijven gebruiken en dan werkt het precies hetzelfde.",
 		"installJank": "Fermi installeren",
-		"language": "Taal:",
+		"language": "Taal",
 		"manageBot": "Robot beheren",
 		"manageInstance": "Server beheren",
 		"mustTypePhrase": "Om uw account te verwijderen moet u de zin typen",
@@ -578,7 +585,8 @@
 		"trustedDesc": "Wanneer u via koppelingen op dit domein komt, wordt u ***niet*** om toestemming gevraagd om deze te openen, zoals bij andere koppelingen. Geef dit alleen aan domeinen die u vertrouwt, zoals'https://fermi.chat'.",
 		"updateSettings": "Instellingen bijwerken",
 		"updatesYay": "Updates gevonden!",
-		"userSettings": "Uw publieke profiel"
+		"userSettings": "Uw publieke profiel",
+		"general": "Algemeen"
 	},
 	"login": {
 		"allGood": "Alles is in orde",
@@ -816,7 +824,8 @@
 		"instURL": "Url:"
 	},
 	"remove": "Verwijderen",
-	"renderJoinAvatars": "Profielafbeeldingen weergeven voor nieuwe leden:",
+	"renderJoinAvatars": "Profielafbeeldingen weergeven in welkomstberichten voor leden:",
+	"checkBoxMemberList": "Gebruik een selectievakje voor de ledenlijst:",
 	"reply": "Antwoorden",
 	"replyingTo": "Reageren op $1",
 	"retrying": "Opnieuw proberen...",

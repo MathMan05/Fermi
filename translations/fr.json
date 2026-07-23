@@ -330,7 +330,7 @@
 	"guild": {
 		"COMMUNITY": "Demander à rejoindre",
 		"disableInvites": "Désactiver les invitations :",
-		"DISCOVERABLE": "Visible depuis le Portail de Découverte des guildes publiques (Discovery)",
+		"DISCOVERABLE": "Visible depuis le Portail de Découverte (Discovery)",
 		"INVITES_DISABLED": "Sur invitation uniquement",
 		"adminMenu": {
 			"changePerms": "Modifier les permissions pour rechercher",
@@ -525,7 +525,7 @@
 	"localuser": {
 		"security": "Sécurité",
 		"advanced": "Paramètres avancés",
-		"danger": "Attention ! Zone dangeureuse",
+		"danger": "Attention !\nZone dangeureuse",
 		"2faCode:": "Code :",
 		"2faCodeGive": "Votre secret TOTP est : $1. Cela va génèrer un jeton A2F à 6 chiffres avec période d'expiration de 30 secondes.",
 		"2fa": "Paramètres de double authentification (2FA)",
