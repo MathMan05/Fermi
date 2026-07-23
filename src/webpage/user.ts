@@ -4,14 +4,7 @@ import {Contextmenu} from "./contextmenu.js";
 import {Localuser} from "./localuser.js";
 import {Guild} from "./guild.js";
 import {SnowFlake} from "./snowflake.js";
-import {
-	ConnectionJson,
-	highMemberJSON,
-	presencejson,
-	relationJson,
-	userjson,
-	webhookInfo,
-} from "./jsontypes.js";
+import {ConnectionJson, highMemberJSON, presencejson, relationJson, userjson} from "./jsontypes.js";
 import {Role} from "./role.js";
 import {Search} from "./search.js";
 import {I18n} from "./i18n.js";
@@ -53,7 +46,6 @@ class User extends SnowFlake {
 	pronouns?: string;
 	bot!: boolean;
 	public_flags!: number;
-	webhook?: webhookInfo;
 	accent_color!: number;
 	banner: string | undefined;
 	hypotheticalbanner!: boolean;
@@ -67,6 +59,7 @@ class User extends SnowFlake {
 		asset: string;
 		sku_id: string;
 	} | null;
+	webhook_id?: string;
 
 	resolving: false | Promise<any> = false;
 	get headers() {
@@ -83,7 +76,7 @@ class User extends SnowFlake {
 			console.error("missing localuser");
 		}
 		this.uid = userjson.id;
-		if (userjson.webhook) {
+		if (userjson.webhook_id) {
 			this.uid += ":::" + userjson.username;
 			console.log(this.uid);
 		}
@@ -781,7 +774,7 @@ class User extends SnowFlake {
 		const pfp = createImg(this.getpfpsrc(), undefined, hoverElm);
 		pfp.loading = "lazy";
 		pfp.classList.add("pfp");
-		if (!this.webhook) pfp.classList.add("userid:" + this.id);
+		if (!this.webhook_id) pfp.classList.add("userid:" + this.id);
 		if (guild) {
 			(async () => {
 				if (guild instanceof Guild) {
@@ -956,7 +949,7 @@ class User extends SnowFlake {
 				.then((member) => {
 					User.contextmenu.bindContextmenu(html, this, member);
 					if (member === undefined && error) {
-						if (this.webhook) return;
+						if (this.webhook_id) return;
 						const errorSpan = document.createElement("span");
 						errorSpan.textContent = "!";
 						errorSpan.classList.add("membererror");
@@ -1325,7 +1318,7 @@ class User extends SnowFlake {
 		if (this.bot) {
 			const username = document.createElement("span");
 			username.classList.add("bot");
-			username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+			username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 			usernamehtml.appendChild(username);
 		}
 
@@ -1393,7 +1386,7 @@ class User extends SnowFlake {
 					if (this.bot) {
 						const username = document.createElement("span");
 						username.classList.add("bot");
-						username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+						username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 						usernamehtml.appendChild(username);
 					}
 
@@ -1681,7 +1674,7 @@ class User extends SnowFlake {
 		if (this.bot) {
 			const username = document.createElement("span");
 			username.classList.add("bot");
-			username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+			username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 			usernamehtml.appendChild(username);
 		}
 		userbody.appendChild(badgediv);
@@ -1734,7 +1727,7 @@ class User extends SnowFlake {
 				if (this.bot) {
 					const username = document.createElement("span");
 					username.classList.add("bot");
-					username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+					username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 					usernamehtml.appendChild(username);
 				}
 				const roles = document.createElement("div");

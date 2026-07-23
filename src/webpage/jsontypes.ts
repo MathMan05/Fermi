@@ -404,7 +404,7 @@ type userjson = {
 	theme_colors: [number, number] | null;
 	pronouns?: string;
 	badge_ids: string[];
-	webhook?: webhookInfo;
+	webhook_id?: string;
 	uid?: string;
 	avatar_decoration_data?: {
 		asset: string;
@@ -862,7 +862,7 @@ type messagejson = {
 	nonce: string;
 	pinned: boolean;
 	type: number;
-	webhook?: webhookInfo;
+	webhook_id?: string;
 	sticker_items?: stickerJson[];
 	message_reference?: string;
 	referenced_message?: messagejson;
