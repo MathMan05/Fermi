@@ -242,6 +242,8 @@ async function refreshUrl(url: URL, port: MessagePort): Promise<string> {
 	return new Promise((res) => promURLMap.set(url.toString(), res));
 }
 self.addEventListener("fetch", async (e) => {
+	//TODO honestly, this doesn't work great going to just disable this for now.
+	return;
 	const event = e as FetchEvent;
 	const host = URL.canParse(event.request.url) && new URL(event.request.url).host;
 	let req = event.request;
