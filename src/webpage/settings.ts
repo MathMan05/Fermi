@@ -18,10 +18,22 @@ interface OptionsElement<x> {
 	readonly watchForChange: (func: (arg1: x) => void) => void;
 	value: x;
 }
+export const enum buttonColor {
+	WHITE,
+	RED,
+}
+interface buttonType {
+	name: string;
+	inner: Options | string;
+	head?: boolean;
+	contained?: boolean;
+	color?: buttonColor;
+	initable?: boolean;
+}
 //future me stuff
 export class Buttons implements OptionsElement<unknown> {
 	readonly name: string;
-	readonly buttons: [string, Options | string][];
+	readonly buttons: buttonType[];
 	readonly buttonMap = new Map<Options | string, HTMLElement>();
 	buttonList!: HTMLDivElement;
 	warndiv!: HTMLElement;
@@ -34,16 +46,30 @@ export class Buttons implements OptionsElement<unknown> {
 		this.name = name;
 		this.titles = titles;
 	}
-	add(name: string, thing?: Options | undefined) {
-		if (!thing) {
-			thing = new Options(this.titles ? name : "", this);
+	add(
+		name: string,
+		inner?: Options,
+		contained?: boolean,
+		head?: boolean,
+		color?: buttonColor,
+		initable?: boolean,
+	) {
+		if (!inner) {
+			inner = new Options(this.titles ? name : "", this);
 		}
-		const button = [name, thing] as [string, string | Options];
+		const button = {
+			name,
+			inner,
+			contained,
+			head,
+			color,
+			initable,
+		};
 		this.buttons.push(button);
 		const htmlarea = this.htmlarea.deref();
 		const buttonTable = this.buttonTable.deref();
 		if (buttonTable && htmlarea) buttonTable.append(this.makeButtonHTML(button, htmlarea));
-		return thing;
+		return inner;
 	}
 	htmlarea = new WeakRef(document.createElement("div"));
 	buttonTable = new WeakRef(document.createElement("div"));
@@ -55,8 +81,9 @@ export class Buttons implements OptionsElement<unknown> {
 		const htmlarea = document.createElement("div");
 		htmlarea.classList.add("flexgrow", "settingsHTMLArea");
 		const buttonTable = this.generateButtons(htmlarea);
-		if (this.buttons[0]) {
-			this.generateHTMLArea(this.buttons[0][1], htmlarea);
+		const button = this.buttons.find((_) => !_.head && _.initable !== false);
+		if (button) {
+			this.generateHTMLArea(button.inner, htmlarea);
 			if (!hideButtons) htmlarea.classList.add("mobileHidden");
 		}
 		if (!hideButtons) buttonList.append(buttonTable);
@@ -65,18 +92,26 @@ export class Buttons implements OptionsElement<unknown> {
 		this.buttonTable = new WeakRef(buttonTable);
 		return buttonList;
 	}
-	makeButtonHTML(buttond: [string, string | Options], optionsArea: HTMLElement) {
-		const button = document.createElement("button");
-		this.buttonMap.set(buttond[1], button);
-		button.classList.add("SettingsButton");
-		button.textContent = buttond[0];
-		button.onclick = (_) => {
-			this.generateHTMLArea(buttond[1], optionsArea);
-			optionsArea.classList.remove("mobileHidden");
-			if (this.warndiv) {
-				this.warndiv.remove();
-			}
-		};
+	makeButtonHTML({name, inner, contained, head, color}: buttonType, optionsArea: HTMLElement) {
+		const button = document.createElement(head ? "span" : "button");
+		this.buttonMap.set(inner, button);
+		button.classList.add(
+			...[head ? "headSetting" : "SettingsButton", contained ? "settingsIndent" : ""].filter(
+				(_) => _,
+			),
+		);
+		button.textContent = name;
+		if (!head)
+			button.onclick = (_) => {
+				this.generateHTMLArea(inner, optionsArea);
+				optionsArea.classList.remove("mobileHidden");
+				if (this.warndiv) {
+					this.warndiv.remove();
+				}
+			};
+		if (color === buttonColor.RED) {
+			button.classList.add("settingRed");
+		}
 		return button;
 	}
 	generateButtons(optionsArea: HTMLElement) {
@@ -85,8 +120,8 @@ export class Buttons implements OptionsElement<unknown> {
 		if (this.top) {
 			buttonTable.classList.add("flexltr");
 		}
-		for (const thing of this.buttons) {
-			buttonTable.append(this.makeButtonHTML(thing, optionsArea));
+		for (const button of this.buttons) {
+			buttonTable.append(this.makeButtonHTML(button, optionsArea));
 		}
 		return buttonTable;
 	}
@@ -2515,9 +2550,20 @@ class Settings extends Buttons {
 		super(name);
 		this.hideButtons = hideButtons;
 	}
-	addButton(name: string, {ltr = false, optName = name, noSubmit = false} = {}): Options {
+	addButton(
+		name: string,
+		{
+			ltr = false,
+			optName = name,
+			noSubmit = false,
+			head = false,
+			contained = false,
+			color = buttonColor.WHITE,
+			initable = true,
+		} = {},
+	): Options {
 		const options = new Options(optName, this, {ltr, noSubmit});
-		this.add(name, options);
+		this.add(name, options, contained, head, color, initable);
 		return options;
 	}
 	show() {

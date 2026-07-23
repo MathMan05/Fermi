@@ -22,7 +22,7 @@ import {
 	pollUpdateJson,
 } from "./jsontypes.js";
 import {Member} from "./member.js";
-import {Dialog, Form, FormError, Options, Settings} from "./settings.js";
+import {buttonColor, Dialog, Form, FormError, Options, Settings} from "./settings.js";
 import {getTextNodeAtPosition, MarkDown, saveCaretPosition} from "./markdown.js";
 import {Bot} from "./bot.js";
 import {Role} from "./role.js";
@@ -371,6 +371,7 @@ class Localuser {
 	guildFolders: guildFolder[] = [];
 	readonly unknownRead = new Map<string, readStateEntry>();
 	async gottenReady(ready: readyjson): Promise<void> {
+		this.getGifProvidors();
 		await I18n.done;
 		this.errorBackoff = 0;
 		this.queryBlog();
@@ -457,6 +458,13 @@ class Localuser {
 		}
 
 		this.pingEndpoint();
+		const prefs = await getPreferences();
+		const ml = document.getElementById("memberlisttoggle")!;
+		if (prefs.checkMemberList) {
+			ml.classList = "";
+		} else {
+			ml.classList = "svgicon svg-friends";
+		}
 	}
 	readonly inrelation = new Set<User>();
 	outoffocus(): void {
@@ -632,6 +640,7 @@ class Localuser {
 
 		ws.addEventListener("close", async (event) => {
 			this.ws = undefined;
+			this.voiceFactory?.close();
 			console.log("WebSocket closed with code " + event.code);
 			if (
 				(event.code > 1000 && event.code < 1016 && this.errorBackoff === 0) ||
@@ -1446,7 +1455,6 @@ class Localuser {
 			}
 			if (!channel.hasPermission("VIEW_CHANNEL", member)) {
 				members.delete(member);
-				console.log(member, "can't see");
 				return;
 			}
 		});
@@ -2038,7 +2046,7 @@ class Localuser {
 				folder.name = name.value;
 				folder.color = +("0x" + (color.value || "#0").split("#")[1]);
 				icon.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
-				if (!folder.color) icon.style.removeProperty("--folder-color");
+				if (!folder.color && folder.color !== 0) icon.style.removeProperty("--folder-color");
 				await this.saveGuildOrder();
 				dio.hide();
 			});
@@ -2048,7 +2056,7 @@ class Localuser {
 		menu.bindContextmenu(iconDiv);
 		if (folder.color !== null && folder.color !== undefined) {
 			icon.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
-			if (!folder.color) icon.style.removeProperty("--folder-color");
+			if (!folder.color && folder.color !== 0) icon.style.removeProperty("--folder-color");
 		}
 		iconDiv.append(icon);
 		const divy = document.createElement("div");
@@ -2497,13 +2505,47 @@ class Localuser {
 			headers: this.headers,
 		}).then((r) => r.json() as Promise<{[key: string]: {enabled: boolean; icon_url?: string}}>);
 	}
+	gifProvideors: {name: string; api_name: string}[] = [];
+	selectedGifProfidor?: {name: string; api_name: string};
+	async getGifProvidors() {
+		const res = (await (
+			await fetch(this.info.api + "/gifs", {
+				headers: this.headers,
+			})
+		).json()) as {name: string; api_name: string}[];
+		if (res[0] && !("name" in res[0])) {
+			if (res.length === 3) {
+				this.gifProvideors = [
+					{name: "Giphy", api_name: "giphy"},
+					{name: "Klipy", api_name: "klipy"},
+				];
+			}
+		} else {
+			this.gifProvideors = res.filter((_) => _.name !== "tenor");
+		}
+		this.figureDefaultProvidor();
+	}
+	async figureDefaultProvidor() {
+		const prefs = await getPreferences();
+		this.selectedGifProfidor =
+			this.gifProvideors.find((_) => _.api_name == prefs.gifProvidor) || this.gifProvideors[0];
+	}
 	async showusersettings() {
 		const prefs = await getPreferences();
 		const localSettings = getLocalSettings();
 		const settings = new Settings(I18n.localuser.settings());
 		{
+			const donate = settings.addButton(I18n.donate.donate(), {initable: false});
+			donate.addMDText(new MarkDown(I18n.donate.mdText(window.location.origin + "/donate")));
+			donate.addText(I18n.donate.desc());
+		}
+		settings.addButton(I18n.localuser.general(), {
+			head: true,
+		});
+		{
 			const userOptions = settings.addButton(I18n.localuser.userSettings(), {
 				ltr: true,
+				contained: true,
 			});
 			const hypotheticalProfile = document.createElement("div");
 			let file: undefined | File | null;
@@ -2623,10 +2665,289 @@ class Localuser {
 				changed = true;
 				regen();
 			});
+			settingsLeft.addButtonInput("", I18n.localuser.connections(), () => {
+				const connections = userOptions.addSubOptions(I18n.localuser.connections());
+				const connectionContainer = document.createElement("div");
+				const actConDivCont = document.createElement("div");
+
+				connectionContainer.classList.add("connection-container");
+				this.conectionChange = () => {
+					if (document.contains(settings.html)) {
+						remake();
+					} else {
+						this.conectionChange = () => {};
+					}
+				};
+				const remake = () => {
+					connectionContainer.innerHTML = "";
+					actConDivCont.innerHTML = "";
+					const cons = fetch(this.info.api + "/users/@me/connections", {
+						headers: this.headers,
+					});
+
+					this.getConnections().then(async (json) => {
+						const actCons = (await (await cons).json()) as ConnectionJson[];
+						const actConMap = new Map<string, ConnectionJson>(
+							actCons.map((_) => [_.type, _] as const),
+						);
+						const serverConnections = Object.keys(json).sort((key) => (json[key].enabled ? -1 : 1));
+
+						serverConnections
+							.filter((_) => !actConMap.has(_))
+							.forEach((key) => {
+								const connection = json[key];
+
+								const container = document.createElement("div");
+								if (connection.icon_url) {
+									const span = document.createElement("span");
+									span.classList.add("conImg", "svgicon");
+									span.style.setProperty("mask", `url("${connection.icon_url}")`);
+									//span.alt = key;
+									container.append(span);
+								} else {
+									container.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+								}
+
+								if (connection.enabled) {
+									container.addEventListener("click", async () => {
+										const connectionRes = await fetch(
+											this.info.api + "/connections/" + key + "/authorize",
+											{
+												headers: this.headers,
+											},
+										);
+										const connectionJSON = await connectionRes.json();
+										window.open(connectionJSON.url, "_blank", "noopener noreferrer");
+									});
+								} else {
+									container.classList.add("disabled");
+								}
+
+								connectionContainer.appendChild(container);
+							});
+						serverConnections
+							.filter((_) => actConMap.has(_))
+							.forEach((_) => {
+								const con = actConMap.get(_);
+								if (!con) return;
+								const connectionObj = json[_];
+
+								const actConDiv = document.createElement("div");
+								actConDiv.classList.add("flexttb", "actConnectionDiv");
+								const topRow = document.createElement("div");
+								actConDiv.append(topRow);
+								topRow.classList.add("flexltr");
+								if (connectionObj.icon_url) {
+									const span = document.createElement("span");
+									span.classList.add("conImg", "svgicon");
+									span.style.setProperty("mask", `url("${connectionObj.icon_url}")`);
+									//span.alt = key;
+									topRow.append(span);
+								}
+
+								const nameDiv = document.createElement("div");
+								nameDiv.classList.add("flexttb");
+
+								const name = document.createElement("span");
+								name.textContent = con.name;
+
+								const serviceName = document.createElement("span");
+								serviceName.textContent = _;
+
+								nameDiv.append(name, serviceName);
+
+								topRow.append(nameDiv);
+
+								const input = document.createElement("input");
+								input.type = "checkbox";
+								input.checked = !!con.visibility;
+								input.onchange = () => {
+									fetch(this.info.api + "/users/@me/connections/" + con.type + "/" + con.id, {
+										method: "PATCH",
+										body: JSON.stringify({
+											visibility: input.checked,
+										}),
+										headers: this.headers,
+									});
+								};
+
+								const dispRow = document.createElement("div");
+								dispRow.classList.add("flexltr");
+								actConDiv.append(dispRow);
+
+								const dispText = document.createElement("span");
+								dispText.textContent = I18n.connections.display();
+								dispRow.append(dispText, input);
+
+								const remove = document.createElement("button");
+								remove.textContent = I18n.connections.delete();
+								actConDiv.append(remove);
+								remove.onclick = () => {
+									const d = new Dialog(I18n.connections.sure());
+									d.options.addText(I18n.connections.sureDesc());
+									const row = d.options.addOptions("", {ltr: true});
+									row.addButtonInput("", I18n.yes(), async () => {
+										await fetch(
+											this.info.api + "/users/@me/connections/" + con.type + "/" + con.id,
+											{
+												method: "DELETE",
+												headers: this.headers,
+											},
+										);
+										d.hide();
+									});
+									row.addButtonInput("", I18n.no(), () => {
+										d.hide();
+									});
+									d.show();
+								};
+
+								actConDivCont.append(actConDiv);
+							});
+					});
+				};
+				remake();
+				connections.addHTMLArea(connectionContainer);
+				connections.addHR();
+				connections.addHTMLArea(actConDivCont);
+			});
 		}
 		{
+			const security = settings.addButton(I18n.localuser.accountSettings(), {contained: true});
+
+			security.addSubButtonInput(I18n.localuser.changeDiscriminator(), (sub) => {
+				const form = sub.addForm(
+					"",
+					(_) => {
+						security.returnFromSub();
+					},
+					{
+						fetchURL: this.info.api + "/users/@me/",
+						headers: this.headers,
+						method: "PATCH",
+					},
+				);
+				form.addTextInput(I18n.localuser.newDiscriminator(), "discriminator");
+			});
+			security.addSubButtonInput(I18n.localuser.changeEmail(), (sub) => {
+				const form = sub.addForm(
+					"",
+					(_) => {
+						security.returnFromSub();
+					},
+					{
+						fetchURL: this.info.api + "/users/@me/",
+						headers: this.headers,
+						method: "PATCH",
+					},
+				);
+				form.addTextInput(I18n.localuser["password:"](), "password", {
+					password: true,
+				});
+				if (this.mfa_enabled) {
+					form.addTextInput(I18n.localuser["2faCode:"](), "code");
+				}
+				form.addTextInput(I18n.localuser["newEmail:"](), "email");
+			});
+			security.addSubButtonInput(I18n.localuser.changeUsername(), (sub) => {
+				const form = sub.addForm(
+					"",
+					(_) => {
+						security.returnFromSub();
+					},
+					{
+						fetchURL: this.info.api + "/users/@me/",
+						headers: this.headers,
+						method: "PATCH",
+					},
+				);
+				form.addTextInput(I18n.localuser["password:"](), "password", {
+					password: true,
+				});
+				if (this.mfa_enabled) {
+					form.addTextInput(I18n.localuser["2faCode:"](), "code");
+				}
+				form.addTextInput(I18n.localuser.newUsername(), "username");
+			});
+			security.addSubButtonInput(I18n.localuser.changePassword(), (sub) => {
+				const form = sub.addForm(
+					"",
+					(_) => {
+						security.returnFromSub();
+					},
+					{
+						fetchURL: this.info.api + "/users/@me/",
+						headers: this.headers,
+						method: "PATCH",
+					},
+				);
+				form.addTextInput(I18n.localuser["oldPassword:"](), "password", {
+					password: true,
+				});
+				if (this.mfa_enabled) {
+					form.addTextInput(I18n.localuser["2faCode:"](), "code");
+				}
+				let in1 = "";
+				let in2 = "";
+				form
+					.addTextInput(I18n.localuser["newPassword:"](), "", {password: true})
+					.watchForChange((text) => {
+						in1 = text;
+					});
+				const copy = form.addTextInput("New password again:", "", {password: true});
+				copy.watchForChange((text) => {
+					in2 = text;
+				});
+				form.setValue("new_password", () => {
+					if (in1 === in2) {
+						return in1;
+					} else {
+						throw new FormError(copy, I18n.localuser.PasswordsNoMatch());
+					}
+				});
+			});
+
+			{
+				security.addButtonInput("", I18n.logout.logout(), async () => {
+					if (await this.userinfo.logout()) window.location.href = "/";
+				});
+			}
+		}
+		{
+			const lang = settings.addButton(I18n.localuser.language(), {contained: true});
+			const div = document.createElement("div");
+			div.classList.add("flexttb");
+			const langBuMap = new Map<string, HTMLButtonElement>();
+			let l = [...langmap];
+			const langF = l.find((_) => _[0] === I18n.lang + ".json");
+			l = l.filter((_) => _ !== langF);
+			if (langF) l.unshift(langF);
+			div.append(
+				...l.map(([key, name]) => {
+					const button = document.createElement("button");
+					button.classList.add("langButton");
+					button.textContent = name;
+					langBuMap.set(key, button);
+					if (key === I18n.lang + ".json") {
+						button.classList.add("selected");
+					}
+					button.onclick = () => {
+						const b = langBuMap.get(I18n.lang + ".json");
+						if (b) b.classList.remove("selected");
+						button.classList.add("selected");
+						I18n.setLanguage(key.replace(".json", ""));
+						this.updateTranslations();
+					};
+					console.log(I18n.lang, key);
+					return button;
+				}),
+			);
+			lang.addHTMLArea(div);
+		}
+
+		{
 			const prefs = await getPreferences();
-			const tas = settings.addButton(I18n.localuser.themesAndSounds());
+			const tas = settings.addButton(I18n.localuser.themesAndSounds(), {contained: true});
 			{
 				const themes = ["Dark", "WHITE", "Light", "Dark-Accent"];
 				tas.addSelect(
@@ -2740,8 +3061,106 @@ class Localuser {
 				);
 			}
 			{
+				const ind = this.gifProvideors.findIndex((_) => this.selectedGifProfidor === _);
+				console.log(prefs.gifProvidor);
+				tas.addSelect(
+					I18n.gifProvidor(),
+					async (i) => {
+						prefs.gifProvidor = this.gifProvideors[i].api_name;
+						console.log(prefs.gifProvidor);
+
+						await setPreferences(prefs);
+						Localuser.loadFont();
+						this.figureDefaultProvidor();
+					},
+					this.gifProvideors.map((_) => _.name),
+					{defaultIndex: ind === -1 ? 0 : ind},
+				);
+			}
+		}
+		{
+			const blog = settings.addButton(I18n.blog.blog(), {contained: true});
+			blog.addCheckboxInput(
+				I18n.blog.blogUpdates(),
+				async (check) => {
+					prefs.showBlogUpdates = check;
+					await setPreferences(prefs);
+				},
+				{initState: prefs.showBlogUpdates},
+			);
+			(async () => {
+				const posts = await this.getPosts();
+				for (const post of posts.items) {
+					const div = document.createElement("div");
+					div.classList.add("flexltr", "blogDiv");
+					if (post.image) {
+						//TODO handle this case, no blog posts currently do this
+					}
+					const titleStuff = document.createElement("div");
+					titleStuff.classList.add("flexttb");
+
+					const h2 = document.createElement("h2");
+					h2.textContent = post.title;
+
+					const p = document.createElement("p");
+					p.textContent = post.content_html;
+					titleStuff.append(h2, p);
+					div.append(titleStuff);
+					blog.addHTMLArea(div);
+					MarkDown.safeLink(div, post.url);
+				}
+			})();
+		}
+
+		const installP = installPGet();
+		if (installP) {
+			const c = settings.addButton(I18n.localuser.install(), {contained: true});
+			c.addText(I18n.localuser.installDesc());
+			c.addButtonInput("", I18n.localuser.installJank(), async () => {
+				//@ts-expect-error have to do this :3
+				await installP.prompt();
+			});
+		}
+
+		settings.addButton(I18n.accessibility.name(), {head: true});
+
+		{
+			const visuals = settings.addButton(I18n.accessibility.visuals(), {contained: true});
+			visuals.addCheckboxInput(
+				I18n.accessibility.roleColors(),
+				(t) => {
+					console.log(t);
+					this.perminfo.user.disableColors = !t;
+				},
+				{initState: !this.perminfo.user.disableColors},
+			);
+			visuals.addCheckboxInput(
+				I18n.accessibility.gradientColors(),
+				(t) => {
+					console.log(t);
+					this.perminfo.user.gradientColors = t;
+				},
+				{initState: this.perminfo.user.gradientColors},
+			);
+			visuals.addCheckboxInput(
+				I18n.channel.allowIcons(),
+				(t) => {
+					console.log(t);
+					this.perminfo.user.disableIcons = !t;
+				},
+				{initState: !this.perminfo.user.disableIcons},
+			);
+
+			visuals.addCheckboxInput(
+				I18n.accessibility.decorations(),
+				(t) => {
+					this.perminfo.user.decorations = t;
+				},
+				{initState: this.perminfo.user.decorations},
+			);
+			{
 				const cur = prefs.renderJoinAvatars;
-				tas.addCheckboxInput(
+				visuals.addCheckboxInput(
 					I18n.renderJoinAvatars(),
 					async (v) => {
 						prefs.renderJoinAvatars = v;
@@ -2750,46 +3169,51 @@ class Localuser {
 					{initState: cur},
 				);
 			}
-		}
-		{
-			const update = settings.addButton(I18n.localuser.updateSettings());
-			let index = ServiceWorkerModeValues.indexOf(localSettings.serviceWorkerMode);
-			if (index === -1) {
-				index = 2;
-			}
-			const sw = update.addSelect(
-				I18n.settings.updates.serviceWorkerMode.title(),
-				() => {},
-				ServiceWorkerModeValues.map((e) => I18n.settings.updates.serviceWorkerMode[e]()),
+			visuals.addCheckboxInput(
+				I18n.checkBoxMemberList(),
+				(c) => {
+					prefs.checkMemberList = c;
+					const ml = document.getElementById("memberlisttoggle")!;
+					if (c) {
+						ml.classList = "";
+					} else {
+						ml.classList = "svgicon svg-friends";
+					}
+					setPreferences(prefs);
+				},
 				{
-					defaultIndex: index,
+					initState: !!prefs.checkMemberList,
 				},
 			);
-			sw.onchange = (e) => {
-				SW.setMode(ServiceWorkerModeValues[e]);
-			};
-			update.addButtonInput("", I18n.localuser.CheckUpdate(), async () => {
-				const update = await SW.checkUpdates();
-				const text = update ? I18n.localuser.updatesYay() : I18n.localuser.noUpdates();
-				const d = new Dialog("");
-				d.options.addTitle(text);
-				if (update) {
-					d.options.addButtonInput("", I18n.localuser.refreshPage(), () => {
-						window.location.reload();
-					});
-				}
-				d.show();
-			});
-			update.addButtonInput("", I18n.localuser.clearCache(), () => {
-				SW.forceClear();
-			});
 		}
 		{
-			const security = settings.addButton(I18n.localuser.accountSettings());
-			const genSecurity = () => {
-				security.removeAll();
+			const animations = settings.addButton(I18n.accessibility.animations(), {contained: true});
+			animations.addSelect(
+				I18n.accessibility.playGif(),
+				async (i) => {
+					prefs.animateGifs = AnimateTristateValues[i];
+					await setPreferences(prefs);
+				},
+				AnimateTristateValues.map((_) => I18n.accessibility.gifSettings[_]()),
+				{defaultIndex: AnimateTristateValues.indexOf(prefs.animateGifs)},
+			);
+			animations.addSelect(
+				I18n.accessibility.playIcon(),
+				async (i) => {
+					prefs.animateIcons = AnimateTristateValues[i];
+					await setPreferences(prefs);
+				},
+				AnimateTristateValues.map((_) => I18n.accessibility.gifSettings[_]()),
+				{defaultIndex: AnimateTristateValues.indexOf(prefs.animateIcons)},
+			);
+		}
+		settings.addButton(I18n.localuser.security(), {head: true});
+		{
+			const twofa = settings.addButton(I18n.localuser["2fa"](), {contained: true});
+			const gen2FA = () => {
+				twofa.removeAll();
 				if (this.mfa_enabled) {
-					security.addSubButtonInput(I18n.localuser["2faDisable"](), (sub) => {
+					twofa.addSubButtonInput(I18n.localuser["2faDisable"](), (sub) => {
 						const form = sub.addForm(
 							"",
 							(_: any) => {
@@ -2801,8 +3225,8 @@ class Localuser {
 									}
 								} else {
 									this.mfa_enabled = false;
-									security.returnFromSub();
-									genSecurity();
+									twofa.returnFromSub();
+									gen2FA();
 								}
 							},
 							{
@@ -2813,7 +3237,7 @@ class Localuser {
 						form.addTextInput(I18n.localuser["2faCode:"](), "code", {required: true});
 					});
 				} else {
-					security.addSubButtonInput(I18n.localuser["2faEnable"](), async (sub) => {
+					twofa.addSubButtonInput(I18n.localuser["2faEnable"](), async (sub) => {
 						let secret = "";
 						for (let i = 0; i < 18; i++) {
 							secret += "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"[Math.floor(Math.random() * 32)];
@@ -2831,9 +3255,9 @@ class Localuser {
 											break;
 									}
 								} else {
-									genSecurity();
+									gen2FA();
 									this.mfa_enabled = true;
-									security.returnFromSub();
+									twofa.returnFromSub();
 								}
 							},
 							{
@@ -2852,7 +3276,7 @@ class Localuser {
 					});
 				}
 				{
-					security.addSubButtonInput(I18n.webauth.manage(), (keyMenu) => {
+					twofa.addSubButtonInput(I18n.webauth.manage(), (keyMenu) => {
 						const addKey = (key: {name: string; id: string}) => {
 							keyMenu.addButtonInput("", key.name, () => {
 								const opt = keyMenu.addSubOptions(key.name);
@@ -2939,314 +3363,113 @@ class Localuser {
 							});
 					});
 				}
-				security.addSubButtonInput(I18n.localuser.changeDiscriminator(), (sub) => {
-					const form = sub.addForm(
-						"",
-						(_) => {
-							security.returnFromSub();
-						},
-						{
-							fetchURL: this.info.api + "/users/@me/",
-							headers: this.headers,
-							method: "PATCH",
-						},
-					);
-					form.addTextInput(I18n.localuser.newDiscriminator(), "discriminator");
-				});
-				security.addSubButtonInput(I18n.localuser.changeEmail(), (sub) => {
-					const form = sub.addForm(
-						"",
-						(_) => {
-							security.returnFromSub();
-						},
-						{
-							fetchURL: this.info.api + "/users/@me/",
-							headers: this.headers,
-							method: "PATCH",
-						},
-					);
-					form.addTextInput(I18n.localuser["password:"](), "password", {
-						password: true,
-					});
-					if (this.mfa_enabled) {
-						form.addTextInput(I18n.localuser["2faCode:"](), "code");
+			};
+			gen2FA();
+		}
+		{
+			const manageSessions = settings.addButton(I18n.deviceManage.title(), {contained: true});
+			(async () => {
+				const json = (await (
+					await fetch(this.info.api + "/auth/sessions?extended=true", {headers: this.headers})
+				).json()) as {user_sessions: expSessionJson[]};
+				for (const session of json.user_sessions.sort(
+					(a, b) => +new Date(a.last_seen) - +new Date(b.last_seen),
+				)) {
+					const div = document.createElement("div");
+					div.classList.add("flexltr", "sessionDiv");
+
+					const info = document.createElement("div");
+					info.classList.add("flexttb");
+					div.append(info);
+
+					let line2 = "";
+					const last = session.last_seen_location_info;
+					if (last) {
+						line2 += last.country_name;
+						if (last.region) line2 += ", " + last.region;
+						if (last.city) line2 += ", " + last.city;
 					}
-					form.addTextInput(I18n.localuser["newEmail:"](), "email");
-				});
-				security.addSubButtonInput(I18n.localuser.changeUsername(), (sub) => {
-					const form = sub.addForm(
-						"",
-						(_) => {
-							security.returnFromSub();
-						},
-						{
-							fetchURL: this.info.api + "/users/@me/",
-							headers: this.headers,
-							method: "PATCH",
-						},
-					);
-					form.addTextInput(I18n.localuser["password:"](), "password", {
-						password: true,
-					});
-					if (this.mfa_enabled) {
-						form.addTextInput(I18n.localuser["2faCode:"](), "code");
+					if (line2) {
+						line2 += " • ";
 					}
-					form.addTextInput(I18n.localuser.newUsername(), "username");
-				});
-				security.addSubButtonInput(I18n.localuser.changePassword(), (sub) => {
-					const form = sub.addForm(
-						"",
-						(_) => {
-							security.returnFromSub();
-						},
-						{
-							fetchURL: this.info.api + "/users/@me/",
-							headers: this.headers,
-							method: "PATCH",
-						},
-					);
-					form.addTextInput(I18n.localuser["oldPassword:"](), "password", {
-						password: true,
-					});
-					if (this.mfa_enabled) {
-						form.addTextInput(I18n.localuser["2faCode:"](), "code");
+					const format = new Intl.RelativeTimeFormat(I18n.lang, {style: "short"});
+					const time = (Date.now() - +new Date(session.last_seen)) / 1000;
+					if (time < 60) {
+						line2 += format.format(-Math.floor(time), "seconds");
+					} else if (time < 60 * 60) {
+						line2 += format.format(-Math.floor(time / 60), "minutes");
+					} else if (time < 60 * 60 * 24) {
+						line2 += format.format(-Math.floor(time / 60 / 60), "hours");
+					} else if (time < 60 * 60 * 24 * 7) {
+						line2 += format.format(-Math.floor(time / 60 / 60 / 24), "days");
+					} else if (time < 60 * 60 * 24 * 365) {
+						line2 += format.format(-Math.floor(time / 60 / 60 / 24 / 7), "weeks");
+					} else {
+						line2 += format.format(-Math.floor(time / 60 / 60 / 24 / 365), "years");
 					}
-					let in1 = "";
-					let in2 = "";
-					form
-						.addTextInput(I18n.localuser["newPassword:"](), "", {password: true})
-						.watchForChange((text) => {
-							in1 = text;
-						});
-					const copy = form.addTextInput("New password again:", "", {password: true});
-					copy.watchForChange((text) => {
-						in2 = text;
-					});
-					form.setValue("new_password", () => {
-						if (in1 === in2) {
-							return in1;
-						} else {
-							throw new FormError(copy, I18n.localuser.PasswordsNoMatch());
+					const loc = document.createElement("span");
+					loc.textContent = line2;
+					info.append(loc);
+					const r = manageSessions.addHTMLArea(div);
+					div.onclick = () => {
+						const sub = manageSessions.addSubOptions(I18n.deviceManage.manageDev());
+						sub.addText(I18n.deviceManage.ip(session.last_seen_ip));
+						sub.addText(I18n.deviceManage.last(session.approx_last_used_time));
+						if (last) {
+							sub.addText(I18n.deviceManage.estimateWarn());
+							sub.addText(I18n.deviceManage.continent(last.continent_name));
+							sub.addText(I18n.deviceManage.country(last.country_name));
+							if (last.region) sub.addText(I18n.deviceManage.region(last.region));
+							if (last.city) sub.addText(I18n.deviceManage.city(last.city));
+							if (last.postal) sub.addText(I18n.deviceManage.postal(last.postal));
+							sub.addText(I18n.deviceManage.longitude(last.longitude + ""));
+							sub.addText(I18n.deviceManage.latitude(last.latitude + ""));
 						}
-					});
-				});
-
-				security.addSelect(
-					I18n.localuser.language(),
-					(e) => {
-						I18n.setLanguage(I18n.options()[e]);
-						this.updateTranslations();
-					},
-					[...langmap.values()],
-					{defaultIndex: I18n.options().indexOf(I18n.lang)},
-				);
-
-				{
-					security.addButtonInput("", I18n.logout.logout(), async () => {
-						if (await this.userinfo.logout()) window.location.href = "/";
-					});
-				}
-			};
-			genSecurity();
-		}
-		{
-			const accessibility = settings.addButton(I18n.accessibility.name());
-			accessibility.addCheckboxInput(
-				I18n.accessibility.roleColors(),
-				(t) => {
-					console.log(t);
-					this.perminfo.user.disableColors = !t;
-				},
-				{initState: !this.perminfo.user.disableColors},
-			);
-			accessibility.addCheckboxInput(
-				I18n.accessibility.gradientColors(),
-				(t) => {
-					console.log(t);
-					this.perminfo.user.gradientColors = t;
-				},
-				{initState: this.perminfo.user.gradientColors},
-			);
-			accessibility.addCheckboxInput(
-				I18n.channel.allowIcons(),
-				(t) => {
-					console.log(t);
-					this.perminfo.user.disableIcons = !t;
-				},
-				{initState: !this.perminfo.user.disableIcons},
-			);
-
-			accessibility.addCheckboxInput(
-				I18n.accessibility.decorations(),
-				(t) => {
-					this.perminfo.user.decorations = t;
-				},
-				{initState: this.perminfo.user.decorations},
-			);
-			accessibility.addSelect(
-				I18n.accessibility.playGif(),
-				async (i) => {
-					prefs.animateGifs = AnimateTristateValues[i];
-					await setPreferences(prefs);
-				},
-				AnimateTristateValues.map((_) => I18n.accessibility.gifSettings[_]()),
-				{defaultIndex: AnimateTristateValues.indexOf(prefs.animateGifs)},
-			);
-			accessibility.addSelect(
-				I18n.accessibility.playIcon(),
-				async (i) => {
-					prefs.animateIcons = AnimateTristateValues[i];
-					await setPreferences(prefs);
-				},
-				AnimateTristateValues.map((_) => I18n.accessibility.gifSettings[_]()),
-				{defaultIndex: AnimateTristateValues.indexOf(prefs.animateIcons)},
-			);
-		}
-		{
-			const connections = settings.addButton(I18n.localuser.connections());
-			const connectionContainer = document.createElement("div");
-			const actConDivCont = document.createElement("div");
-
-			connectionContainer.classList.add("connection-container");
-			this.conectionChange = () => {
-				if (document.contains(settings.html)) {
-					remake();
-				} else {
-					this.conectionChange = () => {};
-				}
-			};
-			const remake = () => {
-				connectionContainer.innerHTML = "";
-				actConDivCont.innerHTML = "";
-				const cons = fetch(this.info.api + "/users/@me/connections", {
-					headers: this.headers,
-				});
-
-				this.getConnections().then(async (json) => {
-					const actCons = (await (await cons).json()) as ConnectionJson[];
-					const actConMap = new Map<string, ConnectionJson>(
-						actCons.map((_) => [_.type, _] as const),
-					);
-					const serverConnections = Object.keys(json).sort((key) => (json[key].enabled ? -1 : 1));
-
-					serverConnections
-						.filter((_) => !actConMap.has(_))
-						.forEach((key) => {
-							const connection = json[key];
-
-							const container = document.createElement("div");
-							if (connection.icon_url) {
-								const span = document.createElement("span");
-								span.classList.add("conImg", "svgicon");
-								span.style.setProperty("mask", `url("${connection.icon_url}")`);
-								//span.alt = key;
-								container.append(span);
-							} else {
-								container.textContent = key.charAt(0).toUpperCase() + key.slice(1);
-							}
-
-							if (connection.enabled) {
-								container.addEventListener("click", async () => {
-									const connectionRes = await fetch(
-										this.info.api + "/connections/" + key + "/authorize",
-										{
-											headers: this.headers,
-										},
-									);
-									const connectionJSON = await connectionRes.json();
-									window.open(connectionJSON.url, "_blank", "noopener noreferrer");
-								});
-							} else {
-								container.classList.add("disabled");
-							}
-
-							connectionContainer.appendChild(container);
-						});
-					serverConnections
-						.filter((_) => actConMap.has(_))
-						.forEach((_) => {
-							const con = actConMap.get(_);
-							if (!con) return;
-							const connectionObj = json[_];
-
-							const actConDiv = document.createElement("div");
-							actConDiv.classList.add("flexttb", "actConnectionDiv");
-							const topRow = document.createElement("div");
-							actConDiv.append(topRow);
-							topRow.classList.add("flexltr");
-							if (connectionObj.icon_url) {
-								const span = document.createElement("span");
-								span.classList.add("conImg", "svgicon");
-								span.style.setProperty("mask", `url("${connectionObj.icon_url}")`);
-								//span.alt = key;
-								topRow.append(span);
-							}
-
-							const nameDiv = document.createElement("div");
-							nameDiv.classList.add("flexttb");
-
-							const name = document.createElement("span");
-							name.textContent = con.name;
-
-							const serviceName = document.createElement("span");
-							serviceName.textContent = _;
-
-							nameDiv.append(name, serviceName);
-
-							topRow.append(nameDiv);
-
-							const input = document.createElement("input");
-							input.type = "checkbox";
-							input.checked = !!con.visibility;
-							input.onchange = () => {
-								fetch(this.info.api + "/users/@me/connections/" + con.type + "/" + con.id, {
-									method: "PATCH",
-									body: JSON.stringify({
-										visibility: input.checked,
-									}),
+						if (session.id !== this.session_id) {
+							sub.addButtonInput("", I18n.deviceManage.logout(), () => {
+								div.remove();
+								r.html = document.createElement("div");
+								manageSessions.returnFromSub();
+								fetch(this.info.api + "/auth/sessions/logout", {
+									method: "POST",
 									headers: this.headers,
+									body: JSON.stringify({
+										session_id_hashes: [session.id_hash],
+									}),
 								});
-							};
-
-							const dispRow = document.createElement("div");
-							dispRow.classList.add("flexltr");
-							actConDiv.append(dispRow);
-
-							const dispText = document.createElement("span");
-							dispText.textContent = I18n.connections.display();
-							dispRow.append(dispText, input);
-
-							const remove = document.createElement("button");
-							remove.textContent = I18n.connections.delete();
-							actConDiv.append(remove);
-							remove.onclick = () => {
-								const d = new Dialog(I18n.connections.sure());
-								d.options.addText(I18n.connections.sureDesc());
-								const row = d.options.addOptions("", {ltr: true});
-								row.addButtonInput("", I18n.yes(), async () => {
-									await fetch(this.info.api + "/users/@me/connections/" + con.type + "/" + con.id, {
-										method: "DELETE",
-										headers: this.headers,
-									});
-									d.hide();
-								});
-								row.addButtonInput("", I18n.no(), () => {
-									d.hide();
-								});
-								d.show();
-							};
-
-							actConDivCont.append(actConDiv);
-						});
-				});
-			};
-			remake();
-			connections.addHTMLArea(connectionContainer);
-			connections.addHR();
-			connections.addHTMLArea(actConDivCont);
+							});
+						} else sub.addText(I18n.deviceManage.curSes());
+					};
+				}
+			})();
 		}
 		{
-			const devPortal = settings.addButton(I18n.localuser.devPortal());
+			const trusted = settings.addButton(I18n.localuser.trusted(), {contained: true});
+			trusted.addMDText(new MarkDown(I18n.localuser.trustedDesc()));
+			for (const thing of MarkDown.trustedDomains) {
+				const div = document.createElement("div");
+				div.classList.add("flexltr", "trustedDomain");
+
+				const name = document.createElement("span");
+				name.textContent = thing;
+
+				const remove = document.createElement("button");
+				remove.textContent = I18n.remove();
+				remove.onclick = () => {
+					MarkDown.saveTrusted();
+					MarkDown.trustedDomains.delete(thing);
+					MarkDown.saveTrusted(true);
+					div.remove();
+				};
+
+				div.append(name, remove);
+				trusted.addHTMLArea(div);
+			}
+		}
+		settings.addButton(I18n.localuser.advanced(), {head: true});
+
+		{
+			const devPortal = settings.addButton(I18n.localuser.devPortal(), {contained: true});
 
 			fetch(this.info.api + "/teams", {
 				headers: this.headers,
@@ -3330,128 +3553,11 @@ class Localuser {
 			});
 		}
 
-		{
-			const manageSessions = settings.addButton(I18n.deviceManage.title());
-			(async () => {
-				const json = (await (
-					await fetch(this.info.api + "/auth/sessions?extended=true", {headers: this.headers})
-				).json()) as {user_sessions: expSessionJson[]};
-				for (const session of json.user_sessions.sort(
-					(a, b) => +new Date(a.last_seen) - +new Date(b.last_seen),
-				)) {
-					const div = document.createElement("div");
-					div.classList.add("flexltr", "sessionDiv");
-
-					const info = document.createElement("div");
-					info.classList.add("flexttb");
-					div.append(info);
-
-					let line2 = "";
-					const last = session.last_seen_location_info;
-					if (last) {
-						line2 += last.country_name;
-						if (last.region) line2 += ", " + last.region;
-						if (last.city) line2 += ", " + last.city;
-					}
-					if (line2) {
-						line2 += " • ";
-					}
-					const format = new Intl.RelativeTimeFormat(I18n.lang, {style: "short"});
-					const time = (Date.now() - +new Date(session.last_seen)) / 1000;
-					if (time < 60) {
-						line2 += format.format(-Math.floor(time), "seconds");
-					} else if (time < 60 * 60) {
-						line2 += format.format(-Math.floor(time / 60), "minutes");
-					} else if (time < 60 * 60 * 24) {
-						line2 += format.format(-Math.floor(time / 60 / 60), "hours");
-					} else if (time < 60 * 60 * 24 * 7) {
-						line2 += format.format(-Math.floor(time / 60 / 60 / 24), "days");
-					} else if (time < 60 * 60 * 24 * 365) {
-						line2 += format.format(-Math.floor(time / 60 / 60 / 24 / 7), "weeks");
-					} else {
-						line2 += format.format(-Math.floor(time / 60 / 60 / 24 / 365), "years");
-					}
-					const loc = document.createElement("span");
-					loc.textContent = line2;
-					info.append(loc);
-					const r = manageSessions.addHTMLArea(div);
-					div.onclick = () => {
-						const sub = manageSessions.addSubOptions(I18n.deviceManage.manageDev());
-						sub.addText(I18n.deviceManage.ip(session.last_seen_ip));
-						sub.addText(I18n.deviceManage.last(session.approx_last_used_time));
-						if (last) {
-							sub.addText(I18n.deviceManage.estimateWarn());
-							sub.addText(I18n.deviceManage.continent(last.continent_name));
-							sub.addText(I18n.deviceManage.country(last.country_name));
-							if (last.region) sub.addText(I18n.deviceManage.region(last.region));
-							if (last.city) sub.addText(I18n.deviceManage.city(last.city));
-							if (last.postal) sub.addText(I18n.deviceManage.postal(last.postal));
-							sub.addText(I18n.deviceManage.longitude(last.longitude + ""));
-							sub.addText(I18n.deviceManage.latitude(last.latitude + ""));
-						}
-						if (session.id !== this.session_id) {
-							sub.addButtonInput("", I18n.deviceManage.logout(), () => {
-								div.remove();
-								r.html = document.createElement("div");
-								manageSessions.returnFromSub();
-								fetch(this.info.api + "/auth/sessions/logout", {
-									method: "POST",
-									headers: this.headers,
-									body: JSON.stringify({
-										session_id_hashes: [session.id_hash],
-									}),
-								});
-							});
-						} else sub.addText(I18n.deviceManage.curSes());
-					};
-				}
-			})();
-		}
-
-		{
-			const deleteAccount = settings.addButton(I18n.localuser.deleteAccount()).addForm(
-				"",
-				(e) => {
-					if ("message" in e) {
-						if (typeof e.message === "string") {
-							throw new FormError(password, e.message);
-						}
-					} else {
-						this.userinfo.remove();
-						window.location.href = "/";
-					}
-				},
-				{
-					headers: this.headers,
-					method: "POST",
-					fetchURL: this.info.api + "/users/@me/delete/",
-					traditionalSubmit: false,
-					submitText: I18n.localuser.deleteAccountButton(),
-				},
-			);
-			const shrek = deleteAccount.addTextInput(
-				I18n.localuser.areYouSureDelete(I18n.localuser.sillyDeleteConfirmPhrase()),
-				"shrek",
-			);
-			const password = deleteAccount.addTextInput(I18n.localuser["password:"](), "password", {
-				password: true,
-			});
-			deleteAccount.addPreprocessor((obj) => {
-				if ("shrek" in obj) {
-					if (obj.shrek !== I18n.localuser.sillyDeleteConfirmPhrase()) {
-						throw new FormError(shrek, I18n.localuser.mustTypePhrase());
-					}
-					delete obj.shrek;
-				} else {
-					throw new FormError(shrek, I18n.localuser.mustTypePhrase());
-				}
-			});
-		}
 		if (
 			this.rights.hasPermission("OPERATOR") ||
 			this.rights.hasPermission("CREATE_REGISTRATION_TOKENS")
 		) {
-			const manageInstance = settings.addButton(I18n.localuser.manageInstance());
+			const manageInstance = settings.addButton(I18n.localuser.manageInstance(), {contained: true});
 			if (this.rights.hasPermission("OPERATOR")) {
 				manageInstance.addButtonInput("", I18n.manageInstance.stop(), () => {
 					const menu = new Dialog("");
@@ -3580,7 +3686,7 @@ class Localuser {
 			}
 		}
 		(async () => {
-			const jankInfo = settings.addButton(I18n.jankInfo());
+			const jankInfo = settings.addButton(I18n.jankInfo(), {contained: true});
 			const img = document.createElement("img");
 			img.src = "/logo.svg";
 			jankInfo.addHTMLArea(img);
@@ -3594,73 +3700,12 @@ class Localuser {
 				),
 			);
 		})();
-		const installP = installPGet();
-		if (installP) {
-			const c = settings.addButton(I18n.localuser.install());
-			c.addText(I18n.localuser.installDesc());
-			c.addButtonInput("", I18n.localuser.installJank(), async () => {
-				//@ts-expect-error have to do this :3
-				await installP.prompt();
+
+		{
+			const devSettings = settings.addButton(I18n.devSettings.name(), {
+				noSubmit: true,
+				contained: true,
 			});
-		}
-		{
-			const trusted = settings.addButton(I18n.localuser.trusted());
-			trusted.addMDText(new MarkDown(I18n.localuser.trustedDesc()));
-			for (const thing of MarkDown.trustedDomains) {
-				const div = document.createElement("div");
-				div.classList.add("flexltr", "trustedDomain");
-
-				const name = document.createElement("span");
-				name.textContent = thing;
-
-				const remove = document.createElement("button");
-				remove.textContent = I18n.remove();
-				remove.onclick = () => {
-					MarkDown.saveTrusted();
-					MarkDown.trustedDomains.delete(thing);
-					MarkDown.saveTrusted(true);
-					div.remove();
-				};
-
-				div.append(name, remove);
-				trusted.addHTMLArea(div);
-			}
-		}
-		{
-			const blog = settings.addButton(I18n.blog.blog());
-			blog.addCheckboxInput(
-				I18n.blog.blogUpdates(),
-				async (check) => {
-					prefs.showBlogUpdates = check;
-					await setPreferences(prefs);
-				},
-				{initState: prefs.showBlogUpdates},
-			);
-			(async () => {
-				const posts = await this.getPosts();
-				for (const post of posts.items) {
-					const div = document.createElement("div");
-					div.classList.add("flexltr", "blogDiv");
-					if (post.image) {
-						//TODO handle this case, no blog posts currently do this
-					}
-					const titleStuff = document.createElement("div");
-					titleStuff.classList.add("flexttb");
-
-					const h2 = document.createElement("h2");
-					h2.textContent = post.title;
-
-					const p = document.createElement("p");
-					p.textContent = post.content_html;
-					titleStuff.append(h2, p);
-					div.append(titleStuff);
-					blog.addHTMLArea(div);
-					MarkDown.safeLink(div, post.url);
-				}
-			})();
-		}
-		{
-			const devSettings = settings.addButton(I18n.devSettings.name(), {noSubmit: true});
 			devSettings.addText(I18n.devSettings.description());
 			devSettings.addHR();
 			const box1 = devSettings.addCheckboxInput(I18n.devSettings.logGateway(), () => {}, {
@@ -3757,6 +3802,7 @@ class Localuser {
 		if (this.trace.length && getDeveloperSettings().showTraces) {
 			const traces = settings.addButton(I18n.localuser.trace(), {
 				noSubmit: true,
+				contained: true,
 			});
 			const traceArr = this.trace;
 
@@ -3853,7 +3899,40 @@ class Localuser {
 			updateInfo();
 		}
 		{
-			const instanceInfo = settings.addButton(I18n.instanceInfo.name());
+			const update = settings.addButton(I18n.localuser.updateSettings(), {contained: true});
+			let index = ServiceWorkerModeValues.indexOf(localSettings.serviceWorkerMode);
+			if (index === -1) {
+				index = 2;
+			}
+			const sw = update.addSelect(
+				I18n.settings.updates.serviceWorkerMode.title(),
+				() => {},
+				ServiceWorkerModeValues.map((e) => I18n.settings.updates.serviceWorkerMode[e]()),
+				{
+					defaultIndex: index,
+				},
+			);
+			sw.onchange = (e) => {
+				SW.setMode(ServiceWorkerModeValues[e]);
+			};
+			update.addButtonInput("", I18n.localuser.CheckUpdate(), async () => {
+				const update = await SW.checkUpdates();
+				const text = update ? I18n.localuser.updatesYay() : I18n.localuser.noUpdates();
+				const d = new Dialog("");
+				d.options.addTitle(text);
+				if (update) {
+					d.options.addButtonInput("", I18n.localuser.refreshPage(), () => {
+						window.location.reload();
+					});
+				}
+				d.show();
+			});
+			update.addButtonInput("", I18n.localuser.clearCache(), () => {
+				SW.forceClear();
+			});
+		}
+		{
+			const instanceInfo = settings.addButton(I18n.instanceInfo.name(), {contained: true});
 			fetch(this.info.api + "/policies/instance", {
 				headers: this.headers,
 			})
@@ -3891,11 +3970,49 @@ class Localuser {
 					});
 				});
 		}
+		settings.addButton(I18n.localuser.danger(), {head: true});
 		{
-			const donate = settings.addButton(I18n.donate.donate());
-			donate.addMDText(new MarkDown(I18n.donate.mdText(window.location.origin + "/donate")));
-			donate.addText(I18n.donate.desc());
+			const deleteAccount = settings
+				.addButton(I18n.localuser.deleteAccount(), {contained: true, color: buttonColor.RED})
+				.addForm(
+					"",
+					(e) => {
+						if ("message" in e) {
+							if (typeof e.message === "string") {
+								throw new FormError(password, e.message);
+							}
+						} else {
+							this.userinfo.remove();
+							window.location.href = "/";
+						}
+					},
+					{
+						headers: this.headers,
+						method: "POST",
+						fetchURL: this.info.api + "/users/@me/delete/",
+						traditionalSubmit: false,
+						submitText: I18n.localuser.deleteAccountButton(),
+					},
+				);
+			const shrek = deleteAccount.addTextInput(
+				I18n.localuser.areYouSureDelete(I18n.localuser.sillyDeleteConfirmPhrase()),
+				"shrek",
+			);
+			const password = deleteAccount.addTextInput(I18n.localuser["password:"](), "password", {
+				password: true,
+			});
+			deleteAccount.addPreprocessor((obj) => {
+				if ("shrek" in obj) {
+					if (obj.shrek !== I18n.localuser.sillyDeleteConfirmPhrase()) {
+						throw new FormError(shrek, I18n.localuser.mustTypePhrase());
+					}
+					delete obj.shrek;
+				} else {
+					throw new FormError(shrek, I18n.localuser.mustTypePhrase());
+				}
+			});
 		}
+
 		settings.show();
 	}
 	readonly botTokens: Map<string, string> = new Map();
@@ -4063,6 +4180,17 @@ class Localuser {
 			Bot.InviteMaker(appId, form, this.info);
 		});
 	}
+	updateSend() {
+		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
+		if (
+			(typebox.markdown.rawString && typebox.markdown.rawString !== "\n") ||
+			document.getElementById("pasteimage")?.children.length
+		) {
+			typebox.parentElement!.classList.remove("noConent");
+		} else {
+			typebox.parentElement!.classList.add("noConent");
+		}
+	}
 	//TODO make this an option
 	readonly autofillregex = Object.freeze(/(^|\s|\n)[@#:]([a-zA-Z0-9]*)$/i);
 	mdBox() {
@@ -4071,11 +4199,7 @@ class Localuser {
 		typeMd.owner = this;
 		typeMd.onUpdate = (str, pre) => {
 			this.search(document.getElementById("searchOptions") as HTMLDivElement, typeMd, str, pre);
-			if (str && str !== "\n") {
-				typebox.parentElement!.classList.remove("noConent");
-			} else {
-				typebox.parentElement!.classList.add("noConent");
-			}
+			this.updateSend();
 		};
 	}
 	async pinnedClick(rect: DOMRect) {
@@ -4121,7 +4245,12 @@ class Localuser {
 		Contextmenu.declareMenu(menu);
 		const trending = (await (
 			await fetch(
-				this.info.api + "/gifs/trending?" + new URLSearchParams([["locale", I18n.lang]]),
+				this.info.api +
+					"/gifs/trending?" +
+					new URLSearchParams([
+						["locale", I18n.lang],
+						["provider", this.selectedGifProfidor?.api_name!],
+					]),
 				{headers: this.headers},
 			)
 		).json()) as {
@@ -4133,7 +4262,12 @@ class Localuser {
 		};
 
 		await fetch(
-			this.info.api + "/gifs/trending-gifs?" + new URLSearchParams([["locale", I18n.lang]]),
+			this.info.api +
+				"/gifs/trending-gifs?" +
+				new URLSearchParams([
+					["locale", I18n.lang],
+					["provider", this.selectedGifProfidor?.api_name!],
+				]),
 			{headers: this.headers},
 		);
 		const gifbox = document.createElement("div");
@@ -4209,6 +4343,7 @@ class Localuser {
 							["locale", I18n.lang],
 							["q", sValue],
 							["limit", "500"],
+							["provider", this.selectedGifProfidor?.api_name!],
 						]),
 					{headers: this.headers},
 				)
@@ -4233,7 +4368,7 @@ class Localuser {
 		};
 		search.classList.add("searchGifBar");
 		//TODO fix this once we swap over
-		search.placeholder = I18n.searchGifs("Tenor");
+		search.placeholder = I18n.searchGifs(this.selectedGifProfidor?.name!);
 		const favs = this.favorites.favoriteGifs();
 		if (favs.length) {
 			favs.forEach(async (_) => (_.src = await this.refreshIfNeeded(_.src)));
@@ -4539,14 +4674,16 @@ class Localuser {
 			typebox,
 		);
 	}
+	private MDGenID = 0;
 	MDFindMention(name: string, original: string, box: HTMLDivElement, typebox: MarkDown) {
 		if (this.ws && this.focusGuild) {
+			const id = ++this.MDGenID;
 			this.MDFineMentionGen(name, original, box, typebox);
 			if (this.focusGuild.member_count <= this.focusGuild.members.size) return;
 			if (this.focusGuild.id !== "@me") {
 				this.focusGuild.searchMembers(8, name).then(async () => {
 					if (!typebox.rawString.startsWith(original)) return;
-					this.MDFineMentionGen(name, original, box, typebox);
+					if (this.MDGenID === id) this.MDFineMentionGen(name, original, box, typebox);
 				});
 			}
 		}

@@ -754,6 +754,14 @@ select {
 	cursor: pointer;
 	transition: background 0.1s ease-in-out;
 }
+.langButton {
+	background: #0000004d;
+	padding: 10px;
+	margin-bottom: 8px;
+	&.selected {
+		background: #000000ad;
+	}
+}
 .subButton {
 	min-width: 350px;
 	padding: 10px;
@@ -2756,7 +2764,7 @@ span.instanceStatus {
 .message.blocked {
 	margin-bottom: 0;
 }
-.messagediv:has(.message.blocked):hover {
+.blockedDiv:hover {
 	background: transparent;
 }
 .pfprow {
@@ -3140,6 +3148,10 @@ span .quote:last-of-type .quoteline {
 	margin-top: 4px;
 	gap: 4px;
 	flex-wrap: wrap;
+	video {
+		max-height: 288px;
+		max-width: 288px;
+	}
 }
 .embed {
 	max-width: 400px;
@@ -3341,21 +3353,57 @@ img.bigembedimg {
 	opacity: 0.5;
 }
 #memberlisttoggle {
-	display: none;
-}
-#memberlisttoggleicon {
-	display: block;
-	padding: 12px 0;
-	margin-left: 0;
+	width: 24px;
+	height: 24px;
 	cursor: pointer;
-	flex-grow: 0;
 }
-#memberlisttoggleicon span {
-	height: 16px;
-	width: 16px;
+#memberlisttoggle.svgicon {
+	/* display: none; */
+	&::before {
+		content: "";
+		width: 24px;
+		height: 24px;
+		display: block;
+	}
 }
-#page:has(#memberlisttoggle:checked) #memberlisttoggleicon span {
-	background: var(--primary-text-prominent);
+::highlight(highkeyword) {
+	color: yellow;
+}
+::highlight(highnumber) {
+	color: orange;
+}
+::highlight(highstring) {
+	color: red;
+}
+::highlight(highsymbol) {
+	color: white;
+	font-weight: bold;
+}
+::highlight(highcomment) {
+	color: green;
+}
+::highlight(highidentifier) {
+	color: white;
+}
+::highlight(highClass) {
+	color: #6741ff;
+}
+::highlight(highProp) {
+	color: #33dcff;
+}
+::highlight(highFunc) {
+	color: #d564ff;
+}
+#memberlisttoggle.svgicon {
+	-moz-appearance: initial;
+	&::before {
+		background: var(--primary-text-soft);
+	}
+}
+#memberlisttoggle.svgicon:checked {
+	&::before {
+		background: var(--primary-text-prominent);
+	}
 }
 
 /* Context Menu */
@@ -4121,13 +4169,14 @@ fieldset input[type="radio"] {
 }
 .settingbuttons {
 	flex: none;
-	width: 192px;
+	width: 210px;
 	padding: 6px;
 	background: var(--settings-panel-bg);
 	border-right: 2px solid var(--shadow);
 	border-left: 2px solid transparent;
 	box-sizing: border-box;
 	overflow-y: auto;
+	overflow-x: clip;
 }
 .roleButtonStyle {
 	color: transparent;
@@ -4145,6 +4194,7 @@ fieldset input[type="radio"] {
 	border: none;
 	transition: background 0.1s;
 	position: relative;
+	padding-right: 0px;
 }
 .infosection {
 	.activeSetting {
@@ -4153,6 +4203,18 @@ fieldset input[type="radio"] {
 }
 .activeSetting {
 	background: var(--secondary-hover);
+}
+.settingsIndent {
+	margin-left: 5px;
+	width: calc(100% - 10px);
+}
+.settingRed {
+	color: var(--red);
+}
+.headSetting {
+	padding: 5px;
+	display: block;
+	font-weight: bold;
 }
 .SettingsButton:hover {
 	background: var(--settings-panel-hover);
@@ -4394,6 +4456,10 @@ fieldset input[type="radio"] {
 	color: var(--secondary-text);
 	border-radius: 4px;
 }
+.roleSettings {
+	display: flex;
+	align-items: center;
+}
 .settingsname {
 	font-size: 1.15rem;
 }
@@ -4402,18 +4468,51 @@ fieldset input[type="radio"] {
 	color: var(--secondary-text-soft);
 }
 .tritoggle {
-	display: inline;
-	margin-left: 4px;
+	display: flex;
+	margin-left: auto;
+	position: relative;
+	padding: 0px;
+	cursor: pointer;
+	&::after {
+		content: "";
+		background: var(--secondary-bg);
+		transition: left 0.2s;
+		border-radius: 4px;
+		width: 18px;
+		height: 18px;
+		display: block;
+		top: 3px;
+		left: 2px;
+		position: absolute;
+	}
+	:first-child {
+		border-radius: 5px 0px 0px 5px;
+	}
+	:last-child {
+		border-radius: 0px 5px 5px 0px;
+	}
+	&:has(:first-child.selected)::after {
+		left: 3px;
+	}
+	&:has(:nth-child(2).selected)::after {
+		left: 27px;
+	}
+	&:has(:nth-child(3).selected)::after {
+		left: 51px;
+	}
 }
-.tritoggle input {
-	margin: 0 2px;
-	accent-color: var(--grey);
+.tritoggle > .triOpt {
+	margin: 0 0px;
+	background: var(--grey);
+	width: 24px;
+	height: 24px;
+	display: inline-block;
 }
-.tritoggle input:first-child {
-	accent-color: var(--green);
+.tritoggle > .triOpt:first-child {
+	background: var(--green);
 }
-.tritoggle input:nth-child(3) {
-	accent-color: var(--red);
+.tritoggle > .triOpt:nth-child(3) {
+	background: var(--red);
 }
 .nonimagecenter > .flexltr.savediv {
 	padding: 16px !important;

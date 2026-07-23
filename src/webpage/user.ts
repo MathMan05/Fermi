@@ -4,14 +4,7 @@ import {Contextmenu} from "./contextmenu.js";
 import {Localuser} from "./localuser.js";
 import {Guild} from "./guild.js";
 import {SnowFlake} from "./snowflake.js";
-import {
-	ConnectionJson,
-	highMemberJSON,
-	presencejson,
-	relationJson,
-	userjson,
-	webhookInfo,
-} from "./jsontypes.js";
+import {ConnectionJson, highMemberJSON, presencejson, relationJson, userjson} from "./jsontypes.js";
 import {Role} from "./role.js";
 import {Search} from "./search.js";
 import {I18n} from "./i18n.js";
@@ -24,6 +17,8 @@ import {Channel} from "./channel.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings";
 import {ReportMenu} from "./reporting/report.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {ImagesDisplay} from "./disimg.js";
+import {File} from "./file.js";
 export const userVolMenu = new Contextmenu<Localuser, string>("user vol stacked", true);
 userVolMenu.addSlider(
 	() => I18n.Voice.userVol(),
@@ -51,7 +46,6 @@ class User extends SnowFlake {
 	pronouns?: string;
 	bot!: boolean;
 	public_flags!: number;
-	webhook?: webhookInfo;
 	accent_color!: number;
 	banner: string | undefined;
 	hypotheticalbanner!: boolean;
@@ -65,6 +59,7 @@ class User extends SnowFlake {
 		asset: string;
 		sku_id: string;
 	} | null;
+	webhook_id?: string;
 
 	resolving: false | Promise<any> = false;
 	get headers() {
@@ -81,7 +76,7 @@ class User extends SnowFlake {
 			console.error("missing localuser");
 		}
 		this.uid = userjson.id;
-		if (userjson.webhook) {
+		if (userjson.webhook_id) {
 			this.uid += ":::" + userjson.username;
 			console.log(this.uid);
 		}
@@ -779,7 +774,7 @@ class User extends SnowFlake {
 		const pfp = createImg(this.getpfpsrc(), undefined, hoverElm);
 		pfp.loading = "lazy";
 		pfp.classList.add("pfp");
-		if (!this.webhook) pfp.classList.add("userid:" + this.id);
+		if (!this.webhook_id) pfp.classList.add("userid:" + this.id);
 		if (guild) {
 			(async () => {
 				if (guild instanceof Guild) {
@@ -954,7 +949,7 @@ class User extends SnowFlake {
 				.then((member) => {
 					User.contextmenu.bindContextmenu(html, this, member);
 					if (member === undefined && error) {
-						if (this.webhook) return;
+						if (this.webhook_id) return;
 						const errorSpan = document.createElement("span");
 						errorSpan.textContent = "!";
 						errorSpan.classList.add("membererror");
@@ -1230,6 +1225,22 @@ class User extends SnowFlake {
 			div.style.setProperty("--accent_color", "transparent");
 		}
 		const banner = this.getBanner(guild);
+		banner.onclick = async () => {
+			const m = await membres;
+			const disp = new ImagesDisplay([
+				new File(
+					{
+						id: "fakeID",
+						filename: "avatar.webp",
+						content_type: "image/webp",
+						url: m?.getBannerUrl() ?? this.getBannerUrl()!,
+						size: 1,
+					},
+					null,
+				),
+			]);
+			disp.show();
+		};
 		div.append(banner);
 		membres.then((member) => {
 			if (!member) return;
@@ -1272,7 +1283,7 @@ class User extends SnowFlake {
 				const hover = new Hover(hovertxt);
 				hover.addEvent(badge);
 				if (badgejson.link && badge instanceof HTMLAnchorElement) {
-					badge.href = badgejson.link;
+					MarkDown.safeLink(badge, badgejson.link);
 				}
 				badgediv.append(badge);
 			}
@@ -1280,6 +1291,21 @@ class User extends SnowFlake {
 
 		const pfp = this.buildstatuspfp(guild);
 		div.appendChild(pfp);
+		pfp.onclick = () => {
+			const disp = new ImagesDisplay([
+				new File(
+					{
+						id: "fakeID",
+						filename: "avatar.webp",
+						content_type: "image/webp",
+						url: this.getpfpsrc(guild instanceof Member ? guild.guild : (guild ?? undefined)),
+						size: 1,
+					},
+					null,
+				),
+			]);
+			disp.show();
+		};
 		const userbody = document.createElement("div");
 		userbody.classList.add("flexttb", "infosection");
 		div.appendChild(userbody);
@@ -1292,7 +1318,7 @@ class User extends SnowFlake {
 		if (this.bot) {
 			const username = document.createElement("span");
 			username.classList.add("bot");
-			username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+			username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 			usernamehtml.appendChild(username);
 		}
 
@@ -1360,7 +1386,7 @@ class User extends SnowFlake {
 					if (this.bot) {
 						const username = document.createElement("span");
 						username.classList.add("bot");
-						username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+						username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 						usernamehtml.appendChild(username);
 					}
 
@@ -1648,7 +1674,7 @@ class User extends SnowFlake {
 		if (this.bot) {
 			const username = document.createElement("span");
 			username.classList.add("bot");
-			username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+			username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 			usernamehtml.appendChild(username);
 		}
 		userbody.appendChild(badgediv);
@@ -1701,7 +1727,7 @@ class User extends SnowFlake {
 				if (this.bot) {
 					const username = document.createElement("span");
 					username.classList.add("bot");
-					username.textContent = this.webhook ? I18n.webhook() : I18n.bot();
+					username.textContent = this.webhook_id ? I18n.webhook() : I18n.bot();
 					usernamehtml.appendChild(username);
 				}
 				const roles = document.createElement("div");

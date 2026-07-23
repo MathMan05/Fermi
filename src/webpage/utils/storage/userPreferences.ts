@@ -34,6 +34,8 @@ export class UserPreferences {
 	theme: ThemeOption = ThemeOption.Dark;
 	accentColor: string = "#5865F2";
 	emojiFont?: string;
+	checkMemberList = false;
+	gifProvidor?: string;
 
 	constructor(init?: Partial<UserPreferences>) {
 		Object.assign(this, init);

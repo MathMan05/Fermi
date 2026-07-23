@@ -401,6 +401,7 @@ class Message extends SnowFlake {
 	}
 
 	giveData(messagejson: messagejson) {
+		delete this.editContent;
 		const func = this.channel.infinite.snapBottom();
 		for (const thing of Object.keys(messagejson)) {
 			if (thing === "attachments") {
@@ -451,8 +452,8 @@ class Message extends SnowFlake {
 		if (messagejson.reactions?.length) {
 			console.log(messagejson.reactions, ":3");
 		}
-		if (messagejson.webhook) {
-			messagejson.author.webhook = messagejson.webhook;
+		if (messagejson.webhook_id) {
+			messagejson.author.webhook_id = messagejson.webhook_id;
 		}
 		if (messagejson.author.id) {
 			this.author = new User(messagejson.author, this.localuser, false);
@@ -596,10 +597,12 @@ class Message extends SnowFlake {
 	getUnixTime(): number {
 		return new Date(this.timestamp).getTime();
 	}
+	private editContent?: string;
 	async edit(content: string) {
 		if (content === this.content.textContent) {
 			return;
 		}
+		this.editContent = content;
 		return await fetch(this.info.api + "/channels/" + this.channel.id + "/messages/" + this.id, {
 			method: "PATCH",
 			headers: this.headers,
@@ -831,6 +834,7 @@ class Message extends SnowFlake {
 						}
 						func();
 					};
+					div.classList.add("blockedDiv");
 					div.appendChild(build);
 					return div;
 				}
@@ -955,7 +959,7 @@ class Message extends SnowFlake {
 				if (this.author.bot) {
 					const username = document.createElement("span");
 					username.classList.add("bot");
-					username.textContent = this.author.webhook ? I18n.webhook() : I18n.bot();
+					username.textContent = this.author.webhook_id ? I18n.webhook() : I18n.bot();
 					userwrap.appendChild(username);
 				}
 				const time = document.createElement("span");
@@ -1003,12 +1007,14 @@ class Message extends SnowFlake {
 				} catch {
 					area.contentEditable = "true";
 				}
-				const md = new MarkDown(this.content.rawString, this.owner, {keep: true});
+				const md = new MarkDown(this.editContent || this.content.rawString, this.owner, {
+					keep: true,
+				});
 				area.append(md.makeHTML());
 				area.addEventListener("keyup", (event) => {
 					if (this.localuser.keyup(event)) return;
 					if (event.key === "Enter" && !event.shiftKey) {
-						this.edit(md.rawString);
+						this.edit(MarkDown.gatherBoxText(area));
 						this.channel.editing = null;
 						this.generateMessage();
 					}
@@ -1394,7 +1400,7 @@ class Message extends SnowFlake {
 			const reactions = document.createElement("div");
 			reactions.classList.add("flexltr", "reactiondiv");
 			this.reactdiv = new WeakRef(reactions);
-			this.updateReactions();
+			this.updateReactions(false);
 			div.append(reactions);
 		}
 		if (this.ephemeral) {
@@ -1604,10 +1610,10 @@ class Message extends SnowFlake {
 		});
 		diaolog.show();
 	}
-	updateReactions() {
+	updateReactions(needsSnap = true) {
 		const reactdiv = this.reactdiv.deref();
 		if (!reactdiv) return;
-		const func = this.channel.infinite.snapBottom();
+		const func = needsSnap && this.channel.infinite.snapBottom();
 		reactdiv.innerHTML = "";
 		for (const thing of this.reactions) {
 			const reaction = document.createElement("div");
@@ -1667,7 +1673,7 @@ class Message extends SnowFlake {
 				this.reactionToggle(new Emoji(thing.emoji, this.guild));
 			};
 		}
-		func();
+		if (func) func();
 	}
 	reactionAdd(data: {name: string; id?: string}, member: Member | {id: string}) {
 		for (const thing of this.reactions) {

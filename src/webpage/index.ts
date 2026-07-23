@@ -270,6 +270,7 @@ if (window.location.pathname.startsWith("/channels")) {
 				thisUser.focusChannel.replyingto = null;
 				thisUser.focusChannel.makereplybox();
 			}
+			thisUser?.updateSend();
 			return;
 		}
 		if (thisUser?.handleKeyUp(event)) {
@@ -361,11 +362,14 @@ if (window.location.pathname.startsWith("/channels")) {
 		for (const file of Array.from(e.clipboardData.files)) {
 			const fileInstance = File.initFromBlob(file);
 			e.preventDefault();
-			const html = fileInstance.upHTML(images, imagesHtml, file);
+			const html = fileInstance.upHTML(images, imagesHtml, file, () => {
+				thisUser?.updateSend();
+			});
 			pasteImageElement.appendChild(html);
 			images.push(file);
 			imagesHtml.set(file, html);
 		}
+		thisUser?.updateSend();
 	});
 
 	await setTheme();
@@ -435,11 +439,14 @@ if (window.location.pathname.startsWith("/channels")) {
 				console.log(data.files);
 				for (const file of Array.from(data.files)) {
 					const fileInstance = File.initFromBlob(file);
-					const html = fileInstance.upHTML(images, imagesHtml, file);
+					const html = fileInstance.upHTML(images, imagesHtml, file, () => {
+						thisUser?.updateSend();
+					});
 					pasteImageElement.appendChild(html);
 					images.push(file);
 					imagesHtml.set(file, html);
 				}
+				thisUser?.updateSend();
 			}
 		}
 	});
@@ -471,11 +478,14 @@ if (window.location.pathname.startsWith("/channels")) {
 			if (input.files) {
 				for (const file of Array.from(input.files)) {
 					const fileInstance = File.initFromBlob(file);
-					const html = fileInstance.upHTML(images, imagesHtml, file);
+					const html = fileInstance.upHTML(images, imagesHtml, file, () => {
+						thisUser?.updateSend();
+					});
 					pasteImageElement.appendChild(html);
 					images.push(file);
 					imagesHtml.set(file, html);
 				}
+				thisUser?.updateSend();
 			}
 		};
 	});

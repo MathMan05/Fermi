@@ -2,7 +2,7 @@ import {InstanceInfo, adduser, Specialuser} from "./utils/utils.js";
 import {I18n} from "./i18n.js";
 import {Dialog, FormError} from "./settings.js";
 import {makeRegister} from "./register.js";
-import {trimTrailingSlashes} from "./utils/netUtils";
+import {safeGoBackLink, trimTrailingSlashes} from "./utils/netUtils";
 function generateRecArea(recover = document.getElementById("recover")) {
 	if (!recover) return;
 	recover.innerHTML = "";
@@ -81,11 +81,7 @@ export async function makeLogin(
 					return;
 				}
 				const redir = new URLSearchParams(window.location.search).get("goback");
-				if (redir && (!URL.canParse(redir) || new URL(redir).host === window.location.host)) {
-					window.location.href = redir;
-				} else {
-					window.location.href = "/channels/@me";
-				}
+				window.location.href = safeGoBackLink(redir);
 			} else {
 				//@ts-ignore
 				//TODO just type this to get rid of the ignore :P

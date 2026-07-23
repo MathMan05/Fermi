@@ -4,6 +4,7 @@
 			"Aquasen",
 			"Asteralee",
 			"Bananax47",
+			"Cice",
 			"Codeurluce",
 			"Crowwhailord",
 			"Derugon",
@@ -29,9 +30,9 @@
 	},
 	"2faCode": "Code A2F :",
 	"404": {
-		"404": "erreur:404 - Page introuvable",
+		"404": "erreur 404 - Page introuvable",
 		"app": "Vers l'application",
-		"blog": "Le blog de Fermi",
+		"blog": "Le blogue de Fermi",
 		"home": "Page d'accueil",
 		"listtitle": "Tu voulais peut-être aller dans un de ces endroits",
 		"login": "Se connecter",
@@ -44,17 +45,17 @@
 	"onboarding": {
 		"name": "Introduction",
 		"disable": "Désactiver l'introduction",
-		"addChannel": "Ajouter un canal",
-		"channel": "Canal :",
+		"addChannel": "Ajouter une chaîne",
+		"channel": "Chaîne :",
 		"desc": "Description :",
-		"deleteChannel": "Supprimer le canal de l'introduction",
+		"deleteChannel": "Supprimer la chaîne d'introduction",
 		"enable": "Activer l'introduction",
 		"title": "Bienvenue sur $1 !"
 	},
 	"DMs": {
-		"add": "Ajouter une personne à ce MP",
-		"close": "Fermer le MP",
-		"copyId": "Copier l'identifiant du MP",
+		"add": "Ajouter quelqu'un à la discussion privée (MP)",
+		"close": "Fermer la discussion par messages privés",
+		"copyId": "Copier l'identifiant du la discussion par MP",
 		"markRead": "Marquer comme lu",
 		"name": "Messages privés"
 	},
@@ -62,21 +63,21 @@
 	"dismiss": "Ignorer",
 	"UrlGen": "Générateur d'invitations de bot",
 	"Voice": {
-		"userVol": "Volume d'utilisateurs :",
+		"userVol": "Volume de l'utilisateur :",
 		"status": {
-			"badWS": "Réponse incorrecte du WS",
+			"badWS": "Réponse incorrecte du WebSocket",
 			"conectionFailed": "La connexion a échoué",
 			"done": "Connecté",
 			"left": "A quitté le chat vocal",
 			"makingOffer": "Appel en cours de configuration",
-			"noSDP": "SDP introuvable",
+			"noSDP": "la SessionDescriptionProtocol (SDP) est introuvable",
 			"notconnected": "Non connecté",
 			"sendingStreams": "Envoi des flux audio",
-			"startingRTC": "Démarrage de la connexion RTC",
-			"waitingMainWS": "En attente du WS principal",
-			"waitingURL": "En attente du lien du vocal",
-			"wsAuth": "En attente d'autorisation du WS",
-			"wsOpen": "En attente de l'ouverture du WS"
+			"startingRTC": "Démarrage de la connexion en temps réel (par RTC)",
+			"waitingMainWS": "En attente du WebSocket principal",
+			"waitingURL": "En attente du lien URL du vocal",
+			"wsAuth": "En attente d'autorisation du WebSocket",
+			"wsOpen": "En attente de l'ouverture du WebSocket"
 		}
 	},
 	"accessibility": {
@@ -86,6 +87,8 @@
 			"never": "Jamais"
 		},
 		"name": "Accessibilité",
+		"visuals": "Visuels",
+		"animations": "Animations",
 		"playGif": "Jouer les GIFs :",
 		"playIcon": "Jouer les icônes animées :",
 		"roleColors": "Désactiver les couleurs des rôles :",
@@ -101,7 +104,7 @@
 	"badge": {
 		"active_developer": "Développeur actif",
 		"application_guild_subscription": "a Premium",
-		"automod": "utilise l'automod",
+		"automod": "utilise l'automod (modération automatique)",
 		"bot_commands": "prend en charge les commandes",
 		"bug_hunter_level_1": "Chasseur de bugs niveau 1",
 		"bug_hunter_level_2": "Chasseur de bugs niveau 2",
@@ -127,15 +130,15 @@
 		"staff": "Personnel de l'instance",
 		"verified_developer": "Développeur vérifié"
 	},
-	"bio": "Bio :",
+	"bio": "Biographie :",
 	"blankMessage": "Message vide",
 	"blog": {
-		"blog": "Blog",
-		"blogUpdates": "Actualités du blog :",
-		"desc": "Lisez ou abonnez-vous au blog pour rester informé des actualités de Fermi !",
-		"fermi": "Le blog sur Fermi",
+		"blog": "Blogue",
+		"blogUpdates": "Voir les actualités du blogue lors de l'ouverture de l'application :",
+		"desc": "Lisez ou abonnez-vous au blogue pour rester informé des actualités de Fermi !",
+		"fermi": "Le blogue sur Fermi",
 		"gotoPost": "Aller à la publication",
-		"wantUpdates": "Souhaiteriez-vous recevoir des actualités hebdomadaires du blog à propos de l'état de Fermi ?"
+		"wantUpdates": "Souhaiteriez-vous recevoir des actualités hebdomadaires du blogue à propos de l'état de Fermi ?"
 	},
 	"bot": "BOT",
 	"botGuilds": "Guildes où le bot est présent :",
@@ -144,44 +147,44 @@
 	"channel": {
 		"SlowmodeCool": "Temporisation du mode lent : $1",
 		"TimeOutCool": "Exclu jusqu'à : $1",
-		"allowIcons": "Autoriser les icônes de canal personnalisées",
+		"allowIcons": "Autoriser les icônes de chaîne personnalisées",
 		"announcement": "Annonces",
 		"copyId": "Copier l'id du canal",
 		"copyIdCat": "Copier l'id de la catégorie",
 		"createCatagory": "Créer une catégorie",
 		"createChannel": "Créer un canal",
 		"creating": "Création du canal",
-		"delete": "Supprimer le canal",
+		"delete": "Supprimer la chaîne",
 		"deleteCat": "Supprimer la catégorie",
 		"icon": "Icône :",
 		"makeInvite": "Créer une invitation",
 		"markRead": "Marquer comme lu",
 		"mute": "Rendre le canal muet",
-		"name": "Canal",
-		"name:": "Nom du canal :",
+		"name": "Chaîne",
+		"name:": "Nom de la Chaîne :",
 		"nsfw:": "Avertissement contenu mature :",
 		"permissions": "Permissions",
 		"selectCatName": "Nom de la catégorie",
-		"selectName": "Nom du canal",
-		"selectType": "Sélectionnez le type de canal",
+		"selectName": "Nom de la chaîne",
+		"selectType": "Sélectionnez le type de chaîne",
 		"settings": "Paramètres",
 		"settingsFor": "Paramètres de $1",
 		"slowmode": "Mode ralenti :",
 		"text": "Texte",
 		"timedOutUntil": "Exclu jusqu'à : $1",
 		"topic:": "Sujet :",
-		"typebox": "Chatter dans $1",
-		"unmute": "Rétablir les notifications du canal",
+		"typebox": "Envoyer un message dans $1",
+		"unmute": "Rétablir les notifications de la chaîne",
 		"voice": "Voix",
 		"deleteThread": "Supprimer le fil",
-		"hideThreads": "Masquer si inactif plus de",
+		"hideThreads": "Masquer après une période d'inactivité",
 		"forum": "Forum"
 	},
 	"threads": {
 		"leave": "Quitter le fil",
 		"join": "Rejoindre le fil",
 		"name": "Nom du fil :",
-		"editTags": "Modifier les tags"
+		"editTags": "Modifier les tags (étiquettes)"
 	},
 	"forum": {
 		"creorsear": "Créer ou rechercher une publication",
@@ -201,28 +204,28 @@
 				"old": "Plus ancien d'abord"
 			},
 			"tagMatch": {
-				"title": "Correspondance des tags",
-				"some": "Correspond à un tag ou plus",
-				"all": "Correspond à tous les tags"
+				"title": "Correspondance des tags (étiquettes)",
+				"some": "Correspond à un tag (étiquette) ou plus",
+				"all": "Correspond à tous les tags (étiquettes)"
 			},
 			"name": "Options de tri"
 		},
 		"errors": {
-			"tagsReq": "Tags requis",
+			"tagsReq": "les Tags (étiquettes) sont requis",
 			"requireText": "Le message ne peut pas être vide"
 		},
-		"allTags": "Tous les tags",
+		"allTags": "Tous les tags (étiquettes)",
 		"settings": {
-			"editTags": "Modifier les tags :",
-			"editTag": "Modifier le tag",
-			"tagName": "Nom du tag :",
-			"moderated": "Ne permettre qu'aux modérateurs de fil d'appliquer ce tag",
-			"addTag": "Ajouter un tag",
-			"delTag": "Supprimer un tag"
+			"editTags": "Modifier les tags (étiquettes) :",
+			"editTag": "Modifier le tag (étiquette)",
+			"tagName": "Nom du tag (étiquette) :",
+			"moderated": "Ne permettre qu'aux modérateurs de fil d'appliquer ce tag (étiquette)",
+			"addTag": "Ajouter un tag (étiquette)",
+			"delTag": "Supprimer un tag (étiquette)"
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Version du client : $1\n\n[Rejoignez la guilde officielle du client Fermi]($2/invite/USgYJo?instance=https%3A%2F%2Fspacebar.chat)\n\n[Contribuez à la traduction du client Fermi](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc) \n\n[Contribuez au client Fermi](https://github.com/MathMan05/Fermi)\n\n[Contribuez au serveur Spacebar (l'infrastructure derrière Fermi)](https://github.com/spacebarchat/server)\n\n[Lisez le blog](https://blog.fermi.chat/)\n\nDroits calculés : $3",
+	"clientDesc": "Version du client : $1\n\n[Rejoignez la guilde officielle d'Harmony](https://fermi.chat/invite/oPhe5g?instance=harmony)\n\n[Rejoignez la guilde officielle du client Fermi](https://fermi.chat/invite/j5HdFM?instance=Harmony)\n\n[Contribuez à la traduction du client Fermi](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc) \n\n[Contribuez au client Fermi](https://codeberg.org/MelodyChat/Fermi)\n\n[Contribuez à l'instance d'Harmony (l'infrastructure derrière le client Fermi)](https://codeberg.org/MelodyChat/Harmony)\n\n[Lisez le blog](https://blog.fermi.chat/)\n\nDroits calculés : $3",
 	"commands": {
 		"errorNotValid": "$1 n'est pas un choix valide pour $2",
 		"required": "$1 est une partie requise de cette commande"
@@ -230,21 +233,22 @@
 	"confirmGuildLeave": "Êtes-vous sûr·e de vouloir quitter $1",
 	"copyLink": "Copier le lien du message",
 	"copyRegLink": "Copier le lien",
-	"copymessageid": "Copier l'id du message",
+	"copymessageid": "Copier l'identifiant du message",
 	"copyrawtext": "Copier le texte brut",
 	"createAccount": "Créer un compte",
 	"delete": "Supprimer",
 	"deleteConfirm": "Êtes-vous sûr·e de vouloir supprimer ceci ?",
+	"deleteConfirmPoll": "Êtes-vous sûr{{GENDER:||e}} de vouloir clore le sondage prématurément ?",
 	"devSettings": {
 		"badUser": "Activer la journalisation des objets utilisateur incorrects qui envoient trop d’informations :",
 		"cache": "Activer les fichiers de mapping du cache du Service Worker",
 		"cacheDesc": "les fichiers de mapping seront toujours chargés, cela s'assurera juste qu'ils sont en cache quand une nouvelle mise à jour est disponible.",
 		"captureTrace": "Cette option indique à Fermi de capturer les propriétés _trace depuis le serveur. Son activation peut empêcher le décodage progressif du JSON de fonctionner (un rechargement peut être nécessaire).",
 		"clearWellKnowns": "Re-charger les enregistrements .well-known",
-		"description": "Ces paramètres sont destinés aux développeurs de Spacebar/Fermi. Si vous ne savez pas ce que vous faites, ne les modifiez pas.",
-		"gatewayComp": "Désactiver la compression de la passerelle",
-		"reportSystem": "Activer le système de rapport expérimental",
-		"logGateway": "Journaliser les événements reçus par la passerelle (niveau de log : info)",
+		"description": "Ces paramètres sont destinés aux développeurs de Harmony/Fermi. Si vous ne savez pas ce que vous faites, ne les modifiez pas.",
+		"gatewayComp": "Désactiver la compression par passerelle (Gateway Compression)",
+		"reportSystem": "Activer le système de signalement expérimental",
+		"logGateway": "Journaliser les événements reçus depuis la passerelle (niveau de log : info)",
 		"name": "Paramètres développeur",
 		"traces": "Affichage des traces :"
 	},
@@ -252,7 +256,7 @@
 		"city": "Ville : $1",
 		"continent": "Continent : $1",
 		"country": "Pays : $1",
-		"curSes": "Ceci est la session en cours, vous devez vous déconnecter via l'autre menu",
+		"curSes": "Il s'agit de la session en cours, vous devez vous déconnecter via l'autre menu",
 		"estimateWarn": "Avertissement : Toutes ces informations sont approximatives, elles peuvent donc être inexactes.",
 		"ip": "Dernière adresse IP connue : $1",
 		"last": "Dernière utilisation approximative : $1",
@@ -264,11 +268,11 @@
 		"region": "Région : $1",
 		"title": "Gérer les sessions"
 	},
-	"discovery": "Découverte",
+	"discovery": "Portail de Découverte (Discovery)",
 	"dms": "Messages privés",
 	"edit": "Modifier",
 	"emoji": {
-		"confirmDel": "Êtes-vous sûr de vouloir supprimer cet emoji ?",
+		"confirmDel": "Êtes-vous sûr de vouloir supprimer cet émoji ?",
 		"found": {
 			"not": "Cet émoji ne provient pas de vos guildes, rejoignez la guilde qui l'héberge pour pouvoir l'utiliser",
 			"other": "Cet emoji provient d'une de vos autres guildes.",
@@ -277,13 +281,14 @@
 		},
 		"from": "Cet émoji provient de",
 		"image:": "Image :",
-		"join": "Rejoindre cette guilde",
+		"join": "Rejoindre la guilde",
 		"name:": "Nom :",
 		"privateGuild": "Cette guilde est privée",
 		"title": "Émojis",
 		"upload": "Importer des émojis"
 	},
 	"emojiSelect": "Émoji :",
+	"gifProvidor": "forunisseur de GIFs :",
 	"errorReconnect": "Impossible de se connecter au serveur, nouvelle tentative dans **$1** secondes...",
 	"favoriteGifs": "GIFs favoris",
 	"folder": {
@@ -315,17 +320,17 @@
 		"removeFriend": "Supprimer cet ami"
 	},
 	"goThere": "Oui, allons-y",
-	"goThereTrust": "Oui & faire confiance à ce domaine désormais.",
+	"goThereTrust": "Oui et faire confiance à ce domaine désormais.",
 	"goingToURL": "Cet hyperlien vous envoie vers $1. Êtes-vous sûr·e de vouloir y aller ?",
 	"group": {
-		"createdm": "Créer un MP!",
-		"edit": "Modifier le chat de groupe",
+		"createdm": "Créer un discussion par MP!",
+		"edit": "Modifier la conversation de groupe",
 		"select": "Sélectionnez des amis"
 	},
 	"guild": {
 		"COMMUNITY": "Demander à rejoindre",
 		"disableInvites": "Désactiver les invitations :",
-		"DISCOVERABLE": "Découverte",
+		"DISCOVERABLE": "Visible depuis le Portail de Découverte des guildes publiques (Discovery)",
 		"INVITES_DISABLED": "Sur invitation uniquement",
 		"adminMenu": {
 			"changePerms": "Modifier les permissions pour rechercher",
@@ -340,8 +345,10 @@
 		"banReason": "Motif du bannissement : $1",
 		"bannedBy": "Banni par :",
 		"banner:": "Bannière :",
-		"bans": "Bans",
+		"bans": "Bannissements",
 		"boostMessage?": "Envoyer un message lorsque quelqu'un booste votre guilde !",
+		"banId": "Bannissement par identifiant",
+		"idSel": "Identifiant :",
 		"community": "Communauté",
 		"confirmDelete": "Voulez-vous vraiment supprimer $1 ?",
 		"confirmLeave": "Êtes-vous sûr·e de vouloir partir ?",
@@ -356,7 +363,7 @@
 		"description:": "Description :",
 		"disoveryTitle": "Découverte des guildes ($1 {{PLURAL:$1|élément|éléments}})",
 		"editingTemplate": "Modification de $1",
-		"emptytext": "Curieux, cette guilde n'a pas de canaux !?",
+		"emptytext": "Curieux, cette guilde n'a pas de chaînes (visibles) !?",
 		"emptytitle": "Endroit étrange",
 		"guilds": "Guildes",
 		"helpTips?": "Envoyez des conseils utiles à votre guilde !",
@@ -372,21 +379,21 @@
 		"mute": "Rendre la guilde muette",
 		"name:": "Nom :",
 		"nameNoMatch": "Les noms ne correspondent pas",
-		"noDelete": "Annuler",
+		"noDelete": "En faite Non (Annuler la suppression)",
 		"noLeave": "Annuler",
 		"none": "Aucune",
 		"notifications": "Notifications",
-		"onlyMentions": "Seulement les mentions",
+		"onlyMentions": "Seulement les mentions par @",
 		"overview": "Aperçu",
 		"region:": "Région :",
 		"roles": "Rôles",
-		"ruleId": "Canal des règles :",
+		"ruleId": "Chaîne des règlements :",
 		"selectnoti": "Sélectionner le type de notification",
 		"sendrandomwelcome?": "Envoyer un message aléatoire lorsque quelqu'un rejoint cette guilde :",
 		"serverName": "Nom de la guilde :",
 		"settings": "Paramètres",
 		"settingsFor": "Paramètres de $1",
-		"splash": "Bannière Découverte :",
+		"splash": "Bannière de Découverte :",
 		"stickWelcomeReact?": "Invitez les membres de votre guilde à réagir avec un autocollant lorsque quelqu'un la rejoint!",
 		"systemSelect:": "Canal de messages systèmes :",
 		"tempCreatedBy": "Modèle créé par :",
@@ -404,6 +411,20 @@
 		"yesDelete": "Oui, je suis sûr·e",
 		"yesLeave": "Oui, je suis sûr·e"
 	},
+	"donate": {
+		"title": "Moyens de faire un don",
+		"donate": "Faire un Don",
+		"desc": "En faisant un don à Fermi, vous contribuez à ça continuation dans le futur !",
+		"mdText": "[Faites un don aujourd'hui au client Fermi]($1)",
+		"lead": {
+			"title": "Soutenir les développeurs",
+			"desc": "Supportez les développeurs d'Harmony et de Fermi."
+		},
+		"host": {
+			"title": "Soutenez l'hôte",
+			"desc": "Soutenez l'hébergeuse de l'instance principale d'Harmony ! Elle contribue à orienter le futur du projet et examine une grande partie du code source d'Harmony. CashApp : $1"
+		}
+	},
 	"hideBlockedMessages": "Vous avez bloqué cet utilisateur, cliquez pour masquer ces messages.",
 	"home": {
 		"icon": "Icône de l’instance de $1",
@@ -414,8 +435,10 @@
 		"addBot": "Ajouter à la guilde",
 		"alreadyHave": "Vous avez déjà un compte ?",
 		"box3description": "Nous apprécierons toujours votre aide, que ce soit sous forme de rapports de bugs, de code ou même simplement en signalant des fautes de frappe.",
+		"box4description": "Aidez a maintenir Harmony, l'infrastructure derrière le client Fermi! Signalez les bogues/bugs, suggérez de nouvelles fonctionnalités ou participez à la rédaction de la documentation : toute aide est la bienvenue !",
 		"box3title": "Contribuer au client Fermi",
-		"compatableInstances": "Instances compatibles avec Spacebar :",
+		"box4title": "Contribuez à Harmony",
+		"compatableInstances": "Instances compatibles avec Harmony :",
 		"createAccount": "Créer un compte",
 		"dobField": "Date de naissance :",
 		"emailField": "E-mail :",
@@ -497,11 +520,15 @@
 	},
 	"jankInfo": "Informations du client",
 	"leaveGuild": "Quitter la guilde",
-	"leaving": "Vous quittez Spacebar",
+	"leaving": "Vous quittez Harmony",
 	"loaded": "Chargé",
 	"localuser": {
+		"security": "Sécurité",
+		"advanced": "Paramètres avancés",
+		"danger": "Attention ! Zone dangeureuse",
 		"2faCode:": "Code :",
 		"2faCodeGive": "Votre secret TOTP est : $1. Cela va génèrer un jeton A2F à 6 chiffres avec période d'expiration de 30 secondes.",
+		"2fa": "Paramètres de double authentification (2FA)",
 		"2faDisable": "Désactiver l'authentification à deux facteurs",
 		"2faEnable": "Activer l'authentification à deux facteurs",
 		"CheckUpdate": "Vérifier les mises à jour",
@@ -531,7 +558,7 @@
 		"connections": "Connexions",
 		"createApp": "Créer une application",
 		"customSound": "Son personnalisé",
-		"customStatusWarn": "Spacebar ne prend pas en charge l’affichage d’un statut personnalisé pour le moment. Même si le statut est accepté, le système ne l'affichera pas",
+		"customStatusWarn": "Harmony ne prend pas en charge l’affichage d’un statut personnalisé pour le moment. Même si le statut est accepté, le système ne l'affichera pas",
 		"deleteAccount": "Suppression du compte",
 		"deleteAccountButton": "Supprimer le compte",
 		"description": "Description :",
@@ -579,7 +606,8 @@
 		"trustedDesc": "Lorsque vous cliquez sur un lien provenant de ces domaines, ils ne vous demanderont ***pas*** l'autorisation d'ouvrir le lien, contrairement aux autres liens. N'accordez cette autorisation qu'aux sites de confiance.",
 		"updateSettings": "Paramètres de mise à jour",
 		"updatesYay": "Mises à jour disponibles !",
-		"userSettings": "Votre profil public"
+		"userSettings": "Votre profil public",
+		"general": "Général"
 	},
 	"login": {
 		"allGood": "OK",
@@ -658,7 +686,8 @@
 		"reactions": "Voir les réactions",
 		"reactionsTitle": "Réactions",
 		"retry": "Renvoyer le message",
-		"viewrest": "Afficher le reste"
+		"viewrest": "Afficher le reste",
+		"pollRes": "le sondage $1, $2 est désormais clos"
 	},
 	"report": {
 		"back": "Retour",
@@ -796,7 +825,8 @@
 		"mut": "Guildes en commun",
 		"mutFriends": "Amis en commun",
 		"permInfo": "Permissions",
-		"userInfo": "Informations sur l’utilisateur"
+		"userInfo": "Informations sur l’utilisateur",
+		"notes": "Notes d'utilisateur"
 	},
 	"profileColor": "Couleur du profil",
 	"pronouns": "Pronoms :",
@@ -810,10 +840,13 @@
 		"passwordError:": "Mot de passe : $1",
 		"register": "S’inscrire",
 		"tos": "Vous devez accepter les conditions d’utilisation",
-		"usernameError": "Nom d’utilisateur : $1"
+		"usernameError": "Nom d’utilisateur : $1",
+		"other": "Autre(s) instance(s)",
+		"instURL": "Adresse URL:"
 	},
 	"remove": "Supprimer",
-	"renderJoinAvatars": "Afficher l'avatar des nouveaux membres :",
+	"renderJoinAvatars": "Afficher l'avatar des nouveaux membres dans le message d'accueil :",
+	"checkBoxMemberList": "Utilisé une boîte à cocher pour la liste des membres :",
 	"reply": "Répondre",
 	"replyingTo": "En réponse à $1",
 	"retrying": "Nouvelle tentative...",
@@ -841,16 +874,27 @@
 		"roleFileIcon": "Icône de rôle :",
 		"roles": "Rôles"
 	},
+	"upload": "Téléverser les Fichiers",
+	"makePoll": "Créer un sondage",
 	"poll": {
 		"question": "Question :",
+		"answers": "Réponses :",
 		"newAnswer": "Nouvelle réponse",
+		"duration": "Durée :",
 		"durCount": {
 			"1": "1 heure",
+			"4": "4 heures",
+			"8": "8 heures",
 			"24": "24 heures",
-			"168": "7 jours"
+			"72": "3 jours",
+			"168": "7 jours",
+			"336": "14 jours"
 		},
 		"mult": "Autoriser plusieurs réponses :",
+		"expires": "Expire le : $1",
+		"tie": "Match nul !",
 		"winningAnswer": "Réponse gagnante : $1%",
+		"view": "Voir le Sondage",
 		"count": "$1 {{PLURAL:$1| vote|votes}} $2 %"
 	},
 	"search": {
@@ -860,7 +904,14 @@
 		"nofind": "Il semble qu'il n'y ait aucun message correspondant à votre recherche, essayez peut-être d'élargir votre recherche pour trouver ce que vous recherchez",
 		"old": "Ancien",
 		"page": "Page $1",
-		"search": "Rechercher"
+		"search": "Rechercher",
+		"settings": "Paramètres de recherche",
+		"before": "Avant :",
+		"after": "Après :",
+		"includensfw": "Inclus du contenu mature :",
+		"authors": "Auteurs :",
+		"mentions": "Mentionne :",
+		"channels": "Chaînes :"
 	},
 	"searchGifs": "Chercher sur $1",
 	"settings": {
@@ -900,8 +951,19 @@
 		"traces": "$1 ($2ms) $3"
 	},
 	"typing": "$2 {{PLURAL:$1|est|sont}} en train d'écrire",
-	"unableToConnect": "Impossible de se connecter au serveur Spacebar. Veuillez essayer de vous déconnecter et de vous reconnecter.",
+	"unableToConnect": "Impossible de se connecter au serveurs d'Harmony. Veuillez essayer de vous déconnecter et de vous reconnecter.",
 	"unableToPin": "Impossible d'épingler le message",
+	"sbWarns": {
+		"regi": "les instances de la plateforme Spacebar ne sont plus officiellement prises en charge par le client Fermi, bien qu'elle peut toujours fonctionner. Harmony est recommandé. Continuer ?",
+		"in": "les instances de la plateforme Spacebar ne sont plus officiellement prises en charge par le client Fermi, bien qu'elle peut toujours fonctionner. Harmony est recommandé. Ce message devrait s'afficher qu'une seule fois."
+	},
+	"connections": {
+		"since": "Membre depuis : $1",
+		"display": "Afficher sur le profil :",
+		"delete": "Supprimer la connexion",
+		"sure": "Êtes-vous sûr{{GENDER:||e}}",
+		"sureDesc": "Si vous supprimez cette connexion, vous ne pourrez pas revenir en arrière."
+	},
 	"unpinMessage": "Désépingler le message",
 	"updateAv": "Mises à jour disponibles",
 	"uploadBanner": "Importer une bannière :",

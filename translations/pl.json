@@ -347,7 +347,7 @@
 		"userField": "Nazwa użytkownika:",
 		"welcomeJank": "Witaj w Fermi"
 	},
-	"incorrectURLS": "## Ta instancja prawdopodobnie wysłała niepoprawne adresy URL.\n### Jeśli jesteś właścicielem instancji proszę zapoznaj się z [tym](https://docs.spacebar.chat/setup/server/) pod *Connecting from remote machines* aby rozwiązać problem.\n Czy chcesz aby Fermi automatycznie spróbował naprawić ten błąd, aby umożliwić Ci połączenie się z instancją?",
+	"incorrectURLS": "## Ta instancja prawdopodobnie wysłała niepoprawne linki.\n### Jeśli jesteś właścicielem instancji proszę zapoznaj się z [tym](https://docs.melodychat.org/setup/server/) pod *Connecting from remote machines* aby rozwiązać problem.\n Czy chcesz aby Fermi automatycznie spróbował naprawić ten błąd, aby umożliwić Ci połączenie się z instancją?",
 	"instInfo": "Informacje o instancji",
 	"instanceInfo": {
 		"contact": "Wyślij maila do administratorów instancji",

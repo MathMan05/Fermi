@@ -55,12 +55,16 @@ class Channel extends SnowFlake {
 	get lastreadmessageid() {
 		return this.lastreadmessageidint;
 	}
-	async getOverwrites(): Promise<[User | Role, Permissions][]> {
+	async getOverwrites(): Promise<[User | Role | {id: string}, Permissions][]> {
 		return await Promise.all(
 			[...this.permissionOverwriteMap].map(async ([id, p]) => {
 				const role = this.guild.roleids.get(id);
 				if (role) return [role, p] as const;
-				return [await this.localuser.getUser(id), p] as const;
+				try {
+					return [await this.localuser.getUser(id), p] as const;
+				} catch {
+					return [{id}, p] as const;
+				}
 			}),
 		);
 	}
@@ -230,11 +234,7 @@ class Channel extends SnowFlake {
 			},
 			{
 				visible: function () {
-					return (
-						this.hasPermission("MANAGE_CHANNELS") ||
-						this.owner_id === this.localuser.user.id ||
-						true
-					);
+					return this.hasPermission("MANAGE_CHANNELS") || this.owner_id === this.localuser.user.id;
 				},
 				icon: {
 					css: "svg-settings",
@@ -1553,6 +1553,7 @@ class Channel extends SnowFlake {
 			const buttons = options.addOptions("", {ltr: true});
 			buttons.addButtonInput("", "Yes", () => {
 				this.perminfo.nsfwOk = true;
+				this.localuser.focusChannel = undefined;
 				this.getHTML();
 			});
 			buttons.addButtonInput("", "No", () => {
@@ -1915,8 +1916,8 @@ class Channel extends SnowFlake {
 		};
 		this.voice.onconnect = () => {
 			if (!this.voice) return;
-			for (const [_, user] of this.voice.users) {
-				this.decorateLive(user);
+			for (const [id] of this.liveMap) {
+				this.decorateLive(id);
 			}
 		};
 		this.voice.onLeaveStream = (id) => {
@@ -1932,8 +1933,8 @@ class Channel extends SnowFlake {
 				this.purgeVid(id);
 			}
 			if (!this.voice) return;
-			for (const [_, user] of this.voice.users) {
-				this.decorateLive(user);
+			for (const [id] of this.liveMap) {
+				this.decorateLive(id);
 			}
 		};
 	}

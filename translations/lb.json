@@ -33,7 +33,8 @@
 		"gifSettings": {
 			"always": "Ëmmer",
 			"never": "Ni"
-		}
+		},
+		"animations": "Animatiounen"
 	},
 	"add": "Derbäisetzen",
 	"applications": {
@@ -210,7 +211,10 @@
 	},
 	"loaded": "Gelueden",
 	"localuser": {
+		"security": "Sécherheet",
+		"advanced": "Erweidert Astellungen",
 		"2faCode:": "Code:",
+		"2fa": "2FA-Astellungen",
 		"2faDisable": "2FA desaktivéieren",
 		"2faEnable": "2FA aktivéieren",
 		"CheckUpdate": "No Aktualiséierunge sichen",
@@ -229,7 +233,7 @@
 		"description": "Beschreiwung:",
 		"install": "Installéieren",
 		"installJank": "Fermi installéieren",
-		"language": "Sprooch:",
+		"language": "Sprooch",
 		"manageBot": "Bot geréieren",
 		"newEmail:": "Nei E-Mail",
 		"newPassword:": "Neit Passwuert:",
@@ -241,7 +245,8 @@
 		"status": "Status",
 		"trace": "Spueren",
 		"updateSettings": "Astellungen aktualiséieren",
-		"userSettings": "Äert ëffentlecht Profil"
+		"userSettings": "Äert ëffentlecht Profil",
+		"general": "Allgemeng"
 	},
 	"login": {
 		"login": "Aloggen",

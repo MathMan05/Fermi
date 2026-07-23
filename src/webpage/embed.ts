@@ -462,6 +462,7 @@ class Embed {
 				img.onclick = async () => {
 					if (this.json.video) {
 						const url = new URL(this.json.video.url);
+						if (!(url.protocol === "http:" || url.protocol === "https:")) return;
 						if (url.host !== "youtube.com") return;
 						img.remove();
 						const iframe = document.createElement("iframe");

@@ -5,6 +5,7 @@ import {Guild} from "./guild.js";
 import {I18n} from "./i18n.js";
 import {Dialog} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
+import {highlight} from "./highlighter/index.js";
 const linkMenu = new Contextmenu<string, void>("copyLink", true);
 linkMenu.addButton(
 	() => I18n.copyRegLink(),
@@ -80,11 +81,25 @@ class MarkDown {
 			}
 			const span = document.createElement("span");
 			span.classList.add("md-emoji", "bigemojiUni");
-
-			const matched = str.match(/^((<a?:[A-Za-z\d_]*:\d*>|([^\da-zA-Z <>])) *){1,3}$/u);
-			if (matched) {
+			const seg = new Intl.Segmenter("en-US", {granularity: "grapheme"});
+			const matchReg = !!str.match(/^(((<a?:[A-Za-z\d_]*:\d*>|([^\da-zA-Z <>]+)) *))$/gu);
+			const matched = matchReg
+				? Array.from(str.matchAll(/((<a?:[A-Za-z\d_]*:\d*>|([^\da-zA-Z <>]+)) *)/gu) || []).flatMap(
+						(match) => {
+							if (match[0].match(/^<a?:[A-Za-z\d_]*:\d*>$/u)) {
+								return match[0];
+							} else if (match[0].match(/[^\da-zA-Z <>]+$/gu)) {
+								return seg.segment(match[0]);
+							} else if (match[0].match(/^\s*$/)) {
+								console.log(match);
+								return [];
+							} else return [..."aaaa"];
+						},
+					)
+				: [..."aaaa"];
+			if (matched.length <= 3) {
 				const map = [...str.matchAll(/<a?:[A-Za-z\d_]*:\d*>|[^\da-zA-Z <>]+/gu).map(([_]) => _)];
-				const seg = new Intl.Segmenter("en-US", {granularity: "grapheme"});
+
 				const invalid = map.find((str) => {
 					if (str.length > 10) return false;
 					if (Array.from(seg.segment(str)).length !== 1) return true;
@@ -310,6 +325,7 @@ class MarkDown {
 				let find = 0;
 				let j = i + count;
 				let init = true;
+				let lang = "";
 				for (; txt[j] !== undefined && (txt[j] !== "\n" || count === 3) && find !== count; j++) {
 					if (txt[j] === "`") {
 						find++;
@@ -322,6 +338,7 @@ class MarkDown {
 							if (txt[j] === " " || txt[j] === "\n") {
 								init = false;
 							}
+							lang += txt[j];
 							if (keep) {
 								build += txt[j];
 							}
@@ -353,6 +370,7 @@ class MarkDown {
 						}
 						pre.textContent = build;
 						span.appendChild(pre);
+						if (count === 3) highlight(pre, lang, keep ? 3 + lang.length : 0, keep ? 3 : 0);
 					}
 					i--;
 					continue;

@@ -181,7 +181,12 @@ class File {
 		const src = this.proxy_url || this.url;
 		return makePlayBox(src, player, 0, url);
 	}
-	upHTML(files: Blob[], map: WeakMap<Blob, HTMLElement>, file: globalThis.File): HTMLElement {
+	upHTML(
+		files: Blob[],
+		map: WeakMap<Blob, HTMLElement>,
+		file: globalThis.File,
+		onremove: () => void,
+	): HTMLElement {
 		const div = document.createElement("div");
 		let contained = this.getHTML(true, false, file.name.startsWith("SPOILER_"));
 		div.classList.add("containedFile");
@@ -196,6 +201,7 @@ class File {
 		garbage.onclick = (_) => {
 			div.remove();
 			files.splice(files.indexOf(file), 1);
+			onremove();
 		};
 
 		const spoiler = document.createElement("button");
