@@ -263,6 +263,20 @@ class DateInput extends TextInput {
 		super.onChange();
 	}
 }
+class ErrorBox implements OptionsElement<void> {
+	div = document.createElement("div");
+	value!: void;
+	generateHTML(): HTMLElement {
+		this.div.classList = "";
+		return this.div;
+	}
+	showError(message: string) {
+		this.div.classList.add("errormsg");
+		this.div.textContent = message;
+	}
+	submit() {}
+	watchForChange() {}
+}
 class SettingsMDText implements OptionsElement<void> {
 	readonly onSubmit!: (str: string) => void;
 	value!: void;
@@ -1614,6 +1628,12 @@ class Options implements OptionsElement<void> {
 		this.options.push(text);
 		this.generate(text);
 		return text;
+	}
+	addErrorBox() {
+		const box = new ErrorBox();
+		this.options.push(box);
+		this.generate(box);
+		return box;
 	}
 	addHR() {
 		const rule = new HorizontalRule();

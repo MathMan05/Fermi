@@ -1167,6 +1167,9 @@ class User extends SnowFlake {
 			case "steam": {
 				return `https://steamcommunity.com/profiles/${con.external_id}`;
 			}
+			case "domain": {
+				return `https://${con.external_id}`;
+			}
 		}
 	}
 	note?: string;

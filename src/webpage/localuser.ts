@@ -2501,9 +2501,11 @@ class Localuser {
 		};
 	}
 	async getConnections() {
-		return fetch(this.info.api + "/connections", {
+		const json = await fetch(this.info.api + "/connections", {
 			headers: this.headers,
 		}).then((r) => r.json() as Promise<{[key: string]: {enabled: boolean; icon_url?: string}}>);
+		json["domain"] = {enabled: true, icon_url: "/icons/domain.svg"};
+		return json;
 	}
 	gifProvideors: {name: string; api_name: string}[] = [];
 	selectedGifProfidor?: {name: string; api_name: string};
@@ -2529,6 +2531,44 @@ class Localuser {
 		const prefs = await getPreferences();
 		this.selectedGifProfidor =
 			this.gifProvideors.find((_) => _.api_name == prefs.gifProvidor) || this.gifProvideors[0];
+	}
+	domainVerification() {
+		const d = new Dialog(I18n.domain.title(), {noSubmit: true});
+		const text = d.options.addTextInput(I18n.domain.domain(), () => {});
+		d.options.addButtonInput("", I18n.submit(), async () => {
+			const dom = text.value;
+			d.options.removeAll();
+			console.log(dom);
+			const res = await fetch(this.info.api + "/users/@me/connections/domain/" + dom, {
+				method: "POST",
+				headers: this.headers,
+			});
+			if (res.ok) {
+				d.hide();
+			} else {
+				const json = (await res.json()) as {code?: number; message: string; proof: string};
+				if (json.code === 50187) {
+					const err = d.options.addErrorBox();
+					d.options.addMDText(new MarkDown(I18n.domain.dnsinst(dom, json.proof)));
+
+					d.options.addButtonInput("", I18n.submit(), async () => {
+						const dom = text.value;
+						const res = await fetch(this.info.api + "/users/@me/connections/domain/" + dom, {
+							method: "POST",
+							headers: this.headers,
+						});
+						if (res.ok) {
+							d.hide();
+						} else {
+							err.showError((await res.json()).message);
+						}
+					});
+				} else {
+					d.options.addText(json.message);
+				}
+			}
+		});
+		d.show();
 	}
 	async showusersettings() {
 		const prefs = await getPreferences();
@@ -2695,6 +2735,7 @@ class Localuser {
 						serverConnections
 							.filter((_) => !actConMap.has(_))
 							.forEach((key) => {
+								if (key === "domain") return;
 								const connection = json[key];
 
 								const container = document.createElement("div");
@@ -2725,6 +2766,21 @@ class Localuser {
 
 								connectionContainer.appendChild(container);
 							});
+						//TODO enable this once domain verification is ready within Harmony
+						if (false as true) {
+							const container = document.createElement("div");
+
+							const span = document.createElement("span");
+							span.classList.add("conImg", "svgicon");
+							span.style.setProperty("mask", `url("/icons/domain.svg")`);
+							container.append(span);
+
+							container.addEventListener("click", async () => {
+								this.domainVerification();
+							});
+
+							connectionContainer.appendChild(container);
+						}
 						serverConnections
 							.filter((_) => actConMap.has(_))
 							.forEach((_) => {

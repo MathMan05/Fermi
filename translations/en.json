@@ -988,6 +988,11 @@
 		"resolving": "resolving user",
 		"unknown": "@unknown-user"
 	},
+	"domain":{
+		"title":"Verify domain",
+		"domain":"Domain:",
+		"dnsinst":"1. Sign into your DNS provider\n\n2. Create a DNS record as follows:\n\nName:\n```\n_harmony.$1\n```\n\nType:\n```\nTXT\n```\n\nContent:\n```\n$2\n```\n\n-# It will likely take a few minutes for the DNS to propagate"
+	},
 	"vc": {
 		"joinForStream": "Join the voice channel to watch",
 		"joiningStream": "Joining stream...",

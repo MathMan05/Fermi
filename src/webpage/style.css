@@ -4120,6 +4120,7 @@ fieldset input[type="radio"] {
 	.SettingsButton {
 		width: auto;
 		border-radius: 3px 3px 1px 1px;
+		padding-right: 16px;
 	}
 }
 .reportMenu {
@@ -4363,6 +4364,12 @@ fieldset input[type="radio"] {
 	overflow: hidden;
 	flex-shrink: 0;
 }
+.errormsg {
+	background: #ff000038;
+	padding: 4px;
+	border-radius: 4px;
+	border: solid #ff54003b;
+}
 .permbox {
 	display: flex;
 	flex-wrap: wrap;
@@ -4434,7 +4441,7 @@ fieldset input[type="radio"] {
 	background: var(--primary-text);
 }
 .conProfImg {
-	margin-right: 4px;
+	margin-right: 12px;
 }
 .conProfDiv {
 	margin: 6px;
