@@ -1041,6 +1041,22 @@ class Message extends SnowFlake {
 				box.oncontextmenu = (e) => {
 					e.stopImmediatePropagation();
 				};
+				const [before, center, after] = I18n.editMode.editMsg("|||").split("|||");
+				const span = document.createElement("span");
+				const bs = document.createElement("span");
+				bs.textContent = before;
+
+				const exit = document.createElement("a");
+				exit.textContent = center;
+				exit.onclick = () => {
+					this.channel.editing = null;
+					this.generateMessage();
+				};
+
+				const asp = document.createElement("span");
+				asp.textContent = after;
+				span.append(bs, exit, asp);
+				box.append(span);
 			} else {
 				this.content.onUpdate = () => {};
 				const messaged = this.content.makeHTML();

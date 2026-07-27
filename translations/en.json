@@ -988,6 +988,9 @@
 		"resolving": "resolving user",
 		"unknown": "@unknown-user"
 	},
+	"editMode":{
+		"editMsg":"Escape to $1cancel$1"
+	},
 	"domain":{
 		"title":"Verify domain",
 		"domain":"Domain:",
