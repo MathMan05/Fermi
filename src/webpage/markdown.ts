@@ -14,6 +14,7 @@ linkMenu.addButton(
 	},
 	{group: "copyLink"},
 );
+const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
 class MarkDown {
 	static emoji?: typeof Emoji;
 	txt: string[];
@@ -973,7 +974,14 @@ class MarkDown {
 		}
 		appendcurrent();
 		const last = getCurLast();
-		if (last && last instanceof Text && last.textContent === "\n" && Error.prototype.stack === "") {
+
+		if (
+			last &&
+			last instanceof Text &&
+			last.textContent === "\n" &&
+			Error.prototype.stack === "" &&
+			!isFirefox
+		) {
 			span.append(current);
 		}
 		if (
@@ -1067,9 +1075,53 @@ class MarkDown {
 				MarkDown.gatherBoxText(box);
 			}
 		};
+		const insertText = (txt: string, trim = false) => {
+			const selection = window.getSelection() as Selection;
+			const rstr = selection.toString();
+			saveCaretPosition(box)?.();
+			gatherBoxContents(false);
+			const content = this.rawString;
+			if (content) {
+				let txti = text;
+				if (trim) {
+					txti = txti.replace(/\n$/, "");
+				}
+				const [_first, end] = content.split(txti);
+				console.log([txti, txt, end]);
+				if (rstr) {
+					const tw = text.split(rstr);
+					tw.pop();
+					text = tw.join("");
+				}
+				const boxText = txti + txt + (end ?? "");
+				box.textContent = boxText;
+				const len = txti.length + txt.length;
+				text = boxText;
+				this.txt = text.split("");
+
+				this.boxupdate(len, false, 0);
+				console.log(this.rawString);
+			} else {
+				box.textContent = txt;
+				text = txt;
+				this.txt = text.split("");
+				this.boxupdate(txt.length, false, 0);
+			}
+		};
+
 		box.onkeyup = (_) => {
 			if (_.isComposing) return;
 			gatherBoxContents(_.key === "Backspace");
+		};
+		box.onkeydown = (_) => {
+			if (isFirefox && _.key === "Enter" && !text.endsWith("\n")) {
+				_.preventDefault();
+				_.stopImmediatePropagation();
+
+				insertText("\n", true);
+
+				return;
+			}
 		};
 		box.addEventListener("compositionend", (_) => {
 			gatherBoxContents(false);
@@ -1082,35 +1134,12 @@ class MarkDown {
 				_.preventDefault();
 				return;
 			}
-			const selection = window.getSelection() as Selection;
 
 			if (types.includes("text/html")) {
 				const data = _.clipboardData.getData("text/html");
 				const html = new DOMParser().parseFromString(data, "text/html");
 				const txt = MarkDown.gatherBoxText(html.body);
-				console.log(txt);
-				const rstr = selection.toString();
-				saveCaretPosition(box)?.();
-				const content = this.textContent;
-				if (content) {
-					const [_first, end] = content.split(text);
-					if (rstr) {
-						const tw = text.split(rstr);
-						tw.pop();
-						text = tw.join("");
-					}
-					const boxText = text + txt + (end ?? "");
-					box.textContent = boxText;
-					const len = text.length + txt.length;
-					text = boxText;
-					this.txt = text.split("");
-					this.boxupdate(len, false, 0);
-				} else {
-					box.textContent = txt;
-					text = txt;
-					this.txt = text.split("");
-					this.boxupdate(txt.length, false, 0);
-				}
+				insertText(txt);
 				_.preventDefault();
 			} else if (types.includes("text/plain")) {
 				//Allow the paste like normal
