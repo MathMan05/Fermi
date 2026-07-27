@@ -998,6 +998,11 @@
 		"resolving": "正在解析用户",
 		"unknown": "@未知用户"
 	},
+	"domain": {
+		"title": "验证域名",
+		"domain": "域名：",
+		"dnsinst": "1. 在您的 DNS 供应商处登录\n\n2. 创建以下 DNS 记录：\n\n名称：\n```\n_harmony.$1\n```\n\n类型：\n```\nTXT\n```\n\n内容：\n```\n$2\n```\n\n-# DNS 传播可能需要几分钟时间"
+	},
 	"vc": {
 		"joinForStream": "加入语音频道以观看",
 		"joiningStream": "正在加入直播…",

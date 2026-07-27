@@ -692,6 +692,10 @@
 	"userping": {
 		"unknown": "@utente-sconosciuto"
 	},
+	"domain": {
+		"title": "Verifica dominio",
+		"domain": "Dominio:"
+	},
 	"webauth": {
 		"addKey": "Aggiungi chiave",
 		"keyname": "Nome chiave:",

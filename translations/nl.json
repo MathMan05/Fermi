@@ -990,6 +990,11 @@
 		"resolving": "gebruiken aan het opzoeken",
 		"unknown": "@onbekende-gebruiker"
 	},
+	"domain": {
+		"title": "Domein verifiëren",
+		"domain": "Domein:",
+		"dnsinst": "1. Meld an bij uw DNS-provider\n\n2. Maak een DNS-record aan als volgt:\n\nNaam:\n```\n_harmony.$1 \n```\n\nType:\n```\nTXT\n```\n\nInhoud:\n```\n$2 \n```\n\n-# Het duurt waarschijnlijk een paar minuten voordat de DNS-wijzigingen zijn doorgevoerd"
+	},
 	"vc": {
 		"joinForStream": "Word lid van het spraakkanaal om te kijken",
 		"joiningStream": "Verbinden met uitzending…",
