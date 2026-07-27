@@ -988,6 +988,11 @@
 		"resolving": "zisťuje sa používateľ",
 		"unknown": "@neznámy-používateľ"
 	},
+	"domain": {
+		"title": "Overiť doménu",
+		"domain": "Doména:",
+		"dnsinst": "1. Prihláste sa k svojmu poskytovateľovi DNS\n\n2. Vytvorte DNS záznam nasledovne:\n\nMeno:\n```\n_harmony. $1 \n```\n\nTyp:\n```\nTXT\n```\n\nObsah:\n```\n $2 \n```\n\n-# Rozšírenie DNS bude pravdepodobne trvať niekoľko minút"
+	},
 	"vc": {
 		"joinForStream": "Pripojte sa k hlasovému kanálu, aby ste mohli sledovať",
 		"joiningStream": "Pripája sa k vysielaniu...",

@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kanato Hinokuma",
 			"Miyakkon",
 			"Omotecho",
 			"RhAnish",
@@ -202,7 +203,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "クライアント バージョン: $1 \n\n[Fermiの公式ギルドに参加する](https://redir.fermi.chat/invite)\n\n[Fermiの翻訳に協力する](https://redir.fermi.chat/translate) \n\n[Fermiの開発に協力する](https://github.com/MathMan05/Fermi)\n\n[Fermiが依存するサーバーのメンテナンスに協力する](https://redir.fermi.chat/server)\n\n[ブログを読む](https://blog.fermi.chat/)\n\n推定された権限: $3",
+	"clientDesc": "クライアント バージョン: $1 \n\n[Fermiの公式ギルドに参加する](https://redir.fermi.chat/invite)\n\n[Fermiの翻訳に協力する](https://redir.fermi.chat/translate) \n\n[Fermiの開発に協力する](https://github.com/MathMan05/Fermi)\n\n[Fermiが依存するサーバーのメンテナンスに協力する](https://redir.fermi.chat/server)\n\n[ブログを読む](https://blog.fermi.chat/)\n\n算出された権限: $3",
 	"commands": {
 		"errorNotValid": "$1は$2に対する有効な選択肢ではありません",
 		"required": "$1はこのコマンドに必須の箇所です"
