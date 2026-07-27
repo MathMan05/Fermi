@@ -15,18 +15,33 @@
 	"multilineSlashComments": true
 },
 {
+	"names":["c++","cpp","hpp","cxx","hxx","h++"],
+	"keywords":["alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel", "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor", "bool", "break", "case", "catch", "char", "char8_t", "char16_t", "char32_t", "class", "compl", "concept", "const", "consteval", "constexpr", "constinit", "const_cast", "continue", "contract_assert", "co_await", "co_return", "co_yield", "decltype", "default", "delete", "do", "double", "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false", "float", "for", "friend", "goto", "if", "inline", "int", "long", "mutable", "namespace", "new", "noexcept", "not", "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected", "public", "reflexpr", "register", "reinterpret_cast", "requires", "return", "short", "signed", "sizeof", "static", "static_assert", "static_cast", "struct", "switch", "synchronized", "template", "this", "thread_local", "throw", "true", "try", "typedef", "typeid", "typename", "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq", "final", "override", "transaction_safe", "transaction_safe_dynamic", "import", "module", "pre", "post"],
+	"hashComments": true,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true
+},
+{
 	"names":["json"],
 	"keywords":["true","false","null"]
 },
 {
-	"names":["go"],
+	"names":["go", "golang"],
 	"keywords":["break","default","func","interface","select","case","defer","go","map","struct","chan","else","goto","package","switch","const","fallthrough","if","range","type","continue",  "for","import","return","var"],
 	"doubleSlashComments": true,
 	"multilineSlashComments": true
 },
 {
-    "names": ["cs", "csharp"],
+    "names": ["cs", "csharp", "c#"],
 	"keywords": ["abstract", "add", "alias", "allows", "and", "args", "as", "ascending", "async", "await", "base", "bool", "break", "by", "byte", "case", "catch", "char", "checked", "class", "closed", "const", "continue", "decimal", "default", "delegate", "descending", "do", "double", "dynamic", "else", "enum", "equals", "event", "explicit", "extension", "extern", "field", "file", "finally", "fixed", "float", "for", "foreach", "from", "get", "global", "goto", "group", "if", "implicit", "in", "init", "interface", "internal", "into", "is", "join", "let", "lock", "long", "managed", "nameof", "namespace", "new", "nint", "not", "notnull", "nuint", "null", "object", "on", "operator", "or", "orderby", "out", "override", "params", "partial", "private", "protected", "public", "readonly", "record", "ref", "remove", "required", "return", "safe", "sbyte", "scoped", "sealed", "select", "set", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "try", "typeof", "uint", "ulong", "unchecked", "unmanaged", "unsafe", "ushort", "using", "value", "var", "virtual", "void", "volatile", "when", "where", "while", "with", "yield", "true", "false"],
+	"firstLineShebang":true,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true,
+	"multiLine":"\"\"\""
+},
+{
+	"names": ["rs", "rust", "rustlang"],
+	"keywords": ["_", "as", "async", "await", "break", "const", "continue", "crate", "dyn", "else", "enum", "extern", "false", "fn", "for", "if", "impl", "in", "let", "loop", "match", "mod", "move", "mut", "pub", "ref", "return", "self", "Self", "static", "struct", "super", "trait", "true", "type", "unsafe", "use", "where", "while"],
 	"firstLineShebang":true,
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,
