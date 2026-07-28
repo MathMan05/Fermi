@@ -573,6 +573,7 @@ class Message extends SnowFlake {
 
 	mentionsuser(userd: User | Member) {
 		if (this.mention_everyone) return true;
+		if (this.id === "1531482863320101422") console.warn(this.mentions);
 		if (userd instanceof User) {
 			return !!this.mentions.has(userd.id);
 		} else if (userd instanceof Member) {
@@ -732,7 +733,7 @@ class Message extends SnowFlake {
 			premessage = this.channel.messages.get(this.channel.idToPrev.get(this.id) as string);
 		}
 		if (
-			this.mentionsuser(this.guild.member) ||
+			this.mentionsuser(this.localuser.user) ||
 			this.ephemeral ||
 			this.interaction?.user.id === this.localuser.user.id
 		) {
