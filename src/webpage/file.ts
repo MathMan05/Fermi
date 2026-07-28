@@ -151,7 +151,7 @@ class File {
 				return div;
 			}
 			return video;
-		} else if (this.content_type.startsWith("audio/")) {
+		} else if (this.content_type.startsWith("audio/") || this.content_type === "application/ogg") {
 			const a = this.getAudioHTML(url);
 			if (OSpoiler) {
 				a.append(makeSpoilerHTML());
