@@ -531,7 +531,7 @@ class Group extends Channel {
 		super.updateChannel(json);
 		this.owner_id = json.owner_id;
 		this.icon = json.icon;
-		this.makeIcon();
+		this.updateIcons();
 	}
 	defaultName() {
 		return this.users.map((_) => _.name).join(", ");
@@ -653,13 +653,26 @@ class Group extends Channel {
 			this.myhtml.remove();
 		}
 	}
-	groupDmDiv = new WeakRef(document.createElement("div"));
-	makeIcon(): HTMLElement {
+	updateIcons() {
+		for (const ref of this.groupDmDivs) {
+			const div = ref.deref();
+			if (!div) {
+				this.groupDmDivs.delete(ref);
+				continue;
+			}
+			this.makeIcon(div);
+		}
+	}
+	private groupDmDivs = new Set<WeakRef<HTMLDivElement>>();
+	makeIcon(div = document.createElement("div")): HTMLDivElement {
+		div.innerHTML = "";
+		div.classList = "";
 		if (this.type === 1) {
-			return this.users[0].buildstatuspfp(this);
+			div.append(this.users[0].buildstatuspfp(this));
+			return div;
 		} else {
-			const div = this.groupDmDiv.deref() || document.createElement("div");
-			div.innerHTML = "";
+			this.groupDmDivs.add(new WeakRef(div));
+
 			div.classList.add("groupDmDiv");
 			if (this.icon) {
 				const img = createImg(
