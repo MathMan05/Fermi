@@ -69,6 +69,7 @@ class Embed {
 			case "link":
 				return this.generateLink();
 			case "video":
+				return this.generateVideo();
 			case "article":
 				return this.generateArticle();
 			default:
@@ -420,6 +421,79 @@ class Embed {
 		})();
 		return div;
 	}
+	generateVideo() {
+		const videoUrl = this.json.video?.proxy_url || this.json.video?.url || (this.json.url && /\.(mp4|webm|mov|m4v|ogv)$/i.test(this.json.url) ? this.json.url : undefined);
+
+		if (!this.json.title && !this.json.description && !this.json.provider && videoUrl) {
+			const div = document.createElement("div");
+			div.classList.add("messageimgdiv");
+			const video = document.createElement("video");
+			video.controls = true;
+			video.preload = "metadata";
+			video.src = videoUrl;
+			video.classList.add("messageimg");
+			if (this.json.video?.width) {
+				let scale = 1;
+				const max = 96 * 3;
+				scale = Math.max(scale, this.json.video.width / max);
+				scale = Math.max(scale, (this.json.video.height || 360) / max);
+				const width = this.json.video.width / scale;
+				const height = (this.json.video.height || 360) / scale;
+				video.style.width = width + "px";
+				video.style.height = height + "px";
+			} else {
+				video.style.maxWidth = "400px";
+				video.style.maxHeight = "300px";
+			}
+			div.append(video);
+			return div;
+		}
+
+		const colordiv = document.createElement("div");
+		colordiv.style.backgroundColor = "#000000";
+		colordiv.classList.add("embed-color");
+
+		const div = document.createElement("div");
+		div.classList.add("embed");
+
+		if (this.json.provider) {
+			const provider = document.createElement("p");
+			provider.classList.add("provider");
+			provider.textContent = this.json.provider.name;
+			div.append(provider);
+		}
+		if (this.json.title) {
+			const a = document.createElement("a");
+			if (this.json.url) {
+				MarkDown.safeLink(a, this.json.url);
+			}
+			a.textContent = this.json.title;
+			a.classList.add("embedtitle");
+			div.append(a);
+		}
+		if (this.json.description) {
+			const description = document.createElement("p");
+			description.textContent = this.json.description;
+			div.append(description);
+		}
+
+		if (videoUrl) {
+			const video = document.createElement("video");
+			video.controls = true;
+			video.preload = "metadata";
+			video.src = videoUrl;
+			video.classList.add("bigembedimg");
+			div.append(video);
+		} else if (this.json.thumbnail) {
+			const img = document.createElement("img");
+			img.classList.add("bigembedimg");
+			img.src = this.json.thumbnail.proxy_url || this.json.thumbnail.url;
+			div.append(img);
+		}
+
+		colordiv.append(div);
+		return colordiv;
+	}
 	generateArticle() {
 		const colordiv = document.createElement("div");
 		colordiv.style.backgroundColor = "#000000";
@@ -433,10 +507,12 @@ class Embed {
 			provider.textContent = this.json.provider.name;
 			div.append(provider);
 		}
-		const a = document.createElement("a");
-		if (this.json.url && this.json.url) {
-			MarkDown.safeLink(a, this.json.url);
-			a.textContent = this.json.title || this.json.url;
+		if (this.json.title) {
+			const a = document.createElement("a");
+			if (this.json.url) {
+				MarkDown.safeLink(a, this.json.url);
+			}
+			a.textContent = this.json.title;
 			a.classList.add("embedtitle");
 			div.append(a);
 		}
