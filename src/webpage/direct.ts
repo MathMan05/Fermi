@@ -466,6 +466,30 @@ class Group extends Channel {
 				group: "dm",
 			},
 		);
+		this.groupcontextmenu.addButton(
+			() => I18n.channel.mute(),
+			function () {
+				this.muteChannel();
+			},
+			{
+				visible: function () {
+					return !this.muted && this.type !== 4;
+				},
+				group: "dm",
+			},
+		);
+		this.groupcontextmenu.addButton(
+			() => I18n.channel.unmute(),
+			function () {
+				this.unmuteChannel();
+			},
+			{
+				visible: function () {
+					return this.muted;
+				},
+				group: "dm",
+			},
+		);
 
 		this.groupcontextmenu.addSeperator(undefined, "dm");
 
