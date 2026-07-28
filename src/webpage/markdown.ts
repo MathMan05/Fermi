@@ -1129,7 +1129,6 @@ class MarkDown {
 		box.onpaste = (_) => {
 			if (!_.clipboardData) return;
 			const types = _.clipboardData.types;
-			console.log(types);
 			if (types.includes("Files")) {
 				_.preventDefault();
 				return;
