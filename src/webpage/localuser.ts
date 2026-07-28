@@ -3182,7 +3182,6 @@ class Localuser {
 		{
 			const shortcuts = settings.addButton(I18n.keyboard.shortcuts(), {contained: true});
 			const cur = getShortcuts();
-			console.log(Localuser.globalShortcuts);
 			for (const [name] of cur) {
 				shortcuts.addText(I18n.keyboard.descs[name]());
 				shortcuts.addHTMLArea(
