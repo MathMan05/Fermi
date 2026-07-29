@@ -464,6 +464,7 @@
 	"invite": {
 		"accept": "Accept",
 		"alreadyJoined": "Already joined",
+		"joining": "Joining...",
 		"channel:": "Channel:",
 		"createInvite": "Create invite",
 		"createdAt": "Created at $1",

@@ -398,6 +398,8 @@ class Embed {
 			div.append(button);
 			button.onclick = (_) => {
 				if (this.localuser.info.api.startsWith(info.api)) {
+					button.textContent = I18n.invite.joining();
+					button.disabled = true;
 					fetch(this.localuser.info.api + "/invites/" + json.code, {
 						method: "POST",
 						headers: this.localuser.headers,
@@ -406,6 +408,10 @@ class Embed {
 						.then((_) => {
 							if (_.message) {
 								alert(_.message);
+								button.textContent = I18n.invite.accept();
+								button.disabled = false;
+							} else {
+								button.textContent = I18n.invite.alreadyJoined();
 							}
 						});
 				} else {
