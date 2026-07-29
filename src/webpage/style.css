@@ -1071,10 +1071,11 @@ textarea {
 	right: 5px;
 	transition: top 0.2s;
 	transition-timing-function: ease-in;
+	mix-blend-mode: difference;
 	background: white;
 	cursor: pointer;
 	&.favorited {
-		background: yellow;
+		background: orange;
 	}
 }
 .visually-hidden {
