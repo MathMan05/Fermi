@@ -422,7 +422,12 @@ class Embed {
 		return div;
 	}
 	generateVideo() {
-		const videoUrl = this.json.video?.proxy_url || this.json.video?.url || (this.json.url && /\.(mp4|webm|mov|m4v|ogv)$/i.test(this.json.url) ? this.json.url : undefined);
+		const videoUrl =
+			this.json.video?.proxy_url ||
+			this.json.video?.url ||
+			(this.json.url && /\.(mp4|webm|mov|m4v|ogv)$/i.test(this.json.url)
+				? this.json.url
+				: undefined);
 
 		if (!this.json.title && !this.json.description && !this.json.provider && videoUrl) {
 			const div = document.createElement("div");
@@ -476,19 +481,67 @@ class Embed {
 			description.textContent = this.json.description;
 			div.append(description);
 		}
-
-		if (videoUrl) {
+		let width = 96 * 4 + "px",
+			height = 96 * 3 + "px";
+		if (this.json.thumbnail.width && this.json.thumbnail.height) {
+			let scale = 1;
+			const inch = 96;
+			scale = Math.max(scale, this.json.thumbnail.width / inch / 4);
+			scale = Math.max(scale, this.json.thumbnail.height / inch / 3);
+			this.json.thumbnail.width /= scale;
+			this.json.thumbnail.height /= scale;
+			this.json.thumbnail.width |= 0;
+			this.json.thumbnail.height |= 0;
+			width = this.json.thumbnail.width + "px";
+			height = this.json.thumbnail.height + "px";
+		}
+		const makeVideo = () => {
+			if (!videoUrl) return;
 			const video = document.createElement("video");
 			video.controls = true;
 			video.preload = "metadata";
 			video.src = videoUrl;
 			video.classList.add("bigembedimg");
-			div.append(video);
-		} else if (this.json.thumbnail) {
+			video.style.width = width;
+			video.style.height = height;
+
+			return video;
+		};
+		if (this.json.thumbnail) {
 			const img = document.createElement("img");
 			img.classList.add("bigembedimg");
 			img.src = this.json.thumbnail.proxy_url || this.json.thumbnail.url;
 			div.append(img);
+			img.style.maxWidth = width;
+			img.style.maxHeight = height;
+
+			img.onclick = async () => {
+				if (this.json.video) {
+					const url = new URL(this.json.video.url);
+					if (!(url.protocol === "http:" || url.protocol === "https:")) return;
+					img.remove();
+					if (
+						url.host !== "youtube.com" &&
+						url.host !== "youtu.be" &&
+						url.host !== "www.youtube.com"
+					) {
+						const vid = makeVideo();
+						if (vid) div.append(vid);
+						return;
+					}
+
+					const iframe = document.createElement("iframe");
+					iframe.src = this.json.video.url + "?autoplay=1";
+
+					iframe.style.width = width;
+					iframe.style.height = height;
+
+					div.append(iframe);
+				}
+			};
+		} else {
+			const vid = makeVideo();
+			if (vid) div.append(vid);
 		}
 
 		colordiv.append(div);
@@ -534,30 +587,14 @@ class Embed {
 				img.style.height = this.json.thumbnail.height + "px";
 			}
 			img.classList.add("bigembedimg");
-			if (this.json.video) {
-				img.onclick = async () => {
-					if (this.json.video) {
-						const url = new URL(this.json.video.url);
-						if (!(url.protocol === "http:" || url.protocol === "https:")) return;
-						if (url.host !== "youtube.com") return;
-						img.remove();
-						const iframe = document.createElement("iframe");
-						iframe.src = this.json.video.url + "?autoplay=1";
-						if (this.json.thumbnail.width && this.json.thumbnail.height) {
-							iframe.style.width = this.json.thumbnail.width + "px";
-							iframe.style.height = this.json.thumbnail.height + "px";
-						}
-						div.append(iframe);
-					}
-				};
-			} else {
-				img.onclick = async () => {
-					const full = new ImagesDisplay([
-						new File({id: "", filename: "", url: img.src, size: -1, content_type: "image/"}, null),
-					]);
-					full.show();
-				};
-			}
+
+			img.onclick = async () => {
+				const full = new ImagesDisplay([
+					new File({id: "", filename: "", url: img.src, size: -1, content_type: "image/"}, null),
+				]);
+				full.show();
+			};
+
 			img.src = this.json.thumbnail.proxy_url || this.json.thumbnail.url;
 			div.append(img);
 		}
