@@ -151,7 +151,7 @@
 		"text": "Text",
 		"timedOutUntil": "Timed out until: $1",
 		"topic:": "Topic:",
-		"typebox": "Message in $1",
+		"typebox": "Message in # $1",
 		"unmute": "Unmute channel",
 		"voice": "Voice",
 		"deleteThread":"Delete thread",
