@@ -29,6 +29,7 @@
 		"enable":"Enable onboarding",
 		"title":"Welcome to $1!"
 	},
+	"copyMedia":"Copy media URL",
 	"DMs": {
 		"add": "Add someone to this DM",
 		"close": "Close DM",
