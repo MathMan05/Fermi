@@ -1361,7 +1361,7 @@ class Message extends SnowFlake {
 						count.textContent = I18n.poll.count("" + c, per + "");
 						aarea.append(count);
 						if (per)
-							aarea.style.background = `linear-gradient(to right, var(--green) ${per}%, var(--bg) ${100 - per}%)`;
+							aarea.style.background = `linear-gradient(to right, var(--green) ${per}%, var(--bg) ${per}%)`;
 					}
 					aarea.onclick = () => check.click();
 					pollbody.append(aarea);
