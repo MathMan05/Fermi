@@ -32,7 +32,7 @@ let instances:
 	| null = null;
 await setTheme();
 export async function setTheme(theme?: string) {
-	const prefs = await getPreferences();
+	const prefs = getPreferences();
 	document.body.className = (theme || prefs.theme) + "-theme";
 	console.log(theme);
 }
@@ -87,9 +87,9 @@ export function setDefaults() {
 		userinfos.accent_color = "#3096f7";
 	}
 
-	getPreferences().then((perfs) =>
-		document.documentElement.style.setProperty("--accent-color", perfs.accentColor),
-	);
+	const perfs = getPreferences();
+	document.documentElement.style.setProperty("--accent-color", perfs.accentColor);
+
 	if (userinfos.preferences === undefined) {
 		userinfos.preferences = {
 			theme: "Dark",
@@ -749,14 +749,12 @@ export function createImg(
 	elm: HTMLElement | void,
 	type: "gif" | "icon" = "gif",
 ): safeImg {
-	const aniOpt = getPreferences().then((prefs) => {
-		return (
-			(type === "gif" ? prefs.animateGifs : prefs.animateIcons) ||
-			("hover" as "hover") ||
-			"always" ||
-			"never"
-		);
-	});
+	const prefs = getPreferences();
+	const aniOpt =
+		(type === "gif" ? prefs.animateGifs : prefs.animateIcons) ||
+		("hover" as "hover") ||
+		"always" ||
+		"never";
 	const img = document.createElement("img");
 	img.loading = "lazy";
 	img.decoding = "async";
@@ -769,11 +767,11 @@ export function createImg(
 			if (animated) {
 				img.crossOrigin = "anonymous";
 			}
-			img.src = (await aniOpt) !== "always" ? staticsrc || src || "" : src || "";
+			img.src = aniOpt !== "always" ? staticsrc || src || "" : src || "";
 		});
 	}
 	img.onload = async () => {
-		if ((await aniOpt) === "always") return;
+		if (aniOpt === "always") return;
 		if (!src) return;
 		if ((await isAnimated(src)) && !staticsrc) {
 			let s = staticImgMap.get(src);
@@ -797,13 +795,13 @@ export function createImg(
 		}
 	};
 	elm.addEventListener("mouseover", async () => {
-		if ((await aniOpt) === "never") return;
+		if (aniOpt === "never") return;
 		if (img.src !== src && src) {
 			img.src = src;
 		}
 	});
 	elm.addEventListener("mouseleave", async () => {
-		if (staticsrc && (await aniOpt) !== "always") {
+		if (staticsrc && aniOpt !== "always") {
 			img.src = staticsrc;
 		}
 	});
@@ -817,7 +815,7 @@ export function createImg(
 					if (animated) {
 						img.crossOrigin = "anonymous";
 					}
-					img.src = (await aniOpt) !== "always" ? staticsrc || src || "" : src || "";
+					img.src = aniOpt !== "always" ? staticsrc || src || "" : src || "";
 				});
 			}
 		},

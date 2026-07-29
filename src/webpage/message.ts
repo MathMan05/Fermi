@@ -27,6 +27,7 @@ import {Components} from "./interactions/compontents.js";
 import {ImagesDisplay} from "./disimg";
 import {ReportMenu} from "./reporting/report.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings.js";
+import {getPreferences} from "./utils/storage/userPreferences.js";
 class Message extends SnowFlake {
 	static contextmenu = new Contextmenu<Message, void>("message menu");
 	stickers!: Sticker[];
@@ -1773,13 +1774,14 @@ let now: string;
 let yesterdayStr: string;
 
 function formatTime(date: Date) {
+	const conf = getPreferences();
 	updateTimes();
 	const datestring = date.toLocaleDateString();
 	const formatTime = (date: Date) =>
 		date.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
 
 	if (datestring === now) {
-		return I18n.todayAt(formatTime(date));
+		return conf.showToday ? I18n.todayAt(formatTime(date)) : formatTime(date);
 	} else if (datestring === yesterdayStr) {
 		return I18n.yesterdayAt(formatTime(date));
 	} else {

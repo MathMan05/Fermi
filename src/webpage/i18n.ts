@@ -119,13 +119,12 @@ class I18n {
 	static options() {
 		return [...langmap.keys()].map((e) => e.replace(".json", ""));
 	}
-	static setLanguage(lang: string) {
+	static async setLanguage(lang: string) {
 		if (this.options().indexOf(lang) !== -1) {
-			getPreferences().then(async (prefs) => {
-				prefs.locale = lang;
-				await I18n.create(lang);
-				await setPreferences(prefs);
-			});
+			const prefs = getPreferences();
+			prefs.locale = lang;
+			await I18n.create(lang);
+			await setPreferences(prefs);
 		}
 	}
 }
@@ -134,7 +133,7 @@ let userLocale = navigator.language.slice(0, 2) || "en";
 if (I18n.options().indexOf(userLocale) === -1) {
 	userLocale = "en";
 }
-const prefs = await getPreferences();
+const prefs = getPreferences();
 const storage = prefs.locale;
 if (storage) {
 	userLocale = storage;

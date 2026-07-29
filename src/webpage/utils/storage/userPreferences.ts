@@ -36,13 +36,14 @@ export class UserPreferences {
 	emojiFont?: string;
 	checkMemberList = false;
 	gifProvidor?: string;
+	showToday = true;
 
 	constructor(init?: Partial<UserPreferences>) {
 		Object.assign(this, init);
 	}
 }
 
-export async function getPreferences(): Promise<UserPreferences> {
+export function getPreferences(): UserPreferences {
 	return new UserPreferences(JSON.parse(localStorage.getItem("userPreferences") || "{}"));
 }
 
