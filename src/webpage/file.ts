@@ -276,16 +276,15 @@ class File {
 	createunknown(url: Promise<string> | void): HTMLElement {
 		console.log("🗎");
 		const src = this.proxy_url || this.url;
-		const div = document.createElement("table");
-		div.classList.add("unknownfile");
-		const nametr = document.createElement("tr");
-		div.append(nametr);
+		const div = document.createElement("div");
+		div.classList.add("unknownfile", "flexltr");
 		const fileicon = document.createElement("td");
-		nametr.append(fileicon);
+		div.append(fileicon);
 		fileicon.append("🗎");
 		fileicon.classList.add("fileicon");
 		fileicon.rowSpan = 2;
-		const nametd = document.createElement("td");
+		const nametd = document.createElement("div");
+		nametd.classList.add("flexttb");
 		if (src) {
 			const a = document.createElement("a");
 			a.href = src;
@@ -300,7 +299,7 @@ class File {
 		}
 
 		nametd.classList.add("filename");
-		nametr.append(nametd);
+		div.append(nametd);
 		const sizetr = document.createElement("tr");
 		const size = document.createElement("td");
 		sizetr.append(size);
