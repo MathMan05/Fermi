@@ -1321,7 +1321,7 @@ class Message extends SnowFlake {
 				question.textContent = this.poll.question.text;
 				pollbody.append(question);
 				let ccount = [...r.values()].reduce((e, l) => e + +l.me_voted, 0);
-				if (this.poll.allow_multiselect) voted = !!ccount;
+				voted = !!ccount;
 				for (const a of this.poll.answers) {
 					const aarea = document.createElement("div");
 					aarea.classList.add("flexltr", "answerArea");
