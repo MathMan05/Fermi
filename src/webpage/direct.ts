@@ -747,6 +747,20 @@ class Group extends Channel {
 				const toggle = document.getElementById("maintoggle") as HTMLInputElement;
 				toggle.checked = true;
 			};
+			const isSingle = this.type === 1 && this.users[0];
+			Group.groupcontextmenu.bindContextmenu(
+				div,
+				this,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				!isSingle,
+			);
+			if (isSingle) {
+				User.contextmenu.bindContextmenu(div, this.users[0], undefined);
+			}
 		} else if (current) {
 			current.remove();
 		} else {
