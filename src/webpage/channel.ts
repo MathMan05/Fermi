@@ -3236,42 +3236,17 @@ class Channel extends SnowFlake {
 			this.parentId = undefined;
 		}
 
-		const oldover = this.permissionOverwriteMap;
-		this.permissionOverwriteMap.clear();
 		(json.permission_overwrites ?? []).forEach((r) => {
 			const p = new Permissions(r.allow, r.deny);
 			this.permissionOverwriteMap.set(r.id, p);
 		});
-		const nchange = new Set<string>(oldover.keys()).difference(this.permissionOverwriteMap);
-		const pchange = new Set<string>(this.permissionOverwriteMap.keys()).difference(oldover);
-		for (const thing of nchange) {
-			const role = this.guild.roleids.get(thing);
-			if (role) {
-				this.croleUpdate(role, new Permissions("0"), false);
-			} else {
-				const user = this.localuser.getUser(thing);
-				user.then((_) => {
-					if (_) this.croleUpdate(_, new Permissions("0"), false);
-				});
-			}
-		}
-		for (const thing of pchange) {
-			const role = this.guild.roleids.get(thing);
-			const perms = this.permissionOverwriteMap.get(thing);
-			if (role && perms) {
-				this.croleUpdate(role, perms, true);
-			} else if (perms) {
-				const user = this.localuser.getUser(thing);
-				user.then((_) => {
-					if (_) this.croleUpdate(_, perms, true);
-				});
-			}
-		}
+
+		this.croleUpdate();
 		this.topic = json.topic;
 		this.nsfw = json.nsfw;
 		this.fireEvents();
 	}
-	croleUpdate: (role: Role | User, perm: Permissions, added: boolean) => unknown = () => {};
+	croleUpdate: () => unknown = () => {};
 	typingstart() {
 		if (this.typing > Date.now()) {
 			return;

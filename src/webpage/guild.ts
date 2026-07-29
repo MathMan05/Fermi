@@ -554,6 +554,14 @@ class Guild extends SnowFlake {
 
 		dio.show();
 	}
+	regenRLPerms() {
+		this.sortRoles();
+		const permlist: [Role, Permissions][] = [];
+		for (const thing of this.roles) {
+			permlist.push([thing, thing.permissions]);
+		}
+		return permlist;
+	}
 	generateSettings() {
 		const settings = new Settings(I18n.guild.settingsFor(this.properties.name));
 		const textChannels = this.channels.filter((e) => {
@@ -697,10 +705,7 @@ class Guild extends SnowFlake {
 		this.makeInviteMenu(settings.addButton(I18n.invite.inviteMaker()), textChannels);
 		if (this.member.hasPermission("MANAGE_ROLES")) {
 			const s1 = settings.addButton(I18n.guild.roles(), {optName: ""});
-			const permlist: [Role, Permissions][] = [];
-			for (const thing of this.roles) {
-				permlist.push([thing, thing.permissions]);
-			}
+			const permlist = this.regenRLPerms();
 			s1.options.push(new RoleList(permlist, this, this.updateRolePermissions.bind(this), false));
 		}
 		if (this.member.hasPermission("MANAGE_GUILD_EXPRESSIONS")) {
