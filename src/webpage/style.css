@@ -187,6 +187,11 @@ body {
 	min-height: 0;
 	display: flex;
 }
+.shortCutSetting {
+	:last-child {
+		margin-left: 10px;
+	}
+}
 .pollRes {
 	padding-left: 50px;
 }

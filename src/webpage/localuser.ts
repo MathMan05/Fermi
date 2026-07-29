@@ -51,6 +51,8 @@ import {CDNParams} from "./utils/cdnParams.js";
 import {SnowFlake} from "./snowflake.js";
 import {trimTrailingSlashes} from "./utils/netUtils.js";
 import {Versions} from "./versions.js";
+import {Shortcut} from "./shortcuts/shortcut.js";
+import {getShortcuts, setShortcuts} from "./utils/storage/shortcuts.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
@@ -93,6 +95,7 @@ class Localuser {
 	readonly messages = new Map<string, Message>();
 	readonly idToPrev = new Map<string, string | undefined>();
 	readonly idToNext = new Map<string, string | undefined>();
+	static readonly globalShortcuts = new Shortcut();
 	get status() {
 		return this.user.status;
 	}
@@ -2570,6 +2573,15 @@ class Localuser {
 		});
 		d.show();
 	}
+	static initShortcuts() {
+		const cur = getShortcuts();
+		for (const [name, combo] of cur) {
+			this.globalShortcuts.registerKeycombo(combo, name);
+		}
+		this.globalShortcuts.registerShortcut("gifSearch", () => {
+			document.getElementById("gifTB")?.click();
+		});
+	}
 	async showusersettings() {
 		const prefs = await getPreferences();
 		const localSettings = getLocalSettings();
@@ -3166,6 +3178,24 @@ class Localuser {
 					MarkDown.safeLink(div, post.url);
 				}
 			})();
+		}
+		{
+			const shortcuts = settings.addButton(I18n.keyboard.shortcuts(), {contained: true});
+			const cur = getShortcuts();
+			for (const [name] of cur) {
+				shortcuts.addText(I18n.keyboard.descs[name]());
+				shortcuts.addHTMLArea(
+					Localuser.globalShortcuts.shortCutbutton(
+						name,
+						(short) => {
+							cur[name] = short;
+							setShortcuts(cur);
+							console.log(cur);
+						},
+						true,
+					),
+				);
+			}
 		}
 
 		const installP = installPGet();
@@ -5528,4 +5558,6 @@ class Localuser {
 		return userinfos.preferences.notisound;
 	}
 }
+Localuser.globalShortcuts.listen(document.body);
+Localuser.initShortcuts();
 export {Localuser};

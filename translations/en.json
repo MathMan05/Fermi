@@ -991,6 +991,13 @@
 	"editMode":{
 		"editMsg":"Escape to $1cancel$1"
 	},
+	"keyboard":{
+		"shortcuts":"Shortcuts",
+		"empty":"<No keybind set>",
+		"descs":{
+			"gifSearch":"Search GIFs:"
+		}
+	},
 	"domain":{
 		"title":"Verify domain",
 		"domain":"Domain:",
