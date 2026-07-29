@@ -1479,17 +1479,20 @@ class Guild extends SnowFlake {
 		this.emojis = json.emojis || [];
 		this.headers = this.owner.headers;
 		this.welcomeScreen = json.welcome_screen;
-		this.properties.features = json.features;
-		if (this.properties.icon !== json.icon) {
-			this.properties.icon = json.icon;
-			if (this.HTMLicon) {
-				const divy = this.generateGuildIcon();
-				this.HTMLicon.replaceWith(divy);
-				this.HTMLicon = divy;
+		if (this.properties)
+			if (this.properties.icon !== json.icon) {
+				this.properties.icon = json.icon;
+				if (this.HTMLicon) {
+					const divy = this.generateGuildIcon();
+					this.HTMLicon.replaceWith(divy);
+					this.HTMLicon = divy;
+				}
 			}
-		}
 		this.roleids.clear();
 		this.banner = json.banner;
+		this.welcomeScreen = json.welcome_screen;
+
+		this.properties = json;
 	}
 	constructor(json: guildjson | -1, owner: Localuser, member: memberjson | User | null) {
 		super(typeof json === "number" ? "@me" : json.id);
@@ -1500,20 +1503,14 @@ class Guild extends SnowFlake {
 		if (json === -1 || member === null) {
 			return;
 		}
-		if (json.stickers.length) {
-			console.log(json.stickers, ":3");
-		}
 
-		this.large = json.large;
+		this.update({...json.properties, large: json.large, emojis: json.emojis});
+
 		this.member_count = json.member_count;
-		this.emojis = json.emojis || [];
 		this.channels = [];
-		if (json.properties) {
-			this.properties = json.properties;
-		}
+
 		this.roles = [];
-		this.banner = json.properties.banner;
-		this.welcomeScreen = json.properties.welcome_screen;
+
 		if (json.roles) {
 			for (const roley of json.roles) {
 				const roleh = new Role(roley, this);
