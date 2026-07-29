@@ -36,6 +36,7 @@ class Permissions {
 	//private static info: { name: string; readableName: string; description: string }[];
 	static *info(): Generator<{name: string; readableName: string; description: string}> {
 		for (const thing of this.permisions) {
+			if (!thing) continue;
 			yield {
 				name: thing,
 				readableName: I18n.permissions.readableNames[thing](),
@@ -91,6 +92,8 @@ class Permissions {
 		"CREATE_EVENTS",
 		"USE_EXTERNAL_SOUNDS",
 		"SEND_VOICE_MESSAGES",
+		null, //TODO unused
+		"SET_VOICE_CHANNEL_STATUS",
 		"SEND_POLLS",
 		"USE_EXTERNAL_APPS",
 		"PIN_MESSAGES",

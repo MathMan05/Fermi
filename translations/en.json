@@ -740,7 +740,8 @@
 			"REQUEST_TO_SPEAK": "Allows role members to request to speak in stage channels.",
 			"USE_EMBEDDED_ACTIVITIES": "Allows role members to use embedded activities.",
 			"USE_APPLICATION_COMMANDS": "Allows role members to use application commands.",
-			"USE_EXTERNAL_APPS": "Allows role members to have application responses to show publicly in channel (When disabled, users will still be allowed to use their apps but responses will be visible only to themselves. This only applies to apps not also installed to the guild)."
+			"USE_EXTERNAL_APPS": "Allows role members to have application responses to show publicly in channel (When disabled, users will still be allowed to use their apps but responses will be visible only to themselves. This only applies to apps not also installed to the guild).",
+			"SET_VOICE_CHANNEL_STATUS":"Set voice channel status"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "Add reactions",
@@ -793,7 +794,8 @@
 			"VIEW_AUDIT_LOG": "View audit log",
 			"VIEW_CHANNEL": "View channels",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "View creator monetization analytics",
-			"VIEW_GUILD_INSIGHTS": "View guild insights"
+			"VIEW_GUILD_INSIGHTS": "View guild insights",
+			"SET_VOICE_CHANNEL_STATUS":"Set voice channel status"
 		}
 	},
 	"pinMessage": "Pin message",
