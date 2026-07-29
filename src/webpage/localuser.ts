@@ -2777,21 +2777,20 @@ class Localuser {
 
 								connectionContainer.appendChild(container);
 							});
-						//TODO enable this once domain verification is ready within Harmony
-						if (false as true) {
-							const container = document.createElement("div");
 
-							const span = document.createElement("span");
-							span.classList.add("conImg", "svgicon");
-							span.style.setProperty("mask", `url("/icons/domain.svg")`);
-							container.append(span);
+						const container = document.createElement("div");
 
-							container.addEventListener("click", async () => {
-								this.domainVerification();
-							});
+						const span = document.createElement("span");
+						span.classList.add("conImg", "svgicon");
+						span.style.setProperty("mask", `url("/icons/domain.svg")`);
+						container.append(span);
 
-							connectionContainer.appendChild(container);
-						}
+						container.addEventListener("click", async () => {
+							this.domainVerification();
+						});
+
+						connectionContainer.appendChild(container);
+
 						serverConnections
 							.filter((_) => actConMap.has(_))
 							.forEach((_) => {

@@ -464,7 +464,7 @@ if (window.location.pathname.startsWith("/channels")) {
 		},
 		{
 			//TODO re-enable this once polls is merged
-			visible: () => false, //!!thisUser.channelfocus?.hasPermission("SEND_POLLS"),
+			visible: () => !!thisUser?.focusChannel?.hasPermission("SEND_POLLS"),
 		},
 	);
 	umenu.addButton(I18n.upload(), () => {
