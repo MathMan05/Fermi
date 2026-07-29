@@ -1779,7 +1779,7 @@ function formatTime(date: Date) {
 		date.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
 
 	if (datestring === now) {
-		return I18n.todayAt(formatTime(date));
+		return formatTime(date);
 	} else if (datestring === yesterdayStr) {
 		return I18n.yesterdayAt(formatTime(date));
 	} else {
