@@ -29,7 +29,7 @@ type botjsonfetch = {
 		guild_id: null | string;
 		bot_public: boolean;
 		bot_require_code_grant: boolean;
-		verify_key: "IMPLEMENTME"; //no clue what this is meant to be :P
+		verify_key: string; //bot token
 		flags: number;
 	};
 	bot: {
