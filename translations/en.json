@@ -810,7 +810,7 @@
 		"bio": "About me:",
 		"joined": "Account made: $1",
 		"joinedMember": "Joined $1: $2",
-		"mut": "Mutual guilds",
+		"mut": "Mutual guilds ($1)",
 		"mutFriends": "Mutual friends",
 		"permInfo": "Permissions",
 		"userInfo": "User info",
