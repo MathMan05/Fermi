@@ -2073,10 +2073,13 @@ span.instanceStatus {
 	user-select: none;
 }
 .Banner {
-	height: 100px;
+	height: 8em;
 	align-items: start;
 	padding-top: 10px;
 	background-size: cover;
+	.ellipsis {
+		text-shadow: 0px 0px 8px black;
+	}
 }
 #serverName {
 	font-size: 1rem;
