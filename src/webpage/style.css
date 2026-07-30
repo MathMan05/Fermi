@@ -2560,6 +2560,9 @@ span.instanceStatus {
 	opacity: 0.5;
 	position: absolute;
 	cursor: text;
+	text-wrap: nowrap;
+	width: 100%;
+	overflow: hidden;
 }
 .outerTypeBox {
 	max-height: 50svh;
@@ -4336,7 +4339,8 @@ fieldset input[type="radio"] {
 .traceBars {
 	padding: 10px 0px;
 }
-.mutGuildBox, .mutFriends {
+.mutGuildBox,
+.mutFriends {
 	background: var(--primary-bg);
 	padding: 6px;
 	cursor: pointer;
