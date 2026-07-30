@@ -2058,7 +2058,10 @@ class Localuser {
 
 		menu.bindContextmenu(iconDiv);
 		if (folder.color !== null && folder.color !== undefined) {
-			folderDiv.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
+			folderDiv.style.setProperty(
+				"--folder-color",
+				"#" + folder.color.toString(16).padStart(6, "0"),
+			);
 			if (!folder.color && folder.color !== 0) folderDiv.style.removeProperty("--folder-color");
 		}
 		iconDiv.append(icon);
@@ -4695,7 +4698,7 @@ class Localuser {
 		maybe.sort((a, b) => b[0] - a[0]);
 		this.MDSearchOptions(
 			maybe.map((a) => {
-				return {name: "# " + a[1].name, replace: `<#${a[1].id}> `};
+				return {name: "# " + a[1].shortName, replace: `<#${a[1].id}> `};
 			}),
 			original,
 			box,
