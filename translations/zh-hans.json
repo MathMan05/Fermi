@@ -39,6 +39,7 @@
 		"enable": "启用入门",
 		"title": "欢迎来到$1！"
 	},
+	"copyMedia": "复制媒体 URL",
 	"DMs": {
 		"add": "将某人添加到此私信",
 		"close": "关闭私信",
@@ -160,7 +161,7 @@
 		"text": "文字",
 		"timedOutUntil": "超时至：$1",
 		"topic:": "主题：",
-		"typebox": "在$1的消息",
+		"typebox": "在 # $1 的消息",
 		"unmute": "取消静音频道",
 		"voice": "语音",
 		"deleteThread": "删除帖子",
@@ -473,6 +474,7 @@
 	"invite": {
 		"accept": "接受",
 		"alreadyJoined": "已加入",
+		"joining": "正在加入…",
 		"channel:": "频道：",
 		"createInvite": "创建邀请",
 		"createdAt": "创建于 $1",
@@ -748,7 +750,8 @@
 			"REQUEST_TO_SPEAK": "允许该身份组成员请求在表演频道发言。",
 			"USE_EMBEDDED_ACTIVITIES": "允许该身份组成员使用嵌入式活动。",
 			"USE_APPLICATION_COMMANDS": "允许该身份组成员使用应用程序命令。",
-			"USE_EXTERNAL_APPS": "允许该身份组成员以应用程序产生的回复在频道中公开显示（禁用此功能后，用户仍可使用其应用，但回复将仅他们自己可见。此功能仅适用于未安装到公会的应用程序）。"
+			"USE_EXTERNAL_APPS": "允许该身份组成员以应用程序产生的回复在频道中公开显示（禁用此功能后，用户仍可使用其应用，但回复将仅他们自己可见。此功能仅适用于未安装到公会的应用程序）。",
+			"SET_VOICE_CHANNEL_STATUS": "设置语音频道状态"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "添加反应",
@@ -801,7 +804,8 @@
 			"VIEW_AUDIT_LOG": "查看审计日志",
 			"VIEW_CHANNEL": "查看频道",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "查看创建者变现分析",
-			"VIEW_GUILD_INSIGHTS": "查看公会洞见"
+			"VIEW_GUILD_INSIGHTS": "查看公会洞见",
+			"SET_VOICE_CHANNEL_STATUS": "设置语音频道状态"
 		}
 	},
 	"pinMessage": "固定消息",
@@ -997,6 +1001,16 @@
 	"userping": {
 		"resolving": "正在解析用户",
 		"unknown": "@未知用户"
+	},
+	"editMode": {
+		"editMsg": "按下“Esc”以$1取消$1"
+	},
+	"keyboard": {
+		"shortcuts": "快捷键",
+		"empty": "<未设置键位绑定>",
+		"descs": {
+			"gifSearch": "搜索 GIF："
+		}
 	},
 	"domain": {
 		"title": "验证域名",

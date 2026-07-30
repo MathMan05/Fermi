@@ -988,6 +988,9 @@
 		"resolving": "zisťuje sa používateľ",
 		"unknown": "@neznámy-používateľ"
 	},
+	"editMode": {
+		"editMsg": "Escapovať na $1cancel$1"
+	},
 	"domain": {
 		"title": "Overiť doménu",
 		"domain": "Doména:",
