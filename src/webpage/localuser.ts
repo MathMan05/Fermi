@@ -2058,8 +2058,8 @@ class Localuser {
 
 		menu.bindContextmenu(iconDiv);
 		if (folder.color !== null && folder.color !== undefined) {
-			icon.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
-			if (!folder.color && folder.color !== 0) icon.style.removeProperty("--folder-color");
+			folderDiv.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
+			if (!folder.color && folder.color !== 0) folderDiv.style.removeProperty("--folder-color");
 		}
 		iconDiv.append(icon);
 		const divy = document.createElement("div");

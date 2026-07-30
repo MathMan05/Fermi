@@ -1953,14 +1953,13 @@ span.instanceStatus {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: var(--folder-bg);
 	border-radius: 16px;
 	margin: 2px;
 	margin-bottom: 8px;
 	cursor: pointer;
 }
 .folder-div {
-	background: color-mix(in srgb, var(--primary-text-soft), 70% transparent);
+	background: color-mix(in srgb, var(--folder-color, var(--accent-color)), 70% transparent);
 	padding: 3px;
 	margin: -3px;
 	border-radius: 16px;
