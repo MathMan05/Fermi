@@ -803,7 +803,7 @@ class User extends SnowFlake {
 	createWidget(guild?: Guild) {
 		guild = this.localuser.guilds.get("@me") as Guild;
 		const div = document.createElement("div");
-		div.classList.add("flexltr", "createdWebhook");
+		div.classList.add("mutFriends", "flexltr");
 		//TODO make sure this is something I can actually do here
 		const name = document.createElement("b");
 		name.textContent = this.name;
