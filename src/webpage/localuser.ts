@@ -4321,6 +4321,7 @@ class Localuser {
 				replyingto: this.focusChannel.replyingto,
 			});
 			this.focusChannel.replyingto = null;
+			this.focusChannel.makereplybox();
 		}
 	}
 
