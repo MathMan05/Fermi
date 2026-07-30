@@ -288,6 +288,8 @@ class File {
 		if (src) {
 			const a = document.createElement("a");
 			a.href = src;
+			a.target = "_blank";
+			a.rel = "noopener noreferrer";
 			if (url)
 				url.then((_) => {
 					a.href = _;
