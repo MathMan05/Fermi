@@ -14,8 +14,8 @@
 	--update: var(--green);
 }
 
-/* Themes. See themes.txt */
-.Dark-theme {
+/* Default theme that looks "just about grey" */
+.no-theme {
 	color-scheme: dark;
 	--primary-button-bg: color-mix(in srgb, #777777 10%, var(--accent-color));
 	--primary-bg: #303339;
@@ -36,26 +36,27 @@
 	--dock-bg: #1b1e20;
 	--card-bg: #000000;
 }
-/*TODO This is a copy of the dark theme, might want to look into other solutions*/
-.no-theme {
+
+/* Themes. See themes.txt */
+.Dark-theme {
 	color-scheme: dark;
 	--primary-button-bg: color-mix(in srgb, #777777 10%, var(--accent-color));
-	--primary-bg: #303339;
-	--primary-hover: #272b31;
+	--primary-bg: #060608;
+	--primary-hover: #18181b;
 	--primary-text: #dfdfdf;
 	--primary-text-soft: #adb8b9;
-	--secondary-bg: #16191b;
-	--secondary-hover: #252b2c;
-	--servers-bg: #191c1d;
-	--channels-bg: #2a2d33;
-	--channel-selected: #3c4046;
-	--typebox-bg: #3a3e45;
-	--button-bg: #4e5457;
-	--button-hover: #6b7174;
-	--spoiler-bg: #000000;
-	--link: #5ca9ed;
+	--secondary-bg: #060608;
+	--secondary-hover: #18181b;
+	--servers-bg: #000000;
+	--channels-bg: #060608;
+	--channel-selected: #1f1f20;
+	--typebox-bg: #101112;
+	--button-bg: #19191a;
+	--button-hover: #1f1f20;
+	--spoiler-bg: #1f1f20;
+	--link: #326be5;
 	--primary-text-prominent: #efefef;
-	--dock-bg: #1b1e20;
+	--dock-bg: #0a0b0c;
 	--card-bg: #000000;
 }
 
