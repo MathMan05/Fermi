@@ -19,19 +19,6 @@ body {
 		background: color-mix(in srgb, var(--green), 20% white);
 	}
 }
-.mutFriends {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-
-	.createdWebhook {
-		flex-grow: 1;
-		background: var(--primary-bg);
-		margin-bottom: 6px;
-		width: 100%;
-		box-sizing: border-box;
-	}
-}
 .createdWebhook {
 	display: flex;
 	align-items: center;
@@ -4345,12 +4332,11 @@ fieldset input[type="radio"] {
 .traceBars {
 	padding: 10px 0px;
 }
-.mutGuildBox {
+.mutGuildBox, .mutFriends {
 	background: var(--primary-bg);
 	padding: 6px;
 	cursor: pointer;
 	margin-top: 6px;
-
 	img {
 		width: 48px !important;
 		height: 48px !important;
