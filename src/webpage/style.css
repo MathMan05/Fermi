@@ -4458,6 +4458,7 @@ fieldset input[type="radio"] {
 }
 .conProfDiv {
 	margin: 6px;
+	align-items: center;
 }
 
 .disabled .conImg {
