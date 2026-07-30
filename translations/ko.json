@@ -34,6 +34,7 @@
 		"enable": "온보딩 활성화",
 		"title": "$1에 오신 것을 환영합니다!"
 	},
+	"copyMedia": "미디어 URL 복사",
 	"DMs": {
 		"add": "이 메시지에 누군가를 추가",
 		"close": "DM 닫기",
@@ -468,6 +469,7 @@
 	"invite": {
 		"accept": "수락",
 		"alreadyJoined": "이미 참여했습니다",
+		"joining": "가입하는 중...",
 		"channel:": "채널:",
 		"createInvite": "초대장 만들기",
 		"createdAt": "만든 날짜: $1",
@@ -992,6 +994,9 @@
 	"userping": {
 		"resolving": "사용자 해결 중",
 		"unknown": "@unknown-user"
+	},
+	"keyboard": {
+		"shortcuts": "단축키"
 	},
 	"vc": {
 		"joinForStream": "음성 채널에 참여해 시청",
