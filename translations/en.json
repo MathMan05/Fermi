@@ -130,6 +130,7 @@
 	"cancel": "Cancel",
 	"channel": {
 		"SlowmodeCool": "Slowmode cooldown: $1",
+		"copyURL":"Copy channel URL",
 		"TimeOutCool": "Timed out until: $1",
 		"allowIcons": "Allow custom channel icons",
 		"announcement": "Announcements",

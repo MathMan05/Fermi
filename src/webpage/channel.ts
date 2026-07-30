@@ -269,6 +269,17 @@ class Channel extends SnowFlake {
 		);
 
 		this.contextmenu.addSeperator();
+		this.contextmenu.addButton(
+			I18n.channel.copyURL(),
+			function (this: Channel) {
+				navigator.clipboard.writeText(`${location.origin}/channels/${this.guild.id}/${this.id}`);
+			},
+			{
+				visible: function () {
+					return this.type !== 4;
+				},
+			},
+		);
 		//TODO copy ID icon
 		this.contextmenu.addButton(
 			function () {
