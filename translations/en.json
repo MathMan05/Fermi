@@ -816,6 +816,7 @@
 		"userInfo": "User info",
 		"notes":"User notes"
 	},
+	"messageNotLoad":"Messages failed to load",
 	"profileColor": "Profile color",
 	"pronouns": "Pronouns:",
 	"readableName": "English",

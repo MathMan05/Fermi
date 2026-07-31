@@ -2791,7 +2791,15 @@ class Channel extends SnowFlake {
 		} else {
 			(document.getElementById("typebox") as HTMLDivElement).blur();
 		}
-		if (getMessages) await this.putmessages();
+		try {
+			if (getMessages) await this.putmessages();
+		} catch (e) {
+			if (e instanceof Error) {
+				const d = new Dialog(e.message);
+				d.show();
+			}
+			return;
+		}
 
 		await prom;
 		if (id !== Channel.genid) {
@@ -2938,11 +2946,20 @@ class Channel extends SnowFlake {
 		if (this.lastreadmessageid && this.messages.has(this.lastreadmessageid)) {
 			return;
 		}
-		const j = await fetch(this.info.api + "/channels/" + this.id + "/messages?limit=100", {
-			headers: this.headers,
-		});
+		let response: messagejson[] | undefined = undefined;
+		for (let i = 0; i < 5; i++) {
+			try {
+				const j = await fetch(this.info.api + "/channels/" + this.id + "/messages?limit=100", {
+					headers: this.headers,
+				});
 
-		const response = (await j.json()) as messagejson[];
+				response = (await j.json()) as messagejson[];
+				break;
+			} catch {
+				await new Promise((res) => setTimeout(res, 1000));
+			}
+		}
+		if (!response) throw new Error(I18n.messageNotLoad());
 		if (response.length !== 100) {
 			this.allthewayup = true;
 		}
