@@ -1598,6 +1598,12 @@ textarea {
 		display: none;
 	}
 }
+#filedroptext {
+	max-width: 75%;
+	max-height: 75vh;
+	padding: 8em 8em 8em 8em;
+	text-align: center;
+}
 .commandError {
 	position: absolute;
 	top: -36px;
