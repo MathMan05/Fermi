@@ -158,6 +158,7 @@ class File {
 			video.append(source);
 			//source.type = this.content_type;
 			video.controls = !temp;
+			video.preload = "metadata";
 
 			if (this.width) video.width = this.width;
 			if (this.height) video.height = this.height;

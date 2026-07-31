@@ -3154,8 +3154,10 @@ span .quote:last-of-type .quoteline {
 	gap: 4px;
 	flex-wrap: wrap;
 	video {
-		max-height: 288px;
-		max-width: 288px;
+		min-height: 200px;
+		min-width: 200px;
+		max-height: 25%;
+		max-width: 50%;
 	}
 }
 .embed {
