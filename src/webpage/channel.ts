@@ -44,6 +44,10 @@ class Channel extends SnowFlake {
 	owner: Guild;
 	headers: Localuser["headers"];
 	name!: string;
+	get shortName() {
+		if (this.name.length > 50) return this.name.slice(0, 50) + "...";
+		return this.name;
+	}
 	parentId?: string;
 	parent?: Channel;
 	children!: Channel[];
@@ -269,6 +273,17 @@ class Channel extends SnowFlake {
 		);
 
 		this.contextmenu.addSeperator();
+		this.contextmenu.addButton(
+			I18n.channel.copyURL(),
+			function (this: Channel) {
+				navigator.clipboard.writeText(`${location.origin}/channels/${this.guild.id}/${this.id}`);
+			},
+			{
+				visible: function () {
+					return this.type !== 4;
+				},
+			},
+		);
 		//TODO copy ID icon
 		this.contextmenu.addButton(
 			function () {
@@ -399,7 +414,7 @@ class Channel extends SnowFlake {
 		update();
 		const inviteOptions = new Dialog("", {noSubmit: true});
 		inviteOptions.options.addTitle(I18n.inviteOptions.title());
-		inviteOptions.options.addText(I18n.invite.subtext(this.name, this.guild.properties.name));
+		inviteOptions.options.addText(I18n.invite.subtext(this.shortName, this.guild.properties.name));
 
 		inviteOptions.options.addSelect(
 			I18n.invite.expireAfter(),
@@ -427,7 +442,7 @@ class Channel extends SnowFlake {
 		inviteOptions.show();
 	}
 	generateSettings() {
-		const settings = new Settings(I18n.channel.settingsFor(this.name));
+		const settings = new Settings(I18n.channel.settingsFor(this.shortName));
 		{
 			const gensettings = settings.addButton(I18n.channel.settings());
 			const form = gensettings.addForm("", () => {}, {
@@ -1052,7 +1067,7 @@ class Channel extends SnowFlake {
 
 			const myhtml = document.createElement("p2");
 			myhtml.classList.add("ellipsis");
-			myhtml.textContent = this.name;
+			myhtml.textContent = this.shortName;
 			this.nameSpan = new WeakRef(myhtml);
 			decdiv.appendChild(myhtml);
 			caps.appendChild(decdiv);
@@ -1119,7 +1134,7 @@ class Channel extends SnowFlake {
 			div.append(button);
 			const myhtml = document.createElement("span");
 			myhtml.classList.add("ellipsis");
-			myhtml.textContent = this.name;
+			myhtml.textContent = this.shortName;
 			this.nameSpan = new WeakRef(myhtml);
 			const decoration = this.renderIcon();
 			button.appendChild(decoration);
@@ -2017,7 +2032,7 @@ class Channel extends SnowFlake {
 		div.append(tags);
 
 		const title = document.createElement("h3");
-		title.textContent = new MarkDown(this.name).makeHTML().textContent;
+		title.textContent = new MarkDown(this.shortName).makeHTML().textContent;
 		div.append(title);
 
 		const member =
@@ -2617,7 +2632,10 @@ class Channel extends SnowFlake {
 		if (this.curCommand) {
 			this.curCommand.render(typebox, this);
 		}
-		typebox.style.setProperty("--channel-text", JSON.stringify(I18n.channel.typebox(this.name)));
+		typebox.style.setProperty(
+			"--channel-text",
+			JSON.stringify(I18n.channel.typebox(this.shortName)),
+		);
 		if (!this.curCommand && !this.isForum()) {
 			const md = typebox.markdown;
 			md.owner = this;
@@ -2670,7 +2688,7 @@ class Channel extends SnowFlake {
 				"/channels/" + this.guild.id + "/" + this.id + (aroundMessage ? `/${aroundMessage}` : ""),
 			);
 		}
-		this.localuser.pageTitle("#" + this.name);
+		this.localuser.pageTitle("#" + this.shortName);
 		const channelTopic = document.getElementById("channelTopic") as HTMLSpanElement;
 		if (this.topic) {
 			channelTopic.innerHTML = "";

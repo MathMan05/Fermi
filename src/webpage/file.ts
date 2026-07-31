@@ -288,6 +288,8 @@ class File {
 		if (src) {
 			const a = document.createElement("a");
 			a.href = src;
+			a.target = "_blank";
+			a.rel = "noopener noreferrer";
 			if (url)
 				url.then((_) => {
 					a.href = _;
@@ -309,11 +311,14 @@ class File {
 		return div;
 	}
 	static filesizehuman(fsize: number) {
-		const i = fsize == 0 ? 0 : Math.floor(Math.log(fsize) / Math.log(1024));
+		// These DO change between languages, for example in russian it uses cyrillic script
+		// also NOBODY is uploading TBs of files... seriously no
+		// And finally we are using SI units, so we go in thousands :)
+		const i = fsize == 0 ? 0 : Math.floor(Math.log(fsize) / Math.log(1000));
 		return (
-			Number((fsize / Math.pow(1024, i)).toFixed(2)) * 1 +
+			Number((fsize / Math.pow(1000, i)).toFixed(2)) * 1 +
 			" " +
-			["Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes"][i] // I don't think this changes across languages, correct me if I'm wrong
+			[I18n.filesize.B(), I18n.filesize.KB(), I18n.filesize.MB(), I18n.filesize.GB()][i]
 		);
 	}
 }

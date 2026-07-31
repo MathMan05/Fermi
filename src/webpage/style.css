@@ -1940,14 +1940,13 @@ span.instanceStatus {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: var(--folder-bg);
 	border-radius: 16px;
 	margin: 2px;
 	margin-bottom: 8px;
 	cursor: pointer;
 }
 .folder-div {
-	background: color-mix(in srgb, var(--primary-text-soft), 70% transparent);
+	background: color-mix(in srgb, var(--folder-color, var(--accent-color)), 70% transparent);
 	padding: 3px;
 	margin: -3px;
 	border-radius: 16px;
@@ -2073,10 +2072,13 @@ span.instanceStatus {
 	user-select: none;
 }
 .Banner {
-	height: 100px;
+	height: 8em;
 	align-items: start;
 	padding-top: 10px;
 	background-size: cover;
+	.ellipsis {
+		text-shadow: 0px 0px 8px black;
+	}
 }
 #serverName {
 	font-size: 1rem;
@@ -2558,6 +2560,9 @@ span.instanceStatus {
 	opacity: 0.5;
 	position: absolute;
 	cursor: text;
+	text-wrap: nowrap;
+	width: 100%;
+	overflow: hidden;
 }
 .outerTypeBox {
 	max-height: 50svh;
@@ -3479,15 +3484,17 @@ img.bigembedimg {
 	width: 300px;
 	max-height: 100svh;
 	background: var(--card-bg);
-	box-shadow:
-		0 0 8px var(--shadow),
-		inset 0 132px 64px var(--accent_color);
+	box-shadow: inset 0 0 300px 350px var(--accent_color);
+	opacity: 1;
 	border-radius: 8px;
 	overflow: hidden;
 	align-items: flex-start;
 	z-index: 3;
 	display: flex;
 	flex-direction: column;
+	.infosection {
+		background-color: color-mix(in srgb, var(--secondary-bg) 75%, transparent);
+	}
 	&:not(.hypoprofile) {
 		animation-duration: 0.2s;
 		animation-name: fade-in;
@@ -3500,7 +3507,7 @@ img.bigembedimg {
 		margin-bottom: 10px;
 		box-sizing: border-box;
 		padding: 10px;
-		background: var(--secondary-bg);
+		background-color: color-mix(in srgb, var(--secondary-bg) 75%, transparent);
 		border: none;
 		border-radius: 5px;
 		font-size: 14px;
@@ -4332,7 +4339,8 @@ fieldset input[type="radio"] {
 .traceBars {
 	padding: 10px 0px;
 }
-.mutGuildBox, .mutFriends {
+.mutGuildBox,
+.mutFriends {
 	background: var(--primary-bg);
 	padding: 6px;
 	cursor: pointer;

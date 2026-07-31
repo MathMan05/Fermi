@@ -13,6 +13,12 @@
 		"whatelse": "What else do you think should happen?",
 		"whereever": "Wherever this is"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"@metadata": {
 		"authors": ["MathMan05, TheGeekn°72"],
 		"comment": "Don't know how often I'll update this top part lol // Aye, I'll take care of it",
@@ -124,6 +130,7 @@
 	"cancel": "Cancel",
 	"channel": {
 		"SlowmodeCool": "Slowmode cooldown: $1",
+		"copyURL":"Copy channel URL",
 		"TimeOutCool": "Timed out until: $1",
 		"allowIcons": "Allow custom channel icons",
 		"announcement": "Announcements",
@@ -803,7 +810,7 @@
 		"bio": "About me:",
 		"joined": "Account made: $1",
 		"joinedMember": "Joined $1: $2",
-		"mut": "Mutual guilds",
+		"mut": "Mutual guilds ($1)",
 		"mutFriends": "Mutual friends",
 		"permInfo": "Permissions",
 		"userInfo": "User info",
