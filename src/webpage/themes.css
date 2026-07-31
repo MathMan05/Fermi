@@ -41,14 +41,14 @@
 .Dark-theme {
 	color-scheme: dark;
 	--primary-button-bg: color-mix(in srgb, #777777 10%, var(--accent-color));
-	--primary-bg: #060608;
+	--primary-bg: #040404;
 	--primary-hover: #18181b;
 	--primary-text: #dfdfdf;
 	--primary-text-soft: #adb8b9;
 	--secondary-bg: #060608;
 	--secondary-hover: #18181b;
 	--servers-bg: #000000;
-	--channels-bg: #060608;
+	--channels-bg: #0a0a0a;
 	--channel-selected: #1f1f20;
 	--typebox-bg: #101112;
 	--button-bg: #19191a;
