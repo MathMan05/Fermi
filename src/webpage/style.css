@@ -2458,7 +2458,7 @@ span.instanceStatus {
 	flex: 0;
 }
 #pasteimage {
-	height: 30%;
+	max-height: 30%;
 	padding: 12px;
 	margin: 16px;
 	background: var(--typebox-bg);
