@@ -3109,6 +3109,24 @@ span .quote:last-of-type .quoteline {
 .mentionMD:hover::before {
 	background: var(--mention);
 }
+
+.smallemoji {
+	height: auto;
+	width: auto;
+	max-height: 1.25em;
+	max-width: 1.25em;
+	vertical-align: middle;
+}
+.bigemoji {
+	width: 0.6in;
+	object-fit: contain;
+	height: 0.6in;
+	vertical-align: middle;
+}
+.bigemojiUni {
+	font-size: 47px;
+}
+
 .reactiondiv {
 	padding-left: 52px;
 	gap: 0 4px;
@@ -3116,7 +3134,8 @@ span .quote:last-of-type .quoteline {
 	user-select: none;
 }
 .reaction {
-	min-width: 30px;
+	min-width: 2em;
+	min-height: 2em;
 	padding: 3px 4px;
 	margin-top: 4px;
 	background: var(--reaction-bg);
@@ -3127,6 +3146,10 @@ span .quote:last-of-type .quoteline {
 	align-items: center;
 	cursor: pointer;
 	gap: 4px;
+	.smallemoji {
+		max-width: 1.5em;
+		max-height: 1.55em;
+	}
 }
 .reaction p {
 	line-height: 1em;
@@ -3137,12 +3160,6 @@ span .quote:last-of-type .quoteline {
 .reaction.meReacted {
 	background: var(--reaction-reacted-bg);
 	border-color: color-mix(in srgb, var(--accent-color), transparent);
-}
-.smallemoji {
-	height: auto;
-	width: auto;
-	max-height: 16px;
-	max-width: 16px;
 }
 
 /* Message External */
@@ -4921,14 +4938,6 @@ fieldset input[type="radio"] {
 .friendsbutton {
 	transition: background-color 0.2s;
 	padding: 0.08in;
-}
-.bigemoji {
-	width: 0.6in;
-	object-fit: contain;
-	height: 0.6in;
-}
-.bigemojiUni {
-	font-size: 47px;
 }
 .friendlyButton {
 	padding: 0.07in;
