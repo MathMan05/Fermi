@@ -39,6 +39,7 @@
 	"DMs": {
 		"add": "Add someone to this DM",
 		"close": "Close DM",
+		"copyURL":"Copy DM URL",
 		"copyId": "Copy DM id",
 		"markRead": "Mark as read",
 		"name": "Direct Messages"
