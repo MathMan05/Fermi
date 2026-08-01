@@ -1132,6 +1132,10 @@ textarea {
 	mask: url(./icons/pin.svg);
 	mask-size: cover;
 }
+.svg-link {
+	mask: url(./icons/link.svg);
+	mask-size: cover;
+}
 .svg-rules {
 	mask: url(./icons/rules.svg);
 	mask-size: cover;
