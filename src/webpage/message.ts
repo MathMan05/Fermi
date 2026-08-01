@@ -193,7 +193,9 @@ class Message extends SnowFlake {
 				);
 			},
 			{
-				//TODO make icon
+				icon: {
+					css: "svg-link",
+				},
 			},
 		);
 		Message.contextmenu.addButton(
