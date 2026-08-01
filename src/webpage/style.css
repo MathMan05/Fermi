@@ -2558,6 +2558,7 @@ span.instanceStatus {
 	flex-shrink: 1;
 	text-wrap: auto;
 	overflow-y: auto;
+	word-break: break-all;
 	margin-right: 0.03in;
 	padding: 10px 0;
 }
