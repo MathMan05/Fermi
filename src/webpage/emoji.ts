@@ -157,11 +157,11 @@ class Emoji {
 					guildText.classList.add("flexttb", "guildEmojiText");
 
 					const guildName = document.createElement("span");
-					guildName.id = "guildName";
+					guildName.classList.add("guildName");
 					guildName.textContent = lookup.guild.name;
 
 					const guildDesc = document.createElement("span");
-					guildDesc.id = "guildDesc";
+					guildDesc.classList.add("guildDesc");
 					const discoverable = lookup.guild.features.find((_) => _ === "DISCOVERABLE");
 					if (discoverable) {
 						if (lookup.guild.description) {
