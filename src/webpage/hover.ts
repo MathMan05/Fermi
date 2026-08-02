@@ -49,7 +49,7 @@ class Hover {
 				this.elm2 = await this.makeHover(elm);
 				Hover.bound = elm;
 				Hover.watchForGone();
-			}, 300);
+			}, 100);
 		});
 		elm.addEventListener("mouseout", () => {
 			clearTimeout(timeOut);

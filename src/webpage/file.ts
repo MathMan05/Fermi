@@ -158,6 +158,7 @@ class File {
 			video.append(source);
 			//source.type = this.content_type;
 			video.controls = !temp;
+			video.preload = "metadata";
 
 			if (this.width) video.width = this.width;
 			if (this.height) video.height = this.height;
@@ -276,19 +277,20 @@ class File {
 	createunknown(url: Promise<string> | void): HTMLElement {
 		console.log("🗎");
 		const src = this.proxy_url || this.url;
-		const div = document.createElement("table");
-		div.classList.add("unknownfile");
-		const nametr = document.createElement("tr");
-		div.append(nametr);
+		const div = document.createElement("div");
+		div.classList.add("unknownfile", "flexltr");
 		const fileicon = document.createElement("td");
-		nametr.append(fileicon);
+		div.append(fileicon);
 		fileicon.append("🗎");
 		fileicon.classList.add("fileicon");
 		fileicon.rowSpan = 2;
-		const nametd = document.createElement("td");
+		const nametd = document.createElement("div");
+		nametd.classList.add("flexttb");
 		if (src) {
 			const a = document.createElement("a");
 			a.href = src;
+			a.target = "_blank";
+			a.rel = "noopener noreferrer";
 			if (url)
 				url.then((_) => {
 					a.href = _;
@@ -300,7 +302,7 @@ class File {
 		}
 
 		nametd.classList.add("filename");
-		nametr.append(nametd);
+		div.append(nametd);
 		const sizetr = document.createElement("tr");
 		const size = document.createElement("td");
 		sizetr.append(size);
@@ -310,11 +312,14 @@ class File {
 		return div;
 	}
 	static filesizehuman(fsize: number) {
-		const i = fsize == 0 ? 0 : Math.floor(Math.log(fsize) / Math.log(1024));
+		// These DO change between languages, for example in russian it uses cyrillic script
+		// also NOBODY is uploading TBs of files... seriously no
+		// And finally we are using SI units, so we go in thousands :)
+		const i = fsize == 0 ? 0 : Math.floor(Math.log(fsize) / Math.log(1000));
 		return (
-			Number((fsize / Math.pow(1024, i)).toFixed(2)) * 1 +
+			Number((fsize / Math.pow(1000, i)).toFixed(2)) * 1 +
 			" " +
-			["Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes"][i] // I don't think this changes across languages, correct me if I'm wrong
+			[I18n.filesize.B(), I18n.filesize.KB(), I18n.filesize.MB(), I18n.filesize.GB()][i]
 		);
 	}
 }

@@ -283,28 +283,15 @@ class RoleList extends Buttons {
 			});
 		}
 		this.options = options;
-		guild.roleUpdate = this.groleUpdate.bind(this);
+		guild.roleUpdate = this.roleUpdate.bind(this);
 		if (channel) {
-			channel.croleUpdate = this.croleUpdate.bind(this);
+			channel.croleUpdate = this.roleUpdate.bind(this);
 		}
 	}
-	private groleUpdate(role: Role, added: 1 | 0 | -1) {
-		if (!this.channel) {
-			if (added === 1) {
-				this.permissions.push([role, role.permissions]);
-			}
-		}
-		if (added === -1) {
-			this.permissions = this.permissions.filter((r) => r[0] !== role);
-		}
-		this.redoButtons();
-	}
-	private croleUpdate(role: Role | User, perm: Permissions, added: boolean) {
-		if (added) {
-			this.permissions.push([role, perm]);
-		} else {
-			this.permissions = this.permissions.filter((r) => r[0] !== role);
-		}
+	private async roleUpdate() {
+		this.permissions = this.channel
+			? await this.channel.getOverwritesOrder()
+			: this.guild.regenRLPerms();
 		this.redoButtons();
 	}
 	makeguildmenus(option: Options) {
@@ -526,11 +513,6 @@ class RoleList extends Buttons {
 	}
 	redoButtons() {
 		this.buttons = [];
-		this.permissions.sort(([a], [b]) => {
-			if (b instanceof User || !(b instanceof Channel)) return 1;
-			if (a instanceof User || !(a instanceof Channel)) return -1;
-			return b.position - a.position;
-		});
 		for (const i of this.permissions) {
 			this.buttons.push({
 				name: "name" in i[0] ? i[0].name : I18n.userping.unknown(),

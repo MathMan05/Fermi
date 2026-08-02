@@ -1,6 +1,6 @@
 [
 {
-	"names":["js","ts","javascript"],
+	"names":["js","ts","typescript","javascript","tscript","jscript"],
 	"keywords": ["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do","else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "let", "await", "true", "false", "null", "undefined"],
 	"firstLineShebang": true,
 	"doubleSlashComments": true,
@@ -8,14 +8,14 @@
 	"JSLikeTemplateStrings": true
 },
 {
-	"names":["h","c","hc"],
+	"names":["h","c","hc","c23","c89","ansic","ansi-c","khr-c","khrc"],
 	"keywords":["auto", "break", "case", "char", "continue", "do", "default", "const", "double", "else", "enum", "extern", "for", "if", "goto", "float", "int", "long", "register", "return", "signed", "static", "sizeof", "short", "struct", "switch", "typedef", "union", "void", "while", "volatile", "unsigned"],
 	"hashComments": true,
 	"doubleSlashComments": true,
 	"multilineSlashComments": true
 },
 {
-	"names":["c++","cpp","hpp","cxx","hxx","h++"],
+	"names":["cplusplus","hplusplus","c++","cpp","hpp","cxx","hxx","h++"],
 	"keywords":["alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel", "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor", "bool", "break", "case", "catch", "char", "char8_t", "char16_t", "char32_t", "class", "compl", "concept", "const", "consteval", "constexpr", "constinit", "const_cast", "continue", "contract_assert", "co_await", "co_return", "co_yield", "decltype", "default", "delete", "do", "double", "dynamic_cast", "else", "enum", "explicit", "export", "extern", "false", "float", "for", "friend", "goto", "if", "inline", "int", "long", "mutable", "namespace", "new", "noexcept", "not", "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected", "public", "reflexpr", "register", "reinterpret_cast", "requires", "return", "short", "signed", "sizeof", "static", "static_assert", "static_cast", "struct", "switch", "synchronized", "template", "this", "thread_local", "throw", "true", "try", "typedef", "typeid", "typename", "union", "unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq", "final", "override", "transaction_safe", "transaction_safe_dynamic", "import", "module", "pre", "post"],
 	"hashComments": true,
 	"doubleSlashComments": true,
@@ -52,5 +52,38 @@
 	"keywords": ["False", "None", "True", "and", "as", "assert", "async", "await", "break", "class", "continue", "def", "del", "elif", "else", "except", "finally", "for", "from", "global", "if", "import", "in", "is", "lambda", "nonlocal", "not", "or", "pass", "raise", "return", "try", "while", "with", "yield"],
 	"hashComments": true,
 	"multiLine":"\"\"\""
-	}
+},
+{
+    "names": ["java", "jav", "jv"],
+	"keywords": ["abstract", "continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", "enum", "instanceof", "return", "transient", "catch", "extends", "int", "short", "try", "char", "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", "const", "float", "native", "super", "while"],
+	"firstLineShebang":true,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true,
+	"multiLine":"\"\"\""
+},
+{
+	"names": ["glsl","glslang","opengl","glslc"],
+	"keywords": ["const", "uniform", "buffer", "shared", "attribute", "varying", "coherent", "volatile", "restrict", "readonly", "writeonly", "atomic_uint", "layout", "centroid", "flat", "smooth", "noperspective", "patch", "sample", "invariant", "precise", "break", "continue", "do", "for", "while", "switch", "case", "default", "if", "else", "subroutine", "in", "out", "inout", "int", "void", "bool", "true", "false", "float", "double", "discard", "return", "vec2", "vec3", "vec4", "ivec2", "ivec3", "ivec4", "bvec2", "bvec3", "bvec4", "uint", "uvec2", "uvec3", "uvec4", "dvec2", "dvec3", "dvec4", "mat2", "mat3", "mat4", "mat2x2", "mat2x3", "mat2x4", "mat3x2", "mat3x3", "mat3x4", "mat4x2", "mat4x3", "mat4x4", "dmat2", "dmat3", "dmat4", "dmat2x2", "dmat2x3", "dmat2x4", "dmat3x2", "dmat3x3", "dmat3x4", "dmat4x2", "dmat4x3", "dmat4x4", "lowp", "mediump", "highp", "precision", "sampler1D", "sampler1DShadow", "sampler1DArray", "sampler1DArrayShadow", "isampler1D", "isampler1DArray", "usampler1D", "usampler1DArray", "sampler2D", "sampler2DShadow", "sampler2DArray", "sampler2DArrayShadow", "isampler2D", "isampler2DArray", "usampler2D", "usampler2DArray", "sampler2DRect", "sampler2DRectShadow", "isampler2DRect", "usampler2DRect", "sampler2DMS", "isampler2DMS", "usampler2DMS", "sampler2DMSArray", "isampler2DMSArray", "usampler2DMSArray", "sampler3D", "isampler3D", "usampler3D", "samplerCube", "samplerCubeShadow", "isamplerCube", "usamplerCube", "samplerCubeArray", "samplerCubeArrayShadow", "isamplerCubeArray", "usamplerCubeArray", "samplerBuffer", "isamplerBuffer", "usamplerBuffer", "image1D", "iimage1D", "uimage1D", "image1DArray", "iimage1DArray", "uimage1DArray", "image2D", "iimage2D", "uimage2D", "image2DArray", "iimage2DArray", "uimage2DArray", "image2DRect", "iimage2DRect", "uimage2DRect", "image2DMS", "iimage2DMS", "uimage2DMS", "image2DMSArray", "iimage2DMSArray", "uimage2DMSArray", "image3D", "iimage3D", "uimage3D", "imageCube", "iimageCube", "uimageCube", "imageCubeArray", "iimageCubeArray", "uimageCubeArray", "imageBuffer", "iimageBuffer", "uimageBuffer", "struct", "In", "addition,", "when", "targeting", "Vulkan,", "the", "following", "keywords", "also", "exist:", "texture1D", "texture1DArray", "itexture1D", "itexture1DArray", "utexture1D", "utexture1DArray", "texture2D", "texture2DArray", "itexture2D", "itexture2DArray", "utexture2D", "utexture2DArray", "texture2DRect", "itexture2DRect", "utexture2DRect", "texture2DMS", "itexture2DMS", "utexture2DMS", "texture2DMSArray", "itexture2DMSArray", "utexture2DMSArray", "texture3D", "itexture3D", "utexture3D", "textureCube", "itextureCube", "utextureCube", "textureCubeArray", "itextureCubeArray", "utextureCubeArray", "textureBuffer", "itextureBuffer", "utextureBuffer", "sampler", "samplerShadow", "subpassInput", "isubpassInput", "usubpassInput", "subpassInputMS", "isubpassInputMS", "usubpassInputMS", "The", "following", "are", "the", "keywords", "reserved", "for", "future", "use.", "Using", "them", "will", "result", "in", "a", "compile-time", "error:", "common", "partition", "active", "asm", "class", "union", "enum", "typedef", "template", "this", "resource", "goto", "inline", "noinline", "public", "static", "extern", "external", "interface", "long", "short", "half", "fixed", "unsigned", "superp", "input", "output", "hvec2", "hvec3", "hvec4", "fvec2", "fvec3", "fvec4", "filter", "sizeof", "cast", "namespace", "using", "sampler3DRect"],
+	"hashComments": true,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true
+},
+{
+	"names": ["hlsl","hlslang","hlslc","directx"],
+	"keywords": [
+		"AppendStructuredBuffer", "asm", "asm_fragment", "BlendState", "bool", "break", "Buffer", "ByteAddressBuffer", "case", "cbuffer", "centroid", "class", "column_major", "compile", "compile_fragment", "CompileShader", "const", "continue", "ComputeShader", "ConsumeStructuredBuffer", "default", "DepthStencilState", "DepthStencilView", "discard", "do", "double", "DomainShader", "dword", "else", "export", "extern", "false", "float", "for", "fxgroup", "GeometryShader", "groupshared", "half", "Hullshader", "if", "in", "inline", "inout", "InputPatch", "int", "interface", "line", "lineadj", "linear", "LineStream", "matrix", "min16float", "min10float", "min16int", "min12int", "min16uint", "namespace", "nointerpolation", "noperspective", "NULL", "out", "OutputPatch", "packoffset", "pass", "pixelfragment", "PixelShader", "point", "PointStream", "precise", "RasterizerState", "RenderTargetView", "return", "register", "row_major", "RWBuffer", "RWByteAddressBuffer", "RWStructuredBuffer", "RWTexture1D", "RWTexture1DArray", "RWTexture2D", "RWTexture2DArray", "RWTexture3D", "sample", "sampler", "SamplerState", "SamplerComparisonState", "shared", "snorm", "stateblock", "stateblock_state", "static", "string", "struct", "switch", "StructuredBuffer", "tbuffer", "technique", "technique10", "technique11", "texture", "Texture1D", "Texture1DArray", "Texture2D", "Texture2DArray", "Texture2DMS", "Texture2DMSArray", "Texture3D", "TextureCube", "TextureCubeArray", "true", "typedef", "triangle", "triangleadj", "TriangleStream",
+		"uint", "uniform", "unorm", "unsigned", "vector", "vertexfragment", "VertexShader", "void", "volatile", "while", "uint", "uint1", "uint2", "uint3", "uint4", "uint1x1", "uint1x2", "uint1x3", "uint1x4 uint2x1", "uint2x2", "uint2x3", "uint2x4 uint3x1", "uint3x2", "uint3x3", "uint3x4 uint4x1", "uint4x2", "uint4x3", "uint4x4", "bool", "bool1", "bool2", "bool3", "bool4", "bool1x1", "bool1x2", "bool1x3", "bool1x4 bool2x1", "bool2x2", "bool2x3", "bool2x4 bool3x1", "bool3x2", "bool3x3", "bool3x4 bool4x1", "bool4x2", "bool4x3", "bool4x4", "int", "int1", "int2", "int3", "int4", "int1x1", "int1x2", "int1x3", "int1x4 int2x1", "int2x2", "int2x3", "int2x4 int3x1", "int3x2", "int3x3", "int3x4 int4x1", "int4x2", "int4x3", "int4x4", "float", "float1", "float2", "float3", "float4", "float1x1", "float1x2", "float1x3", "float1x4 float2x1", "float2x2", "float2x3", "float2x4 float3x1", "float3x2", "float3x3", "float3x4 float4x1", "float4x2", "float4x3", "float4x4"
+	],
+	"hashComments": true,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true
+},
+{
+    "names": ["kt","kot","kotlin","kts"],
+	"keywords": ["as", "as?", "break", "class", "continue", "do", "else", "false", "for", "fun", "if", "in", "!in", "interface", "is", "!is", "null", "object", "package", "return", "super", "this", "throw", "true", "try", "typealias", "typeof", "val", "var", "when", "while", "by", "catch", "constructor", "delegate", "dynamic", "field", "file", "finally", "get", "import", "init", "param", "property", "receiver", "set", "setparam", "value", "where", "actual", "abstract", "annotation", "companion", "const", "crossinline", "data", "enum", "expect", "external", "final", "infix", "inline", "inner", "internal", "lateinit", "noinline", "open", "operator", "out", "override", "private", "protected", "public", "reified", "sealed", "suspend", "tailrec", "vararg"],
+	"firstLineShebang":true,
+	"doubleSlashComments": true,
+	"multilineSlashComments": true,
+	"multiLine":"\"\"\""
+}
 ]

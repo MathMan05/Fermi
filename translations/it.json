@@ -32,6 +32,7 @@
 		"desc": "Descrizione:",
 		"title": "Benvenuto a $1!"
 	},
+	"copyMedia": "Copia URL del contenuto multimediale",
 	"DMs": {
 		"add": "Aggiungi qualcuno a questo DM",
 		"close": "Chiudi DM",
@@ -149,7 +150,7 @@
 		"text": "Testo",
 		"timedOutUntil": "In time-out fino: $1",
 		"topic:": "Argomento:",
-		"typebox": "Messaggio in $1",
+		"typebox": "Messaggio in # $1",
 		"unmute": "Riattiva canale",
 		"voice": "Voce",
 		"deleteThread": "Elimina thread",
@@ -594,14 +595,16 @@
 			"PIN_MESSAGES": "Consente ai membri del ruolo di fissare messaggi.",
 			"MANAGE_EVENTS": "Consente ai membri del ruolo di modificare/cancellare eventi (esistenti e futuri).",
 			"SEND_VOICE_MESSAGES": "Consente l'invio di messaggi vocali nei canali di testo.",
-			"CREATE_INSTANT_INVITE": "Consente ai membri del ruolo di creare inviti per la gilda."
+			"CREATE_INSTANT_INVITE": "Consente ai membri del ruolo di creare inviti per la gilda.",
+			"SET_VOICE_CHANNEL_STATUS": "Imposta lo stato del canale vocale"
 		},
 		"readableNames": {
 			"BYPASS_SLOWMODE": "Bypassa la slowmode",
 			"CONNECT": "Connetti",
 			"PIN_MESSAGES": "Fissa messaggi",
 			"SEND_MESSAGES": "Invia messaggi",
-			"STREAM": "Video"
+			"STREAM": "Video",
+			"SET_VOICE_CHANNEL_STATUS": "Imposta lo stato del canale vocale"
 		}
 	},
 	"profile": {
@@ -691,6 +694,12 @@
 	},
 	"userping": {
 		"unknown": "@utente-sconosciuto"
+	},
+	"keyboard": {
+		"shortcuts": "Tasti di scelta rapida",
+		"descs": {
+			"gifSearch": "Ricerca GIF:"
+		}
 	},
 	"domain": {
 		"title": "Verifica dominio",

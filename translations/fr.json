@@ -52,6 +52,7 @@
 		"enable": "Activer l'introduction",
 		"title": "Bienvenue sur $1 !"
 	},
+	"copyMedia": "Copier L'URL du média",
 	"DMs": {
 		"add": "Ajouter quelqu'un à la discussion privée (MP)",
 		"close": "Fermer la discussion par messages privés",
@@ -123,7 +124,7 @@
 		"hypesquad_house_1": "Audace",
 		"hypesquad_house_2": "Excellence",
 		"hypesquad_house_3": "Équilibre",
-		"legacy_username": "a un nom d'utilisateur d'origine",
+		"legacy_username": "a un nom d'utilisateur hérité",
 		"partner": "Partenaire de l'instance",
 		"premium": "Premium",
 		"quest_completed": "a fait une quête",
@@ -149,17 +150,17 @@
 		"TimeOutCool": "Exclu jusqu'à : $1",
 		"allowIcons": "Autoriser les icônes de chaîne personnalisées",
 		"announcement": "Annonces",
-		"copyId": "Copier l'id du canal",
-		"copyIdCat": "Copier l'id de la catégorie",
+		"copyId": "Copier l'identifiant de la chaîne",
+		"copyIdCat": "Copier l'identifiant de la catégorie",
 		"createCatagory": "Créer une catégorie",
-		"createChannel": "Créer un canal",
-		"creating": "Création du canal",
+		"createChannel": "Créer un chaîne",
+		"creating": "Création du Chaîne",
 		"delete": "Supprimer la chaîne",
 		"deleteCat": "Supprimer la catégorie",
 		"icon": "Icône :",
 		"makeInvite": "Créer une invitation",
 		"markRead": "Marquer comme lu",
-		"mute": "Rendre le canal muet",
+		"mute": "Rendre la chaîne muette",
 		"name": "Chaîne",
 		"name:": "Nom de la Chaîne :",
 		"nsfw:": "Avertissement contenu mature :",
@@ -268,7 +269,7 @@
 		"region": "Région : $1",
 		"title": "Gérer les sessions"
 	},
-	"discovery": "Portail de Découverte (Discovery)",
+	"discovery": "Portail de Découverte",
 	"dms": "Messages privés",
 	"edit": "Modifier",
 	"emoji": {
@@ -330,7 +331,7 @@
 	"guild": {
 		"COMMUNITY": "Demander à rejoindre",
 		"disableInvites": "Désactiver les invitations :",
-		"DISCOVERABLE": "Visible depuis le Portail de Découverte (Discovery)",
+		"DISCOVERABLE": "Visible depuis le Portail de Découverte",
 		"INVITES_DISABLED": "Sur invitation uniquement",
 		"adminMenu": {
 			"changePerms": "Modifier les permissions pour rechercher",
@@ -457,7 +458,7 @@
 		"userField": "Nom d’utilisateur :",
 		"welcomeJank": "Bienvenue dans le client Fermi"
 	},
-	"incorrectURLS": "## Cette instance a probablement envoyé des liens incorrects.\n### Si vous êtes le propriétaire de l’instance, veuillez consulter la section *Connecting from remote machines* de [cette page](https://docs.spacebar.chat/setup/server/) pour corriger le problème.\n Souhaitez-vous que le client Fermi tente automatiquement de corriger cette erreur pour vous permettre de vous connecter à l’instance ?",
+	"incorrectURLS": "## Cette instance a probablement envoyé des liens incorrects.\n### Si vous êtes le propriétaire de l’instance, veuillez consulter la section *Connecting from remote machines* de [cette page](https://docs.melodychat.org/setup/server/) pour corriger le problème.\nSouhaitez-vous que le client Fermi tente automatiquement de corriger cette erreur pour vous permettre de vous connecter à l’instance ?",
 	"instInfo": "Informations d’instance",
 	"instanceInfo": {
 		"contact": "Envoyer un e-mail aux administrateurs de l’instance",
@@ -486,6 +487,7 @@
 	"invite": {
 		"accept": "Accepter",
 		"alreadyJoined": "Déjà rejoint",
+		"joining": "Rejoindre...",
 		"channel:": "Canal :",
 		"createInvite": "Créer une invitation",
 		"createdAt": "Créée le : $1",
@@ -1010,6 +1012,21 @@
 	"userping": {
 		"resolving": "résolution de l'utilisateur",
 		"unknown": "@utilisateur-inconnu"
+	},
+	"editMode": {
+		"editMsg": "Échapper à $1cancel$1"
+	},
+	"keyboard": {
+		"shortcuts": "Raccourcis",
+		"empty": "<No keybind set>",
+		"descs": {
+			"gifSearch": "Rechercher des GIFs :"
+		}
+	},
+	"domain": {
+		"title": "Vérifier le domaine",
+		"domain": "Domaine :",
+		"dnsinst": "1. Connectez-vous à votre fournisseur DNS\n\n2. Créer un registre DNS : \n\nNom :\n```\n_harmony.$1\n```\n\nType :\n```\nTXT\n```\n\nContenu :\n```\n$2\n```\n\n-# Il faudra probablement quelques minutes pour le DNS se propage."
 	},
 	"vc": {
 		"joinForStream": "Rejoignez le canal vocal pour regarder",

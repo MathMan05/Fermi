@@ -35,6 +35,7 @@ import {Hover} from "./hover.js";
 import {ReportMenu} from "./reporting/report.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {TypeBox} from "./typeBox.js";
 export async function makeInviteMenu(inviteMenu: Options, guild: Guild, url: string) {
 	const invDiv = document.createElement("div");
 	const bansp = ProgessiveDecodeJSON<invitejson[]>(url, {
@@ -554,6 +555,14 @@ class Guild extends SnowFlake {
 
 		dio.show();
 	}
+	regenRLPerms() {
+		this.sortRoles();
+		const permlist: [Role, Permissions][] = [];
+		for (const thing of this.roles) {
+			permlist.push([thing, thing.permissions]);
+		}
+		return permlist;
+	}
 	generateSettings() {
 		const settings = new Settings(I18n.guild.settingsFor(this.properties.name));
 		const textChannels = this.channels.filter((e) => {
@@ -697,10 +706,7 @@ class Guild extends SnowFlake {
 		this.makeInviteMenu(settings.addButton(I18n.invite.inviteMaker()), textChannels);
 		if (this.member.hasPermission("MANAGE_ROLES")) {
 			const s1 = settings.addButton(I18n.guild.roles(), {optName: ""});
-			const permlist: [Role, Permissions][] = [];
-			for (const thing of this.roles) {
-				permlist.push([thing, thing.permissions]);
-			}
+			const permlist = this.regenRLPerms();
 			s1.options.push(new RoleList(permlist, this, this.updateRolePermissions.bind(this), false));
 		}
 		if (this.member.hasPermission("MANAGE_GUILD_EXPRESSIONS")) {
@@ -1474,17 +1480,20 @@ class Guild extends SnowFlake {
 		this.emojis = json.emojis || [];
 		this.headers = this.owner.headers;
 		this.welcomeScreen = json.welcome_screen;
-		this.properties.features = json.features;
-		if (this.properties.icon !== json.icon) {
-			this.properties.icon = json.icon;
-			if (this.HTMLicon) {
-				const divy = this.generateGuildIcon();
-				this.HTMLicon.replaceWith(divy);
-				this.HTMLicon = divy;
+		if (this.properties)
+			if (this.properties.icon !== json.icon) {
+				this.properties.icon = json.icon;
+				if (this.HTMLicon) {
+					const divy = this.generateGuildIcon();
+					this.HTMLicon.replaceWith(divy);
+					this.HTMLicon = divy;
+				}
 			}
-		}
 		this.roleids.clear();
 		this.banner = json.banner;
+		this.welcomeScreen = json.welcome_screen;
+
+		this.properties = json;
 	}
 	constructor(json: guildjson | -1, owner: Localuser, member: memberjson | User | null) {
 		super(typeof json === "number" ? "@me" : json.id);
@@ -1495,20 +1504,14 @@ class Guild extends SnowFlake {
 		if (json === -1 || member === null) {
 			return;
 		}
-		if (json.stickers.length) {
-			console.log(json.stickers, ":3");
-		}
 
-		this.large = json.large;
+		this.update({...json.properties, large: json.large, emojis: json.emojis});
+
 		this.member_count = json.member_count;
-		this.emojis = json.emojis || [];
 		this.channels = [];
-		if (json.properties) {
-			this.properties = json.properties;
-		}
+
 		this.roles = [];
-		this.banner = json.properties.banner;
-		this.welcomeScreen = json.properties.welcome_screen;
+
 		if (json.roles) {
 			for (const roley of json.roles) {
 				const roleh = new Role(roley, this);
@@ -1953,16 +1956,9 @@ class Guild extends SnowFlake {
 		if (this.localuser.focusChannel && this.localuser.focusChannel.myhtml) {
 			this.localuser.focusChannel.myhtml.classList.remove("viewChannel");
 		}
+		TypeBox.changeVisablity(false);
 		this.prevchannel = undefined;
 		this.localuser.focusChannel = undefined;
-		const replybox = document.getElementById("replybox") as HTMLElement;
-		const typebox = document.getElementById("typebox") as HTMLElement;
-		replybox.classList.add("hideReplyBox");
-		typebox.classList.remove("typeboxreplying");
-		(document.getElementById("typebox") as HTMLDivElement).contentEditable = "false";
-		(document.getElementById("upload") as HTMLElement).style.visibility = "hidden";
-		(document.getElementById("typediv") as HTMLElement).style.visibility = "hidden";
-		(document.getElementById("sideDiv") as HTMLElement).innerHTML = "";
 	}
 	noChannel(addstate: boolean) {
 		for (const c of this.channels) {

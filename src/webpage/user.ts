@@ -803,7 +803,7 @@ class User extends SnowFlake {
 	createWidget(guild?: Guild) {
 		guild = this.localuser.guilds.get("@me") as Guild;
 		const div = document.createElement("div");
-		div.classList.add("flexltr", "createdWebhook");
+		div.classList.add("mutFriends", "flexltr");
 		//TODO make sure this is something I can actually do here
 		const name = document.createElement("b");
 		name.textContent = this.name;
@@ -1447,7 +1447,7 @@ class User extends SnowFlake {
 		};
 		(async () => {
 			const high = await this.highInfo();
-			const mut = buttons.add(I18n.profile.mut());
+			const mut = buttons.add(I18n.profile.mut(high.mutual_guilds.length + ""));
 			const mutDiv = document.createElement("div");
 
 			mutDiv.append(
@@ -1466,6 +1466,11 @@ class User extends SnowFlake {
 						gname.textContent = guild.properties.name;
 						info.append(gname);
 						box.append(icon, info);
+						box.onclick = () => {
+							removeAni(background);
+							guild.loadGuild();
+							guild.loadChannel();
+						};
 						if (nick) info.append(nick);
 						return box;
 					})

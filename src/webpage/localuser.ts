@@ -23,7 +23,7 @@ import {
 } from "./jsontypes.js";
 import {Member} from "./member.js";
 import {buttonColor, Dialog, Form, FormError, Options, Settings} from "./settings.js";
-import {getTextNodeAtPosition, MarkDown, saveCaretPosition} from "./markdown.js";
+import {getTextNodeAtPosition, MarkDown} from "./markdown.js";
 import {Bot} from "./bot.js";
 import {Role} from "./role.js";
 import {VoiceFactory, voiceStatusStr} from "./voice.js";
@@ -53,15 +53,14 @@ import {trimTrailingSlashes} from "./utils/netUtils.js";
 import {Versions} from "./versions.js";
 import {Shortcut} from "./shortcuts/shortcut.js";
 import {getShortcuts, setShortcuts} from "./utils/storage/shortcuts.js";
+import {TypeBox} from "./typeBox.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
 };
 type trace = [string, traceObj];
 const wsCodesRetry = new Set([4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009]);
-interface CustomHTMLDivElement extends HTMLDivElement {
-	markdown: MarkDown;
-}
+
 interface MDSearchOption {
 	name: string;
 	replace: string;
@@ -337,7 +336,7 @@ class Localuser {
 	}
 	async queryBlog() {
 		this.perminfo.localuser ??= {};
-		const prefs = await getPreferences();
+		const prefs = getPreferences();
 		const bstate = prefs.showBlogUpdates;
 		if (bstate === undefined) {
 			const pop = new Dialog("");
@@ -461,7 +460,7 @@ class Localuser {
 		}
 
 		this.pingEndpoint();
-		const prefs = await getPreferences();
+		const prefs = getPreferences();
 		const ml = document.getElementById("memberlisttoggle")!;
 		if (prefs.checkMemberList) {
 			ml.classList = "";
@@ -1755,6 +1754,7 @@ class Localuser {
 	}
 
 	loadGuild(id: string, forceReload = false): Guild | undefined {
+		TypeBox.saveBox();
 		this.searching = false;
 		let guild = this.guilds.get(id);
 		if (!guild) {
@@ -1785,7 +1785,7 @@ class Localuser {
 				//https://cdn.discordapp.com/banners/677271830838640680/fab8570de5bb51365ba8f36d7d3627ae.webp?size=240
 				banner.style.setProperty(
 					"background-image",
-					`linear-gradient(rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 40%), url(${this.info.cdn}/banners/${guild.id}/${guild.banner + new CDNParams({expectedSize: 128})})`,
+					`linear-gradient(rgba(80, 80, 80, 1) 0%, rgba(80, 80, 80, 0) 40%), url(${this.info.cdn}/banners/${guild.id}/${guild.banner + new CDNParams({expectedSize: 128})})`,
 				);
 				banner.classList.add("Banner");
 				//background-image:
@@ -2058,8 +2058,11 @@ class Localuser {
 
 		menu.bindContextmenu(iconDiv);
 		if (folder.color !== null && folder.color !== undefined) {
-			icon.style.setProperty("--folder-color", "#" + folder.color.toString(16).padStart(6, "0"));
-			if (!folder.color && folder.color !== 0) icon.style.removeProperty("--folder-color");
+			folderDiv.style.setProperty(
+				"--folder-color",
+				"#" + folder.color.toString(16).padStart(6, "0"),
+			);
+			if (!folder.color && folder.color !== 0) folderDiv.style.removeProperty("--folder-color");
 		}
 		iconDiv.append(icon);
 		const divy = document.createElement("div");
@@ -2483,7 +2486,6 @@ class Localuser {
 	async getPosts() {
 		const text = await (await fetch("https://blog.fermi.chat/feed_rss_created.xml")).text();
 		const xml = new DOMParser().parseFromString(text, "text/xml");
-		console.log(xml, text);
 		const posts = Array.from(xml.getElementsByTagName("channel")[0].getElementsByTagName("item"));
 		return {
 			items: posts.map((post) => {
@@ -2531,7 +2533,7 @@ class Localuser {
 		this.figureDefaultProvidor();
 	}
 	async figureDefaultProvidor() {
-		const prefs = await getPreferences();
+		const prefs = getPreferences();
 		this.selectedGifProfidor =
 			this.gifProvideors.find((_) => _.api_name == prefs.gifProvidor) || this.gifProvideors[0];
 	}
@@ -2583,7 +2585,7 @@ class Localuser {
 		});
 	}
 	async showusersettings() {
-		const prefs = await getPreferences();
+		const prefs = getPreferences();
 		const localSettings = getLocalSettings();
 		const settings = new Settings(I18n.localuser.settings());
 		{
@@ -2778,21 +2780,20 @@ class Localuser {
 
 								connectionContainer.appendChild(container);
 							});
-						//TODO enable this once domain verification is ready within Harmony
-						if (false as true) {
-							const container = document.createElement("div");
 
-							const span = document.createElement("span");
-							span.classList.add("conImg", "svgicon");
-							span.style.setProperty("mask", `url("/icons/domain.svg")`);
-							container.append(span);
+						const container = document.createElement("div");
 
-							container.addEventListener("click", async () => {
-								this.domainVerification();
-							});
+						const span = document.createElement("span");
+						span.classList.add("conImg", "svgicon");
+						span.style.setProperty("mask", `url("/icons/domain.svg")`);
+						container.append(span);
 
-							connectionContainer.appendChild(container);
-						}
+						container.addEventListener("click", async () => {
+							this.domainVerification();
+						});
+
+						connectionContainer.appendChild(container);
+
 						serverConnections
 							.filter((_) => actConMap.has(_))
 							.forEach((_) => {
@@ -3014,7 +3015,7 @@ class Localuser {
 		}
 
 		{
-			const prefs = await getPreferences();
+			const prefs = getPreferences();
 			const tas = settings.addButton(I18n.localuser.themesAndSounds(), {contained: true});
 			{
 				const themes = ["Dark", "WHITE", "Light", "Dark-Accent"];
@@ -3143,6 +3144,18 @@ class Localuser {
 					},
 					this.gifProvideors.map((_) => _.name),
 					{defaultIndex: ind === -1 ? 0 : ind},
+				);
+			}
+			{
+				tas.addCheckboxInput(
+					"Show today at:",
+					(b) => {
+						prefs.showToday = b;
+						setPreferences(prefs);
+					},
+					{
+						initState: prefs.showToday,
+					},
 				);
 			}
 		}
@@ -4267,21 +4280,12 @@ class Localuser {
 		});
 	}
 	updateSend() {
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		if (
-			(typebox.markdown.rawString && typebox.markdown.rawString !== "\n") ||
-			document.getElementById("pasteimage")?.children.length
-		) {
-			typebox.parentElement!.classList.remove("noConent");
-		} else {
-			typebox.parentElement!.classList.add("noConent");
-		}
+		TypeBox.updateSend();
 	}
 	//TODO make this an option
 	readonly autofillregex = Object.freeze(/(^|\s|\n)[@#:]([a-zA-Z0-9]*)$/i);
 	mdBox() {
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		const typeMd = typebox.markdown;
+		const typeMd = TypeBox.markdown;
 		typeMd.owner = this;
 		typeMd.onUpdate = (str, pre) => {
 			this.search(document.getElementById("searchOptions") as HTMLDivElement, typeMd, str, pre);
@@ -4308,6 +4312,7 @@ class Localuser {
 				replyingto: this.focusChannel.replyingto,
 			});
 			this.focusChannel.replyingto = null;
+			this.focusChannel.makereplybox();
 		}
 	}
 
@@ -4515,8 +4520,7 @@ class Localuser {
 		search.focus();
 	}
 	async TBEmojiMenu(rect: DOMRect) {
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		const p = saveCaretPosition(typebox);
+		const p = TypeBox.saveCarrot();
 		if (!p) return;
 		const original = MarkDown.getText();
 
@@ -4527,7 +4531,7 @@ class Localuser {
 		);
 		this.favorites.addEmoji(emoji.id || (emoji.emoji as string));
 		p();
-		const md = typebox.markdown;
+		const md = TypeBox.markdown;
 		this.MDReplace(
 			emoji.id
 				? `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`
@@ -4562,10 +4566,6 @@ class Localuser {
 			);
 		}
 	}
-	fileExtange!: (
-		files: Blob[],
-		html: WeakMap<Blob, HTMLElement>,
-	) => [Blob[], WeakMap<Blob, HTMLElement>];
 	MDSearchOptions(
 		options: MDSearchOption[],
 		original: string,
@@ -4685,7 +4685,7 @@ class Localuser {
 		maybe.sort((a, b) => b[0] - a[0]);
 		this.MDSearchOptions(
 			maybe.map((a) => {
-				return {name: "# " + a[1].name, replace: `<#${a[1].id}> `};
+				return {name: "# " + a[1].shortName, replace: `<#${a[1].id}> `};
 			}),
 			original,
 			box,
@@ -5236,7 +5236,7 @@ class Localuser {
 	readonly presences: Map<string, presencejson> = new Map();
 	static font?: FontFace;
 	static async loadFont() {
-		const prefs = await getPreferences();
+		const prefs = getPreferences();
 		const fontName = prefs.emojiFont;
 
 		if (this.font) {

@@ -25,6 +25,12 @@
 		"whatelse": "Easter egg alert message shown randomly when clicking the 'Wherever this is' link on the 404 page. It's meant to be humorous/silly.",
 		"whereever": "Link text on the 404 page that triggers random easter egg events when clicked."
 	},
+	"filesize": {
+		"B": "SI unit bytes abbreviated",
+		"KB": "SI unit kilobytes abbreviated",
+		"MB": "SI unit megabytes abbreviated",
+		"GB": "SI unit gigabytes abbreviated"
+	},
 	"onboarding": {
 		"name": "Settings section title for the guild onboarding feature.",
 		"disable": "Button label to disable the onboarding feature for a guild.",

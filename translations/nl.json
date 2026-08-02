@@ -31,6 +31,7 @@
 		"enable": "Inwerken inschakelen",
 		"title": "Welkom bij $1!"
 	},
+	"copyMedia": "Media-url kopiëren",
 	"DMs": {
 		"add": "Iemand aan dit directe bericht toevoegen",
 		"close": "Directe bericht sluiten",
@@ -465,6 +466,7 @@
 	"invite": {
 		"accept": "Accepteren",
 		"alreadyJoined": "Al lid",
+		"joining": "Deelnemen...",
 		"channel:": "Kanaal:",
 		"createInvite": "Uitnodiging maken",
 		"createdAt": "Gemaakt op $1",
@@ -989,6 +991,16 @@
 	"userping": {
 		"resolving": "gebruiken aan het opzoeken",
 		"unknown": "@onbekende-gebruiker"
+	},
+	"editMode": {
+		"editMsg": "Escape om te $1annuleren$1"
+	},
+	"keyboard": {
+		"shortcuts": "Sneltoetsen",
+		"empty": "<Geen toetsencombinatie ingesteld>",
+		"descs": {
+			"gifSearch": "GIF's zoeken:"
+		}
 	},
 	"domain": {
 		"title": "Domein verifiëren",
