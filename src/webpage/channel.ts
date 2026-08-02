@@ -31,12 +31,12 @@ import {mobile, createImg, safeImg} from "./utils/utils.js";
 import {webhookMenu} from "./webhooks.js";
 import {File} from "./file.js";
 import {Sticker} from "./sticker.js";
-import {CustomHTMLDivElement} from "./index.js";
 import {Direct} from "./direct.js";
 import {NotificationHandler} from "./notificationHandler.js";
 import {Command} from "./interactions/commands.js";
 import {Tag} from "./tag.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {TypeBox} from "./typeBox.js";
 
 class Channel extends SnowFlake {
 	editing!: Message | null;
@@ -1437,40 +1437,13 @@ class Channel extends SnowFlake {
 			this.replyingto.div.classList.remove("replying");
 		}
 		this.replyingto = message;
-		const typebox = document.getElementById("typebox") as HTMLElement;
-		typebox.focus();
+		TypeBox.focus();
 		if (!this.replyingto?.div) return;
-		console.log(message);
 		this.replyingto.div.classList.add("replying");
 		this.makereplybox();
 	}
 	makereplybox() {
-		const replybox = document.getElementById("replybox") as HTMLElement;
-		const typebox = document.getElementById("typebox") as HTMLElement;
-		if (this.replyingto) {
-			replybox.innerHTML = "";
-			const span = document.createElement("span");
-			span.textContent = I18n.replyingTo(this.replyingto.author.username);
-			const X = document.createElement("button");
-			X.onclick = (_) => {
-				if (this.replyingto?.div) {
-					this.replyingto.div.classList.remove("replying");
-				}
-				replybox.classList.add("hideReplyBox");
-				this.replyingto = null;
-				replybox.innerHTML = "";
-				typebox.classList.remove("typeboxreplying");
-			};
-			replybox.classList.remove("hideReplyBox");
-			X.classList.add("cancelReply", "svgicon", "svg-x");
-			replybox.append(span);
-			replybox.append(X);
-			typebox.classList.add("typeboxreplying");
-		} else {
-			replybox.classList.add("hideReplyBox");
-			replybox.innerHTML = "";
-			typebox.classList.remove("typeboxreplying");
-		}
+		TypeBox.updateReplying();
 	}
 	async getmessage(id: string): Promise<Message | undefined> {
 		const message = this.messages.get(id);
@@ -1543,9 +1516,6 @@ class Channel extends SnowFlake {
 	}
 	static genid: number = 0;
 	nsfwPannel() {
-		(document.getElementById("typebox") as HTMLDivElement).contentEditable = "" + false;
-		(document.getElementById("upload") as HTMLElement).style.visibility = "hidden";
-		(document.getElementById("typediv") as HTMLElement).style.visibility = "hidden";
 		const messages = document.getElementById("scrollWrap") as HTMLDivElement;
 		const messageContainers = Array.from(messages.getElementsByClassName("messagecontainer"));
 		for (const thing of messageContainers) {
@@ -1953,49 +1923,35 @@ class Channel extends SnowFlake {
 			}
 		};
 	}
-	files: Blob[] = [];
-	htmls = new WeakMap<Blob, HTMLElement>();
-	textSave = "";
-	collectBox() {
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		const [files, html] = this.localuser.fileExtange([], new WeakMap<Blob, HTMLElement>());
-		this.files = files;
-		this.htmls = html;
-		this.textSave = MarkDown.gatherBoxText(typebox);
-		typebox.textContent = "";
-	}
 	curCommand?: Command;
 	curWatch = () => {};
 	async submitCommand() {
 		if (!this.curCommand) return;
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		if (await this.curCommand.submit(typebox, this)) {
+		if (await this.curCommand.submit(TypeBox.box, this)) {
 			this.curCommand = undefined;
-			const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-			typebox.markdown.boxEnabled = true;
-			typebox.innerHTML = "";
-			typebox.markdown.boxupdate();
-			typebox.removeEventListener("keyup", this.curWatch);
+			TypeBox.markdown.boxEnabled = true;
+			TypeBox.box.innerHTML = "";
+			TypeBox.markdown.boxupdate();
+			TypeBox.box.removeEventListener("keyup", this.curWatch);
 		}
 	}
 	startCommand(command: Command) {
 		this.curCommand = command;
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		typebox.markdown.boxEnabled = false;
+		TypeBox.markdown.boxEnabled = false;
 		const func = () => {
 			const node = window.getSelection()?.focusNode;
 			if (this.localuser.focusChannel === this) {
-				const out = command.collect(typebox, this, node || undefined);
+				const out = command.collect(TypeBox.box, this, node || undefined);
 				if (!out) {
-					typebox.markdown.boxEnabled = true;
-					typebox.markdown.boxupdate();
-					typebox.removeEventListener("keyup", func);
+					TypeBox.markdown.boxEnabled = true;
+					TypeBox.markdown.boxupdate();
+					TypeBox.box.removeEventListener("keyup", func);
 				}
 			}
 		};
 		this.curWatch = func;
-		typebox.addEventListener("keyup", func);
-		command.render(typebox, this);
+		TypeBox.box.addEventListener("keyup", func);
+		command.render(TypeBox.box, this);
 	}
 	isForum() {
 		return this.type === 15 || this.type === 16;
@@ -2624,28 +2580,18 @@ class Channel extends SnowFlake {
 		if (this.owner instanceof Direct) {
 			this.owner.freindDiv?.classList.remove("viewChannel");
 		}
-		if (this.localuser.focusChannel) {
-			this.localuser.focusChannel.collectBox();
+		TypeBox.saveBox();
+		if (!this.curCommand && !this.isForum()) {
+			TypeBox.restoreBox(this);
 		}
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		typebox.markdown.boxEnabled = !this.curCommand;
+		TypeBox.markdown.boxEnabled = !this.curCommand;
 		if (this.curCommand) {
-			this.curCommand.render(typebox, this);
+			this.curCommand.render(TypeBox.box, this);
 		}
-		typebox.style.setProperty(
+		TypeBox.box.style.setProperty(
 			"--channel-text",
 			JSON.stringify(I18n.channel.typebox(this.shortName)),
 		);
-		if (!this.curCommand && !this.isForum()) {
-			const md = typebox.markdown;
-			md.owner = this;
-			typebox.textContent = this.textSave;
-			md.boxupdate(Infinity);
-		}
-		if (this.isForum()) {
-			typebox.textContent = "";
-		}
-		this.localuser.fileExtange(this.files, this.htmls);
 
 		if (getMessages === undefined) {
 			getMessages = this.type !== 2 || !this.localuser.voiceAllowed;
@@ -2761,36 +2707,8 @@ class Channel extends SnowFlake {
 		}
 		this.rendertyping();
 
-		try {
-			(document.getElementById("typebox") as HTMLDivElement).contentEditable = this.canMessage
-				? "plaintext-only"
-				: "false";
-		} catch {
-			(document.getElementById("typebox") as HTMLDivElement).contentEditable = this.canMessage
-				? "true"
-				: "false";
-		}
-		(document.getElementById("upload") as HTMLElement).style.visibility = this.canMessage
-			? "visible"
-			: "hidden";
-		(document.getElementById("gifTB") as HTMLElement).style.display = this.canMessage
-			? "block"
-			: "none";
-		(document.getElementById("stickerTB") as HTMLElement).style.display = this.canMessage
-			? "block"
-			: "none";
-		(document.getElementById("emojiTB") as HTMLElement).style.display = this.canMessage
-			? "block"
-			: "none";
-		(document.getElementById("mobileSend") as HTMLElement).style.display = this.canMessage
-			? "block"
-			: "none";
-		(document.getElementById("typediv") as HTMLElement).style.visibility = "visible";
-		if (!mobile) {
-			(document.getElementById("typebox") as HTMLDivElement).focus();
-		} else {
-			(document.getElementById("typebox") as HTMLDivElement).blur();
-		}
+		TypeBox.changeWrite();
+
 		try {
 			if (getMessages) await this.putmessages();
 		} catch (e) {
