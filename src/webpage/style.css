@@ -1058,8 +1058,9 @@ textarea {
 	right: 5px;
 	transition: top 0.2s;
 	transition-timing-function: ease-in;
+	backdrop-filter: blur(20px);
 	mix-blend-mode: difference;
-	background: white;
+	background: #969696;
 	cursor: pointer;
 	&.favorited {
 		background: orange;
