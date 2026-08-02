@@ -23,7 +23,7 @@ import {
 } from "./jsontypes.js";
 import {Member} from "./member.js";
 import {buttonColor, Dialog, Form, FormError, Options, Settings} from "./settings.js";
-import {getTextNodeAtPosition, MarkDown, saveCaretPosition} from "./markdown.js";
+import {getTextNodeAtPosition, MarkDown} from "./markdown.js";
 import {Bot} from "./bot.js";
 import {Role} from "./role.js";
 import {VoiceFactory, voiceStatusStr} from "./voice.js";

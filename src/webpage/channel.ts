@@ -27,7 +27,7 @@ import {Member} from "./member.js";
 import {Voice} from "./voice.js";
 import {User, userVolMenu} from "./user.js";
 import {I18n} from "./i18n.js";
-import {mobile, createImg, safeImg} from "./utils/utils.js";
+import {createImg, safeImg} from "./utils/utils.js";
 import {webhookMenu} from "./webhooks.js";
 import {File} from "./file.js";
 import {Sticker} from "./sticker.js";
