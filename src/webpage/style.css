@@ -3386,32 +3386,32 @@ img.bigembedimg {
 	}
 }
 ::highlight(highkeyword) {
-	color: yellow;
+	color: var(--yellow);
 }
 ::highlight(highnumber) {
-	color: orange;
+	color: color-mix(in srgb, var(--yellow) 50%, var(--red));
 }
 ::highlight(highstring) {
-	color: red;
+	color: color-mix(in srgb, var(--red) 50%, var(--primary-text));
 }
 ::highlight(highsymbol) {
-	color: white;
+	color: var(--primary-text-soft);
 	font-weight: bold;
 }
 ::highlight(highcomment) {
-	color: green;
+	color: color-mix(in srgb, var(--green) 50%, var(--primary-text));
 }
 ::highlight(highidentifier) {
-	color: white;
+	color: var(--primary-text);
 }
 ::highlight(highClass) {
-	color: #6741ff;
+	color: color-mix(in srgb, var(--red) 25%, var(--primary-text));
 }
 ::highlight(highProp) {
-	color: #33dcff;
+	color: color-mix(in srgb, var(--blue) 50%, var(--primary-text));
 }
 ::highlight(highFunc) {
-	color: #d564ff;
+	color: color-mix(in srgb, var(--red) 50%, var(--primary-text));
 }
 #memberlisttoggle.svgicon {
 	-moz-appearance: initial;
