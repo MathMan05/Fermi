@@ -3386,33 +3386,34 @@ img.bigembedimg {
 	}
 }
 ::highlight(highkeyword) {
-	color: color-mix(in srgb, var(--yellow) 75%, var(--primary-text));
+	color: var(--code-keyword);
 }
 ::highlight(highnumber) {
-	color: color-mix(in srgb, var(--yellow) 50%, var(--red));
+	color: var(--code-number);
 }
 ::highlight(highstring) {
-	color: color-mix(in srgb, var(--red) 50%, var(--primary-text));
+	color: var(--code-string);
 }
 ::highlight(highsymbol) {
-	color: var(--primary-text-soft);
+	color: var(--primary-text-prominent);
 	font-weight: bold;
 }
 ::highlight(highcomment) {
-	color: color-mix(in srgb, var(--green) 50%, var(--primary-text));
+	color: var(--code-comment);
 }
 ::highlight(highidentifier) {
 	color: var(--primary-text);
 }
 ::highlight(highClass) {
-	color: color-mix(in srgb, var(--red) 25%, var(--primary-text));
+	color: var(--code-class);
 }
 ::highlight(highProp) {
-	color: color-mix(in srgb, var(--blue) 50%, var(--primary-text));
+	color: var(--code-prop);
 }
 ::highlight(highFunc) {
-	color: color-mix(in srgb, var(--red) 50%, var(--primary-text));
+	color: var(--code-func);
 }
+
 #memberlisttoggle.svgicon {
 	-moz-appearance: initial;
 	&::before {
