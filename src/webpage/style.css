@@ -3386,7 +3386,7 @@ img.bigembedimg {
 	}
 }
 ::highlight(highkeyword) {
-	color: var(--yellow);
+	color: color-mix(in srgb, var(--yellow) 75%, var(--primary-text));
 }
 ::highlight(highnumber) {
 	color: color-mix(in srgb, var(--yellow) 50%, var(--red));
