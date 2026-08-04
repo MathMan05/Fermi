@@ -5039,7 +5039,7 @@ fieldset input[type="radio"] {
 		justify-content: center;
 		font-weight: bold;
 		color: white;
-		background: color-mix(in srgb, black 25%, transparent);
+		background: color-mix(in srgb, black 50%, transparent);
 	}
 }
 .gifbox {
