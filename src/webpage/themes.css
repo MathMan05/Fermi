@@ -12,6 +12,14 @@
 	--blue: #779bff;
 	--grey: #b5b5b5;
 	--update: var(--green);
+
+	--code-keyword: yellow;
+	--code-number: orange;
+	--code-string: red;
+	--code-comment: green;
+	--code-class: #6741ff;
+	--code-prop: #33dcff;
+	--code-func: #d564ff;
 }
 
 /* Themes. See themes.txt */
@@ -88,6 +96,15 @@
 	--secondary-text-soft: #4c4c5a;
 	--dock-bg: #d1d1df;
 	--dock-hover: #b8b8d0;
+
+	--code-bg: #fdfdf4;
+	--code-keyword: rgb(180, 180, 76);
+	--code-number: rgb(161, 109, 12);
+	--code-string: rgb(153, 4, 4);
+	--code-comment: rgb(9, 116, 9);
+	--code-class: #230a86;
+	--code-prop: #027d96;
+	--code-func: #6c0091;
 }
 
 .Light-theme {

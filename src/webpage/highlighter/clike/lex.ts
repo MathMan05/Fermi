@@ -25,7 +25,7 @@ function regex(config: clikeConf): RegExp {
 			`(${RegExp.escape(config.multiLine)}(?:${matchOpts.join("|")})*(?:${RegExp.escape(config.multiLine)})?)`,
 		);
 	}
-	conds.push(`\'(\\\\(.|\\n)|[^"\\n\\\\])*\'?`);
+	conds.push(`\'(\\\\(.|\\n)|[^\'\\n\\\\])*\'?`);
 	conds.push(`"(\\\\(.|\\n)|[^"\\n\\\\])*"?`);
 	if (config.hashComments) {
 		conds.push("#.*");

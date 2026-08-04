@@ -3388,33 +3388,34 @@ img.bigembedimg {
 	}
 }
 ::highlight(highkeyword) {
-	color: yellow;
+	color: var(--code-keyword);
 }
 ::highlight(highnumber) {
-	color: orange;
+	color: var(--code-number);
 }
 ::highlight(highstring) {
-	color: red;
+	color: var(--code-string);
 }
 ::highlight(highsymbol) {
-	color: white;
+	color: var(--primary-text-prominent);
 	font-weight: bold;
 }
 ::highlight(highcomment) {
-	color: green;
+	color: var(--code-comment);
 }
 ::highlight(highidentifier) {
-	color: white;
+	color: var(--primary-text);
 }
 ::highlight(highClass) {
-	color: #6741ff;
+	color: var(--code-class);
 }
 ::highlight(highProp) {
-	color: #33dcff;
+	color: var(--code-prop);
 }
 ::highlight(highFunc) {
-	color: #d564ff;
+	color: var(--code-func);
 }
+
 #memberlisttoggle.svgicon {
 	-moz-appearance: initial;
 	&::before {
