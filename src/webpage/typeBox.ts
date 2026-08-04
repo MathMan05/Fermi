@@ -370,4 +370,7 @@ export class TypeBox {
 		this.nonceMap.delete(channel.id);
 	}
 }
-TypeBox.init();
+
+if (TypeBox.box) {
+	TypeBox.init();
+}
