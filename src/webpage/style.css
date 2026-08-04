@@ -3104,11 +3104,11 @@ span .quote:last-of-type .quoteline {
 	aspect-ratio: 1.9;
 }
 .mentionMD {
-	color: transparent;
 	background-clip: text;
 	padding: 1px 2px;
 	border-radius: 4px;
 	cursor: pointer;
+	color: color-mix(in srgb, var(--userbg) 75%, var(--primary-text));
 	background-image: var(--userbg, linear-gradient(var(--primary-text), var(--primary-text)));
 	position: relative;
 	z-index: 1;
