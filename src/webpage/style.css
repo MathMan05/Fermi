@@ -1,3 +1,6 @@
+* {
+	scrollbar-color: var(--button-bg) var(--primary-bg);
+}
 /* General */
 body {
 	height: 100%;
