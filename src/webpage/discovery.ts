@@ -4,6 +4,7 @@ import {I18n} from "./i18n.js";
 import {guildjson} from "./jsontypes.js";
 import {ReportMenu} from "./reporting/report.js";
 import {Dialog} from "./settings.js";
+import {TypeBox} from "./typeBox.js";
 import {CDNParams} from "./utils/cdnParams.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings.js";
 import {createImg} from "./utils/utils.js";
@@ -51,7 +52,7 @@ export class Discovery {
 			this.owner.freindDiv?.classList.remove("viewChannel");
 		}
 		if (this.localuser.focusChannel) {
-			this.localuser.focusChannel.collectBox();
+			TypeBox.saveBox();
 		}
 		history.pushState(["@me", "discover"], "", "/channels/@me/discover");
 		this.localuser.pageTitle(I18n.discovery());

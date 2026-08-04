@@ -1058,10 +1058,12 @@ textarea {
 	right: 5px;
 	transition: top 0.2s;
 	transition-timing-function: ease-in;
-	background: white;
+	backdrop-filter: blur(20px);
+	mix-blend-mode: difference;
+	background: #969696;
 	cursor: pointer;
 	&.favorited {
-		background: yellow;
+		background: orange;
 	}
 }
 .visually-hidden {
@@ -1130,6 +1132,10 @@ textarea {
 }
 .svg-pin {
 	mask: url(./icons/pin.svg);
+	mask-size: cover;
+}
+.svg-link {
+	mask: url(./icons/link.svg);
 	mask-size: cover;
 }
 .svg-rules {
@@ -1304,7 +1310,7 @@ textarea {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	background: #0000009e;
+	background: var(--secondary-bg);
 	padding: 6px;
 	border-radius: 100%;
 	cursor: pointer;
@@ -1597,6 +1603,12 @@ textarea {
 	&[hidden] {
 		display: none;
 	}
+}
+#filedroptext {
+	max-width: 75%;
+	max-height: 75vh;
+	padding: 8em 8em 8em 8em;
+	text-align: center;
 }
 .commandError {
 	position: absolute;
@@ -2076,6 +2088,7 @@ span.instanceStatus {
 	align-items: start;
 	padding-top: 10px;
 	background-size: cover;
+	color: white;
 	.ellipsis {
 		text-shadow: 0px 0px 8px black;
 	}
@@ -2452,7 +2465,7 @@ span.instanceStatus {
 	flex: 0;
 }
 #pasteimage {
-	height: 30%;
+	max-height: 30%;
 	padding: 12px;
 	margin: 16px;
 	background: var(--typebox-bg);
@@ -2477,13 +2490,14 @@ span.instanceStatus {
 	border-radius: 8px;
 	overflow: hidden;
 	height: 192px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	.unknownfile {
 		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
 	}
 }
 .messageimgdiv {
@@ -2551,6 +2565,7 @@ span.instanceStatus {
 	flex-shrink: 1;
 	text-wrap: auto;
 	overflow-y: auto;
+	word-break: break-word;
 	margin-right: 0.03in;
 	padding: 10px 0;
 }
@@ -3171,8 +3186,10 @@ span .quote:last-of-type .quoteline {
 	gap: 4px;
 	flex-wrap: wrap;
 	video {
-		max-height: 288px;
-		max-width: 288px;
+		min-height: 200px;
+		min-width: 200px;
+		max-height: 25%;
+		max-width: 50%;
 	}
 }
 .embed {
@@ -3389,33 +3406,34 @@ img.bigembedimg {
 	}
 }
 ::highlight(highkeyword) {
-	color: yellow;
+	color: var(--code-keyword);
 }
 ::highlight(highnumber) {
-	color: orange;
+	color: var(--code-number);
 }
 ::highlight(highstring) {
-	color: red;
+	color: var(--code-string);
 }
 ::highlight(highsymbol) {
-	color: white;
+	color: var(--primary-text-prominent);
 	font-weight: bold;
 }
 ::highlight(highcomment) {
-	color: green;
+	color: var(--code-comment);
 }
 ::highlight(highidentifier) {
-	color: white;
+	color: var(--primary-text);
 }
 ::highlight(highClass) {
-	color: #6741ff;
+	color: var(--code-class);
 }
 ::highlight(highProp) {
-	color: #33dcff;
+	color: var(--code-prop);
 }
 ::highlight(highFunc) {
-	color: #d564ff;
+	color: var(--code-func);
 }
+
 #memberlisttoggle.svgicon {
 	-moz-appearance: initial;
 	&::before {

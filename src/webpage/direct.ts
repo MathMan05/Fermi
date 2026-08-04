@@ -492,7 +492,15 @@ class Group extends Channel {
 		);
 
 		this.groupcontextmenu.addSeperator(undefined, "dm");
-
+		this.groupcontextmenu.addButton(
+			I18n.DMs.copyURL(),
+			function (this: Group) {
+				navigator.clipboard.writeText(`${location.origin}/channels/@me/${this.id}`);
+			},
+			{
+				group: "id",
+			},
+		);
 		this.groupcontextmenu.addButton(
 			() => I18n.DMs.copyId(),
 			function (this: Group) {

@@ -23,7 +23,7 @@ import {
 } from "./jsontypes.js";
 import {Member} from "./member.js";
 import {buttonColor, Dialog, Form, FormError, Options, Settings} from "./settings.js";
-import {getTextNodeAtPosition, MarkDown, saveCaretPosition} from "./markdown.js";
+import {getTextNodeAtPosition, MarkDown} from "./markdown.js";
 import {Bot} from "./bot.js";
 import {Role} from "./role.js";
 import {VoiceFactory, voiceStatusStr} from "./voice.js";
@@ -53,15 +53,14 @@ import {trimTrailingSlashes} from "./utils/netUtils.js";
 import {Versions} from "./versions.js";
 import {Shortcut} from "./shortcuts/shortcut.js";
 import {getShortcuts, setShortcuts} from "./utils/storage/shortcuts.js";
+import {TypeBox} from "./typeBox.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
 };
 type trace = [string, traceObj];
 const wsCodesRetry = new Set([4000, 4001, 4002, 4003, 4005, 4007, 4008, 4009]);
-interface CustomHTMLDivElement extends HTMLDivElement {
-	markdown: MarkDown;
-}
+
 interface MDSearchOption {
 	name: string;
 	replace: string;
@@ -1755,6 +1754,7 @@ class Localuser {
 	}
 
 	loadGuild(id: string, forceReload = false): Guild | undefined {
+		TypeBox.saveBox();
 		this.searching = false;
 		let guild = this.guilds.get(id);
 		if (!guild) {
@@ -4280,21 +4280,12 @@ class Localuser {
 		});
 	}
 	updateSend() {
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		if (
-			(typebox.markdown.rawString && typebox.markdown.rawString !== "\n") ||
-			document.getElementById("pasteimage")?.children.length
-		) {
-			typebox.parentElement!.classList.remove("noConent");
-		} else {
-			typebox.parentElement!.classList.add("noConent");
-		}
+		TypeBox.updateSend();
 	}
 	//TODO make this an option
 	readonly autofillregex = Object.freeze(/(^|\s|\n)[@#:]([a-zA-Z0-9]*)$/i);
 	mdBox() {
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		const typeMd = typebox.markdown;
+		const typeMd = TypeBox.markdown;
 		typeMd.owner = this;
 		typeMd.onUpdate = (str, pre) => {
 			this.search(document.getElementById("searchOptions") as HTMLDivElement, typeMd, str, pre);
@@ -4529,8 +4520,7 @@ class Localuser {
 		search.focus();
 	}
 	async TBEmojiMenu(rect: DOMRect) {
-		const typebox = document.getElementById("typebox") as CustomHTMLDivElement;
-		const p = saveCaretPosition(typebox);
+		const p = TypeBox.saveCarrot();
 		if (!p) return;
 		const original = MarkDown.getText();
 
@@ -4541,7 +4531,7 @@ class Localuser {
 		);
 		this.favorites.addEmoji(emoji.id || (emoji.emoji as string));
 		p();
-		const md = typebox.markdown;
+		const md = TypeBox.markdown;
 		this.MDReplace(
 			emoji.id
 				? `<${emoji.animated ? "a" : ""}:${emoji.name}:${emoji.id}>`
@@ -4576,10 +4566,6 @@ class Localuser {
 			);
 		}
 	}
-	fileExtange!: (
-		files: Blob[],
-		html: WeakMap<Blob, HTMLElement>,
-	) => [Blob[], WeakMap<Blob, HTMLElement>];
 	MDSearchOptions(
 		options: MDSearchOption[],
 		original: string,

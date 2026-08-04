@@ -24,6 +24,12 @@
 		"whatelse": "어떻게 되어야 한다고 생각시나요?",
 		"whereever": "이곳이 무엇이든"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "온보딩",
 		"disable": "온보딩 비활성화",
@@ -156,7 +162,7 @@
 		"text": "텍스트",
 		"timedOutUntil": "다음 시간까지 타임아웃: $1",
 		"topic:": "주제:",
-		"typebox": "$1에서의 메시지",
+		"typebox": "# $1에서의 메시지",
 		"unmute": "채널 알림 표시",
 		"voice": "음성",
 		"deleteThread": "스레드 삭제",
@@ -806,7 +812,7 @@
 		"bio": "내 정보:",
 		"joined": "계정 생성일: $1",
 		"joinedMember": "가입일 $1: $2",
-		"mut": "상호 길드",
+		"mut": "상호 길드 ($1)",
 		"mutFriends": "상호 친구",
 		"permInfo": "권한",
 		"userInfo": "사용자 정보",

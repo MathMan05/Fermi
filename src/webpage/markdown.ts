@@ -6,6 +6,7 @@ import {I18n} from "./i18n.js";
 import {Dialog} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
 import {highlight} from "./highlighter/index.js";
+import {TypeBox} from "./typeBox.js";
 const linkMenu = new Contextmenu<string, void>("copyLink", true);
 linkMenu.addButton(
 	() => I18n.copyRegLink(),
@@ -14,7 +15,7 @@ linkMenu.addButton(
 	},
 	{group: "copyLink"},
 );
-const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
+const isFirefox = Error.prototype.stack === "";
 class MarkDown {
 	static emoji?: typeof Emoji;
 	txt: string[];
@@ -351,19 +352,20 @@ class MarkDown {
 				if (stdsize) {
 					build = build.replaceAll("\n", "");
 				}
-				if (find === count) {
+				if (find === count || (keep && count === 3)) {
 					appendcurrent();
 					i = j;
 					if (keep) {
 						build += "`".repeat(find);
 					}
+					if (build.endsWith("\n")) build += "\n";
 					if (count !== 3 && !stdsize) {
 						const samp = document.createElement("samp");
 						samp.textContent = build;
 						span.appendChild(samp);
 					} else {
 						const pre = document.createElement("pre");
-						if (build.at(-1) === "\n") {
+						if (build.at(-1) === "\n" && !isFirefox) {
 							build = build.substring(0, build.length - 1);
 						}
 						if (txt[i] === "\n") {
@@ -974,14 +976,20 @@ class MarkDown {
 		}
 		appendcurrent();
 		const last = getCurLast();
-
+		function addSpacer() {
+			const s = document.createElement("span");
+			s.style.setProperty("white-space", "pre");
+			s.textContent = "​";
+			s.setAttribute("real", "");
+			span.append(s);
+		}
 		if (
 			last &&
-			last instanceof Text &&
-			last.textContent === "\n" &&
-			Error.prototype.stack === "" &&
-			!isFirefox
+			isFirefox &&
+			(last instanceof Text || last instanceof HTMLSpanElement) &&
+			last.textContent === "\n"
 		) {
+			addSpacer();
 			span.append(current);
 		}
 		if (
@@ -1052,17 +1060,6 @@ class MarkDown {
 		box.addEventListener("keydown", (_) => {
 			if (_.isComposing) return;
 			if (Error.prototype.stack !== "") return;
-			if (_.key === "Enter") {
-				const selection = window.getSelection() as Selection;
-				if (!selection) return;
-				const range = selection.getRangeAt(0);
-				const node = new Text("\n");
-				range.insertNode(node);
-				const g = node.nextSibling;
-				if (g) range.setStart(g, 0);
-				_.preventDefault();
-				return;
-			}
 		});
 		let prevcontent = "";
 		const gatherBoxContents = (isBackSpace: boolean) => {
@@ -1083,28 +1080,29 @@ class MarkDown {
 			const content = this.rawString;
 			if (content) {
 				let txti = text;
-				if (trim) {
+				if (trim && TypeBox.inPre()) {
 					txti = txti.replace(/\n$/, "");
 				}
-				const [_first, end] = content.split(txti);
-				console.log([txti, txt, end]);
+				const [first, ...ends] = content.split(txti);
+				const end = ends.join(txti);
 				if (rstr) {
 					const tw = text.split(rstr);
 					tw.pop();
 					text = tw.join("");
 				}
-				const boxText = txti + txt + (end ?? "");
-				box.textContent = boxText;
+				const boxText = first + txti + txt + (end ?? "");
+				box.innerHTML = "";
+				this.txt = boxText.split("");
+				box.append(this.makeHTML({keep: true}));
 				const len = txti.length + txt.length;
 				text = boxText;
-				this.txt = text.split("");
 
 				this.boxupdate(len, false, 0);
-				console.log(this.rawString);
 			} else {
-				box.textContent = txt;
+				this.txt = txt.split("");
+				box.innerHTML = "";
+				box.append(this.makeHTML({keep: true}));
 				text = txt;
-				this.txt = text.split("");
 				this.boxupdate(txt.length, false, 0);
 			}
 		};
@@ -1114,7 +1112,7 @@ class MarkDown {
 			gatherBoxContents(_.key === "Backspace");
 		};
 		box.onkeydown = (_) => {
-			if (isFirefox && _.key === "Enter" && !text.endsWith("\n")) {
+			if (isFirefox && _.key === "Enter" && (TypeBox.inPre() || _.shiftKey)) {
 				_.preventDefault();
 				_.stopImmediatePropagation();
 
@@ -1191,6 +1189,7 @@ class MarkDown {
 				html.childNodes[0].childNodes.length === 1 &&
 				html.childNodes[0].childNodes[0];
 			//console.log(box.cloneNode(true), html.cloneNode(true));
+			if (isFirefox) allowLazy = false;
 			//TODO this may be slow, may want to check in on this in the future if it is
 			if ((!box.hasChildNodes() || html.isEqualNode(Array.from(box.childNodes)[0])) && allowLazy) {
 				//console.log("no replace needed");
@@ -1233,6 +1232,11 @@ class MarkDown {
 			if (thing instanceof Text) {
 				const text = thing.textContent;
 				build += text;
+				if (element.tagName.toLowerCase() === "pre") {
+					if (build.endsWith("\n") && isFirefox) {
+						build = build.replace(/\n$/, "");
+					}
+				}
 
 				continue;
 			}
@@ -1431,13 +1435,13 @@ function saveCaretPosition(
 						build += node.textContent;
 					}
 				} else {
-					//console.error(node,"This shouldn't happen");
+					//console.error(node, "This shouldn't happen");
 				}
 			}
 		}
 		crawlForText(context);
 		if (baseString === "\n") {
-			build += baseString;
+			//build += baseString;
 		}
 		text = build;
 		len += build.length;
@@ -1447,15 +1451,14 @@ function saveCaretPosition(
 		len = Math.min(len, txtLengthFunc(context).length);
 		len += offset;
 
-		return function restore(backspace = false) {
+		return function restore(_backspace = false) {
 			if (!selection) return;
 			const pos = getTextNodeAtPosition(context, len, txtLengthFunc);
 			if (
 				pos.node instanceof Text &&
 				pos.node.textContent === "\n" &&
 				pos.node.nextSibling &&
-				Error.prototype.stack === "" &&
-				!backspace
+				isFirefox
 			) {
 				if (pos.node.nextSibling instanceof Text && pos.node.nextSibling.textContent === "\n") {
 					pos.position = 1;
