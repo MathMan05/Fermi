@@ -5287,7 +5287,7 @@ img.error::after {
 	background: transparent;
 	width: 48px;
 	height: 48px;
-	img {
+	.pfpDiv {
 		width: 24px;
 		height: 24px;
 		&:nth-child(1) {
