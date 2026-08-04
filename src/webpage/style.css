@@ -2887,6 +2887,7 @@ span.instanceStatus {
 	width: fit-content;
 	background-clip: border-box !important;
 	align-self: center;
+	vertical-align: center;
 }
 .membererror {
 	display: inline-block;
