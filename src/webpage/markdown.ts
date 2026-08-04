@@ -1060,18 +1060,6 @@ class MarkDown {
 		box.addEventListener("keydown", (_) => {
 			if (_.isComposing) return;
 			if (Error.prototype.stack !== "") return;
-			if (_.key === "Enter" && !TypeBox.inPre() && !_.shiftKey) {
-				return;
-				const selection = window.getSelection() as Selection;
-				if (!selection) return;
-				const range = selection.getRangeAt(0);
-				const node = new Text("\n");
-				range.insertNode(node);
-				const g = node.nextSibling;
-				if (g) range.setStart(g, 0);
-				_.preventDefault();
-				return;
-			}
 		});
 		let prevcontent = "";
 		const gatherBoxContents = (isBackSpace: boolean) => {
