@@ -1310,7 +1310,7 @@ textarea {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	background: #0000009e;
+	background: var(--secondary-bg);
 	padding: 6px;
 	border-radius: 100%;
 	cursor: pointer;
