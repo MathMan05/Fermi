@@ -2882,12 +2882,13 @@ span.instanceStatus {
 	background: color-mix(in srgb, var(--accent-color) 75%, transparent) !important;
 	font-size: 0.75em !important;
 	font-weight: bold;
-	color: var(--primary-text-prominent) !important;
+	color: white !important;
 	border-radius: 4px;
 	flex: none;
 	width: fit-content;
 	background-clip: border-box !important;
 	align-self: center;
+	vertical-align: center;
 }
 .membererror {
 	display: inline-block;
