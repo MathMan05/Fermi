@@ -119,6 +119,9 @@
 	},
 	"bio": "Label for the bio/about-me text field in user settings.",
 	"blankMessage": "Placeholder text shown when a message has no content.",
+	"sentAttachment": "Notification message when someone sends an attachment",
+	"sentPoll": "Notification message when someone sends a poll",
+	"sentSticker": "Notification message when someone sends a sticker",
 	"blog": {
 		"blog": "Settings section title for the blog feature.",
 		"blogUpdates": "Label for the toggle to enable/disable blog update notifications.",

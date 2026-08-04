@@ -20,6 +20,17 @@ export class NotificationHandler {
 			noticontent ||= message.embeds[0]?.json.title;
 			noticontent ||= message.content.textContent;
 		}
+		if (message.attachments.length > 0) {
+			noticontent ||= I18n.sentAttachment();
+		}
+		if (message.poll) {
+			noticontent ||= I18n.sentPoll();
+		}
+		if (message.stickers.length > 0) {
+			noticontent ||= I18n.sentSticker();
+		}
+		// exhausted all options, sorry, we just send the raw thing!
+		noticontent ||= message.content.rawString;
 		noticontent ||= I18n.blankMessage();
 
 		const image = message.getimages()[0];

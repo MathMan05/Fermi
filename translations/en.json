@@ -117,6 +117,9 @@
 	},
 	"bio": "Bio:",
 	"blankMessage": "Blank message",
+	"sentAttachment": "Sent an attachment",
+	"sentPoll": "Sent a poll",
+	"sentSticker": "Sent a sticker",
 	"blog": {
 		"blog": "Blog",
 		"blogUpdates": "Get blog updates when you open the app:",
