@@ -25,6 +25,12 @@
 		"whatelse": "Cos'altro pensi che dovrebbe succedere?",
 		"whereever": "Ovunque questo sia"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "Inserimento",
 		"addChannel": "Aggiungi canale",
@@ -123,6 +129,7 @@
 	"cancel": "Annulla",
 	"channel": {
 		"SlowmodeCool": "Tempo di attesa slowmode: $1",
+		"copyURL": "Copia l'URL del canale",
 		"TimeOutCool": "In time-out fino: $1",
 		"allowIcons": "Consenti di mettere icone del canale personalizzati",
 		"announcement": "Annunci",

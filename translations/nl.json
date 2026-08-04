@@ -21,6 +21,12 @@
 		"whatelse": "Wat denkt u dat er nog meer moet gebeuren?",
 		"whereever": "Waar dit ook is"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "Inwerken",
 		"disable": "Inwerken uitschakelen",
@@ -35,6 +41,7 @@
 	"DMs": {
 		"add": "Iemand aan dit directe bericht toevoegen",
 		"close": "Directe bericht sluiten",
+		"copyURL": "DM-url kopiëren",
 		"copyId": "Directe bericht-ID kopiëren",
 		"markRead": "Markeren als gelezen",
 		"name": "Directe berichten"
@@ -126,6 +133,7 @@
 	"cancel": "Annuleren",
 	"channel": {
 		"SlowmodeCool": "Afkoeltijd voor langzame modus: $1",
+		"copyURL": "Kanaal-url kopiëren",
 		"TimeOutCool": "Time-out bereikt na: $1",
 		"allowIcons": "Aangepaste kanaalpictogrammen toestaan",
 		"announcement": "Aankondigingen",
@@ -153,7 +161,7 @@
 		"text": "Tekst",
 		"timedOutUntil": "Time-out bereikt na: $1",
 		"topic:": "Onderwerp:",
-		"typebox": "Bericht in $1",
+		"typebox": "Bericht in # $1",
 		"unmute": "Dempen kanaal opheffen",
 		"voice": "Spraak",
 		"deleteThread": "Onderwerp verwijderen",
@@ -742,7 +750,8 @@
 			"REQUEST_TO_SPEAK": "Laat rolleden een spreekverzoek indienen in de podiumkanalen.",
 			"USE_EMBEDDED_ACTIVITIES": "Hiermee kunnen rolleden ingebedde activiteiten gebruiken.",
 			"USE_APPLICATION_COMMANDS": "Hiermee kunnen rolleden toepassingsopdrachten gebruiken.",
-			"USE_EXTERNAL_APPS": "Hiermee kunnen rolleden hun toepassingenreacties openbaar in het kanaal weergeven. Indien uitgeschakeld, kunnen gebruikers hun apps nog steeds gebruiken, maar zijn de reacties alleen voor henzelf zichtbaar. Dit geldt alleen voor apps die niet ook in het gilde zijn geïnstalleerd."
+			"USE_EXTERNAL_APPS": "Hiermee kunnen rolleden hun toepassingenreacties openbaar in het kanaal weergeven. Indien uitgeschakeld, kunnen gebruikers hun apps nog steeds gebruiken, maar zijn de reacties alleen voor henzelf zichtbaar. Dit geldt alleen voor apps die niet ook in het gilde zijn geïnstalleerd.",
+			"SET_VOICE_CHANNEL_STATUS": "Spraakkanaalstatus instellen"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "Reacties toevoegen",
@@ -795,7 +804,8 @@
 			"VIEW_AUDIT_LOG": "Inspectielogboek bekijken",
 			"VIEW_CHANNEL": "Kanalen bekijken",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "Monetisatie-analyses voor makers bekijken",
-			"VIEW_GUILD_INSIGHTS": "Gilde-inzichten bekijken"
+			"VIEW_GUILD_INSIGHTS": "Gilde-inzichten bekijken",
+			"SET_VOICE_CHANNEL_STATUS": "Spraakkanaalstatus instellen"
 		}
 	},
 	"pinMessage": "Bericht vastzetten",
@@ -803,12 +813,13 @@
 		"bio": "Over mij:",
 		"joined": "Account aangemaakt: $1",
 		"joinedMember": "Toegetreden tot $1: $2",
-		"mut": "Gedeelde gilden",
+		"mut": "Gedeelde gilden ($1)",
 		"mutFriends": "Wederzijdse vrienden",
 		"permInfo": "Rechten",
 		"userInfo": "Gebruikersinfo",
 		"notes": "Gebruikersopmerkingen"
 	},
+	"messageNotLoad": "Berichten konden niet worden geladen",
 	"profileColor": "Profielkleur",
 	"pronouns": "Voornaamwoorden:",
 	"readableName": "Nederlands",

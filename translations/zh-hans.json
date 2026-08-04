@@ -29,6 +29,12 @@
 		"whatelse": "您认为应该还会发生什么事？",
 		"whereever": "无论这在哪里"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "入门",
 		"disable": "禁用入门",
@@ -43,6 +49,7 @@
 	"DMs": {
 		"add": "将某人添加到此私信",
 		"close": "关闭私信",
+		"copyURL": "复制私信 URL",
 		"copyId": "复制私信 ID",
 		"markRead": "标记为已读",
 		"name": "私信"
@@ -134,6 +141,7 @@
 	"cancel": "取消",
 	"channel": {
 		"SlowmodeCool": "慢速模式冷却时间：$1",
+		"copyURL": "复制频道 URL",
 		"TimeOutCool": "超时至：$1",
 		"allowIcons": "允许自定义频道图标",
 		"announcement": "公告",
@@ -813,12 +821,13 @@
 		"bio": "关于我：",
 		"joined": "账户已创建： $1",
 		"joinedMember": "已加入$1：$2",
-		"mut": "互助公会",
+		"mut": "互助公会（$1）",
 		"mutFriends": "共同好友",
 		"permInfo": "权限",
 		"userInfo": "用户信息",
 		"notes": "用户笔记"
 	},
+	"messageNotLoad": "消息加载失败",
 	"profileColor": "个人档案色",
 	"pronouns": "称谓：",
 	"readableName": "简体中文",
