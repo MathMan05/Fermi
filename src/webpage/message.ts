@@ -28,6 +28,7 @@ import {ImagesDisplay} from "./disimg";
 import {ReportMenu} from "./reporting/report.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings.js";
 import {getPreferences} from "./utils/storage/userPreferences.js";
+import {TypeBox} from "./typeBox.js";
 class Message extends SnowFlake {
 	static contextmenu = new Contextmenu<Message, void>("message menu");
 	stickers!: Sticker[];
@@ -1017,7 +1018,7 @@ class Message extends SnowFlake {
 				area.append(md.makeHTML());
 				area.addEventListener("keyup", (event) => {
 					if (this.localuser.keyup(event)) return;
-					if (event.key === "Enter" && !event.shiftKey) {
+					if (event.key === "Enter" && !event.shiftKey && !TypeBox.inPre()) {
 						this.edit(MarkDown.gatherBoxText(area));
 						this.channel.editing = null;
 						this.generateMessage();
@@ -1025,7 +1026,7 @@ class Message extends SnowFlake {
 				});
 				area.addEventListener("keydown", (event) => {
 					this.localuser.keydown(event);
-					if (event.key === "Enter" && !event.shiftKey) event.preventDefault();
+					if (event.key === "Enter" && !event.shiftKey && !TypeBox.inPre()) event.preventDefault();
 					if (event.key === "Escape") {
 						this.channel.editing = null;
 						this.generateMessage();

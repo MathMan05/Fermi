@@ -33,7 +33,7 @@ export class TypeBox {
 		this.box.addEventListener("keydown", (event) => {
 			if (event.isComposing) return;
 			this.localuser?.keydown(event);
-			if (event.key === "Enter" && !event.shiftKey && window.innerWidth > 600) {
+			if (event.key === "Enter" && !event.shiftKey && window.innerWidth > 600 && !TypeBox.inPre()) {
 				event.preventDefault();
 				event.stopImmediatePropagation();
 			}
@@ -268,6 +268,16 @@ export class TypeBox {
 		};
 		this.localuser = l;
 	}
+	static inPre() {
+		const selection = window.getSelection();
+		if (!selection) return false;
+		let node = selection.anchorNode;
+		while (node) {
+			if (node instanceof HTMLPreElement) return true;
+			node = node.parentElement;
+		}
+		return false;
+	}
 	private static async handleEnter(event: KeyboardEvent): Promise<void> {
 		if (event.isComposing) return;
 		if (event.key === "Escape" && (this.files.length || this.localuser?.focusChannel?.replyingto)) {
@@ -296,7 +306,7 @@ export class TypeBox {
 		}
 		channel.typingstart();
 
-		if (event.key === "Enter" && !event.shiftKey && window.innerWidth > 600) {
+		if (event.key === "Enter" && !event.shiftKey && window.innerWidth > 600 && !this.inPre()) {
 			event.preventDefault();
 			await this.sendMessage(channel, content);
 		}
