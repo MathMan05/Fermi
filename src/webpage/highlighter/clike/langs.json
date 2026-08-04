@@ -8,6 +8,10 @@
 	"JSLikeTemplateStrings": true
 },
 {
+	"names":["json"],
+	"keywords":["true","false","null"]
+},
+{
 	"names":["h","c","hc","c23","c89","ansic","ansi-c","khr-c","khrc"],
 	"keywords":["auto", "break", "case", "char", "continue", "do", "default", "const", "double", "else", "enum", "extern", "for", "if", "goto", "float", "int", "long", "register", "return", "signed", "static", "sizeof", "short", "struct", "switch", "typedef", "union", "void", "while", "volatile", "unsigned"],
 	"hashComments": true,
@@ -85,5 +89,13 @@
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,
 	"multiLine":"\"\"\""
+},
+{
+	"names":["bash","sh","ksh","csh","shell"],
+	"keywords":["if","fi","else","then","while","do","for","continue","done","break","case","esac","in","local","return","declare","EOF","readonly","true","false"],
+	"firstLineShebang":true,
+	"hashComments": true,
+	"doubleSlashComments": false,
+	"multilineSlashComments": false
 }
 ]
