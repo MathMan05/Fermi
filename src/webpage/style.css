@@ -3149,8 +3149,8 @@ span .quote:last-of-type .quoteline {
 	user-select: none;
 }
 .reaction {
-	min-width: 2em;
-	min-height: 2em;
+	min-width: 1.25em;
+	min-height: 1.25em;
 	padding: 3px 4px;
 	margin-top: 4px;
 	background: var(--reaction-bg);
@@ -3161,10 +3161,7 @@ span .quote:last-of-type .quoteline {
 	align-items: center;
 	cursor: pointer;
 	gap: 4px;
-	.smallemoji {
-		max-width: 1.5em;
-		max-height: 1.55em;
-	}
+	font-size: 1.25em;
 }
 .reaction p {
 	line-height: 1em;
