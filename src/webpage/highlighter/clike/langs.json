@@ -8,10 +8,6 @@
 	"JSLikeTemplateStrings": true
 },
 {
-	"names":["json"],
-	"keywords":["true","false","null"]
-},
-{
 	"names":["h","c","hc","c23","c89","ansic","ansi-c","khr-c","khrc"],
 	"keywords":["auto", "break", "case", "char", "continue", "do", "default", "const", "double", "else", "enum", "extern", "for", "if", "goto", "float", "int", "long", "register", "return", "signed", "static", "sizeof", "short", "struct", "switch", "typedef", "union", "void", "while", "volatile", "unsigned"],
 	"hashComments": true,
