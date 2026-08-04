@@ -210,7 +210,6 @@ class Embed {
 		const div = document.createElement("div");
 		div.classList.add("messageimgdiv");
 		const img = createImg(this.json.thumbnail.proxy_url);
-		img.classList.add("messageimg");
 		img.onclick = () => {
 			const full = new ImagesDisplay([
 				new File(
@@ -442,7 +441,6 @@ class Embed {
 			video.controls = true;
 			video.preload = "metadata";
 			video.src = videoUrl;
-			video.classList.add("messageimg");
 			if (this.json.video?.width) {
 				let scale = 1;
 				const max = 96 * 3;

@@ -2505,16 +2505,13 @@ span.instanceStatus {
 	overflow: clip;
 	width: fit-content;
 	height: fit-content;
-}
-.messageimg {
-	height: 100%;
-	width: 100%;
-	object-fit: contain;
-	user-select: none;
-	cursor: pointer;
-}
-.attachments .messageimg {
-	border-radius: 4px;
+	img, div {
+		height: 100%;
+		width: 100%;
+		object-fit: contain;
+		user-select: none;
+		cursor: pointer;
+	}
 }
 #replybox {
 	height: 32px;
@@ -3173,6 +3170,21 @@ span .quote:last-of-type .quoteline {
 		min-width: 200px;
 		max-height: 25%;
 		max-width: 50%;
+	}
+	.messageimgdiv {
+		img, video {
+			border-radius: 4px;
+		}
+	}
+	.messagegallerydiv {
+		object-fit: fill;
+		height: 200px;
+		max-width: 50%;
+		overflow: hidden;
+		img, video {
+			height: 100%;
+			object-fit: cover;
+		}
 	}
 }
 .embed {
