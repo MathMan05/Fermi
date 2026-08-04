@@ -3336,7 +3336,7 @@ img.bigembedimg {
 
 /* Sidebar */
 #sideContainDiv {
-	padding: 16px 8px;
+	padding: 16px 8px 0px 8px;
 	display: none;
 	flex: none;
 	width: 240px;
