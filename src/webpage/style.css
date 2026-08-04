@@ -5019,14 +5019,15 @@ fieldset input[type="radio"] {
 .gifPreviewBox {
 	position: relative;
 	width: 2in;
+	height: 1in;
 	margin-bottom: 10px;
 	border-radius: 7px;
 	overflow: hidden;
 	cursor: pointer;
 
 	img {
-		width: 2in;
-		height: 1in;
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 	}
 	span {
@@ -5038,8 +5039,9 @@ fieldset input[type="radio"] {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: color-mix(in srgb, var(--card-bg) 60%, transparent);
 		font-weight: bold;
+		color: white;
+		background: color-mix(in srgb, black 50%, transparent);
 	}
 }
 .gifbox {
