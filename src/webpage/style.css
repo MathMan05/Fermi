@@ -4891,18 +4891,15 @@ fieldset input[type="radio"] {
 .friendcontainer {
 	display: flex;
 	width: 100%;
-	padding: 0.2in;
+	padding: 0.15in;
 	overflow-y: auto;
 	height: 100%;
 	align-items: stretch;
 	box-sizing: border-box;
-
 	> div {
-		background: #00000030;
-		margin-bottom: 0.1in;
 		padding: 0.06in 0.1in;
-		border-radius: 0.1in;
-		border: solid 1px var(--black);
+		margin: 0 0;
+		border-bottom: solid 1px var(--secondary-bg);
 	}
 }
 .fixedsearch {
@@ -4961,16 +4958,15 @@ fieldset input[type="radio"] {
 }
 .friendlyButton {
 	padding: 0.07in;
-	background: #00000045;
 	transition: background 0.2s;
 	border-radius: 1in;
-	border: solid 1px var(--black);
+	border: solid 1px var(--secondary-bg);
 	width: 24px;
 	height: 24px;
 	margin: 0 0.05in;
 }
 .friendlyButton:hover {
-	background: black;
+	background: var(--secondary-hover);
 }
 .stickerOption {
 	border: solid 1px var(--black);
