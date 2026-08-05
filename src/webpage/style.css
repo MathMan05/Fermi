@@ -5181,7 +5181,6 @@ img.error::after {
 	border-radius: 2in;
 }
 .stickerMArea {
-	padding-left: 48px;
 }
 .solidBackground {
 	background: var(--secondary-bg);

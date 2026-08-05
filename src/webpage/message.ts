@@ -1294,7 +1294,7 @@ class Message extends SnowFlake {
 		for (const sticker of this.stickers) {
 			stickerArea.append(sticker.getHTML());
 		}
-		div.append(stickerArea);
+		text.append(stickerArea);
 
 		if (this.poll) {
 			const pollbody = document.createElement("div");
