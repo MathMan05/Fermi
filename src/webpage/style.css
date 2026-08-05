@@ -3523,7 +3523,7 @@ img.bigembedimg {
 	border-radius: 8px;
 	overflow: hidden;
 	align-items: flex-start;
-	z-index: 3;
+	z-index: 4;
 	display: flex;
 	flex-direction: column;
 	.banner {
