@@ -3526,6 +3526,9 @@ img.bigembedimg {
 	z-index: 3;
 	display: flex;
 	flex-direction: column;
+	.banner {
+		height: 64px;
+	}
 	.infosection {
 		background-color: color-mix(in srgb, var(--secondary-bg) 75%, transparent);
 	}
