@@ -4523,32 +4523,34 @@ fieldset input[type="radio"] {
 	position: relative;
 	padding: 0px;
 	cursor: pointer;
+	flex-direction: row-reverse;
+
 	&::after {
 		content: "";
 		background: var(--secondary-bg);
-		transition: left 0.2s;
+		transition: right 0.2s;
 		border-radius: 4px;
 		width: 18px;
 		height: 18px;
 		display: block;
 		top: 3px;
-		left: 2px;
+		right: 2px;
 		position: absolute;
 	}
-	:first-child {
+	:last-child {
 		border-radius: 5px 0px 0px 5px;
 	}
-	:last-child {
+	:first-child {
 		border-radius: 0px 5px 5px 0px;
 	}
 	&:has(:first-child.selected)::after {
-		left: 3px;
+		right: 3px;
 	}
 	&:has(:nth-child(2).selected)::after {
-		left: 27px;
+		right: 27px;
 	}
 	&:has(:nth-child(3).selected)::after {
-		left: 51px;
+		right: 51px;
 	}
 }
 .tritoggle > .triOpt {
