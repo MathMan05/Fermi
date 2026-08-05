@@ -3523,9 +3523,10 @@ img.bigembedimg {
 	border-radius: 8px;
 	overflow: hidden;
 	align-items: flex-start;
-	z-index: 3;
+	z-index: 4;
 	display: flex;
 	flex-direction: column;
+
 	.infosection {
 		background-color: color-mix(in srgb, var(--secondary-bg) 75%, transparent);
 	}
