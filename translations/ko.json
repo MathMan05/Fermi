@@ -44,6 +44,7 @@
 	"DMs": {
 		"add": "이 메시지에 누군가를 추가",
 		"close": "DM 닫기",
+		"copyURL": "DM URL 복사",
 		"copyId": "DM ID 복사",
 		"markRead": "읽은 것으로 표시",
 		"name": "직신"
@@ -121,6 +122,9 @@
 	},
 	"bio": "자기 소개:",
 	"blankMessage": "빈 메시지",
+	"sentAttachment": "첨부 파일을 보냈습니다",
+	"sentPoll": "설문 조사를 보냈습니다",
+	"sentSticker": "스티커를 보냈습니다",
 	"blog": {
 		"blog": "블로그",
 		"blogUpdates": "앱을 열었을 때 블로그 업데이트 받기:",
@@ -135,6 +139,7 @@
 	"cancel": "취소",
 	"channel": {
 		"SlowmodeCool": "저속 모드 쿨다운: $1",
+		"copyURL": "채널 URL 복사",
 		"TimeOutCool": "다음 시간까지 타임아웃: $1",
 		"allowIcons": "사용자 지정 채널 아이콘 허용",
 		"announcement": "알림",
@@ -751,7 +756,8 @@
 			"REQUEST_TO_SPEAK": "역할 멤버가 스테이지 채널에서 말할 수 있도록 허용합니다.",
 			"USE_EMBEDDED_ACTIVITIES": "역할 멤버가 임베디드 활동을 사용할 수 있도록 허용합니다.",
 			"USE_APPLICATION_COMMANDS": "역할 멤버가 애플리케이션 명령을 사용할 수 있도록 허용합니다.",
-			"USE_EXTERNAL_APPS": "역할 멤버가 애플리케이션 응답을 채널에 공개적으로 표시할 수 있도록 허용합니다. (비활성화하더라도 사용자는 앱을 계속 사용할 수 있지만 응답은 본인에게만 표시됩니다. 이 기능은 길드에 설치되지 않은 앱에만 적용됩니다.)"
+			"USE_EXTERNAL_APPS": "역할 멤버가 애플리케이션 응답을 채널에 공개적으로 표시할 수 있도록 허용합니다. (비활성화하더라도 사용자는 앱을 계속 사용할 수 있지만 응답은 본인에게만 표시됩니다. 이 기능은 길드에 설치되지 않은 앱에만 적용됩니다.)",
+			"SET_VOICE_CHANNEL_STATUS": "음성 채널 상태 설정"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "반응 추가",
@@ -804,7 +810,8 @@
 			"VIEW_AUDIT_LOG": "감사 로그 보기",
 			"VIEW_CHANNEL": "채널 보기",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "크리에이터 수익 창출 분석 보기",
-			"VIEW_GUILD_INSIGHTS": "길드 분석 정보 보기"
+			"VIEW_GUILD_INSIGHTS": "길드 분석 정보 보기",
+			"SET_VOICE_CHANNEL_STATUS": "음성 채널 상태 설정"
 		}
 	},
 	"pinMessage": "메시지 고정",
@@ -818,6 +825,7 @@
 		"userInfo": "사용자 정보",
 		"notes": "사용자 메모"
 	},
+	"messageNotLoad": "메시지를 불러오는 데 실패했습니다",
 	"profileColor": "프로필 색상",
 	"pronouns": "대명사:",
 	"readableName": "한국어",
@@ -1002,7 +1010,14 @@
 		"unknown": "@unknown-user"
 	},
 	"keyboard": {
-		"shortcuts": "단축키"
+		"shortcuts": "단축키",
+		"descs": {
+			"gifSearch": "GIF 검색:"
+		}
+	},
+	"domain": {
+		"title": "도메인 검증",
+		"domain": "도메인:"
 	},
 	"vc": {
 		"joinForStream": "음성 채널에 참여해 시청",

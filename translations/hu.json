@@ -1,0 +1,408 @@
+{
+	"@metadata": {
+		"authors": [
+			"Dj",
+			"Koko1998"
+		]
+	},
+	"2faCode": "Kétfaktoros hitelesítési kód:",
+	"404": {
+		"404": "Hiba: 404 – Az oldal nem található",
+		"app": "Az alkalmazáshoz",
+		"home": "Kezdőlap",
+		"login": "Bejelentkezés",
+		"reset": "Jelszó-visszaállítási oldal",
+		"title": "Úgy tűnik, elvesztél",
+		"whereever": "Bárhol is legyen ez"
+	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
+	"onboarding": {
+		"addChannel": "Csatorna hozzáadása",
+		"channel": "Csatorna:",
+		"desc": "Leírás:"
+	},
+	"DMs": {
+		"markRead": "Megjelölés olvasottként",
+		"name": "Közvetlen üzenetek"
+	},
+	"ok": "Rendben",
+	"dismiss": "Elvetés",
+	"accessibility": {
+		"gifSettings": {
+			"always": "Mindig",
+			"never": "Soha"
+		},
+		"name": "Akadálymentesség",
+		"visuals": "Vizuális elemek",
+		"animations": "Animációk",
+		"playGif": "GIF-ek lejátszása:",
+		"playIcon": "Animált ikonok lejátszása:"
+	},
+	"badge": {
+		"premium": "Prémium",
+		"verified_developer": "Ellenőrzött fejlesztő"
+	},
+	"blog": {
+		"blog": "Blog",
+		"gotoPost": "Ugrás a bejegyzéshez"
+	},
+	"cancel": "Mégse",
+	"channel": {
+		"announcement": "Bejelentések",
+		"createCatagory": "Kategória létrehozása",
+		"createChannel": "Csatorna létrehozása",
+		"creating": "Csatorna létrehozása",
+		"delete": "Csatorna törlése",
+		"deleteCat": "Kategória törlése",
+		"icon": "Ikon:",
+		"makeInvite": "Meghívó küldése",
+		"markRead": "Megjelölés olvasottként",
+		"mute": "Csatorna némítása",
+		"name": "Csatorna",
+		"name:": "Csatorna neve:",
+		"permissions": "Engedélyek",
+		"selectCatName": "Kategória neve",
+		"selectName": "Csatorna neve",
+		"selectType": "Csatornatípus kiválasztása",
+		"settings": "Beállítások",
+		"slowmode": "Lassú üzemmód:",
+		"text": "Szöveg",
+		"topic:": "Téma:",
+		"forum": "Fórum"
+	},
+	"forum": {
+		"next": "Következő",
+		"back": "Vissza",
+		"newPost": "Új bejegyzés létrehozása",
+		"post": "Bejegyzés",
+		"sortOptions": {
+			"sortby": {
+				"title": "Rendezés",
+				"recent": "Nemrég aktív",
+				"posted": "Közzététel dátuma"
+			},
+			"sortOrder": {
+				"title": "Rendezési sorrend"
+			}
+		}
+	},
+	"copyRegLink": "Hivatkozás másolása",
+	"createAccount": "Fiók létrehozása",
+	"delete": "Törlés",
+	"deleteConfirm": "Biztosan törölni szeretnéd ezt?",
+	"devSettings": {
+		"name": "Fejlesztői beállítások"
+	},
+	"deviceManage": {
+		"city": "Város: $1",
+		"continent": "Kontinens: $1",
+		"country": "Ország: $1",
+		"ip": "Utolsó ismert IP-cím: $1",
+		"logout": "Kijelentkezés",
+		"manageDev": "Eszköz kezelése",
+		"region": "Régió: $1"
+	},
+	"dms": "Közvetlen üzenetek",
+	"edit": "Szerkesztés",
+	"emoji": {
+		"confirmDel": "Biztos, hogy törölni akarod ezt az emojit?",
+		"image:": "Kép:",
+		"name:": "Név:",
+		"title": "Emojik",
+		"upload": "Emojik feltöltése"
+	},
+	"emojiSelect": "Emoji:",
+	"favoriteGifs": "Kedvenc GIF-ek",
+	"folder": {
+		"color": "Mappa színe:",
+		"create": "Új mappa létrehozása",
+		"edit": "Mappa szerkesztése",
+		"name": "Mappa neve:"
+	},
+	"form": {
+		"captcha": "Várjunk csak, ember vagy?"
+	},
+	"friends": {
+		"addfriend": "Barát hozzáadása",
+		"addfriendpromt": "Barátok hozzáadása felhasználónév alapján:",
+		"requestsent": "Kérés elküldve!",
+		"all": "Mind",
+		"all:": "Minden barát:",
+		"blocked": "Blokkolva",
+		"blockedusers": "Blokkolt felhasználók",
+		"bu": "Blokkolt felhasználók",
+		"friendlist": "Barátlista",
+		"friends": "Barátok",
+		"notfound": "A felhasználó nem található",
+		"online": "Elérhető",
+		"online:": "Elérhető barátok:",
+		"pending": "Függőben",
+		"pending:": "Függőben lévő barátkérelmek:",
+		"removeFriend": "Barát eltávolítása"
+	},
+	"group": {
+		"edit": "Csoportos csevegés szerkesztése",
+		"select": "Barátok kijelölése"
+	},
+	"guild": {
+		"INVITES_DISABLED": "Csak meghívottak számára",
+		"adminMenu": {
+			"ownName": "Tulajdonos",
+			"permission": "Engedélyek:"
+		},
+		"banReason": "Kitiltás oka: $1",
+		"bannedBy": "Kitiltotta:",
+		"bans": "Kitiltások",
+		"idSel": "Azonosító:",
+		"community": "Közösség",
+		"createNewTemplate": "Sablon létrehozása",
+		"description:": "Leírás:",
+		"icon:": "Ikon:",
+		"invites": "Meghívók",
+		"loadingDiscovery": "Betöltés…",
+		"makeInvite": "Meghívó küldése",
+		"markRead": "Megjelölés olvasottként",
+		"name:": "Név:",
+		"nameNoMatch": "A nevek nem egyeznek",
+		"noDelete": "Mindegy",
+		"noLeave": "Mindegy",
+		"none": "Egyik sem",
+		"notifications": "Értesítések",
+		"overview": "Áttekintés",
+		"region:": "Régió:",
+		"roles": "Szerepkörök",
+		"settings": "Beállítások",
+		"tempCreatedBy": "A sablont készítette:",
+		"templateDesc": "A sablon leírása:",
+		"templateName": "A sablon neve:",
+		"templateURL": "Sablon linkje: $1",
+		"templates": "Sablonok",
+		"topic:": "Téma:",
+		"viewTemplate": "Sablon megtekintése",
+		"yesDelete": "Igen, biztos vagyok benne",
+		"yesLeave": "Igen, biztos vagyok benne"
+	},
+	"donate": {
+		"title": "Adományozási lehetőségek",
+		"donate": "Adományozás"
+	},
+	"htmlPages": {
+		"createAccount": "Fiók létrehozása",
+		"dobField": "Születési dátum",
+		"emailField": "E-mail:",
+		"instanceField": "Példa:",
+		"loaddesc": "Ez nem fog sokáig tartani",
+		"loginButton": "Bejelentkezés",
+		"noAccount": "Nincs még fiókod?",
+		"pw2Field": "Írd be a jelszót újra:",
+		"pwField": "Jelszó:",
+		"switchaccounts": "Fiókváltás",
+		"trans": "Fordítás",
+		"userField": "Felhasználónév:"
+	},
+	"instanceStats": {
+		"members": "Tagok: $1",
+		"messages": "Üzenetek: $1",
+		"users": "Regisztrált felhasználók: $1"
+	},
+	"invite": {
+		"channel:": "Csatorna:",
+		"createInvite": "Meghívó létrehozása",
+		"createdAt": "Létrehozva ekkor $1",
+		"expireAfter": "Lejár ezután:",
+		"expires": "Lejár ekkor: $1",
+		"never": "Soha"
+	},
+	"inviteOptions": {
+		"12h": "12 óra",
+		"1d": "1 nap",
+		"1h": "1 óra",
+		"30d": "30 nap",
+		"30m": "30 perc",
+		"6h": "6 óra",
+		"7d": "7 nap",
+		"never": "Soha",
+		"noLimit": "Nincs korlát",
+		"title": "Hívj meg embereket"
+	},
+	"localuser": {
+		"2faCode:": "Kód:",
+		"2fa": "Kétfaktoros hitelesítés beállításai",
+		"2faDisable": "A kétfaktoros hitelesítés letiltása",
+		"2faEnable": "A kétfaktoros hitelesítés engedélyezése",
+		"CheckUpdate": "Frissítések ellenőrzése",
+		"PasswordsNoMatch": "A jelszavak nem egyeznek",
+		"accountSettings": "Fiók beállításai",
+		"badCode": "Érvénytelen kód",
+		"badPassword": "Érvénytelen jelszó",
+		"changeEmail": "E-mail cím módosítása",
+		"changePassword": "Jelszó módosítása",
+		"changeUsername": "Felhasználónév módosítása",
+		"clearCache": "Gyorsítótár törlése",
+		"newEmail:": "Új e-mail",
+		"newPassword:": "Új jelszó:",
+		"newUsername": "Új felhasználónév:",
+		"noUpdates": "Nem található frissítés",
+		"notisound": "Értesítési hang:",
+		"oldPassword:": "Régi jelszó:",
+		"password:": "Jelszó",
+		"setUp2fa": "A kétfaktoros hitelesítés beállítása",
+		"settings": "Beállítások",
+		"status": "Állapot",
+		"team:": "Csapat:",
+		"theme:": "Téma",
+		"themesAndSounds": "Témák és hangok",
+		"updateSettings": "Beállítások frissítése",
+		"updatesYay": "Frissítések találhatók!",
+		"userSettings": "A nyilvános profilod",
+		"general": "Általános"
+	},
+	"login": {
+		"enterPAgain": "Írd be a jelszót újra:",
+		"login": "Bejelentkezés",
+		"newPassword": "Új jelszó:",
+		"recover": "Elfelejtett jelszó?",
+		"recovery": "Elfelejtett jelszó"
+	},
+	"logout": {
+		"error": {
+			"cancel": "Mégse",
+			"cont": "Folytatás mindenképpen"
+		},
+		"logout": "Kijelentkezés"
+	},
+	"manageInstance": {
+		"format": "Formátum:",
+		"length": "Hossz:"
+	},
+	"media": {
+		"artist": "Művész: $1",
+		"composer": "Zeneszerző: $1",
+		"download": "Média letöltése",
+		"length": "Hossz: $1 perc és $2 másodperc",
+		"loading": "Betöltés",
+		"moreInfo": "További információ",
+		"notFound": "Média nem található"
+	},
+	"member": {
+		"nick:": "Becenév:",
+		"reason:": "Indoklás:"
+	},
+	"message": {
+		"delete": "Üzenet törlése",
+		"report": "Üzenet jelentése",
+		"deleted": "Törölt üzenet",
+		"edit": "Üzenet szerkesztése",
+		"edited": "(szerkesztve)",
+		"fullMessage": "Teljes üzenet:",
+		"reactionAdd": "Reakció hozzáadása",
+		"reactionsTitle": "Reakciók"
+	},
+	"report": {
+		"back": "Vissza",
+		"next": "Következő",
+		"cancel": "Mégse"
+	},
+	"nevermind": "Mindegy",
+	"notiVolume": "Értesítés hangereje:",
+	"pinMessage": "Üzenet rögzítése",
+	"profile": {
+		"bio": "Rólam:",
+		"mutFriends": "Közös barátok",
+		"permInfo": "Engedélyek",
+		"userInfo": "Felhasználói információk",
+		"notes": "Felhasználói megjegyzések"
+	},
+	"profileColor": "Profil színe",
+	"recentEmoji": "Legutóbbi emojik",
+	"register": {
+		"DOBError": "Születési dátum: $1",
+		"agreeTOS": "Elfogadom a [Szolgáltatási feltételeket]($1):",
+		"emailError": "E-mail: $1",
+		"passwordError:": "Jelszó: $1",
+		"usernameError": "Felhasználónév: $1",
+		"instURL": "URL:"
+	},
+	"remove": "Eltávolítás",
+	"role": {
+		"displaySettings": "Megjelenítési beállítások",
+		"name": "Szerepkör neve:",
+		"perms": "Engedélyek",
+		"remove": "Szerepkör eltávolítása",
+		"roleEmoji": "Szerepkör emoji:",
+		"roleFileIcon": "Szerepkör ikon:",
+		"roles": "Szerepkörök"
+	},
+	"upload": "Fájlok feltöltése",
+	"makePoll": "Szavazás létrehozása",
+	"poll": {
+		"question": "Kérdés:",
+		"answers": "Válaszok:",
+		"newAnswer": "Új válasz",
+		"duration": "Időtartam:",
+		"durCount": {
+			"1": "1 óra",
+			"4": "4 óra",
+			"8": "8 óra",
+			"24": "24 óra",
+			"72": "3 nap",
+			"168": "7 nap",
+			"336": "14 nap"
+		},
+		"expires": "Lejár ekkor: $1"
+	},
+	"search": {
+		"back": "Vissza",
+		"new": "Új",
+		"next": "Következő",
+		"old": "Régi",
+		"search": "Keresés",
+		"settings": "Keresési beállítások",
+		"authors": "Szerzők:",
+		"mentions": "Említések:",
+		"channels": "Csatornák:"
+	},
+	"settings": {
+		"img": "Kép feltöltése",
+		"save": "Módosítások mentése",
+		"unsaved": "Vigyázz, vannak nem mentett módosításaid"
+	},
+	"sticker": {
+		"desc": "Leírás",
+		"image": "Kép:",
+		"name": "Név:"
+	},
+	"switchAccounts": "Fiókváltás ⇌",
+	"connections": {
+		"since": "Tagság kezdete: $1",
+		"delete": "Kapcsolat törlése",
+		"sure": "Biztos vagy benne?"
+	},
+	"unpinMessage": "Üzenet rögzítésének megszüntetése",
+	"updateAv": "Frissítések elérhetők",
+	"useTemplateButton": "Sablon használata",
+	"user": {
+		"dnd": "Ne zavarj",
+		"editNick": "Becenév szerkesztése",
+		"friendReq": "Barátkérelem",
+		"idle": "Tétlen",
+		"invisible": "Láthatatlan",
+		"offline": "Offline",
+		"online": "Online",
+		"remove": "Felhasználó eltávolítása",
+		"unblock": "Felhasználó blokkolásának feloldása",
+		"viewProfile": "Profil megtekintése"
+	},
+	"keyboard": {
+		"empty": "<Nincs beállított billentyűkombináció>",
+		"descs": {
+			"gifSearch": "GIF-ek keresése:"
+		}
+	},
+	"yes": "Igen"
+}
