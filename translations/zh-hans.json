@@ -127,6 +127,9 @@
 	},
 	"bio": "个人简介：",
 	"blankMessage": "空白消息",
+	"sentAttachment": "发送了一个附件",
+	"sentPoll": "发送了一个投票",
+	"sentSticker": "发送了一张贴纸",
 	"blog": {
 		"blog": "博客",
 		"blogUpdates": "打开应用时获取博客更新：",
