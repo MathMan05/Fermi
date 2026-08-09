@@ -662,18 +662,28 @@ export type safeImg = HTMLImageElement & {
 	setSrcs: (nsrc: string, nstaticsrc: string | void) => void;
 	isAnimated: () => Promise<boolean>;
 };
+function getSetting(type: "gif" | "icon" | "emoji" | "sticker") {
+	const prefs = getPreferences();
+	switch (type) {
+		case "gif":
+			return prefs.animateGifs;
+		case "icon":
+			return prefs.animateIcons;
+		case "emoji":
+			return prefs.animateEmoji;
+		case "sticker":
+			return prefs.animateSticker;
+		default:
+			return "hover";
+	}
+}
 export function createImg(
 	src: string | undefined,
 	staticsrc: string | void,
 	elm: HTMLElement | void,
-	type: "gif" | "icon" = "gif",
+	type: "gif" | "icon" | "emoji" | "sticker" = "gif",
 ): safeImg {
-	const prefs = getPreferences();
-	const aniOpt =
-		(type === "gif" ? prefs.animateGifs : prefs.animateIcons) ||
-		("hover" as "hover") ||
-		"always" ||
-		"never";
+	const aniOpt = getSetting(type);
 	const img = document.createElement("img");
 	img.loading = "lazy";
 	img.decoding = "async";

@@ -3305,6 +3305,24 @@ class Localuser {
 				AnimateTristateValues.map((_) => I18n.accessibility.gifSettings[_]()),
 				{defaultIndex: AnimateTristateValues.indexOf(prefs.animateIcons)},
 			);
+			animations.addSelect(
+				I18n.accessibility.playEmoji(),
+				async (i) => {
+					prefs.animateEmoji = AnimateTristateValues[i];
+					await setPreferences(prefs);
+				},
+				AnimateTristateValues.map((_) => I18n.accessibility.gifSettings[_]()),
+				{defaultIndex: AnimateTristateValues.indexOf(prefs.animateEmoji)},
+			);
+			animations.addSelect(
+				I18n.accessibility.playSticker(),
+				async (i) => {
+					prefs.animateSticker = AnimateTristateValues[i];
+					await setPreferences(prefs);
+				},
+				AnimateTristateValues.map((_) => I18n.accessibility.gifSettings[_]()),
+				{defaultIndex: AnimateTristateValues.indexOf(prefs.animateSticker)},
+			);
 		}
 		settings.addButton(I18n.localuser.security(), {head: true});
 		{

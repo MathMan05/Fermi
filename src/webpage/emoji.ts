@@ -6,7 +6,7 @@ import {emojijson, emojiSource} from "./jsontypes.js";
 import {Localuser} from "./localuser.js";
 import {BinRead} from "./utils/binaryUtils.js";
 import {CDNParams} from "./utils/cdnParams.js";
-import {removeAni} from "./utils/utils.js";
+import {createImg, removeAni} from "./utils/utils.js";
 
 //I need to recompile the emoji format for translation
 class Emoji {
@@ -89,17 +89,20 @@ class Emoji {
 	getHTML(bigemoji: boolean = false, click = true) {
 		if (this.id) {
 			if (!this.owner) throw new Error("owner is missing for custom emoji!");
-			const emojiElem = document.createElement("img");
+			const emojiElem = createImg(
+				this.owner.info.cdn +
+					"/emojis/" +
+					this.id +
+					"." +
+					(this.animated ? "gif" : "png") +
+					new CDNParams({expectedSize: 32, animated: this.animated}),
+				undefined,
+				undefined,
+				"emoji",
+			);
 			emojiElem.classList.add("md-emoji");
 			emojiElem.classList.add(bigemoji ? "bigemoji" : "smallemoji");
 			emojiElem.crossOrigin = "anonymous";
-			emojiElem.src =
-				this.owner.info.cdn +
-				"/emojis/" +
-				this.id +
-				"." +
-				(this.animated ? "gif" : "png") +
-				new CDNParams({expectedSize: 32, animated: this.animated});
 			emojiElem.alt = this.name;
 			emojiElem.loading = "lazy";
 

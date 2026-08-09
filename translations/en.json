@@ -76,6 +76,8 @@
 		"animations":"Animations",
 		"playGif": "Play GIFs:",
 		"playIcon": "Play animated icons:",
+		"playEmoji":"Play animated emoji:",
+		"playSticker":"Play animated stickers:",
 		"roleColors": "Disable role colors:",
 		"gradientColors":"Disable gradient coloring:",
 		"decorations":"Enable avatar decorations:"

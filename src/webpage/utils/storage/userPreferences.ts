@@ -30,6 +30,8 @@ export class UserPreferences {
 	// render settings
 	animateIcons: AnimateTristateValue = AnimateTristateValue.OnlyOnHover;
 	animateGifs: AnimateTristateValue = AnimateTristateValue.OnlyOnHover;
+	animateEmoji: AnimateTristateValue = AnimateTristateValue.Always;
+	animateSticker: AnimateTristateValue = AnimateTristateValue.Always;
 	renderJoinAvatars: boolean = true;
 	theme: ThemeOption = ThemeOption.Dark;
 	accentColor: string = "#5865F2";
