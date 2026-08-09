@@ -12,6 +12,7 @@ if (window.location.pathname.startsWith("/invite"))
 		}
 		console.log(m);
 		well = m.get(well.toLowerCase()) || (await getInstanceInfo(well))?.api || well;
+		well = well.replace(/\/*$/gm, "");
 		const joinable: Specialuser[] = [];
 
 		for (const key in users.users) {
@@ -20,7 +21,6 @@ if (window.location.pathname.startsWith("/invite"))
 				if (well && user.serverurls.wellknown.includes(well)) {
 					joinable.push(user);
 				}
-				console.log(user);
 			}
 		}
 
