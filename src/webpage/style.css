@@ -3268,6 +3268,8 @@ img.bigembedimg {
 	margin-top: 8px;
 	border-radius: 4px;
 	cursor: pointer;
+	width: -webkit-fill-available;
+	width: -moz-available;
 }
 .inviteEmbed {
 	width: 400px;
