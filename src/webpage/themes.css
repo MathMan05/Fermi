@@ -182,6 +182,34 @@
 	--card-bg: #000000;
 	--embed-bg: #000000;
 }
+.NightSky-Accent-theme {
+	color-scheme: dark;
+	--primary-button-bg: color-mix(in srgb, #777777 20%, var(--accent-color));
+	--primary-bg: color-mix(in srgb, #040404 95%, var(--accent-color));
+	--primary-hover: color-mix(in srgb, #18181b 95%, var(--accent-color));
+	--primary-text: #dfdfdf;
+	--primary-text-soft: #adb8b9;
+	--secondary-bg: color-mix(in srgb, #060608 95%, var(--accent-color));
+	--secondary-hover: color-mix(in srgb, #18181b 95%, var(--accent-color));
+	--folder-bg: color-mix(in srgb, var(--primary-text-soft) 95%, var(--accent-color));
+	--servers-bg: color-mix(in srgb, #000000 95%, var(--accent-color));
+	--channels-bg: color-mix(in srgb, #0a0a0a 95%, var(--accent-color));
+	--channel-selected: color-mix(in srgb, #1f1f20 95%, var(--accent-color));
+	--typebox-bg: color-mix(in srgb, #101112 95%, var(--accent-color));
+	--button-bg: color-mix(in srgb, #19191a 95%, var(--accent-color));
+	--button-hover: color-mix(in srgb, #1f1f20 95%, var(--accent-color));
+	--spoiler: color-mix(in srgb, #101010 95%, var(--accent-color));
+	--link: #326be5;
+	--black: color-mix(in srgb, #000000 90%, var(--accent-color));
+	--icon: color-mix(in srgb, #ffffff, var(--accent-color));
+	--dock-bg: color-mix(in srgb, #0a0b0c 95%, var(--accent-color));
+	--spoiler-hover: color-mix(in srgb, #111111 95%, var(--accent-color));
+	--card-bg: color-mix(in srgb, #000000 95%, var(--accent-color));
+	--spoiler-bg: #1f1f20;
+	--reaction-reacted-bg: color-mix(in srgb, var(--reaction-bg) 95%, white);
+	--primary-text-prominent: #efefef;
+	--embed-bg: #000000;
+}
 
 /* Optional Variables */
 body {
