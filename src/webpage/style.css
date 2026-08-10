@@ -275,7 +275,7 @@ body {
 	flex-direction: column;
 }
 .pollBody {
-	background: #00000059;
+	background: var(--secondary-bg);
 	padding: 10px;
 	border-radius: 4px;
 	margin-top: 2px;
@@ -285,13 +285,12 @@ body {
 	}
 }
 .answerArea {
-	--bg: #0000004a;
+	--bg: color-mix(in srgb, var(--accent-color) 15%, transparent);
 	background: var(--bg);
-	margin-top: 3px;
+	margin-bottom: 6px;
 	padding: 12px;
 	cursor: pointer;
 	position: relative;
-
 	input {
 		margin-left: auto;
 		cursor: pointer;
