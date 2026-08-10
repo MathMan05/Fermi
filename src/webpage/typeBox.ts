@@ -248,9 +248,8 @@ export class TypeBox {
 	static uploadFiles() {
 		const input = document.createElement("input");
 		input.type = "file";
-		input.click();
 		input.multiple = true;
-		console.log("clicked");
+		input.click();
 		if (!this.localuser?.focusChannel) return;
 		input.onchange = () => {
 			if (input.files) {
