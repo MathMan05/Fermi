@@ -37,29 +37,6 @@
 	--card-bg: #000000;
 }
 
-/* Themes. See themes.txt */
-.Dark-theme {
-	color-scheme: dark;
-	--primary-button-bg: color-mix(in srgb, #777777 10%, var(--accent-color));
-	--primary-bg: #040404;
-	--primary-hover: #18181b;
-	--primary-text: #dfdfdf;
-	--primary-text-soft: #adb8b9;
-	--secondary-bg: #060608;
-	--secondary-hover: #18181b;
-	--servers-bg: #000000;
-	--channels-bg: #0a0a0a;
-	--channel-selected: #1f1f20;
-	--typebox-bg: #101112;
-	--button-bg: #19191a;
-	--button-hover: #1f1f20;
-	--spoiler-bg: #1f1f20;
-	--link: #326be5;
-	--primary-text-prominent: #efefef;
-	--dock-bg: #0a0b0c;
-	--card-bg: #000000;
-}
-
 .WHITE-theme {
 	color-scheme: light;
 
@@ -117,32 +94,53 @@
 	--secondary-text-soft: #211f2e;
 	--blank-bg: #494985;
 }
-
+.Dark-theme {
+	color-scheme: dark;
+	--primary-button-bg: color-mix(in srgb, #777777 10%, var(--accent-color));
+	--primary-bg: #040404;
+	--primary-hover: #18181b;
+	--primary-text: #dfdfdf;
+	--primary-text-soft: #adb8b9;
+	--secondary-bg: #060608;
+	--secondary-hover: #18181b;
+	--servers-bg: #000000;
+	--channels-bg: #0a0a0a;
+	--channel-selected: #1f1f20;
+	--typebox-bg: #101112;
+	--button-bg: #19191a;
+	--button-hover: #1f1f20;
+	--spoiler-bg: #1f1f20;
+	--link: #326be5;
+	--primary-text-prominent: #efefef;
+	--dock-bg: #0a0b0c;
+	--card-bg: #000000;
+}
 .Dark-Accent-theme {
 	color-scheme: dark;
 	--primary-button-bg: color-mix(in srgb, #777777 10%, var(--accent-color));
-	--primary-bg: color-mix(in srgb, #3f3f3f 65%, var(--accent-color));
-	--primary-hover: color-mix(in srgb, #373737 68%, var(--accent-color));
-	--primary-text: #ebebeb;
-	--primary-text-soft: #ebebebb8;
-	--secondary-bg: color-mix(in srgb, #222222 72%, var(--accent-color));
-	--secondary-hover: color-mix(in srgb, #222222 65%, var(--accent-color));
+	--primary-bg: color-mix(in srgb, #040404 85%, var(--accent-color));
+	--primary-hover: color-mix(in srgb, #18181b 68%, var(--accent-color));
+	--primary-text: #dfdfdf;
+	--primary-text-soft: #adb8b9;
+	--secondary-bg: color-mix(in srgb, #060608 75%, var(--accent-color));
+	--secondary-hover: color-mix(in srgb, #18181b 65%, var(--accent-color));
 	--folder-bg: color-mix(in srgb, var(--primary-text-soft) 70%, var(--accent-color));
-	--servers-bg: color-mix(in srgb, #0b0b0b 70%, var(--accent-color));
-	--channels-bg: color-mix(in srgb, #292929 68%, var(--accent-color));
-	--channel-selected: color-mix(in srgb, #555555 65%, var(--accent-color));
-	--typebox-bg: color-mix(in srgb, #666666 60%, var(--accent-color));
-	--button-bg: color-mix(in srgb, #777777 56%, var(--accent-color));
-	--button-hover: color-mix(in srgb, #585858 58%, var(--accent-color));
+	--servers-bg: color-mix(in srgb, #000000 85%, var(--accent-color));
+	--channels-bg: color-mix(in srgb, #0a0a0a 85%, var(--accent-color));
+	--channel-selected: color-mix(in srgb, #1f1f20 75%, var(--accent-color));
+	--typebox-bg: color-mix(in srgb, #101112 60%, var(--accent-color));
+	--button-bg: color-mix(in srgb, #19191a 56%, var(--accent-color));
+	--button-hover: color-mix(in srgb, #1f1f20 58%, var(--accent-color));
 	--spoiler: color-mix(in srgb, #101010 72%, var(--accent-color));
-	--link: color-mix(in srgb, #99ccff 75%, var(--accent-color));
+	--link: #326be5;
 	--black: color-mix(in srgb, #000000 90%, var(--accent-color));
 	--icon: color-mix(in srgb, #ffffff, var(--accent-color));
-	--dock-bg: color-mix(in srgb, #171717 68%, var(--accent-color));
+	--dock-bg: color-mix(in srgb, #0a0b0c 68%, var(--accent-color));
 	--spoiler-hover: color-mix(in srgb, #111111 80%, var(--accent-color));
-	--card-bg: color-mix(in srgb, #0b0b0b 70%, var(--accent-color));
-	--spoiler-bg: #000000;
+	--card-bg: color-mix(in srgb, #000000 70%, var(--accent-color));
+	--spoiler-bg: #1f1f20;
 	--reaction-reacted-bg: color-mix(in srgb, var(--reaction-bg) 80%, white);
+	--primary-text-prominent: #efefef;
 }
 
 /* Optional Variables */
