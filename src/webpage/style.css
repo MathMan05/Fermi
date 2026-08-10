@@ -2160,6 +2160,9 @@ span.instanceStatus {
 	display: flex;
 	align-items: center;
 	transition: font-weight 0.1s;
+	> .ellipsis {
+		margin-bottom: 0.25em;
+	}
 }
 .channelbutton:hover {
 	background: var(--channel-hover);
