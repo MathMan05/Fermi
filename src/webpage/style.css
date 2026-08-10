@@ -5225,6 +5225,13 @@ img.error::after {
 .guildEmojiText {
 	display: flex;
 	justify-content: center;
+	word-break: break-all;
+}
+.guildDesc {
+	color: var(--secondary-text-soft);
+	font-size: 0.9em;
+	max-height: 15em;
+	overflow-y: scroll;
 }
 
 .optionElement:has(.friendGroupSelect) {
