@@ -36,6 +36,9 @@ class Sticker extends SnowFlake {
 	getHTML(): HTMLElement {
 		const img = createImg(
 			this.owner.info.cdn + "/stickers/" + this.id + ".webp" + new CDNParams({expectedSize: 160}),
+			undefined,
+			undefined,
+			"sticker",
 		);
 		img.classList.add("sticker");
 		const hover = new Hover(this.name);

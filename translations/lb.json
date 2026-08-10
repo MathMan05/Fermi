@@ -11,6 +11,12 @@
 		"home": "Haaptsäit",
 		"login": "Aloggen"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"addChannel": "Kanal derbäisetzen",
 		"channel": "Kanal:",
@@ -19,6 +25,7 @@
 	},
 	"copyMedia": "Medien-URL kopéieren",
 	"DMs": {
+		"copyURL": "DM-URL kopéieren",
 		"markRead": "Als gelies markéieren"
 	},
 	"ok": "OK",
@@ -54,6 +61,7 @@
 	"botSettings": "Bot-Astellungen",
 	"cancel": "Ofbriechen",
 	"channel": {
+		"copyURL": "Kanal-URL kopéieren",
 		"announcement": "Ukënnegungen",
 		"copyId": "Kanal-ID kopéieren",
 		"createCatagory": "Kategorie uleeën",
@@ -316,6 +324,7 @@
 		"bio": "Iwwer mech:",
 		"userInfo": "Benotzerinformatiounen"
 	},
+	"messageNotLoad": "Messagë konnten net geluede ginn",
 	"profileColor": "Profilfaarf",
 	"pronouns": "Pronomen:",
 	"readableName": "Lëtzebuergesch",
@@ -404,7 +413,7 @@
 		"since": "Member zanter: $1",
 		"sure": "Sidd Dir sécher?"
 	},
-	"uploadFilesText": "Lued Är Fichieren hei erop!",
+	"uploadFilesText": "Luet Är Fichieren hei erop!",
 	"useTemplate": "$1 als Schabloun benotzen",
 	"useTemplateButton": "Schabloun benotzen",
 	"user": {

@@ -35,6 +35,7 @@ import {Hover} from "./hover.js";
 import {ReportMenu} from "./reporting/report.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {TypeBox} from "./typeBox.js";
 export async function makeInviteMenu(inviteMenu: Options, guild: Guild, url: string) {
 	const invDiv = document.createElement("div");
 	const bansp = ProgessiveDecodeJSON<invitejson[]>(url, {
@@ -198,6 +199,14 @@ class Guild extends SnowFlake {
 	static readonly contextmenu = new Contextmenu<Guild, void>("guild menu");
 	static setupcontextmenu() {
 		Guild.contextmenu.addButton(
+			() => I18n.guild.markRead(),
+			function (this: Guild) {
+				this.markAsRead();
+			},
+		);
+		Guild.contextmenu.addSeperator();
+
+		Guild.contextmenu.addButton(
 			() => I18n.guild.makeInvite(),
 			function (this: Guild) {
 				const d = new Dialog("");
@@ -209,14 +218,6 @@ class Guild extends SnowFlake {
 					return this.member.hasPermission("CREATE_INSTANT_INVITE");
 				},
 				color: "blue",
-			},
-		);
-		Guild.contextmenu.addSeperator();
-
-		Guild.contextmenu.addButton(
-			() => I18n.guild.markRead(),
-			function (this: Guild) {
-				this.markAsRead();
 			},
 		);
 
@@ -1955,16 +1956,9 @@ class Guild extends SnowFlake {
 		if (this.localuser.focusChannel && this.localuser.focusChannel.myhtml) {
 			this.localuser.focusChannel.myhtml.classList.remove("viewChannel");
 		}
+		TypeBox.changeVisablity(false);
 		this.prevchannel = undefined;
 		this.localuser.focusChannel = undefined;
-		const replybox = document.getElementById("replybox") as HTMLElement;
-		const typebox = document.getElementById("typebox") as HTMLElement;
-		replybox.classList.add("hideReplyBox");
-		typebox.classList.remove("typeboxreplying");
-		(document.getElementById("typebox") as HTMLDivElement).contentEditable = "false";
-		(document.getElementById("upload") as HTMLElement).style.visibility = "hidden";
-		(document.getElementById("typediv") as HTMLElement).style.visibility = "hidden";
-		(document.getElementById("sideDiv") as HTMLElement).innerHTML = "";
 	}
 	noChannel(addstate: boolean) {
 		for (const c of this.channels) {

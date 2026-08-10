@@ -39,6 +39,7 @@
 	"DMs": {
 		"add": "Add someone to this DM",
 		"close": "Close DM",
+		"copyURL":"Copy DM URL",
 		"copyId": "Copy DM id",
 		"markRead": "Mark as read",
 		"name": "Direct Messages"
@@ -75,6 +76,8 @@
 		"animations":"Animations",
 		"playGif": "Play GIFs:",
 		"playIcon": "Play animated icons:",
+		"playEmoji":"Play animated emoji:",
+		"playSticker":"Play animated stickers:",
 		"roleColors": "Disable role colors:",
 		"gradientColors":"Disable gradient coloring:",
 		"decorations":"Enable avatar decorations:"
@@ -116,6 +119,9 @@
 	},
 	"bio": "Bio:",
 	"blankMessage": "Blank message",
+	"sentAttachment": "Sent an attachment",
+	"sentPoll": "Sent a poll",
+	"sentSticker": "Sent a sticker",
 	"blog": {
 		"blog": "Blog",
 		"blogUpdates": "Get blog updates when you open the app:",
@@ -816,6 +822,7 @@
 		"userInfo": "User info",
 		"notes":"User notes"
 	},
+	"messageNotLoad":"Messages failed to load",
 	"profileColor": "Profile color",
 	"pronouns": "Pronouns:",
 	"readableName": "English",

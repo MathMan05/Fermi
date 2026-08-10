@@ -7,6 +7,7 @@ body {
 	color: var(--primary-text);
 	overflow: hidden; /* avoid "bounce" */
 	-webkit-text-size-adjust: 100%;
+	scrollbar-color: var(--button-bg) var(--primary-bg);
 }
 #page {
 	height: 100svh;
@@ -274,7 +275,7 @@ body {
 	flex-direction: column;
 }
 .pollBody {
-	background: #00000059;
+	background: var(--secondary-bg);
 	padding: 10px;
 	border-radius: 4px;
 	margin-top: 2px;
@@ -284,13 +285,12 @@ body {
 	}
 }
 .answerArea {
-	--bg: #0000004a;
+	--bg: color-mix(in srgb, var(--accent-color) 15%, transparent);
 	background: var(--bg);
-	margin-top: 3px;
+	margin-bottom: 6px;
 	padding: 12px;
 	cursor: pointer;
 	position: relative;
-
 	input {
 		margin-left: auto;
 		cursor: pointer;
@@ -1058,10 +1058,12 @@ textarea {
 	right: 5px;
 	transition: top 0.2s;
 	transition-timing-function: ease-in;
-	background: white;
+	backdrop-filter: blur(20px);
+	mix-blend-mode: difference;
+	background: #969696;
 	cursor: pointer;
 	&.favorited {
-		background: yellow;
+		background: orange;
 	}
 }
 .visually-hidden {
@@ -1130,6 +1132,10 @@ textarea {
 }
 .svg-pin {
 	mask: url(./icons/pin.svg);
+	mask-size: cover;
+}
+.svg-link {
+	mask: url(./icons/link.svg);
 	mask-size: cover;
 }
 .svg-rules {
@@ -1304,7 +1310,7 @@ textarea {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	background: #0000009e;
+	background: var(--secondary-bg);
 	padding: 6px;
 	border-radius: 100%;
 	cursor: pointer;
@@ -1597,6 +1603,12 @@ textarea {
 	&[hidden] {
 		display: none;
 	}
+}
+#filedroptext {
+	max-width: 75%;
+	max-height: 75vh;
+	padding: 8em 8em 8em 8em;
+	text-align: center;
 }
 .commandError {
 	position: absolute;
@@ -2076,6 +2088,7 @@ span.instanceStatus {
 	align-items: start;
 	padding-top: 10px;
 	background-size: cover;
+	color: white;
 	.ellipsis {
 		text-shadow: 0px 0px 8px black;
 	}
@@ -2146,6 +2159,9 @@ span.instanceStatus {
 	display: flex;
 	align-items: center;
 	transition: font-weight 0.1s;
+	> .ellipsis {
+		margin-bottom: 0.25em;
+	}
 }
 .channelbutton:hover {
 	background: var(--channel-hover);
@@ -2362,7 +2378,7 @@ span.instanceStatus {
 }
 
 #userdock {
-	padding: 4px 6px;
+	padding: 11.75px 6px;
 	background: var(--dock-bg);
 	align-items: center;
 	justify-content: space-between;
@@ -2452,7 +2468,7 @@ span.instanceStatus {
 	flex: 0;
 }
 #pasteimage {
-	height: 30%;
+	max-height: 30%;
 	padding: 12px;
 	margin: 16px;
 	background: var(--typebox-bg);
@@ -2477,13 +2493,14 @@ span.instanceStatus {
 	border-radius: 8px;
 	overflow: hidden;
 	height: 192px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	.unknownfile {
 		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
 	}
 }
 .messageimgdiv {
@@ -2491,16 +2508,13 @@ span.instanceStatus {
 	overflow: clip;
 	width: fit-content;
 	height: fit-content;
-}
-.messageimg {
-	height: 100%;
-	width: 100%;
-	object-fit: contain;
-	user-select: none;
-	cursor: pointer;
-}
-.attachments .messageimg {
-	border-radius: 4px;
+	img, div {
+		height: 100%;
+		width: 100%;
+		object-fit: contain;
+		user-select: none;
+		cursor: pointer;
+	}
 }
 #replybox {
 	height: 32px;
@@ -2551,6 +2565,7 @@ span.instanceStatus {
 	flex-shrink: 1;
 	text-wrap: auto;
 	overflow-y: auto;
+	word-break: break-word;
 	margin-right: 0.03in;
 	padding: 10px 0;
 }
@@ -2866,12 +2881,13 @@ span.instanceStatus {
 	background: color-mix(in srgb, var(--accent-color) 75%, transparent) !important;
 	font-size: 0.75em !important;
 	font-weight: bold;
-	color: var(--primary-text-prominent) !important;
+	color: white !important;
 	border-radius: 4px;
 	flex: none;
 	width: fit-content;
 	background-clip: border-box !important;
 	align-self: center;
+	vertical-align: center;
 }
 .membererror {
 	display: inline-block;
@@ -3087,11 +3103,11 @@ span .quote:last-of-type .quoteline {
 	aspect-ratio: 1.9;
 }
 .mentionMD {
-	color: transparent;
 	background-clip: text;
 	padding: 1px 2px;
 	border-radius: 4px;
 	cursor: pointer;
+	color: color-mix(in srgb, var(--userbg) 75%, var(--primary-text));
 	background-image: var(--userbg, linear-gradient(var(--primary-text), var(--primary-text)));
 	position: relative;
 	z-index: 1;
@@ -3109,6 +3125,24 @@ span .quote:last-of-type .quoteline {
 .mentionMD:hover::before {
 	background: var(--mention);
 }
+
+.smallemoji {
+	height: auto;
+	width: auto;
+	max-height: 1.25em;
+	max-width: 1.25em;
+	vertical-align: middle;
+}
+.bigemoji {
+	width: 0.6in;
+	object-fit: contain;
+	height: 0.6in;
+	vertical-align: middle;
+}
+.bigemojiUni {
+	font-size: 47px;
+}
+
 .reactiondiv {
 	padding-left: 52px;
 	gap: 0 4px;
@@ -3116,7 +3150,8 @@ span .quote:last-of-type .quoteline {
 	user-select: none;
 }
 .reaction {
-	min-width: 30px;
+	min-width: 1.25em;
+	min-height: 1.25em;
 	padding: 3px 4px;
 	margin-top: 4px;
 	background: var(--reaction-bg);
@@ -3127,6 +3162,7 @@ span .quote:last-of-type .quoteline {
 	align-items: center;
 	cursor: pointer;
 	gap: 4px;
+	font-size: 1.25em;
 }
 .reaction p {
 	line-height: 1em;
@@ -3138,12 +3174,6 @@ span .quote:last-of-type .quoteline {
 	background: var(--reaction-reacted-bg);
 	border-color: color-mix(in srgb, var(--accent-color), transparent);
 }
-.smallemoji {
-	height: auto;
-	width: auto;
-	max-height: 16px;
-	max-width: 16px;
-}
 
 /* Message External */
 .filename a {
@@ -3154,8 +3184,25 @@ span .quote:last-of-type .quoteline {
 	gap: 4px;
 	flex-wrap: wrap;
 	video {
-		max-height: 288px;
-		max-width: 288px;
+		min-height: 200px;
+		min-width: 200px;
+		max-height: 25%;
+		max-width: 50%;
+	}
+	.messageimgdiv {
+		img, video {
+			border-radius: 4px;
+		}
+	}
+	.messagegallerydiv {
+		object-fit: fill;
+		height: 200px;
+		max-width: 50%;
+		overflow: hidden;
+		img, video {
+			height: 100%;
+			object-fit: cover;
+		}
 	}
 }
 .embed {
@@ -3235,6 +3282,8 @@ img.bigembedimg {
 	margin-top: 8px;
 	border-radius: 4px;
 	cursor: pointer;
+	width: -webkit-fill-available;
+	width: -moz-available;
 }
 .inviteEmbed {
 	width: 400px;
@@ -3302,7 +3351,7 @@ img.bigembedimg {
 
 /* Sidebar */
 #sideContainDiv {
-	padding: 16px 8px;
+	padding: 16px 8px 0px 8px;
 	display: none;
 	flex: none;
 	width: 240px;
@@ -3372,33 +3421,34 @@ img.bigembedimg {
 	}
 }
 ::highlight(highkeyword) {
-	color: yellow;
+	color: var(--code-keyword);
 }
 ::highlight(highnumber) {
-	color: orange;
+	color: var(--code-number);
 }
 ::highlight(highstring) {
-	color: red;
+	color: var(--code-string);
 }
 ::highlight(highsymbol) {
-	color: white;
+	color: var(--primary-text-prominent);
 	font-weight: bold;
 }
 ::highlight(highcomment) {
-	color: green;
+	color: var(--code-comment);
 }
 ::highlight(highidentifier) {
-	color: white;
+	color: var(--primary-text);
 }
 ::highlight(highClass) {
-	color: #6741ff;
+	color: var(--code-class);
 }
 ::highlight(highProp) {
-	color: #33dcff;
+	color: var(--code-prop);
 }
 ::highlight(highFunc) {
-	color: #d564ff;
+	color: var(--code-func);
 }
+
 #memberlisttoggle.svgicon {
 	-moz-appearance: initial;
 	&::before {
@@ -3489,9 +3539,12 @@ img.bigembedimg {
 	border-radius: 8px;
 	overflow: hidden;
 	align-items: flex-start;
-	z-index: 3;
+	z-index: 4;
 	display: flex;
 	flex-direction: column;
+	.banner {
+		height: 64px;
+	}
 	.infosection {
 		background-color: color-mix(in srgb, var(--secondary-bg) 75%, transparent);
 	}
@@ -4488,32 +4541,34 @@ fieldset input[type="radio"] {
 	position: relative;
 	padding: 0px;
 	cursor: pointer;
+	flex-direction: row-reverse;
+
 	&::after {
 		content: "";
 		background: var(--secondary-bg);
-		transition: left 0.2s;
+		transition: right 0.2s;
 		border-radius: 4px;
 		width: 18px;
 		height: 18px;
 		display: block;
 		top: 3px;
-		left: 2px;
+		right: 2px;
 		position: absolute;
 	}
-	:first-child {
+	:last-child {
 		border-radius: 5px 0px 0px 5px;
 	}
-	:last-child {
+	:first-child {
 		border-radius: 0px 5px 5px 0px;
 	}
 	&:has(:first-child.selected)::after {
-		left: 3px;
+		right: 3px;
 	}
 	&:has(:nth-child(2).selected)::after {
-		left: 27px;
+		right: 27px;
 	}
 	&:has(:nth-child(3).selected)::after {
-		left: 51px;
+		right: 51px;
 	}
 }
 .tritoggle > .triOpt {
@@ -4854,18 +4909,15 @@ fieldset input[type="radio"] {
 .friendcontainer {
 	display: flex;
 	width: 100%;
-	padding: 0.2in;
+	padding: 0.15in;
 	overflow-y: auto;
 	height: 100%;
 	align-items: stretch;
 	box-sizing: border-box;
-
 	> div {
-		background: #00000030;
-		margin-bottom: 0.1in;
 		padding: 0.06in 0.1in;
-		border-radius: 0.1in;
-		border: solid 1px var(--black);
+		margin: 0 0;
+		border-bottom: solid 1px var(--secondary-bg);
 	}
 }
 .fixedsearch {
@@ -4922,26 +4974,17 @@ fieldset input[type="radio"] {
 	transition: background-color 0.2s;
 	padding: 0.08in;
 }
-.bigemoji {
-	width: 0.6in;
-	object-fit: contain;
-	height: 0.6in;
-}
-.bigemojiUni {
-	font-size: 47px;
-}
 .friendlyButton {
 	padding: 0.07in;
-	background: #00000045;
 	transition: background 0.2s;
 	border-radius: 1in;
-	border: solid 1px var(--black);
+	border: solid 1px var(--secondary-bg);
 	width: 24px;
 	height: 24px;
 	margin: 0 0.05in;
 }
 .friendlyButton:hover {
-	background: black;
+	background: var(--secondary-hover);
 }
 .stickerOption {
 	border: solid 1px var(--black);
@@ -4993,14 +5036,15 @@ fieldset input[type="radio"] {
 .gifPreviewBox {
 	position: relative;
 	width: 2in;
+	height: 1in;
 	margin-bottom: 10px;
 	border-radius: 7px;
 	overflow: hidden;
 	cursor: pointer;
 
 	img {
-		width: 2in;
-		height: 1in;
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 	}
 	span {
@@ -5012,8 +5056,9 @@ fieldset input[type="radio"] {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: color-mix(in srgb, var(--card-bg) 60%, transparent);
 		font-weight: bold;
+		color: white;
+		background: color-mix(in srgb, black 50%, transparent);
 	}
 }
 .gifbox {
@@ -5150,7 +5195,6 @@ img.error::after {
 	border-radius: 2in;
 }
 .stickerMArea {
-	padding-left: 48px;
 }
 .solidBackground {
 	background: var(--secondary-bg);
@@ -5188,6 +5232,13 @@ img.error::after {
 .guildEmojiText {
 	display: flex;
 	justify-content: center;
+	word-break: break-all;
+}
+.guildDesc {
+	color: var(--secondary-text-soft);
+	font-size: 0.9em;
+	max-height: 15em;
+	overflow-y: scroll;
 }
 
 .optionElement:has(.friendGroupSelect) {
@@ -5259,7 +5310,7 @@ img.error::after {
 	background: transparent;
 	width: 48px;
 	height: 48px;
-	img {
+	.pfpDiv {
 		width: 24px;
 		height: 24px;
 		&:nth-child(1) {

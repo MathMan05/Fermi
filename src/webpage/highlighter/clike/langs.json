@@ -85,5 +85,13 @@
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,
 	"multiLine":"\"\"\""
+},
+{
+	"names":["bash","sh","ksh","csh","shell"],
+	"keywords":["if","fi","else","then","while","do","for","continue","done","break","case","esac","in","local","return","declare","EOF","readonly","true","false"],
+	"firstLineShebang":true,
+	"hashComments": true,
+	"doubleSlashComments": false,
+	"multilineSlashComments": false
 }
 ]

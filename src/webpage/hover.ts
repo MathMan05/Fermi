@@ -68,9 +68,13 @@ class Hover {
 			this.elm2.remove();
 		});
 	}
+	static prevDiv = new WeakRef(document.createElement("div"));
 	async makeHover(elm: HTMLElement) {
+		const prev = Hover.prevDiv.deref();
+		if (prev) prev.remove();
 		if (!document.contains(elm)) return document.createElement("div");
 		const div = document.createElement("div");
+		Hover.prevDiv = new WeakRef(div);
 
 		if (this.customHTML) {
 			div.append(this.customHTML());
