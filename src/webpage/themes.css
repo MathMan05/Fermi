@@ -131,6 +131,7 @@
 	--primary-text-prominent: #efefef;
 	--dock-bg: #0a0b0c;
 	--card-bg: #000000;
+	--embed-bg: #000000;
 }
 .Dark-Accent-theme {
 	color-scheme: dark;
@@ -158,6 +159,7 @@
 	--spoiler-bg: #1f1f20;
 	--reaction-reacted-bg: color-mix(in srgb, var(--reaction-bg) 95%, white);
 	--primary-text-prominent: #efefef;
+	--embed-bg: #000000;
 }
 
 /* Optional Variables */
