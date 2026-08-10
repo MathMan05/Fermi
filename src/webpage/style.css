@@ -2508,7 +2508,8 @@ span.instanceStatus {
 	overflow: clip;
 	width: fit-content;
 	height: fit-content;
-	img, div {
+	img,
+	div {
 		height: 100%;
 		width: 100%;
 		object-fit: contain;
@@ -3186,11 +3187,12 @@ span .quote:last-of-type .quoteline {
 	video {
 		min-height: 200px;
 		min-width: 200px;
-		max-height: 25%;
-		max-width: 50%;
+		max-height: 25vh;
+		max-width: 50vw;
 	}
 	.messageimgdiv {
-		img, video {
+		img,
+		video {
 			border-radius: 4px;
 		}
 	}
@@ -3199,7 +3201,8 @@ span .quote:last-of-type .quoteline {
 		height: 200px;
 		max-width: 50%;
 		overflow: hidden;
-		img, video {
+		img,
+		video {
 			height: 100%;
 			object-fit: cover;
 		}
