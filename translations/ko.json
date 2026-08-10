@@ -81,6 +81,8 @@
 		"animations": "애니메이션",
 		"playGif": "GIF 재생:",
 		"playIcon": "애니메이션 아이콘 재생:",
+		"playEmoji": "애니메이션 이모티콘 재생:",
+		"playSticker": "애니메이션 스티커 재생:",
 		"roleColors": "역할 색상 비활성화:",
 		"gradientColors": "그라데이션 색상 비활성화:",
 		"decorations": "아바타 장식 활성화:"
@@ -1008,6 +1010,9 @@
 	"userping": {
 		"resolving": "사용자 해결 중",
 		"unknown": "@unknown-user"
+	},
+	"editMode": {
+		"editMsg": "Escape키를 눌러서 $1cancel$1"
 	},
 	"keyboard": {
 		"shortcuts": "단축키",
