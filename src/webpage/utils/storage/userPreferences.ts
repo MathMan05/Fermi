@@ -15,12 +15,14 @@ export const enum ThemeOption {
 	White = "WHITE",
 	Light = "Light",
 	DarkAccent = "Dark-Accent",
+	NightSky = "Night Sky",
 }
 export const ThemeOptionValues = [
 	ThemeOption.Dark,
 	ThemeOption.White,
 	ThemeOption.Light,
 	ThemeOption.DarkAccent,
+	ThemeOption.NightSky
 ];
 
 export class UserPreferences {
