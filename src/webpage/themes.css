@@ -73,7 +73,7 @@
 	--primary-button-bg: color-mix(in srgb, #000000 10%, var(--accent-color));
 	--primary-bg: #fefefe;
 	--primary-hover: #f6f6f9;
-	--primary-text: #4b4b59;
+	--primary-text: black;
 	--primary-text-soft: #656575;
 
 	--secondary-bg: #e0e0ea;
