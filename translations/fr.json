@@ -24,6 +24,7 @@
 			"Rwobweats",
 			"Sylvie",
 			"TheGeekn°72",
+			"Trial",
 			"Urhixidur",
 			"WillyM",
 			"Wladek92"
@@ -43,21 +44,28 @@
 		"whatelse": "Que pensez-vous qu'il devrait se passer d'autre ?",
 		"whereever": "Où que ce soit"
 	},
+	"filesize": {
+		"B": "o",
+		"KB": "Ko",
+		"MB": "Mo",
+		"GB": "Go"
+	},
 	"onboarding": {
 		"name": "Introduction",
 		"disable": "Désactiver l'introduction",
 		"addChannel": "Ajouter une chaîne",
 		"channel": "Chaîne :",
 		"desc": "Description :",
-		"deleteChannel": "Supprimer la chaîne d'introduction",
+		"deleteChannel": "Supprimer le canal de l'intégration",
 		"enable": "Activer l'introduction",
 		"title": "Bienvenue sur $1 !"
 	},
 	"copyMedia": "Copier L'URL du média",
 	"DMs": {
-		"add": "Ajouter quelqu'un à la discussion privée (MP)",
-		"close": "Fermer la discussion par messages privés",
-		"copyId": "Copier l'identifiant du la discussion par MP",
+		"add": "Ajouter quelqu'un à ce canal privé",
+		"close": "Fermer le canal privé",
+		"copyURL": "Copier l'URL du message privé",
+		"copyId": "Copier l'identifiant du canal privé",
 		"markRead": "Marquer comme lu",
 		"name": "Messages privés"
 	},
@@ -106,7 +114,7 @@
 	"badge": {
 		"active_developer": "Développeur actif",
 		"application_guild_subscription": "a Premium",
-		"automod": "utilise l'automod (modération automatique)",
+		"automod": "utilise l'AutoMod",
 		"bot_commands": "prend en charge les commandes",
 		"bug_hunter_level_1": "Chasseur de bugs niveau 1",
 		"bug_hunter_level_2": "Chasseur de bugs niveau 2",
@@ -132,8 +140,11 @@
 		"staff": "Personnel de l'instance",
 		"verified_developer": "Développeur vérifié"
 	},
-	"bio": "Biographie :",
+	"bio": "Bio :",
 	"blankMessage": "Message vide",
+	"sentAttachment": "a envoyé une pièce jointe",
+	"sentPoll": "a envoyé un sondage",
+	"sentSticker": "a envoyé un autocollant",
 	"blog": {
 		"blog": "Blogue",
 		"blogUpdates": "Voir les actualités du blogue lors de l'ouverture de l'application :",
@@ -150,26 +161,26 @@
 		"SlowmodeCool": "Temporisation du mode lent : $1",
 		"copyURL": "Copier l'URL du canal",
 		"TimeOutCool": "Exclu jusqu'à : $1",
-		"allowIcons": "Autoriser les icônes de chaîne personnalisées",
+		"allowIcons": "Autoriser les icônes de canal personnalisées",
 		"announcement": "Annonces",
 		"copyId": "Copier l'identifiant du canal",
 		"copyIdCat": "Copier l'identifiant de la catégorie",
 		"createCatagory": "Créer une catégorie",
 		"createChannel": "Créer un canal",
 		"creating": "Création du canal",
-		"delete": "Supprimer la chaîne",
+		"delete": "Supprimer le canal",
 		"deleteCat": "Supprimer la catégorie",
 		"icon": "Icône :",
 		"makeInvite": "Créer une invitation",
 		"markRead": "Marquer comme lu",
 		"mute": "Rendre le canal muet",
-		"name": "Chaîne",
-		"name:": "Nom de la Chaîne :",
+		"name": "Canal",
+		"name:": "Nom du canal :",
 		"nsfw:": "Avertissement contenu mature :",
 		"permissions": "Permissions",
 		"selectCatName": "Nom de la catégorie",
-		"selectName": "Nom de la chaîne",
-		"selectType": "Sélectionnez le type de chaîne",
+		"selectName": "Nom du canal",
+		"selectType": "Sélectionnez le type de canal",
 		"settings": "Paramètres",
 		"settingsFor": "Paramètres de $1",
 		"slowmode": "Mode ralenti :",
@@ -187,7 +198,7 @@
 		"leave": "Quitter le fil",
 		"join": "Rejoindre le fil",
 		"name": "Nom du fil :",
-		"editTags": "Modifier les tags (étiquettes)"
+		"editTags": "Modifier les tags"
 	},
 	"forum": {
 		"creorsear": "Créer ou rechercher une publication",
@@ -207,24 +218,24 @@
 				"old": "Plus ancien d'abord"
 			},
 			"tagMatch": {
-				"title": "Correspondance des tags (étiquettes)",
-				"some": "Correspond à un tag (étiquette) ou plus",
-				"all": "Correspond à tous les tags (étiquettes)"
+				"title": "Tags correspondants",
+				"some": "Correspond à un tag ou plus",
+				"all": "Correspond à tous les tags"
 			},
 			"name": "Options de tri"
 		},
 		"errors": {
-			"tagsReq": "les Tags (étiquettes) sont requis",
+			"tagsReq": "Les tags sont requis",
 			"requireText": "Le message ne peut pas être vide"
 		},
-		"allTags": "Tous les tags (étiquettes)",
+		"allTags": "Tous les tags",
 		"settings": {
-			"editTags": "Modifier les tags (étiquettes) :",
-			"editTag": "Modifier le tag (étiquette)",
-			"tagName": "Nom du tag (étiquette) :",
-			"moderated": "Ne permettre qu'aux modérateurs de fil d'appliquer ce tag (étiquette)",
-			"addTag": "Ajouter un tag (étiquette)",
-			"delTag": "Supprimer un tag (étiquette)"
+			"editTags": "Modifier les tags :",
+			"editTag": "Modifier le tag",
+			"tagName": "Nom du tag :",
+			"moderated": "Ne permettre qu'aux modérateurs de fil d'appliquer ce tag :",
+			"addTag": "Ajouter un tag",
+			"delTag": "Supprimer un tag"
 		}
 	},
 	"channelLink": "# $1",
@@ -250,8 +261,8 @@
 		"clearWellKnowns": "Re-charger les enregistrements .well-known",
 		"description": "Ces paramètres sont destinés aux développeurs de Harmony/Fermi. Si vous ne savez pas ce que vous faites, ne les modifiez pas.",
 		"gatewayComp": "Désactiver la compression par passerelle (Gateway Compression)",
-		"reportSystem": "Activer le système de signalement expérimental",
-		"logGateway": "Journaliser les événements reçus depuis la passerelle (niveau de log : info)",
+		"reportSystem": "Activer le système de signalement expérimental :",
+		"logGateway": "Journaliser les événements passerelle (niveau d'info log) :",
 		"name": "Paramètres développeur",
 		"traces": "Affichage des traces :"
 	},
@@ -271,7 +282,7 @@
 		"region": "Région : $1",
 		"title": "Gérer les sessions"
 	},
-	"discovery": "Portail de Découverte",
+	"discovery": "Découverte",
 	"dms": "Messages privés",
 	"edit": "Modifier",
 	"emoji": {
@@ -291,7 +302,7 @@
 		"upload": "Importer des émojis"
 	},
 	"emojiSelect": "Émoji :",
-	"gifProvidor": "forunisseur de GIFs :",
+	"gifProvidor": "Fournisseur de GIF :",
 	"errorReconnect": "Impossible de se connecter au serveur, nouvelle tentative dans **$1** secondes...",
 	"favoriteGifs": "GIFs favoris",
 	"folder": {
@@ -333,7 +344,7 @@
 	"guild": {
 		"COMMUNITY": "Demander à rejoindre",
 		"disableInvites": "Désactiver les invitations :",
-		"DISCOVERABLE": "Visible depuis le Portail de Découverte",
+		"DISCOVERABLE": "Découverte",
 		"INVITES_DISABLED": "Sur invitation uniquement",
 		"adminMenu": {
 			"changePerms": "Modifier les permissions pour rechercher",
@@ -366,7 +377,7 @@
 		"description:": "Description :",
 		"disoveryTitle": "Découverte des guildes ($1 {{PLURAL:$1|élément|éléments}})",
 		"editingTemplate": "Modification de $1",
-		"emptytext": "Curieux, cette guilde n'a pas de chaînes (visibles) !?",
+		"emptytext": "Curieux, cette guilde n'a pas de canaux !?",
 		"emptytitle": "Endroit étrange",
 		"guilds": "Guildes",
 		"helpTips?": "Envoyez des conseils utiles à votre guilde !",
@@ -382,15 +393,15 @@
 		"mute": "Rendre la guilde muette",
 		"name:": "Nom :",
 		"nameNoMatch": "Les noms ne correspondent pas",
-		"noDelete": "En faite Non (Annuler la suppression)",
+		"noDelete": "Annuler",
 		"noLeave": "Annuler",
 		"none": "Aucune",
 		"notifications": "Notifications",
-		"onlyMentions": "Seulement les mentions par @",
+		"onlyMentions": "Seulement les @mentions",
 		"overview": "Aperçu",
 		"region:": "Région :",
 		"roles": "Rôles",
-		"ruleId": "Chaîne des règlements :",
+		"ruleId": "Règles du canal :",
 		"selectnoti": "Sélectionner le type de notification",
 		"sendrandomwelcome?": "Envoyer un message aléatoire lorsque quelqu'un rejoint cette guilde :",
 		"serverName": "Nom de la guilde :",
@@ -529,10 +540,10 @@
 	"localuser": {
 		"security": "Sécurité",
 		"advanced": "Paramètres avancés",
-		"danger": "Attention !\nZone dangeureuse",
-		"2faCode:": "Code :",
+		"danger": "Zone dangereuse",
+		"2faCode:": "Code A2F:",
 		"2faCodeGive": "Votre secret TOTP est : $1. Cela va génèrer un jeton A2F à 6 chiffres avec période d'expiration de 30 secondes.",
-		"2fa": "Paramètres de double authentification (2FA)",
+		"2fa": "Paramètres de double authentification (A2F/2FA)",
 		"2faDisable": "Désactiver l'authentification à deux facteurs",
 		"2faEnable": "Activer l'authentification à deux facteurs",
 		"CheckUpdate": "Vérifier les mises à jour",
@@ -691,7 +702,7 @@
 		"reactionsTitle": "Réactions",
 		"retry": "Renvoyer le message",
 		"viewrest": "Afficher le reste",
-		"pollRes": "le sondage $1, $2 est désormais clos"
+		"pollRes": "Le sondage de $1, $2, est désormais clos"
 	},
 	"report": {
 		"back": "Retour",
@@ -853,7 +864,7 @@
 	},
 	"remove": "Supprimer",
 	"renderJoinAvatars": "Afficher l'avatar des nouveaux membres dans le message d'accueil :",
-	"checkBoxMemberList": "Utilisé une boîte à cocher pour la liste des membres :",
+	"checkBoxMemberList": "Utilise une case à cocher pour la liste des membres :",
 	"reply": "Répondre",
 	"replyingTo": "En réponse à $1",
 	"retrying": "Nouvelle tentative...",
@@ -881,7 +892,7 @@
 		"roleFileIcon": "Icône de rôle :",
 		"roles": "Rôles"
 	},
-	"upload": "Téléverser les Fichiers",
+	"upload": "Téléverser les fichiers",
 	"makePoll": "Créer un sondage",
 	"poll": {
 		"question": "Question :",
@@ -901,8 +912,8 @@
 		"expires": "Expire le : $1",
 		"tie": "Match nul !",
 		"winningAnswer": "Réponse gagnante : $1%",
-		"view": "Voir le Sondage",
-		"count": "$1 {{PLURAL:$1| vote|votes}} $2 %"
+		"view": "Voir le sondage",
+		"count": "$1 {{PLURAL:$1|vote|votes}} $2 %"
 	},
 	"search": {
 		"back": "Retour",
@@ -915,10 +926,10 @@
 		"settings": "Paramètres de recherche",
 		"before": "Avant :",
 		"after": "Après :",
-		"includensfw": "Inclus du contenu mature :",
+		"includensfw": "Inclure le contenu mature :",
 		"authors": "Auteurs :",
 		"mentions": "Mentionne :",
-		"channels": "Chaînes :"
+		"channels": "Canaux :"
 	},
 	"searchGifs": "Chercher sur $1",
 	"settings": {
@@ -968,7 +979,7 @@
 		"since": "Membre depuis : $1",
 		"display": "Afficher sur le profil :",
 		"delete": "Supprimer la connexion",
-		"sure": "Êtes-vous sûr{{GENDER:||e}}",
+		"sure": "Êtes-vous sûr{{GENDER:||e}} ?",
 		"sureDesc": "Si vous supprimez cette connexion, vous ne pourrez pas revenir en arrière."
 	},
 	"unpinMessage": "Désépingler le message",
@@ -1023,7 +1034,7 @@
 	},
 	"keyboard": {
 		"shortcuts": "Raccourcis",
-		"empty": "<No keybind set>",
+		"empty": "<Pas de touche assignée>",
 		"descs": {
 			"gifSearch": "Rechercher des GIFs :"
 		}

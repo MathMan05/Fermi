@@ -19,6 +19,12 @@
 		"whatelse": "Čo iné by sa podľa vás malo stať?",
 		"whereever": "Nech je to kdekoľvek"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "kB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "Uvítanie",
 		"disable": "Vypnúť uvítanie",
@@ -29,9 +35,11 @@
 		"enable": "Zapnúť uvítanie",
 		"title": "Vitajte na $1!"
 	},
+	"copyMedia": "Skopírovať URL adresu média",
 	"DMs": {
 		"add": "Pridať niekoho do tejto súkromnej správy",
 		"close": "Zavrieť súkromnú správu",
+		"copyURL": "Skopírovať URL adresu priamej správy",
 		"copyId": "Kopírovať ID súkromnej správy",
 		"markRead": "Označiť ako prečítané",
 		"name": "Súkromné správy"
@@ -109,6 +117,9 @@
 	},
 	"bio": "Bio:",
 	"blankMessage": "Prázdna správa",
+	"sentAttachment": "Odoslaná príloha",
+	"sentPoll": "Odoslaná anketa",
+	"sentSticker": "Odoslaná nálepka",
 	"blog": {
 		"blog": "Blog",
 		"blogUpdates": "Dostávať aktualizácie blogu pri otvorení aplikácie:",
@@ -123,6 +134,7 @@
 	"cancel": "Zrušiť",
 	"channel": {
 		"SlowmodeCool": "Doba čakania spomaleného režimu: $1",
+		"copyURL": "Skopírovať URL kanálu",
 		"TimeOutCool": "Timeout do: $1",
 		"allowIcons": "Povoliť vlastné ikony kanálov",
 		"announcement": "Oznamy",
@@ -150,7 +162,7 @@
 		"text": "Text",
 		"timedOutUntil": "Timeout do: $1",
 		"topic:": "Téma:",
-		"typebox": "Napísať správu v $1",
+		"typebox": "Napísať správu v # $1",
 		"unmute": "Zrušiť stlmenie kanála",
 		"voice": "Hlas",
 		"deleteThread": "Odstrániť vlákno",
@@ -463,6 +475,7 @@
 	"invite": {
 		"accept": "Prijať",
 		"alreadyJoined": "Už ste sa pripojili",
+		"joining": "Pripájanie...",
 		"channel:": "Kanál:",
 		"createInvite": "Vytvoriť pozvánku",
 		"createdAt": "Vytvorené: $1",
@@ -738,7 +751,8 @@
 			"REQUEST_TO_SPEAK": "Umožňuje členom s touto rolou žiadať o slovo v pódiových kanáloch.",
 			"USE_EMBEDDED_ACTIVITIES": "Umožňuje členom s touto rolou používať vstavané aktivity.",
 			"USE_APPLICATION_COMMANDS": "Umožňuje členom s touto rolou používať príkazy aplikácií.",
-			"USE_EXTERNAL_APPS": "Umožňuje, aby sa odpovede aplikácií od členov s touto rolou zobrazovali verejne v kanáli (ak je vypnuté, používatelia budú môcť aplikácie naďalej používať, ale odpovede uvidia iba oni sami. Platí to iba pre aplikácie, ktoré nie sú zároveň nainštalované na serveri)."
+			"USE_EXTERNAL_APPS": "Umožňuje, aby sa odpovede aplikácií od členov s touto rolou zobrazovali verejne v kanáli (ak je vypnuté, používatelia budú môcť aplikácie naďalej používať, ale odpovede uvidia iba oni sami. Platí to iba pre aplikácie, ktoré nie sú zároveň nainštalované na serveri).",
+			"SET_VOICE_CHANNEL_STATUS": "Nastaviť stav hlasového kanálu"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "Pridávať reakcie",
@@ -791,7 +805,8 @@
 			"VIEW_AUDIT_LOG": "Zobrazovať záznam auditu",
 			"VIEW_CHANNEL": "Zobrazovať kanály",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "Zobrazovať analytiku spoplatnenia tvorcu",
-			"VIEW_GUILD_INSIGHTS": "Zobrazovať prehľady servera"
+			"VIEW_GUILD_INSIGHTS": "Zobrazovať prehľady servera",
+			"SET_VOICE_CHANNEL_STATUS": "Nastaviť stav hlasového kanálu"
 		}
 	},
 	"pinMessage": "Pripnúť správu",
@@ -799,12 +814,13 @@
 		"bio": "O mne:",
 		"joined": "Účet vytvorený: $1",
 		"joinedMember": "Pripojil sa k $1: $2",
-		"mut": "Spoločné servery",
+		"mut": "Spoločné servery ($1)",
 		"mutFriends": "Spoloční priatelia",
 		"permInfo": "Povolenia",
 		"userInfo": "Informácie o používateľovi",
 		"notes": "Poznámky o používateľovi"
 	},
+	"messageNotLoad": "Správy sa nepodarilo načítať",
 	"profileColor": "Farba profilu",
 	"pronouns": "Zámená:",
 	"readableName": "Slovenčina",
@@ -990,6 +1006,13 @@
 	},
 	"editMode": {
 		"editMsg": "Escapovať na $1cancel$1"
+	},
+	"keyboard": {
+		"shortcuts": "Skratky",
+		"empty": "<Nenastavená klávesová skratka>",
+		"descs": {
+			"gifSearch": "Hľadať GIFy:"
+		}
 	},
 	"domain": {
 		"title": "Overiť doménu",

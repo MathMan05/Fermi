@@ -119,6 +119,9 @@
 	},
 	"bio": "Bio:",
 	"blankMessage": "Leeg bericht",
+	"sentAttachment": "Heeft een bijlage verzonden",
+	"sentPoll": "Heeft een peiling verzonden",
+	"sentSticker": "Heeft een sticker verzonden",
 	"blog": {
 		"blog": "Blog",
 		"blogUpdates": "Blognieuwtjes zien zodra u de app opent:",

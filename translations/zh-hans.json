@@ -86,6 +86,8 @@
 		"animations": "动画",
 		"playGif": "播放动图：",
 		"playIcon": "播放动态图标：",
+		"playEmoji": "播放动态表情：",
+		"playSticker": "播放动态贴纸：",
 		"roleColors": "禁用角色颜色：",
 		"gradientColors": "禁用渐变着色：",
 		"decorations": "启用头像装饰："
