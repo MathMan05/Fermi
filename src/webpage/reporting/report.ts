@@ -351,8 +351,7 @@ class ReportNode {
 		const elms: Record<string, string[] | string> = {};
 		for (const thing of this.elements) {
 			if (thing.options?.length) {
-				if (thing.json.type === "free_text") elms[thing.json.name] = thing.options[0];
-				else elms[thing.json.name] = thing.options;
+				elms[thing.json.name] = thing.options;
 			}
 		}
 		return elms;
