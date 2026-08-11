@@ -190,7 +190,7 @@ export class ReportMenu {
 		error.render();
 	}
 	gatherElements() {
-		let elms: Record<string, string[] | string> = {};
+		let elms: Record<string, string[]> = {};
 		for (const node of this.nodes) {
 			elms = {
 				...node.gatherElements(),
@@ -348,7 +348,7 @@ class ReportNode {
 		this.owner.div?.append(div);
 	}
 	gatherElements() {
-		const elms: Record<string, string[] | string> = {};
+		const elms: Record<string, string[]> = {};
 		for (const thing of this.elements) {
 			if (thing.options?.length) {
 				elms[thing.json.name] = thing.options;
