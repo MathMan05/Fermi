@@ -348,9 +348,12 @@ class ReportNode {
 		this.owner.div?.append(div);
 	}
 	gatherElements() {
-		const elms: Record<string, string[]> = {};
+		const elms: Record<string, string[] | string> = {};
 		for (const thing of this.elements) {
-			if (thing.options?.length) elms[thing.json.name] = thing.options;
+			if (thing.options?.length) {
+				if (thing.json.type === "free_text") elms[thing.json.name] = thing.options[0];
+				else elms[thing.json.name] = thing.options;
+			}
 		}
 		return elms;
 	}
@@ -566,6 +569,9 @@ class ReportElement {
 				textarea.rows = json.data.rows;
 				textarea.maxLength = json.data.character_limit;
 				div.append(textarea);
+				textarea.onchange = () => {
+					this.options[0] = textarea.value;
+				};
 				break;
 			}
 			default:
