@@ -190,7 +190,7 @@ export class ReportMenu {
 		error.render();
 	}
 	gatherElements() {
-		let elms: Record<string, string[]> = {};
+		let elms: Record<string, string[] | string> = {};
 		for (const node of this.nodes) {
 			elms = {
 				...node.gatherElements(),

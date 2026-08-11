@@ -233,7 +233,7 @@ export interface reportPut {
 	 * This is for various elements, this will return all of the things selected with the key being the name
 	 */
 	elements: {
-		[key: string]: string[];
+		[key: string]: string[] | string;
 	};
 
 	name: reportTypes;
