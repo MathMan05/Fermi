@@ -375,7 +375,6 @@ class Direct extends Guild {
 		}
 	}
 	unreads(html?: HTMLElement | undefined): void {
-		debugger;
 		if (this.freindDiv) {
 			this.freindDiv;
 			const notiCount = Array.from(this.freindDiv.children).find((_) =>
