@@ -2288,6 +2288,21 @@ span.instanceStatus {
 		font-weight: bold;
 	}
 }
+.friendsNoti {
+	background: var(--red);
+	width: 24px;
+	color: var(--primary-text);
+	aspect-ratio: 1/1;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 3px;
+	margin-left: auto;
+	&:empty {
+		display: none;
+	}
+}
 .memberListStyle {
 	span {
 		font-size: 0.9rem;

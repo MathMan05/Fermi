@@ -1054,8 +1054,7 @@ class Localuser {
 						user.handleRelationship(temp.d);
 						this.relationshipsUpdate();
 						const me = this.guilds.get("@me");
-						if (!me) return;
-						me.unreads();
+						if (me) me.unreads();
 						const arr = this.relChangeUpdateMap.get(user.id);
 						if (arr) {
 							arr.forEach((_) => _());
@@ -1074,6 +1073,8 @@ class Localuser {
 						arr.forEach((_) => _());
 						this.relChangeUpdateMap.delete(user.id);
 					}
+					const me = this.guilds.get("@me");
+					if (me) me.unreads();
 					break;
 				}
 				case "PRESENCE_UPDATE": {

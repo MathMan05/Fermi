@@ -77,6 +77,12 @@ class Direct extends Guild {
 		freindDiv.onclick = () => {
 			this.loadChannel(null);
 		};
+		const notiCount = document.createElement("span");
+		if (this.mentions) {
+			notiCount.textContent = this.mentions + "";
+		}
+		notiCount.classList.add("friendsNoti");
+		freindDiv.append(notiCount);
 
 		const newDm = document.createElement("div");
 		newDm.classList.add("flexltr", "dmline");
@@ -367,6 +373,23 @@ class Direct extends Guild {
 		for (const thing of this.channels) {
 			(thing as Group).unreads();
 		}
+	}
+	unreads(html?: HTMLElement | undefined): void {
+		debugger;
+		if (this.freindDiv) {
+			this.freindDiv;
+			const notiCount = Array.from(this.freindDiv.children).find((_) =>
+				_.classList.contains("friendsNoti"),
+			);
+			if (notiCount) {
+				if (this.mentions) {
+					notiCount.textContent = this.mentions + "";
+				} else {
+					notiCount.textContent = "";
+				}
+			}
+		}
+		super.unreads(html);
 	}
 }
 
