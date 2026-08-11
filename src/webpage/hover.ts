@@ -1,5 +1,6 @@
 import {Contextmenu} from "./contextmenu.js";
 import {MarkDown} from "./markdown.js";
+import {removeAni} from "./utils/utils.js";
 type sides = "right" | "bottom";
 class Hover {
 	str: string | MarkDown | (() => Promise<MarkDown | string> | MarkDown | string);
@@ -68,13 +69,11 @@ class Hover {
 			this.elm2.remove();
 		});
 	}
-	static prevDiv = new WeakRef(document.createElement("div"));
 	async makeHover(elm: HTMLElement) {
-		const prev = Hover.prevDiv.deref();
-		if (prev) prev.remove();
+		const prevs = document.getElementsByClassName("hoverthing");
+		Array.from(prevs).forEach((_) => removeAni(_));
 		if (!document.contains(elm)) return document.createElement("div");
 		const div = document.createElement("div");
-		Hover.prevDiv = new WeakRef(div);
 
 		if (this.customHTML) {
 			div.append(this.customHTML());

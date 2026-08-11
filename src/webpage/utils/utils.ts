@@ -649,7 +649,7 @@ async function isAnimated(src: string) {
 	);
 }
 const staticImgMap = new Map<string, string | Promise<string>>();
-export async function removeAni(elm: HTMLElement, time = 500) {
+export async function removeAni(elm: Element, time = 500) {
 	elm.classList.add("removeElm");
 	const ani = elm.getAnimations();
 	await Promise.race([
