@@ -110,21 +110,19 @@ interface freeTextReport extends reportElementBase {
 	name: string;
 	type: "free_text";
 	data: {
-		title: string;
-		options: {
-			title?: string;
-			subtitle?: string;
-			placeholder?: string;
-			/**
-			 * Number of visible text rows
-			 */
-			rows: number;
-			character_limit: number;
-			/**
-			 * It must match this regex pattern
-			 */
-			pattern: string;
-		}[];
+		title?: string;
+
+		subtitle?: string;
+		placeholder?: string;
+		/**
+		 * Number of visible text rows
+		 */
+		rows: number;
+		character_limit: number;
+		/**
+		 * It must match this regex pattern
+		 */
+		pattern?: string;
 	};
 	should_submit_data: true;
 }
