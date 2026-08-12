@@ -1,4 +1,3 @@
-/* General */
 body {
 	height: 100%;
 	margin: 0;
@@ -944,7 +943,7 @@ textarea {
 		background: var(--primary-text-soft);
 	}
 }
-/* Icons */
+
 .pfpDiv {
 	position: relative;
 	background: none !important;
@@ -1635,7 +1634,7 @@ textarea {
 		opacity: 1;
 	}
 }
-/* Animations */
+
 @keyframes fade {
 	0%,
 	100% {
@@ -1655,7 +1654,6 @@ textarea {
 	}
 }
 
-/* Scrollbars */
 ::-webkit-scrollbar {
 	height: 10px;
 	width: 10px;
@@ -1691,7 +1689,6 @@ textarea {
 	scrollbar-width: none;
 }
 
-/* Homepage */
 #titleDiv {
 	padding: 8px;
 	background: var(--primary-bg);
@@ -1791,7 +1788,6 @@ span.instanceStatus {
 	justify-content: space-between;
 }
 
-/* Login/Invite */
 #logindiv,
 #invitebody {
 	position: absolute;
@@ -1895,7 +1891,6 @@ span.instanceStatus {
 	color: var(--primary-text);
 }
 
-/* Loading */
 #loading {
 	z-index: 110;
 	position: absolute;
@@ -1967,7 +1962,7 @@ span.instanceStatus {
 .guilds-div-folder {
 	transition: height 0.2s;
 }
-/* Server List */
+
 #guildRail {
 	flex: 0 0 auto;
 	padding: 8px;
@@ -2063,7 +2058,6 @@ span.instanceStatus {
 	top: 0px;
 }
 
-/* Channel Panel */
 .channelflex {
 	flex: none;
 	width: 240px;
@@ -2271,7 +2265,7 @@ span.instanceStatus {
 		background: var(--red);
 	}
 }
-/* Member Info (DM/Member List) */
+
 .liststyle {
 	padding: 3px 8px;
 	border-radius: 4px;
@@ -2327,7 +2321,6 @@ span.instanceStatus {
 	margin-right: 8px;
 }
 
-/* Dock */
 #VoiceBox {
 	margin: 2px 0;
 	background: var(--dock-bg);
@@ -2435,7 +2428,6 @@ span.instanceStatus {
 	background: var(--user-info-text);
 }
 
-/* Message Area */
 .channelnamediv {
 	background: var(--main-header-bg);
 }
@@ -2688,7 +2680,7 @@ span.instanceStatus {
 		color: var(--red);
 	}
 }
-/* Message */
+
 .messagediv,
 .titlespace {
 	padding: 3px 36px 3px 16px;
@@ -2919,7 +2911,6 @@ span.instanceStatus {
 	animation: jumped 1.3s;
 }
 
-/* Message Content */
 .message pre {
 	padding: 8px;
 	margin-top: 4px;
@@ -3191,7 +3182,6 @@ span .quote:last-of-type .quoteline {
 	border-color: color-mix(in srgb, var(--accent-color), transparent);
 }
 
-/* Message External */
 .filename a {
 	color: var(--filename);
 }
@@ -3367,7 +3357,6 @@ img.bigembedimg {
 	background: color-mix(in hsl, var(--green) 80%, var(--black));
 }
 
-/* Sidebar */
 #sideContainDiv {
 	padding: 16px 8px 0px 8px;
 	display: none;
@@ -3479,7 +3468,6 @@ img.bigembedimg {
 	}
 }
 
-/* Context Menu */
 .contextmenu {
 	position: absolute;
 	padding: 8px;
@@ -3545,7 +3533,6 @@ img.bigembedimg {
 	background: var(--secondary-bg);
 }
 
-/* Profile */
 .profile {
 	position: absolute;
 	height: 350px;
@@ -3749,7 +3736,6 @@ ul {
 	border-radius: 50%;
 }
 
-/* Emoji Picker */
 .emojiPicker {
 	position: absolute;
 	height: 440px;
@@ -3878,7 +3864,7 @@ ul {
 	flex-direction: row;
 	flex-wrap: wrap;
 }
-/* Fullscreen and Modal (TEMP) */
+
 .background {
 	contain-intrinsic-width: AUTO 100px;
 	position: fixed;
@@ -4167,7 +4153,6 @@ fieldset input[type="radio"] {
 	word-break: break-word;
 }
 
-/* Settings */
 .menu {
 	background: var(--settings-bg);
 }
@@ -4639,7 +4624,6 @@ fieldset input[type="radio"] {
 	background: var(--primary-text-prominent);
 }
 
-/* Jank Mobile  */
 #maintoggle,
 #maintoggleicon {
 	display: none;
