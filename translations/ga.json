@@ -18,6 +18,12 @@
 		"whatelse": "Cad eile a cheapann tú ba chóir a tharlú?",
 		"whereever": "Cibé áit a bhfuil sé seo"
 	},
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "Ionduchtú",
 		"disable": "Díchumasaigh an clárú",
@@ -28,9 +34,11 @@
 		"enable": "Cumasaigh ionduchtú",
 		"title": "Fáilte go $1!"
 	},
+	"copyMedia": "Cóipeáil URL na meán",
 	"DMs": {
 		"add": "Cuir duine éigin leis an DM seo",
 		"close": "Dún DM",
+		"copyURL": "Cóipeáil URL DM",
 		"copyId": "Cóipeáil aitheantas DM",
 		"markRead": "Marcáil mar léite",
 		"name": "Teachtaireachtaí Díreacha"
@@ -63,8 +71,12 @@
 			"never": "Choíche"
 		},
 		"name": "Inrochtaineacht",
+		"visuals": "Amharcléirithe",
+		"animations": "Beochana",
 		"playGif": "Seinn GIFanna:",
 		"playIcon": "Seinn deilbhíní beoite:",
+		"playEmoji": "Seinn emoji beoite:",
+		"playSticker": "Seinn greamáin bheoite:",
 		"roleColors": "Díchumasaigh dathanna róil:",
 		"gradientColors": "Díchumasaigh dathú grádáin:",
 		"decorations": "Cumasaigh maisiúcháin abhatár:"
@@ -106,9 +118,12 @@
 	},
 	"bio": "Beathaisnéis:",
 	"blankMessage": "Teachtaireacht bhán",
+	"sentAttachment": "Seoladh ceangaltán",
+	"sentPoll": "Seoladh pobalbhreith",
+	"sentSticker": "Seolta greamán",
 	"blog": {
 		"blog": "Blag",
-		"blogUpdates": "Nuashonruithe blag:",
+		"blogUpdates": "Faigh nuashonruithe blag nuair a osclaíonn tú an aip:",
 		"desc": "Léigh nó liostáil leis an mblag le haghaidh nuashonruithe ar Fermi!",
 		"fermi": "Blag Fermi",
 		"gotoPost": "Téigh go dtí an post",
@@ -120,6 +135,7 @@
 	"cancel": "Cealaigh",
 	"channel": {
 		"SlowmodeCool": "Fuarú mallmhód: $1",
+		"copyURL": "Cóipeáil URL an chainéil",
 		"TimeOutCool": "Am caite go dtí: $1",
 		"allowIcons": "Ceadaigh deilbhíní saincheaptha cainéil",
 		"announcement": "Fógraí",
@@ -147,7 +163,7 @@
 		"text": "Téacs",
 		"timedOutUntil": "Am caite go dtí: $1",
 		"topic:": "Topaic:",
-		"typebox": "Teachtaireacht i $1",
+		"typebox": "Teachtaireacht i # $1",
 		"unmute": "Díbholg an cainéal",
 		"voice": "Guth",
 		"deleteThread": "Scrios an snáithe",
@@ -199,7 +215,7 @@
 		}
 	},
 	"channelLink": "# $1",
-	"clientDesc": "Leagan cliant: $1\n\n[Bí páirteach i ngiúld oifigiúil Fermi](https://redir.fermi.chat/invite)\n\n[Cabhraigh le Fermi a aistriú](https://redir.fermi.chat/translate)\n\n[Cabhraigh le Fermi a chruthú](https://github.com/MathMan05/Fermi)\n\n[Cabhraigh leis an bhfreastalaí a bhfuil Fermi ag brath air a chothabháil](https://redir.fermi.chat/server)\n\n[Léigh an blag](https://blog.fermi.chat/)\n\nCearta ríofa: $3",
+	"clientDesc": "Leagan cliant: $1\n\n[Bí páirteach i ngiúld oifigiúil Fermi](https://redir.fermi.chat/invite)\n\n[Cabhraigh le Fermi a aistriú](https://redir.fermi.chat/translate)\n\n[Cabhraigh le Fermi a chruthú](https://codeberg.org/MelodyChat/Fermi)\n\n[Cabhraigh leis an bhfreastalaí a bhfuil Fermi ag brath air a chothabháil](https://redir.fermi.chat/server)\n\n[Léigh an blag](https://blog.fermi.chat/)\n\nCearta ríofa: $3",
 	"commands": {
 		"errorNotValid": "Ní rogha bhailí é $1 le haghaidh $2",
 		"required": "Is cuid riachtanach den ordú seo é $1"
@@ -212,6 +228,7 @@
 	"createAccount": "Cruthaigh Cuntas",
 	"delete": "Scrios",
 	"deleteConfirm": "An bhfuil tú cinnte gur mian leat é seo a scriosadh?",
+	"deleteConfirmPoll": "An bhfuil tú cinnte gur mhaith leat deireadh a chur leis an vótaíocht go luath?",
 	"devSettings": {
 		"badUser": "Cumasaigh logáil réada úsáideora lochtacha a sheolann an iomarca faisnéise:",
 		"cache": "Cumasaigh comhaid léarscáile Taisceála Oibrí Seirbhíse:",
@@ -222,7 +239,7 @@
 		"gatewayComp": "Díchumasaigh comhbhrú Geata:",
 		"reportSystem": "Cumasaigh córas tuairiscithe turgnamhach:",
 		"logGateway": "Logáil imeachtaí geata a fuarthas (eolas ar leibhéal logála):",
-		"name": "Socruithe Forbróra",
+		"name": "Socruithe forbróra",
 		"traces": "Nochtadh rianta:"
 	},
 	"deviceManage": {
@@ -261,6 +278,7 @@
 		"upload": "Uaslódáil emojis"
 	},
 	"emojiSelect": "Emoji:",
+	"gifProvidor": "Soláthraí GIF:",
 	"errorReconnect": "Ní féidir ceangal leis an bhfreastalaí, déan iarracht eile i gceann **$1** soicind...",
 	"favoriteGifs": "GIFanna is fearr leat",
 	"folder": {
@@ -383,6 +401,20 @@
 		"yesDelete": "Sea, táim cinnte",
 		"yesLeave": "Sea, táim cinnte"
 	},
+	"donate": {
+		"title": "Bealaí chun Síntiús a thabhairt",
+		"donate": "Tabhair Síntiús",
+		"desc": "Trí bhronnadh a thabhairt do Fermi, cuidíonn tú le leanúint leis na tionscadail seo amach anseo!",
+		"mdText": "[Tabhair Síntiús Inniu do Fermi]($1)",
+		"lead": {
+			"title": "Tacaigh leis an bPríomhfhorbróir",
+			"desc": "Tacaigh le príomhfhorbróir Harmony agus Fermi. Rinne siad Fermi ón tús agus is iad príomhchothaitheoir Harmony."
+		},
+		"host": {
+			"title": "Tacaigh leis an Óstach",
+			"desc": "Tacaigh le hÓstach phríomhchás Harmony! Cuidíonn sí leis an tionscadal a threorú isteach sa todhchaí le ceannaireacht, agus déanann sí athbhreithniú ar chuid mhór den chód a théann isteach i mbunachar cód Harmony.\nCashApp: $1"
+		}
+	},
 	"hideBlockedMessages": "Tá an t-úsáideoir seo blocáilte agat, cliceáil chun na teachtaireachtaí seo a cheilt.",
 	"home": {
 		"icon": "Deilbhín sampla $1",
@@ -393,7 +425,9 @@
 		"addBot": "Cuir leis an gild",
 		"alreadyHave": "An bhfuil cuntas agat cheana féin?",
 		"box3description": "Cuirimid fáilte i gcónaí roimh chabhair, bíodh sé sin i bhfoirm tuairiscí fabht, nó cód, nó fiú trí roinnt clóscríobh a thabhairt ar aird.",
+		"box4description": "Cabhraigh le Harmony a chothabháil, an cúltaca a bhfuil Fermi ag brath air chun feidhmiú! Tuairiscigh fabhtanna, cuir iarrataí ar ghnéithe, nó cabhraigh le doiciméadacht a scríobh, tá fáilte roimh aon rud!",
 		"box3title": "Cuir le Fermi",
+		"box4title": "Cuir le Comhchuibheas",
 		"compatableInstances": "Cásanna atá comhoiriúnach le Harmony:",
 		"createAccount": "Cruthaigh cuntas",
 		"dobField": "Dáta breithe:",
@@ -413,7 +447,7 @@
 		"userField": "Ainm úsáideora:",
 		"welcomeJank": "Fáilte go Fermi"
 	},
-	"incorrectURLS": "## Is dócha gur sheol an cás seo na naisc mhíchearta.\n### Más tusa úinéir an chás, féach [anseo](https://docs.spacebar.chat/setup/server/) faoi *Ag ceangal ó mheaisíní iargúlta* chun an fhadhb a cheartú.\nAr mhaith leat go ndéanfadh Fermi iarracht an earráid seo a shocrú go huathoibríoch chun ligean duit ceangal leis an gcás?",
+	"incorrectURLS": "## Is dócha gur sheol an cás seo na naisc mhíchearta.\n### Más tusa úinéir an chás, féach [anseo](https://docs.melodychat.org/setup/server/) faoi *Ag ceangal ó mheaisíní iargúlta* chun an fhadhb a cheartú.\nAr mhaith leat go ndéanfadh Fermi iarracht an earráid seo a shocrú go huathoibríoch chun ligean duit ceangal leis an gcás?",
 	"instInfo": "Faisnéis faoi chás",
 	"instanceInfo": {
 		"contact": "Riarthóirí sampla ríomhphoist",
@@ -442,6 +476,7 @@
 	"invite": {
 		"accept": "Glac leis",
 		"alreadyJoined": "Tá ballraíocht agat cheana féin",
+		"joining": "Ag dul isteach...",
 		"channel:": "Cainéal:",
 		"createInvite": "Cruthaigh cuireadh",
 		"createdAt": "Cruthaithe ag $1",
@@ -479,8 +514,12 @@
 	"leaving": "Tá tú ag fágáil Harmony",
 	"loaded": "Luchtaithe",
 	"localuser": {
+		"security": "Slándáil",
+		"advanced": "Socruithe ardleibhéil",
+		"danger": "Crios contúirte",
 		"2faCode:": "Cód:",
 		"2faCodeGive": "Is é seo do rún TOTP: $1. Ginfidh sé seo comhartha 2FA 6 dhigit le tréimhse éaga 30 soicind.",
+		"2fa": "Socruithe 2FA",
 		"2faDisable": "Díchumasaigh 2FA",
 		"2faEnable": "Cumasaigh 2FA",
 		"CheckUpdate": "Seiceáil le haghaidh nuashonruithe",
@@ -520,7 +559,7 @@
 		"install": "Suiteáil",
 		"installDesc": "Trí Fermi a shuiteáil, beidh tú in ann é a oscailt ina fhuinneog féin agus gníomhú mar aip féin! Is féidir leat leanúint ar aghaidh ag úsáid Fermi sa bhrabhsálaí gréasáin mar a bhí tú agus oibreoidh sé mar an gcéanna.",
 		"installJank": "Suiteáil Fermi",
-		"language": "Teanga:",
+		"language": "Teanga",
 		"manageBot": "Bainistigh an bota",
 		"manageInstance": "Bainistigh an cás",
 		"mustTypePhrase": "Chun do chuntas a scriosadh ní mór duit an frása a chlóscríobh",
@@ -554,11 +593,12 @@
 		"themesAndSounds": "Téamaí & Fuaimeanna",
 		"tokenDisplay": "Comhartha: $1",
 		"trace": "Rianta",
-		"trusted": "Fearainn Iontaofa",
+		"trusted": "Fearainn iontaofa",
 		"trustedDesc": "Nuair a chliceálann tú ar naisc a sheolann chuig na fearainn seo thú, ní iarrfar ort cead a thabhairt chun naisc a oscailt cosúil le naisc eile, tabhair cead seo ach do fhearainn a bhfuil muinín agat astu, amhail 'https://fermi.chat'",
 		"updateSettings": "Nuashonraigh socruithe",
 		"updatesYay": "Nuashonruithe aimsithe!",
-		"userSettings": "Do phróifíl phoiblí"
+		"userSettings": "Do phróifíl phoiblí",
+		"general": "Ginearálta"
 	},
 	"login": {
 		"allGood": "Gach rud go maith",
@@ -622,6 +662,7 @@
 		"andMore": "$1, agus níos mó!",
 		"attached": "cuireadh ceangaltán",
 		"delete": "Scrios an teachtaireacht",
+		"endPoll": "Deireadh leis an vótaíocht",
 		"report": "Tuairiscigh teachtaireacht",
 		"deleted": "Teachtaireacht scriosta",
 		"edit": "Cuir teachtaireacht in eagar",
@@ -636,7 +677,8 @@
 		"reactions": "Féach ar imoibrithe",
 		"reactionsTitle": "Imoibrithe",
 		"retry": "Athsheol teachtaireacht earráideach",
-		"viewrest": "Féach ar an gcuid eile"
+		"viewrest": "Féach ar an gcuid eile",
+		"pollRes": "Tá pobalbhreith $1, $2, dúnta."
 	},
 	"report": {
 		"back": "Ar ais",
@@ -710,7 +752,8 @@
 			"REQUEST_TO_SPEAK": "Ceadaíonn sé seo do bhaill róil iarratas a dhéanamh chun labhairt i gcainéil stáitse.",
 			"USE_EMBEDDED_ACTIVITIES": "Ceadaíonn sé do bhaill róil gníomhaíochtaí leabaithe a úsáid.",
 			"USE_APPLICATION_COMMANDS": "Ceadaíonn sé seo do bhaill róil orduithe feidhmchláir a úsáid.",
-			"USE_EXTERNAL_APPS": "Ceadaíonn sé seo do bhaill róil freagraí feidhmchlár a thaispeáint go poiblí sa chainéal (Nuair a bheidh sé díchumasaithe, beidh cead ag úsáideoirí a n-aipeanna a úsáid fós ach ní bheidh na freagraí le feiceáil ach acu féin. Ní bhaineann sé seo ach le haipeanna nach bhfuil suiteáilte sa cheardchumann freisin)."
+			"USE_EXTERNAL_APPS": "Ceadaíonn sé seo do bhaill róil freagraí feidhmchlár a thaispeáint go poiblí sa chainéal (Nuair a bheidh sé díchumasaithe, beidh cead ag úsáideoirí a n-aipeanna a úsáid fós ach ní bheidh na freagraí le feiceáil ach acu féin. Ní bhaineann sé seo ach le haipeanna nach bhfuil suiteáilte sa cheardchumann freisin).",
+			"SET_VOICE_CHANNEL_STATUS": "Socraigh stádas an chainéil gutha"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "Cuir imoibrithe leis",
@@ -763,7 +806,8 @@
 			"VIEW_AUDIT_LOG": "Féach ar log iniúchta",
 			"VIEW_CHANNEL": "Féach ar chainéil",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "Féach ar anailísíocht monetization cruthaitheoirí",
-			"VIEW_GUILD_INSIGHTS": "Féach ar léargais na gildeanna"
+			"VIEW_GUILD_INSIGHTS": "Féach ar léargais na gildeanna",
+			"SET_VOICE_CHANNEL_STATUS": "Socraigh stádas an chainéil gutha"
 		}
 	},
 	"pinMessage": "Teachtaireacht bioráin",
@@ -771,12 +815,13 @@
 		"bio": "Fúmsa:",
 		"joined": "Cuntas cruthaithe: $1",
 		"joinedMember": "Chuaigh isteach $1: $2",
-		"mut": "Gildeanna frithpháirteacha",
+		"mut": "Comhghuaillíochtaí frithpháirteacha ($1)",
 		"mutFriends": "Cairde frithpháirteacha",
 		"permInfo": "Ceadanna",
 		"userInfo": "Eolas úsáideora",
 		"notes": "Nótaí úsáideora"
 	},
+	"messageNotLoad": "Theip ar na teachtaireachtaí a lódáil",
 	"profileColor": "Dath próifíle",
 	"pronouns": "Forainmneacha:",
 	"readableName": "Gaeilge",
@@ -794,7 +839,8 @@
 		"instURL": "URL:"
 	},
 	"remove": "Bain",
-	"renderJoinAvatars": "Taispeáin abhatár do bhaill nua:",
+	"renderJoinAvatars": "Taispeáin abhatár i dteachtaireachtaí fáilte do bhaill:",
+	"checkBoxMemberList": "Úsáid bosca seiceála don liosta ball:",
 	"reply": "Freagra",
 	"replyingTo": "Ag freagairt do $1",
 	"retrying": "Ag iarraidh arís...",
@@ -821,6 +867,29 @@
 		"roleEmoji": "Emoji róil:",
 		"roleFileIcon": "Deilbhín róil:",
 		"roles": "Róil"
+	},
+	"upload": "Uaslódáil comhaid",
+	"makePoll": "Déan pobalbhreith",
+	"poll": {
+		"question": "Ceist:",
+		"answers": "Freagraí:",
+		"newAnswer": "Freagra Nua",
+		"duration": "Fad:",
+		"durCount": {
+			"1": "1 uair an chloig",
+			"4": "4 uair an chloig",
+			"8": "8 uair an chloig",
+			"24": "24 uair an chloig",
+			"72": "3 lá",
+			"168": "7 lá",
+			"336": "14 lá"
+		},
+		"mult": "Ceadaigh freagraí iolracha:",
+		"expires": "Dáta éaga: $1",
+		"tie": "Ceas comhscór a bhí ann!",
+		"winningAnswer": "An freagra buacach: $1%",
+		"view": "Féach ar an vótaíocht",
+		"count": "$1 {{PLURAL:$1|vóta|vótaí}} $2%"
 	},
 	"search": {
 		"back": "Ar ais",
@@ -935,6 +1004,21 @@
 	"userping": {
 		"resolving": "úsáideoir a réiteach",
 		"unknown": "@úsáideoir-anaithnid"
+	},
+	"editMode": {
+		"editMsg": "Éalaigh go $1cancel$1"
+	},
+	"keyboard": {
+		"shortcuts": "Aicearraí",
+		"empty": "<Gan aon cheangal eochrach socraithe>",
+		"descs": {
+			"gifSearch": "Cuardaigh GIFanna:"
+		}
+	},
+	"domain": {
+		"title": "Fíoraigh fearann",
+		"domain": "Fearann:",
+		"dnsinst": "1. Sínigh isteach i do sholáthraí DNS\n\n2. Cruthaigh taifead DNS mar seo a leanas:\n\nAinm:\n```\n_harmony.$1\n```\n\nCineál:\n```\nTXT\n```\n\nÁbhar:\n```\n$2\n```\n\n-# Is dócha go dtógfaidh sé cúpla nóiméad don DNS leathadh"
 	},
 	"vc": {
 		"joinForStream": "Bígí páirteach sa chainéal gutha le féachaint",
