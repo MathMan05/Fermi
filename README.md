@@ -1,4 +1,6 @@
 # Fermi
+<a href="https://liberapay.com/Mathium05/donate"><img src="https://img.shields.io/liberapay/patrons/Mathium05.svg?logo=liberapay"></a>
+
 Fermi is a [Harmony](https://redir.fermi.chat/server) Client written in TS, HTML, and CSS.
 
 ![](src/webpage/home/SS1.webp)
