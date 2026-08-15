@@ -2588,10 +2588,6 @@ class Channel extends SnowFlake {
 		if (this.curCommand) {
 			this.curCommand.render(TypeBox.box, this);
 		}
-		TypeBox.box.style.setProperty(
-			"--channel-text",
-			JSON.stringify(I18n.channel.typebox(this.shortName)),
-		);
 
 		if (getMessages === undefined) {
 			getMessages = this.type !== 2 || !this.localuser.voiceAllowed;

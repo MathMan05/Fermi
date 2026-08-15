@@ -153,6 +153,7 @@ export class TypeBox {
 		for (const file of this.files) {
 			this.addFile(file, false);
 		}
+		this.box.style.setProperty("--channel-text", JSON.stringify(I18n.channel.typebox(c.shortName)));
 	}
 	static changeWrite() {
 		if (!this.localuser?.focusChannel) return;
