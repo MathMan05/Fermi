@@ -7,7 +7,14 @@ export async function highlight(
 	skipStart: number = 0,
 	skipEnd: number = 0,
 ) {
-	await new Promise((res) => setTimeout(res));
+	let i = 0;
+	while (!document.body.contains(elm)) {
+		for (let i = 0; i < 4; i++) {
+			await new Promise<void>((res) => queueMicrotask(res));
+		}
+		i++;
+		if (i === 100) break;
+	}
 	lang = lang.trim();
 	let content = elm.textContent;
 	if (skipStart) {
