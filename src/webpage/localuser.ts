@@ -876,6 +876,9 @@ class Localuser {
 				case "CHANNEL_UPDATE":
 					if (this.initialized) {
 						this.updateChannel(temp.d);
+						if (temp.d.id === this.focusChannel?.id) {
+							TypeBox.changeWrite();
+						}
 					}
 					break;
 				case "CHANNEL_CREATE":
@@ -1033,18 +1036,29 @@ class Localuser {
 					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.updateRole(temp.d.role);
+					if (guild === this.focusGuild) {
+						TypeBox.changeWrite();
+					}
 					break;
 				}
 				case "GUILD_ROLE_DELETE": {
 					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.deleteRole(temp.d.role_id);
+					if (guild === this.focusGuild) {
+						TypeBox.changeWrite();
+					}
 					break;
 				}
 				case "GUILD_MEMBER_UPDATE": {
 					const guild = this.guilds.get(temp.d.guild_id);
 					if (!guild) break;
 					guild.memberupdate(temp.d);
+					if (temp.d.id === this.user.id) {
+						if (guild === this.focusGuild) {
+							TypeBox.changeWrite();
+						}
+					}
 					break;
 				}
 				case "RELATIONSHIP_UPDATE":
