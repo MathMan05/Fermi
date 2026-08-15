@@ -4310,7 +4310,7 @@ class Localuser {
 		TypeBox.updateSend();
 	}
 	//TODO make this an option
-	readonly autofillregex = Object.freeze(/(^|\s|\n)[@#:]([a-zA-Z0-9]*)$/i);
+	readonly autofillregex = Object.freeze(/(^|\s|\n|>)[@#:]([a-zA-Z0-9]*)$/i);
 	mdBox() {
 		const typeMd = TypeBox.markdown;
 		typeMd.owner = this;
