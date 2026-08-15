@@ -154,6 +154,10 @@ export class TypeBox {
 			this.addFile(file, false);
 		}
 		this.box.style.setProperty("--channel-text", JSON.stringify(I18n.channel.typebox(c.shortName)));
+
+		if (!state?.text) {
+			this.box.textContent = "";
+		}
 	}
 	static changeWrite() {
 		if (!this.localuser?.focusChannel) return;
