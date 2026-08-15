@@ -259,6 +259,7 @@
 		"region": "Region: $1",
 		"title": "Manage sessions"
 	},
+	"addGuild":"Add a guild",
 	"discovery": "Discovery",
 	"dms": "Direct messages",
 	"edit": "Edit",

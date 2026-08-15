@@ -2218,6 +2218,14 @@ class Localuser {
 			guildDiscoveryContainer.addEventListener("click", () => {
 				this.guildDiscovery();
 			});
+			new Hover(I18n.discovery(), {
+				side: "right",
+				weak: true,
+			}).addEvent(guilddsdiv);
+			new Hover(I18n.addGuild(), {
+				side: "right",
+				weak: true,
+			}).addEvent(div);
 		}
 		this.unreads();
 		dirrect.unreaddms();
