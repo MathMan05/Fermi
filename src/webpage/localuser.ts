@@ -1423,7 +1423,7 @@ class Localuser {
 		if (!guild) return;
 
 		const channel = this.focusChannel;
-		if (!channel) return;
+		if (!channel || !channel.hasPermission("VIEW_CHANNEL")) return;
 		if (channel.voice && this.voiceAllowed) {
 			const div = document.getElementById("sideDiv") as HTMLDivElement;
 			div.textContent = "";
