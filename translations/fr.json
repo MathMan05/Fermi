@@ -36,7 +36,7 @@
 		"app": "Vers l'application",
 		"blog": "Le blogue de Fermi",
 		"home": "Page d'accueil",
-		"listtitle": "Tu voulais peut-être aller dans un de ces endroits",
+		"listtitle": "Tu voulais peut-être aller dans l’un de ces endroits",
 		"login": "Se connecter",
 		"report": "Si vous avez trouvé cette page dans le client, veuillez le signaler :",
 		"reset": "Page de réinitialisation du mot de passe",
@@ -62,14 +62,14 @@
 	},
 	"copyMedia": "Copier L'URL du média",
 	"DMs": {
-		"add": "Ajouter quelqu'un à ce canal privé",
-		"close": "Fermer le canal privé",
+		"add": "Ajouter quelqu'un à ce message privé",
+		"close": "Fermer le message privé",
 		"copyURL": "Copier l'URL du message privé",
-		"copyId": "Copier l'identifiant du canal privé",
+		"copyId": "Copier l'identifiant du canal du message privé",
 		"markRead": "Marquer comme lu",
 		"name": "Messages privés"
 	},
-	"ok": "OK",
+	"ok": "Ok",
 	"dismiss": "Ignorer",
 	"UrlGen": "Générateur d'invitations de bot",
 	"Voice": {
@@ -101,6 +101,8 @@
 		"animations": "Animations",
 		"playGif": "Jouer les GIFs :",
 		"playIcon": "Jouer les icônes animées :",
+		"playEmoji": "Jouer les émojis animés :",
+		"playSticker": "Jouer les stickers animés",
 		"roleColors": "Désactiver les couleurs des rôles :",
 		"gradientColors": "Désactiver la coloration en dégradé :",
 		"decorations": "Activer les décorations d'avatar :"
@@ -136,7 +138,7 @@
 		"legacy_username": "a un nom d'utilisateur hérité",
 		"partner": "Partenaire de l'instance",
 		"premium": "Premium",
-		"quest_completed": "a fait une quête",
+		"quest_completed": "a fini une quête",
 		"staff": "Personnel de l'instance",
 		"verified_developer": "Développeur vérifié"
 	},
@@ -176,7 +178,7 @@
 		"mute": "Rendre le canal muet",
 		"name": "Canal",
 		"name:": "Nom du canal :",
-		"nsfw:": "Avertissement contenu mature :",
+		"nsfw:": "Avertissement de contenu mature :",
 		"permissions": "Permissions",
 		"selectCatName": "Nom de la catégorie",
 		"selectName": "Nom du canal",
@@ -282,6 +284,7 @@
 		"region": "Région : $1",
 		"title": "Gérer les sessions"
 	},
+	"addGuild": "Ajouter une guilde",
 	"discovery": "Découverte",
 	"dms": "Messages privés",
 	"edit": "Modifier",
@@ -344,7 +347,7 @@
 	"guild": {
 		"COMMUNITY": "Demander à rejoindre",
 		"disableInvites": "Désactiver les invitations :",
-		"DISCOVERABLE": "Découverte",
+		"DISCOVERABLE": "Visible dans \"Découverte\"",
 		"INVITES_DISABLED": "Sur invitation uniquement",
 		"adminMenu": {
 			"changePerms": "Modifier les permissions pour rechercher",
