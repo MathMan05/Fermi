@@ -1015,7 +1015,7 @@
 		"unknown": "@unknown-user"
 	},
 	"editMode":{
-		"editMsg":"Escape to $1cancel$1"
+		"editMsg":"Escape to $1cancel$1 enter to $2submit$2"
 	},
 	"keyboard":{
 		"shortcuts":"Shortcuts",

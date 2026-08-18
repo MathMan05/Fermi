@@ -1046,7 +1046,7 @@ class Message extends SnowFlake {
 				box.oncontextmenu = (e) => {
 					e.stopImmediatePropagation();
 				};
-				const [before, center, after] = I18n.editMode.editMsg("|||").split("|||");
+				const [before, center, after] = I18n.editMode.editMsg("|||", "???").split("|||");
 				const span = document.createElement("span");
 				const bs = document.createElement("span");
 				bs.textContent = before;
@@ -1058,9 +1058,29 @@ class Message extends SnowFlake {
 					this.generateMessage();
 				};
 
+				const makeEnter = (txt: string) => {
+					const [before, center, after] = txt.split("???");
+					const save = document.createElement("a");
+					save.textContent = center;
+					save.onclick = () => {
+						this.edit(MarkDown.gatherBoxText(area));
+						this.channel.editing = null;
+						this.generateMessage();
+					};
+					const bs = document.createElement("span");
+					bs.textContent = before;
+					const asp = document.createElement("span");
+					asp.textContent = after;
+					return [bs, save, asp];
+				};
+
 				const asp = document.createElement("span");
 				asp.textContent = after;
-				span.append(bs, exit, asp);
+				span.append(
+					...(before.includes("???") ? makeEnter(before) : [bs]),
+					exit,
+					...(after.includes("???") ? makeEnter(after) : [asp]),
+				);
 				box.append(span);
 			} else {
 				this.content.onUpdate = () => {};
