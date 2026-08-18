@@ -69,7 +69,7 @@ class Sticker extends SnowFlake {
 				const desc = document.createElement("span");
 
 				toptext.append(name, desc);
-				const shtml = this.getHTML(false);
+				const shtml = this.getHTML(true);
 				shtml.classList.add("sourceSticker");
 				top.append(shtml, toptext);
 
@@ -276,7 +276,7 @@ class Sticker extends SnowFlake {
 				const emojiElem = document.createElement("div");
 				emojiElem.classList.add("stickerSelect");
 
-				emojiElem.append(sticker.getHTML(false));
+				emojiElem.append(sticker.getHTML(true));
 				body.append(emojiElem);
 
 				emojiElem.addEventListener("click", () => {
@@ -345,7 +345,7 @@ class Sticker extends SnowFlake {
 				for (const [, sticker] of guild.stickers) {
 					const stickerElem = document.createElement("div");
 					stickerElem.classList.add("stickerSelect");
-					stickerElem.append(sticker.getHTML(false));
+					stickerElem.append(sticker.getHTML(true));
 					body.append(stickerElem);
 					stickerElem.addEventListener("click", () => {
 						res(sticker);

@@ -974,7 +974,7 @@ class Guild extends SnowFlake {
 							traditionalSubmit: true,
 						});
 
-						form.addHTMLArea(sticker.getHTML());
+						form.addHTMLArea(sticker.getHTML(true));
 						form.addTextInput(I18n.sticker.name(), "name", {
 							initText: sticker.name,
 						});
@@ -1007,7 +1007,7 @@ class Guild extends SnowFlake {
 						});
 					};
 
-					div.append(sticker.getHTML(), text);
+					div.append(sticker.getHTML(true), text);
 
 					containdiv.append(div);
 				}
