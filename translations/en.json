@@ -1038,6 +1038,7 @@
 	"webhooks": {
 		"EnterWebhookName": "Enter webhook name",
 		"areYouSureDelete": "Are you sure you want to delete $1?",
+		"areYouSureDeleteHead":"Delete $1?",
 		"avatar": "Avatar",
 		"base": "Webhooks",
 		"channel": "Webhook outputs to channel:",

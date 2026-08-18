@@ -4401,7 +4401,7 @@ fieldset input[type="radio"] {
 	padding: 6px;
 	cursor: pointer;
 	margin-top: 6px;
-	img {
+	.pfpDiv {
 		width: 48px !important;
 		height: 48px !important;
 		padding: 4px !important;

@@ -156,7 +156,7 @@ async function webhookMenu(
 				form.addHTMLArea(div);
 			} catch {}
 			form.addButtonInput("", I18n.webhooks.deleteWebhook(), () => {
-				const d = new Dialog("areYouSureDelete");
+				const d = new Dialog(I18n.webhooks.areYouSureDeleteHead(hook.name));
 				const opt = d.options;
 				opt.addTitle(I18n.webhooks.areYouSureDelete(hook.name));
 				const opt2 = opt.addOptions("", {ltr: true});
