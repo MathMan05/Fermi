@@ -912,7 +912,7 @@ class User extends SnowFlake {
 				if ("setSrcs" in element) {
 					img.setSrcs(this.getpfpsrc());
 				} else {
-					console.warn("element didn't have setSrcs property");
+					img.src = this.getpfpsrc();
 				}
 			});
 		}

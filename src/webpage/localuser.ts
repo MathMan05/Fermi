@@ -1756,8 +1756,10 @@ class Localuser {
 		}
 	}
 	loaduser(): void {
+		const userpfp = document.getElementById("userpfp") as HTMLImageElement;
 		(document.getElementById("username") as HTMLSpanElement).textContent = this.user.username;
-		(document.getElementById("userpfp") as HTMLImageElement).src = this.user.getpfpsrc();
+		userpfp.src = this.user.getpfpsrc();
+		userpfp.classList = `pfp userid:${this.user.id}`;
 		(document.getElementById("status") as HTMLSpanElement).textContent = this.status;
 	}
 	isAdmin(): boolean {
