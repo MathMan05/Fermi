@@ -167,7 +167,7 @@
 	--primary-hover: #18181b;
 	--primary-text: #dfdfdf;
 	--primary-text-soft: #adb8b9;
-	--secondary-bg: #060608;
+	--secondary-bg: #000000;
 	--secondary-hover: #18181b;
 	--servers-bg: #000000;
 	--channels-bg: #0a0a0a;
@@ -178,7 +178,7 @@
 	--spoiler-bg: #1f1f20;
 	--link: #326be5;
 	--primary-text-prominent: #efefef;
-	--dock-bg: #0a0b0c;
+	--dock-bg: #000000;
 	--card-bg: #000000;
 	--embed-bg: #000000;
 }
@@ -189,7 +189,7 @@
 	--primary-hover: color-mix(in srgb, #18181b 95%, var(--accent-color));
 	--primary-text: #dfdfdf;
 	--primary-text-soft: #adb8b9;
-	--secondary-bg: color-mix(in srgb, #060608 95%, var(--accent-color));
+	--secondary-bg: color-mix(in srgb, #000000 95%, var(--accent-color));
 	--secondary-hover: color-mix(in srgb, #18181b 95%, var(--accent-color));
 	--folder-bg: color-mix(in srgb, var(--primary-text-soft) 95%, var(--accent-color));
 	--servers-bg: color-mix(in srgb, #000000 95%, var(--accent-color));
@@ -202,7 +202,7 @@
 	--link: #326be5;
 	--black: color-mix(in srgb, #000000 90%, var(--accent-color));
 	--icon: color-mix(in srgb, #ffffff, var(--accent-color));
-	--dock-bg: color-mix(in srgb, #0a0b0c 95%, var(--accent-color));
+	--dock-bg: color-mix(in srgb, #000000 95%, var(--accent-color));
 	--spoiler-hover: color-mix(in srgb, #111111 95%, var(--accent-color));
 	--card-bg: color-mix(in srgb, #000000 95%, var(--accent-color));
 	--spoiler-bg: #1f1f20;
