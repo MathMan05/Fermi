@@ -731,6 +731,9 @@ audio::-webkit-media-controls-panel {
 		background: #00000050;
 	}
 }
+.copyCode {
+	margin-top: 12px;
+}
 button,
 input::file-selector-button,
 select {

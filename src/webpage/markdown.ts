@@ -374,6 +374,15 @@ class MarkDown {
 						pre.textContent = build;
 						span.appendChild(pre);
 						if (count === 3) highlight(pre, lang, keep ? 3 + lang.length : 0, keep ? 3 : 0);
+						if (!keep && !stdsize && lang && count === 3) {
+							const button = document.createElement("button");
+							button.textContent = I18n.copyCode();
+							button.classList.add("copyCode");
+							pre.append(button);
+							button.onclick = () => {
+								navigator.clipboard.writeText(build);
+							};
+						}
 					}
 					i--;
 					continue;
