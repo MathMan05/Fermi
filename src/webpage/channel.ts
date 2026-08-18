@@ -3166,7 +3166,7 @@ class Channel extends SnowFlake {
 		this.owner_id = json.owner_id;
 		this.icon = json.icon;
 		this.defaultAutoArchiveDuration = json.default_auto_archive_duration;
-		this.renderIcon();
+
 		this.threadData = json.thread_metadata;
 		this.rate_limit_per_user = json.rate_limit_per_user || 0;
 		this.appliedTags = json.applied_tags || this.appliedTags;
@@ -3194,6 +3194,7 @@ class Channel extends SnowFlake {
 		this.topic = json.topic;
 		this.nsfw = json.nsfw;
 		this.fireEvents();
+		this.renderIcon();
 	}
 	croleUpdate: () => unknown = () => {};
 	typingstart() {
