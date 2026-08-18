@@ -961,6 +961,12 @@ class Message extends SnowFlake {
 				const userwrap = document.createElement("div");
 				userwrap.classList.add("userwrap");
 				userwrap.appendChild(username);
+				const pronouns = document.createElement("span");
+				pronouns.textContent = this.author.pronouns ?? "";
+				pronouns.classList.add("inlinepronouns");
+				//TODO make this a setting
+				if (this.author.pronouns) userwrap.append(pronouns);
+
 				if (this.author.bot) {
 					const username = document.createElement("span");
 					username.classList.add("bot");

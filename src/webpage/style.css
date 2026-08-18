@@ -2544,6 +2544,7 @@ span.instanceStatus {
 .cancelReply {
 	height: 16px;
 	width: 16px;
+	margin-left: auto;
 }
 .cancelReply:hover {
 	background: var(--primary-text-prominent);
@@ -2813,6 +2814,11 @@ span.instanceStatus {
 	width: 100%;
 	overflow: clip;
 	position: relative;
+}
+.inlinepronouns {
+	font-size: 14px;
+	margin-left: 4px;
+	opacity: 0.7;
 }
 
 .commentrow:hover::after {

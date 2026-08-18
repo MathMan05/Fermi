@@ -229,7 +229,7 @@ export class TypeBox {
 			this.box.classList.add("typeboxreplying");
 			replybox.innerHTML = "";
 			const span = document.createElement("span");
-			span.textContent = I18n.replyingTo(c.replyingto.author.username);
+			span.textContent = I18n.replyingTo(c.replyingto.author.name);
 			const X = document.createElement("button");
 			X.onclick = (_) => {
 				if (c.replyingto?.div) {
@@ -243,6 +243,13 @@ export class TypeBox {
 			replybox.classList.remove("hideReplyBox");
 			X.classList.add("cancelReply", "svgicon", "svg-x");
 			replybox.append(span);
+
+			const pronouns = document.createElement("span");
+			pronouns.textContent = c.replyingto.author.pronouns ?? "";
+			pronouns.classList.add("inlinepronouns");
+			//TODO make this a setting
+			if (c.replyingto.author.pronouns) replybox.append(pronouns);
+
 			replybox.append(X);
 		} else {
 			replybox.classList.add("hideReplyBox");
