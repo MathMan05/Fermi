@@ -488,7 +488,27 @@ type emojipjson = emojijson & {
 	roles: string[];
 	groups: null; //TODO figure out what this means lol
 };
-
+export interface guildSource {
+	id: string;
+	name: string;
+	icon: string | null;
+	description: string | null;
+	splash: string | null;
+	discovery_splash: string | null;
+	features: string[];
+	vanity_url_code: string | null;
+	preferred_locale: string;
+	premium_subscription_count: number;
+	approximate_member_count: number;
+	approximate_presence_count: number;
+	premium_tier: number;
+	auto_removed: boolean;
+	primary_category_id: string | null;
+	keywords: string[] | null;
+	is_published: boolean;
+	//TODO later
+	reasons_to_join: [];
+}
 type guildjson = {
 	application_command_counts: {[key: string]: number};
 	channels: channeljson[];

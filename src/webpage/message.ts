@@ -1293,7 +1293,7 @@ class Message extends SnowFlake {
 		const stickerArea = document.createElement("div");
 		stickerArea.classList.add("flexltr", "stickerMArea");
 		for (const sticker of this.stickers) {
-			stickerArea.append(sticker.getHTML());
+			stickerArea.append(sticker.getHTML(true));
 		}
 		text.append(stickerArea);
 

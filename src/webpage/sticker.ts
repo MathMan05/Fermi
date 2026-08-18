@@ -2,11 +2,11 @@ import {Contextmenu} from "./contextmenu.js";
 import {Guild} from "./guild.js";
 import {Hover} from "./hover.js";
 import {I18n} from "./i18n.js";
-import {stickerJson} from "./jsontypes.js";
+import {guildSource, stickerJson} from "./jsontypes.js";
 import {Localuser} from "./localuser.js";
 import {SnowFlake} from "./snowflake.js";
 import {CDNParams} from "./utils/cdnParams.js";
-import {createImg} from "./utils/utils.js";
+import {createImg, removeAni} from "./utils/utils.js";
 
 class Sticker extends SnowFlake {
 	name: string;
@@ -33,7 +33,7 @@ class Sticker extends SnowFlake {
 		this.tags = json.tags;
 		this.description = json.description || "";
 	}
-	getHTML(): HTMLElement {
+	getHTML(noclick: boolean): HTMLElement {
 		const img = createImg(
 			this.owner.info.cdn + "/stickers/" + this.id + ".webp" + new CDNParams({expectedSize: 160}),
 			undefined,
@@ -44,6 +44,105 @@ class Sticker extends SnowFlake {
 		const hover = new Hover(this.name);
 		hover.addEvent(img);
 		img.alt = this.description;
+		if (!noclick) {
+			img.onclick = async (e) => {
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				const div = document.createElement("div");
+				div.style.top = e.clientY + "px";
+				div.style.left = e.clientX + "px";
+				div.classList.add("flexttb", "EmojiGuildMenu");
+
+				const localuser = this.localuser as Localuser;
+				const lookup = await Sticker.lookupStickerSource(this.id, this.localuser);
+
+				const top = document.createElement("div");
+				top.classList.add("flexltr", "GuildEmojiTop");
+
+				const toptext = document.createElement("div");
+				toptext.classList.add("flexttb");
+				div.append(toptext);
+
+				const name = document.createElement("span");
+				name.textContent = this.name;
+
+				const desc = document.createElement("span");
+
+				toptext.append(name, desc);
+				const shtml = this.getHTML(false);
+				shtml.classList.add("sourceSticker");
+				top.append(shtml, toptext);
+
+				if (!lookup) {
+					desc.textContent = I18n.sticker.found.private();
+					return;
+				}
+				const guild = localuser.guilds.get(lookup.id);
+				if (guild) {
+					if (localuser.focusGuild === guild) {
+						desc.textContent = I18n.sticker.found.this();
+					} else {
+						desc.textContent = I18n.sticker.found.other();
+					}
+				} else {
+					desc.textContent = I18n.sticker.found.not();
+				}
+
+				const h3 = document.createElement("h3");
+				h3.textContent = I18n.sticker.from();
+
+				const guildRow = document.createElement("div");
+				guildRow.classList.add("flexltr", "guildEmojiRow");
+
+				const guildText = document.createElement("div");
+				guildText.classList.add("flexttb", "guildEmojiText");
+
+				const guildName = document.createElement("span");
+				guildName.classList.add("guildName");
+				guildName.textContent = lookup.name;
+
+				const guildDesc = document.createElement("span");
+				guildDesc.classList.add("guildDesc");
+				const discoverable = lookup.features.find((_) => _ === "DISCOVERABLE");
+				if (discoverable) {
+					if (lookup.description) {
+						guildDesc.textContent = lookup.description;
+					}
+				} else {
+					guildDesc.textContent = I18n.emoji.privateGuild();
+				}
+
+				guildText.append(guildName, guildDesc);
+				if (!guild && discoverable) {
+					const button = document.createElement("button");
+					button.textContent = I18n.emoji.join();
+					button.classList.add("emojiJoin");
+					guildText.append(button);
+					button.onclick = async () => {
+						const joinRes = await fetch(
+							localuser.info.api + "/guilds/" + lookup.id + "/members/@me",
+							{
+								method: "PUT",
+								headers: localuser.headers,
+							},
+						);
+						if (joinRes.ok) {
+							removeAni(div);
+						}
+					};
+				}
+				guildRow.append(
+					Guild.generateGuildIcon({...lookup, info: localuser.info}, false)
+						.lastChild as HTMLElement,
+					guildText,
+				);
+				div.append(top, h3, guildRow);
+
+				document.body.append(div);
+				Contextmenu.keepOnScreen(div);
+				Contextmenu.declareMenu(div);
+			};
+		}
 		return img;
 	}
 	static searchStickers(search: string, localuser: Localuser, results = 50): [Sticker, number][] {
@@ -177,7 +276,7 @@ class Sticker extends SnowFlake {
 				const emojiElem = document.createElement("div");
 				emojiElem.classList.add("stickerSelect");
 
-				emojiElem.append(sticker.getHTML());
+				emojiElem.append(sticker.getHTML(false));
 				body.append(emojiElem);
 
 				emojiElem.addEventListener("click", () => {
@@ -246,7 +345,7 @@ class Sticker extends SnowFlake {
 				for (const [, sticker] of guild.stickers) {
 					const stickerElem = document.createElement("div");
 					stickerElem.classList.add("stickerSelect");
-					stickerElem.append(sticker.getHTML());
+					stickerElem.append(sticker.getHTML(false));
 					body.append(stickerElem);
 					stickerElem.addEventListener("click", () => {
 						res(sticker);
@@ -269,6 +368,40 @@ class Sticker extends SnowFlake {
 		menu.append(body);
 		search.focus();
 		return promise;
+	}
+	static stickerMap = new WeakMap<Localuser, Map<string, guildSource | void>>();
+	static async lookupStickerSource(id: string, localuser: Localuser): Promise<guildSource | void> {
+		const guild = localuser.guilds.values().find((guild) => guild.stickers.has(id));
+		if (guild) {
+			return {
+				...guild.properties,
+				premium_subscription_count: 0,
+				approximate_member_count: 0,
+				approximate_presence_count: 0,
+				auto_removed: false,
+				primary_category_id: null,
+				keywords: null,
+				is_published: false,
+				reasons_to_join: [],
+				vanity_url_code: "",
+			};
+		}
+
+		const map = this.stickerMap.get(localuser) || new Map();
+		this.emojiMap.set(localuser, map);
+
+		if (map.has(id)) return map.get(id);
+
+		const res = await fetch(localuser.info.api + `/stickers/${id}/guild`, {
+			headers: localuser.headers,
+		});
+		if (res.status === 403) {
+			map.set(id, undefined);
+			return undefined;
+		}
+		const json = (await res.json()) as guildSource;
+		map.set(id, json);
+		return json;
 	}
 }
 export {Sticker};

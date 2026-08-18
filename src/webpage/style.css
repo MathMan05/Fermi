@@ -5225,7 +5225,10 @@ img.error::after {
 		margin-right: 10px;
 	}
 }
-
+.sourceSticker {
+	width: 48px;
+	height: 48px;
+}
 .guildEmojiRow {
 	img {
 		margin-right: 8px;

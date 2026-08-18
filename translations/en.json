@@ -937,7 +937,14 @@
 		"name": "Name:",
 		"tags": "Associated emoji: ",
 		"title": "Stickers",
-		"upload": "Upload stickers"
+		"upload": "Upload stickers",
+		"found": {
+			"not": "This sticker is not from your guilds, join the guild hosting it to use this sticker",
+			"other": "This sticker is from one of your other guilds.",
+			"private": "The guild for this sticker can't be found",
+			"this": "This sticker is from this guild."
+		},
+		"from": "This sticker is from"
 	},
 	"submit": "Submit",
 	"switchAccounts": "Switch accounts ⇌",
