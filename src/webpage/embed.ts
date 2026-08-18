@@ -7,6 +7,7 @@ import {I18n} from "./i18n.js";
 import {ImagesDisplay} from "./disimg.js";
 import {File} from "./file.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {PopUp} from "./settings.js";
 
 class Embed {
 	type: string;
@@ -406,7 +407,7 @@ class Embed {
 						.then((r) => r.json())
 						.then((_) => {
 							if (_.message) {
-								alert(_.message);
+								new PopUp(_.message).show();
 								button.textContent = I18n.invite.accept();
 								button.disabled = false;
 							} else {
