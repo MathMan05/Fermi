@@ -238,39 +238,39 @@ class Direct extends Guild {
 				checkVoid();
 				container.innerHTML = "";
 				container.append(I18n.friends["pending:"]());
-				for (const user of this.localuser.inrelation) {
-					if (user.relationshipType === 3 || user.relationshipType === 4) {
-						const buttons = document.createElement("div");
-						buttons.classList.add("flexltr");
+				for (const user of [...this.localuser.inrelation]
+					.filter((user) => user.relationshipType === 3 || user.relationshipType === 4)
+					.sort((a, b) => +b.relationshipID! - +a.relationshipID!)) {
+					const buttons = document.createElement("div");
+					buttons.classList.add("flexltr");
+					const buttonc = document.createElement("div");
+					const button1 = document.createElement("span");
+					button1.classList.add("svgicon", "svg-x");
+					if (user.relationshipType === 3) {
 						const buttonc = document.createElement("div");
-						const button1 = document.createElement("span");
-						button1.classList.add("svgicon", "svg-x");
-						if (user.relationshipType === 3) {
-							const buttonc = document.createElement("div");
-							const button2 = document.createElement("span");
-							button2.classList.add("svgicon", "svg-x");
-							button2.classList.add("svg-addfriend");
-							buttonc.append(button2);
-							buttonc.classList.add("friendlyButton");
-							buttonc.append(button2);
-							buttons.append(buttonc);
-							buttonc.onclick = (e) => {
-								e.stopImmediatePropagation();
-								user.changeRelationship(1);
-								outerDiv.remove();
-							};
-						}
-						buttonc.append(button1);
+						const button2 = document.createElement("span");
+						button2.classList.add("svgicon", "svg-x");
+						button2.classList.add("svg-addfriend");
+						buttonc.append(button2);
 						buttonc.classList.add("friendlyButton");
+						buttonc.append(button2);
+						buttons.append(buttonc);
 						buttonc.onclick = (e) => {
 							e.stopImmediatePropagation();
-							user.changeRelationship(0);
+							user.changeRelationship(1);
 							outerDiv.remove();
 						};
-						buttons.append(buttonc);
-						const outerDiv = genuserstrip(user, buttons);
-						container.append(outerDiv);
 					}
+					buttonc.append(button1);
+					buttonc.classList.add("friendlyButton");
+					buttonc.onclick = (e) => {
+						e.stopImmediatePropagation();
+						user.changeRelationship(0);
+						outerDiv.remove();
+					};
+					buttons.append(buttonc);
+					const outerDiv = genuserstrip(user, buttons);
+					container.append(outerDiv);
 				}
 			};
 			pending.onclick = genPending;

@@ -41,6 +41,7 @@ class User extends SnowFlake {
 	username!: string;
 	nickname: string | null = null;
 	relationshipType: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0;
+	relationshipID?: string;
 	bio!: MarkDown;
 	discriminator!: string;
 	pronouns?: string;
@@ -1149,6 +1150,7 @@ class User extends SnowFlake {
 		this.nickname = relation.nickname;
 		this.relationshipType = relation.type;
 		this.localuser.inrelation.add(this);
+		this.relationshipID = relation.id;
 		if (nickChange) {
 			this.nameChange();
 		}
