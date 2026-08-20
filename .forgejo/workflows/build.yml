@@ -22,6 +22,8 @@ jobs:
       run: npm run build
     - name: Write desc
       run: NOTES=$(git tag -n99 --format="%(contents)")
+    - name: tar it
+      run: mkdir release; tar -czvf release.tar.gz dist
     - uses: actions/forgejo-release@v2.13.4
       with:
         direction: upload
@@ -29,6 +31,6 @@ jobs:
         repo: MelodyChat/fermi
         token: ${{ secrets.CODEBERG_TOKEN }}
         tag: ${{ github.ref_name }}
-        release-dir: dist/
+        release-dir: release/
         release-notes: ${{ env.NOTES }}
 
