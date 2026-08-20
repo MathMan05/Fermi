@@ -25,6 +25,8 @@ jobs:
       run: echo "NOTES=" >> $FORGEJO_OUTPUT; git tag -n99 --format="%(contents)" >> $FORGEJO_OUTPUT;
     - name: tar it
       run: mkdir release; tar -czvf release.tar.gz dist
+    - name: echo notes
+      run: echo $FORGEJO_OUTPUT
     - uses: actions/forgejo-release@v2.13.4
       with:
         direction: upload
