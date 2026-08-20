@@ -13,13 +13,17 @@ To access Fermi after starting, simply go to http://localhost:8080/login and eit
 If there are any issues please report them either here, or to me dirrectly on Harmony
 ## Adding instances to the dropdown
 Please see [this](https://codeberg.org/MelodyChat/Fermi/src/branch/main/InstanceInfo.md) for how to add an instance to the dropdown picker.
+
 ## How to statically host Fermi
 [Click here](./howToStaticallyHost.md)
+
 ## RoadMap
 You can view the current roadmap on https://codeberg.org/MelodyChat/Fermi/projects/59942.
+
 ## AI Code
 AI code due to not being GPLv3 compatable is not allowed in this repo. I thought this didn't need to be said, but it does.
 And to be clear, *any* use of AI is not allowed in Fermi.
+
 ## Link
 The official Harmony server for Fermi: https://redir.fermi.chat/invite
 
