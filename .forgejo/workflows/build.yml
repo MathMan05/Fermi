@@ -1,8 +1,10 @@
 name: Build Fermi
 
 on:
-    release:
     push:
+        tags:
+            - "0.*"
+            - "1.*"
 
 jobs:
   tsc:
