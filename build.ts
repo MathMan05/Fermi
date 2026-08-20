@@ -210,12 +210,16 @@ async function build() {
 
 	let revision = process.env.VER;
 	if (!revision) {
+		console.time("Getting git tag");
+		revision = child_process.execSync("git tag --points-at HEAD").toString().trim();
+
+		console.timeEnd("Getting git tag");
+	}
+	if (!revision) {
 		console.time("Getting git commit hash");
 		revision = child_process.execSync("git rev-parse HEAD").toString().trim();
-		await fs.writeFile(path.join(__dirname, "dist", "webpage", "getupdates"), revision);
 		console.timeEnd("Getting git commit hash");
 	}
-
 	console.time("Writing version");
 	await fs.writeFile(path.join(__dirname, "dist", "webpage", "getupdates"), revision);
 	console.timeEnd("Writing version");
