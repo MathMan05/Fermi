@@ -2465,14 +2465,15 @@ span.instanceStatus {
 	position: relative;
 }
 .scroller {
-	flex: 1;
+	/*! flex: 1; */
 	padding-bottom: 22px;
 	overflow-y: auto;
-	flex-grow: 1;
+	flex-grow: 0;
 	display: flex;
 	flex-direction: column;
 	flex-shrink: 1;
 	max-height: fit-content;
+	height: fit-content;
 }
 .noFlex {
 	flex: 0;
