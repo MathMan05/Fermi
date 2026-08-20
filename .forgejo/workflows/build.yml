@@ -20,8 +20,15 @@ jobs:
       run: npm i
     - name: npm run build
       run: npm run build
-    - uses: actions/upload-artifact@v3
+    - name: Write desc
+      run: NOTES=$(git tag -n99 --format="%(contents)")
+    - uses: actions/forgejo-release@v2.13.4
       with:
-        name: build
-        path: dist/
-        archive: true
+        direction: upload
+        url: https://codeberg.org/
+        repo: MelodyChat/fermi
+        token: ${{ secrets.CODEBERG_TOKEN }}
+        tag: ${{ github.ref_name }}
+        release-dir: dist/
+        release-notes: ${{ env.NOTES }}
+
