@@ -22,7 +22,7 @@ jobs:
       run: npm run build
     - name: Write desc
       id: desc
-      run: cat "NOTES=" >> "FORGEJO_OUTPUT"; git tag -n99 --format="%(contents)" >> "FORGEJO_OUTPUT";
+      run: cat "NOTES=" >> $FORGEJO_OUTPUT; git tag -n99 --format="%(contents)" >> $FORGEJO_OUTPUT;
     - name: tar it
       run: mkdir release; tar -czvf release.tar.gz dist
     - uses: actions/forgejo-release@v2.13.4
