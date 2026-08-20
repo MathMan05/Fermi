@@ -18,7 +18,7 @@ jobs:
       run: npm i
     - name: npm run tsc
       run: npm run tsc --noEmit
-    - uses: actions/upload-artifact@v7
+    - uses: actions/upload-artifact@v3
       with:
         name: build
         path: dist/
