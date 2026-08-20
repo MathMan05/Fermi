@@ -1,0 +1,24 @@
+name: Build Fermi
+
+on:
+    release:
+    push:
+
+jobs:
+  tsc:
+    name: tsc
+    runs-on: codeberg-tiny
+    steps:
+    - uses: actions/checkout@v4
+    - name: install node v22
+      uses: actions/setup-node@v1
+      with:
+        node-version: 22
+    - name: npm i
+      run: npm i
+    - name: npm run tsc
+      run: npm run tsc --noEmit
+    - uses: actions/upload-artifact@v7
+      with:
+        name: build
+        path: dist/
