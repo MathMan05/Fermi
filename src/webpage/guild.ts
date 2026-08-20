@@ -724,8 +724,13 @@ class Guild extends SnowFlake {
 						headers: this.headers,
 					},
 				);
-				form.addFileInput(I18n.emoji["image:"](), "image", {required: true});
-				form.addTextInput(I18n.emoji["name:"](), "name", {required: true});
+				form.addFileInput(I18n.emoji["image:"](), "image", {required: true}).onchange = (f) => {
+					if (f) {
+						const i = t.input.deref();
+						if (i) t.value = i.value = f[0].name.replace(/\.[a-zA-Z0-9_]*/gm, "");
+					}
+				};
+				const t = form.addTextInput(I18n.emoji["name:"](), "name", {required: true});
 				popup.show();
 			});
 			const containdiv = document.createElement("div");
@@ -949,6 +954,12 @@ class Guild extends SnowFlake {
 					}
 				});
 				const filei = form.addFileInput(I18n.sticker.image(), "file", {required: true});
+				filei.onchange = (f) => {
+					if (f) {
+						const i = name.input.deref();
+						if (i) name.value = i.value = f[0].name.replace(/\.[a-zA-Z0-9_]*/gm, "");
+					}
+				};
 				const name = form.addTextInput(I18n.sticker.name(), "name", {required: true});
 				const tags = form.addEmojiInput(I18n.sticker.tags(), "tags", this.localuser, {
 					required: true,
