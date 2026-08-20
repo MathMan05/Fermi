@@ -331,6 +331,7 @@ class User extends SnowFlake {
 				visible: function () {
 					return this.relationshipType !== 2 && this.id !== this.localuser.user.id;
 				},
+				color: "red",
 			},
 		);
 
