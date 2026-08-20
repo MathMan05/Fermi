@@ -30,6 +30,10 @@ jobs:
     - uses: actions/forgejo-release@v2.13.4
       with:
         direction: upload
+        url: https://codeberg.org/
+        repo: MelodyChat/fermi
+        token: ${{ secrets.CODEBERG_TOKEN }}
+        tag: ${{ github.ref_name }}
         release-dir: release/
         release-notes: ${{ steps.desc.outputs.NOTES }}
 
