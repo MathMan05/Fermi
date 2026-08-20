@@ -16,8 +16,8 @@ jobs:
         node-version: 22
     - name: npm i
       run: npm i
-    - name: npm run tsc
-      run: npm run tsc --noEmit
+    - name: npm run build
+      run: npm run build
     - uses: actions/upload-artifact@v3
       with:
         name: build
