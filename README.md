@@ -7,9 +7,6 @@ Fermi is a [Harmony](https://redir.fermi.chat/server) Client written in TS, HTML
 
 To build it, clone the repo and run `npm install`, then `npm run build`
 To run it, use `npm start`
-or do the equivalent with bun.
-
-Both [Bun](https://bun.sh) and [Node.js](https://nodejs.org) are supported, and should function as expected.
 
 To access Fermi after starting, simply go to http://localhost:8080/login and either register a new account, or log in with your email and password.
 
