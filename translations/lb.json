@@ -83,7 +83,8 @@
 		"text": "Text",
 		"topic:": "Theema:",
 		"hideThreads": "No Inaktivitéit verstoppen",
-		"forum": "Forum"
+		"forum": "Forum",
+		"addChannel": "Kanal derbäisetzen"
 	},
 	"threads": {
 		"name": "Numm vum Thread:"
@@ -441,6 +442,7 @@
 	},
 	"webhooks": {
 		"areYouSureDelete": "Sidd Dir sécher, datt Dir $1 läsche wëllt?",
+		"areYouSureDeleteHead": "$1 läschen?",
 		"channel": "Kanal fir Webhook-Output",
 		"name": "Webhook-Numm:",
 		"type": "Typ: $1"

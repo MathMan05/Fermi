@@ -179,7 +179,8 @@
 		"voice": "语音",
 		"deleteThread": "删除帖子",
 		"hideThreads": "不活跃时隐藏",
-		"forum": "论坛"
+		"forum": "论坛",
+		"addChannel": "添加频道"
 	},
 	"threads": {
 		"leave": "留下帖子",
@@ -947,7 +948,14 @@
 		"name": "名称：",
 		"tags": "相关表情符号：",
 		"title": "贴纸",
-		"upload": "上传贴纸"
+		"upload": "上传贴纸",
+		"found": {
+			"not": "此贴纸不属于您的公会，请加入发布该贴纸的公会以使用它",
+			"other": "此贴纸来自您的其他公会。",
+			"private": "找不到此贴纸的公会",
+			"this": "此贴纸来自此公会。"
+		},
+		"from": "此贴纸来自"
 	},
 	"submit": "提交",
 	"switchAccounts": "切换账号 ⇌",
@@ -1018,7 +1026,7 @@
 		"unknown": "@未知用户"
 	},
 	"editMode": {
-		"editMsg": "按下“Esc”以$1取消$1"
+		"editMsg": "按下“Esc”以$1取消$1按下“Enter”以$2提交$2"
 	},
 	"keyboard": {
 		"shortcuts": "快捷键",
@@ -1045,9 +1053,11 @@
 		"manage": "管理安全密钥"
 	},
 	"webhook": "WEBHOOK",
+	"copyCode": "复制代码",
 	"webhooks": {
 		"EnterWebhookName": "输入Webhook名称",
 		"areYouSureDelete": "您确定要删除$1吗？",
+		"areYouSureDeleteHead": "删除$1？",
 		"avatar": "头像",
 		"base": "Webhook",
 		"channel": "Webhook输出到频道：",

@@ -174,7 +174,8 @@
 		"voice": "음성",
 		"deleteThread": "스레드 삭제",
 		"hideThreads": "활동이 없으면 숨김",
-		"forum": "포럼"
+		"forum": "포럼",
+		"addChannel": "채널 추가"
 	},
 	"threads": {
 		"leave": "스레드 나가기",
@@ -264,6 +265,7 @@
 		"region": "지역: $1",
 		"title": "세션 관리"
 	},
+	"addGuild": "길드 추가",
 	"discovery": "발견",
 	"dms": "개인 메시지",
 	"edit": "편집",
