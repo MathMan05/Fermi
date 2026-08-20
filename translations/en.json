@@ -169,7 +169,8 @@
 		"voice": "Voice",
 		"deleteThread":"Delete thread",
 		"hideThreads":"Hide after inactivity",
-		"forum":"Forum"
+		"forum":"Forum",
+		"addChannel":"Add channel"
 	},
 	"threads":{
 		"leave":"Leave thread",

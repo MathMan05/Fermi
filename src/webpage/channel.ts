@@ -37,6 +37,7 @@ import {Command} from "./interactions/commands.js";
 import {Tag} from "./tag.js";
 import {CDNParams} from "./utils/cdnParams.js";
 import {TypeBox} from "./typeBox.js";
+import {Hover} from "./hover.js";
 
 class Channel extends SnowFlake {
 	editing!: Message | null;
@@ -1076,6 +1077,8 @@ class Channel extends SnowFlake {
 				const addchannel = document.createElement("span");
 				addchannel.classList.add("addchannel", "svgicon", "svg-plus");
 				caps.appendChild(addchannel);
+				const h = new Hover(I18n.channel.addChannel(), {side: "right", weak: true});
+				h.addEvent(addchannel);
 				addchannel.onclick = (_) => {
 					this.guild.createchannels(this.createChannel.bind(this));
 				};
