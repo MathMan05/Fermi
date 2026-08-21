@@ -7,8 +7,8 @@ on:
             - "1.*"
 
 jobs:
-  tsc:
-    name: tsc
+  makeRelease:
+    name: makeRelease
     runs-on: codeberg-tiny
     steps:
     - uses: actions/checkout@v4
