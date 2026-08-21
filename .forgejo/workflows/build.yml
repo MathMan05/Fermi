@@ -29,7 +29,6 @@ jobs:
       run: echo ${{ steps.desc.outputs.NOTES }}
     - uses: actions/forgejo-release@v2.13.4
       with:
-        verbose: true
         direction: upload
         url: https://codeberg.org/
         repo: MelodyChat/fermi
