@@ -22,7 +22,12 @@ jobs:
       run: npm run build
     - name: Write desc
       id: desc
-      run: echo "NOTES=\"" >> $FORGEJO_OUTPUT; git tag -n99 --format="%(contents)" >> $FORGEJO_OUTPUT; echo '"' >> $FORGEJO_OUTPUT
+      run: |
+        cat >> $FORGEJO_OUTPUT <<EOF
+        NOTES<<STRING
+        $(git tag -n99 --format="%(contents)")
+        STRING
+        EOF
     - name: tar it #TODO zip too?
       run: mkdir release; tar -czvf release/release.tar.gz dist/*
     - name: echo notes
