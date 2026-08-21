@@ -16,6 +16,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 22
+    - name: fetch tag
+      run: git fetch origin ${{ github.ref_name }}
     - name: npm i
       run: npm i
     - name: npm run build
