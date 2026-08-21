@@ -28,7 +28,7 @@ jobs:
         $(git tag --points-at HEAD -n99 --format="%(contents)")
         STRING
         EOF
-    - name: tar it #TODO zip too?
+    - name: tar it
       run: mkdir release; tar -czvf release/release.tar.gz dist/*
     - name: zip it
       run: zip release/release.zip -r dist/*
