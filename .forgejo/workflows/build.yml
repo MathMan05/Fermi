@@ -23,7 +23,7 @@ jobs:
     - name: Write desc
       id: desc
       run: echo "NOTES=" >> $FORGEJO_OUTPUT; git tag -n99 --format="%(contents)" >> $FORGEJO_OUTPUT;
-    - name: tar it
+    - name: tar it #TODO zip too?
       run: mkdir release; tar -czvf release.tar.gz dist
     - name: echo ${{ steps.desc.outputs.NOTES }}
       run: echo $FORGEJO_OUTPUT
