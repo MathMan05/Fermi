@@ -25,7 +25,7 @@ jobs:
       run: |
         cat >> $FORGEJO_OUTPUT <<EOF
         NOTES<<STRING
-        $(git tag -n99 --format="%(contents)")
+        $(git tag ${{ github.ref_name }} -n99 --format="%(contents)")
         STRING
         EOF
     - name: tar it #TODO zip too?
@@ -33,7 +33,7 @@ jobs:
     - name: echo notes
       run: echo ${{ steps.desc.outputs.NOTES }}
     - name: output res
-      run: git tag -n99 --format="%(contents)"
+      run: git tag ${{ github.ref_name }} -n99 --format="%(contents)"
     - uses: actions/forgejo-release@v2.13.4
       with:
         direction: upload
