@@ -32,10 +32,8 @@ jobs:
         EOF
     - name: tar it #TODO zip too?
       run: mkdir release; tar -czvf release/release.tar.gz dist/*
-    - name: echo notes
-      run: echo ${{ steps.desc.outputs.NOTES }}
-    - name: output res
-      run: git tag --points-at HEAD -n99
+    - name: zip it
+      run: zip release/release.zip dist/*
     - uses: actions/forgejo-release@v2.13.4
       with:
         direction: upload
