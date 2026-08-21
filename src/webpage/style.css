@@ -2820,6 +2820,12 @@ span.instanceStatus {
 	font-size: 14px;
 	margin-left: 4px;
 	opacity: 0.7;
+	display: -webkit-box;
+	word-break: break-all;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	line-clamp: 1;
+	-webkit-line-clamp: 1;
 }
 
 .commentrow:hover::after {
@@ -2859,6 +2865,7 @@ span.instanceStatus {
 	background-clip: text, border-box;
 	position: relative;
 	background-image: var(--userbg, linear-gradient(var(--primary-text), var(--primary-text)));
+	text-wrap: nowrap;
 }
 .pollText {
 	margin: 0px 4px;
