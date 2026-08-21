@@ -1173,6 +1173,9 @@ class User extends SnowFlake {
 			case "domain": {
 				return `https://${con.external_id}`;
 			}
+			case "codeberg": {
+				return `https://codeberg.org/${con.name}`;
+			}
 		}
 	}
 	note?: string;
