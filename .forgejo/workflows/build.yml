@@ -25,8 +25,8 @@ jobs:
       run: echo "NOTES=" >> $FORGEJO_OUTPUT; git tag -n99 --format="%(contents)" >> $FORGEJO_OUTPUT;
     - name: tar it #TODO zip too?
       run: mkdir release; tar -czvf release.tar.gz dist
-    - name: echo ${{ steps.desc.outputs.NOTES }}
-      run: echo $FORGEJO_OUTPUT
+    - name: echo notes
+      run: echo ${{ steps.desc.outputs.NOTES }}
     - uses: actions/forgejo-release@v2.13.4
       with:
         verbose: true
