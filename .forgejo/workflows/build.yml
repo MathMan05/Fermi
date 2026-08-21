@@ -29,6 +29,7 @@ jobs:
       run: echo $FORGEJO_OUTPUT
     - uses: actions/forgejo-release@v2.13.4
       with:
+        verbose: true
         direction: upload
         url: https://codeberg.org/
         repo: MelodyChat/fermi
