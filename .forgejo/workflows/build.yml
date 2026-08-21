@@ -33,7 +33,7 @@ jobs:
     - name: tar it #TODO zip too?
       run: mkdir release; tar -czvf release/release.tar.gz dist/*
     - name: zip it
-      run: zip release/release.zip dist/*
+      run: zip release/release.zip dist/**/*
     - uses: actions/forgejo-release@v2.13.4
       with:
         direction: upload
