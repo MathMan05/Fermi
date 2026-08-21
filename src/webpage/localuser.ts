@@ -54,6 +54,7 @@ import {Versions} from "./versions.js";
 import {Shortcut} from "./shortcuts/shortcut.js";
 import {getShortcuts, setShortcuts} from "./utils/storage/shortcuts.js";
 import {TypeBox} from "./typeBox.js";
+import {InstnaceConfig} from "./instanceConfig.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
@@ -273,6 +274,7 @@ class Localuser {
 	}
 	onswap?: (l: Localuser) => void;
 	constructor(userinfo: Specialuser) {
+		this.conf = new InstnaceConfig(userinfo.serverurls.api);
 		Play.playURL("/audio/sounds.jasf").then((_) => {
 			this.play = _;
 		});
@@ -372,9 +374,12 @@ class Localuser {
 	}
 	guildFolders: guildFolder[] = [];
 	readonly unknownRead = new Map<string, readStateEntry>();
+	conf: InstnaceConfig;
 	async gottenReady(ready: readyjson): Promise<void> {
+		this.conf = new InstnaceConfig(this.info.api);
 		this.getGifProvidors();
 		await I18n.done;
+		await this.conf.ready;
 		this.errorBackoff = 0;
 		this.queryBlog();
 		this.guildFolders = ready.d.user_settings.guild_folders;
