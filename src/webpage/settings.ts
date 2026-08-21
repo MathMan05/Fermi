@@ -174,11 +174,12 @@ class TextInput implements OptionsElement<string> {
 	password: boolean;
 	spaceReplace: string;
 	name: string;
+	charLimit: number;
 	constructor(
 		label: string,
 		onSubmit: (str: string) => void,
 		owner: Options,
-		{initText = "", password = false, spaceReplace = " ", name = ""} = {},
+		{initText = "", password = false, spaceReplace = " ", name = "", charLimit = -1} = {},
 	) {
 		this.label = label;
 		this.value = initText;
@@ -187,6 +188,7 @@ class TextInput implements OptionsElement<string> {
 		this.password = password;
 		this.spaceReplace = spaceReplace;
 		this.name = name;
+		this.charLimit = charLimit;
 	}
 	generateHTML(): HTMLDivElement {
 		const div = document.createElement("div");
@@ -198,12 +200,27 @@ class TextInput implements OptionsElement<string> {
 		input.value = this.value;
 		input.type = this.password ? "password" : "text";
 		input.oninput = this.onChange.bind(this);
+		let hintText: undefined | HTMLElement;
 		input.onkeyup = () => {
 			let textValue = input.value;
 			textValue = textValue.replace(/ /g, this.spaceReplace);
 			input.value = textValue;
+			if (this.charLimit !== -1) {
+				const left = this.charLimit - textValue.length;
+				if (left / this.charLimit < 0.2) {
+					if (!hintText) {
+						hintText = document.createElement("span");
+						hintText.classList.add("hintTextInput");
+					}
+					div.append(hintText);
+					hintText.textContent = I18n.charLeft(left + "");
+				} else if (hintText) {
+					hintText.remove();
+				}
+			}
 		};
 		this.input = new WeakRef(input);
+		if (this.charLimit !== -1) input.maxLength = this.charLimit;
 		div.append(input);
 		return div;
 	}
@@ -774,16 +791,18 @@ class MDInput implements OptionsElement<string> {
 	readonly onSubmit: (str: string) => void;
 	value: string;
 	input!: WeakRef<HTMLTextAreaElement>;
+	charLimit: number;
 	constructor(
 		label: string,
 		onSubmit: (str: string) => void,
 		owner: Options,
-		{initText = ""} = {},
+		{initText = "", charLimit = -1} = {},
 	) {
 		this.label = label;
 		this.value = initText;
 		this.owner = owner;
 		this.onSubmit = onSubmit;
+		this.charLimit = charLimit;
 	}
 	generateHTML(): HTMLDivElement {
 		const div = document.createElement("div");
@@ -793,7 +812,24 @@ class MDInput implements OptionsElement<string> {
 		div.append(document.createElement("br"));
 		const input = document.createElement("textarea");
 		input.value = this.value;
-		input.oninput = this.onChange.bind(this);
+		let hintText: undefined | HTMLElement;
+		input.oninput = () => {
+			this.onChange();
+			if (this.charLimit !== -1) {
+				const left = this.charLimit - this.value.length;
+				if (left / this.charLimit < 0.2) {
+					if (!hintText) {
+						hintText = document.createElement("span");
+						hintText.classList.add("hintTextInput");
+					}
+					div.append(hintText);
+					hintText.textContent = I18n.charLeft(left + "");
+				} else if (hintText) {
+					hintText.remove();
+				}
+			}
+		};
+		if (this.charLimit !== -1) input.maxLength = this.charLimit;
 		this.input = new WeakRef(input);
 		div.append(input);
 		return div;
@@ -1565,13 +1601,14 @@ class Options implements OptionsElement<void> {
 	addTextInput(
 		label: string,
 		onSubmit: (str: string) => void,
-		{initText = "", password = false, spaceReplace = " ", name = ""} = {},
+		{initText = "", password = false, spaceReplace = " ", name = "", charLimit = -1} = {},
 	) {
 		const textInput = new TextInput(label, onSubmit, this, {
 			initText,
 			password,
 			spaceReplace,
 			name,
+			charLimit,
 		});
 		this.options.push(textInput);
 		this.generate(textInput);
@@ -1583,8 +1620,8 @@ class Options implements OptionsElement<void> {
 		this.generate(colorInput);
 		return colorInput;
 	}
-	addMDInput(label: string, onSubmit: (str: string) => void, {initText = ""} = {}) {
-		const mdInput = new MDInput(label, onSubmit, this, {initText});
+	addMDInput(label: string, onSubmit: (str: string) => void, {initText = "", charLimit = -1} = {}) {
+		const mdInput = new MDInput(label, onSubmit, this, {initText, charLimit});
 		this.options.push(mdInput);
 		this.generate(mdInput);
 		return mdInput;

@@ -2717,7 +2717,7 @@ class Localuser {
 						});
 					}
 				},
-				{initText: this.user.pronouns},
+				{initText: this.user.pronouns, charLimit: this.conf.maxPronouns},
 			);
 			pronounbox.watchForChange((_) => {
 				hypouser.pronouns = _;
@@ -2726,6 +2726,7 @@ class Localuser {
 			});
 			const bioBox = settingsLeft.addMDInput(I18n.bio(), (_) => {}, {
 				initText: this.user.bio.rawString,
+				charLimit: this.conf.maxBio,
 			});
 			bioBox.watchForChange((_) => {
 				newbio = _;

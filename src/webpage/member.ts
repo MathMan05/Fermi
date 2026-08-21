@@ -311,7 +311,7 @@ class Member extends SnowFlake {
 						});
 					}
 				},
-				{initText: this.pronouns},
+				{initText: this.pronouns, charLimit: this.localuser.conf.maxPronouns},
 			);
 			pronounbox.watchForChange((_) => {
 				hypomember.pronouns = _;
@@ -320,6 +320,7 @@ class Member extends SnowFlake {
 			});
 			const bioBox = settingsLeft.addMDInput(I18n.bio(), (_) => {}, {
 				initText: this.bio,
+				charLimit: this.localuser.conf.maxBio,
 			});
 			bioBox.watchForChange((_) => {
 				newbio = _;

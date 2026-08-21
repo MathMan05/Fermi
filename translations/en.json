@@ -172,6 +172,7 @@
 		"forum":"Forum",
 		"addChannel":"Add channel"
 	},
+	"charLeft":"You have $1 {{PLURAL:$1|characters|character}} remaining",
 	"threads":{
 		"leave":"Leave thread",
 		"join":"Join thread",
