@@ -5051,6 +5051,7 @@ fieldset input[type="radio"] {
 	height: 5in;
 	background: var(--secondary-bg);
 	border-radius: 8px;
+	z-index: 4;
 }
 .gifPreviewBox {
 	position: relative;
