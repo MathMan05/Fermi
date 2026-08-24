@@ -194,8 +194,10 @@
 		"voice": "Voix",
 		"deleteThread": "Supprimer le fil",
 		"hideThreads": "Masquer après une période d'inactivité",
-		"forum": "Forum"
+		"forum": "Forum",
+		"addChannel": "Ajouter une chaîne"
 	},
+	"charLeft": "Il vous reste $1 {{PLURAL:$1|caractères|caractère}} {{PLURAL:$1|restants|restant}}",
 	"threads": {
 		"leave": "Quitter le fil",
 		"join": "Rejoindre le fil",
@@ -404,7 +406,7 @@
 		"overview": "Aperçu",
 		"region:": "Région :",
 		"roles": "Rôles",
-		"ruleId": "Règles du canal :",
+		"ruleId": "chaîne des Règlements :",
 		"selectnoti": "Sélectionner le type de notification",
 		"sendrandomwelcome?": "Envoyer un message aléatoire lorsque quelqu'un rejoint cette guilde :",
 		"serverName": "Nom de la guilde :",
@@ -544,7 +546,7 @@
 		"security": "Sécurité",
 		"advanced": "Paramètres avancés",
 		"danger": "Zone dangereuse",
-		"2faCode:": "Code A2F:",
+		"2faCode:": "Code A2F :",
 		"2faCodeGive": "Votre secret TOTP est : $1. Cela va génèrer un jeton A2F à 6 chiffres avec période d'expiration de 30 secondes.",
 		"2fa": "Paramètres de double authentification (A2F/2FA)",
 		"2faDisable": "Désactiver l'authentification à deux facteurs",
@@ -586,7 +588,7 @@
 		"install": "Installer",
 		"installDesc": "Installer le client Fermi vous permettra de l’ouvrir dans sa propre fenêtre et de le faire fonctionner comme une application séparée ! Vous pouvez également continuer à utiliser le client Fermi dans votre navigateur web comme auparavant, et le fonctionnement restera le même.",
 		"installJank": "Installer le client Fermi",
-		"language": "Langue :",
+		"language": "Langue",
 		"manageBot": "Gérer le bot",
 		"manageInstance": "Gérer l’instance",
 		"mustTypePhrase": "Pour supprimer votre compte, vous devez saisir la phrase",
@@ -717,7 +719,7 @@
 		"summary": "Résumé du signalement :"
 	},
 	"messageLink": "Envoyer un message dans # $1",
-	"muteDuration": "Durée :",
+	"muteDuration": "Rétablir dans :",
 	"nevermind": "Annuler",
 	"no": "Non",
 	"noEmojiFont": "Utiliser les émojis système",
@@ -962,7 +964,14 @@
 		"name": "Nom :",
 		"tags": "Emoji associé :",
 		"title": "Autocollants",
-		"upload": "Importer des autocollants"
+		"upload": "Importer des autocollants",
+		"found": {
+			"not": "Cet autocollant ne provient pas de votre guilde, rejoignez la guilde qui l'héberge pour pouvoir l'utiliser",
+			"other": "Cet autocollant provient d'une de vos autres guildes.",
+			"private": "La guilde associée à cet autocollant est introuvable",
+			"this": "Cet autocollant provient de cette guilde."
+		},
+		"from": "Cet autocollant provient de"
 	},
 	"submit": "Soumettre",
 	"switchAccounts": "Changer de compte ⇌",
@@ -1033,7 +1042,7 @@
 		"unknown": "@utilisateur-inconnu"
 	},
 	"editMode": {
-		"editMsg": "Échapper à $1cancel$1"
+		"editMsg": "Échapper pour $1annuler$1, Entrer pour $2soumettre$2"
 	},
 	"keyboard": {
 		"shortcuts": "Raccourcis",
@@ -1060,9 +1069,11 @@
 		"manage": "Gérer les clés de sécurité"
 	},
 	"webhook": "WEBHOOK",
+	"copyCode": "Copier le code",
 	"webhooks": {
 		"EnterWebhookName": "Entrez le nom du Webhook",
 		"areYouSureDelete": "Êtes-vous sûr·e de vouloir supprimer $1 ?",
+		"areYouSureDeleteHead": "Supprimer $1 ?",
 		"avatar": "Avatar",
 		"base": "Webhooks",
 		"channel": "Canal de sortie du Webhook :",

@@ -1010,7 +1010,7 @@
 		"unknown": "@onbekende-gebruiker"
 	},
 	"editMode": {
-		"editMsg": "Escape om te $1annuleren$1"
+		"editMsg": "Escape om te $1annuleren$1, Enter voor $2opslaan$2"
 	},
 	"keyboard": {
 		"shortcuts": "Sneltoetsen",

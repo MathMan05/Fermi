@@ -182,6 +182,7 @@
 		"forum": "论坛",
 		"addChannel": "添加频道"
 	},
+	"charLeft": "您还剩余$1个{{PLURAL:$1|字符}}",
 	"threads": {
 		"leave": "留下帖子",
 		"join": "加入帖子",

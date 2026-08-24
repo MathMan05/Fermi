@@ -440,6 +440,7 @@
 		"addKey": "Schlëssel derbäisetzen",
 		"manage": "Sécherheetsschlëssele geréieren"
 	},
+	"copyCode": "Code kopéieren",
 	"webhooks": {
 		"areYouSureDelete": "Sidd Dir sécher, datt Dir $1 läsche wëllt?",
 		"areYouSureDeleteHead": "$1 läschen?",

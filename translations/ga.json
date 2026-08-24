@@ -168,7 +168,8 @@
 		"voice": "Guth",
 		"deleteThread": "Scrios an snáithe",
 		"hideThreads": "Folaigh tar éis neamhghníomhaíochta",
-		"forum": "Fóram"
+		"forum": "Fóram",
+		"addChannel": "Cuir cainéal leis"
 	},
 	"threads": {
 		"leave": "Fág an snáithe",
@@ -936,7 +937,14 @@
 		"name": "Ainm:",
 		"tags": "Emoji gaolmhar:",
 		"title": "Greamáin",
-		"upload": "Uaslódáil greamáin"
+		"upload": "Uaslódáil greamáin",
+		"found": {
+			"not": "Ní ó do cheardchumainn an greamán seo, bí páirteach sa cheardchumann atá á óstáil chun an greamán seo a úsáid",
+			"other": "Is ó cheann de do gildeanna eile an greamán seo.",
+			"private": "Ní féidir an guild don ghreamán seo a fháil",
+			"this": "Is ón gceardchumann seo an greamán seo."
+		},
+		"from": "Is as an greamán seo"
 	},
 	"submit": "Cuir isteach",
 	"switchAccounts": "Athraigh cuntais ⇌",
@@ -1007,7 +1015,7 @@
 		"unknown": "@úsáideoir-anaithnid"
 	},
 	"editMode": {
-		"editMsg": "Éalaigh go $1cancel$1"
+		"editMsg": "Éalaigh go $1cealaigh$1 cuir isteach go $2cuir isteach$2"
 	},
 	"keyboard": {
 		"shortcuts": "Aicearraí",
@@ -1034,9 +1042,11 @@
 		"manage": "Bainistigh eochracha slándála"
 	},
 	"webhook": "CRÚCA GRÉASÁIN",
+	"copyCode": "Cóipeáil an chóid",
 	"webhooks": {
 		"EnterWebhookName": "Cuir isteach ainm an chrúca gréasáin",
 		"areYouSureDelete": "An bhfuil tú cinnte gur mian leat $1 a scriosadh?",
+		"areYouSureDeleteHead": "Scrios $1?",
 		"avatar": "Abhatár",
 		"base": "Crúcaí Gréasáin",
 		"channel": "Aschuir Crúca Gréasáin chuig an gcainéal:",

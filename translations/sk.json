@@ -169,7 +169,8 @@
 		"voice": "Hlas",
 		"deleteThread": "Odstrániť vlákno",
 		"hideThreads": "Skryť po nečinnosti",
-		"forum": "Fórum"
+		"forum": "Fórum",
+		"addChannel": "Pridať kanál"
 	},
 	"threads": {
 		"leave": "Opustiť vlákno",
@@ -259,6 +260,7 @@
 		"region": "Región: $1",
 		"title": "Spravovať relácie"
 	},
+	"addGuild": "Pridať server",
 	"discovery": "Objavovanie",
 	"dms": "Súkromné správy",
 	"edit": "Upraviť",
@@ -936,7 +938,14 @@
 		"name": "Názov:",
 		"tags": "Priradené emoji:",
 		"title": "Nálepky",
-		"upload": "Nahrať nálepky"
+		"upload": "Nahrať nálepky",
+		"found": {
+			"not": "Táto nálepka nie je z vašich serverov. Ak ju chcete použiť, pripojte sa k serveru, ktorý ju poskytuje",
+			"other": "Táto nálepka je z jedného z vašich ostatných serverov.",
+			"private": "Server tejto nálepky sa nepodarilo nájsť",
+			"this": "Táto nálepka je z tohto servera."
+		},
+		"from": "Táto nálepka je z"
 	},
 	"submit": "Odoslať",
 	"switchAccounts": "Prepnúť účty ⇌",
@@ -1007,7 +1016,7 @@
 		"unknown": "@neznámy-používateľ"
 	},
 	"editMode": {
-		"editMsg": "Escapovať na $1cancel$1"
+		"editMsg": "Escape na $1zrušenie$1, Enter na $2odoslanie$2"
 	},
 	"keyboard": {
 		"shortcuts": "Skratky",
@@ -1034,9 +1043,11 @@
 		"manage": "Spravovať bezpečnostné kľúče"
 	},
 	"webhook": "WEBHOOK",
+	"copyCode": "Kopírovať kód",
 	"webhooks": {
 		"EnterWebhookName": "Zadajte názov webhooku",
 		"areYouSureDelete": "Naozaj chcete odstrániť $1?",
+		"areYouSureDeleteHead": "Odstrániť $1?",
 		"avatar": "Avatar",
 		"base": "Webhooky",
 		"channel": "Webhook odosiela výstup do kanála:",
