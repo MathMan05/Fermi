@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Atvalerie",
+			"PanWor",
 			"Woytecr"
 		]
 	},
@@ -137,6 +138,7 @@
 		"unmute": "Wyłącz wyciszenie kanału",
 		"voice": "Głosowy"
 	},
+	"charLeft": "{{PLURAL:$1|Zostało|Zostały|Zostało}} Ci jeszcze $1 {{PLURAL:$1|znak|znaki|znaków}}",
 	"channelLink": "# $1",
 	"clientDesc": "Wersja klienta: $1\n\n[Dołącz do oficjalnej gildii Fermi]($2/invite/USgYJo?instance=https%3A%2F%2Fspacebar.chat)\n\n[Pomóż w tłumaczeniu Fermi](https://translatewiki.net/wiki/Translating:JankClient#sortable:3=desc)\n\n[Pomóż w tworzeniu Fermi](https://github.com/MathMan05/Fermi)\n\n[Pomóż w utrzymaniu serwera, na którym opiera się Fermi](https://github.com/spacebarchat/server)\n\n[Czytaj blog](https://blog.fermi.chat/)\n\nObliczone uprawnienia: $3",
 	"commands": {
@@ -325,7 +327,7 @@
 	},
 	"htmlPages": {
 		"addBot": "Dodaj do gildii",
-		"alreadyHave": "Posiadasz już konto?",
+		"alreadyHave": "Masz już konto?",
 		"box3description": "Zawsze doceniamy pomoc, niezależnie czy jest ona w postaci zgłoszeń błędów, kodu, czy nawet wskazania literówek.",
 		"box3title": "Współtwórz Fermi",
 		"compatableInstances": "Instancje kompatybilne z Spacebarem:",
@@ -375,7 +377,7 @@
 	},
 	"invite": {
 		"accept": "Akceptuj",
-		"alreadyJoined": "Już dołączyłeś",
+		"alreadyJoined": "Już dołączono",
 		"channel:": "Kanał:",
 		"createInvite": "Stwórz zaproszenie",
 		"createdAt": "Utworzono w $1",
@@ -387,7 +389,7 @@
 		"invitedBy": "Zostałeś zaproszony przez $1",
 		"joinUsing": "Dołącz za pomocą zaproszenia",
 		"loginOrCreateAccount": "Zaloguj się lub stwórz nowe konto ⇌",
-		"longInvitedBy": "$1 zaprosił cię do dołączenia do $2",
+		"longInvitedBy": "$1 zaprosił(a) Cię do dołączenia do $2",
 		"maxUses": "Maksymalna liczba użyć: $1",
 		"never": "Nigdy",
 		"noAccount": "Utwórz konto, aby przyjąć zaproszenie",
@@ -452,7 +454,7 @@
 		"disableConnection": "To połączenie zostało wyłączone po stronie serwera",
 		"editingBot": "Edytowanie bota $1",
 		"install": "Instaluj",
-		"installDesc": "Zainstalowanie Fermi pozwoli ci na otworzenie go w jego własnym oknie oraz będzie on działać jak osobna aplikacja! Możesz też po prostu korzystać z Fermi w przeglądarce, tak jak dotychczas, i będzie działać tak samo.",
+		"installDesc": "Zainstalowanie Fermi pozwoli Ci na otworzenie go w jego własnym oknie oraz będzie on działać jak osobna aplikacja! Możesz też po prostu korzystać z Fermi w przeglądarce, tak jak dotychczas, i będzie działać tak samo.",
 		"installJank": "Zainstaluj Fermi",
 		"language": "Język:",
 		"manageBot": "Zarządzaj botem",
@@ -510,7 +512,7 @@
 		"error": {
 			"cancel": "Anuluj",
 			"cont": "Kontynuuj mimo to",
-			"desc": "Fermi nie mógł cię wylogować\n Czy mimo wszystko chcesz usunąć konto?",
+			"desc": "Fermi nie udało się Cię wylogować.\n Czy mimo wszystko chcesz usunąć konto?",
 			"title": "Wystąpił błąd podczas próby wylogowania"
 		},
 		"logout": "Wyloguj się"
@@ -753,7 +755,7 @@
 		"back": "Wstecz",
 		"new": "Nowy",
 		"next": "Dalej",
-		"nofind": "Wygląda na to, że nie ma wiadomości, które pasują do twojego wyszukiwania. Spróbuj je poszerzyć, aby znaleźć to, czego szukasz",
+		"nofind": "Wygląda na to, że nie ma wiadomości, które pasują do Twojego wyszukiwania. Spróbuj je poszerzyć, aby znaleźć to, czego szukasz.",
 		"old": "Stary",
 		"page": "Strona $1",
 		"search": "Szukaj"
