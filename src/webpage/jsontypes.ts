@@ -884,7 +884,11 @@ type messagejson = {
 	type: number;
 	webhook_id?: string;
 	sticker_items?: stickerJson[];
-	message_reference?: string;
+	message_reference?: {
+		guild_id: string;
+		channel_id: string;
+		message_id: string;
+	};
 	referenced_message?: messagejson;
 	poll?: polljson;
 };

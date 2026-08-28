@@ -3268,7 +3268,7 @@ class Channel extends SnowFlake {
 	async makeFakeMessage(
 		content: string,
 		files: filejson[] = [],
-		reply = undefined,
+		reply: undefined | {guild_id: string; channel_id: string; message_id: string} = undefined,
 		sticker_ids: string[],
 		nonce: string,
 		embeds: embedjson[] = [],
@@ -3375,7 +3375,11 @@ class Channel extends SnowFlake {
 			},
 		};
 	}
-	async uploadFile(files: globalThis.File[]) {
+	async uploadFiles(
+		files: globalThis.File[],
+		progress: (total: number, sofar: number) => void = () => {},
+	) {
+		if (files.length === 0) return [];
 		const urls = (await (
 			await fetch(this.info.api + "/channels/" + this.id + "/attachments", {
 				headers: this.headers,
@@ -3398,17 +3402,55 @@ class Channel extends SnowFlake {
 				original_content_type?: string;
 			}[];
 		};
-		Promise.all(
+		const total = files.reduce((n, f) => n + f.size, 0);
+		let totalprog = 0;
+		progress(total, 0);
+		await Promise.all(
 			urls.attachments.map(async ({upload_url, id}) => {
-				return await (
-					await fetch(upload_url, {
-						body: files[+id],
-						method: "PUT",
-					})
-				).json();
+				return new Promise<void>(async (res, rej) => {
+					const file = files[+id];
+					const res2 = new XMLHttpRequest();
+					res2.responseType = "json";
+					let prog = 0;
+					res2.upload.onprogress = (e) => {
+						totalprog += e.loaded - prog;
+						prog = e.loaded;
+						progress(total, totalprog);
+					};
+					res2.onerror = rej;
+					res2.open("PUT", upload_url);
+					res2.setRequestHeader("Content-type", "application/octet-stream");
+					res2.setRequestHeader("Authorization", this.headers.Authorization);
+					res2.onload = () => {
+						if (res2.status !== 200) {
+							rej();
+						} else {
+							totalprog += file.size - prog;
+							prog = file.size;
+							progress(total, totalprog);
+						}
+					};
+					res2.onreadystatechange = () => {
+						if (res2.readyState === 4) {
+							res();
+						}
+					};
+
+					try {
+						res2.send(file);
+					} catch (e) {
+						throw e;
+					}
+				});
 			}),
 		);
-		return urls.attachments;
+		return urls.attachments.map((f) => {
+			const file = files[+f.id];
+			return {
+				...f,
+				filename: file.name,
+			};
+		});
 	}
 	nonces = new Set<string>();
 	lastSentMessage?: Message;
@@ -3539,7 +3581,7 @@ class Channel extends SnowFlake {
 			nonce = undefined,
 			poll = undefined,
 		}: {
-			attachments?: Blob[];
+			attachments?: globalThis.File[];
 			embeds?: embedjson[];
 			replyingto?: Message | null;
 			sticker_ids?: string[];
@@ -3559,7 +3601,7 @@ class Channel extends SnowFlake {
 		) {
 			return;
 		}
-		let replyjson: any;
+		let replyjson: {guild_id: string; channel_id: string; message_id: string} | undefined;
 		if (replyingto) {
 			replyjson = {
 				guild_id: replyingto.guild.id,
@@ -3593,8 +3635,66 @@ class Channel extends SnowFlake {
 			});
 		};
 
-		const promiseHandler = (resolve: () => void) => {
-			res.responseType = "json";
+		let rbody: string | FormData;
+		let ctype: string | undefined;
+		const maybeUpdate = () => {
+			if ("updatePosition" in this && this.updatePosition instanceof Function) {
+				console.log("here?");
+				this.updatePosition(Date.now());
+			}
+		};
+		maybeUpdate();
+		ressy = async (e) => {
+			if (e == "NotOk") {
+				funcs?.void();
+				return;
+			}
+		};
+		nonce = nonce || Math.floor(Math.random() * 1000000000) + "";
+		funcs = await this.makeFakeMessage(
+			content,
+			attachments.map((_) => ({
+				id: "string",
+				filename: "",
+				content_type: _.type,
+				size: _.size,
+				url: URL.createObjectURL(_),
+			})),
+			replyjson,
+			sticker_ids,
+			nonce,
+			embeds,
+		);
+		const body = {
+			content,
+			nonce: nonce,
+			message_reference: replyjson,
+			sticker_ids,
+			embeds,
+			poll,
+			attachments: [] as {
+				id: string;
+				filename: string;
+				uploaded_filename: string;
+				original_content_type?: string;
+			}[],
+		};
+		try {
+			body.attachments = (await this.uploadFiles(attachments, funcs?.progress)).map((obj) => ({
+				id: obj.id,
+				uploaded_filename: obj.upload_filename,
+				filename: obj.filename,
+				original_content_type: obj.original_content_type,
+			}));
+		} catch {
+			fail();
+		}
+
+		res = new XMLHttpRequest();
+		res.responseType = "json";
+		res.upload.onprogress = progress;
+		res.onerror = fail;
+		prom = new Promise<void>((resolve) => {
 			res.onload = () => {
 				if (res.status !== 200) {
 					ressy("NotOk");
@@ -3614,117 +3714,23 @@ class Channel extends SnowFlake {
 				}
 				resolve();
 			};
-		};
+		});
+		res.open("POST", this.info.api + "/channels/" + this.id + "/messages");
+		res.setRequestHeader("Content-type", (ctype = this.headers["Content-type"]));
+		res.setRequestHeader("Authorization", this.headers.Authorization);
 
-		let rbody: string | FormData;
-		let ctype: string | undefined;
-		const maybeUpdate = () => {
-			if ("updatePosition" in this && this.updatePosition instanceof Function) {
-				console.log("here?");
-				this.updatePosition(Date.now());
-			}
-		};
-		maybeUpdate();
-		ressy = async (e) => {
-			if (e == "NotOk") {
-				funcs?.void();
-				return;
-			}
-		};
-		if (attachments.length === 0) {
-			const body = {
-				content,
-				nonce: nonce || Math.floor(Math.random() * 1000000000) + "",
-				message_reference: undefined,
-				sticker_ids,
-				embeds,
-				poll,
-			};
-			if (replyjson) {
-				body.message_reference = replyjson;
-			}
-			res = new XMLHttpRequest();
-			res.responseType = "json";
-			res.upload.onprogress = progress;
-			res.onerror = fail;
-			prom = new Promise<void>(promiseHandler);
-			res.open("POST", this.info.api + "/channels/" + this.id + "/messages");
-			res.setRequestHeader("Content-type", (ctype = this.headers["Content-type"]));
-			res.setRequestHeader("Authorization", this.headers.Authorization);
-			funcs = await this.makeFakeMessage(
-				content,
-				[],
-				body.message_reference,
-				sticker_ids,
-				body.nonce,
-				embeds,
-			);
-
-			try {
-				res.send((rbody = JSON.stringify(body)));
-			} catch {
-				fail();
-			}
-			/*
+		try {
+			res.send((rbody = JSON.stringify(body)));
+		} catch {
+			fail();
+		}
+		/*
 			res = fetch(this.info.api + "/channels/" + this.id + "/messages", {
 				method: "POST",
 				headers: this.headers,
 				body: JSON.stringify(body),
 			});
 			*/
-		} else {
-			const formData = new FormData();
-			const body = {
-				content,
-				nonce: nonce || Math.floor(Math.random() * 1000000000) + "",
-				message_reference: undefined,
-				sticker_ids,
-				embeds,
-				poll,
-			};
-			if (replyjson) {
-				body.message_reference = replyjson;
-			}
-			formData.append("payload_json", JSON.stringify(body));
-			for (const i in attachments) {
-				formData.append("files[" + i + "]", attachments[i]);
-			}
-
-			res = new XMLHttpRequest();
-			res.responseType = "json";
-			res.upload.onprogress = progress;
-			res.onerror = fail;
-			prom = new Promise<void>(promiseHandler);
-			res.open("POST", this.info.api + "/channels/" + this.id + "/messages", true);
-
-			res.setRequestHeader("Authorization", this.headers.Authorization);
-
-			funcs = await this.makeFakeMessage(
-				content,
-				attachments.map((_) => ({
-					id: "string",
-					filename: "",
-					content_type: _.type,
-					size: _.size,
-					url: URL.createObjectURL(_),
-				})),
-				body.message_reference,
-				sticker_ids,
-				body.nonce,
-			);
-			try {
-				res.send((rbody = formData));
-			} catch {
-				fail();
-			}
-			/*
-			res = fetch(this.info.api + "/channels/" + this.id + "/messages", {
-				method: "POST",
-				body: formData,
-				headers: {Authorization: this.headers.Authorization},
-			});
-			*/
-		}
 
 		return prom;
 	}
