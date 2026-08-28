@@ -3180,7 +3180,7 @@ class Localuser {
 			}
 			{
 				tas.addCheckboxInput(
-					"Show today at:",
+					I18n.showTodayAt(),
 					(b) => {
 						prefs.showToday = b;
 						setPreferences(prefs);
