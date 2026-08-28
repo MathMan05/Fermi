@@ -4450,7 +4450,9 @@ class Localuser {
 
 				gifs.append(div);
 
-				div.onclick = () => {
+				div.onmousedown = (e) => {
+					e.preventDefault();
+					e.stopImmediatePropagation();
 					if (this.focusChannel) {
 						this.focusChannel.sendMessage(gif.src, {
 							embeds: [],
