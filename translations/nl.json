@@ -171,8 +171,10 @@
 		"voice": "Spraak",
 		"deleteThread": "Onderwerp verwijderen",
 		"hideThreads": "Verbergen na inactiviteit",
-		"forum": "Forum"
+		"forum": "Forum",
+		"addChannel": "Kanaal toevoegen"
 	},
+	"charLeft": "U hebt nog $1 {{PLURAL:$1|teken|tekens}} over",
 	"threads": {
 		"leave": "Discussie verlaten",
 		"join": "Aan discussie meedoen",
@@ -939,7 +941,14 @@
 		"name": "Naam:",
 		"tags": "Gekoppelde emoji:",
 		"title": "Stickers",
-		"upload": "Stickers uploaden"
+		"upload": "Stickers uploaden",
+		"found": {
+			"not": "Deze sticker is niet van uw gilde. Word lid van het gilde dat hem aanbiedt om deze sticker te kunnen gebruiken",
+			"other": "Deze sticker komt van een van uw andere gilden.",
+			"private": "Het gilde waar deze sticker bij hoort is niet te vinden",
+			"this": "Deze sticker is afkomstig van dit gilde."
+		},
+		"from": "Deze sticker is van"
 	},
 	"submit": "Opslaan",
 	"switchAccounts": "Van account wisselen ⇌",
@@ -1037,9 +1046,11 @@
 		"manage": "Beveiligingssleutels beheren"
 	},
 	"webhook": "WEBHOOK",
+	"copyCode": "Code kopiëren",
 	"webhooks": {
 		"EnterWebhookName": "Voer de webhook-naam in",
 		"areYouSureDelete": "Weet u zeker dat u $1 wilt verwijderen?",
+		"areYouSureDeleteHead": "$1 verwijderen?",
 		"avatar": "Avatar",
 		"base": "Webhooks",
 		"channel": "Webhook-uitvoer naar kanaal:",
