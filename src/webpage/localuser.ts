@@ -3193,7 +3193,7 @@ class Localuser {
 			}
 			{
 				tas.addSelect(
-					I18n.localuser["clockFormatOverride"](),
+					I18n.localuser.clockFormatOverride(),
 					async (_) => {
 						prefs.clockFormatOverride = ClockFormatOverrideValues[_];
 						setPreferences(prefs);
