@@ -527,6 +527,12 @@
 		"2faDisable": "Disable 2FA",
 		"2faEnable": "Enable 2FA",
 		"CheckUpdate": "Check for updates",
+		"clockFormatOverride": "Clock format override:",
+		"clockFormatOverrideValues": {
+			"default": "Automatic",
+			"12hour": "Use AM/PM",
+			"24hour": "Use 24-hour"
+		},
 		"PasswordsNoMatch": "Passwords don't match",
 		"TOSURL": "Terms of Service link:",
 		"VoiceWarning": "Are you sure you want to enable this? It's very experimental and is likely to cause issues. (this feature is for devs, please don't enable if you don't know what you're doing)",

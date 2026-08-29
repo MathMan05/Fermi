@@ -27,7 +27,7 @@ import {Components} from "./interactions/compontents.js";
 import {ImagesDisplay} from "./disimg";
 import {ReportMenu} from "./reporting/report.js";
 import {getDeveloperSettings} from "./utils/storage/devSettings.js";
-import {getPreferences} from "./utils/storage/userPreferences.js";
+import {ClockFormatOverride, getPreferences} from "./utils/storage/userPreferences.js";
 import {TypeBox} from "./typeBox.js";
 class Message extends SnowFlake {
 	static contextmenu = new Contextmenu<Message, void>("message menu");
@@ -1807,8 +1807,16 @@ function formatTime(date: Date) {
 	const conf = getPreferences();
 	updateTimes();
 	const datestring = date.toLocaleDateString();
+
+	let hour12: boolean | undefined = undefined;
+	if (conf.clockFormatOverride == ClockFormatOverride.Show12Hour) {
+		hour12 = true;
+	} else if (conf.clockFormatOverride == ClockFormatOverride.Show24Hour) {
+		hour12 = false;
+	}
+
 	const formatTime = (date: Date) =>
-		date.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+		date.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit", hour12: hour12});
 
 	if (datestring === now) {
 		return conf.showToday ? I18n.todayAt(formatTime(date)) : formatTime(date);

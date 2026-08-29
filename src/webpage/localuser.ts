@@ -40,6 +40,7 @@ import {AccountSwitcher} from "./utils/switcher.js";
 import {Favorites} from "./favorites.js";
 import {
 	AnimateTristateValues,
+	ClockFormatOverrideValues,
 	getPreferences,
 	setPreferences,
 	ThemeOption,
@@ -3187,6 +3188,19 @@ class Localuser {
 					},
 					{
 						initState: prefs.showToday,
+					},
+				);
+			}
+			{
+				tas.addSelect(
+					I18n.localuser["clockFormatOverride"](),
+					async (_) => {
+						prefs.clockFormatOverride = ClockFormatOverrideValues[_];
+						setPreferences(prefs);
+					},
+					ClockFormatOverrideValues.map((_) => I18n.localuser.clockFormatOverrideValues[_]()),
+					{
+						defaultIndex: ClockFormatOverrideValues.indexOf(prefs.clockFormatOverride),
 					},
 				);
 			}

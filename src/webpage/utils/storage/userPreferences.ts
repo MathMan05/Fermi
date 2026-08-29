@@ -26,6 +26,16 @@ export const ThemeOptionValues = [
 	ThemeOption.NightSky,
 	ThemeOption.NightSkyAccent,
 ];
+export const enum ClockFormatOverride {
+	Default = "default",
+	Show12Hour = "12hour",
+	Show24Hour = "24hour",
+}
+export const ClockFormatOverrideValues = [
+	ClockFormatOverride.Default,
+	ClockFormatOverride.Show12Hour,
+	ClockFormatOverride.Show24Hour,
+];
 
 export class UserPreferences {
 	showBlogUpdates?: boolean;
@@ -43,6 +53,7 @@ export class UserPreferences {
 	checkMemberList = false;
 	gifProvidor?: string;
 	showToday = true;
+	clockFormatOverride: ClockFormatOverride = ClockFormatOverride.Default;
 
 	constructor(init?: Partial<UserPreferences>) {
 		Object.assign(this, init);
