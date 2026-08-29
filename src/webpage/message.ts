@@ -1809,9 +1809,9 @@ function formatTime(date: Date) {
 	const datestring = date.toLocaleDateString();
 
 	let hour12: boolean | undefined = undefined;
-	if (conf.clockFormatOverride == ClockFormatOverride.Show12Hour) {
+	if (conf.clockFormatOverride == ClockFormatOverride.show12Hour) {
 		hour12 = true;
-	} else if (conf.clockFormatOverride == ClockFormatOverride.Show24Hour) {
+	} else if (conf.clockFormatOverride == ClockFormatOverride.show24Hour) {
 		hour12 = false;
 	}
 
