@@ -529,7 +529,7 @@
 		"CheckUpdate": "Check for updates",
 		"clockFormatOverride": "Clock format override:",
 		"clockFormatOverrideValues": {
-			"default": "Automatic",
+			"automatic": "Automatic",
 			"12hour": "Use AM/PM",
 			"24hour": "Use 24-hour"
 		},
