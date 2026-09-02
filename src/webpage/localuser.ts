@@ -40,6 +40,7 @@ import {AccountSwitcher} from "./utils/switcher.js";
 import {Favorites} from "./favorites.js";
 import {
 	AnimateTristateValues,
+	ClockFormatOverrideValues,
 	getPreferences,
 	setPreferences,
 	ThemeOption,
@@ -3190,6 +3191,19 @@ class Localuser {
 					},
 				);
 			}
+			{
+				tas.addSelect(
+					I18n.localuser.clockFormatOverride(),
+					async (_) => {
+						prefs.clockFormatOverride = ClockFormatOverrideValues[_];
+						setPreferences(prefs);
+					},
+					ClockFormatOverrideValues.map((_) => I18n.localuser.clockFormatOverrideValues[_]()),
+					{
+						defaultIndex: ClockFormatOverrideValues.indexOf(prefs.clockFormatOverride),
+					},
+				);
+			}
 		}
 		{
 			const blog = settings.addButton(I18n.blog.blog(), {contained: true});
@@ -4450,7 +4464,9 @@ class Localuser {
 
 				gifs.append(div);
 
-				div.onclick = () => {
+				div.onmousedown = (e) => {
+					e.preventDefault();
+					e.stopImmediatePropagation();
 					if (this.focusChannel) {
 						this.focusChannel.sendMessage(gif.src, {
 							embeds: [],
