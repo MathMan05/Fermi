@@ -453,6 +453,9 @@
 		"2faDisable": "Disattiva 2FA",
 		"2faEnable": "Attiva 2FA",
 		"CheckUpdate": "Controlla aggiornamenti",
+		"clockFormatOverrideValues": {
+			"automatic": "Automatico"
+		},
 		"PasswordsNoMatch": "Le password non corrispondono",
 		"TOSURL": "Link ai Termini di servizio:",
 		"accountSettings": "Impostazioni utenza",

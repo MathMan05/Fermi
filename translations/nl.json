@@ -529,6 +529,12 @@
 		"2faDisable": "Tweetrapsauthenticatie uitschakelen",
 		"2faEnable": "Tweetrapsauthenticatie inschakelen",
 		"CheckUpdate": "Controleren op updates",
+		"clockFormatOverride": "Aangepaste klokweergave:",
+		"clockFormatOverrideValues": {
+			"automatic": "Automatisch",
+			"12hour": "AM/PM gebruiken",
+			"24hour": "24 uur gebruiken"
+		},
 		"PasswordsNoMatch": "Wachtwoorden komen niet overeen",
 		"TOSURL": "Koppeling naar de gebruiksvoorwaarden:",
 		"VoiceWarning": "Weet u zeker dat u dit wilt inschakelen? Het is erg experimenteel en kan problemen opleveren. (Deze functie is er voor ontwikkelaars. Blijf er liever van af als u niet weet wat u doet.)",

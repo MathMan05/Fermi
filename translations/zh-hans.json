@@ -537,6 +537,12 @@
 		"2faDisable": "禁用双因素验证",
 		"2faEnable": "启用双因素验证",
 		"CheckUpdate": "检查更新",
+		"clockFormatOverride": "时钟格式覆盖：",
+		"clockFormatOverrideValues": {
+			"automatic": "自动",
+			"12hour": "使用 AM/PM",
+			"24hour": "使用 24 小时制"
+		},
 		"PasswordsNoMatch": "密码不匹配",
 		"TOSURL": "服务条款链接：",
 		"VoiceWarning": "您确定要启用这个功能吗？这是非常实验性的，可能会引发问题。（此功能仅供开发者使用，如果您不确定操作，请不要启用。）",
