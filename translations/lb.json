@@ -231,6 +231,9 @@
 		"2faDisable": "2FA desaktivéieren",
 		"2faEnable": "2FA aktivéieren",
 		"CheckUpdate": "No Aktualiséierunge sichen",
+		"clockFormatOverrideValues": {
+			"automatic": "Automatesch"
+		},
 		"PasswordsNoMatch": "D'Passwierder sinn net d'selwecht",
 		"addBot": "Bot derbäisetzen",
 		"advancedBot": "Erweidert Bot-Astellungen",
