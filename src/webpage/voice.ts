@@ -834,7 +834,7 @@ a=rtcp-mux\r`;
 							sender?.track?.kind === "audio"
 								? this.owner.mute
 									? 0
-									: this.ssrcMap.get(sender as RTCRtpSender)
+									: this.ssrcMap.get(sender as RTCRtpSender) || 0
 								: 0,
 						video_ssrc,
 						rtx_ssrc,
