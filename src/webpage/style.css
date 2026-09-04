@@ -2674,11 +2674,11 @@ span.instanceStatus {
 .dot:nth-child(3) {
 	animation-delay: 0.66s;
 }
+
 .loadingMessage {
-	> span {
-		opacity: 0.5;
-	}
+	opacity: 0.5;
 }
+
 .erroredMessage {
 	span {
 		opacity: 1;
