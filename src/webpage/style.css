@@ -78,10 +78,10 @@ body {
 	width: fit-content;
 	background: var(--secondary-bg);
 	margin-bottom: 8px;
-	span {
+	> span {
 		margin-right: 4px;
 	}
-	button {
+	> button {
 		margin-left: 4px;
 	}
 }
@@ -92,17 +92,17 @@ body {
 	margin-bottom: 6px;
 	border-radius: 10px;
 	cursor: pointer;
-	.pfpDiv {
+	> .pfpDiv {
 		width: 48px;
 		height: 48px;
 	}
-	.flexttb {
+	> .flexttb {
 		margin-left: 10px;
 		display: flex;
 		justify-content: center;
 
-		.flexltr {
-			span {
+		> .flexltr {
+			> span {
 				margin-right: 4px;
 				text-wrap: nowrap;
 				background: var(--primary-bg);
@@ -252,7 +252,7 @@ body {
 .ephemeralDiv {
 	padding-left: 50px;
 	opacity: 0.6;
-	span {
+	> span {
 		padding-right: 6px;
 	}
 	font-size: 13px;
@@ -306,7 +306,7 @@ body {
 	}
 }
 .reses {
-	span {
+	> span {
 		background: #0000007a;
 		margin: 3px;
 		padding: 3px;
@@ -322,10 +322,10 @@ body {
 
 	> * {
 		padding: 2px;
-		span {
+		> span {
 			margin-right: 10px;
 		}
-		input {
+		> input {
 			margin-left: auto;
 			width: 20px;
 			height: 20px;
@@ -587,7 +587,7 @@ body {
 	border-radius: 100%;
 	align-items: center;
 	justify-content: center;
-	span {
+	> span {
 		width: 12px !important;
 		height: 12px !important;
 		background: white;
@@ -695,12 +695,12 @@ video {
 	max-width: 100%;
 }
 .dateline {
-	hr {
+	> hr {
 		width: 100%;
 		height: 1px;
 		margin: 0.05in;
 	}
-	span {
+	> span {
 		flex-shrink: 0;
 	}
 	align-items: center;
@@ -843,7 +843,7 @@ textarea {
 		min-width: 96px;
 		flex-grow: 1;
 	}
-	.selected {
+	> .selected {
 		padding: 2px;
 		background: var(--blue);
 		border-radius: 4px;
@@ -853,7 +853,7 @@ textarea {
 		align-items: center;
 		margin-right: 5px;
 
-		span {
+		> span {
 			width: 16px;
 			height: 16px;
 			flex-shrink: 0;
@@ -938,7 +938,7 @@ textarea {
 }
 .voiceTray {
 	margin-left: auto;
-	span {
+	> span {
 		width: 16px;
 		height: 16px;
 		margin: 1px;
@@ -2140,7 +2140,7 @@ span.instanceStatus {
 	margin-bottom: 2px;
 	position: relative;
 	&.muted {
-		span {
+		> span {
 			color: color-mix(in srgb, var(--primary-text-soft), transparent);
 			&.svgicon {
 				background: color-mix(in srgb, var(--primary-text-soft), transparent);
@@ -2301,7 +2301,7 @@ span.instanceStatus {
 	}
 }
 .memberListStyle {
-	span {
+	> span {
 		font-size: 0.9rem;
 		margin-left: 4px;
 		font-weight: 600;
@@ -2349,7 +2349,7 @@ span.instanceStatus {
 	align-items: stretch;
 	width: 100%;
 
-	div {
+	> div {
 		flex-grow: 1;
 		display: flex;
 		align-items: center;
@@ -2358,7 +2358,7 @@ span.instanceStatus {
 		margin: 6px;
 		border-radius: 6px;
 		cursor: pointer;
-		span {
+		> span {
 			height: 24px;
 			width: 24px;
 			display: block;
@@ -2377,7 +2377,7 @@ span.instanceStatus {
 	font-size: 14px;
 	cursor: pointer;
 	width: fit-content;
-	span {
+	> span {
 		white-space: nowrap;
 	}
 }
@@ -2675,7 +2675,7 @@ span.instanceStatus {
 	animation-delay: 0.66s;
 }
 .loadingMessage {
-	span {
+	> span {
 		opacity: 0.5;
 	}
 }
@@ -2720,7 +2720,7 @@ span.instanceStatus {
 	align-items: center;
 	cursor: pointer;
 	transition: backdrop-filter 0.4s;
-	span {
+	> span {
 		background: var(--spoiler-bg);
 		padding: 3px 6px;
 		border-radius: 6px;
@@ -2728,7 +2728,7 @@ span.instanceStatus {
 }
 .fSpoil:hover {
 	backdrop-filter: blur(15px);
-	span {
+	> span {
 		background: var(--spoiler-hover);
 	}
 }
@@ -2838,7 +2838,7 @@ span.instanceStatus {
 	background: var(--secondary-bg);
 	border-radius: 16px;
 	cursor: pointer;
-	img {
+	> img {
 		width: 64px;
 		height: 64px;
 		object-fit: contain;
@@ -2853,7 +2853,7 @@ span.instanceStatus {
 	justify-content: center;
 	align-items: center;
 
-	span {
+	> span {
 		text-align: center;
 	}
 }
@@ -3090,17 +3090,17 @@ span .quote:last-of-type .quoteline {
 	width: calc(100% - 30px);
 	justify-content: center;
 	box-sizing: border-box;
-	div {
+	> div {
 		padding: 3px;
 		margin: 2px;
 		cursor: pointer;
 		&.selected {
-			span {
+			> span {
 				opacity: 1;
 			}
 		}
 	}
-	span {
+	> span {
 		width: 10px;
 		height: 10px;
 		background: white;
@@ -3444,32 +3444,32 @@ img.bigembedimg {
 		display: block;
 	}
 }
-::highlight(highkeyword) {
+pre::highlight(highkeyword) {
 	color: var(--code-keyword);
 }
-::highlight(highnumber) {
+pre::highlight(highnumber) {
 	color: var(--code-number);
 }
-::highlight(highstring) {
+pre::highlight(highstring) {
 	color: var(--code-string);
 }
-::highlight(highsymbol) {
+pre::highlight(highsymbol) {
 	color: var(--primary-text-prominent);
 	font-weight: bold;
 }
-::highlight(highcomment) {
+pre::highlight(highcomment) {
 	color: var(--code-comment);
 }
-::highlight(highidentifier) {
+pre::highlight(highidentifier) {
 	color: var(--primary-text);
 }
-::highlight(highClass) {
+pre::highlight(highClass) {
 	color: var(--code-class);
 }
-::highlight(highProp) {
+pre::highlight(highProp) {
 	color: var(--code-prop);
 }
-::highlight(highFunc) {
+pre::highlight(highFunc) {
 	color: var(--code-func);
 }
 
@@ -4369,7 +4369,7 @@ fieldset input[type="radio"] {
 	border-radius: 0.1in;
 	user-select: none;
 	cursor: pointer;
-	span {
+	> div.flexttb > span {
 		color: var(--secondary-text-soft);
 	}
 	.svgicon {
@@ -4947,15 +4947,15 @@ fieldset input[type="radio"] {
 	border: solid 1px var(--black);
 	border-radius: 0.05in;
 	z-index: 104;
-	span {
-		background: #00000042;
-		width: 100%;
-		margin-top: 4px;
-		padding: 6px;
-		box-sizing: border-box;
-		border-radius: 0.05in;
-		cursor: pointer;
-	}
+}
+.OptionList > span {
+	background: #00000042;
+	width: 100%;
+	margin-top: 4px;
+	padding: 6px;
+	box-sizing: border-box;
+	border-radius: 0.05in;
+	cursor: pointer;
 }
 .suberror {
 	animation: goout 6s forwards;
@@ -5062,12 +5062,12 @@ fieldset input[type="radio"] {
 	overflow: hidden;
 	cursor: pointer;
 
-	img {
+	> img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
-	span {
+	> span {
 		top: 0px;
 		left: 0px;
 		position: absolute;
@@ -5112,7 +5112,7 @@ fieldset input[type="radio"] {
 	border-radius: 4px;
 	font-size: 0.2in;
 	padding: 0 0.1in;
-	span {
+	> span {
 		width: 16px;
 		height: 16px;
 		background: var(--primary-text);

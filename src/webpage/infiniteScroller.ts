@@ -425,7 +425,14 @@ class InfiniteScroller {
 		(async () => {
 			while (true) {
 				if (this.div && this.div.parentElement) {
-					if (this.div.parentElement.clientHeight !== this.div.clientHeight) this.reachesBottom();
+					if (
+						await new Promise<boolean>((res) =>
+							requestAnimationFrame(() =>
+								res(this.div!.parentElement!.clientHeight !== this.div!.clientHeight),
+							),
+						)
+					)
+						this.reachesBottom();
 					break;
 				}
 				await new Promise((res) => setTimeout(res, 100));
