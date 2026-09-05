@@ -9,6 +9,7 @@ interface clikeConf {
 	multilineSlashComments?: boolean;
 	JSLikeTemplateStrings?: boolean;
 	multiLine?: string;
+	customComment?: string;
 }
 function regex(config: clikeConf): RegExp {
 	const conds = [] as string[];
@@ -29,6 +30,9 @@ function regex(config: clikeConf): RegExp {
 	conds.push(`"(\\\\(.|\\n)|[^"\\n\\\\])*"?`);
 	if (config.hashComments) {
 		conds.push("#.*");
+	}
+	if (config.customComment) {
+		conds.push(config.customComment + ".*");
 	}
 	if (config.doubleSlashComments) {
 		conds.push("\\/\\/.*");
@@ -139,6 +143,11 @@ function* lex(code: string, config: clikeConf) {
 				content: lex,
 			};
 		} else if (lex.startsWith("#") && config.hashComments) {
+			yield {
+				type: hcolors.comment,
+				content: lex,
+			};
+		} else if (config.customComment && lex.startsWith(config.customComment)) {
 			yield {
 				type: hcolors.comment,
 				content: lex,
