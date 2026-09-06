@@ -1176,6 +1176,9 @@ class User extends SnowFlake {
 			case "codeberg": {
 				return `https://codeberg.org/${con.name}`;
 			}
+			case "github": {
+				return `https://github.com/${con.name}`;
+			}
 		}
 	}
 	note?: string;
