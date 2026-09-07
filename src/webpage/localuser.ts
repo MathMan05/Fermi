@@ -341,7 +341,6 @@ class Localuser {
 		);
 	}
 	async queryBlog() {
-		this.perminfo.localuser ??= {};
 		const prefs = getPreferences();
 		const bstate = prefs.showBlogUpdates;
 		if (bstate === undefined) {
@@ -2121,6 +2120,7 @@ class Localuser {
 		};
 		iconDiv.onclick = () => toggle();
 		this.perminfo.folderStates ??= {};
+		this.perminfo.localuser ??= {};
 		this.perminfo.folderStates[folder.id] ??= {};
 		if (this.perminfo.folderStates[folder.id].state === true) {
 			toggle(true);
@@ -3181,7 +3181,7 @@ class Localuser {
 			}
 			{
 				tas.addCheckboxInput(
-					"Show today at:",
+					I18n.showTodayAt(),
 					(b) => {
 						prefs.showToday = b;
 						setPreferences(prefs);
