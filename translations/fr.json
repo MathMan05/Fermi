@@ -552,6 +552,12 @@
 		"2faDisable": "Désactiver l'authentification à deux facteurs",
 		"2faEnable": "Activer l'authentification à deux facteurs",
 		"CheckUpdate": "Vérifier les mises à jour",
+		"clockFormatOverride": "Format d'affichage de l'heure :",
+		"clockFormatOverrideValues": {
+			"automatic": "Auto",
+			"12hour": "AM/PM",
+			"24hour": "24H"
+		},
 		"PasswordsNoMatch": "Les mots de passe ne correspondent pas",
 		"TOSURL": "Lien vers les Conditions Générales d'Utilisation :",
 		"VoiceWarning": "Êtes-vous sûr·e de vouloir activer cette option ? C'est très expérimental et est susceptible de causer des problèmes (cette fonctionnalité est destinée aux développeurs, veuillez ne pas l'activer si vous ne savez pas ce que vous faites)",

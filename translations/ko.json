@@ -177,6 +177,7 @@
 		"forum": "포럼",
 		"addChannel": "채널 추가"
 	},
+	"charLeft": "$1{{PLURAL:$1|자}} 남았습니다",
 	"threads": {
 		"leave": "스레드 나가기",
 		"join": "스레드 입장하기",
@@ -1014,7 +1015,7 @@
 		"unknown": "@unknown-user"
 	},
 	"editMode": {
-		"editMsg": "Escape키를 눌러서 $1cancel$1"
+		"editMsg": "Escape키를 눌러서 $1cancel$1 Enter키를 눌러서 $2submit$2"
 	},
 	"keyboard": {
 		"shortcuts": "단축키",
@@ -1039,9 +1040,11 @@
 		"manage": "보안 키 관리"
 	},
 	"webhook": "웹훅",
+	"copyCode": "코드 복사",
 	"webhooks": {
 		"EnterWebhookName": "웹훅 이름 입력",
 		"areYouSureDelete": "$1 항목을 삭제하시겠습니까?",
+		"areYouSureDeleteHead": "$1을(를) 삭제합니까?",
 		"avatar": "아바타",
 		"base": "웹훅",
 		"channel": "웹훅을 채널로 출력:",
