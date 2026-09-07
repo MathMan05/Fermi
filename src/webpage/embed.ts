@@ -509,6 +509,8 @@ class Embed {
 			video.classList.add("bigembedimg");
 			video.style.width = width;
 			video.style.height = height;
+			video.width = parseInt(width);
+			video.height = parseInt(height);
 
 			return video;
 		};
@@ -519,6 +521,8 @@ class Embed {
 			div.append(img);
 			img.style.maxWidth = width;
 			img.style.maxHeight = height;
+			img.width = parseInt(width);
+			img.height = parseInt(height);
 
 			img.onclick = async () => {
 				if (this.json.video) {
