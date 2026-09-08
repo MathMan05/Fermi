@@ -13,6 +13,7 @@
 		"whatelse": "What else do you think should happen?",
 		"whereever": "Wherever this is"
 	},
+	"nomics": "No mics found",
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
@@ -25,30 +26,30 @@
 		"last-updated": "2026/02/13",
 		"locale": "en"
 	},
-	"onboarding":{
-		"name":"Onboarding",
-		"disable":"Disable onboarding",
-		"addChannel":"Add channel",
-		"channel":"Channel:",
-		"desc":"Description:",
-		"deleteChannel":"Delete channel from onboarding",
-		"enable":"Enable onboarding",
-		"title":"Welcome to $1!"
+	"onboarding": {
+		"name": "Onboarding",
+		"disable": "Disable onboarding",
+		"addChannel": "Add channel",
+		"channel": "Channel:",
+		"desc": "Description:",
+		"deleteChannel": "Delete channel from onboarding",
+		"enable": "Enable onboarding",
+		"title": "Welcome to $1!"
 	},
-	"copyMedia":"Copy media URL",
+	"copyMedia": "Copy media URL",
 	"DMs": {
 		"add": "Add someone to this DM",
 		"close": "Close DM",
-		"copyURL":"Copy DM URL",
+		"copyURL": "Copy DM URL",
 		"copyId": "Copy DM id",
 		"markRead": "Mark as read",
 		"name": "Direct Messages"
 	},
-	"ok":"Ok",
-	"dismiss":"Dismiss",
+	"ok": "Ok",
+	"dismiss": "Dismiss",
 	"UrlGen": "Bot invite generator",
 	"Voice": {
-		"userVol":"User volume:",
+		"userVol": "User volume:",
 		"status": {
 			"badWS": "Bad response from WS",
 			"conectionFailed": "Connection Failed",
@@ -72,15 +73,15 @@
 			"never": "Never"
 		},
 		"name": "Accessibility",
-		"visuals":"Visuals",
-		"animations":"Animations",
+		"visuals": "Visuals",
+		"animations": "Animations",
 		"playGif": "Play GIFs:",
 		"playIcon": "Play animated icons:",
-		"playEmoji":"Play animated emoji:",
-		"playSticker":"Play animated stickers:",
+		"playEmoji": "Play animated emoji:",
+		"playSticker": "Play animated stickers:",
 		"roleColors": "Disable role colors:",
-		"gradientColors":"Disable gradient coloring:",
-		"decorations":"Enable avatar decorations:"
+		"gradientColors": "Disable gradient coloring:",
+		"decorations": "Enable avatar decorations:"
 	},
 	"accountNotStart": "Account unable to start",
 	"add": "Add",
@@ -136,7 +137,7 @@
 	"cancel": "Cancel",
 	"channel": {
 		"SlowmodeCool": "Slowmode cooldown: $1",
-		"copyURL":"Copy channel URL",
+		"copyURL": "Copy channel URL",
 		"TimeOutCool": "Timed out until: $1",
 		"allowIcons": "Allow custom channel icons",
 		"announcement": "Announcements",
@@ -167,54 +168,54 @@
 		"typebox": "Message in # $1",
 		"unmute": "Unmute channel",
 		"voice": "Voice",
-		"deleteThread":"Delete thread",
-		"hideThreads":"Hide after inactivity",
-		"forum":"Forum",
-		"addChannel":"Add channel"
+		"deleteThread": "Delete thread",
+		"hideThreads": "Hide after inactivity",
+		"forum": "Forum",
+		"addChannel": "Add channel"
 	},
-	"charLeft":"You have $1 {{PLURAL:$1|characters|character}} remaining",
-	"threads":{
-		"leave":"Leave thread",
-		"join":"Join thread",
-		"name":"Thread name:",
-		"editTags":"Edit tags"
+	"charLeft": "You have $1 {{PLURAL:$1|characters|character}} remaining",
+	"threads": {
+		"leave": "Leave thread",
+		"join": "Join thread",
+		"name": "Thread name:",
+		"editTags": "Edit tags"
 	},
-	"forum":{
-		"creorsear":"Create or search for post",
-		"next":"Next",
-		"back":"Back",
-		"newPost":"Make a new post",
-		"post":"Post",
-		"sortOptions":{
-			"sortby":{
-				"title":"Sort by",
-				"recent":"Recently active",
-				"posted":"Posted date"
+	"forum": {
+		"creorsear": "Create or search for post",
+		"next": "Next",
+		"back": "Back",
+		"newPost": "Make a new post",
+		"post": "Post",
+		"sortOptions": {
+			"sortby": {
+				"title": "Sort by",
+				"recent": "Recently active",
+				"posted": "Posted date"
 			},
-			"sortOrder":{
-				"title":"Sort order",
-				"recent":"Recent first",
-				"old":"Old first"
+			"sortOrder": {
+				"title": "Sort order",
+				"recent": "Recent first",
+				"old": "Old first"
 			},
-			"tagMatch":{
-				"title":"Tag matching",
-				"some":"Match some tags",
-				"all":"Match all tags"
+			"tagMatch": {
+				"title": "Tag matching",
+				"some": "Match some tags",
+				"all": "Match all tags"
 			},
-			"name":"Sorting options"
+			"name": "Sorting options"
 		},
-		"errors":{
-			"tagsReq":"Tags are required",
-			"requireText":"Message cannot be empty"
+		"errors": {
+			"tagsReq": "Tags are required",
+			"requireText": "Message cannot be empty"
 		},
-		"allTags":"All tags",
-		"settings":{
-			"editTags":"Edit tags:",
-			"editTag":"Edit tag",
-			"tagName":"Tag name:",
-			"moderated":"Only allow thread moderators to apply tag:",
-			"addTag":"Add a tag",
-			"delTag":"Delete tag"
+		"allTags": "All tags",
+		"settings": {
+			"editTags": "Edit tags:",
+			"editTag": "Edit tag",
+			"tagName": "Tag name:",
+			"moderated": "Only allow thread moderators to apply tag:",
+			"addTag": "Add a tag",
+			"delTag": "Delete tag"
 		}
 	},
 	"channelLink": "# $1",
@@ -225,13 +226,13 @@
 	},
 	"confirmGuildLeave": "Are you sure you want to leave $1",
 	"copyLink": "Copy message link",
-	"copyRegLink":"Copy link",
+	"copyRegLink": "Copy link",
 	"copymessageid": "Copy message id",
 	"copyrawtext": "Copy raw text",
 	"createAccount": "Create Account",
 	"delete": "Delete",
 	"deleteConfirm": "Are you sure you want to delete this?",
-	"deleteConfirmPoll":"Are you sure you want to end the poll early?",
+	"deleteConfirmPoll": "Are you sure you want to end the poll early?",
 	"devSettings": {
 		"badUser": "Enable logging of bad user objects that send too much information:",
 		"cache": "Enable Service Worker Caching map files:",
@@ -240,7 +241,7 @@
 		"clearWellKnowns": "Re-fetch .well-known records:",
 		"description": "These are for developers of Harmony/Fermi, if you don't know what you're doing, please don't mess with these settings.",
 		"gatewayComp": "Disable Gateway compression:",
-		"reportSystem":"Enable experimental reporting system:",
+		"reportSystem": "Enable experimental reporting system:",
 		"logGateway": "Log received gateway events (log level info):",
 		"name": "Developer settings",
 		"traces": "Expose traces:"
@@ -261,7 +262,7 @@
 		"region": "Region: $1",
 		"title": "Manage sessions"
 	},
-	"addGuild":"Add a guild",
+	"addGuild": "Add a guild",
 	"discovery": "Discovery",
 	"dms": "Direct messages",
 	"edit": "Edit",
@@ -282,8 +283,8 @@
 		"upload": "Upload emojis"
 	},
 	"emojiSelect": "Emoji:",
-	"gifProvidor":"Gif Provider:",
-	"showTodayAt":"Show today at:",
+	"gifProvidor": "Gif Provider:",
+	"showTodayAt": "Show today at:",
 	"errorReconnect": "Unable to connect to the server, retrying in **$1** seconds...",
 	"favoriteGifs": "Favorited GIFs",
 	"folder": {
@@ -298,7 +299,7 @@
 	"friends": {
 		"addfriend": "Add friend",
 		"addfriendpromt": "Add friends by username:",
-        "requestsent": "Request sent!",
+		"requestsent": "Request sent!",
 		"all": "All",
 		"all:": "All friends:",
 		"blocked": "Blocked",
@@ -324,7 +325,7 @@
 	},
 	"guild": {
 		"COMMUNITY": "Apply to join",
-		"disableInvites":"Disable invites:",
+		"disableInvites": "Disable invites:",
 		"DISCOVERABLE": "Discovery",
 		"INVITES_DISABLED": "Invite only",
 		"adminMenu": {
@@ -334,7 +335,7 @@
 			"owner": "Find the owner",
 			"permission": "Permissions:"
 		},
-		"report":"Report guild",
+		"report": "Report guild",
 		"admins": "Find admins",
 		"all": "All",
 		"banReason": "Ban reason: $1",
@@ -342,8 +343,8 @@
 		"banner:": "Banner:",
 		"bans": "Bans",
 		"boostMessage?": "Send a message when someone boosts your guild!",
-		"banId":"Ban by ID",
-		"idSel":"ID:",
+		"banId": "Ban by ID",
+		"idSel": "ID:",
 		"community": "Community",
 		"confirmDelete": "Are you sure you want to delete $1?",
 		"confirmLeave": "Are you sure you want to leave?",
@@ -406,18 +407,18 @@
 		"yesDelete": "Yes, I'm sure",
 		"yesLeave": "Yes, I'm sure"
 	},
-	"donate":{
-		"title":"Ways to Donate",
-		"donate":"Donate",
-		"desc":"By donating to Fermi you help the continuation of these projects going into the future!",
-		"mdText":"[Donate Today to Fermi]($1)",
-		"lead":{
-			"title":"Support the Lead Dev",
-			"desc":"Support the lead dev of Harmony and Fermi. They made Fermi from scratch and are the lead maintainer of Harmony."
+	"donate": {
+		"title": "Ways to Donate",
+		"donate": "Donate",
+		"desc": "By donating to Fermi you help the continuation of these projects going into the future!",
+		"mdText": "[Donate Today to Fermi]($1)",
+		"lead": {
+			"title": "Support the Lead Dev",
+			"desc": "Support the lead dev of Harmony and Fermi. They made Fermi from scratch and are the lead maintainer of Harmony."
 		},
-		"host":{
-			"title":"Support the Host",
-			"desc":"Support the Host of the main Harmony instance! She helps to guide the project into the future with leadership, and reviews much of the code that goes into the Harmony codebase.\nCashApp: $1"
+		"host": {
+			"title": "Support the Host",
+			"desc": "Support the Host of the main Harmony instance! She helps to guide the project into the future with leadership, and reviews much of the code that goes into the Harmony codebase.\nCashApp: $1"
 		}
 	},
 	"hideBlockedMessages": "You have this user blocked, click to hide these messages.",
@@ -519,12 +520,12 @@
 	"leaving": "You're leaving Harmony",
 	"loaded": "Loaded",
 	"localuser": {
-		"security":"Security",
-		"advanced":"Advanced settings",
-		"danger":"Danger zone",
+		"security": "Security",
+		"advanced": "Advanced settings",
+		"danger": "Danger zone",
 		"2faCode:": "Code:",
 		"2faCodeGive": "Your TOTP secret is: $1. This will generate a 6 digits 2FA token with a 30 second expiration period.",
-		"2fa":"2FA settings",
+		"2fa": "2FA settings",
 		"2faDisable": "Disable 2FA",
 		"2faEnable": "Enable 2FA",
 		"CheckUpdate": "Check for updates",
@@ -584,10 +585,10 @@
 		"oldPassword:": "Old password:",
 		"password:": "Password",
 		"privacyPolcyURL": "Privacy policy link:",
-		"appID":"Application ID: $1",
-		"showSecret":"Show client secret",
-		"clientSecret":"Client secret: $1",
-		"secret":"Secret",
+		"appID": "Application ID: $1",
+		"showSecret": "Show client secret",
+		"clientSecret": "Client secret: $1",
+		"secret": "Secret",
 		"publicAvaliable": "Make bot publicly inviteable?",
 		"refreshPage": "Refresh to apply",
 		"requireCode": "Require code grant to invite the bot?",
@@ -609,7 +610,7 @@
 		"updateSettings": "Update settings",
 		"updatesYay": "Updates found!",
 		"userSettings": "Your public profile",
-		"general":"General"
+		"general": "General"
 	},
 	"login": {
 		"allGood": "All good",
@@ -669,12 +670,12 @@
 		"timeoutTime": "Timeout duration:"
 	},
 	"message": {
-		"messages":"$1 message{{PLURAL:$1||s}} >",
+		"messages": "$1 message{{PLURAL:$1||s}} >",
 		"andMore": "$1, and more!",
 		"attached": "sent an attachment",
 		"delete": "Delete message",
-		"endPoll":"End poll",
-		"report":"Report message",
+		"endPoll": "End poll",
+		"report": "Report message",
 		"deleted": "Deleted message",
 		"edit": "Edit message",
 		"edited": "(edited)",
@@ -683,22 +684,22 @@
 		"thread": "$1 has created a thread: $2",
 		"reactedWith": "Reacted with $1",
 		"reactionAdd": "Add reaction",
-		"createThread":"Create thread",
-		"threadOptions":"Thread options",
+		"createThread": "Create thread",
+		"threadOptions": "Thread options",
 		"reactions": "View reactions",
 		"reactionsTitle": "Reactions",
 		"retry": "Resend errored message",
 		"viewrest": "View rest",
-		"pollRes":"$1's poll $2 has closed."
+		"pollRes": "$1's poll $2 has closed."
 	},
-	"report":{
-		"back":"Back",
-		"next":"Next",
-		"cancel":"Cancel",
-		"submit":"Submit",
-		"blockUser":"Block user",
-		"timeout":"Timeout member",
-		"summary":"Report summary:"
+	"report": {
+		"back": "Back",
+		"next": "Next",
+		"cancel": "Cancel",
+		"submit": "Submit",
+		"blockUser": "Block user",
+		"timeout": "Timeout member",
+		"summary": "Report summary:"
 	},
 	"messageLink": "Message in # $1",
 	"muteDuration": "Unmute in:",
@@ -764,7 +765,7 @@
 			"USE_EMBEDDED_ACTIVITIES": "Allows role members to use embedded activities.",
 			"USE_APPLICATION_COMMANDS": "Allows role members to use application commands.",
 			"USE_EXTERNAL_APPS": "Allows role members to have application responses to show publicly in channel (When disabled, users will still be allowed to use their apps but responses will be visible only to themselves. This only applies to apps not also installed to the guild).",
-			"SET_VOICE_CHANNEL_STATUS":"Set voice channel status"
+			"SET_VOICE_CHANNEL_STATUS": "Set voice channel status"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "Add reactions",
@@ -818,7 +819,7 @@
 			"VIEW_CHANNEL": "View channels",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "View creator monetization analytics",
 			"VIEW_GUILD_INSIGHTS": "View guild insights",
-			"SET_VOICE_CHANNEL_STATUS":"Set voice channel status"
+			"SET_VOICE_CHANNEL_STATUS": "Set voice channel status"
 		}
 	},
 	"pinMessage": "Pin message",
@@ -830,9 +831,9 @@
 		"mutFriends": "Mutual friends",
 		"permInfo": "Permissions",
 		"userInfo": "User info",
-		"notes":"User notes"
+		"notes": "User notes"
 	},
-	"messageNotLoad":"Messages failed to load",
+	"messageNotLoad": "Messages failed to load",
 	"profileColor": "Profile color",
 	"pronouns": "Pronouns:",
 	"readableName": "English",
@@ -846,12 +847,12 @@
 		"register": "Register",
 		"tos": "You must agree to the TOS",
 		"usernameError": "Username: $1",
-		"other":"Other instance",
-		"instURL":"URL:"
+		"other": "Other instance",
+		"instURL": "URL:"
 	},
 	"remove": "Remove",
 	"renderJoinAvatars": " Display avatars in member welcome messages: ",
-	"checkBoxMemberList":"Use a checkbox for the member list: ",
+	"checkBoxMemberList": "Use a checkbox for the member list: ",
 	"reply": "Reply",
 	"replyingTo": "Replying to $1",
 	"retrying": "Retrying...",
@@ -879,28 +880,28 @@
 		"roleFileIcon": "Role icon:",
 		"roles": "Roles"
 	},
-	"upload":"Upload files",
-	"makePoll":"Make poll",
-	"poll":{
-		"question":"Question:",
-		"answers":"Answers:",
-		"newAnswer":"New Answer",
-		"duration":"Duration:",
-		"durCount":{
-			"1":"1 hour",
-			"4":"4 hours",
-			"8":"8 hours",
-			"24":"24 hours",
-			"72":"3 days",
-			"168":"7 days",
-			"336":"14 days"
+	"upload": "Upload files",
+	"makePoll": "Make poll",
+	"poll": {
+		"question": "Question:",
+		"answers": "Answers:",
+		"newAnswer": "New Answer",
+		"duration": "Duration:",
+		"durCount": {
+			"1": "1 hour",
+			"4": "4 hours",
+			"8": "8 hours",
+			"24": "24 hours",
+			"72": "3 days",
+			"168": "7 days",
+			"336": "14 days"
 		},
-		"mult":"Allow multiple answers:",
-		"expires":"Expires: $1",
-		"tie":"It was a tie!",
-		"winningAnswer":"Winning answer: $1%",
-		"view":"View poll",
-		"count":"$1 {{PLURAL:$1|vote|votes}} $2%"
+		"mult": "Allow multiple answers:",
+		"expires": "Expires: $1",
+		"tie": "It was a tie!",
+		"winningAnswer": "Winning answer: $1%",
+		"view": "View poll",
+		"count": "$1 {{PLURAL:$1|vote|votes}} $2%"
 	},
 	"search": {
 		"back": "Back",
@@ -910,13 +911,13 @@
 		"old": "Old",
 		"page": "Page $1",
 		"search": "Search",
-		"settings":"Search Settings",
-		"before":"Before:",
-		"after":"After:",
-		"includensfw":"Include NSFW:",
-		"authors":"Authors:",
-		"mentions":"Mentions:",
-		"channels":"Channels:"
+		"settings": "Search Settings",
+		"before": "Before:",
+		"after": "After:",
+		"includensfw": "Include NSFW:",
+		"authors": "Authors:",
+		"mentions": "Mentions:",
+		"channels": "Channels:"
 	},
 	"searchGifs": "Search $1",
 	"settings": {
@@ -965,16 +966,16 @@
 	"typing": "$2 {{PLURAL:$1|is|are}} typing",
 	"unableToConnect": "Unable to connect to the Harmony server. Please try logging out and back in.",
 	"unableToPin": "Unable to pin message",
-	"sbWarns":{
-		"regi":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. Continue?",
-		"in":"Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. This message should only show once."
+	"sbWarns": {
+		"regi": "Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. Continue?",
+		"in": "Spacebar instances are no longer officially supported by Fermi, while it'll likely still work, Harmony is recommended. This message should only show once."
 	},
-	"connections":{
-		"since":"Member since: $1",
-		"display":"Display on profile: ",
-		"delete":"Delete Connection",
-		"sure":"Are you sure?",
-		"sureDesc":"If you remove this connection, you can't undo it"
+	"connections": {
+		"since": "Member since: $1",
+		"display": "Display on profile: ",
+		"delete": "Delete Connection",
+		"sure": "Are you sure?",
+		"sureDesc": "If you remove this connection, you can't undo it"
 	},
 	"unpinMessage": "Unpin message",
 	"updateAv": "Updates available",
@@ -985,9 +986,9 @@
 	"useTemplateButton": "Use template",
 	"usedFermi": "sent via Fermi",
 	"user": {
-		"report":"Report user",
-		"deleted":"Deleted user",
-		"reportApp":"Report application",
+		"report": "Report user",
+		"deleted": "Deleted user",
+		"reportApp": "Report application",
 		"addRole": "Add roles",
 		"ban": "Ban member",
 		"block": "Block user",
@@ -1017,26 +1018,26 @@
 		"unTimeout": "Remove timeout on member",
 		"unban": "Unban $1",
 		"unblock": "Unblock user",
-		"viewProfile":"View profile"
+		"viewProfile": "View profile"
 	},
 	"userping": {
 		"resolving": "resolving user",
 		"unknown": "@unknown-user"
 	},
-	"editMode":{
-		"editMsg":"Escape to $1cancel$1 enter to $2submit$2"
+	"editMode": {
+		"editMsg": "Escape to $1cancel$1 enter to $2submit$2"
 	},
-	"keyboard":{
-		"shortcuts":"Shortcuts",
-		"empty":"<No keybind set>",
-		"descs":{
-			"gifSearch":"Search GIFs:"
+	"keyboard": {
+		"shortcuts": "Shortcuts",
+		"empty": "<No keybind set>",
+		"descs": {
+			"gifSearch": "Search GIFs:"
 		}
 	},
-	"domain":{
-		"title":"Verify domain",
-		"domain":"Domain:",
-		"dnsinst":"1. Sign into your DNS provider\n\n2. Create a DNS record as follows:\n\nName:\n```\n_harmony.$1\n```\n\nType:\n```\nTXT\n```\n\nContent:\n```\n$2\n```\n\n-# It will likely take a few minutes for the DNS to propagate"
+	"domain": {
+		"title": "Verify domain",
+		"domain": "Domain:",
+		"dnsinst": "1. Sign into your DNS provider\n\n2. Create a DNS record as follows:\n\nName:\n```\n_harmony.$1\n```\n\nType:\n```\nTXT\n```\n\nContent:\n```\n$2\n```\n\n-# It will likely take a few minutes for the DNS to propagate"
 	},
 	"vc": {
 		"joinForStream": "Join the voice channel to watch",
@@ -1051,11 +1052,11 @@
 		"manage": "Manage security keys"
 	},
 	"webhook": "WEBHOOK",
-	"copyCode":"Copy code",
+	"copyCode": "Copy code",
 	"webhooks": {
 		"EnterWebhookName": "Enter webhook name",
 		"areYouSureDelete": "Are you sure you want to delete $1?",
-		"areYouSureDeleteHead":"Delete $1?",
+		"areYouSureDeleteHead": "Delete $1?",
 		"avatar": "Avatar",
 		"base": "Webhooks",
 		"channel": "Webhook outputs to channel:",

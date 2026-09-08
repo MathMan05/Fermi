@@ -3,7 +3,7 @@ import {Contextmenu} from "./contextmenu.js";
 import {Guild, makeInviteMenu} from "./guild.js";
 import {Localuser} from "./localuser.js";
 import {Permissions} from "./permissions.js";
-import {Dialog, Float, Settings} from "./settings.js";
+import {Dialog, Float, PopUp, Settings} from "./settings.js";
 import {Role, RoleList} from "./role.js";
 import {InfiniteScroller} from "./infiniteScroller.js";
 import {SnowFlake} from "./snowflake.js";
@@ -1767,23 +1767,31 @@ class Channel extends SnowFlake {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			const menu = new Contextmenu<void, void>("");
-			const mics = await this.localuser.getAudioDeviceList();
-			for (const mic of mics) {
-				menu.addButton(
-					mic.label,
-					() => {
-						this.localuser.setNewDefualtDevice(mic.deviceId);
-					},
-					{
-						icon: {
-							css:
-								mic.deviceId === this.localuser.getDefaultAudio() ? "svg-select" : "svg-noSelect",
+			try {
+				const mics = await this.localuser.getAudioDeviceList();
+				if (!mics.length) {
+					new PopUp(I18n.nomics()).show();
+					return;
+				}
+				for (const mic of mics) {
+					menu.addButton(
+						mic.label,
+						() => {
+							this.localuser.setNewDefualtDevice(mic.deviceId);
 						},
-					},
-				);
+						{
+							icon: {
+								css:
+									mic.deviceId === this.localuser.getDefaultAudio() ? "svg-select" : "svg-noSelect",
+							},
+						},
+					);
+				}
+				const box = muteOpt.getBoundingClientRect();
+				menu.makemenu(box.left, box.top - 34 - window.innerHeight);
+			} catch (e) {
+				new PopUp((e as Error).message).show();
 			}
-			const box = muteOpt.getBoundingClientRect();
-			menu.makemenu(box.left, box.top - 34 - window.innerHeight);
 		};
 
 		const updateCallIcon = () => {
