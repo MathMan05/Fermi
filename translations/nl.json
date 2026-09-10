@@ -21,6 +21,7 @@
 		"whatelse": "Wat denkt u dat er nog meer moet gebeuren?",
 		"whereever": "Waar dit ook is"
 	},
+	"nomics": "Geen microfoons gevonden",
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
@@ -285,6 +286,7 @@
 	},
 	"emojiSelect": "Emoji:",
 	"gifProvidor": "GIF-aanbieder:",
+	"showTodayAt": "Vandaag laten zien om:",
 	"errorReconnect": "Kan geen verbinding maken met de server. Het wordt over **$1** seconden opnieuw geprobeerd…",
 	"favoriteGifs": "Favoriete GIF's",
 	"folder": {
