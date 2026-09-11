@@ -41,97 +41,100 @@
 				<h1 id="switchaccounts" i18n="htmlPages.switchaccounts">Switch accounts</h1>
 			</div>
 		</div>
-		<div class="flexltr" id="page">
-			<div id="guildRail"></div>
-			<div class="flexttb channelflex">
-				<div class="flexltr header" id="servertd">
-					<h2 id="serverName" class="ellipsis">Server Name</h2>
-				</div>
-				<div id="channels"></div>
-				<div class="flexttb">
-					<div class="flexltr" id="VoiceBox">
-						<div class="flexttb">
-							<span id="VoiceStatus"></span>
-							<span id="VoiceGuild"></span>
-							<div id="VoiceButtons" class="flexltr"></div>
-						</div>
+		<div class="flexttb" id="page">
+			<div class="flexltr clear" id="noti">ALERT GAY</div>
+			<div class="flexltr">
+				<div id="guildRail"></div>
+				<div class="flexttb channelflex">
+					<div class="flexltr header" id="servertd">
+						<h2 id="serverName" class="ellipsis">Server Name</h2>
 					</div>
-					<div class="flexltr" id="userdock">
-						<div class="flexltr" id="userinfo">
-							<img id="userpfp" class="pfp" />
-
-							<div class="flexttb userflex">
-								<p id="username">USERNAME</p>
-								<p id="status">STATUS</p>
+					<div id="channels"></div>
+					<div class="flexttb">
+						<div class="flexltr" id="VoiceBox">
+							<div class="flexttb">
+								<span id="VoiceStatus"></span>
+								<span id="VoiceGuild"></span>
+								<div id="VoiceButtons" class="flexltr"></div>
 							</div>
 						</div>
+						<div class="flexltr" id="userdock">
+							<div class="flexltr" id="userinfo">
+								<img id="userpfp" class="pfp" />
 
-						<div id="user-actions" class="flexltr">
-							<div><span id="mic" class="svgicon svg-mic"></span></div>
-							<div><span id="settings" class="svgicon svg-settings"></span></div>
+								<div class="flexttb userflex">
+									<p id="username">USERNAME</p>
+									<p id="status">STATUS</p>
+								</div>
+							</div>
+
+							<div id="user-actions" class="flexltr">
+								<div><span id="mic" class="svgicon svg-mic"></span></div>
+								<div><span id="settings" class="svgicon svg-settings"></span></div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="flexttb flexgrow" id="mainarea">
-				<div class="flexltr header channelnamediv">
-					<label for="maintoggle" id="maintoggleicon">
-						<span class="svgicon svg-category"></span>
-					</label>
-					<input type="checkbox" id="maintoggle" />
-					<span class="flexltr" style="align-items: center">
-						<span id="channelname">Channel name</span>
-						<span id="channelTopic" class="ellipsis" hidden>Channel topic</span>
-					</span>
-					<div class="spaceElm"></div>
-					<div id="pinnedMDiv">
-						<span class="svgicon svg-pin" id="pinnedM"></span>
-					</div>
-					<div class="searchMeta">
-						<div contenteditable="true" class="searchBox" id="searchBox"></div>
-						<span id="searchX" class="svgicon svg-search" contenteditable="false"></span>
-					</div>
-					<span class="svgicon svg-update" i18n="updateAv" id="updateIcon" hidden></span>
-					<input type="checkbox" id="memberlisttoggle" class="svgicon svg-friends" checked />
-				</div>
-				<div class="flexltr flexgrow">
-					<div class="flexttb flexgrow" id="voiceArea"></div>
-					<div class="flexttb flexgrow" id="chatArea">
-						<div id="channelw" class="flexltr" tabindex="-1">
-							<div id="scrollWrap"></div>
-							<div id="loadingdiv"></div>
+				<div class="flexttb flexgrow" id="mainarea">
+					<div class="flexltr header channelnamediv">
+						<label for="maintoggle" id="maintoggleicon">
+							<span class="svgicon svg-category"></span>
+						</label>
+						<input type="checkbox" id="maintoggle" />
+						<span class="flexltr" style="align-items: center">
+							<span id="channelname">Channel name</span>
+							<span id="channelTopic" class="ellipsis" hidden>Channel topic</span>
+						</span>
+						<div class="spaceElm"></div>
+						<div id="pinnedMDiv">
+							<span class="svgicon svg-pin" id="pinnedM"></span>
 						</div>
-						<div style="position: relative">
-							<div id="searchOptions" class="flexttb searchOptions"></div>
+						<div class="searchMeta">
+							<div contenteditable="true" class="searchBox" id="searchBox"></div>
+							<span id="searchX" class="svgicon svg-search" contenteditable="false"></span>
 						</div>
-						<div id="pasteimage" class="flexltr"></div>
-						<div id="replybox" class="hideReplyBox"></div>
-						<div id="typediv">
-							<div id="realbox">
-								<div class="outerTypeBox noConent">
-									<span class="svg-upload svgicon" id="upload"></span>
-									<div id="typebox" contenteditable="true"></div>
-									<div id="buttonCol" class="flexltr">
-										<span class="svgicon svg-gif" id="gifTB"></span>
-										<span class="svgicon svg-sticker" id="stickerTB"></span>
+						<span class="svgicon svg-update" i18n="updateAv" id="updateIcon" hidden></span>
+						<input type="checkbox" id="memberlisttoggle" class="svgicon svg-friends" checked />
+					</div>
+					<div class="flexltr flexgrow">
+						<div class="flexttb flexgrow" id="voiceArea"></div>
+						<div class="flexttb flexgrow" id="chatArea">
+							<div id="channelw" class="flexltr" tabindex="-1">
+								<div id="scrollWrap"></div>
+								<div id="loadingdiv"></div>
+							</div>
+							<div style="position: relative">
+								<div id="searchOptions" class="flexttb searchOptions"></div>
+							</div>
+							<div id="pasteimage" class="flexltr"></div>
+							<div id="replybox" class="hideReplyBox"></div>
+							<div id="typediv">
+								<div id="realbox">
+									<div class="outerTypeBox noConent">
+										<span class="svg-upload svgicon" id="upload"></span>
+										<div id="typebox" contenteditable="true"></div>
+										<div id="buttonCol" class="flexltr">
+											<span class="svgicon svg-gif" id="gifTB"></span>
+											<span class="svgicon svg-sticker" id="stickerTB"></span>
+										</div>
+										<span class="svgicon svg-emoji" id="emojiTB"></span>
+										<img id="mobileSend" src="/icons/mobileSend.svg" />
 									</div>
-									<span class="svgicon svg-emoji" id="emojiTB"></span>
-									<img id="mobileSend" src="/icons/mobileSend.svg" />
 								</div>
-							</div>
-							<div id="typing" class="hidden flexltr">
-								<p id="typingtext">typing</p>
-								<div class="flexltr loading-indicator">
-									<div class="dot"></div>
-									<div class="dot"></div>
-									<div class="dot"></div>
+								<div id="typing" class="hidden flexltr">
+									<p id="typingtext">typing</p>
+									<div class="flexltr loading-indicator">
+										<div class="dot"></div>
+										<div class="dot"></div>
+										<div class="dot"></div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="flexttb" id="sideContainDiv">
-						<div class="flexttb" id="sideDiv"></div>
-						<div id="player" class="flexttb"></div>
+						<div class="flexttb" id="sideContainDiv">
+							<div class="flexttb" id="sideDiv"></div>
+							<div id="player" class="flexttb"></div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -8,6 +8,24 @@ body {
 	-webkit-text-size-adjust: 100%;
 	scrollbar-color: var(--button-bg) var(--primary-bg);
 }
+#noti {
+	height: 40px;
+	flex-shrink: 0;
+	background: #1e629f;
+	display: flex;
+	align-items: center;
+	padding: 0 20px;
+	transition: height 0.2s;
+	overflow: clip;
+
+	&.clear {
+		height: 0px;
+	}
+	> a {
+		color: var(--primary-text);
+	}
+}
+
 #page {
 	height: 100svh;
 	background: var(--primary-bg);
@@ -1302,9 +1320,19 @@ textarea {
 	aspect-ratio: 1/1;
 	flex-shrink: 0;
 	color: transparent;
+	flex-grow: 0;
+
 	&[hidden] {
 		display: none;
 	}
+}
+.margin-left {
+	margin-left: auto;
+}
+.close-noti {
+	width: 26px;
+	height: 26px;
+	cursor: pointer;
 }
 .friendProf {
 	width: 20px;

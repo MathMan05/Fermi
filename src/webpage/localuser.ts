@@ -58,6 +58,7 @@ import {TypeBox} from "./typeBox.js";
 import {InstnaceConfig} from "./instanceConfig.js";
 import {FS} from "./fs/index.js";
 import {decode64} from "./utils/base64.js";
+import {showBanner, submitBanner} from "./utils/bannerController.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
@@ -379,6 +380,7 @@ class Localuser {
 	readonly unknownRead = new Map<string, readStateEntry>();
 	conf: InstnaceConfig;
 	async gottenReady(ready: readyjson): Promise<void> {
+		showBanner();
 		this.conf = new InstnaceConfig(this.info.api);
 		this.getGifProvidors();
 		await I18n.done;
