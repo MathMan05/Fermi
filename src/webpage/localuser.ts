@@ -58,7 +58,7 @@ import {TypeBox} from "./typeBox.js";
 import {InstnaceConfig} from "./instanceConfig.js";
 import {FS} from "./fs/index.js";
 import {decode64} from "./utils/base64.js";
-import {showBanner, submitBanner} from "./utils/bannerController.js";
+import {showBanner} from "./utils/bannerController.js";
 type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
