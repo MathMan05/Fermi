@@ -252,6 +252,7 @@
 		"upload": "Carica emoji"
 	},
 	"emojiSelect": "Emoji:",
+	"showTodayAt": "Mostra oggi a:",
 	"errorReconnect": "Impossibile connettersi al server, nuovo tentativo tra **$1** secondi...",
 	"favoriteGifs": "GIF preferite",
 	"folder": {

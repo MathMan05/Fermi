@@ -44,6 +44,7 @@
 		"whatelse": "Que pensez-vous qu'il devrait se passer d'autre ?",
 		"whereever": "Où que ce soit"
 	},
+	"nomics": "Aucun micro détecté",
 	"filesize": {
 		"B": "o",
 		"KB": "Ko",
@@ -308,6 +309,7 @@
 	},
 	"emojiSelect": "Émoji :",
 	"gifProvidor": "Fournisseur de GIF :",
+	"showTodayAt": "Montrer aujourd'hui :",
 	"errorReconnect": "Impossible de se connecter au serveur, nouvelle tentative dans **$1** secondes...",
 	"favoriteGifs": "GIFs favoris",
 	"folder": {
