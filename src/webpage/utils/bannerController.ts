@@ -2,10 +2,13 @@ import "./banners/index.js";
 export interface banner {
 	text: string | (() => string);
 	url?: string;
+	id?: string;
 	priority: number;
 }
 let winner = null as null | banner;
+const seen = new Set(JSON.parse(localStorage.getItem("seenBanners") || "[]") as string[]);
 export function submitBanner(banner: banner) {
+	if (banner.id && seen.has(banner.id)) return;
 	if (!winner) winner = banner;
 	if (winner.priority < banner.priority) winner = banner;
 }
@@ -13,6 +16,10 @@ export function submitBanner(banner: banner) {
 let shown = false;
 export function showBanner() {
 	if (shown || !winner) return;
+	if (winner.id) {
+		seen.add(winner.id);
+		localStorage.setItem("seenBanners", JSON.stringify([...seen]));
+	}
 	shown = true;
 	const noti = document.getElementById("noti")!;
 	noti.textContent = "";
