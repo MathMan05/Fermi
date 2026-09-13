@@ -25,7 +25,10 @@ body {
 		color: var(--primary-text);
 	}
 }
-
+#subpage {
+	height: 100svh;
+	background: var(--primary-bg);
+}
 #page {
 	height: 100svh;
 	background: var(--primary-bg);
