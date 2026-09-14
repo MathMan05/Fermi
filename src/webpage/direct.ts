@@ -719,13 +719,14 @@ class Group extends Channel {
 	}
 	private groupDmDivs = new Set<WeakRef<HTMLDivElement>>();
 	makeIcon(div = document.createElement("div")): HTMLDivElement {
+		const newdiv = !!div.innerHTML;
 		div.innerHTML = "";
 		div.classList = "";
 		if (this.type === 1) {
 			div.append(this.users[0].buildstatuspfp(this));
 			return div;
 		} else {
-			this.groupDmDivs.add(new WeakRef(div));
+			if (!newdiv) this.groupDmDivs.add(new WeakRef(div));
 
 			div.classList.add("groupDmDiv");
 			if (this.icon) {
