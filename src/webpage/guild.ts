@@ -2081,6 +2081,9 @@ class Guild extends SnowFlake {
 		if (channel === this.prevchannel) {
 			this.prevchannel = undefined;
 		}
+		if (channel.parent) {
+			channel.parent.children = channel.parent.children.filter((_) => _ !== channel);
+		}
 		/*
 		const build=[];
 		for(const thing of this.channels){
