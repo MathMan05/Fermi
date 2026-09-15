@@ -2324,7 +2324,13 @@ class Form implements OptionsElement<object> {
 		if (!this.traditionalSubmit && this.submitText) {
 			const button = document.createElement("button");
 			button.onclick = async (_) => {
-				await this.submit();
+				button.disabled = true;
+				try {
+					await this.submit();
+				} finally {
+					console.log("done?");
+					button.disabled = false;
+				}
 			};
 			button.textContent = this.submitText;
 			div.append(button);
@@ -2356,7 +2362,7 @@ class Form implements OptionsElement<object> {
 		if (this.submitLock.locked) return;
 		const lock = await this.submitLock.acquireLock();
 		try {
-			this.submitInt();
+			await this.submitInt();
 		} finally {
 			lock();
 		}
@@ -2451,7 +2457,7 @@ class Form implements OptionsElement<object> {
 				}
 			};
 			const doFetch = async () => {
-				fetch(this.fetchURL, {
+				await fetch(this.fetchURL, {
 					method: this.method,
 					body: JSON.stringify(build),
 					headers: this.headers,
@@ -2495,7 +2501,7 @@ class Form implements OptionsElement<object> {
 							this.showPrimError(json.message);
 							return;
 						}
-						onSubmit(json);
+						await onSubmit(json);
 					});
 			};
 			await doFetch();
