@@ -1423,7 +1423,12 @@ class Channel extends SnowFlake {
 				name,
 				type,
 				parent_id: this.id,
-				permission_overwrites: [],
+				permission_overwrites: [...this.permissionOverwriteMap].map((_) => ({
+					id: _[0],
+					allow: _[1].allow + "",
+					deny: _[1].deny + "",
+					type: this.guild.roleids.has(_[0]) ? 0 : 1,
+				})),
 			}),
 		})
 			.then((_) => _.json())
