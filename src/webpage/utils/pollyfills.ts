@@ -75,3 +75,4 @@ ReadableStream.prototype[Symbol.asyncIterator] ??= async function* () {
 		if (done) return undefined;
 	}
 };
+export const nothing = void 0;
