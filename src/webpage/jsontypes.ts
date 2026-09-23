@@ -1525,3 +1525,47 @@ export {
 	addInfoBan,
 	templateSkim,
 };
+
+export interface PushNotification {
+	type: string;
+	receiving_user_id?: string;
+	notif_type_id?: number;
+	notif_instance_id?: string;
+	title?: string;
+	subtitle?: string;
+	expand_subtitle?: boolean;
+	icon_url?: string;
+	silent?: boolean;
+	sent_at_ms?: number;
+	channel_ids?: string[];
+	mention_type?: string;
+	join_id?: string;
+}
+
+export interface MessagePush extends PushNotification {
+	type: "MESSAGE_CREATE";
+	message?: {
+		author: userjson;
+		mentions: string[];
+		embeds: embedjson[];
+		components: component[];
+		sticker_items: string[];
+		//Not gonna send the poll at least for now :P
+	};
+	message_id: string;
+	message_type_: number;
+	message_content: string;
+	message_flags?: number;
+	channel_id: string;
+	channel_type: number;
+	channel_name: string;
+	channel_icon?: string | null;
+	guild_id?: string;
+	user_id: string;
+	user_username: string;
+	user_discriminator?: string;
+	user_avatar?: string;
+	user_guild_avatar?: string;
+}
+
+export type pushNotifsReal = MessagePush;

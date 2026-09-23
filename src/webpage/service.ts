@@ -1,3 +1,4 @@
+import {pushNotifsReal} from "./jsontypes";
 import {messageFrom, messageTo} from "./utils/serviceType";
 
 async function deleteoldcache() {
@@ -407,4 +408,28 @@ self.addEventListener("message", (message) => {
 			listenToPort(port);
 		}
 	}
+});
+interface PushEvent extends ExtendableEvent {
+	data: PushMessageData;
+}
+declare var registration: {
+	showNotification: (
+		title: string,
+		opts: {
+			body: string;
+		},
+	) => Promise<void>;
+};
+self.addEventListener("push", async (event) => {
+	const e = event as PushEvent;
+	const payload = e.data?.text();
+	if (!payload) {
+		return;
+	}
+	const obj = JSON.parse(payload) as pushNotifsReal;
+	e.waitUntil(
+		registration.showNotification(obj.user_username, {
+			body: obj.message_content,
+		}),
+	);
 });

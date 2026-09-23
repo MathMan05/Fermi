@@ -2628,6 +2628,31 @@ class Localuser {
 			const donate = settings.addButton(I18n.donate.donate(), {initable: false});
 			donate.addMDText(new MarkDown(I18n.donate.mdText(window.location.origin + "/donate")));
 			donate.addText(I18n.donate.desc());
+			donate.addButtonInput("", "sub", async () => {
+				const json = (await (
+					await fetch(this.info.api + "/users/@me/devices/vapid", {
+						headers: this.headers,
+					})
+				).json()) as {public: string};
+				const {token} = (await (
+					await fetch(this.info.api + "/users/@me/devices/sync-token", {
+						headers: this.headers,
+					})
+				).json()) as {token: string};
+				const sub = await SW.registration.pushManager.subscribe({
+					userVisibleOnly: true,
+					applicationServerKey: json.public,
+				});
+
+				await fetch(this.info.api + "/users/@me/devices/vapid", {
+					headers: this.headers,
+					method: "POST",
+					body: JSON.stringify({
+						token,
+						subscription_info: sub,
+					}),
+				});
+			});
 		}
 		settings.addButton(I18n.localuser.general(), {
 			head: true,
