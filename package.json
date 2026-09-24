@@ -10,7 +10,7 @@
 		"tsc": "tsc --noEmit"
 	},
 	"author": "MathMan05",
-	"license": "GPL-3.0",
+	"license": "AGPL-3.0",
 	"dependencies": {
 		"@swc/core": "1.11.24"
 	},
