@@ -31,6 +31,7 @@
 		]
 	},
 	"2faCode": "Code A2F :",
+	"donateMessage": "Fermi survit grâce aux dons, pensez-y SVP ! Toute aide est la bienvenue !",
 	"404": {
 		"404": "erreur 404 - Page introuvable",
 		"app": "Vers l'application",

@@ -11,6 +11,7 @@
 		]
 	},
 	"2faCode": "Código 2FA:",
+	"donateMessage": "Doe ao Fermi hoje!",
 	"404": {
 		"404": "Erro: 404 - Página não encontrada",
 		"app": "Ao aplicativo",
@@ -24,6 +25,13 @@
 		"whatelse": "O que mais você acha que deveria acontecer?",
 		"whereever": "O que quer que isso seja"
 	},
+	"nomics": "Nenhum microfone encontrado",
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "Onboarding",
 		"disable": "Desabilitar onboarding",
@@ -34,9 +42,11 @@
 		"enable": "Habilitar onboarding",
 		"title": "Bem-vindo à $1"
 	},
+	"copyMedia": "Copiar URL da mídia",
 	"DMs": {
 		"add": "Adicione alguém para este PV",
 		"close": "Fechar PV",
+		"copyURL": "Copiar URL da MP",
 		"copyId": "Copiar ID do PV",
 		"markRead": "Marcar como lido",
 		"name": "Mensagens Privadas"
@@ -45,6 +55,7 @@
 	"dismiss": "Ignorar",
 	"UrlGen": "Gerador de convite do bot",
 	"Voice": {
+		"userVol": "Volume do usuário:",
 		"status": {
 			"badWS": "Resposta ruim do WS",
 			"conectionFailed": "Conexão falhou",
@@ -68,8 +79,12 @@
 			"never": "Nunca"
 		},
 		"name": "Acessibilidade",
+		"visuals": "Visuais",
+		"animations": "Animações",
 		"playGif": "Tocar GIFs:",
 		"playIcon": "Tocar ícones animados:",
+		"playEmoji": "Tocar emojis animados:",
+		"playSticker": "Tocar figurinhas animadas:",
 		"roleColors": "Desabilitar cores dos cargo",
 		"gradientColors": "Desabilitar gradientes",
 		"decorations": "Habilitar decorações de avatar:"
@@ -84,7 +99,7 @@
 		"active_developer": "Desenvolvedor Ativo",
 		"application_guild_subscription": "Tem premium",
 		"automod": "utiliza Automod",
-		"bot_commands": "Suporta comandos",
+		"bot_commands": "suporta comandos",
 		"bug_hunter_level_1": "Caçador de bugs nível 1",
 		"bug_hunter_level_2": "Caçador de bugs nível 2",
 		"certified_moderator": "Moderador",
@@ -98,22 +113,25 @@
 		"guild_booster_lvl7": "Impulsionou guilda",
 		"guild_booster_lvl8": "Impulsionou guilda",
 		"guild_booster_lvl9": "Impulsionou guilda por um bom tempo",
-		"hypesquad": "Coisa com direitos autorais",
+		"hypesquad": "Vibesquad [PLACEHOLDER]",
 		"hypesquad_house_1": "Bravura",
-		"hypesquad_house_2": "Brilhança",
-		"hypesquad_house_3": "Balança",
-		"legacy_username": "Tem nome de usuário legacy",
-		"partner": "Parceiro da instância",
+		"hypesquad_house_2": "Excelencia",
+		"hypesquad_house_3": "Equilíbrio",
+		"legacy_username": "tem nome legado",
+		"partner": "Parceiro da Instância",
 		"premium": "Premium",
-		"quest_completed": "Completou uma missão",
+		"quest_completed": "completou uma missão",
 		"staff": "Staff da instância",
 		"verified_developer": "Desenvolvedor Verificado"
 	},
 	"bio": "Bio:",
 	"blankMessage": "Mensagem vazia",
+	"sentAttachment": "Enviou um anexo",
+	"sentPoll": "Enviou uma enquete",
+	"sentSticker": "Enviou uma figurinha",
 	"blog": {
 		"blog": "Blogue",
-		"blogUpdates": "Atualizações do blog:",
+		"blogUpdates": "Receber atualizações do blog quando abrir o app:",
 		"desc": "Leia ou se inscreva no blogue para receber atualizações sobre o Fermi!",
 		"fermi": "Blog do Fermi",
 		"gotoPost": "Ir ao post",
@@ -125,6 +143,7 @@
 	"cancel": "Cancelar",
 	"channel": {
 		"SlowmodeCool": "Espera do modo lento: $1",
+		"copyURL": "Copiar URL do canal",
 		"TimeOutCool": "Castigado até: $1",
 		"allowIcons": "Permitir ícones de canal customizados",
 		"announcement": "Anúncios",
@@ -140,8 +159,8 @@
 		"markRead": "Marcar como lido",
 		"mute": "Silenciar Canal",
 		"name": "Canal",
-		"name:": "Nome:",
-		"nsfw:": "NSFW:",
+		"name:": "Nome do canal:",
+		"nsfw:": "Aviso de conteúdo maturo/NSFW:",
 		"permissions": "Permissões",
 		"selectCatName": "Nome da categoria",
 		"selectName": "Nome do canal",
@@ -157,12 +176,14 @@
 		"voice": "Voz",
 		"deleteThread": "Apagar tópico",
 		"hideThreads": "Esconder após inatividade",
-		"forum": "Fórum"
+		"forum": "Fórum",
+		"addChannel": "Adicionar canal"
 	},
+	"charLeft": "Restam $1 {{PLURAL:$1|caracteres|caractere}}",
 	"threads": {
 		"leave": "Sair do tópico",
 		"join": "Entrar no tópico",
-		"name": "Nome:",
+		"name": "Nome do tópico:",
 		"editTags": "Editar tags"
 	},
 	"forum": {
@@ -217,6 +238,7 @@
 	"createAccount": "Criar Conta",
 	"delete": "Apagar",
 	"deleteConfirm": "Tem certeza de que quer apagar isso?",
+	"deleteConfirmPoll": "Tem certeza que quer terminar a enquete cedo?",
 	"devSettings": {
 		"badUser": "Habilitar o registro no console de objetos de usuário ruins que enviam informação demais:",
 		"cache": "Ativar arquivos de mapa de cache do Trabalhador de Serviços:",
@@ -246,6 +268,7 @@
 		"region": "Região: $1",
 		"title": "Gerenciar sessões"
 	},
+	"addGuild": "Adicionar uma guilda",
 	"discovery": "Descobrir",
 	"dms": "Mensagens Privadas",
 	"edit": "Editar",
@@ -254,7 +277,7 @@
 		"found": {
 			"not": "Esse emoji não é de uma das suas guildas, você deve entrar para poder usá-lo",
 			"other": "Esse emoji é de uma de suas outras guildas.",
-			"private": "A guilda para esse emoji não pôde ser encontrada",
+			"private": "A guilda desse emoji não pôde ser encontrada",
 			"this": "Este emoji é desta guilda."
 		},
 		"from": "Esse emoji é de",
@@ -266,6 +289,8 @@
 		"upload": "Enviar Emojis"
 	},
 	"emojiSelect": "Emoji:",
+	"gifProvidor": "Provedor de Gifs:",
+	"showTodayAt": "Mostre hoje às:",
 	"errorReconnect": "Impossível conectar ao servidor, tentando novamente em **$1** segundos...",
 	"favoriteGifs": "Gifs Favoritos",
 	"folder": {
@@ -280,6 +305,7 @@
 	"friends": {
 		"addfriend": "Adicionar como amigo",
 		"addfriendpromt": "Adicionar como amigo por nome de usuário:",
+		"requestsent": "Pedido enviado!",
 		"all": "Todos",
 		"all:": "Todos os amigos:",
 		"blocked": "Bloqueado(a)",
@@ -323,6 +349,8 @@
 		"banner:": "Banner:",
 		"bans": "Banimentos",
 		"boostMessage?": "Envie uma mensagem quando alguém impulsionar sua guilda!",
+		"banId": "Banir por ID",
+		"idSel": "ID:",
 		"community": "Comunidade",
 		"confirmDelete": "Tem certeza de que quer apagar $1?",
 		"confirmLeave": "Tem certeza de que quer sair?",
@@ -368,12 +396,12 @@
 		"settings": "Configurações",
 		"settingsFor": "Configurações para $1",
 		"splash": "Splash no Descobrir:",
-		"stickWelcomeReact?": "Motive membros da sua guilda a reagir com um adesivo quando alguém entra!",
+		"stickWelcomeReact?": "Motive membros da sua guilda a reagir com uma figurinha quando alguém entra!",
 		"systemSelect:": "Canal de mensagens do sistema:",
 		"tempCreatedBy": "Modelo criado por:",
-		"tempUseCount": "Modelo já foi usado $1 {{PLURAL:$1|vez|vezes}}",
-		"template": "Modelo:",
-		"templateDesc": "Descrição do Modelo:",
+		"tempUseCount": "Predefinição já foi usada $1 {{PLURAL:$1|vez|vezes}}",
+		"template": "Predefinição:",
+		"templateDesc": "Descrição da Predefinição:",
 		"templateName": "Nome do Modelo:",
 		"templateNameShort": "Nome do modelo precisa ter pelo menos 2 caracteres.",
 		"templateURL": "URL do Modelo: $1",
@@ -385,6 +413,20 @@
 		"yesDelete": "Sim, tenho certeza",
 		"yesLeave": "Sim, tenho certeza"
 	},
+	"donate": {
+		"title": "Maneiras de Doar",
+		"donate": "Doar",
+		"desc": "Ao doar ao Fermi, você ajuda a continuação desses projetos no futuro!",
+		"mdText": "[Doe hoje ao Fermi]($1)",
+		"lead": {
+			"title": "Apoie o Líder de Desenvolvimento",
+			"desc": "Apoie o líder de desenvolvimento de Harmony e Fermi. Ele fez Fermi do zero e é o mantedor líder do Harmony."
+		},
+		"host": {
+			"title": "Apoie a Host",
+			"desc": "Apoie a host da instância oficial do Harmony! Ela ajuda a guiar o projeto com liderança, e revisa muito do código introduzido à base do Harmony.\nCashApp: $1"
+		}
+	},
 	"hideBlockedMessages": "Você bloqueou este usuário, clique para esconder essas mensagens.",
 	"home": {
 		"icon": "Ícone da instância $1",
@@ -395,8 +437,10 @@
 		"addBot": "Adicionar à guilda",
 		"alreadyHave": "Já tem uma conta?",
 		"box3description": "Nós sempre apreciamos ajuda, tanto denúncias de bugs ou código, e até apontando erros gramáticos.",
+		"box4description": "Ajude a manter o Harmony, o backend que o Fermi depende para funcionar! Relate bugs, sugira funções ou ajude a escrever documentação, tudo é bem recebido!",
 		"box3title": "Contribua ao Fermi",
-		"compatableInstances": "Instâncias compatíveis com o Spacebar:",
+		"box4title": "Contribua ao Harmony",
+		"compatableInstances": "Instâncias compatíveis com o Harmony:",
 		"createAccount": "Criar conta",
 		"dobField": "Data de nascimento:",
 		"emailField": "E-mail:",
@@ -415,13 +459,13 @@
 		"userField": "Nome de usuário:",
 		"welcomeJank": "Bem-vindo(a) ao Fermi"
 	},
-	"incorrectURLS": "## Esta instância provávelmente enviou as URLs incorretas.\n### Se você for o dono da instância por favor veja [isso](https://docs.spacebar.chat/setup/server/) após *Connecting from remote machines* para corrigir o problema.\n Você gostaria que o Fermi corigisse esse problema automáticamente para permitir que conecte a instância?",
+	"incorrectURLS": "## Esta instância provávelmente enviou as URLs incorretas.\n### Se você for o dono da instância por favor veja [isso](https://docs.melodychat.org/setup/server/) após *Connecting from remote machines* para corrigir o problema.\n Você gostaria que o Fermi corigisse esse problema automáticamente para permitir que conecte a instância?",
 	"instInfo": "Informação da Instância",
 	"instanceInfo": {
 		"contact": "Escrever um e-mail para os Administradores da Instância",
 		"frontPage": "[Página Inicial]($1)",
 		"name": "Informações da Instância",
-		"publicUrl": "[URL Pública]($1)",
+		"publicUrl": "[Link público]($1)",
 		"tosPage": "[Termos de Serviço]($1)"
 	},
 	"instanceStats": {
@@ -444,6 +488,7 @@
 	"invite": {
 		"accept": "Aceitar",
 		"alreadyJoined": "Já entrou",
+		"joining": "Entrando...",
 		"channel:": "Canal:",
 		"createInvite": "Criar convite",
 		"createdAt": "Criado em $1",
@@ -481,15 +526,25 @@
 	"leaving": "Você está saindo do Spacebar",
 	"loaded": "Carregado",
 	"localuser": {
+		"security": "Segurança",
+		"advanced": "Configurações avançadas",
+		"danger": "Zona de perigo",
 		"2faCode:": "Código:",
 		"2faCodeGive": "Seu segredo é: $1 e tem 6 digitos, com um período de token de 30 segundos",
+		"2fa": "Configurações da A2F",
 		"2faDisable": "Desabilitar 2FA",
 		"2faEnable": "Habilitar 2FA",
 		"CheckUpdate": "Checar atualizações",
+		"clockFormatOverride": "Definição de formato de relógio:",
+		"clockFormatOverrideValues": {
+			"automatic": "Automático",
+			"12hour": "Use AM/PM",
+			"24hour": "Use 24 horas"
+		},
 		"PasswordsNoMatch": "As senhas não coincidem",
-		"TOSURL": "URL dos Termos de Serviço:",
+		"TOSURL": "Link dos Termos de Serviço:",
 		"VoiceWarning": "Você tem certeza que quer habilitar isto? É bem experimental e pode causar problemas. (esta função é somente para desenvolvedores, não a ative se não sabe o que está fazendo)",
-		"accentColor": "Cor de destaque:",
+		"accentColor": "Cor de destaque do tema:",
 		"accountSettings": "Configurações da conta",
 		"addBot": "Adicionar bot",
 		"addStatus": "Adicionar status",
@@ -513,7 +568,7 @@
 		"createApp": "Criar aplicativo",
 		"customSound": "Som Customizado",
 		"customStatusWarn": "Spacebar não tem suporte a status customizados no momento, então enquanto será aceito, nada será feito com ele.",
-		"deleteAccount": "Apagar conta",
+		"deleteAccount": "Remoção de conta",
 		"deleteAccountButton": "Apagar conta",
 		"description": "Descrição:",
 		"devPortal": "Portal do desenvolvedor",
@@ -522,7 +577,7 @@
 		"install": "Instalar",
 		"installDesc": "Instalar o Fermi te permite abrir ele em uma janela e que ele aja como um app próprio! Você também pode só continuar a usar o Fermi no navegador e irá funcionar do mesmo jeito.",
 		"installJank": "Instalar Fermi",
-		"language": "Língua:",
+		"language": "Idioma",
 		"manageBot": "Gerenciar bot",
 		"manageInstance": "Gerenciar instância",
 		"mustTypePhrase": "Para apagar sua conta, você deve digitar a frase.",
@@ -560,7 +615,8 @@
 		"trustedDesc": "Esses domínios não vão te perguntar por permissão ao clicá-los como outros links, só permita links que você confia.",
 		"updateSettings": "Configurações de atualização",
 		"updatesYay": "Atualizações foram encontradas!",
-		"userSettings": "Seu perfil público"
+		"userSettings": "Seu perfil público",
+		"general": "Geral"
 	},
 	"login": {
 		"allGood": "Tudo certo",
@@ -620,22 +676,27 @@
 		"timeoutTime": "Tempo de Castigo:"
 	},
 	"message": {
+		"messages": "$1 mensage{{PLURAL:$1|m|ns}} >",
 		"andMore": "$1, e mais!",
-		"attached": "Enviou um anexo",
+		"attached": "enviou um anexo",
 		"delete": "Excluir mensagem",
+		"endPoll": "Fechar enquete",
 		"report": "Denunciar mensagem",
 		"deleted": "Mensagem excluída",
 		"edit": "Editar mensagem",
 		"edited": "editado",
 		"fullMessage": "Mensagem completa:",
 		"pin": "$1 fixou uma mensagem",
+		"thread": "$1 criou a enquete: $2",
 		"reactedWith": "Reagiu com $1",
 		"reactionAdd": "Adicionar reação",
+		"createThread": "Criar tópico",
 		"threadOptions": "Opções do tópico",
 		"reactions": "Ver reações",
 		"reactionsTitle": "Reações",
 		"retry": "Reenviar mensagem com erro",
-		"viewrest": "Ver o resto"
+		"viewrest": "Ver o resto",
+		"pollRes": "A enquete $2 de $1 foi fechada."
 	},
 	"report": {
 		"back": "Voltar",
@@ -652,17 +713,17 @@
 	"no": "Não",
 	"noEmojiFont": "Usar emojis do sistema",
 	"noMessages": "Nada aqui ainda, seja o primeiro a dizer algo!",
-	"noPins": "Parece que não tem nada aqui... ainda",
-	"noStickers": "Isso é meio estranho, não tem nenhum adesivo aqui para usar!",
+	"noPins": "Parece que não tem nada pra você aqui... ainda",
+	"noStickers": "Que estranho, aqui não tem nenhuma figurinha para usar!",
 	"notiClump": "Você recebeu $1 notificações de $2",
 	"notiVolume": "Volume da notificação:",
 	"otherAt": "$1 às $2",
 	"permissions": {
 		"descriptions": {
-			"ADMINISTRATOR": "Permite todas as permissões e ultrapassa permissões específicas. Esta é uma permissão perigosa!",
-			"MANAGE_GUILD": "Permite o gerenciamento e alterações da guilda",
-			"VIEW_AUDIT_LOG": "Permite que o usuário visualize o registro",
-			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "Permite que o usuário visualize detalhes de assinatura de cargo",
+			"ADMINISTRATOR": "Permite TUDO abaixo e ultrapassa definições de permissões. Somente VOCÊ e membros/bots que você absolutamente confia devem ter essa PERIGOSA permissão!!",
+			"MANAGE_GUILD": "Permite membros do cargo gerenciarem e editarem a guilda.",
+			"VIEW_AUDIT_LOG": "Permite que membros do cargo vejam o registro de mudanças.",
+			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "Permite que membros do cargo vejam analíticos de assinatura.",
 			"VIEW_GUILD_INSIGHTS": "Permite que o usuário veja detalhes da guilda",
 			"BYPASS_SLOWMODE": "Modo lento não afetará mais este usuário",
 			"MENTION_EVERYONE": "Permite que o usuário mencione everyone",
@@ -676,8 +737,8 @@
 			"MANAGE_WEBHOOKS": "Permite que o usuário gerencie e altere webhooks",
 			"CREATE_EVENTS": "Permite a criação de eventos programados e que altere e apague esses criados pelo usuário atual.",
 			"MANAGE_EVENTS": "Permite que o usuário altere e gerencie eventos",
-			"CREATE_GUILD_EXPRESSIONS": "Permite que o usuário crie emojis, adesivos, e sons da soundboard, e alterar e apagar esses criados pelo usuário atual.",
-			"MANAGE_GUILD_EXPRESSIONS": "Permite que o usuário gerencie emojis, adesivos e a soundboard",
+			"CREATE_GUILD_EXPRESSIONS": "Permite que o usuário crie expressões (emojis, figurinhas, e sons da soundboard).",
+			"MANAGE_GUILD_EXPRESSIONS": "Permite que o usuário gerencie expressões (emojis, adesivos e a soundboard).",
 			"MODERATE_MEMBERS": "Permite que o usuário deixe outros usuários de castigo para previnir que mandem ou reajam a mensagens no chat e em tópicos, e que falem em canais de voz e canais stage",
 			"KICK_MEMBERS": "Permite que o usuário expulse membros da guilda",
 			"BAN_MEMBERS": "Permite que o usuário faça o banimento de membros da guilda",
@@ -692,7 +753,7 @@
 			"SEND_MESSAGES_IN_THREADS": "Permite que o usuário envie mensagens em tópicos",
 			"SEND_TTS_MESSAGES": "Permite que o usuário envie mensagens texto-para-fala",
 			"USE_EXTERNAL_EMOJIS": "Permite que o usuário use emojis externos",
-			"USE_EXTERNAL_STICKERS": "Permite que o usuário use adesivos externos",
+			"USE_EXTERNAL_STICKERS": "Permitir que membros do cargo usem figurinhas externas em canais de texto.",
 			"EMBED_LINKS": "Permite que links enviados por este usuário mostrem um embed",
 			"ATTACH_FILES": "Permite que o usuário anexe arquivos",
 			"SEND_VOICE_MESSAGES": "Permite que o usuário envie mensagens de voz",
@@ -709,7 +770,8 @@
 			"REQUEST_TO_SPEAK": "Permite que o usuário peça para falar em um canal stage",
 			"USE_EMBEDDED_ACTIVITIES": "Permite que o usuário use atividades embutidas",
 			"USE_APPLICATION_COMMANDS": "Permite que o usuário utilize comandos de aplicação",
-			"USE_EXTERNAL_APPS": "Permite que aplicativos instalados pelo usuário enviem respostas públicas. Quando desabilitado, usuários ainda poderão usar seus aplicativos mas as respostas serão temporárias. Isso só se aplica a aplicativos não instalados na guilda."
+			"USE_EXTERNAL_APPS": "Permite que aplicativos instalados pelo usuário enviem respostas públicas. Quando desabilitado, usuários ainda poderão usar seus aplicativos mas as respostas serão temporárias. Isso só se aplica a aplicativos não instalados na guilda.",
+			"SET_VOICE_CHANNEL_STATUS": "Definir status do canal de voz"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "Adicionar reações",
@@ -756,13 +818,14 @@
 			"USE_EXTERNAL_APPS": "Usar aplicativos externos",
 			"USE_EXTERNAL_EMOJIS": "Usar emojis externos",
 			"USE_EXTERNAL_SOUNDS": "Usar sons externos",
-			"USE_EXTERNAL_STICKERS": "Usar adesivos externos",
+			"USE_EXTERNAL_STICKERS": "Usar figurinhas externas",
 			"USE_SOUNDBOARD": "Usar soundboard",
 			"USE_VAD": "Usar detecção de atividade de voz",
 			"VIEW_AUDIT_LOG": "Ver registro",
 			"VIEW_CHANNEL": "Ver canais",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "Ver análise de monetização de criador",
-			"VIEW_GUILD_INSIGHTS": "Ver detalhes da guilda"
+			"VIEW_GUILD_INSIGHTS": "Ver detalhes da guilda",
+			"SET_VOICE_CHANNEL_STATUS": "Definir status do canal de voz"
 		}
 	},
 	"pinMessage": "Fixar mensagem",
@@ -773,7 +836,8 @@
 		"mut": "Guildas mútuas",
 		"mutFriends": "Amigos mútuos",
 		"permInfo": "Permissões",
-		"userInfo": "Informações do usuário"
+		"userInfo": "Informações do usuário",
+		"notes": "Notas do usuário"
 	},
 	"profileColor": "Cor do perfil:",
 	"pronouns": "Pronomes:",
@@ -787,7 +851,9 @@
 		"passwordError:": "Senha: $1",
 		"register": "Registrar",
 		"tos": "Você deve aceitar os Termos de Serviço",
-		"usernameError": "Nome de usuário: $1"
+		"usernameError": "Nome de usuário: $1",
+		"other": "Outra instância",
+		"instURL": "URL:"
 	},
 	"remove": "Remover",
 	"renderJoinAvatars": "Mostrar avatares de membros novos:",
@@ -818,6 +884,29 @@
 		"roleFileIcon": "Ícone do cargo:",
 		"roles": "Cargos"
 	},
+	"upload": "Enviar arquivos",
+	"makePoll": "Criar enquete",
+	"poll": {
+		"question": "Pergunta:",
+		"answers": "Respostas:",
+		"newAnswer": "Nova Resposta",
+		"duration": "Duração:",
+		"durCount": {
+			"1": "1 hora",
+			"4": "4 horas",
+			"8": "8 horas",
+			"24": "24 horas",
+			"72": "3 dias",
+			"168": "7 dias",
+			"336": "14 dias"
+		},
+		"mult": "Permitir múltiplas respostas:",
+		"expires": "Expira: $1",
+		"tie": "Foi um empate!",
+		"winningAnswer": "Resposta vencendora: $1%",
+		"view": "Ver enquete",
+		"count": "$1 {{PLURAL:$1|voto|votos}} $2%"
+	},
 	"search": {
 		"back": "Voltar",
 		"new": "Novo",
@@ -825,9 +914,16 @@
 		"nofind": "Parece ter nenhuma mensagem que bate com sua pesquisa, talvez tente deixar sua pesquisa mais ampla para encontrar o que você quer",
 		"old": "Antigo",
 		"page": "Página $1",
-		"search": "Pesquisar"
+		"search": "Pesquisar",
+		"settings": "Pesquisar Configurações",
+		"before": "Antes:",
+		"after": "Depois:",
+		"includensfw": "Incluir NSFW:",
+		"authors": "Autores:",
+		"mentions": "Menções:",
+		"channels": "Canais:"
 	},
-	"searchGifs": "Pesquisar no Tenor",
+	"searchGifs": "Pesquisar no $1",
 	"settings": {
 		"clear": "Limpar",
 		"img": "Enviar imagem",
@@ -846,16 +942,23 @@
 	"showBlockedMessages": "Você bloqueou este usuário, clique para ver $1 {{PLURAL:$1|mensagem|mensagens}} bloqueadas.",
 	"spoiler": "Spoiler",
 	"sticker": {
-		"confirmDel": "Tem certeza que quer apagar esse adesivo?",
-		"del": "Apagar adesivo",
+		"confirmDel": "Tem certeza que quer apagar essa figurinha?",
+		"del": "Apagar figurinha",
 		"desc": "Descrição",
-		"errEmjMust": "Deve incluir um emoji com seu adesivo",
-		"errFileMust": "Deve incluir uma imagem para seu adesivo",
+		"errEmjMust": "Deve incluir um emoji com sua figurinha",
+		"errFileMust": "Deve incluir uma imagem para sua figurinha",
 		"image": "Imagem:",
 		"name": "Nome:",
 		"tags": "Emoji associado:",
-		"title": "Adesivos",
-		"upload": "Enviar adesivos"
+		"title": "Figurinhas",
+		"upload": "Enviar figurinhas",
+		"found": {
+			"not": "Essa figurinha não é de suas guildas, entre na guilda dele para usá-lo",
+			"other": "Essa figurinha é de uma de suas guildas.",
+			"private": "A guilda dessa figurinha não pôde ser encontrada",
+			"this": "Esta figurinha é dessa guilda."
+		},
+		"from": "Esta figurinha é de"
 	},
 	"submit": "Enviar",
 	"switchAccounts": "Trocar contas",
@@ -865,8 +968,19 @@
 		"traces": "$1 ($2ms) $3"
 	},
 	"typing": "$2 {{PLURAL:$1|está|estão}} digitando",
-	"unableToConnect": "Impossível conectar ao servidor Spacebar. Por favor tente sair e entrar novamente.",
+	"unableToConnect": "Impossível conectar ao servidor Harmony. Por favor tente sair e entrar novamente.",
 	"unableToPin": "Não foi possível fixar a mensagem",
+	"sbWarns": {
+		"regi": "Instâncias do Spacebar não são mais oficialmente suportadas pelo Fermi, enquanto provavelmente funcionarão, Harmony é recomendado. Continuar?",
+		"in": "Instâncias do Spacebar não são mais oficialmente suportadas pelo Fermi, enquanto provavelmente funcionarão, Harmony é recomendado. Essa mensagem só aparecerá uma vez."
+	},
+	"connections": {
+		"since": "Membro desde: $1",
+		"display": "Exibir no perfil:",
+		"delete": "Apagar Conexão",
+		"sure": "Tem certeza?",
+		"sureDesc": "Se apagar essa conexão, não poderá desfazer"
+	},
 	"unpinMessage": "Desfixar essa mensagem",
 	"updateAv": "Atualizações Disponíveis",
 	"uploadBanner": "Enviar banner:",
@@ -877,6 +991,7 @@
 	"usedFermi": "Usou Fermi",
 	"user": {
 		"report": "Denunciar usuário",
+		"deleted": "Usuário deletado",
 		"reportApp": "Denunciar aplicativo",
 		"addRole": "Adicionar cargos",
 		"ban": "Banir membro",
@@ -906,11 +1021,23 @@
 		"timeout": "Castigar membro",
 		"unTimeout": "Remover Castigo do membro",
 		"unban": "Desbanir $1",
-		"unblock": "Desbloquear usuário"
+		"unblock": "Desbloquear usuário",
+		"viewProfile": "Ver perfil"
 	},
 	"userping": {
 		"resolving": "Resolvendo usuário",
 		"unknown": "@Desconhecido"
+	},
+	"keyboard": {
+		"shortcuts": "Atalhos",
+		"empty": "<Nenhuma tecla definida>",
+		"descs": {
+			"gifSearch": "Procurar GIFs:"
+		}
+	},
+	"domain": {
+		"title": "Verificar domínio",
+		"domain": "Domínio:"
 	},
 	"vc": {
 		"joinForStream": "Entre no canal para assistir",
@@ -925,9 +1052,11 @@
 		"manage": "Gerenciar chaves de segurança"
 	},
 	"webhook": "WEBHOOK",
+	"copyCode": "Copiar código",
 	"webhooks": {
 		"EnterWebhookName": "Digite o nome do Webhook",
 		"areYouSureDelete": "Tem certeza de que quer apagar $1?",
+		"areYouSureDeleteHead": "Apagar $1?",
 		"avatar": "Avatar",
 		"base": "Webhooks",
 		"channel": "Canal",
