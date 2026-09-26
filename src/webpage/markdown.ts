@@ -74,6 +74,7 @@ class MarkDown {
 		return this.markdown(this.txt, {keep, stdsize});
 	}
 	markdown(text: string | string[], {keep = false, stdsize = false} = {}) {
+		debugger;
 		if (!keep && !stdsize) {
 			let str: string;
 			if (text instanceof Array) {
@@ -109,7 +110,7 @@ class MarkDown {
 				});
 				if (!invalid) {
 					for (const match of map) {
-						if (match.length > 10) {
+						if (match.length > 10 && match.startsWith("<")) {
 							const parts = match.match(/^<(a)?:\w+:(\d{10,30})>$/);
 							if (parts && parts[2]) {
 								const owner = this.channel ? this.channel.guild : this.localuser;
