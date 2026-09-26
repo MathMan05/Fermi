@@ -1460,7 +1460,7 @@ function saveCaretPosition(
 		len = Math.min(len, txtLengthFunc(context).length);
 		len += offset;
 
-		return function restore(_backspace = false) {
+		return function restore(backspace = false) {
 			if (!selection) return;
 			const pos = getTextNodeAtPosition(context, len, txtLengthFunc);
 			if (
@@ -1480,6 +1480,10 @@ function saveCaretPosition(
 			const range = new Range();
 			range.setStart(pos.node, pos.position);
 			selection.addRange(range);
+
+			if(!backspace && !TypeBox.box.textContent){
+				TypeBox.box.blur();
+			}
 		};
 	} catch {
 		return undefined;
