@@ -7,6 +7,8 @@ import {Dialog} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
 import {highlight} from "./highlighter/index.js";
 import {TypeBox} from "./typeBox.js";
+import {mobile} from "./utils/utils";
+
 const linkMenu = new Contextmenu<string, void>("copyLink", true);
 linkMenu.addButton(
 	() => I18n.copyRegLink(),
@@ -1481,7 +1483,7 @@ function saveCaretPosition(
 			range.setStart(pos.node, pos.position);
 			selection.addRange(range);
 
-			if(!backspace && !TypeBox.box.textContent){
+			if(mobile && !backspace && !TypeBox.box.textContent){
 				TypeBox.box.blur();
 			}
 		};
