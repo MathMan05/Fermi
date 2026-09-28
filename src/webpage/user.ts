@@ -1179,6 +1179,8 @@ class User extends SnowFlake {
 			case "github": {
 				return `https://github.com/${con.name}`;
 			}
+			case "mastodon":
+				return con.external_id;
 		}
 	}
 	note?: string;

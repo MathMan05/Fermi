@@ -180,40 +180,52 @@ export async function showusersettings(localuser: Localuser) {
 					);
 					const serverConnections = Object.keys(json).sort((key) => (json[key].enabled ? -1 : 1));
 
-					serverConnections
-						.filter((_) => !actConMap.has(_))
-						.forEach((key) => {
-							if (key === "domain") return;
-							const connection = json[key];
+					serverConnections.forEach((key) => {
+						if (key === "domain") return;
+						const connection = json[key];
 
-							const container = document.createElement("div");
-							if (connection.icon_url) {
-								const span = document.createElement("span");
-								span.classList.add("conImg", "svgicon");
-								span.style.setProperty("mask", `url("${connection.icon_url}")`);
-								//span.alt = key;
-								container.append(span);
-							} else {
-								container.textContent = key.charAt(0).toUpperCase() + key.slice(1);
-							}
+						const container = document.createElement("div");
+						if (connection.icon_url) {
+							const span = document.createElement("span");
+							span.classList.add("conImg", "svgicon");
+							span.style.setProperty("mask", `url("${connection.icon_url}")`);
+							//span.alt = key;
+							container.append(span);
+						} else {
+							container.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+						}
 
-							if (connection.enabled) {
-								container.addEventListener("click", async () => {
-									const connectionRes = await fetch(
-										localuser.info.api + "/connections/" + key + "/authorize",
-										{
-											headers: localuser.headers,
-										},
-									);
-									const connectionJSON = await connectionRes.json();
-									window.open(connectionJSON.url, "_blank", "noopener noreferrer");
-								});
-							} else {
-								container.classList.add("disabled");
-							}
+						if (connection.enabled) {
+							container.addEventListener("click", async () => {
+								let end = "";
+								if (key === "mastodon") {
+									const {promise, resolve} = Promise.withResolvers<string>();
+									const d = new Dialog(I18n.connections.mastodon());
+									const f = d.options.addForm("", (_) => {
+										const o = _ as {handle: string};
+										resolve(`?handle=${o.handle}`);
+										d.hide();
+									});
+									f.addMDText(new MarkDown(I18n.connections.mastodonSub()));
+									f.addTextInput(I18n.connections.handle(), "handle");
+									d.show();
+									end = await promise;
+								}
+								const connectionRes = await fetch(
+									localuser.info.api + "/connections/" + key + "/authorize" + end,
+									{
+										headers: localuser.headers,
+									},
+								);
+								const connectionJSON = await connectionRes.json();
+								window.open(connectionJSON.url, "_blank", "noopener noreferrer");
+							});
+						} else {
+							container.classList.add("disabled");
+						}
 
-							connectionContainer.appendChild(container);
-						});
+						connectionContainer.appendChild(container);
+					});
 
 					const container = document.createElement("div");
 
@@ -265,13 +277,20 @@ export async function showusersettings(localuser: Localuser) {
 							input.type = "checkbox";
 							input.checked = !!con.visibility;
 							input.onchange = () => {
-								fetch(localuser.info.api + "/users/@me/connections/" + con.type + "/" + con.id, {
-									method: "PATCH",
-									body: JSON.stringify({
-										visibility: input.checked,
-									}),
-									headers: localuser.headers,
-								});
+								fetch(
+									localuser.info.api +
+										"/users/@me/connections/" +
+										con.type +
+										"/" +
+										encodeURIComponent(con.id),
+									{
+										method: "PATCH",
+										body: JSON.stringify({
+											visibility: input.checked,
+										}),
+										headers: localuser.headers,
+									},
+								);
 							};
 
 							const dispRow = document.createElement("div");
@@ -291,7 +310,11 @@ export async function showusersettings(localuser: Localuser) {
 								const row = d.options.addOptions("", {ltr: true});
 								row.addButtonInput("", I18n.yes(), async () => {
 									await fetch(
-										localuser.info.api + "/users/@me/connections/" + con.type + "/" + con.id,
+										localuser.info.api +
+											"/users/@me/connections/" +
+											con.type +
+											"/" +
+											encodeURIComponent(con.id),
 										{
 											method: "DELETE",
 											headers: localuser.headers,
