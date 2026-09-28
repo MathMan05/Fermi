@@ -18,6 +18,7 @@ import "./audio/page.js";
 import "./404.js";
 import type * as C from "./typeChecker/chekerIndex.js";
 import {TypeBox} from "./typeBox.js";
+import {showusersettings} from "./mainSettings.js";
 
 if (window.location.pathname === "/app") {
 	window.location.pathname = "/channels/@me";
@@ -192,7 +193,7 @@ if (window.location.pathname.startsWith("/channels")) {
 	await setTheme();
 
 	function userSettings(): void {
-		thisUser?.showusersettings();
+		if (thisUser) showusersettings(thisUser);
 	}
 
 	(document.getElementById("settings") as HTMLImageElement).onclick = userSettings;

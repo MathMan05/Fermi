@@ -74,7 +74,6 @@ class MarkDown {
 		return this.markdown(this.txt, {keep, stdsize});
 	}
 	markdown(text: string | string[], {keep = false, stdsize = false} = {}) {
-		debugger;
 		if (!keep && !stdsize) {
 			let str: string;
 			if (text instanceof Array) {
