@@ -8,6 +8,7 @@
 		]
 	},
 	"2faCode": "雙因素驗證代碼：",
+	"donateMessage": "Fermi 依靠大家的捐款來維持運作，歡迎您做出捐款！任何捐款都有幫助！",
 	"404": {
 		"404": "錯誤代號：404--找不到頁面",
 		"app": "前往應用程式",
@@ -21,6 +22,13 @@
 		"whatelse": "您認為應該還會發生什麼事？",
 		"whereever": "無論這在哪裡"
 	},
+	"nomics": "找不到麥克風",
+	"filesize": {
+		"B": "B",
+		"KB": "KB",
+		"MB": "MB",
+		"GB": "GB"
+	},
 	"onboarding": {
 		"name": "入門",
 		"disable": "停用入門功能",
@@ -31,9 +39,11 @@
 		"enable": "啟用入門功能",
 		"title": "歡迎來到$1！"
 	},
+	"copyMedia": "複製媒體 URL",
 	"DMs": {
 		"add": "將某人添加到此私訊",
 		"close": "關閉私訊",
+		"copyURL": "複製私訊 URL",
 		"copyId": "複製私訊 ID",
 		"markRead": "標記為已讀",
 		"name": "私訊"
@@ -70,6 +80,8 @@
 		"animations": "動態",
 		"playGif": "播放GIF動圖：",
 		"playIcon": "播放動態圖示：",
+		"playEmoji": "播放動態表情符號：",
+		"playSticker": "播放動態貼圖：",
 		"roleColors": "停用角色顏色：",
 		"gradientColors": "停用漸層色彩：",
 		"decorations": "啟用頭像裝飾："
@@ -111,6 +123,9 @@
 	},
 	"bio": "個人簡介：",
 	"blankMessage": "空白訊息",
+	"sentAttachment": "已發送一個附件",
+	"sentPoll": "已發送一個投票",
+	"sentSticker": "已發送一張貼圖",
 	"blog": {
 		"blog": "部落格",
 		"blogUpdates": "當您開啟應用程式時取得部落格更新：",
@@ -125,6 +140,7 @@
 	"cancel": "取消",
 	"channel": {
 		"SlowmodeCool": "慢速模式冷卻時間：$1",
+		"copyURL": "複製頻道 URL",
 		"TimeOutCool": "超時至：$1",
 		"allowIcons": "允許自訂頻道圖示",
 		"announcement": "公告",
@@ -152,13 +168,15 @@
 		"text": "文字",
 		"timedOutUntil": "逾時至：$1",
 		"topic:": "主題：",
-		"typebox": "在$1的訊息",
+		"typebox": "在 #$1 的訊息",
 		"unmute": "取消噤聲頻道",
 		"voice": "語音",
 		"deleteThread": "刪除討論串",
 		"hideThreads": "不活躍後隱藏",
-		"forum": "論壇"
+		"forum": "論壇",
+		"addChannel": "新增頻道"
 	},
+	"charLeft": "您還剩下 $1 個{{PLURAL:$1|字元}}",
 	"threads": {
 		"leave": "離開討論串",
 		"join": "加入討論串",
@@ -247,6 +265,7 @@
 		"region": "地區：$1",
 		"title": "管理連線階段"
 	},
+	"addGuild": "新增公會",
 	"discovery": "探索",
 	"dms": "私訊",
 	"edit": "編輯",
@@ -268,6 +287,7 @@
 	},
 	"emojiSelect": "表情符號：",
 	"gifProvidor": "Gif 提供者：",
+	"showTodayAt": "顯示今日於：",
 	"errorReconnect": "無法連接到伺服器，將在 **$1** 秒後重試…",
 	"favoriteGifs": "收藏的 Gif 圖檔",
 	"folder": {
@@ -465,6 +485,7 @@
 	"invite": {
 		"accept": "接受",
 		"alreadyJoined": "已加入",
+		"joining": "正在加入…",
 		"channel:": "頻道：",
 		"createInvite": "建立邀請",
 		"createdAt": "建立於 $1",
@@ -511,6 +532,12 @@
 		"2faDisable": "停用雙因素驗證",
 		"2faEnable": "啟用雙因素驗證",
 		"CheckUpdate": "檢查更新",
+		"clockFormatOverride": "時鐘格式覆寫：",
+		"clockFormatOverrideValues": {
+			"automatic": "自動",
+			"12hour": "使用 AM/PM",
+			"24hour": "使用 24 小時"
+		},
 		"PasswordsNoMatch": "密碼不符合",
 		"TOSURL": "服務條款的連結：",
 		"VoiceWarning": "您確定要啟用這個功能嗎？這是非常實驗性的，可能會引發問題。（此功能僅供開發者使用，如果您不確定操作，請不要啟用。）",
@@ -740,7 +767,8 @@
 			"REQUEST_TO_SPEAK": "允許角色成員請求在表演頻道中發言。",
 			"USE_EMBEDDED_ACTIVITIES": "允許角色成員使用內嵌活動。",
 			"USE_APPLICATION_COMMANDS": "允許角色成員使用應用程式指令。",
-			"USE_EXTERNAL_APPS": "允許角色成員將應用程式回應公開顯示於頻道中（當此功能關閉時，使用者仍可使用其應用程式，但回應僅對自身可見。此設定僅適用於未同時安裝至公會的應用程式）。"
+			"USE_EXTERNAL_APPS": "允許角色成員將應用程式回應公開顯示於頻道中（當此功能關閉時，使用者仍可使用其應用程式，但回應僅對自身可見。此設定僅適用於未同時安裝至公會的應用程式）。",
+			"SET_VOICE_CHANNEL_STATUS": "設定語音頻道狀態"
 		},
 		"readableNames": {
 			"ADD_REACTIONS": "增加反應",
@@ -793,7 +821,8 @@
 			"VIEW_AUDIT_LOG": "查看稽核日誌",
 			"VIEW_CHANNEL": "查看頻道",
 			"VIEW_CREATOR_MONETIZATION_ANALYTICS": "查看建立者變現分析",
-			"VIEW_GUILD_INSIGHTS": "查看公會洞見"
+			"VIEW_GUILD_INSIGHTS": "查看公會洞見",
+			"SET_VOICE_CHANNEL_STATUS": "設定語音頻道狀態"
 		}
 	},
 	"pinMessage": "置頂訊息",
@@ -801,12 +830,13 @@
 		"bio": "關於我：",
 		"joined": "已建立帳號：$1",
 		"joinedMember": "已加入$1：$2",
-		"mut": "共同公會",
+		"mut": "共同公會（$1）",
 		"mutFriends": "共同好友",
 		"permInfo": "權限",
 		"userInfo": "使用者資訊",
 		"notes": "使用者備註"
 	},
+	"messageNotLoad": "訊息載入失敗",
 	"profileColor": "個人檔案色彩",
 	"pronouns": "稱謂：",
 	"readableName": "繁體中文",
@@ -920,7 +950,14 @@
 		"name": "名稱：",
 		"tags": "相關表情符號：",
 		"title": "貼圖",
-		"upload": "上傳貼圖"
+		"upload": "上傳貼圖",
+		"found": {
+			"not": "此貼圖不是來自於您的公會，請加入管理該貼圖的公會來使用。",
+			"other": "此貼圖來自您的另一個公會。",
+			"private": "找不到此貼圖的公會",
+			"this": "這張貼紙來自此公會。"
+		},
+		"from": "這張貼圖來自"
 	},
 	"submit": "提交",
 	"switchAccounts": "切換帳號 ⇌",
@@ -990,6 +1027,21 @@
 		"resolving": "解析使用者",
 		"unknown": "@不明使用者"
 	},
+	"editMode": {
+		"editMsg": "按 esc 以$1取消$1，按 enter 以$2提交$2"
+	},
+	"keyboard": {
+		"shortcuts": "快捷鍵",
+		"empty": "<未設定按鍵綁定>",
+		"descs": {
+			"gifSearch": "搜尋 GIF："
+		}
+	},
+	"domain": {
+		"title": "驗證網域",
+		"domain": "網域：",
+		"dnsinst": "1. 登入您的 DNS 提供者\n\n2. 建立以下 DNS 紀錄：\n\n名稱：\n```\n_harmony.$1\n```\n\n類型：\n```\nTXT\n```\n\n內容：\n```\n$2\n```\n\n-# DNS 傳播可能需要幾分鐘時間"
+	},
 	"vc": {
 		"joinForStream": "加入語音頻道來觀看",
 		"joiningStream": "正在加入直播…",
@@ -1003,9 +1055,11 @@
 		"manage": "管理安全金鑰"
 	},
 	"webhook": "WEBHOOK",
+	"copyCode": "複製代碼",
 	"webhooks": {
 		"EnterWebhookName": "輸入 Webhook 名稱",
 		"areYouSureDelete": "您確定要刪除$1嗎？",
+		"areYouSureDeleteHead": "刪除$1？",
 		"avatar": "頭像",
 		"base": "Webhook",
 		"channel": "Webhook 輸出到頻道：",
