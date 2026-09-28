@@ -8,7 +8,7 @@
 		]
 	},
 	"2faCode": "2FA-code:",
-	"donateMessage": "Doneer vandaag nog aan Fermi!",
+	"donateMessage": "Fermi is afhankelijk van donaties. Overweeg alstublieft een donatie! Elk bedrag is welkom!",
 	"404": {
 		"404": "fout:404 - Pagina niet gevonden",
 		"app": "Naar de app",
@@ -84,7 +84,7 @@
 		"playSticker": "Geanimeerde stickers afspelen:",
 		"roleColors": "Rolkleuren uitschakelen:",
 		"gradientColors": "Kleurverloop uitschakelen:",
-		"decorations": "Avatarversieringen inschakelen:"
+		"decorations": "Profielafbeeldingsversieringen inschakelen:"
 	},
 	"accountNotStart": "Account kan niet worden gestart",
 	"add": "Toevoegen",
@@ -550,7 +550,7 @@
 		"areYouSureDelete": "Weet u zeker dat u uw account wilt verwijderen? Zo ja, voer dan de zin $1 in.",
 		"badCode": "Onjuiste code",
 		"badPassword": "Onjuist wachtwoord",
-		"botAvatar": "Robot-avatar:",
+		"botAvatar": "Robotprofielafbeelding:",
 		"botInviteCreate": "Robot-uitnodigingsmaker",
 		"botUsername": "Robot-gebruikersnaam:",
 		"changeDiscriminator": "Discriminator wijzigen",
@@ -1060,7 +1060,7 @@
 		"EnterWebhookName": "Voer de webhook-naam in",
 		"areYouSureDelete": "Weet u zeker dat u $1 wilt verwijderen?",
 		"areYouSureDeleteHead": "$1 verwijderen?",
-		"avatar": "Avatar",
+		"avatar": "Profielafbeelding",
 		"base": "Webhooks",
 		"channel": "Webhook-uitvoer naar kanaal:",
 		"copyURL": "Webhook-koppeling kopiëren",
