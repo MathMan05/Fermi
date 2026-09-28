@@ -1933,10 +1933,10 @@ class Guild extends SnowFlake {
 	async loadChannel(ID?: string | undefined | null, addstate = true, message?: string) {
 		if (ID) {
 			const channel = this.localuser.channels.get(ID);
-			if (channel) {
+			if (channel && channel.type !== 4) {
 				await channel.getHTML(addstate, undefined, message);
 				return;
-			} else {
+			} else if (channel?.type !== 4) {
 				await this.goToThread(ID);
 				return;
 			}
@@ -2108,7 +2108,7 @@ class Guild extends SnowFlake {
 			body: JSON.stringify({name, type}),
 		})
 			.then((_) => _.json())
-			.then((_) => this.goToChannelDelay(_.id));
+			.then((_) => type !== 4 && this.goToChannelDelay(_.id));
 	}
 	async createRole(name: string) {
 		const fetched = await fetch(this.info.api + "/guilds/" + this.id + "roles", {

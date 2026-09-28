@@ -2589,6 +2589,7 @@ class Channel extends SnowFlake {
 		this.forumSearch("", theadList);
 	}
 	async getHTML(addstate = true, getMessages: boolean | void = undefined, aroundMessage?: string) {
+		if (this.type === 4) return;
 		if (!this.visible) {
 			this.guild.loadChannel();
 			return;
