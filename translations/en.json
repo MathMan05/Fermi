@@ -318,7 +318,7 @@
 	},
 	"goThere": "Yes, let's go",
 	"goThereTrust": "Yes & trust this domain from now on",
-	"goingToURL": "This hyperlink will send you to $1. Are you sure you want to go there?",
+	"goingToURL": "This hyperlink will send you to $1 in a new tab. Are you sure you want to go there?",
 	"group": {
 		"createdm": "Create DM!",
 		"edit": "Edit group chat",
