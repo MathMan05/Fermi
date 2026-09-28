@@ -354,6 +354,7 @@ class Localuser {
 			pop.show();
 		} else if (bstate) {
 			const post = (await this.getPosts()).items[0];
+			this.perminfo.localuser ??= {};
 			if (this.perminfo.localuser.mostRecent !== post.url) {
 				this.perminfo.localuser.mostRecent = post.url;
 				const pop = new Dialog(post.title);
@@ -1224,6 +1225,7 @@ class Localuser {
 		});
 		if (!device) return;
 		await this.voiceFactory?.currentVoice?.giveMicTrack(device);
+		this.perminfo.localuser ??= {};
 		this.perminfo.localuser.defaultAudio = id;
 	}
 	getDefaultAudio() {
@@ -1233,6 +1235,7 @@ class Localuser {
 		if (!this.voiceFactory) return;
 		if (!this.ws) return;
 		const v = this.voiceFactory.joinVoice(channel.id, channel.guild.id, this.mute);
+		this.perminfo.localuser ??= {};
 		if (this.perminfo.localuser.defaultAudio) {
 			const devices = await this.getAudioDeviceList();
 			const d = devices.find((_) => _.deviceId === this.perminfo.localuser.defaultAudio);
