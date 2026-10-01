@@ -18,7 +18,6 @@ import {
 	startTypingjson,
 	wsjson,
 	pollUpdateJson,
-	applicationJson,
 } from "./jsontypes.js";
 import {Member} from "./member.js";
 import {Dialog, Form, FormError, Options} from "./settings.js";
