@@ -18,6 +18,7 @@ import {
 	startTypingjson,
 	wsjson,
 	pollUpdateJson,
+	applicationJson,
 } from "./jsontypes.js";
 import {Member} from "./member.js";
 import {Dialog, Form, FormError, Options} from "./settings.js";
@@ -2626,7 +2627,6 @@ class Localuser {
 			headers: this.headers,
 		});
 		const json = await res.json();
-		console.error(json);
 		const form = container.addSubForm(json.name, () => {}, {
 			fetchURL: this.info.api + "/applications/" + appId,
 			method: "PATCH",
@@ -2669,6 +2669,16 @@ class Localuser {
 		});
 		form.addCheckboxInput(I18n.localuser.requireCode(), "bot_require_code_grant", {
 			initState: json.bot_require_code_grant,
+		});
+		//TODO remove this conditional once https://codeberg.org/MelodyChat/Harmony/pulls/278 is merged
+		if (false as boolean)
+			form.addMDInput(I18n.localuser.redirURIs(), "redirect_uris", {
+				initText: json.redirect_uris.join("\n"),
+			});
+		form.addPreprocessor((_) => {
+			if ("redirect_uris" in _ && typeof _.redirect_uris === "string") {
+				_.redirect_uris = _.redirect_uris.split("\n");
+			}
 		});
 		form.addButtonInput("", I18n.localuser[json.bot ? "manageBot" : "addBot"](), async () => {
 			if (!json.bot) {

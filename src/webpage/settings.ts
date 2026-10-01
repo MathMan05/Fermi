@@ -2353,7 +2353,7 @@ class Form implements OptionsElement<object> {
 		}
 	}
 	preprocessor: (obj: Object) => void = () => {};
-	addPreprocessor(func: (obj: Object) => void) {
+	addPreprocessor(func: (obj: object) => void) {
 		this.preprocessor = func;
 	}
 	onFormError = (_: FormError) => {};

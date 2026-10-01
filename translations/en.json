@@ -593,6 +593,7 @@
 		"publicAvaliable": "Make bot publicly inviteable?",
 		"refreshPage": "Refresh to apply",
 		"requireCode": "Require code grant to invite the bot?",
+		"redirURIs": "Redirect URIs:",
 		"resetToken": "Reset token",
 		"saveToken": "Save token to local storage",
 		"setUp2fa": "2FA Setup",
