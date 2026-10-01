@@ -176,16 +176,25 @@ class TextInput implements OptionsElement<string> {
 	spaceReplace: string;
 	name: string;
 	charLimit: number;
+	onEnter?: () => void;
 	constructor(
 		label: string,
 		onSubmit: (str: string) => void,
 		owner: Options,
-		{initText = "", password = false, spaceReplace = " ", name = "", charLimit = -1} = {},
+		{
+			initText = "",
+			password = false,
+			spaceReplace = " ",
+			name = "",
+			charLimit = -1,
+			onEnter = undefined as (() => void) | undefined,
+		} = {},
 	) {
 		this.label = label;
 		this.value = initText;
 		this.owner = owner;
 		this.onSubmit = onSubmit;
+		this.onEnter = onEnter;
 		this.password = password;
 		this.spaceReplace = spaceReplace;
 		this.name = name;
@@ -202,7 +211,7 @@ class TextInput implements OptionsElement<string> {
 		input.type = this.password ? "password" : "text";
 		input.oninput = this.onChange.bind(this);
 		let hintText: undefined | HTMLElement;
-		input.onkeyup = () => {
+		input.onkeyup = (e) => {
 			let textValue = input.value;
 			textValue = textValue.replace(/ /g, this.spaceReplace);
 			input.value = textValue;
@@ -218,6 +227,9 @@ class TextInput implements OptionsElement<string> {
 				} else if (hintText) {
 					hintText.remove();
 				}
+			}
+			if (e.key === "Enter") {
+				this.onEnter?.();
 			}
 		};
 		this.input = new WeakRef(input);
@@ -1602,7 +1614,14 @@ class Options implements OptionsElement<void> {
 	addTextInput(
 		label: string,
 		onSubmit: (str: string) => void,
-		{initText = "", password = false, spaceReplace = " ", name = "", charLimit = -1} = {},
+		{
+			initText = "",
+			password = false,
+			spaceReplace = " ",
+			name = "",
+			charLimit = -1,
+			onEnter = undefined as void | (() => void),
+		} = {},
 	) {
 		const textInput = new TextInput(label, onSubmit, this, {
 			initText,
@@ -1610,6 +1629,7 @@ class Options implements OptionsElement<void> {
 			spaceReplace,
 			name,
 			charLimit,
+			onEnter,
 		});
 		this.options.push(textInput);
 		this.generate(textInput);
@@ -2246,6 +2266,7 @@ class Form implements OptionsElement<object> {
 			password,
 			spaceReplace,
 			name,
+			onEnter: () => this.submit(),
 		});
 		this.names.set(formName, textInput);
 		if (required) {
