@@ -328,7 +328,7 @@
 	},
 	"goThere": "是的，去吧",
 	"goThereTrust": "确认并自此确信该域名",
-	"goingToURL": "该超链接将会使您跳转至$1。您确定要去那里吗？",
+	"goingToURL": "此超链接将会在新标签页送您到$1。您确定要去那里吗？",
 	"group": {
 		"createdm": "创建私信！",
 		"edit": "编辑群聊",
@@ -986,7 +986,10 @@
 		"display": "个人资料页面显示：",
 		"delete": "删除连接",
 		"sure": "您确定吗？",
-		"sureDesc": "如果断开此连接，则无法撤销。"
+		"sureDesc": "如果断开此连接，则无法撤销。",
+		"handle": "处理：",
+		"mastodon": "输入 Mastodon 账号信息",
+		"mastodonSub": "-# 这与诸如 wahrn 的非 Mastodon 服务兼容"
 	},
 	"unpinMessage": "取消置顶消息",
 	"updateAv": "可用更新",

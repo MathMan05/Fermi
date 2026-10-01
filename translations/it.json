@@ -284,7 +284,7 @@
 	},
 	"goThere": "Sì, andiamo",
 	"goThereTrust": "Sì e fidati di questo dominio da ora in poi",
-	"goingToURL": "Questo collegamento ipertestuale ti indirizzerà a $1. Sei sicuro di voler continuare?",
+	"goingToURL": "Questo collegamento ipertestuale ti indirizzerà a $1 in una nuova scheda. Sei sicuro di voler continuare?",
 	"group": {
 		"createdm": "Crea DM!",
 		"edit": "Modifica chat di gruppo",

@@ -320,7 +320,7 @@
 	},
 	"goThere": "Laten we gaan",
 	"goThereTrust": "Ja, en vertrouw dit domein vanaf nu",
-	"goingToURL": "Deze hyperlink brengt u naar $1. Weet u zeker dat u daarheen wilt gaan?",
+	"goingToURL": "Deze hyperlink brengt u naar $1 in een nieuw tabblad. Weet u zeker dat u daarheen wilt gaan?",
 	"group": {
 		"createdm": "DM maken!",
 		"edit": "Groepschat bewerken",
@@ -978,7 +978,10 @@
 		"display": "Weergeven op profiel:",
 		"delete": "Verbinding verwijderen",
 		"sure": "Weet u het zeker?",
-		"sureDesc": "Als u deze verbinding verbreekt, kunt u dat niet meer ongedaan maken."
+		"sureDesc": "Als u deze verbinding verbreekt, kunt u dat niet meer ongedaan maken.",
+		"handle": "Verwijzing:",
+		"mastodon": "Voer de Mastodon-accountgegevens in",
+		"mastodonSub": "-# Dit is compatibel met niet-Mastodon-diensten zoals Wafrn"
 	},
 	"unpinMessage": "Bericht losmaken",
 	"updateAv": "Updates beschikbaar",
