@@ -15,7 +15,7 @@ import {
 	setPreferences,
 	ThemeOption,
 } from "./utils/storage/userPreferences";
-import {createImg, getapiurls, installPGet, setTheme, SW} from "./utils/utils";
+import {createImg, getapiurls, installPGet, saveFile, setTheme, SW} from "./utils/utils";
 
 export async function showusersettings(localuser: Localuser) {
 	const prefs = getPreferences();
@@ -840,8 +840,14 @@ export async function showusersettings(localuser: Localuser) {
 										break;
 								}
 							} else {
-								gen2FA();
+								const codes = _.backup_codes as {
+									user_id: string;
+									code: string;
+									consumed: boolean;
+								}[];
+								saveFile(new TextEncoder().encode(JSON.stringify(codes)).buffer, "codes.backup");
 								localuser.mfa_enabled = true;
+								gen2FA();
 								twofa.returnFromSub();
 							}
 						},

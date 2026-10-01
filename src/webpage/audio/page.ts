@@ -1,5 +1,5 @@
 import {BinWrite} from "../utils/binaryUtils.js";
-import {setTheme} from "../utils/utils.js";
+import {saveFile, setTheme} from "../utils/utils.js";
 import {Play} from "./play.js";
 if (window.location.pathname.startsWith("/audio")) {
 	await setTheme();
@@ -179,14 +179,7 @@ if(zip){
 	const download = document.getElementById("download");
 	if (download) {
 		download.onclick = () => {
-			const blob = new Blob([buff], {type: "binary"});
-			const downloadUrl = URL.createObjectURL(blob);
-			const a = document.createElement("a");
-			a.href = downloadUrl;
-			a.download = "sounds.jasf";
-			document.body.appendChild(a);
-			a.click();
-			URL.revokeObjectURL(downloadUrl);
+			saveFile(buff, "sounds.jasf");
 		};
 	}
 }

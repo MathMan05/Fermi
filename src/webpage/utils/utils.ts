@@ -1012,3 +1012,13 @@ export function getInstances() {
 export function getStringURLMapPair() {
 	return [stringURLMap, stringURLsMap] as const;
 }
+export async function saveFile(buff: ArrayBuffer, name: string) {
+	const blob = new Blob([buff], {type: "binary"});
+	const downloadUrl = URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	a.href = downloadUrl;
+	a.download = name;
+	document.body.appendChild(a);
+	a.click();
+	URL.revokeObjectURL(downloadUrl);
+}
