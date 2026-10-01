@@ -1620,7 +1620,7 @@ class Options implements OptionsElement<void> {
 			spaceReplace = " ",
 			name = "",
 			charLimit = -1,
-			onEnter = undefined as void | (() => void),
+			onEnter = undefined as undefined | (() => void),
 		} = {},
 	) {
 		const textInput = new TextInput(label, onSubmit, this, {
