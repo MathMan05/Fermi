@@ -320,7 +320,7 @@
 	},
 	"goThere": "好的，去吧",
 	"goThereTrust": "確認並從此信任該網域",
-	"goingToURL": "此超連結將會送你到$1。您確定要去那裡嗎？",
+	"goingToURL": "此超連結將會在新分頁送您到$1。您確定要去那裡嗎？",
 	"group": {
 		"createdm": "建立私訊！",
 		"edit": "編輯群組聊天",
@@ -978,7 +978,10 @@
 		"display": "顯示在個人資料：",
 		"delete": "刪除連接",
 		"sure": "您確定嗎？",
-		"sureDesc": "如果您移除此連接，則無法還原。"
+		"sureDesc": "如果您移除此連接，則無法還原。",
+		"handle": "處理：",
+		"mastodon": "輸入 Mastodon 帳號資訊",
+		"mastodonSub": "# 這類似 wafrn 不相容 Mastodon 服務"
 	},
 	"unpinMessage": "取消置頂訊息",
 	"updateAv": "有更新可用",
