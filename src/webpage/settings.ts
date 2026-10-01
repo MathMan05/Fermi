@@ -2266,7 +2266,7 @@ class Form implements OptionsElement<object> {
 			password,
 			spaceReplace,
 			name,
-			onEnter: () => this.submit(),
+			onEnter: this.traditionalSubmit ? undefined : () => this.submit(),
 		});
 		this.names.set(formName, textInput);
 		if (required) {
