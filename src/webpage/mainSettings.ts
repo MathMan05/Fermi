@@ -869,15 +869,15 @@ export async function showusersettings(localuser: Localuser) {
 			{
 				twofa.addSubButtonInput(I18n.webauth.manage(), (keyMenu) => {
 					const addKey = (key: {name: string; id: string}) => {
-						keyMenu.addButtonInput("", key.name, () => {
+						const b = keyMenu.addButtonInput("", key.name, () => {
 							const opt = keyMenu.addSubOptions(key.name);
-							const button = opt.addButtonInput("", I18n.delete(), async () => {
+							opt.addButtonInput("", I18n.delete(), async () => {
 								await fetch(localuser.info.api + "/users/@me/mfa/webauthn/credentials/" + key.id, {
 									headers: localuser.headers,
 									method: "DELETE",
 								});
+								keyMenu.deleteElm(b);
 								keyMenu.returnFromSub();
-								keyMenu.deleteElm(button);
 							});
 						});
 					};
