@@ -2055,10 +2055,7 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 					},
 				);
 				form.addTitle(I18n["2faCode"]());
-				form.addPreprocessor((e) => {
-					//@ts-ignore
-					e.ticket = json.ticket;
-				});
+				form.setValue("ticket", json.ticket);
 				const ti = form.addTextInput("", "code");
 			}
 			{
@@ -2081,11 +2078,8 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 						},
 					},
 				);
-				form.addTitle(I18n.mfa.backupIn());
-				form.addPreprocessor((e) => {
-					//@ts-ignore
-					e.ticket = json.ticket;
-				});
+				form.setValue("ticket", json.ticket);
+
 				form.addButtonInput("", I18n.mfa.giveBackupFile(), async () => {
 					let handle: FileSystemFileHandle | undefined = undefined;
 					let jsonfile: string;
@@ -2145,6 +2139,7 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 						alert(I18n.mfa.backupFailed());
 					}
 				});
+				form.addTitle(I18n.mfa.backupIn());
 				const ti = form.addTextInput("", "code");
 			}
 			better.show().parentElement!.style.zIndex = "200";
