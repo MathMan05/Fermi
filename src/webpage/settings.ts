@@ -1988,6 +1988,7 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 	if (json.ticket) {
 		return new Promise<boolean>(async (resolution) => {
 			const better = new Dialog("");
+			better.onhide = () => resolution(false);
 			const buttons = better.options.addButtons("", {top: true, titles: false});
 			if (json.webauthn) {
 				const opt = buttons.add(I18n.mfa.webauthn());
