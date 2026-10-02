@@ -15,6 +15,15 @@
 		"whereever": "Wherever this is"
 	},
 	"nomics": "No mics found",
+	"mfa": {
+		"totp": "TOTP",
+		"webauthn": "Passkey",
+		"backup": "Backup code",
+		"backupIn": "Backup code:",
+		"giveBackupFile": "Use backup code file",
+		"backupWorked": "Backup codes were able to work, though you should reset your 2fa with your remaining $1 {{PLURAL:$1|code|codes}}",
+		"backupFailed": "Backup code file was unable to bypass 2fa"
+	},
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
@@ -525,6 +534,7 @@
 		"advanced": "Advanced settings",
 		"danger": "Danger zone",
 		"2faCode:": "Code:",
+		"reset2FACode": "Code (or backup code):",
 		"2faCodeGive": "Your TOTP secret is: $1. This will generate a 6 digits 2FA token with a 30 second expiration period.",
 		"2fa": "2FA settings",
 		"2faDisable": "Disable 2FA",

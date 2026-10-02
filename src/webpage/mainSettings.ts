@@ -819,7 +819,7 @@ export async function showusersettings(localuser: Localuser) {
 							headers: localuser.headers,
 						},
 					);
-					form.addTextInput(I18n.localuser["2faCode:"](), "code", {required: true});
+					form.addTextInput(I18n.localuser.reset2FACode(), "code", {required: true});
 				});
 			} else {
 				twofa.addSubButtonInput(I18n.localuser["2faEnable"](), async (sub) => {
