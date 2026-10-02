@@ -396,6 +396,7 @@ class Contextmenu<x, y> {
 		dontlayer = false,
 	) {
 		const func = (event: MouseEvent) => {
+			if (event.altKey) return;
 			const selectedText = window.getSelection();
 			if (selectedText) {
 				//Don't override context menus for highlighted text
