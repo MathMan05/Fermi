@@ -17,6 +17,8 @@
 	"nomics": "No mics found",
 	"mfa": {
 		"totp": "TOTP",
+		"password": "Password",
+		"passwordCond": "Password:",
 		"webauthn": "Passkey",
 		"backup": "Backup code",
 		"backupIn": "Backup code:",

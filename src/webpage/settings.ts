@@ -1875,20 +1875,20 @@ class Options implements OptionsElement<void> {
 			this.haschanged = true;
 			this.owner.changed(div);
 
-			button.onclick = (_) => {
+			button.onclick = async (_) => {
 				if (this.owner instanceof Buttons) {
 					this.owner.save();
 				}
+				await this.submit();
 				div.remove();
-				this.submit();
 			};
 		}
 	}
 	afterSubmit = () => {};
-	submit() {
+	async submit() {
 		this.haschanged = false;
 		if (this.subOptions) {
-			this.subOptions.submit();
+			await this.subOptions.submit();
 			return;
 		}
 
@@ -1984,16 +1984,82 @@ class FormError extends Error {
 		this.elem = elem;
 	}
 }
-async function handle2fa(json: any, api: string): Promise<false | any> {
+interface mfaRes {
+	code: 60003;
+	mfa: {
+		methods: (
+			| {
+					type: "webauthn";
+					challenge: string;
+			  }
+			| {
+					type: "totp";
+					backup_codes_allowed: true;
+			  }
+			| {
+					type: "backup";
+			  }
+			| {
+					type: "password";
+			  }
+		)[];
+		ticket: string;
+	};
+}
+async function handle2fa(
+	json: any,
+	api: string,
+	headers: Record<string, string>,
+): Promise<false | any> {
+	let login = false;
 	if (json.ticket) {
+		login = true;
+		const j = json as {
+			ticket: string;
+			mfa: boolean;
+			sms: boolean;
+			token: null;
+			webauthn?: string;
+		};
+		json = {
+			code: 60003,
+			mfa: {
+				methods: [
+					...(j.webauthn
+						? [
+								{
+									type: "webauthn",
+									challenge: j.webauthn,
+								} as const,
+							]
+						: []),
+					...(j.mfa
+						? [
+								{
+									type: "totp",
+									backup_codes_allowed: true,
+								} as const,
+								{
+									type: "backup",
+								} as const,
+							]
+						: []),
+				],
+				ticket: j.ticket,
+			},
+		} satisfies mfaRes;
+	}
+	if (json.code === 60003) {
+		const mfares = json as mfaRes;
 		return new Promise<boolean>(async (resolution) => {
 			const better = new Dialog("");
 			better.onhide = () => resolution(false);
 			const buttons = better.options.addButtons("", {top: true, titles: false});
-			if (json.webauthn) {
+			const w = mfares.mfa.methods.find((_) => _.type === "webauthn");
+			if (w) {
 				const opt = buttons.add(I18n.mfa.webauthn());
 				opt.addButtonInput("", "Passkey", async (): Promise<void> => {
-					const challenge = JSON.parse(json.webauthn)
+					const challenge = JSON.parse(w.challenge)
 						.publicKey as PublicKeyCredentialRequestOptionsJSON;
 					challenge.challenge = challenge.challenge
 						.split("=")[0]
@@ -2023,19 +2089,31 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 						rawId: toBase64(credential.rawId),
 						response,
 					};
-					const resObj = await fetch(api + "/auth/mfa/webauthn", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify({code: JSON.stringify(res), ticket: json.ticket}),
-					});
+					const resObj = login
+						? await fetch(api + "/auth/mfa/webauthn", {
+								method: "POST",
+								headers: {
+									"Content-Type": "application/json",
+									...headers,
+								},
+								body: JSON.stringify({code: JSON.stringify(res), ticket: mfares.mfa.ticket}),
+							})
+						: await fetch(api + "/mfa/finish", {
+								method: "POST",
+								headers,
+								body: JSON.stringify({
+									data: JSON.stringify(res),
+									mfa_type: "webauthn",
+									ticket: mfares.mfa.ticket,
+								}),
+							});
 					if (!resObj.ok) resolution(false);
 					const jsonRes = await resObj.json();
-					resolution(jsonRes);
+					resolution(login ? jsonRes : (jsonRes.token as string));
+					better.hide();
 				});
 			}
-			if (json.mfa) {
+			if (mfares.mfa.methods.find((_) => _.type === "totp")) {
 				const opt = buttons.add(I18n.mfa.totp());
 				const form = opt.addForm(
 					"",
@@ -2043,23 +2121,27 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 						if (res.message) {
 							throw new FormError(ti, res.message);
 						} else {
-							resolution(res);
+							if (login) resolution(res);
+							else resolution(res.token);
 							better.hide();
 						}
 					},
 					{
-						fetchURL: api + "/auth/mfa/totp",
+						fetchURL: login ? api + "/auth/mfa/totp" : api + "/mfa/finish",
 						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
+						headers: login
+							? {
+									"Content-Type": "application/json",
+								}
+							: headers,
 					},
 				);
+				if (!login) form.setValue("mfa_type", "totp");
 				form.addTitle(I18n["2faCode"]());
-				form.setValue("ticket", json.ticket);
-				const ti = form.addTextInput("", "code");
+				form.setValue("ticket", mfares.mfa.ticket);
+				const ti = form.addTextInput("", login ? "code" : "data");
 			}
-			{
+			if (mfares.mfa.methods.find((_) => _.type === "backup")) {
 				const opt = buttons.add(I18n.mfa.backup());
 				const form = opt.addForm(
 					"",
@@ -2067,18 +2149,22 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 						if (res.message) {
 							throw new FormError(ti, res.message);
 						} else {
-							resolution(res);
+							if (login) resolution(res);
+							else resolution(res.token);
 							better.hide();
 						}
 					},
 					{
-						fetchURL: api + "/auth/mfa/totp",
+						fetchURL: login ? api + "/auth/mfa/totp" : api + "/mfa/finish",
 						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
+						headers: login
+							? {
+									"Content-Type": "application/json",
+								}
+							: headers,
 					},
 				);
+				if (!login) form.setValue("mfa_type", "backup");
 				form.setValue("ticket", json.ticket);
 
 				form.addButtonInput("", I18n.mfa.giveBackupFile(), async () => {
@@ -2114,14 +2200,25 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 					let resolve: any;
 					for (const item of j) {
 						if (item.consumed) continue;
-						const res = await fetch(api + "/auth/mfa/totp", {
+						const res = await fetch(login ? api + "/auth/mfa/totp" : api + "/mfa/finish", {
 							method: "POST",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({code: item.code, ticket: json.ticket}),
+							headers: login
+								? {
+										"Content-Type": "application/json",
+									}
+								: headers,
+							body: JSON.stringify(
+								login
+									? {code: item.code, ticket: json.ticket}
+									: {
+											data: item.code,
+											ticket: mfares.mfa.ticket,
+											mfa_type: "backup",
+										},
+							),
 						});
 						item.consumed = true;
+						better.hide();
 						resolve = await res.json();
 						if (res.ok) break;
 					}
@@ -2135,13 +2232,41 @@ async function handle2fa(json: any, api: string): Promise<false | any> {
 						}
 					if (resolve) {
 						alert(I18n.mfa.backupWorked(j.reduce((c, p) => (p.consumed ? c : c + 1), 0) + ""));
-						resolution(resolve);
+						if (login) resolution(resolve);
+						else resolution(resolve.token);
 					} else {
 						alert(I18n.mfa.backupFailed());
 					}
 				});
 				form.addTitle(I18n.mfa.backupIn());
 				const ti = form.addTextInput("", "code");
+			}
+			if (mfares.mfa.methods.find((_) => _.type === "password")) {
+				const opt = buttons.add(I18n.mfa.password());
+				const form = opt.addForm(
+					"",
+					(res: any) => {
+						if (res.message) {
+							throw new FormError(ti, res.message);
+						} else {
+							resolution(res.token);
+							better.hide();
+						}
+					},
+					{
+						fetchURL: api + "/mfa/finish",
+						method: "POST",
+						headers: login
+							? {
+									"Content-Type": "application/json",
+								}
+							: headers,
+					},
+				);
+				if (!login) form.setValue("mfa_type", "password");
+				form.addTitle(I18n.mfa.passwordCond());
+				form.setValue("ticket", mfares.mfa.ticket);
+				const ti = form.addTextInput("", "data", {password: true});
 			}
 			better.show().parentElement!.style.zIndex = "200";
 		});
@@ -2172,7 +2297,7 @@ class Form implements OptionsElement<object> {
 	readonly required: WeakSet<OptionsElement<any>> = new WeakSet();
 	readonly submitText: string;
 	fetchURL: string;
-	readonly headers = {};
+	readonly headers = {} as Record<string, string>;
 	readonly method: string;
 	value!: object;
 	traditionalSubmit: boolean;
@@ -2585,7 +2710,11 @@ class Form implements OptionsElement<object> {
 						}
 						const match = this.fetchURL.match(/https?:\/\/[^\/]*\/api/gm);
 						if (match && this.tfaCheck) {
-							const tried = await handle2fa(json, match[0]);
+							const tried = await handle2fa(json, match[0], this.headers);
+							if (typeof tried === "string") {
+								this.headers["X-Discord-MFA-Authorization"] = tried;
+								return await doFetch();
+							}
 							if (tried) {
 								return await onSubmit(tried);
 							}
@@ -2603,13 +2732,9 @@ class Form implements OptionsElement<object> {
 							);
 							return;
 						}
-						if (
-							Math.floor(json.code / 100) === 4 &&
-							json.message &&
-							typeof json.message === "string"
-						) {
+						if (json.code && json.message && typeof json.message === "string") {
 							this.showPrimError(json.message);
-							return;
+							throw new Error("errored");
 						}
 						await onSubmit(json);
 					});
