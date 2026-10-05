@@ -12,6 +12,10 @@
 		"login": "Aloggen"
 	},
 	"nomics": "Keng Mikroe fonnt",
+	"mfa": {
+		"password": "Passwuert",
+		"passwordCond": "Passwuert:"
+	},
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
