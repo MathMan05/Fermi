@@ -20,7 +20,7 @@ import {
 	pollUpdateJson,
 } from "./jsontypes.js";
 import {Member} from "./member.js";
-import {Dialog, Form, FormError, Options, PopUp} from "./settings.js";
+import {Dialog, Form, FormError, Options} from "./settings.js";
 import {getTextNodeAtPosition, MarkDown} from "./markdown.js";
 import {Bot} from "./bot.js";
 import {Role} from "./role.js";
