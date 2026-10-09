@@ -601,6 +601,7 @@
 		"appID": "Application ID: $1",
 		"showSecret": "Show client secret",
 		"clientSecret": "Client secret: $1",
+		"done":"Done",
 		"secret": "Secret",
 		"publicAvaliable": "Make bot publicly inviteable?",
 		"refreshPage": "Refresh to apply",

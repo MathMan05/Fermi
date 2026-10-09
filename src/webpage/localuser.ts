@@ -20,7 +20,7 @@ import {
 	pollUpdateJson,
 } from "./jsontypes.js";
 import {Member} from "./member.js";
-import {Dialog, Form, FormError, Options} from "./settings.js";
+import {Dialog, Form, FormError, Options, PopUp} from "./settings.js";
 import {getTextNodeAtPosition, MarkDown} from "./markdown.js";
 import {Bot} from "./bot.js";
 import {Role} from "./role.js";
@@ -2651,13 +2651,22 @@ class Localuser {
 			initText: json.privacy_policy_url,
 		});
 		form.addText(I18n.localuser.appID(appId));
-		form.addSubButtonInput(
-			I18n.localuser.showSecret(),
-			(opt) => {
-				opt.addText(I18n.localuser.clientSecret(json.verify_key));
+		form.options.addForm(
+			"",
+			(res) => {
+				const r = res as {secret: string};
+				const d = new Dialog("");
+				d.options.addText(I18n.localuser.clientSecret(r.secret));
+				d.options.addButtonInput("", I18n.localuser.done(), () => {
+					d.hide();
+				});
+				d.show();
 			},
 			{
-				intText: I18n.localuser.secret(),
+				submitText: I18n.localuser.showSecret(),
+				fetchURL: this.info.api + `/applications/${appId}/reset`,
+				method: "POST",
+				headers: this.headers,
 			},
 		);
 		form.addTextInput(I18n.localuser.TOSURL(), "terms_of_service_url", {
