@@ -25,6 +25,11 @@
 		"whatelse": "Cos'altro pensi che dovrebbe succedere?",
 		"whereever": "Ovunque questo sia"
 	},
+	"mfa": {
+		"password": "Password",
+		"passwordCond": "Password:",
+		"webauthn": "Passkey"
+	},
 	"filesize": {
 		"B": "B",
 		"KB": "KB",

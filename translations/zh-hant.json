@@ -23,6 +23,15 @@
 		"whereever": "無論這在哪裡"
 	},
 	"nomics": "找不到麥克風",
+	"mfa": {
+		"totp": "一次性驗證碼",
+		"webauthn": "通行密鑰",
+		"backup": "後援代碼",
+		"backupIn": "後援代碼：",
+		"giveBackupFile": "使用後援代碼檔案",
+		"backupWorked": "後援代碼可以正常使用，但您應該使用剩餘的 $1 個{{PLURAL:$1|代碼}}來重設雙因素驗證",
+		"backupFailed": "後援代碼檔案無法繞過雙因素驗證。"
+	},
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
@@ -527,6 +536,7 @@
 		"advanced": "進階設定",
 		"danger": "危險區域",
 		"2faCode:": "代碼：",
+		"reset2FACode": "代碼（或後援代碼）：",
 		"2faCodeGive": "您的一次性驗證碼是：$1（6 位數字），這將產生一個6位數的雙因素驗證代碼、其有效期為30秒。",
 		"2fa": "雙因素驗證設定",
 		"2faDisable": "停用雙因素驗證",
@@ -595,6 +605,7 @@
 		"publicAvaliable": "讓機器人可以公開邀請？",
 		"refreshPage": "重整以套用",
 		"requireCode": "需要代碼授予才能邀請機器人？",
+		"redirURIs": "重新導向 URI：",
 		"resetToken": "重新設定權杖",
 		"saveToken": "將權杖儲存到本地端裝置",
 		"setUp2fa": "雙因素驗證設定",
@@ -710,7 +721,7 @@
 	"no": "否",
 	"noEmojiFont": "使用系統表情符號",
 	"noMessages": "這裡還沒有訊息，請搶先發表意見！",
-	"noPins": "昔人已乘黃鶴去，此地空餘黃鶴樓。黃鶴一去不復返，白雲千載空悠悠...",
+	"noPins": "頻道尚未有訊息要提供給你…",
 	"noStickers": "太慘了，這裡沒有貼圖能供您使用！",
 	"notiClump": "您已收到來自$2的通知$1",
 	"notiVolume": "通知音量：",

@@ -24,6 +24,14 @@
 		"whatelse": "어떻게 되어야 한다고 생각시나요?",
 		"whereever": "이곳이 무엇이든"
 	},
+	"mfa": {
+		"totp": "TOTP",
+		"password": "비밀번호",
+		"passwordCond": "비밀번호:",
+		"webauthn": "패스키",
+		"backup": "백업 코드",
+		"backupIn": "백업 코드:"
+	},
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
@@ -320,7 +328,7 @@
 	},
 	"goThere": "네, 이동합니다",
 	"goThereTrust": "네, 이제부터 이 도메인을 신뢰합니다",
-	"goingToURL": "이 링크를 클릭하면 $1(으)로 이동합니다. 정말로 이동합니까?",
+	"goingToURL": "이 링크를 클릭하면 새 탭에서 $1(으)로 이동합니다. 정말로 이동합니까?",
 	"group": {
 		"createdm": "개인 메세지를 만드세요!",
 		"edit": "그룹 채팅 편집",

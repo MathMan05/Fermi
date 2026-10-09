@@ -889,7 +889,7 @@
 	"poll": {
 		"question": "Pergunta:",
 		"answers": "Respostas:",
-		"newAnswer": "Nova Resposta",
+		"newAnswer": "Nova resposta",
 		"duration": "Duração:",
 		"durCount": {
 			"1": "1 hora",

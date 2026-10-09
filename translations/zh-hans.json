@@ -31,6 +31,17 @@
 		"whereever": "无论这在哪里"
 	},
 	"nomics": "未找到麦克风",
+	"mfa": {
+		"totp": "一次性验证码",
+		"password": "密码",
+		"passwordCond": "密码：",
+		"webauthn": "通行密钥",
+		"backup": "备份代码",
+		"backupIn": "备份代码：",
+		"giveBackupFile": "使用备份代码文件",
+		"backupWorked": "备份代码可以正常使用，但您应该使用其余的$1个{{PLURAL:$1|代码}}来重置双重认证",
+		"backupFailed": "备份代码文件无法绕过双重认证"
+	},
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
@@ -535,6 +546,7 @@
 		"advanced": "高级设置",
 		"danger": "危险区域",
 		"2faCode:": "代码：",
+		"reset2FACode": "代码（或备份代码）：",
 		"2faCodeGive": "您的TOTP（基于时间的一次性密码）秘钥为：$1。这将生成一个6位的双因素验证令牌，有效期为30秒。",
 		"2fa": "双重认证设置",
 		"2faDisable": "禁用双因素验证",
@@ -603,6 +615,7 @@
 		"publicAvaliable": "允许公开邀请机器人吗？",
 		"refreshPage": "刷新以应用",
 		"requireCode": "需要代码授予才能邀请机器人？",
+		"redirURIs": "重定向 URI：",
 		"resetToken": "重置令牌",
 		"saveToken": "将令牌保存到本地存储",
 		"setUp2fa": "双因素认证设置",
