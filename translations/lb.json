@@ -14,7 +14,8 @@
 	"nomics": "Keng Mikroe fonnt",
 	"mfa": {
 		"password": "Passwuert",
-		"passwordCond": "Passwuert:"
+		"passwordCond": "Passwuert:",
+		"backup": "Backup-Code"
 	},
 	"filesize": {
 		"B": "B",

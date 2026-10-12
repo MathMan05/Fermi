@@ -496,6 +496,7 @@
 		"appID": "ID applicazione: $1",
 		"showSecret": "Mostra segreto client",
 		"clientSecret": "Segreto del client: $1",
+		"done": "Fatto",
 		"secret": "Segreto",
 		"publicAvaliable": "Vuoi rendere il bot pubblicamente invitabile?",
 		"refreshPage": "Aggiorna per applicare",

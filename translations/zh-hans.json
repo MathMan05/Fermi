@@ -611,6 +611,7 @@
 		"appID": "应用程序 ID：$1",
 		"showSecret": "显示客户端密钥",
 		"clientSecret": "客户端密钥：$1",
+		"done": "完成",
 		"secret": "密钥",
 		"publicAvaliable": "允许公开邀请机器人吗？",
 		"refreshPage": "刷新以应用",
