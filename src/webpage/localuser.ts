@@ -333,6 +333,7 @@ class Localuser {
 		);
 	}
 	async queryBlog() {
+		//TODO remove this soon
 		if (true as false) return;
 		const prefs = getPreferences();
 		const bstate = prefs.showBlogUpdates;
