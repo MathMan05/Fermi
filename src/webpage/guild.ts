@@ -1358,10 +1358,12 @@ class Guild extends SnowFlake {
 	}
 	makeInviteMenu(options: Options, valid: void | Channel[]) {
 		if (!valid) {
-			valid = this.channels.filter((e) => {
-				//TODO there are almost certainly more types. is Voice valid?
-				return new Set([0, 5]).has(e.type);
-			});
+			valid = this.channels
+				.filter((c) => c.hasPermission("VIEW_CHANNEL") && c.type !== 4)
+				.filter((e) => {
+					//TODO there are almost certainly more types. is Voice valid?
+					return new Set([0, 5]).has(e.type);
+				});
 		}
 		let channel = valid[0];
 		const div = document.createElement("div");
