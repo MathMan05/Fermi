@@ -9,12 +9,12 @@ class Hover {
 	side: sides;
 	constructor(
 		txt: string | MarkDown | (() => Promise<MarkDown | string> | MarkDown | string),
-		{customHTML, weak, side}: {customHTML?: () => HTMLElement; weak: boolean; side?: sides} = {
+		{customHTML, weak, side}: {customHTML?: () => HTMLElement; weak?: boolean; side?: sides} = {
 			weak: true,
 		},
 	) {
 		this.customHTML = customHTML;
-		this.weak = weak;
+		this.weak = weak ?? true;
 		this.str = txt;
 		this.side = side || "bottom";
 	}

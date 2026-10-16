@@ -2057,6 +2057,7 @@ class Localuser {
 		iconDiv.classList.add("folder-icon-div");
 		const icon = document.createElement("span");
 		icon.classList.add("svg-folder");
+		new Hover(folder.name, {side: "right"}).addEvent(icon);
 
 		const menu = new Contextmenu<void, void>("");
 		menu.addButton(I18n.folder.edit(), () => {
