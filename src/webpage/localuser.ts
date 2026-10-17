@@ -1450,8 +1450,12 @@ class Localuser {
 				list.d.ops[0].items.map(async (member) => {
 					if ("member" in member) {
 						if (this.userMap.get(member.member.id)?.members.has(guild)) return;
-						if (this.focusGuild?.id && this.focusGuild?.id !== "@me")
-							await this.getMember(member.member.user!.id, this.focusGuild.id);
+						if (
+							this.focusGuild?.id &&
+							this.focusGuild?.id !== "@me" &&
+							member.member.guild_id === guild.id
+						)
+							await Member.new(member.member, guild);
 					} else {
 						counts.set(member.group.id, member.group.count);
 					}
