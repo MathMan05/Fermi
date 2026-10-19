@@ -184,6 +184,8 @@ export async function showusersettings(localuser: Localuser) {
 						if (key === "domain") return;
 						const connection = json[key];
 
+						const name = key.charAt(0).toUpperCase() + key.slice(1);
+
 						const container = document.createElement("div");
 						if (connection.icon_url) {
 							const span = document.createElement("span");
@@ -192,7 +194,7 @@ export async function showusersettings(localuser: Localuser) {
 							//span.alt = key;
 							container.append(span);
 						} else {
-							container.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+							container.textContent = name;
 						}
 
 						if (connection.enabled) {
@@ -223,6 +225,7 @@ export async function showusersettings(localuser: Localuser) {
 						} else {
 							container.classList.add("disabled");
 						}
+						new Hover(name).addEvent(container);
 
 						connectionContainer.appendChild(container);
 					});
