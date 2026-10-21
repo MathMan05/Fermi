@@ -1077,12 +1077,15 @@ export async function showusersettings(localuser: Localuser) {
 				const head = document.createElement("div");
 
 				head.classList.add("flexltr", "oauthWidgetHead");
-				const img = document.createElement("img");
-				img.src = localuser.info.cdn + "/app-icons/" + application.id + "/" + application.icon;
+				if (localuser.info.cdn) {
+					const img = document.createElement("img");
+					img.src = localuser.info.cdn + "/app-icons/" + application.id + "/" + application.icon;
+					head.append(img);
+				}
 				const title = document.createElement("h2");
 				title.textContent = application.name;
 
-				head.append(img, title);
+				head.append(title);
 
 				const permDesc = document.createElement("h4");
 				permDesc.textContent = I18n.oauth2.permDesc();
