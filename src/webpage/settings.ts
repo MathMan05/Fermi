@@ -2006,7 +2006,7 @@ interface mfaRes {
 		ticket: string;
 	};
 }
-async function handle2fa(
+export async function handle2fa(
 	json: any,
 	api: string,
 	headers: Record<string, string>,

@@ -1,8 +1,9 @@
 import {Hover} from "./hover";
 import {I18n, langmap} from "./i18n";
-import {ConnectionJson, expSessionJson} from "./jsontypes";
+import {applicationJson, ConnectionJson, expSessionJson} from "./jsontypes";
 import {Localuser, trace, traceObj} from "./localuser";
 import {MarkDown} from "./markdown";
+import {oauthScopes} from "./oauth2/util";
 import {buttonColor, Dialog, FormError, Settings} from "./settings";
 import {CDNParams} from "./utils/cdnParams";
 import {getDeveloperSettings, setDeveloperSettings} from "./utils/storage/devSettings";
@@ -1061,6 +1062,58 @@ export async function showusersettings(localuser: Localuser) {
 			div.append(name, remove);
 			trusted.addHTMLArea(div);
 		}
+	}
+	{
+		const trusted = settings.addButton(I18n.oauth2.trusted(), {contained: true});
+		trusted.addMDText(new MarkDown(I18n.oauth2.trustedDesc()));
+		(async () => {
+			const apps = (await (
+				await fetch(localuser.info.api + "/oauth2/tokens", {headers: localuser.headers})
+			).json()) as {id: string; scopes: oauthScopes; application: applicationJson}[];
+			for (const {application, id, scopes} of apps) {
+				const div = document.createElement("div");
+
+				div.classList.add("flexttb", "oauthWidget");
+				const head = document.createElement("div");
+
+				head.classList.add("flexltr", "oauthWidgetHead");
+				const img = document.createElement("img");
+				img.src = localuser.info.cdn + "/app-icons/" + application.id + "/" + application.icon;
+				const title = document.createElement("h2");
+				title.textContent = application.name;
+
+				head.append(img, title);
+
+				const permDesc = document.createElement("h4");
+				permDesc.textContent = I18n.oauth2.permDesc();
+				div.append(head, permDesc);
+
+				for (const scope of scopes) {
+					const p = document.createElement("p");
+					p.textContent =
+						scope in I18n.oauth2.readableNames
+							? I18n.oauth2.readableNames[scope as keyof typeof I18n.oauth2.readableNames]()
+							: scope;
+					div.append(p);
+				}
+
+				const button = document.createElement("button");
+				button.textContent = I18n.oauth2.unauth();
+				div.append(button);
+				button.onclick = async () => {
+					button.disabled = true;
+					const res = await fetch(localuser.info.api + "/oauth2/tokens/" + id, {
+						headers: localuser.headers,
+						method: "DELETE",
+					});
+					button.disabled = false;
+					if (!res.ok) return;
+					div.remove();
+				};
+
+				trusted.addHTMLArea(div);
+			}
+		})();
 	}
 	settings.addButton(I18n.localuser.advanced(), {head: true});
 

@@ -2,6 +2,8 @@ import {I18n} from "../i18n.js";
 import {getapiurls} from "../utils/utils.js";
 import {getBulkUsers, Specialuser} from "../utils/utils.js";
 import {Permissions} from "../permissions.js";
+import {AccountSwitcher} from "../utils/switcher.js";
+import {handle2fa} from "../settings.js";
 type botjsonfetch = {
 	guilds: {
 		id: string;
@@ -44,12 +46,19 @@ type botjsonfetch = {
 	};
 	authorized: boolean;
 };
+
 if (window.location.pathname.startsWith("/oauth2")) {
 	const users = getBulkUsers();
 	const params = new URLSearchParams(window.location.search);
 	//TODO replace me
-	const well = params.get("instance") || "Hamrony";
+	const well = params.get("instance") || "http://localhost:3001";
 	const permstr = params.get("permissions");
+
+	const response_type = params.get("response_type");
+	const scopes = params.get("scope");
+
+	const guildPick = scopes?.includes("bot");
+
 	const joinable: Specialuser[] = [];
 
 	for (const key in users.users) {
@@ -58,7 +67,6 @@ if (window.location.pathname.startsWith("/oauth2")) {
 			if (well && user.serverurls.wellknown.includes(well)) {
 				joinable.push(user);
 			}
-			console.log(user);
 		}
 	}
 
@@ -86,6 +94,35 @@ if (window.location.pathname.startsWith("/oauth2")) {
 
 	if (!joinable.length) {
 		document.getElementById("AcceptInvite")!.textContent = "Create an account to invite the bot";
+	}
+	const headers = {
+		"Content-type": "application/json; charset=UTF-8",
+		Authorization: "",
+	} as Record<string, string>;
+	async function OAuth2(user: Specialuser, guild_id?: string) {
+		if (!urls) return;
+		headers.Authorization = user.token;
+		const j = (await (
+			await fetch(urls.api + "/oauth2/authorize?" + params, {
+				method: "POST",
+				body: JSON.stringify({
+					authorize: true,
+					guild_id,
+					permissions: permstr,
+				}),
+				headers,
+			})
+		).json()) as {location: string};
+		const b = await handle2fa(j, urls.api, headers);
+		if (typeof b === "string") {
+			headers["X-Discord-MFA-Authorization"] = b;
+			return OAuth2(user, guild_id);
+		}
+		if (j.location) {
+			window.location.assign(j.location);
+		} else {
+			window.close();
+		}
 	}
 	await I18n.done;
 	function showGuilds(user: Specialuser) {
@@ -128,83 +165,27 @@ if (window.location.pathname.startsWith("/oauth2")) {
 				dialog.append(button);
 				button.onclick = () => {
 					const id = select.value;
-					const params2 = new URLSearchParams("");
-					params2.set("client_id", params.get("client_id") as string);
-					fetch(urls.api + "/oauth2/authorize?" + params2.toString(), {
-						method: "POST",
-						body: JSON.stringify({
-							authorize: true,
-							guild_id: id,
-							permissions: permstr,
-						}),
-						headers: {
-							"Content-type": "application/json; charset=UTF-8",
-							Authorization: user.token,
-						},
-					}).then((req) => {
-						if (req.ok) {
-							alert("Bot added successfully");
-						}
-					});
+					OAuth2(user, id);
 				};
 				document.body.append(dialog);
 			});
 	}
-	function showAccounts(): void {
-		const table = document.createElement("dialog");
-		for (const user of joinable) {
-			console.log(user.pfpsrc);
-
-			const userinfo = document.createElement("div");
-			userinfo.classList.add("flexltr", "switchtable");
-
-			const pfp = document.createElement("img");
-			pfp.src = user.pfpsrc;
-			pfp.classList.add("pfp");
-			userinfo.append(pfp);
-
-			const userDiv = document.createElement("div");
-			userDiv.classList.add("userinfo");
-			userDiv.textContent = user.username;
-			userDiv.append(document.createElement("br"));
-
-			const span = document.createElement("span");
-			span.textContent = user.serverurls.wellknown.replace("https://", "").replace("http://", "");
-			span.classList.add("serverURL");
-			userDiv.append(span);
-
-			userinfo.append(userDiv);
-			table.append(userinfo);
-
-			userinfo.addEventListener("click", () => {
-				table.remove();
-				showGuilds(user);
-			});
-		}
-
-		const td = document.createElement("div");
-		td.classList.add("switchtable");
-		td.textContent = "Login or create an account ⇌";
-		td.addEventListener("click", () => {
-			const l = new URLSearchParams("?");
-			l.set("goback", window.location.href);
-			l.set("instance", well!);
-			window.location.href = "/login?" + l.toString();
+	async function showAccounts(e?: MouseEvent) {
+		e?.preventDefault();
+		e?.stopImmediatePropagation();
+		const s = new AccountSwitcher((u) => {
+			console.log(u, well);
+			if (well && u.serverurls.wellknown.includes(well)) {
+				return true;
+			}
+			return false;
 		});
-
-		if (!joinable.length) {
-			const l = new URLSearchParams("?");
-			l.set("goback", window.location.href);
-			l.set("instance", well!);
-			window.location.href = "/login?" + l.toString();
-		}
-
-		table.append(td);
-		table.classList.add("flexttb", "accountSwitcher");
-		console.log(table);
-		document.body.append(table);
+		const su = await s.show();
+		if (guildPick) showGuilds(su);
+		else OAuth2(su);
 	}
 	const user = joinable[0];
+
 	if (user) {
 		fetch(urls.api + "/oauth2/authorize/" + window.location.search, {
 			headers: {
@@ -215,7 +196,11 @@ if (window.location.pathname.startsWith("/oauth2")) {
 			.then((json: botjsonfetch) => {
 				const title = document.getElementById("invitename");
 				if (title) {
-					title.textContent = `Invite ${json.bot.username} to your servers`;
+					if (guildPick) {
+						title.textContent = I18n.oauth2.botGuild(json.bot.username);
+					} else {
+						title.textContent = I18n.oauth2.grantApp(json.application.name);
+					}
 				}
 				const desc = document.getElementById("invitedescription");
 				if (desc) {
@@ -230,7 +215,7 @@ if (window.location.pathname.startsWith("/oauth2")) {
 				}
 				const perms = document.getElementById("permissions") as HTMLDivElement;
 
-				if (perms && permstr) {
+				if (permstr) {
 					perms.children[0].textContent = I18n.htmlPages.idpermissions();
 					const permisions = new Permissions(permstr);
 					for (const perm of Permissions.info()) {
@@ -242,6 +227,28 @@ if (window.location.pathname.startsWith("/oauth2")) {
 							div.classList.add("flexttb");
 							perms.append(div);
 						}
+					}
+				}
+				if (response_type === "token" || response_type === "code") {
+					if (scopes)
+						for (const scope of scopes.split(",")) {
+							const div = document.createElement("div");
+							const h2 = document.createElement("h2");
+							h2.textContent =
+								scope in I18n.oauth2.readableNames
+									? I18n.oauth2.readableNames[scope as keyof typeof I18n.oauth2.readableNames]()
+									: scope;
+							div.append(h2);
+							div.classList.add("flexttb");
+							perms.append(div);
+						}
+					{
+						const div = document.createElement("div");
+						const h2 = document.createElement("h2");
+						h2.textContent = I18n.oauth2.baseScope();
+						div.append(h2);
+						div.classList.add("flexttb");
+						perms.append(div);
 					}
 				}
 			});
