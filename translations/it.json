@@ -701,6 +701,9 @@
 	},
 	"updateAv": "Aggiornamenti disponibili",
 	"uploadFilesText": "Carica i tuoi file qui!",
+	"oauth2": {
+		"permDesc": "L'applicazione dispone delle seguenti autorizzazioni:"
+	},
 	"user": {
 		"report": "Segnala utente",
 		"deleted": "Utenza cancellata",
