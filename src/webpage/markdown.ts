@@ -289,7 +289,7 @@ class MarkDown {
 				}
 			}
 			if (txt[i] === "\\") {
-				const chatset = new Set("\\`{}[]()<>*_#+-.!|@".split(""));
+				const chatset = new Set("\\`{}[]()<>*_#+-.!|@");
 				if (chatset.has(txt[i + 1])) {
 					if (keep) {
 						current.textContent += txt[i];
@@ -1483,7 +1483,7 @@ function saveCaretPosition(
 			range.setStart(pos.node, pos.position);
 			selection.addRange(range);
 
-			if(mobile && !backspace && !TypeBox.box.textContent){
+			if (mobile && !backspace && !TypeBox.box.textContent) {
 				TypeBox.box.blur();
 			}
 		};
