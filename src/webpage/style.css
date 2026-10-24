@@ -2900,6 +2900,7 @@ span.instanceStatus {
 }
 .pollText {
 	margin: 0px 4px;
+	text-wrap: auto;
 }
 .roleIcon {
 	display: inline-block;
@@ -5435,22 +5436,22 @@ img.error::after {
 		animation-timing-function: ease-out;
 	}
 }
-.oauthWidget{
-	padding:8px;
-	background:#ffffff21;
-	border-radius:4px;
-	> button{
-		margin-top:10px;
-		color:var(--red);
-		font-weight:bold;
+.oauthWidget {
+	padding: 8px;
+	background: #ffffff21;
+	border-radius: 4px;
+	> button {
+		margin-top: 10px;
+		color: var(--red);
+		font-weight: bold;
 	}
 }
-.oauthWidgetHead{
-	> img{
-		width:64px;
-		height:64px;
-		border-radius:15px;
-		margin-right:20px;
+.oauthWidgetHead {
+	> img {
+		width: 64px;
+		height: 64px;
+		border-radius: 15px;
+		margin-right: 20px;
 	}
 	align-items: center;
 }

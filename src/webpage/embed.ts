@@ -455,6 +455,7 @@ class Embed {
 				video.style.maxWidth = "400px";
 				video.style.maxHeight = "300px";
 			}
+
 			div.append(video);
 			return div;
 		}
@@ -480,6 +481,27 @@ class Embed {
 			a.textContent = this.json.title;
 			a.classList.add("embedtitle");
 			div.append(a);
+		}
+		if (this.json.author) {
+			const authorline = document.createElement("div");
+			if (this.json.author.icon_url) {
+				const img = document.createElement("img");
+				img.classList.add("authorEmbedImg");
+				this.localuser.refreshIfNeeded(this.json.author.icon_url).then((url) => {
+					if (this.json.author) this.json.author.icon_url = url;
+					img.src = url;
+				});
+				authorline.append(img);
+			}
+			const a = this.json.author.url ? document.createElement("a") : document.createElement("span");
+			a.textContent = this.json.author.name as string;
+			if (this.json.author.url) {
+				MarkDown.safeLink(a, this.json.author.url);
+				a.classList.add("username");
+			}
+
+			authorline.append(a);
+			div.append(authorline);
 		}
 		if (this.json.description) {
 			const description = document.createElement("p");
