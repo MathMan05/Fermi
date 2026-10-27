@@ -85,8 +85,8 @@ class Localuser {
 	headers!: {"Content-type": string; Authorization: string};
 	user!: User;
 	readonly guilds = new Map<string, Guild>();
-	readonly channels: Map<string, Channel> = new Map();
-	readonly userMap: Map<string, User> = new Map();
+	readonly channels = new Map<string, Channel>();
+	readonly userMap = new Map<string, User>();
 	readonly messages = new Map<string, Message>();
 	readonly idToPrev = new Map<string, string | undefined>();
 	readonly idToNext = new Map<string, string | undefined>();
@@ -1463,7 +1463,7 @@ class Localuser {
 			);
 		}
 
-		const elms: Map<Role | "offline" | "online", (Member | User)[]> = new Map([]);
+		const elms = new Map<Role | "offline" | "online", (Member | User)[]>([]);
 		for (const role of guild.roles) {
 			if (role.hoist) {
 				elms.set(role, []);
@@ -2622,7 +2622,7 @@ class Localuser {
 		});
 	}
 
-	readonly botTokens: Map<string, string> = new Map();
+	readonly botTokens = new Map<string, string>();
 	async manageApplication(appId = "", container: Options, deleteButton: () => void) {
 		if (this.perminfo.applications) {
 			for (const item of Object.keys(this.perminfo.applications)) {
@@ -3761,7 +3761,7 @@ class Localuser {
 		string,
 		Map<string, (returns: memberjson | undefined) => void>
 	>();
-	readonly presences: Map<string, presencejson> = new Map();
+	readonly presences = new Map<string, presencejson>();
 	static font?: FontFace;
 	static async loadFont() {
 		const prefs = getPreferences();
