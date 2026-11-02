@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+    - name: Harmony Issues
+      url: https://codeberg.org/MelodyChat/Harmony
+      about: Harmony is where the backend lives, so if there is an issues that you think occurs on our server, please report it here instead
+    - name: Harmonies Official
+      url: https://fermi.chat/invite/JLLhnI?instance=Harmony
+      about: Need help? Join the Harmony developer community!
