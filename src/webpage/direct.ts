@@ -12,6 +12,7 @@ import {Dialog, Float, FormError} from "./settings.js";
 import {Discovery} from "./discovery.js";
 import {createImg} from "./utils/utils.js";
 import {CDNParams} from "./utils/cdnParams.js";
+import {Hover} from "./hover.js";
 
 class Direct extends Guild {
 	channels: Group[];
@@ -778,6 +779,7 @@ class Group extends Channel {
 				const toggle = document.getElementById("maintoggle") as HTMLInputElement;
 				toggle.checked = true;
 			};
+			new Hover(this.name, {side: "right"}).addEvent(div);
 			const isSingle = this.type === 1 && this.users[0];
 			Group.groupcontextmenu.bindContextmenu(
 				div,
