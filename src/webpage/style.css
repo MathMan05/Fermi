@@ -2844,7 +2844,7 @@ span.instanceStatus {
 	word-break: break-word;
 	gap: 4px;
 	width: 100%;
-	overflow: clip;
+	overflow: visible;
 	position: relative;
 }
 .inlinepronouns {
