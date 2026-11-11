@@ -502,16 +502,16 @@ class Localuser {
 	swapped = false;
 	resume_gateway_url?: string;
 	session_id?: string;
-	async initwebsocket(resume = false): Promise<void> {
+	async initwebsocket(resume = false): Promise<boolean> {
 		let returny: () => void;
 		if (!this.resume_gateway_url || !this.session_id) {
-			resume = false;
+			if (resume) return false;
 		}
 		if (!resume) {
 			this.messages.clear();
 			this.idToPrev.clear();
 			this.idToNext.clear();
-		}
+		} //else debugger;
 		const doComp = DecompressionStream && !getDeveloperSettings().gatewayCompression;
 		const ws = new WebSocket(
 			(resume ? this.resume_gateway_url : this.info.gateway.toString()) +
@@ -544,8 +544,6 @@ class Localuser {
 							},
 						}),
 					);
-					this.resume_gateway_url = undefined;
-					this.session_id = undefined;
 				} else {
 					ws.send(
 						JSON.stringify({
@@ -653,10 +651,11 @@ class Localuser {
 				(wsCodesRetry.has(event.code) && this.errorBackoff === 0)
 			) {
 				this.errorBackoff++;
-				this.initwebsocket(true).then(() => {
+				const suc = await this.initwebsocket(true);
+				if (suc) {
 					this.loaduser();
-				});
-				return;
+					return;
+				}
 			}
 			this.unload();
 			(document.getElementById("loading") as HTMLElement).classList.remove("doneloading");
@@ -735,6 +734,7 @@ class Localuser {
 		console.log("here?");
 		await promise;
 		console.warn("huh");
+		return true;
 	}
 	readonly interNonceMap = new Map<string, Message>();
 	registerInterNonce(nonce: string, thing: Message) {
@@ -767,13 +767,19 @@ class Localuser {
 		} catch (e) {
 			console.error(e);
 		}
+		if (temp.op === 7 && this.ws) {
+			this.errorBackoff = 0;
+			this.ws.close(4000);
+			return;
+		}
 		if (temp.d._trace) this.handleTrace(temp.d._trace);
 		if (getDeveloperSettings().gatewayLogging) console.debug(temp);
 		if (temp.s) this.lastSequence = temp.s;
-		if (temp.op === 9 && this.ws) {
+		if (temp.op === 9 && this.ws && !temp.d) {
 			this.errorBackoff = 0;
 			this.ws.close(4041);
 		}
+
 		if (temp.op == 0) {
 			switch (temp.t) {
 				case "THREAD_MEMBERS_UPDATE": {
