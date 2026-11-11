@@ -1,6 +1,7 @@
-const props = ["gifSearch"] as const;
+const props = ["gifSearch", "search"] as const;
 export class Shortcuts {
 	gifSearch = "ctrl+g";
+	search = "ctrl+f";
 
 	constructor(data: Partial<Shortcuts> = {}) {
 		Object.assign(this, data);

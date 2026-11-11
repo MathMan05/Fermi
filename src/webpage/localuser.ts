@@ -2626,6 +2626,9 @@ class Localuser {
 		this.globalShortcuts.registerShortcut("gifSearch", () => {
 			document.getElementById("gifTB")?.click();
 		});
+		this.globalShortcuts.registerShortcut("search", () => {
+			document.getElementById("searchBox")!.focus();
+		});
 	}
 
 	readonly botTokens = new Map<string, string>();

@@ -30,7 +30,7 @@ export class Shortcut {
 		this.nameToCombo.clear();
 	}
 	private static normalize(e: string): string {
-		const code = new Set(e.toLowerCase().split("-"));
+		const code = new Set(e.toLowerCase().split(/[-\+]/));
 		const build = [] as string[];
 		if (code.has("meta")) build.push("meta");
 		if (code.has("ctrl")) build.push("ctrl");

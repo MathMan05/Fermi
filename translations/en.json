@@ -1089,7 +1089,8 @@
 		"shortcuts": "Shortcuts",
 		"empty": "<No keybind set>",
 		"descs": {
-			"gifSearch": "Search GIFs:"
+			"gifSearch": "Search GIFs:",
+			"search": "Search:"
 		}
 	},
 	"domain": {
