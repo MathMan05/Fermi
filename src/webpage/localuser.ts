@@ -2089,6 +2089,19 @@ class Localuser {
 			});
 			dio.show();
 		});
+		menu.addButton(I18n.folder.delete(), async () => {
+			this.guildOrder = this.guildOrder.flatMap((_): typeof this.guildOrder => {
+				if (_ !== folder) return [_];
+				return _.guilds.map((_) => {
+					return {guilds: [_], id: null, name: "", color: null};
+				});
+			});
+			for (const elm of [...divy.children]) {
+				folderDiv.before(elm);
+			}
+			folderDiv.remove();
+			await this.saveGuildOrder();
+		});
 
 		menu.bindContextmenu(iconDiv);
 		if (folder.color !== null && folder.color !== undefined) {
@@ -2143,7 +2156,7 @@ class Localuser {
 				guilds: Guild[];
 				color?: number | null;
 				name: string;
-				id: number;
+				id: number | null;
 		  }
 	)[] = [];
 	buildservers(): void {
