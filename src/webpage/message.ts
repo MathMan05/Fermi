@@ -18,7 +18,7 @@ import {
 	userjson,
 } from "./jsontypes.js";
 import {Emoji} from "./emoji.js";
-import {mobile} from "./utils/utils.js";
+import {createImg, mobile} from "./utils/utils.js";
 import {I18n} from "./i18n.js";
 import {Hover} from "./hover.js";
 import {Dialog} from "./settings.js";
@@ -759,9 +759,10 @@ class Message extends SnowFlake {
 		build.classList.add("flexltr", "message");
 
 		if (this.interaction) {
+			const user = new User(this.interaction.user, this.localuser);
 			const replyline = document.createElement("div");
 
-			const minipfp = document.createElement("img");
+			const minipfp = createImg(user.getpfpsrc());
 			minipfp.classList.add("replypfp");
 			replyline.appendChild(minipfp);
 
@@ -774,12 +775,9 @@ class Message extends SnowFlake {
 			reply.textContent = I18n.interactions.replyline();
 			replyline.appendChild(reply);
 
-			const user = new User(this.interaction.user, this.localuser);
-
-			minipfp.src = user.getpfpsrc();
 			Member.resolveMember(user, this.guild).then((member) => {
 				if (member) {
-					minipfp.src = member.getpfpsrc();
+					minipfp.setSrcs(member.getpfpsrc());
 					username.textContent = member.name;
 					member.subName(username);
 				} else {
@@ -849,7 +847,7 @@ class Message extends SnowFlake {
 		if (this.message_reference && this.type !== 6 && this.type !== 18 && this.type !== 46) {
 			const replyline = document.createElement("div");
 
-			const minipfp = document.createElement("img");
+			const minipfp = createImg(this.info.cdn + "/embed/avatars/4.png");
 			minipfp.classList.add("replypfp");
 			replyline.appendChild(minipfp);
 
@@ -892,7 +890,7 @@ class Message extends SnowFlake {
 				} else {
 					reply.appendChild(message.content.makeHTML({stdsize: true}));
 				}
-				minipfp.src = author.getpfpsrc();
+				minipfp.setSrcs(author.getpfpsrc());
 
 				author.bind(minipfp, this.guild);
 				username.textContent = author.name;
@@ -900,7 +898,7 @@ class Message extends SnowFlake {
 				Member.resolveMember(author, this.guild).then((member) => {
 					if (member) {
 						username.textContent = member.name;
-						minipfp.src = member.getpfpsrc();
+						minipfp.setSrcs(member.getpfpsrc());
 						member.subName(username);
 					} else {
 						author.subName(username);
