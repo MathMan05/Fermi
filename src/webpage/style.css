@@ -4426,8 +4426,8 @@ fieldset input[type="radio"] {
 	max-height: 2.5in;
 }
 .sticker {
-	max-width: 4in;
-	height: 2in;
+	max-width: 4in !important;
+	max-height: 2in;
 }
 .vsmaller {
 	.optionElement {
