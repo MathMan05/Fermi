@@ -231,9 +231,10 @@ if (window.location.pathname.startsWith("/oauth2")) {
 				}
 				if (response_type === "token" || response_type === "code") {
 					if (scopes)
-						for (const scope of scopes.split(",")) {
+						for (let scope of scopes.split(",")) {
 							const div = document.createElement("div");
 							const h2 = document.createElement("h2");
+							scope = scope.replace(".", "DOT");
 							h2.textContent =
 								scope in I18n.oauth2.readableNames
 									? I18n.oauth2.readableNames[scope as keyof typeof I18n.oauth2.readableNames]()

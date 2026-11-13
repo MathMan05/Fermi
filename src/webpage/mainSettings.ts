@@ -1091,11 +1091,14 @@ export async function showusersettings(localuser: Localuser) {
 				permDesc.textContent = I18n.oauth2.permDesc();
 				div.append(head, permDesc);
 
-				for (const scope of scopes) {
+				for (let scope of scopes) {
+					scope = scope.replace(".", "DOT");
 					const p = document.createElement("p");
 					p.textContent =
 						scope in I18n.oauth2.readableNames
-							? I18n.oauth2.readableNames[scope as keyof typeof I18n.oauth2.readableNames]()
+							? I18n.oauth2.readableNames[
+									scope.replace(".", "DOT") as keyof typeof I18n.oauth2.readableNames
+								]()
 							: scope;
 					div.append(p);
 				}
