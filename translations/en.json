@@ -253,7 +253,7 @@
 		"clearWellKnowns": "Re-fetch .well-known records:",
 		"description": "These are for developers of Harmony/Fermi, if you don't know what you're doing, please don't mess with these settings.",
 		"gatewayComp": "Disable Gateway compression:",
-		"reportSystem": "Enable experimental reporting system:",
+		"reportSystem": "Enable experimental reporting system (not implemented on the server yet):",
 		"logGateway": "Log received gateway events (log level info):",
 		"name": "Developer settings",
 		"traces": "Expose traces:"
