@@ -80,7 +80,7 @@ class Message extends SnowFlake {
 	getTimeStamp() {
 		return new Date(this.timestamp).getTime();
 	}
-	static setup() {
+	static {
 		this.del = new Promise((_) => {
 			this.resolve = _;
 		});
@@ -1836,5 +1836,5 @@ function updateTimes() {
 		yesterdayStr = yesterday.toLocaleDateString();
 	}
 }
-Message.setup();
+
 export {Message};
