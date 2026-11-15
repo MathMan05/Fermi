@@ -127,21 +127,26 @@ class I18n {
 			await setPreferences(prefs);
 		}
 	}
+	static {
+		let userLocale = navigator.language.slice(0, 2) || "en";
+		if (I18n.options().indexOf(userLocale) === -1) {
+			userLocale = "en";
+		}
+		const prefs = getPreferences();
+		const storage = prefs.locale;
+		if (storage) {
+			userLocale = storage;
+			I18n.create(userLocale);
+		} else {
+			prefs.locale = userLocale;
+			setPreferences(prefs).then(() => {
+				I18n.create(userLocale);
+			});
+		}
+	}
 }
 console.log(langmap);
-let userLocale = navigator.language.slice(0, 2) || "en";
-if (I18n.options().indexOf(userLocale) === -1) {
-	userLocale = "en";
-}
-const prefs = getPreferences();
-const storage = prefs.locale;
-if (storage) {
-	userLocale = storage;
-} else {
-	prefs.locale = userLocale;
-	await setPreferences(prefs);
-}
-I18n.create(userLocale);
+
 function transForm(inobj: translation, path: string = "") {
 	const obj: Record<string, any> = {};
 	for (const [key, value] of Object.entries(inobj)) {
