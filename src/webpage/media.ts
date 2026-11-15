@@ -2,7 +2,7 @@ import {Contextmenu} from "./contextmenu.js";
 import {I18n} from "./i18n.js";
 import {Dialog} from "./settings.js";
 import {ProgressiveArray} from "./utils/progessiveLoad.js";
-const menu = new Contextmenu<media, undefined>("media");
+export const menu = new Contextmenu<media, undefined>("media");
 menu.addButton(
 	() => I18n.media.download(),
 	function () {
@@ -46,7 +46,7 @@ menu.addButton(
 		}
 	},
 );
-type mediaEvents =
+export type mediaEvents =
 	| {
 			type: "play";
 	  }
@@ -73,7 +73,7 @@ type mediaEvents =
 			type: "end";
 	  };
 
-function makePlayBox(
+export function makePlayBox(
 	mor: string | media,
 	player: MediaPlayer,
 	ctime = 0,
@@ -241,7 +241,7 @@ function makePlayBox(
 	return div;
 }
 
-interface media {
+export interface media {
 	src: string;
 	filename: string;
 	img?: {
@@ -256,7 +256,7 @@ interface media {
 	copyright?: string;
 	length: number | Promise<number>;
 }
-class MediaPlayer {
+export class MediaPlayer {
 	lists: media[] = [];
 	curAudio?: HTMLElement;
 	private listeners: [(e: mediaEvents) => void, string][] = [];
@@ -533,4 +533,3 @@ class MediaPlayer {
 		return output as media;
 	}
 }
-export {MediaPlayer, media, makePlayBox};
