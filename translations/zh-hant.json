@@ -4,6 +4,7 @@
 			"Key0121",
 			"Kly",
 			"LowensteinYang",
+			"PacmanD",
 			"張詠涵"
 		]
 	},
@@ -253,7 +254,7 @@
 		"clearWellKnowns": "重新取得 .well-known 紀錄：",
 		"description": "這些是給 Harmony/Fermi 的開發人員使用，若您不清楚用途，請不要變動這些設定。",
 		"gatewayComp": "停用閘道器壓縮：",
-		"reportSystem": "啟用實驗性回報系統：",
+		"reportSystem": "啟用實驗性回報系統（本伺服器尚未實作）：",
 		"logGateway": "記錄接收到的閘道器事件（日誌等級資訊）：",
 		"name": "開發人員設定",
 		"traces": "暴露痕跡："

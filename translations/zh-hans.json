@@ -263,7 +263,7 @@
 		"clearWellKnowns": "重新获取<code>.well-known</code>记录：",
 		"description": "这些设置是给Harmony/Fermi的开发者用的，如果你不知道自己在做什么，请不要随意更改这些设置。",
 		"gatewayComp": "禁用网关压缩：",
-		"reportSystem": "启用实验性报告系统：",
+		"reportSystem": "启用实验性报告系统（本服务器尚未实现）：",
 		"logGateway": "记录接收到的网关事件（日志级别信息）：",
 		"name": "开发者设置",
 		"traces": "暴露痕迹："
@@ -313,7 +313,8 @@
 		"color": "文件夹颜色：",
 		"create": "创建新文件夹",
 		"edit": "编辑文件夹",
-		"name": "文件夹名称："
+		"name": "文件夹名称：",
+		"delete": "删除文件夹"
 	},
 	"form": {
 		"captcha": "等等，你是人类吗？"
@@ -1013,6 +1014,46 @@
 	"useTemplate": "以$1为模板",
 	"useTemplateButton": "使用模板",
 	"usedFermi": "通过Fermi发送",
+	"oauth2": {
+		"botGuild": "邀请 $1 到您的公会",
+		"grantApp": "授予 $1 权限",
+		"baseScope": "读取公开的个人资料信息",
+		"trusted": "已信任的应用",
+		"trustedDesc": "这些是您已批准代您执行操作的应用",
+		"permDesc": "该应用拥有以下权限：",
+		"unauth": "取消授权",
+		"readableNames": {
+			"activitiesDOTread": "读取活动",
+			"activitiesDOTwrite": "添加活动",
+			"applicationsDOTbuildsDOTread": "读取构建版本数据",
+			"applicationsDOTbuildsDOTupload": "上传构建版本",
+			"applicationsDOTcommands": "向公会添加命令",
+			"applicationsDOTcommandsDOTupdate": "更新命令",
+			"applicationsDOTcommandsDOTpermissionsDOTupdate": "更新命令权限",
+			"applicationsDOTentitlements": "读取应用权限",
+			"applicationsDOTstoreDOTupdate": "储存更新",
+			"bot": "添加机器人",
+			"connections": "读取连接",
+			"dm_channelsDOTread": "读取私信",
+			"email": "读取电子邮件地址",
+			"gdmDOTjoin": "加入群组私信",
+			"guilds": "读取公会",
+			"guildsDOTjoin": "为您加入公会",
+			"guildsDOTmembersDOTread": "读取公会成员",
+			"identify": "读取用户信息",
+			"identifyDOTpremium": "扮鬼吓唬别人",
+			"messagesDOTread": "读取所有消息",
+			"relationshipsDOTread": "读取好友列表",
+			"role_connectionsDOTwrite": "更新连接",
+			"rpc": "控制客户端",
+			"rpcDOTactivitiesDOTwrite": "开始活动",
+			"rpcDOTnotificationsDOTread": "读取活动",
+			"rpcDOTvoiceDOTread": "读取语音状态",
+			"rpcDOTvoiceDOTwrite": "写入语音状态",
+			"voice": "为您连接语音聊天",
+			"webhookDOTincoming": "创建 webhook"
+		}
+	},
 	"user": {
 		"report": "举报用户",
 		"deleted": "已删除的用户",
@@ -1059,7 +1100,8 @@
 		"shortcuts": "快捷键",
 		"empty": "<未设置键位绑定>",
 		"descs": {
-			"gifSearch": "搜索 GIF："
+			"gifSearch": "搜索 GIF：",
+			"search": "搜索："
 		}
 	},
 	"domain": {

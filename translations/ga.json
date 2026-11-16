@@ -5,6 +5,7 @@
 		]
 	},
 	"2faCode": "Cód 2FA:",
+	"donateMessage": "Maireann Fermi ar shíntiúis; smaoinigh, le do thoil, ar shíntiús a thabhairt! Cuidíonn gach rud!",
 	"404": {
 		"404": "earráid:404 - Leathanach Gan Aimsiú",
 		"app": "Chuig an aip",
@@ -17,6 +18,18 @@
 		"title": "Is cosúil go bhfuil tú caillte",
 		"whatelse": "Cad eile a cheapann tú ba chóir a tharlú?",
 		"whereever": "Cibé áit a bhfuil sé seo"
+	},
+	"nomics": "Níor aimsíodh aon mhicreafóin",
+	"mfa": {
+		"totp": "TOTP",
+		"password": "Pasfhocal",
+		"passwordCond": "Pasfhocal:",
+		"webauthn": "Eochair phas",
+		"backup": "Cód cúltaca",
+		"backupIn": "Cód cúltaca:",
+		"giveBackupFile": "Úsáid comhad cód cúltaca",
+		"backupWorked": "D’oibrigh na cóid chúltaca, ach ba cheart duit d’fhíordheimhniú dhá fhachtóir (2FA) a athshocrú leis an $1 {{PLURAL:$1|chód}} atá fágtha agat.",
+		"backupFailed": "Níorbh fhéidir leis an gcomhad cód cúltaca an fíordheimhniú dhá fhachtóir (2FA) a sheachaint"
 	},
 	"filesize": {
 		"B": "B",
@@ -171,6 +184,7 @@
 		"forum": "Fóram",
 		"addChannel": "Cuir cainéal leis"
 	},
+	"charLeft": "Tá $1 {{PLURAL:$1|charachtar}} fágtha agat",
 	"threads": {
 		"leave": "Fág an snáithe",
 		"join": "Glac páirt sa snáithe",
@@ -281,6 +295,7 @@
 	},
 	"emojiSelect": "Emoji:",
 	"gifProvidor": "Soláthraí GIF:",
+	"showTodayAt": "Seó inniu ag:",
 	"errorReconnect": "Ní féidir ceangal leis an bhfreastalaí, déan iarracht eile i gceann **$1** soicind...",
 	"favoriteGifs": "GIFanna is fearr leat",
 	"folder": {
@@ -313,7 +328,7 @@
 	},
 	"goThere": "Sea, déanaimis dul",
 	"goThereTrust": "Sea & muinín a bheith agat as an bhfearann ​​seo as seo amach",
-	"goingToURL": "Seolfaidh an hipearnasc seo chuig $1 thú. An bhfuil tú cinnte gur mhaith leat dul ann?",
+	"goingToURL": "Tabharfaidh an naisc seo tú chuig $1 i gcluaisín nua. An bhfuil tú cinnte gur mian leat dul ann?",
 	"group": {
 		"createdm": "Cruthaigh DM!",
 		"edit": "Cuir comhrá grúpa in eagar",
@@ -520,11 +535,18 @@
 		"advanced": "Socruithe ardleibhéil",
 		"danger": "Crios contúirte",
 		"2faCode:": "Cód:",
+		"reset2FACode": "Cód (nó cód cúltaca):",
 		"2faCodeGive": "Is é seo do rún TOTP: $1. Ginfidh sé seo comhartha 2FA 6 dhigit le tréimhse éaga 30 soicind.",
 		"2fa": "Socruithe 2FA",
 		"2faDisable": "Díchumasaigh 2FA",
 		"2faEnable": "Cumasaigh 2FA",
 		"CheckUpdate": "Seiceáil le haghaidh nuashonruithe",
+		"clockFormatOverride": "Formáid an chloig a shárú:",
+		"clockFormatOverrideValues": {
+			"automatic": "Uathoibríoch",
+			"12hour": "Úsáid AM/PM",
+			"24hour": "Úsáid 24 uair an chloig"
+		},
 		"PasswordsNoMatch": "Ní hionann na pasfhocail",
 		"TOSURL": "Nasc na dTéarmaí Seirbhíse:",
 		"VoiceWarning": "An bhfuil tú cinnte gur mhaith leat é seo a chumasú? Tá sé an-turgnamhach agus is dócha go mbeidh fadhbanna ann. (is do fhorbróirí an ghné seo, ná cumasaigh é mura bhfuil a fhios agat cad atá á dhéanamh agat)",
@@ -578,10 +600,12 @@
 		"appID": "ID an iarratais: $1",
 		"showSecret": "Taispeáin rún an chliaint",
 		"clientSecret": "Rún cliant: $1",
+		"done": "Déanta",
 		"secret": "Rúnda",
 		"publicAvaliable": "An féidir cuireadh poiblí a thabhairt don bhota?",
 		"refreshPage": "Athnuaigh le cur i bhfeidhm",
 		"requireCode": "An bhfuil gá le deonú cód chun cuireadh a thabhairt don bota?",
+		"redirURIs": "URIanna Atreoraithe:",
 		"resetToken": "Athshocraigh an comhartha",
 		"saveToken": "Sábháil an comhartha chuig an stóras áitiúil",
 		"setUp2fa": "Socrú 2FA",
@@ -965,7 +989,10 @@
 		"display": "Taispeáin ar phróifíl:",
 		"delete": "Scrios an Ceangal",
 		"sure": "An bhfuil tú cinnte?",
-		"sureDesc": "Mura mbaintear an nasc seo, ní féidir leat é a chealú"
+		"sureDesc": "Mura mbaintear an nasc seo, ní féidir leat é a chealú",
+		"handle": "Láimhseáil:",
+		"mastodon": "Cuir isteach sonraí an chuntais Mastodon",
+		"mastodonSub": "-# Tá sé seo comhoiriúnach le seirbhísí seachas Mastodon, ar nós wafrn"
 	},
 	"unpinMessage": "Díphionáil teachtaireacht",
 	"updateAv": "Nuashonruithe ar fáil",
@@ -975,6 +1002,46 @@
 	"useTemplate": "Úsáid $1 mar theimpléad",
 	"useTemplateButton": "Úsáid teimpléad",
 	"usedFermi": "seolta trí Fermi",
+	"oauth2": {
+		"botGuild": "Tabhair cuireadh do $1 chuig do cheardchumainn",
+		"grantApp": "Deonaigh ceadanna $1",
+		"baseScope": "Léigh faisnéis phróifíle phoiblí",
+		"trusted": "Aipeanna iontaofa",
+		"trustedDesc": "Seo iad na feidhmchláir ar thug tú cead dóibh gníomhartha a dhéanamh thar do cheann",
+		"permDesc": "Tá na ceadúnais seo a leanas ag an aip:",
+		"unauth": "Díúdarásaigh",
+		"readableNames": {
+			"activitiesDOTread": "Gníomhaíochtaí léitheoireachta",
+			"activitiesDOTwrite": "Cuir gníomhaíochtaí leis",
+			"applicationsDOTbuildsDOTread": "Léigh sonraí tógála",
+			"applicationsDOTbuildsDOTupload": "Uaslódáil tógálacha",
+			"applicationsDOTcommands": "Cuir orduithe leis an gcomhlachas",
+			"applicationsDOTcommandsDOTupdate": "Orduithe nuashonraithe",
+			"applicationsDOTcommandsDOTpermissionsDOTupdate": "Nuashonraigh ceadanna orduithe",
+			"applicationsDOTentitlements": "Léigh cearta feidhmchláir",
+			"applicationsDOTstoreDOTupdate": "Nuashonrú siopa",
+			"bot": "Cuir bot leis",
+			"connections": "Léigh na naisc",
+			"dm_channelsDOTread": "Léigh teachtaireachtaí díreacha",
+			"email": "Léigh an seoladh ríomhphoist",
+			"gdmDOTjoin": "Bí páirteach i dteachtaireachtaí díreacha grúpa",
+			"guilds": "Léigh cumainn",
+			"guildsDOTjoin": "Bí i do bhall de chumainn atá oiriúnach duit",
+			"guildsDOTmembersDOTread": "Léigh baill an cheárdhumhais",
+			"identify": "Léigh faisnéis úsáideora",
+			"identifyDOTpremium": "Cuir taibhsí ar dhaoine",
+			"messagesDOTread": "Léigh gach teachtaireacht",
+			"relationshipsDOTread": "Léigh liosta na gcairde",
+			"role_connectionsDOTwrite": "Nuashonraigh na naisc",
+			"rpc": "Rialaigh an cliant",
+			"rpcDOTactivitiesDOTwrite": "Tosaigh gníomhaíochtaí",
+			"rpcDOTnotificationsDOTread": "Gníomhaíochtaí léitheoireachta",
+			"rpcDOTvoiceDOTread": "Léigh staid an ghutha",
+			"rpcDOTvoiceDOTwrite": "Scríobh staid an ghutha",
+			"voice": "Ceangail le comhráite gutha duit",
+			"webhookDOTincoming": "Cruthaigh crúca gréasáin"
+		}
+	},
 	"user": {
 		"report": "Tuairiscigh úsáideoir",
 		"deleted": "Úsáideoir scriosta",
