@@ -23,6 +23,17 @@
 		"whereever": "Waar dit ook is"
 	},
 	"nomics": "Geen microfoons gevonden",
+	"mfa": {
+		"totp": "TOTP",
+		"password": "Wachtwoord",
+		"passwordCond": "Wachtwoord:",
+		"webauthn": "Toegangssleutel",
+		"backup": "Back-upcode",
+		"backupIn": "Back-upcode:",
+		"giveBackupFile": "Back-upcodebestand gebruiken",
+		"backupWorked": "De back-upcodes werkten, maar u moet uw tweetrapsauthenticatie opnieuw instellen met uw resterende $1 {{PLURAL:$1|code|codes}}",
+		"backupFailed": "Het back-upcodebestand kon de tweetrapsauthenticatie niet omzeilen"
+	},
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
@@ -420,8 +431,8 @@
 			"desc": "Steun de hoofdontwikkelaar van Harmony en Fermi. Die heeft Fermi helemaal zelf ontwikkeld en is de belangrijkste beheerder van Harmony."
 		},
 		"host": {
-			"title": "Steun de gastvrouw",
-			"desc": "Steun de gastvrouw van de belangrijkste Harmony-instantie! Zij helpt het project met haar leiderschap naar de toekomst te leiden en beoordeelt een groot deel van de code die in de Harmony-codebasis wordt gebruikt. CashApp: $1"
+			"title": "Steun de serverprovider",
+			"desc": "Steun de serverprovider van de belangrijkste Harmony-instantie! Die helpt het project met leiderschap naar de toekomst te leiden en beoordeelt een groot deel van de code die in de Harmony-codebasis wordt gebruikt. CashApp: $1"
 		}
 	},
 	"hideBlockedMessages": "U heeft deze gebruiker geblokkeerd. Klik om deze berichten te verbergen.",
@@ -527,6 +538,7 @@
 		"advanced": "Gevorderde instellingen",
 		"danger": "Gevarenzone",
 		"2faCode:": "Code:",
+		"reset2FACode": "Code (of back-upcode):",
 		"2faCodeGive": "Uw TOTP-geheim is: $1. Hiermee wordt een 2FA-token van 6 cijfers gegenereerd met een geldigheidsduur van 30 seconden.",
 		"2fa": "2FA-instellingen",
 		"2faDisable": "Tweetrapsauthenticatie uitschakelen",
@@ -591,10 +603,12 @@
 		"appID": "Toepassings-ID: $1",
 		"showSecret": "Clientgeheim weergeven",
 		"clientSecret": "Cliëntgeheim: $1",
+		"done": "Klaar",
 		"secret": "Geheim",
 		"publicAvaliable": "De robot openbaar uitnodigbaar maken?",
 		"refreshPage": "Vernieuw de pagina om toe te passen",
 		"requireCode": "Codetoekenning vereisen om de robot uit te nodigen?",
+		"redirURIs": "Omleidings-URI's:",
 		"resetToken": "Token opnieuw instellen",
 		"saveToken": "Token lokaal opslaan",
 		"setUp2fa": "Tweetrapsauthenticatie instellen",
@@ -902,7 +916,7 @@
 		"mult": "Meerdere antwoorden toestaan:",
 		"expires": "Vervalt: $1",
 		"tie": "Het was gelijkspel!",
-		"winningAnswer": "Winnend antwoord: $1%",
+		"winningAnswer": "Winnende antwoord: $1%",
 		"view": "Peiling bekijken",
 		"count": "$1 {{PLURAL:$1|stem|stemmen}} $2%"
 	},
@@ -991,6 +1005,46 @@
 	"useTemplate": "$1 als sjabloon gebruiken",
 	"useTemplateButton": "Sjabloon gebruiken",
 	"usedFermi": "verzonden via Fermi",
+	"oauth2": {
+		"botGuild": "$1 uitnodigen voor uw guilds",
+		"grantApp": "$1 rechten verlenen",
+		"baseScope": "Openbare profielinformatie lezen",
+		"trusted": "Vertrouwde apps",
+		"trustedDesc": "Dit zijn de apps die u heeft goedgekeurd om namens u handelingen te verrichten",
+		"permDesc": "De app heeft de volgende rechten:",
+		"unauth": "Autorisatie intrekken",
+		"readableNames": {
+			"activitiesDOTread": "Activiteiten lezen",
+			"activitiesDOTwrite": "Activiteiten toevoegen",
+			"applicationsDOTbuildsDOTread": "Build-gegevens lezen",
+			"applicationsDOTbuildsDOTupload": "Builds uploaden",
+			"applicationsDOTcommands": "Opdrachten aan guild toevoegen",
+			"applicationsDOTcommandsDOTupdate": "Opdrachten bijwerken",
+			"applicationsDOTcommandsDOTpermissionsDOTupdate": "Opdrachtrechten bijwerken",
+			"applicationsDOTentitlements": "App-rechten lezen",
+			"applicationsDOTstoreDOTupdate": "Winkelupdate",
+			"bot": "Een robot toevoegen",
+			"connections": "Verbindingen lezen",
+			"dm_channelsDOTread": "Privéberichten lezen",
+			"email": "E-mailadres lezen",
+			"gdmDOTjoin": "Deelnemen aan groepsprivéberichten",
+			"guilds": "Guilds lezen",
+			"guildsDOTjoin": "Voor u aan guilds deelnemen",
+			"guildsDOTmembersDOTread": "Leden van guild lezen",
+			"identify": "Gebruikersinformatie lezen",
+			"identifyDOTpremium": "Mensen achtervolgen",
+			"messagesDOTread": "Alle berichten lezen",
+			"relationshipsDOTread": "Vriendenlijst lezen",
+			"role_connectionsDOTwrite": "Verbindingen bijwerken",
+			"rpc": "De client besturen",
+			"rpcDOTactivitiesDOTwrite": "Activiteiten starten",
+			"rpcDOTnotificationsDOTread": "Activiteiten lezen",
+			"rpcDOTvoiceDOTread": "Spraakstatus lezen",
+			"rpcDOTvoiceDOTwrite": "Spraakstatus schrijven",
+			"voice": "Voor u verbinding maken met spraakchats",
+			"webhookDOTincoming": "Een webhook aanmaken"
+		}
+	},
 	"user": {
 		"report": "Gebruiker melden",
 		"deleted": "Gebruiker verwijderd",

@@ -248,6 +248,11 @@
 		"clear": "खाली करें"
 	},
 	"todayAt": "आज $1 पर",
+	"keyboard": {
+		"descs": {
+			"search": "खोजें:"
+		}
+	},
 	"webhooks": {
 		"name": "नाम:"
 	},

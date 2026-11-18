@@ -6,6 +6,7 @@
 		]
 	},
 	"2faCode": "Kód 2FA:",
+	"donateMessage": "Fermi žije z darov, zvážte prosím príspevok! Pomôže čokoľvek!",
 	"404": {
 		"404": "chyba:404 – Stránka nenájdená",
 		"app": "Do aplikácie",
@@ -18,6 +19,18 @@
 		"title": "Zdá sa, že ste sa stratili",
 		"whatelse": "Čo iné by sa podľa vás malo stať?",
 		"whereever": "Nech je to kdekoľvek"
+	},
+	"nomics": "Nenašli sa žiadne mikrofóny",
+	"mfa": {
+		"totp": "TOTP",
+		"password": "Heslo",
+		"passwordCond": "Heslo:",
+		"webauthn": "Prístupový kľúč",
+		"backup": "Záložný kód",
+		"backupIn": "Záložný kód:",
+		"giveBackupFile": "Použiť súbor so záložnými kódmi",
+		"backupWorked": "Záložné kódy zafungovali, mali by ste však obnoviť 2FA pomocou {{PLURAL:$1|one=zostávajúceho $1 kódu|few=zostávajúcich $1 kódov|many=zostávajúcich $1 kódu|zostávajúcich $1 kódov}}",
+		"backupFailed": "Súborom so záložnými kódmi sa nepodarilo obísť 2FA"
 	},
 	"filesize": {
 		"B": "B",
@@ -172,6 +185,7 @@
 		"forum": "Fórum",
 		"addChannel": "Pridať kanál"
 	},
+	"charLeft": "{{PLURAL:$1|one=Zostáva vám $1 znak|few=Zostávajú vám $1 znaky|many=Zostáva vám $1 znaku|Zostáva vám $1 znakov}}",
 	"threads": {
 		"leave": "Opustiť vlákno",
 		"join": "Pripojiť sa k vláknu",
@@ -282,6 +296,7 @@
 	},
 	"emojiSelect": "Emoji:",
 	"gifProvidor": "Poskytovateľ Gif:",
+	"showTodayAt": "Dnes zobraziť o:",
 	"errorReconnect": "Nepodarilo sa pripojiť k serveru, ďalší pokus o **$1** s...",
 	"favoriteGifs": "Obľúbené GIFy",
 	"folder": {
@@ -314,7 +329,7 @@
 	},
 	"goThere": "Áno, poďme na to",
 	"goThereTrust": "Áno a odteraz dôverovať tejto doméne",
-	"goingToURL": "Tento odkaz vás presmeruje na $1. Naozaj tam chcete ísť?",
+	"goingToURL": "Tento odkaz vás presmeruje na $1 na novej karte. Naozaj tam chcete ísť?",
 	"group": {
 		"createdm": "Vytvoriť súkromnú správu!",
 		"edit": "Upraviť skupinový chat",
@@ -521,11 +536,18 @@
 		"advanced": "Rozšírené nastavenia",
 		"danger": "Nebezpečná zóna",
 		"2faCode:": "Kód:",
+		"reset2FACode": "Kód (alebo záložný kód):",
 		"2faCodeGive": "Váš TOTP kľúč je: $1. Vygeneruje 6-miestny kód 2FA s platnosťou 30 sekúnd.",
 		"2fa": "Nastavenia 2FA",
 		"2faDisable": "Vypnúť 2FA",
 		"2faEnable": "Zapnúť 2FA",
 		"CheckUpdate": "Skontrolovať aktualizácie",
+		"clockFormatOverride": "Vlastný formát času:",
+		"clockFormatOverrideValues": {
+			"automatic": "Automaticky",
+			"12hour": "Používať AM/PM",
+			"24hour": "Používať 24-hodinový formát"
+		},
 		"PasswordsNoMatch": "Heslá sa nezhodujú",
 		"TOSURL": "Odkaz na podmienky používania:",
 		"VoiceWarning": "Naozaj to chcete zapnúť? Je to veľmi experimentálne a pravdepodobne to spôsobí problémy. (Táto funkcia je pre vývojárov, prosím nezapínajte ju, ak neviete, čo robíte.)",
@@ -579,10 +601,12 @@
 		"appID": "ID aplikácie: $1",
 		"showSecret": "Zobraziť tajný kľúč klienta",
 		"clientSecret": "Tajný kľúč klienta: $1",
+		"done": "Hotovo",
 		"secret": "Tajný kľúč",
 		"publicAvaliable": "Umožniť verejné pozývanie bota?",
 		"refreshPage": "Obnovte stránku, aby sa zmeny prejavili",
 		"requireCode": "Vyžadovať autorizačný kód (code grant) na pozvanie bota?",
+		"redirURIs": "URI presmerovania:",
 		"resetToken": "Resetovať token",
 		"saveToken": "Uložiť token do localStorage",
 		"setUp2fa": "Nastavenie 2FA",
@@ -966,7 +990,10 @@
 		"display": "Zobraziť v profile:",
 		"delete": "Odstrániť prepojenie",
 		"sure": "Ste si istý?",
-		"sureDesc": "Ak toto prepojenie odstránite, nemožno to vrátiť späť"
+		"sureDesc": "Ak toto prepojenie odstránite, nemožno to vrátiť späť",
+		"handle": "Používateľské meno:",
+		"mastodon": "Zadajte údaje účtu Mastodon",
+		"mastodonSub": "-# Funguje aj so službami mimo Mastodonu, napríklad wafrn"
 	},
 	"unpinMessage": "Odopnúť správu",
 	"updateAv": "K dispozícii sú aktualizácie",
@@ -976,6 +1003,46 @@
 	"useTemplate": "Použiť $1 ako šablónu",
 	"useTemplateButton": "Použiť šablónu",
 	"usedFermi": "odoslané cez Fermi",
+	"oauth2": {
+		"botGuild": "Pozvať $1 na vaše servery",
+		"grantApp": "Udeliť povolenia aplikácii $1",
+		"baseScope": "Čítať informácie verejného profilu",
+		"trusted": "Dôveryhodné aplikácie",
+		"trustedDesc": "Toto sú aplikácie, ktorým ste povolili konať vo vašom mene",
+		"permDesc": "Aplikácia má tieto povolenia:",
+		"unauth": "Zrušiť autorizáciu",
+		"readableNames": {
+			"activitiesDOTread": "Čítať aktivity",
+			"activitiesDOTwrite": "Pridávať aktivity",
+			"applicationsDOTbuildsDOTread": "Čítať údaje o zostaveniach",
+			"applicationsDOTbuildsDOTupload": "Nahrávať zostavenia",
+			"applicationsDOTcommands": "Pridávať príkazy na server",
+			"applicationsDOTcommandsDOTupdate": "Aktualizovať príkazy",
+			"applicationsDOTcommandsDOTpermissionsDOTupdate": "Aktualizovať povolenia príkazov",
+			"applicationsDOTentitlements": "Čítať nároky aplikácie",
+			"applicationsDOTstoreDOTupdate": "Aktualizovať obchod",
+			"bot": "Pridať bota",
+			"connections": "Čítať prepojenia",
+			"dm_channelsDOTread": "Čítať súkromné správy",
+			"email": "Čítať e-mailovú adresu",
+			"gdmDOTjoin": "Pripájať sa ku skupinovým správam",
+			"guilds": "Čítať servery",
+			"guildsDOTjoin": "Pripájať sa na servery za vás",
+			"guildsDOTmembersDOTread": "Čítať členov servera",
+			"identify": "Čítať informácie o používateľovi",
+			"identifyDOTpremium": "Strašiť ľudí",
+			"messagesDOTread": "Čítať všetky správy",
+			"relationshipsDOTread": "Čítať zoznam priateľov",
+			"role_connectionsDOTwrite": "Aktualizovať prepojenia",
+			"rpc": "Ovládať klienta",
+			"rpcDOTactivitiesDOTwrite": "Spúšťať aktivity",
+			"rpcDOTnotificationsDOTread": "Čítať aktivity",
+			"rpcDOTvoiceDOTread": "Čítať stav hlasu",
+			"rpcDOTvoiceDOTwrite": "Meniť stav hlasu",
+			"voice": "Pripájať sa k hlasovým chatom za vás",
+			"webhookDOTincoming": "Vytvoriť webhook"
+		}
+	},
 	"user": {
 		"report": "Nahlásiť používateľa",
 		"deleted": "Odstránený používateľ",

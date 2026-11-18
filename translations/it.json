@@ -219,7 +219,7 @@
 	"deleteConfirm": "Sei sicuro di voler cancellare questo?",
 	"devSettings": {
 		"description": "Queste impostazioni sono riservate agli sviluppatori di Harmony/Fermi, se non sapete cosa state facendo, vi preghiamo di non modificarle.",
-		"reportSystem": "Attiva sistema di segnalazione sperimentale:",
+		"reportSystem": "Attiva il sistema di segnalazione sperimentale (non ancora implementato sul server):",
 		"name": "Impostazioni sviluppatore"
 	},
 	"deviceManage": {
@@ -264,7 +264,8 @@
 		"color": "Colore cartella:",
 		"create": "Crea una nuova cartella",
 		"edit": "Modifica cartella",
-		"name": "Nome cartella:"
+		"name": "Nome cartella:",
+		"delete": "Cancella cartella"
 	},
 	"form": {
 		"captcha": "Aspetta, sei un essere umano?"
@@ -719,7 +720,8 @@
 	"keyboard": {
 		"shortcuts": "Tasti di scelta rapida",
 		"descs": {
-			"gifSearch": "Ricerca GIF:"
+			"gifSearch": "Ricerca GIF:",
+			"search": "Cerca:"
 		}
 	},
 	"domain": {
