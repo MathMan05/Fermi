@@ -27,7 +27,6 @@ import {Role} from "./role.js";
 import {VoiceFactory, voiceStatusStr} from "./voice.js";
 import {I18n} from "./i18n.js";
 import {Emoji} from "./emoji.js";
-import {Play} from "./audio/play.js";
 import {Message} from "./message.js";
 import {badgeArr} from "./Dbadges.js";
 import {Rights} from "./rights.js";
@@ -47,9 +46,8 @@ import {Shortcut} from "./shortcuts/shortcut.js";
 import {getShortcuts} from "./utils/storage/shortcuts.js";
 import {TypeBox} from "./typeBox.js";
 import {InstnaceConfig} from "./instanceConfig.js";
-import {FS} from "./fs/index.js";
-import {decode64} from "./utils/base64.js";
 import {showBanner} from "./utils/bannerController.js";
+import {SuperUser} from "./superuser.js";
 export type traceObj = {
 	micros: number;
 	calls?: (string | traceObj)[];
@@ -91,7 +89,6 @@ class Localuser {
 	readonly idToPrev = new Map<string, string | undefined>();
 	readonly idToNext = new Map<string, string | undefined>();
 	static readonly globalShortcuts = new Shortcut();
-	fs = new FS();
 	get status() {
 		return this.user.status;
 	}
@@ -104,7 +101,7 @@ class Localuser {
 	private connectionSucceed = 0;
 	private errorBackoff = 0;
 	voiceFactory?: VoiceFactory;
-	play?: Play;
+
 	instancePing = {
 		name: "Unknown",
 	};
@@ -116,7 +113,7 @@ class Localuser {
 		this.userinfo.localuserStore = e;
 	}
 	static users = getBulkUsers();
-	static async showAccountSwitcher(thisUser?: Localuser) {
+	static async showAccountSwitcher(su: SuperUser, thisUser?: Localuser) {
 		const specialUser = await new AccountSwitcher().show();
 
 		const onswap = thisUser?.onswap;
@@ -126,7 +123,7 @@ class Localuser {
 		loading.classList.remove("doneloading");
 		loading.classList.add("loading");
 
-		thisUser = new Localuser(specialUser);
+		thisUser = new Localuser(specialUser, su);
 		Localuser.users.currentuser = specialUser.uid;
 		sessionStorage.setItem("currentuser", specialUser.uid);
 		localStorage.setItem("userinfos", JSON.stringify(Localuser.users));
@@ -219,7 +216,7 @@ class Localuser {
 		menu.addButton(
 			() => I18n.switchAccounts(),
 			function () {
-				Localuser.showAccountSwitcher(this);
+				Localuser.showAccountSwitcher(this.superUser, this);
 			},
 		);
 		return menu;
@@ -269,11 +266,10 @@ class Localuser {
 		return [];
 	}
 	onswap?: (l: Localuser) => void;
-	constructor(userinfo: Specialuser) {
+	superUser: SuperUser;
+	constructor(userinfo: Specialuser, su: SuperUser) {
+		this.superUser = su;
 		this.conf = new InstnaceConfig(userinfo.serverurls.api);
-		Play.playURL("/audio/sounds.jasf").then((_) => {
-			this.play = _;
-		});
 
 		this.userinfo = userinfo;
 		this.perminfo.guilds ??= {};
@@ -4041,52 +4037,6 @@ class Localuser {
 		return new Promise((res) => {
 			this.urlsToRefresh.push([url, res]);
 		});
-	}
-	getNotiVolume(): number {
-		const userinfos = getBulkInfo();
-		return userinfos.preferences.volume ?? 20;
-	}
-	setNotificationVolume(volume: number) {
-		const userinfos = getBulkInfo();
-		userinfos.preferences.volume = volume;
-		localStorage.setItem("userinfos", JSON.stringify(userinfos));
-	}
-	setNotificationSound(sound: string) {
-		const userinfos = getBulkInfo();
-		userinfos.preferences.notisound = sound;
-		localStorage.setItem("userinfos", JSON.stringify(userinfos));
-	}
-	async playSound(name = this.getNotificationSound()) {
-		const volume = this.getNotiVolume();
-		if (this.play) {
-			const voice = this.play.tracks.includes(name);
-			if (voice) {
-				this.play.play(name, volume);
-			} else {
-				const audio = document.createElement("audio");
-				let sound = await this.fs.getFile("/customSound", false);
-				if (this.perminfo.sound?.cSound) {
-					const s = this.perminfo.sound.cSound as string;
-					if (!s) return;
-					const byteString = s.split(",")[1];
-
-					sound = await this.fs.getFile("/customSound", true);
-					if (!sound) return;
-					await sound.write(decode64(byteString));
-					delete this.perminfo.sound;
-				}
-				if (!sound) return;
-				audio.volume = volume / 100;
-				audio.src = await sound.getURL();
-				audio.play().catch();
-			}
-		} else {
-			console.error("play object is missing");
-		}
-	}
-	getNotificationSound() {
-		const userinfos = getBulkInfo();
-		return userinfos.preferences.notisound;
 	}
 }
 Localuser.globalShortcuts.listen(document.body);

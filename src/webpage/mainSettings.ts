@@ -508,12 +508,12 @@ export async function showusersettings(localuser: Localuser) {
 							reader.onload = async () => {
 								let buffer = reader.result;
 								if (!(buffer instanceof ArrayBuffer)) return;
-								const sound = await localuser.fs.getFile("/customSound", true);
+								const sound = await localuser.superUser.fs.getFile("/customSound", true);
 								if (!sound) {
 									return;
 								}
 								sound.write(buffer);
-								localuser.playSound("custom");
+								localuser.superUser.playSound(localuser, "custom");
 							};
 							reader.readAsArrayBuffer(file);
 						}
@@ -523,28 +523,28 @@ export async function showusersettings(localuser: Localuser) {
 					area.innerHTML = "";
 				}
 			};
-			const sounds = [...(localuser.play?.tracks || []), I18n.localuser.customSound()];
-			const initIndex = sounds.indexOf(localuser.getNotificationSound());
+			const sounds = [...(localuser.superUser.play?.tracks || []), I18n.localuser.customSound()];
+			const initIndex = sounds.indexOf(localuser.superUser.getNotificationSound());
 			const select = tas.addSelect(
 				I18n.localuser.notisound(),
 				(index) => {
-					localuser.setNotificationSound(sounds[index]);
+					localuser.superUser.setNotificationSound(sounds[index]);
 				},
 				sounds,
 				{defaultIndex: initIndex},
 			);
 			select.watchForChange((index) => {
 				initArea(index);
-				localuser.playSound(sounds[index]);
+				localuser.superUser.playSound(localuser, sounds[index]);
 			});
 			const input = document.createElement("input");
 			input.type = "range";
-			input.value = localuser.getNotiVolume() + "";
+			input.value = localuser.superUser.getNotiVolume() + "";
 			input.min = "0";
 			input.max = "100";
 			input.onchange = () => {
-				localuser.setNotificationVolume(+input.value);
-				localuser.playSound(sounds[select.index]);
+				localuser.superUser.setNotificationVolume(+input.value);
+				localuser.superUser.playSound(localuser, sounds[select.index]);
 			};
 
 			const area = document.createElement("div");

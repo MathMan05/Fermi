@@ -1,4 +1,6 @@
+import {Play} from "./audio/play";
 import {Contextmenu} from "./contextmenu";
+import {FS} from "./fs";
 import {Hover} from "./hover";
 import {I18n} from "./i18n";
 import {Localuser} from "./localuser";
@@ -6,8 +8,9 @@ import {makeLogin} from "./login";
 import {showusersettings} from "./mainSettings";
 import {MarkDown} from "./markdown";
 import {TypeBox} from "./typeBox";
+import {decode64} from "./utils/base64";
 import {getPreferences} from "./utils/storage/userPreferences";
-import {mobile, setTheme, Specialuser} from "./utils/utils";
+import {getBulkInfo, mobile, setTheme, Specialuser} from "./utils/utils";
 
 export class SuperUser {
 	locals: Localuser[] = [];
@@ -90,7 +93,7 @@ export class SuperUser {
 		switchAccountsElement.addEventListener("click", async (event) => {
 			event.stopImmediatePropagation();
 			if (!this.current) return;
-			Localuser.showAccountSwitcher(this.current);
+			Localuser.showAccountSwitcher(this, this.current);
 		});
 		const loaddesc = document.getElementById("load-desc") as HTMLSpanElement;
 		try {
@@ -98,9 +101,10 @@ export class SuperUser {
 			if (!Localuser.users.users[current]) {
 				this.current = new Localuser(
 					await new Promise<Specialuser>((res) => makeLogin(true, "", res)),
+					this,
 				);
 			} else {
-				this.current = new Localuser(Localuser.users.users[current]);
+				this.current = new Localuser(Localuser.users.users[current], this);
 			}
 
 			this.current.initwebsocket().then(async () => {
@@ -261,5 +265,56 @@ export class SuperUser {
 			span.textContent = e.replace("\n", "");
 			return span;
 		});
+		Play.playURL("/audio/sounds.jasf").then((_) => {
+			this.play = _;
+		});
+	}
+	getNotiVolume(): number {
+		const userinfos = getBulkInfo();
+		return userinfos.preferences.volume ?? 20;
+	}
+	setNotificationVolume(volume: number) {
+		const userinfos = getBulkInfo();
+		userinfos.preferences.volume = volume;
+		localStorage.setItem("userinfos", JSON.stringify(userinfos));
+	}
+	setNotificationSound(sound: string) {
+		const userinfos = getBulkInfo();
+		userinfos.preferences.notisound = sound;
+		localStorage.setItem("userinfos", JSON.stringify(userinfos));
+	}
+	play?: Play;
+	fs = new FS();
+	async playSound(local: Localuser, name = this.getNotificationSound()) {
+		const volume = this.getNotiVolume();
+		if (this.play) {
+			const voice = this.play.tracks.includes(name);
+			if (voice) {
+				this.play.play(name, volume);
+			} else {
+				const audio = document.createElement("audio");
+				let sound = await this.fs.getFile("/customSound", false);
+				if (local.perminfo.sound?.cSound) {
+					const s = local.perminfo.sound.cSound as string;
+					if (!s) return;
+					const byteString = s.split(",")[1];
+
+					sound = await this.fs.getFile("/customSound", true);
+					if (!sound) return;
+					await sound.write(decode64(byteString));
+					delete local.perminfo.sound;
+				}
+				if (!sound) return;
+				audio.volume = volume / 100;
+				audio.src = await sound.getURL();
+				audio.play().catch();
+			}
+		} else {
+			console.error("play object is missing");
+		}
+	}
+	getNotificationSound() {
+		const userinfos = getBulkInfo();
+		return userinfos.preferences.notisound;
 	}
 }
