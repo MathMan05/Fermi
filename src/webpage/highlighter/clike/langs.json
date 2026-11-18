@@ -1,7 +1,7 @@
 [
 {
 	"names":["js","ts","typescript","javascript","tscript","jscript"],
-	"keywords": ["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do","else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "let", "await", "true", "false", "null", "undefined"],
+	"keywords": ["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do","else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "new", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "let", "await", "true", "false", "null", "undefined", "async"],
 	"firstLineShebang": true,
 	"doubleSlashComments": true,
 	"multilineSlashComments": true,
