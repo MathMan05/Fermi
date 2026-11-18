@@ -85,14 +85,12 @@ if (window.location.pathname.startsWith("/channels")) {
 		thisUser.initwebsocket().then(async () => {
 			if (thisUser) TypeBox.regSwap(thisUser);
 			thisUser?.loaduser();
-			console.warn("huh");
 			await thisUser?.init();
-			console.warn("huh2");
 			const loading = document.getElementById("loading") as HTMLDivElement;
 			loading.classList.add("doneloading");
 			loading.classList.remove("loading");
 			loaddesc.textContent = I18n.loaded();
-			console.log("done loading");
+
 			if (templateID) {
 				thisUser?.passTemplateID(templateID);
 			}
