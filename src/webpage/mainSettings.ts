@@ -5,6 +5,7 @@ import {Localuser, trace, traceObj} from "./localuser";
 import {MarkDown} from "./markdown";
 import {oauthScopes} from "./oauth2/util";
 import {buttonColor, Dialog, FormError, Settings} from "./settings";
+import {SuperUser} from "./superuser";
 import {CDNParams} from "./utils/cdnParams";
 import {getDeveloperSettings, setDeveloperSettings} from "./utils/storage/devSettings";
 import {getLocalSettings, ServiceWorkerModeValues} from "./utils/storage/localSettings";
@@ -566,7 +567,7 @@ export async function showusersettings(localuser: Localuser) {
 			);
 		}
 		{
-			const options = [[null, I18n.noEmojiFont()], ...Localuser.fonts] as const;
+			const options = [[null, I18n.noEmojiFont()], ...SuperUser.fonts] as const;
 			const cur = prefs.emojiFont;
 			let index = options.findIndex((_) => _[1] == cur);
 			if (index === -1) index = 0;
@@ -580,7 +581,7 @@ export async function showusersettings(localuser: Localuser) {
 					}
 
 					await setPreferences(prefs);
-					Localuser.loadFont();
+					SuperUser.loadFont();
 				},
 				options.map((font) => font[1]),
 				{
@@ -598,7 +599,7 @@ export async function showusersettings(localuser: Localuser) {
 					console.log(prefs.gifProvidor);
 
 					await setPreferences(prefs);
-					Localuser.loadFont();
+					SuperUser.loadFont();
 					localuser.figureDefaultProvidor();
 				},
 				localuser.gifProvideors.map((_) => _.name),

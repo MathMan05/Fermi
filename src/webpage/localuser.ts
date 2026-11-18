@@ -3784,38 +3784,7 @@ class Localuser {
 		Map<string, (returns: memberjson | undefined) => void>
 	>();
 	readonly presences = new Map<string, presencejson>();
-	static font?: FontFace;
-	static async loadFont() {
-		const prefs = getPreferences();
-		const fontName = prefs.emojiFont;
 
-		if (this.font) {
-			//TODO see when/if this can be removed
-			//@ts-ignore this is stupid. it's been here since 2020
-			document.fonts.delete(this.font);
-		}
-
-		const realname = this.fonts.find((_) => _[1] === fontName)?.[0];
-		if (realname) {
-			const font = new FontFace("emojiFont", `url("/emoji/${realname}")`);
-			await font.load();
-			console.error("Loaded font:", fontName, "/", realname);
-			//TODO see when/if this can be removed
-			//@ts-ignore this is stupid. it's been here since 2020
-			document.fonts.add(font);
-			console.log(font);
-			this.font = font;
-		}
-	}
-	static get fonts() {
-		const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
-		return [
-			[`NotoColorEmoji-Regular.${isFirefox ? "woff2" : "ttf"}`, "Noto Color Emoji"],
-			[`OpenMoji-color-glyf_colr_0.woff2`, "OpenMoji"],
-			[`Twemoji-16.0.1.${isFirefox ? "woff2" : "ttf"}`, "Twemoji"],
-			[`BlobmojiCompat.${isFirefox ? "woff2" : "ttf"}`, "Blobmoji"],
-		] as const;
-	}
 	readonly getMemberMap = new Map<string, Promise<Member | undefined>>();
 	async getMember(id: string, guildid: string): Promise<Member | undefined> {
 		const user = this.userMap.get(id);
