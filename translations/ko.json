@@ -253,7 +253,7 @@
 		"clearWellKnowns": ".well-known 레코드를 다시 가져옴:",
 		"description": "이 설정은 Harmony/페르미 개발자를 위한 것입니다. 사용법을 잘 모르시는 분은 이 설정을 건드리지 마세요.",
 		"gatewayComp": "게이트웨이 압축을 비활성화:",
-		"reportSystem": "실험 신고 시스템을 활성화:",
+		"reportSystem": "실험 신고 시스템을 활성화 (서버에는 아직 구현되지 않음):",
 		"logGateway": "수신된 게이트웨이 이벤트 로그(로그 레벨 정보):",
 		"name": "개발자 설정",
 		"traces": "흔적 드러내기:"
