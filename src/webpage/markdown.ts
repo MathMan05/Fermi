@@ -75,8 +75,8 @@ class MarkDown {
 	makeHTML({keep = this.keep, stdsize = this.stdsize} = {}) {
 		return this.markdown(this.txt, {keep, stdsize});
 	}
-	markdown(text: string | string[], {keep = false, stdsize = false} = {}) {
-		if (!keep && !stdsize) {
+	markdown(text: string | string[], {keep = false, stdsize = false, first = true} = {}) {
+		if (!keep && !stdsize && first) {
 			let str: string;
 			if (text instanceof Array) {
 				str = text.join("");
@@ -208,7 +208,7 @@ class MarkDown {
 						if (keep) {
 							element.append(keepys);
 						}
-						element.appendChild(this.markdown(build, {keep, stdsize}));
+						element.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						span.append(element);
 					} finally {
 						i -= 1;
@@ -236,7 +236,7 @@ class MarkDown {
 								arr.push(txt[j]);
 							}
 							i = j;
-							const line = this.markdown(arr);
+							const line = this.markdown(arr, {keep, stdsize, first: false});
 							if (keep) {
 								if (!first) {
 									current.textContent += "\n";
@@ -423,7 +423,7 @@ class MarkDown {
 						if (keep) {
 							i.append(stars);
 						}
-						i.appendChild(this.markdown(build, {keep, stdsize}));
+						i.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						if (keep) {
 							i.append(stars);
 						}
@@ -433,7 +433,7 @@ class MarkDown {
 						if (keep) {
 							b.append(stars);
 						}
-						b.appendChild(this.markdown(build, {keep, stdsize}));
+						b.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						if (keep) {
 							b.append(stars);
 						}
@@ -444,7 +444,7 @@ class MarkDown {
 						if (keep) {
 							b.append(stars);
 						}
-						b.appendChild(this.markdown(build, {keep, stdsize}));
+						b.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						if (keep) {
 							b.append(stars);
 						}
@@ -490,7 +490,7 @@ class MarkDown {
 						if (keep) {
 							i.append(underscores);
 						}
-						i.appendChild(this.markdown(build, {keep, stdsize}));
+						i.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						if (keep) {
 							i.append(underscores);
 						}
@@ -500,7 +500,7 @@ class MarkDown {
 						if (keep) {
 							u.append(underscores);
 						}
-						u.appendChild(this.markdown(build, {keep, stdsize}));
+						u.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						if (keep) {
 							u.append(underscores);
 						}
@@ -511,7 +511,7 @@ class MarkDown {
 						if (keep) {
 							i.append(underscores);
 						}
-						i.appendChild(this.markdown(build, {keep, stdsize}));
+						i.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						if (keep) {
 							i.append(underscores);
 						}
@@ -548,7 +548,7 @@ class MarkDown {
 						if (keep) {
 							s.append(tildes);
 						}
-						s.appendChild(this.markdown(build, {keep, stdsize}));
+						s.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						if (keep) {
 							s.append(tildes);
 						}
@@ -582,7 +582,7 @@ class MarkDown {
 						if (keep) {
 							j.append(pipes);
 						}
-						j.appendChild(this.markdown(build, {keep, stdsize}));
+						j.appendChild(this.markdown(build, {keep, stdsize, first: false}));
 						j.classList.add("spoiler");
 						j.onclick = MarkDown.unspoil;
 						if (keep) {
@@ -970,7 +970,7 @@ class MarkDown {
 							i = j;
 							if (!stdsize) {
 								MarkDown.safeLink(linkElem, parts[2]);
-								linkElem.append(this.markdown(parts[1], {keep, stdsize}));
+								linkElem.append(this.markdown(parts[1], {keep, stdsize, first: false}));
 								linkElem.target = "_blank";
 								linkElem.rel = "noopener noreferrer";
 							}
