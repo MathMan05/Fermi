@@ -1195,7 +1195,7 @@ class Channel extends SnowFlake {
 
 			this.updateVoiceUsers();
 			if (this.voice === this.localuser.currentVoice && this.voice?.open) {
-				this.localuser.play?.play("join", this.localuser.getNotiVolume());
+				this.localuser.superUser.play?.play("join", this.localuser.superUser.getNotiVolume());
 			}
 		};
 		this.voice.onUserChange = (user, change) => {
@@ -3861,8 +3861,8 @@ class Channel extends SnowFlake {
 			return;
 		}
 
-		if (this.localuser.play) {
-			this.localuser.playSound();
+		if (this.localuser.superUser.play) {
+			this.localuser.superUser.playSound(this.localuser);
 		} else {
 			console.warn("no play 3:");
 		}
