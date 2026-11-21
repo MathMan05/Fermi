@@ -2756,6 +2756,7 @@ class Channel extends SnowFlake {
 		}, 10000);
 		if (memb.id === this.localuser.user.id) {
 			console.log("you is typing");
+			this.rendertyping();
 			return;
 		}
 		console.log("user is typing and you should see it");
