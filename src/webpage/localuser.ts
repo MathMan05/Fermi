@@ -857,7 +857,7 @@ class Localuser {
 				}
 				case "TYPING_START":
 					if (this.initialized) {
-						this.typingStart(temp);
+						this.typingStartEvent(temp);
 					}
 					break;
 				case "USER_UPDATE":
@@ -2477,10 +2477,10 @@ class Localuser {
 		}
 		return sum;
 	}
-	async typingStart(typing: startTypingjson): Promise<void> {
+	async typingStartEvent(typing: startTypingjson): Promise<void> {
 		const channel = this.channels.get(typing.d.channel_id);
 		if (!channel) return;
-		channel.typingStart(typing);
+		channel.typingStartEvent(typing);
 	}
 	updatepfp(file: Blob | null): void {
 		if (file) {

@@ -2742,7 +2742,7 @@ class Channel extends SnowFlake {
 		//loading.classList.remove("loading");
 	}
 	typingmap: Map<Member | User, number> = new Map();
-	async typingStart(typing: startTypingjson): Promise<void> {
+	async typingStartEvent(typing: startTypingjson): Promise<void> {
 		const memb = typing.d.member
 			? await Member.new(typing.d.member, this.guild)
 			: await this.localuser.getUser(typing.d.user_id);

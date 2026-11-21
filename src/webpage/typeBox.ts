@@ -315,7 +315,7 @@ export class TypeBox {
 			channel.editLast();
 			return;
 		}
-		channel.typingstart();
+		if ([...event.key].length === 1) channel.typingstart();
 
 		if (event.key === "Enter" && !event.shiftKey && window.innerWidth > 600 && !this.inPre()) {
 			event.preventDefault();
