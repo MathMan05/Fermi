@@ -2673,14 +2673,17 @@ class Channel extends SnowFlake {
 			this.myhtml.classList.add("viewChannel");
 		}
 		const id = ++Channel.genid;
-
 		if (this.localuser.focusChannel && this.localuser.focusChannel !== this) {
 			this.localuser.focusChannel.infinite.delete();
+			const prev = this.localuser.focusChannel;
+			this.localuser.focusChannel = this;
 
 			if (this.localuser.focusChannel.isThread() && !this.localuser.focusChannel.member) {
-				const prev = this.localuser.focusChannel;
-				this.localuser.focusChannel = this;
 				prev.parent?.createguildHTML();
+			}
+			for (const thing of prev.typingmap.keys()) {
+				const u = thing instanceof Member ? thing.user : thing;
+				u.statusChange();
 			}
 		} else if (this.localuser.focusChannel === this && !aroundMessage && !this.isForum()) {
 			if (this.lastmessageid)
@@ -2748,11 +2751,8 @@ class Channel extends SnowFlake {
 			: await this.localuser.getUser(typing.d.user_id);
 		if (!memb) return;
 		this.typingmap.set(memb, Date.now());
-		const user = memb instanceof User ? memb : memb.user;
-		user.statusChange();
 		setTimeout(() => {
 			this.rendertyping();
-			user.statusChange();
 		}, 10000);
 		if (memb.id === this.localuser.user.id) {
 			console.log("you is typing");
@@ -2791,6 +2791,8 @@ class Channel extends SnowFlake {
 			} else {
 				this.typingmap.delete(thing);
 			}
+			const u = thing instanceof Member ? thing.user : thing;
+			u.statusChange();
 		}
 		build = I18n.typing(i + "", build);
 		if (this.localuser.focusChannel === this) {

@@ -831,16 +831,8 @@ class User extends SnowFlake {
 		return div;
 	}
 	updateStatusSet = new Set<WeakRef<HTMLDivElement>>();
-	contextMap = new WeakMap<HTMLDivElement, Guild | Channel>();
 	localstatusUpdate = () => {};
-	registerStatus(status: HTMLDivElement, thing: Guild | void | Member | null | Channel) {
-		if (thing) {
-			if (thing instanceof Member) {
-				this.contextMap.set(status, thing.guild);
-			} else {
-				this.contextMap.set(status, thing);
-			}
-		}
+	registerStatus(status: HTMLDivElement) {
 		this.updateStatusSet.add(new WeakRef(status));
 		this.updateStatus(status);
 	}
@@ -859,16 +851,11 @@ class User extends SnowFlake {
 				status.classList.add("onlinestatus");
 				break;
 		}
-		const m = this.contextMap.get(status);
-		if (m) {
-			let guild: Guild;
-			let channel: Channel | void = undefined;
-			if ("guild" in m) {
-				channel = m;
-				guild = m.guild;
-			} else {
-				guild = m;
-			}
+		typeupdate: {
+			const channel = this.localuser.focusChannel;
+			if (!channel) break typeupdate;
+			const guild = channel.guild;
+
 			const memb = this.members.get(guild);
 			if (memb && !(memb instanceof Promise) && channel) {
 				const typing = channel.typingmap.get(memb);
@@ -897,7 +884,7 @@ class User extends SnowFlake {
 		const div = this.buildpfp(isChannel ? guild.guild : guild);
 
 		const status = document.createElement("div");
-		this.registerStatus(status, guild);
+		this.registerStatus(status);
 		status.classList.add("statusDiv");
 		status.append(document.createElement("div"));
 
