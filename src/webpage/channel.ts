@@ -2742,7 +2742,6 @@ class Channel extends SnowFlake {
 		this.makereplybox();
 
 		if (getMessages) await this.buildmessages(aroundMessage);
-		//loading.classList.remove("loading");
 	}
 	typingmap: Map<Member | User, number> = new Map();
 	async typingStartEvent(typing: startTypingjson): Promise<void> {
