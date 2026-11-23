@@ -537,6 +537,9 @@ class Emoji {
 			return [new Emoji(a[0], weakGuild.get(a[0]) || localuser), a[1]];
 		});
 	}
+	static {
+		this.grabEmoji();
+	}
 }
-Emoji.grabEmoji();
+
 export {Emoji};
