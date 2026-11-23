@@ -12,6 +12,7 @@
 			"Peterxy12",
 			"Plana",
 			"TFX202X",
+			"Villager-bloc-h",
 			"Wilf233"
 		]
 	},
@@ -937,7 +938,7 @@
 		"old": "旧",
 		"page": "第 $1 页",
 		"search": "搜索",
-		"settings": "搜索设置",
+		"settings": "高级搜索",
 		"before": "前：",
 		"after": "后：",
 		"includensfw": "包含NSFW内容：",
