@@ -255,7 +255,7 @@
 		"clearWellKnowns": ".well-known-records opnieuw ophalen:",
 		"description": "Deze instellingen zijn bedoeld voor ontwikkelaars van Harmony/Fermi. Als u niet weet wat u doet, kunt u deze instellingen beter niet wijzigen.",
 		"gatewayComp": "Gateway-compressie uitschakelen:",
-		"reportSystem": "Experimentele rapportagesysteem inschakelen:",
+		"reportSystem": "Experimenteel rapportagesysteem inschakelen (nog niet op de server geïmplementeerd):",
 		"logGateway": "Ontvangen gatewaygebeurtenissen loggen (logniveau info):",
 		"name": "Ontwikkelaarsinstellingen",
 		"traces": "Traces zichtbaar maken:"

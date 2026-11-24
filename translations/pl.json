@@ -160,7 +160,7 @@
 		"clearWellKnowns": "Pobierz ponownie rekordy .well-known",
 		"description": "Są one przeznaczone dla programistów Spacebar/Fermi. Jeśli nie wiesz, co robisz, nie zmieniaj tych ustawień.",
 		"gatewayComp": "Wyłącz kompresję bramy",
-		"reportSystem": "Włącz eksperymentalny system zgłaszania",
+		"reportSystem": "Włącz eksperymentalny system zgłaszania (jeszcze niewzdrożony na serwerze):",
 		"logGateway": "Log odbieranych zdarzeń bramy (informacje na poziomie logów):",
 		"name": "Ustawienia programisty",
 		"traces": "Ujawnij ślady:"
@@ -758,7 +758,8 @@
 		"nofind": "Wygląda na to, że nie ma wiadomości, które pasują do Twojego wyszukiwania. Spróbuj je poszerzyć, aby znaleźć to, czego szukasz.",
 		"old": "Stary",
 		"page": "Strona $1",
-		"search": "Szukaj"
+		"search": "Szukaj",
+		"settings": "Wyszukiwanie zaawansowane"
 	},
 	"searchGifs": "Wyszukaj w Tenor",
 	"settings": {
