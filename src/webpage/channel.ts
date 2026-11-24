@@ -3790,7 +3790,7 @@ class Channel extends SnowFlake {
 		}
 		const messagez = new Message(messagep.d, this);
 		Member.resolveMember(messagez.author, this.guild).then((_) => {
-			this.typingmap.delete(_ as Member);
+			this.typingmap.set(_ as Member, 0);
 			this.rendertyping();
 		});
 		this.lastmessage = messagez;
