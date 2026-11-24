@@ -454,37 +454,33 @@ body {
 .searchOptions {
 	padding: 0.05in 0.15in;
 	border-radius: 0.1in;
-	background: var(--channels-bg);
+	background: var(--primary-bg);
 	position: absolute;
 	bottom: 0;
 	width: calc(100% - 32px);
 	box-sizing: border-box;
+	margin: 16px;
+	border: solid 1px var(--secondary-bg);
+	z-index: 1;
 
 	> span {
 		transition: background 0.1s;
-		margin-bottom: 0.025in;
-		margin-top: 0.025in;
-		padding: 0.075in 0.05in;
+		padding: 0.05in 0.025in;
 		border-radius: 0.03in;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
-
 		> span,
 		img {
 			margin-right: 0.05in;
 		}
 	}
 	span.selected {
-		background: var(--button-bg);
+		background: var(--primary-hover);
 	}
 	span:hover {
-		background: var(--button-bg);
+		background: var(--primary-hover);
 	}
-
-	margin: 16px;
-	border: solid 0.025in var(--black);
-	z-index: 1;
 }
 .searchOptions:empty {
 	padding: 0;
