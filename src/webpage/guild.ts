@@ -633,6 +633,15 @@ class Guild extends SnowFlake {
 				options,
 			);
 
+			const sysmap = [null, ...textChannels.map((e) => e.id)];
+			form.addSelect(
+				I18n.guild["systemSelect:"](),
+				"system_channel_id",
+				[I18n.nosymstem(), ...textChannels.map((e) => e.name)],
+				{defaultIndex: sysmap.indexOf(this.properties.system_channel_id)},
+				sysmap,
+			);
+
 			form.addCheckboxInput(I18n.guild.disableInvites(), "invDis", {
 				initState: !!this.properties.features.includes("INVITES_DISABLED"),
 			});
@@ -1343,16 +1352,6 @@ class Guild extends SnowFlake {
 					defaultIndex,
 				},
 				[...textChannels.map((_) => _.id), undefined],
-			);
-		}
-		{
-			const sysmap = [null, ...textChannels.map((e) => e.id)];
-			com.addSelect(
-				I18n.guild["systemSelect:"](),
-				"system_channel_id",
-				["No system messages", ...textChannels.map((e) => e.name)],
-				{defaultIndex: sysmap.indexOf(this.properties.system_channel_id)},
-				sysmap,
 			);
 		}
 	}

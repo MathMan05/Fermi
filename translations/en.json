@@ -26,6 +26,7 @@
 		"backupWorked": "Backup codes were able to work, though you should reset your 2fa with your remaining $1 {{PLURAL:$1|code|codes}}",
 		"backupFailed": "Backup code file was unable to bypass 2fa"
 	},
+	"nosymstem": "No system messages",
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
