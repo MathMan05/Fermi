@@ -2627,8 +2627,14 @@ span.instanceStatus {
 	display: flex;
 	flex-direction: row;
 	position: relative;
+	.svgicon {
+		transition: background 0.2s;
+		background: color-mix(in srgb, var(--primary-text-soft), 70% transparent);
 }
-
+	.svgicon:hover {
+		background: var(--primary-text-soft);
+	}
+}
 .searchBox:empty {
 	width: 2in;
 }
