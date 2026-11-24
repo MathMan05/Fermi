@@ -704,6 +704,10 @@ class Guild extends SnowFlake {
 			form.addTextInput(I18n.guild["region:"](), "region", {initText: region});
 		}
 		this.makeInviteMenu(settings.addButton(I18n.invite.inviteMaker()), textChannels);
+		if (this.member.hasPermission("MANAGE_GUILD")) {
+			const inviteMenu = settings.addButton(I18n.guild.invites());
+			makeInviteMenu(inviteMenu, this, this.info.api + `/guilds/${this.id}/invites`);
+		}
 		if (this.member.hasPermission("MANAGE_ROLES")) {
 			const s1 = settings.addButton(I18n.guild.roles(), {optName: ""});
 			const permlist = this.regenRLPerms();
@@ -787,6 +791,122 @@ class Guild extends SnowFlake {
 			};
 			genDiv();
 			emoji.addHTMLArea(containdiv);
+			{
+				const emoji = settings.addButton(I18n.sticker.title());
+				emoji.addButtonInput("", I18n.sticker.upload(), () => {
+					const popup = new Dialog(I18n.sticker.upload());
+					const form = popup.options.addForm("", async () => {
+						const body = new FormData();
+						body.set("name", name.value);
+						if (!filei.value) throw new FormError(filei, I18n.sticker.errFileMust());
+						const file = filei.value.item(0);
+						if (!file) throw new FormError(filei, I18n.sticker.errFileMust());
+						body.set("file", file);
+						if (!tags.value) throw new FormError(tags, I18n.sticker.errEmjMust());
+						if (tags.value.id) {
+							body.set("tags", tags.value.id);
+						} else if (tags.value.emoji) {
+							body.set("tags", tags.value.emoji);
+						} else {
+							throw new FormError(tags, I18n.sticker.errEmjMust());
+						}
+						const res = await fetch(this.info.api + "/guilds/" + this.id + "/stickers", {
+							method: "POST",
+							headers: {
+								Authorization: this.headers.Authorization,
+							},
+							body,
+						});
+						if (res.ok) {
+							popup.hide();
+						} else {
+							const json = await res.json();
+							if ("message" in json && typeof json.message === "string") {
+								throw new FormError(filei, json.message);
+							}
+						}
+					});
+					const filei = form.addFileInput(I18n.sticker.image(), "file", {required: true});
+					filei.onchange = (f) => {
+						if (f) {
+							const i = name.input.deref();
+							if (i) name.value = i.value = f[0].name.replace(/\.[a-zA-Z0-9_]*/gm, "");
+						}
+					};
+					const name = form.addTextInput(I18n.sticker.name(), "name", {required: true});
+					const tags = form.addEmojiInput(I18n.sticker.tags(), "tags", this.localuser, {
+						required: true,
+					});
+					popup.show();
+				});
+				const containdiv = document.createElement("div");
+				containdiv.classList.add("stickersDiv");
+				const genDiv = () => {
+					containdiv.innerHTML = "";
+					for (const [_, sticker] of this.stickers) {
+						const div = document.createElement("div");
+						div.classList.add("flexttb", "stickerOption");
+
+						const text = document.createElement("span");
+						text.textContent = sticker.name;
+
+						div.onclick = () => {
+							const form = emoji.addSubForm(emoji.name, () => {}, {
+								fetchURL: this.info.api + "/guilds/" + this.id + "/stickers/" + sticker.id,
+								method: "PATCH",
+								headers: this.headers,
+								traditionalSubmit: true,
+							});
+
+							form.addHTMLArea(sticker.getHTML(true));
+							form.addTextInput(I18n.sticker.name(), "name", {
+								initText: sticker.name,
+							});
+
+							form.addMDInput(I18n.sticker.desc(), "description", {
+								initText: sticker.description,
+							});
+
+							let initEmoji = Emoji.getEmojiFromIDOrString(sticker.tags, this.localuser);
+							form.addEmojiInput(I18n.sticker.tags(), "tags", this.localuser, {
+								initEmoji,
+								required: false,
+							});
+
+							form.addButtonInput("", I18n.sticker.del(), () => {
+								const diaolog = new Dialog("");
+								diaolog.options.addTitle(I18n.sticker.confirmDel());
+								const options = diaolog.options.addOptions("", {ltr: true});
+								options.addButtonInput("", I18n.yes(), () => {
+									fetch(`${this.info.api}/guilds/${this.id}/stickers/${sticker.id}`, {
+										method: "DELETE",
+										headers: this.headers,
+									});
+									diaolog.hide();
+								});
+								options.addButtonInput("", I18n.no(), () => {
+									diaolog.hide();
+								});
+								diaolog.show();
+							});
+						};
+
+						div.append(sticker.getHTML(true), text);
+
+						containdiv.append(div);
+					}
+				};
+				this.onStickerUpdate = () => {
+					emoji.returnFromSub();
+					if (!document.body.contains(containdiv)) {
+						this.onStickerUpdate = () => {};
+						return;
+					}
+					genDiv();
+				};
+				genDiv();
+				emoji.addHTMLArea(containdiv);
+			}
 		}
 		if (this.member.hasPermission("MANAGE_GUILD")) {
 			const onboard = settings.addButton(I18n.onboarding.name());
@@ -917,126 +1037,6 @@ class Guild extends SnowFlake {
 				}
 			};
 			genOnboard();
-		}
-		if (this.member.hasPermission("MANAGE_GUILD_EXPRESSIONS")) {
-			const emoji = settings.addButton(I18n.sticker.title());
-			emoji.addButtonInput("", I18n.sticker.upload(), () => {
-				const popup = new Dialog(I18n.sticker.upload());
-				const form = popup.options.addForm("", async () => {
-					const body = new FormData();
-					body.set("name", name.value);
-					if (!filei.value) throw new FormError(filei, I18n.sticker.errFileMust());
-					const file = filei.value.item(0);
-					if (!file) throw new FormError(filei, I18n.sticker.errFileMust());
-					body.set("file", file);
-					if (!tags.value) throw new FormError(tags, I18n.sticker.errEmjMust());
-					if (tags.value.id) {
-						body.set("tags", tags.value.id);
-					} else if (tags.value.emoji) {
-						body.set("tags", tags.value.emoji);
-					} else {
-						throw new FormError(tags, I18n.sticker.errEmjMust());
-					}
-					const res = await fetch(this.info.api + "/guilds/" + this.id + "/stickers", {
-						method: "POST",
-						headers: {
-							Authorization: this.headers.Authorization,
-						},
-						body,
-					});
-					if (res.ok) {
-						popup.hide();
-					} else {
-						const json = await res.json();
-						if ("message" in json && typeof json.message === "string") {
-							throw new FormError(filei, json.message);
-						}
-					}
-				});
-				const filei = form.addFileInput(I18n.sticker.image(), "file", {required: true});
-				filei.onchange = (f) => {
-					if (f) {
-						const i = name.input.deref();
-						if (i) name.value = i.value = f[0].name.replace(/\.[a-zA-Z0-9_]*/gm, "");
-					}
-				};
-				const name = form.addTextInput(I18n.sticker.name(), "name", {required: true});
-				const tags = form.addEmojiInput(I18n.sticker.tags(), "tags", this.localuser, {
-					required: true,
-				});
-				popup.show();
-			});
-			const containdiv = document.createElement("div");
-			containdiv.classList.add("stickersDiv");
-			const genDiv = () => {
-				containdiv.innerHTML = "";
-				for (const [_, sticker] of this.stickers) {
-					const div = document.createElement("div");
-					div.classList.add("flexttb", "stickerOption");
-
-					const text = document.createElement("span");
-					text.textContent = sticker.name;
-
-					div.onclick = () => {
-						const form = emoji.addSubForm(emoji.name, () => {}, {
-							fetchURL: this.info.api + "/guilds/" + this.id + "/stickers/" + sticker.id,
-							method: "PATCH",
-							headers: this.headers,
-							traditionalSubmit: true,
-						});
-
-						form.addHTMLArea(sticker.getHTML(true));
-						form.addTextInput(I18n.sticker.name(), "name", {
-							initText: sticker.name,
-						});
-
-						form.addMDInput(I18n.sticker.desc(), "description", {
-							initText: sticker.description,
-						});
-
-						let initEmoji = Emoji.getEmojiFromIDOrString(sticker.tags, this.localuser);
-						form.addEmojiInput(I18n.sticker.tags(), "tags", this.localuser, {
-							initEmoji,
-							required: false,
-						});
-
-						form.addButtonInput("", I18n.sticker.del(), () => {
-							const diaolog = new Dialog("");
-							diaolog.options.addTitle(I18n.sticker.confirmDel());
-							const options = diaolog.options.addOptions("", {ltr: true});
-							options.addButtonInput("", I18n.yes(), () => {
-								fetch(`${this.info.api}/guilds/${this.id}/stickers/${sticker.id}`, {
-									method: "DELETE",
-									headers: this.headers,
-								});
-								diaolog.hide();
-							});
-							options.addButtonInput("", I18n.no(), () => {
-								diaolog.hide();
-							});
-							diaolog.show();
-						});
-					};
-
-					div.append(sticker.getHTML(true), text);
-
-					containdiv.append(div);
-				}
-			};
-			this.onStickerUpdate = () => {
-				emoji.returnFromSub();
-				if (!document.body.contains(containdiv)) {
-					this.onStickerUpdate = () => {};
-					return;
-				}
-				genDiv();
-			};
-			genDiv();
-			emoji.addHTMLArea(containdiv);
-		}
-		if (this.member.hasPermission("MANAGE_GUILD")) {
-			const inviteMenu = settings.addButton(I18n.guild.invites());
-			makeInviteMenu(inviteMenu, this, this.info.api + `/guilds/${this.id}/invites`);
 		}
 
 		if (this.member.hasPermission("BAN_MEMBERS")) {
