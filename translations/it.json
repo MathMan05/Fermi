@@ -30,6 +30,7 @@
 		"passwordCond": "Password:",
 		"webauthn": "Passkey"
 	},
+	"nosymstem": "Nessun messaggio di sistema",
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
