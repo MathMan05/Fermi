@@ -43,6 +43,7 @@
 		"backupWorked": "备份代码可以正常使用，但您应该使用其余的$1个{{PLURAL:$1|代码}}来重置双重认证",
 		"backupFailed": "备份代码文件无法绕过双重认证"
 	},
+	"nosymstem": "无系统消息",
 	"filesize": {
 		"B": "B",
 		"KB": "KB",
