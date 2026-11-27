@@ -298,6 +298,12 @@
 	"emojiSelect": "Emoji:",
 	"gifProvidor": "Gif Provider:",
 	"showTodayAt": "Show today at:",
+	"stripTrackingInfo": "Strip tracking level:",
+	"tracking": {
+		"all": "Strip all tracking",
+		"known": "Strip only known tracking",
+		"none": "Don't trip tracking"
+	},
 	"errorReconnect": "Unable to connect to the server, retrying in **$1** seconds...",
 	"favoriteGifs": "Favorited GIFs",
 	"folder": {

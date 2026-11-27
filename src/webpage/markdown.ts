@@ -7,7 +7,8 @@ import {Dialog} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
 import {highlight} from "./highlighter/index.js";
 import {TypeBox} from "./typeBox.js";
-import {mobile} from "./utils/utils";
+import {getBulkInfo, mobile} from "./utils/utils";
+import {getPreferences, StripTracking} from "./utils/storage/userPreferences.js";
 
 const linkMenu = new Contextmenu<string, void>("copyLink", true);
 linkMenu.addButton(
@@ -1274,11 +1275,42 @@ class MarkDown {
 
 		localStorage.setItem("trustedDomains", domains);
 	}
+	static stripTracking(url: string): string {
+		if (!URL.canParse(url)) return url;
+		const settings = getPreferences();
+		const u = new URL(url);
+		switch (settings.tracking) {
+			//@ts-expect-error fall through in switch case
+			default:
+				settings.tracking satisfies never;
+			//@ts-expect-error fall through in switch case
+			case StripTracking.all:
+				["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach((opt) => {
+					u.searchParams.delete(opt);
+				});
+
+			case StripTracking.known:
+				switch (u.hostname) {
+					case "youtu.be":
+					case "youtube.com":
+					case "music.youtube.com":
+					case "m.youtube.com":
+					case "www.youtube.com":
+						u.searchParams.delete("si");
+						break;
+				}
+				break;
+			case StripTracking.none:
+				return url;
+		}
+		return u.toString();
+	}
 	static safeLink(
 		elm: HTMLElement,
 		url: string,
 		localuser: Localuser | null = null,
 	): string | void {
+		url = this.stripTracking(url);
 		if (elm instanceof HTMLAnchorElement) {
 			elm.rel = "noopener noreferrer";
 		}

@@ -631,6 +631,17 @@ export async function showusersettings(localuser: Localuser) {
 				},
 			);
 		}
+		{
+			tas.addSelect(
+				I18n.stripTrackingInfo(),
+				(b) => {
+					prefs.tracking = b;
+					setPreferences(prefs);
+				},
+				[I18n.tracking.all(), I18n.tracking.known(), I18n.tracking.none()],
+				{defaultIndex: prefs.tracking},
+			);
+		}
 	}
 	{
 		const blog = settings.addButton(I18n.blog.blog(), {contained: true});

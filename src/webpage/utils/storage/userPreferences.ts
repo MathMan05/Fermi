@@ -36,7 +36,11 @@ export const ClockFormatOverrideValues = [
 	ClockFormatOverride.show12Hour,
 	ClockFormatOverride.show24Hour,
 ];
-
+export const enum StripTracking {
+	all = 0,
+	known = 1,
+	none = 2,
+}
 export class UserPreferences {
 	showBlogUpdates?: boolean;
 	locale: string = navigator.language || "en";
@@ -54,6 +58,7 @@ export class UserPreferences {
 	gifProvidor?: string;
 	showToday = true;
 	clockFormatOverride: ClockFormatOverride = ClockFormatOverride.automatic;
+	tracking: StripTracking = StripTracking.all;
 
 	constructor(init?: Partial<UserPreferences>) {
 		Object.assign(this, init);
