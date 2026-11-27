@@ -7,7 +7,7 @@ import {Dialog} from "./settings.js";
 import {Contextmenu} from "./contextmenu.js";
 import {highlight} from "./highlighter/index.js";
 import {TypeBox} from "./typeBox.js";
-import {getBulkInfo, mobile} from "./utils/utils";
+import {mobile} from "./utils/utils";
 import {getPreferences, StripTracking} from "./utils/storage/userPreferences.js";
 
 const linkMenu = new Contextmenu<string, void>("copyLink", true);
